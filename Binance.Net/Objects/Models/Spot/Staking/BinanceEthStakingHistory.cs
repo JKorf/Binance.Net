@@ -3,7 +3,7 @@
     /// <summary>
     /// Staking history
     /// </summary>
-    public class BinanceEthStakingHistory
+    public record BinanceEthStakingHistory
     {
         /// <summary>
         /// Asset

@@ -3,7 +3,7 @@
     /// <summary>
     /// Purchase quota left
     /// </summary>
-    public class BinancePurchaseQuotaLeft
+    public record BinancePurchaseQuotaLeft
     {
         /// <summary>
         /// The asset

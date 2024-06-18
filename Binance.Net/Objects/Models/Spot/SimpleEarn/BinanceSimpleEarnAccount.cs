@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple earn account info
     /// </summary>
-    public class BinanceSimpleEarnAccount
+    public record BinanceSimpleEarnAccount
     {
         /// <summary>
         /// Total quantity in BTC

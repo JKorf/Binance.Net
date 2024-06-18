@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Rebates page wrapper
     /// </summary>
-    public class BinanceRebateWrapper
+    public record BinanceRebateWrapper
     {
         /// <summary>
         /// The current page
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Rebate info
     /// </summary>
-    public class BinanceRebate
+    public record BinanceRebate
     {
         /// <summary>
         /// The asset

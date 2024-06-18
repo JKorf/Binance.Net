@@ -3,7 +3,7 @@
     /// <summary>
     /// Convert Pairs
     /// </summary>
-    public class BinanceConvertAssetPair
+    public record BinanceConvertAssetPair
     {
         /// <summary>
         /// Quote asset

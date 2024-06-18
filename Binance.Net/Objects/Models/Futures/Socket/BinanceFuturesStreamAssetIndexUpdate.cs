@@ -3,7 +3,7 @@
     /// <summary>
     /// Futures stream symbol update
     /// </summary>
-    public class BinanceFuturesStreamAssetIndexUpdate : BinanceStreamEvent
+    public record BinanceFuturesStreamAssetIndexUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Symbol

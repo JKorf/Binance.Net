@@ -3,7 +3,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The result of cancel all orders
     /// </summary>
-    public class BinanceFuturesCancelAllOrders
+    public record BinanceFuturesCancelAllOrders
     {
         /// <summary>
         /// The execution code

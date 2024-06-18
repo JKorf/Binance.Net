@@ -3,7 +3,7 @@
     /// <summary>
     /// Account info
     /// </summary>
-    public class BinanceFuturesCoinAccountInfo
+    public record BinanceFuturesCoinAccountInfo
     {
         /// <summary>
         /// Can deposit

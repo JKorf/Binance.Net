@@ -3,7 +3,7 @@
     /// <summary>
     /// Asset details
     /// </summary>
-    public class BinanceAssetDetails
+    public record BinanceAssetDetails
     {
         /// <summary>
         /// Minimal quantity you can withdraw

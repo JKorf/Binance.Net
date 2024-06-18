@@ -3,7 +3,7 @@
     /// <summary>
     /// Funding wallet asset
     /// </summary>
-    public class BinanceFundingAsset
+    public record BinanceFundingAsset
     {
         /// <summary>
         /// The asset

@@ -3,7 +3,7 @@
     /// <summary>
     /// Exchange info
     /// </summary>
-    public class BinanceExchangeInfo
+    public record BinanceExchangeInfo
     {
         /// <summary>
         /// The timezone the server uses

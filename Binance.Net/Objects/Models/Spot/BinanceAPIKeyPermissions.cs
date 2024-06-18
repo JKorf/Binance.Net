@@ -3,7 +3,7 @@
     /// <summary>
     /// Permissions of the current API key
     /// </summary>
-    public class BinanceAPIKeyPermissions
+    public record BinanceAPIKeyPermissions
     {
         /// <summary>
         /// Whether the key is restricted to certain IP's or not

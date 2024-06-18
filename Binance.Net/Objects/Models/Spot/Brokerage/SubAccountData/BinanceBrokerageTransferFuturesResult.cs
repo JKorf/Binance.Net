@@ -3,7 +3,7 @@
     /// <summary>
     /// Transfer Futures Result
     /// </summary>
-    public class BinanceBrokerageTransferFuturesResult
+    public record BinanceBrokerageTransferFuturesResult
     {
         /// <summary>
         /// Transaction Id

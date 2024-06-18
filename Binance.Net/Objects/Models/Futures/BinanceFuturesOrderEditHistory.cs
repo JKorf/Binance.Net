@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The history of order edits
     /// </summary>
-    public class BinanceFuturesOrderEditHistory
+    public record BinanceFuturesOrderEditHistory
     {
         /// <summary>
         /// The symbol the order is for
@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Order changes
     /// </summary>
-    public class BinanceFuturesOrderChanges
+    public record BinanceFuturesOrderChanges
     {
         /// <summary>
         /// Price change
@@ -79,7 +79,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Change info
     /// </summary>
-    public class BinanceFuturesOrderChange
+    public record BinanceFuturesOrderChange
     {
         /// <summary>
         /// Before edit

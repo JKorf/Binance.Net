@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models
     /// <summary>
     /// Order info
     /// </summary>
-    public class BinanceOrderBase
+    public record BinanceOrderBase
     {
         /// <summary>
         /// The symbol the order is for

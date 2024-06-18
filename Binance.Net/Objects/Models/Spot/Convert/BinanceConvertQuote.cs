@@ -3,7 +3,7 @@
     /// <summary>
     /// Convert Quote
     /// </summary>
-    public class BinanceConvertQuote
+    public record BinanceConvertQuote
     {
         /// <summary>
         /// Quote id

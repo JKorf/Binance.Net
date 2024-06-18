@@ -23923,7 +23923,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceMarginTradeCoeff.MarginCallBar">
             <summary>
-            Margin class margin ratio
+            Margin record margin ratio
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceMarginTradeCoeff.NormalBar">

@@ -3,7 +3,7 @@
     /// <summary>
     /// Information about an account
     /// </summary>
-    public class BinanceFuturesAccountBalance
+    public record BinanceFuturesAccountBalance
     {
         /// <summary>
         /// Account alias
@@ -46,7 +46,7 @@
     /// <summary>
     /// Usd futures account balance
     /// </summary>
-    public class BinanceUsdFuturesAccountBalance : BinanceFuturesAccountBalance
+    public record BinanceUsdFuturesAccountBalance : BinanceFuturesAccountBalance
     {
         /// <summary>
         /// Maximum quantity for transfer out
@@ -63,7 +63,7 @@
     /// <summary>
     /// Coin futures account balance
     /// </summary>
-    public class BinanceCoinFuturesAccountBalance : BinanceFuturesAccountBalance
+    public record BinanceCoinFuturesAccountBalance : BinanceFuturesAccountBalance
     {
         /// <summary>
         /// Available for withdraw

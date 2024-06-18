@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Prevented order info
     /// </summary>
-    public class BinancePreventedTrade
+    public record BinancePreventedTrade
     {
         /// <summary>
         /// Symbol

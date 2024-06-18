@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceFuturesOrderBook : BinanceOrderBook
+    public record BinanceFuturesOrderBook : BinanceOrderBook
     {
         /// <summary>
         /// Pair

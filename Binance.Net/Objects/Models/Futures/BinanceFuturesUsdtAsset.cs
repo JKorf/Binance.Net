@@ -3,7 +3,7 @@
     /// <summary>
     /// Asset info
     /// </summary>
-    public class BinanceFuturesUsdtAsset
+    public record BinanceFuturesUsdtAsset
     {
         /// <summary>
         /// Name of the asset

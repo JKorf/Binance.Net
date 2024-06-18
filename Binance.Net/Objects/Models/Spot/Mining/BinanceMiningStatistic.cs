@@ -3,7 +3,7 @@
     /// <summary>
     /// Mining statistics
     /// </summary>
-    public class BinanceMiningStatistic
+    public record BinanceMiningStatistic
     {
         /// <summary>
         /// Hashrate last fifteen minutes

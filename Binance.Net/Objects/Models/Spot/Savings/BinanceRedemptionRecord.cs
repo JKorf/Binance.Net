@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
     /// <summary>
     /// Redemption record
     /// </summary>
-    public class BinanceRedemptionRecord
+    public record BinanceRedemptionRecord
     {
         /// <summary>
         /// Quantity purchased

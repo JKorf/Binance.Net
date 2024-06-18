@@ -3,7 +3,7 @@
     /// <summary>
     /// Response to the change in initial leverage request
     /// </summary>
-    public class BinanceFuturesInitialLeverageChangeResult
+    public record BinanceFuturesInitialLeverageChangeResult
     {
         /// <summary>
         /// New leverage multiplier

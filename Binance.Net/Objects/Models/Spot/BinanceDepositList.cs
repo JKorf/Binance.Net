@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about a deposit
     /// </summary>
-    public class BinanceDeposit
+    public record BinanceDeposit
     {
         /// <summary>
         /// Time the deposit was added to Binance

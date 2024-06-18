@@ -3,7 +3,7 @@
     /// <summary>
     /// Information about a trade
     /// </summary>
-    public class BinanceTrade
+    public record BinanceTrade
     {
         /// <summary>
         /// The symbol the trade is for

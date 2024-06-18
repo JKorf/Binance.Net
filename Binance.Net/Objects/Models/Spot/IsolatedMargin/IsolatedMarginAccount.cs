@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Isolated margin account info
     /// </summary>
-    public class BinanceIsolatedMarginAccount
+    public record BinanceIsolatedMarginAccount
     {
         /// <summary>
         /// Account assets
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Isolated margin account symbol
     /// </summary>
-    public class BinanceIsolatedMarginAccountSymbol
+    public record BinanceIsolatedMarginAccountSymbol
     {
         /// <summary>
         /// Base asset
@@ -87,7 +87,7 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Isolated margin account asset
     /// </summary>
-    public class BinanceIsolatedMarginAccountAsset
+    public record BinanceIsolatedMarginAccountAsset
     {
         /// <summary>
         /// Asset name

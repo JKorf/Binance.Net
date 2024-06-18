@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceOrderBook : IBinanceOrderBook
+    public record BinanceOrderBook : IBinanceOrderBook
     {
         /// <summary>
         /// The symbol of the order book 

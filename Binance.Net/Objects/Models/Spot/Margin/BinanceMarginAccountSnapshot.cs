@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Margin account snapshot
     /// </summary>
-    public class BinanceMarginAccountSnapshot
+    public record BinanceMarginAccountSnapshot
     {
         /// <summary>
         /// Timestamp of the data
@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Margin snapshot data
     /// </summary>
-    public class BinanceMarginAccountSnapshotData
+    public record BinanceMarginAccountSnapshotData
     {
         /// <summary>
         /// The margin level

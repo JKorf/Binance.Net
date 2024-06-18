@@ -2,7 +2,7 @@
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
-    internal class BinanceSubAccountAssetTransferHistoryList
+    internal record BinanceSubAccountAssetTransferHistoryList
     {
         [JsonProperty("success")]
         public bool Success { get; set; }
@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Binance sub account transfer
     /// </summary>
-    public class BinanceSubAccountAssetTransferHistory
+    public record BinanceSubAccountAssetTransferHistory
     {
         /// <summary>
         /// Transaction id

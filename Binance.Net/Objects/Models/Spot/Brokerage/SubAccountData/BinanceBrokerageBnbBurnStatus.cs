@@ -3,7 +3,7 @@
     /// <summary>
     /// BNB Burn Status
     /// </summary>
-    public class BinanceBrokerageBnbBurnStatus
+    public record BinanceBrokerageBnbBurnStatus
     {
         /// <summary>
         /// Sub Account Id

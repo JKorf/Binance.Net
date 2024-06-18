@@ -3,7 +3,7 @@
     /// <summary>
     /// Redemption info
     /// </summary>
-    public class BinanceBlvtRedemption
+    public record BinanceBlvtRedemption
     {
         /// <summary>
         /// Id

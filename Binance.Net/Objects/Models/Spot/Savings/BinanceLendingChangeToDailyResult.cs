@@ -3,7 +3,7 @@
     /// <summary>
     /// Purchase result
     /// </summary>
-    public class BinanceLendingChangeToDailyResult
+    public record BinanceLendingChangeToDailyResult
     {
         /// <summary>
         /// The id of the purchase

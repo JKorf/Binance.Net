@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Parameters for editing an order
     /// </summary>
-    public class BinanceFuturesBatchEditOrder
+    public record BinanceFuturesBatchEditOrder
     {
         /// <summary>
         /// Id of the order to edit. This or ClientOrderId should be provided

@@ -3,7 +3,7 @@
     /// <summary>
     /// Account status info
     /// </summary>
-    public class BinanceAccountStatus
+    public record BinanceAccountStatus
     {
         /// <summary>
         /// The result status

@@ -3,7 +3,7 @@
     /// <summary>
     /// A event received by a Binance websocket
     /// </summary>
-    public class BinanceStreamEvent
+    public record BinanceStreamEvent
     {
         /// <summary>
         /// The type of the event

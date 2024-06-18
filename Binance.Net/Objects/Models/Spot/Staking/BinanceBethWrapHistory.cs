@@ -3,7 +3,7 @@
     /// <summary>
     /// Wrap history
     /// </summary>
-    public class BinanceBethWrapHistory
+    public record BinanceBethWrapHistory
     {
         /// <summary>
         /// Exchange rate

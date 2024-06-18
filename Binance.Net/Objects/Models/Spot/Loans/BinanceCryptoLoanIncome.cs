@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     /// <summary>
     /// Crypto loan income info
     /// </summary>
-    public class BinanceCryptoLoanIncome
+    public record BinanceCryptoLoanIncome
     {
         /// <summary>
         /// Asset

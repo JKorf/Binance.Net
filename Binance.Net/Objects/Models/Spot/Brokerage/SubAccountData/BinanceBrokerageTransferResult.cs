@@ -3,7 +3,7 @@
     /// <summary>
     /// Transfer Result
     /// </summary>
-    public class BinanceBrokerageTransferResult
+    public record BinanceBrokerageTransferResult
     {
         /// <summary>
         /// Transaction Id

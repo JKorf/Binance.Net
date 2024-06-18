@@ -1,6 +1,6 @@
 ﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
-    internal class BinanceSubAccountTransferWrapper
+    internal record BinanceSubAccountTransferWrapper
     {
         [JsonProperty("msg")]
         public string? Message { get; set; }
@@ -11,7 +11,7 @@
     /// <summary>
     /// Sub account transfer info
     /// </summary>
-    public class BinanceSubAccountTransfer
+    public record BinanceSubAccountTransfer
     {
         /// <summary>
         /// From which email the transfer originated

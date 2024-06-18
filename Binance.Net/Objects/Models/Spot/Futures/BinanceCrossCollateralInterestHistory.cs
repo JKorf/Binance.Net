@@ -3,7 +3,7 @@
     /// <summary>
     /// Interest history
     /// </summary>
-    public class BinanceCrossCollateralInterestHistory
+    public record BinanceCrossCollateralInterestHistory
     {
         /// <summary>
         /// Collateral asset

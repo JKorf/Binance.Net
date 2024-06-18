@@ -3,7 +3,7 @@
     /// <summary>
     /// Redemption
     /// </summary>
-    public class BinanceSimpleEarnRedemption
+    public record BinanceSimpleEarnRedemption
     {
         /// <summary>
         /// Success

@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn collateral record
     /// </summary>
-    public class BinanceSimpleEarnCollateralRecord
+    public record BinanceSimpleEarnCollateralRecord
     {
         /// <summary>
         /// Quantity

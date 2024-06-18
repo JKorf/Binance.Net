@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMaxAlgorithmicOrdersFilter"/>
     /// </summary>
     [JsonConverter(typeof(SymbolFuturesFilterConverter))]
-    public class BinanceFuturesSymbolFilter
+    public record BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The type of this filter
@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Price filter
     /// </summary>
-    public class BinanceSymbolPriceFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolPriceFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The minimal price the order can be for
@@ -37,7 +37,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Lot size filter
     /// </summary>
-    public class BinanceSymbolLotSizeFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolLotSizeFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The minimal quantity of an order
@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Market lot size filter
     /// </summary>
-    public class BinanceSymbolMarketLotSizeFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolMarketLotSizeFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The minimal quantity of an order
@@ -75,7 +75,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     ///Max orders filter
     /// </summary>
-    public class BinanceSymbolMaxOrdersFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolMaxOrdersFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The max number of orders for this symbol
@@ -86,7 +86,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Max algo orders filter
     /// </summary>
-    public class BinanceSymbolMaxAlgorithmicOrdersFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolMaxAlgorithmicOrdersFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The max number of Algorithmic orders for this symbol
@@ -97,7 +97,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Price percentage filter
     /// </summary>
-    public class BinanceSymbolPercentPriceFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolPercentPriceFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The max factor the price can deviate up
@@ -116,7 +116,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Min notional filter
     /// </summary>
-    public class BinanceSymbolMinNotionalFilter : BinanceFuturesSymbolFilter
+    public record BinanceSymbolMinNotionalFilter : BinanceFuturesSymbolFilter
     {
         /// <summary>
         /// The minimal total quote quantity of an order. This is calculated by Price * Quantity.

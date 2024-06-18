@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn locked product reward record
     /// </summary>
-    public class BinanceSimpleEarnLockedRewardRecord
+    public record BinanceSimpleEarnLockedRewardRecord
     {
         /// <summary>
         /// Asset

@@ -1,6 +1,6 @@
 ﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
-    internal class BinanceSubAccountAsset
+    internal record BinanceSubAccountAsset
     {
         public bool Success { get; set; } = true;
         [JsonProperty("msg")]

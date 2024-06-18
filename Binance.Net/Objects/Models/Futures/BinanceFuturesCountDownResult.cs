@@ -3,7 +3,7 @@
     /// <summary>
     /// Result of setting a countdown timer
     /// </summary>
-    public class BinanceFuturesCountDownResult
+    public record BinanceFuturesCountDownResult
     {
         /// <summary>
         /// Symbol

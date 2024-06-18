@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
     /// <summary>
     /// Customized fixed project position
     /// </summary>
-    public class BinanceCustomizedFixedProjectPosition
+    public record BinanceCustomizedFixedProjectPosition
     {
         /// <summary>
         /// Asset name

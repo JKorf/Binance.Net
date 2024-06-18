@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Order list info
     /// </summary>
-    public class BinanceStreamOrderList: BinanceStreamEvent
+    public record BinanceStreamOrderList: BinanceStreamEvent
     {
         /// <summary>
         /// The id of the order list
@@ -65,7 +65,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Order reference
     /// </summary>
-    public class BinanceStreamOrderId
+    public record BinanceStreamOrderId
     {
         /// <summary>
         /// The symbol of the order

@@ -3,7 +3,7 @@
     /// <summary>
     /// Notional and Leverage Brackets
     /// </summary>
-    public class BinanceFuturesSymbolBracket
+    public record BinanceFuturesSymbolBracket
     {
         /// <summary>
         /// Symbol or pair
@@ -32,7 +32,7 @@
     /// <summary>
     /// Bracket
     /// </summary>
-    public class BinanceFuturesBracket
+    public record BinanceFuturesBracket
     {
         /// <summary>
         /// Bracket

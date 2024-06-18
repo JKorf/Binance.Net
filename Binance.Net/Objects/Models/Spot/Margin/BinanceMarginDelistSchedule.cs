@@ -3,7 +3,7 @@
     /// <summary>
     /// Delist margin schedule
     /// </summary>
-    public class BinanceMarginDelistSchedule
+    public record BinanceMarginDelistSchedule
     {
         /// <summary>
         /// Delist time

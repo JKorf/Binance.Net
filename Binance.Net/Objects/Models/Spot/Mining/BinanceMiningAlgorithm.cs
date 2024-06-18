@@ -3,7 +3,7 @@
     /// <summary>
     /// Mining coin info
     /// </summary>
-    public class BinanceMiningAlgorithm
+    public record BinanceMiningAlgorithm
     {
         /// <summary>
         /// The name of the algorithm

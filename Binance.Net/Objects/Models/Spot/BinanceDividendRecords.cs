@@ -3,7 +3,7 @@
     /// <summary>
     /// Dividend record
     /// </summary>
-    public class BinanceDividendRecord
+    public record BinanceDividendRecord
     {
         /// <summary>
         /// Id

@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub Account Create Result
     /// </summary>
-    public class BinanceBrokerageSubAccountCreateResult
+    public record BinanceBrokerageSubAccountCreateResult
     {
         /// <summary>
         /// Sub Account Id

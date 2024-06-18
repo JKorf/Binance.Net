@@ -3,7 +3,7 @@
     /// <summary>
     /// Enable Or Disable BNB Burn Margin Interest Result
     /// </summary>
-    public class BinanceBrokerageChangeBnbBurnMarginInterestResult
+    public record BinanceBrokerageChangeBnbBurnMarginInterestResult
     {
         /// <summary>
         /// Sub Account Id

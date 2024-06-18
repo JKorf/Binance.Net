@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
     /// <summary>
     /// Adjust history
     /// </summary>
-    public class BinanceCrossCollateralAdjustLtvHistory
+    public record BinanceCrossCollateralAdjustLtvHistory
     {
         /// <summary>
         /// Quantity

@@ -3,7 +3,7 @@
     /// <summary>
     /// Eth staking quota
     /// </summary>
-    public class BinanceEthStakingQuota
+    public record BinanceEthStakingQuota
     {
         /// <summary>
         /// Staking quota left

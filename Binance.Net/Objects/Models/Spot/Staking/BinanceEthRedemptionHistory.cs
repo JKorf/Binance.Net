@@ -3,7 +3,7 @@
     /// <summary>
     /// Redemption history
     /// </summary>
-    public class BinanceEthRedemptionHistory
+    public record BinanceEthRedemptionHistory
     {
         /// <summary>
         /// Asset

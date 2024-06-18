@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// The order book for a asset
     /// </summary>
-    public class BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent, IBinanceFuturesEventOrderBook
+    public record BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent, IBinanceFuturesEventOrderBook
     {
         /// <summary>
         /// The symbol of the order book (only filled from stream updates)

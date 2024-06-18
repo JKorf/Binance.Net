@@ -3,7 +3,7 @@
     /// <summary>
     /// Fee data
     /// </summary>
-    public class BinanceIsolatedMarginFeeData
+    public record BinanceIsolatedMarginFeeData
     {
         /// <summary>
         /// Vip level
@@ -30,7 +30,7 @@
     /// <summary>
     /// Fee info
     /// </summary>
-    public class BinanceIsolatedMarginFeeInfo
+    public record BinanceIsolatedMarginFeeInfo
     {
         /// <summary>
         /// Asset

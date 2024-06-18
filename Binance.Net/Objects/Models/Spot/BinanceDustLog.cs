@@ -3,7 +3,7 @@
     /// <summary>
     /// Dust log response details
     /// </summary>
-    public class BinanceDustLogList
+    public record BinanceDustLogList
     {
         /// <summary>
         /// Total counts of exchange
@@ -18,7 +18,7 @@
     /// <summary>
     /// Dust log details
     /// </summary>
-    public class BinanceDustLog
+    public record BinanceDustLog
     {
         /// <summary>
         /// Total transferred
@@ -51,7 +51,7 @@
     /// <summary>
     /// Dust log entry details
     /// </summary>
-    public class BinanceDustLogDetails
+    public record BinanceDustLogDetails
     {
         /// <summary>
         /// Transaction id

@@ -4,7 +4,7 @@
     /// List result
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinanceListResult<T>
+    public record BinanceListResult<T>
     {
         /// <summary>
         /// Data start time

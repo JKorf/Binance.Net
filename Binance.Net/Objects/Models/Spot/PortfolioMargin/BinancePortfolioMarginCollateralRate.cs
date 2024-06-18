@@ -3,7 +3,7 @@
     /// <summary>
     /// Portfolio margin collateral rate info
     /// </summary>
-    public class BinancePortfolioMarginCollateralRate
+    public record BinancePortfolioMarginCollateralRate
     {
         /// <summary>
         /// Asset

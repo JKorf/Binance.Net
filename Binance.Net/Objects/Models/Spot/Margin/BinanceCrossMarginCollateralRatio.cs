@@ -3,7 +3,7 @@
     /// <summary>
     /// Cross margin collateral info
     /// </summary>
-    public class BinanceCrossMarginCollateralRatio
+    public record BinanceCrossMarginCollateralRatio
     {
         /// <summary>
         /// Collaterals
@@ -18,7 +18,7 @@
     /// <summary>
     /// Collateral info
     /// </summary>
-    public class BinanceCrossMarginCollateral
+    public record BinanceCrossMarginCollateral
     {
         /// <summary>
         /// Min usd value

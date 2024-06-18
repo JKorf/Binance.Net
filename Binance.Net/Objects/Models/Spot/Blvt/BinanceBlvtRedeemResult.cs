@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// <summary>
     /// Redeem result
     /// </summary>
-    public class BinanceBlvtRedeemResult
+    public record BinanceBlvtRedeemResult
     {
         /// <summary>
         /// Id

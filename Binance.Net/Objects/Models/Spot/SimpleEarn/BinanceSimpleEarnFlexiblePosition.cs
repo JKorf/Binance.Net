@@ -3,7 +3,7 @@
     /// <summary>
     /// Flexible product position info
     /// </summary>
-    public class BinanceSimpleEarnFlexiblePosition
+    public record BinanceSimpleEarnFlexiblePosition
     {
         /// <summary>
         /// Asset

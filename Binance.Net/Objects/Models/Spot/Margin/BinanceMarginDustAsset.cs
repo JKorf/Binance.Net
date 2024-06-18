@@ -3,7 +3,7 @@
     /// <summary>
     /// Asset info for dust conversion
     /// </summary>
-    public class BinanceMarginDustAsset
+    public record BinanceMarginDustAsset
     {
         /// <summary>
         /// Total btc
@@ -26,7 +26,7 @@
     /// <summary>
     /// Asset dust details
     /// </summary>
-    public class BinanceMarginDustAssetDetails
+    public record BinanceMarginDustAssetDetails
     {
         /// <summary>
         /// Asset

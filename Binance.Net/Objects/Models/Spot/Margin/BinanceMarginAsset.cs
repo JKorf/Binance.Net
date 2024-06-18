@@ -3,7 +3,7 @@
     /// <summary>
     /// Margin asset info
     /// </summary>
-    public class BinanceMarginAsset
+    public record BinanceMarginAsset
     {
         /// <summary>
         /// Full name of the asset

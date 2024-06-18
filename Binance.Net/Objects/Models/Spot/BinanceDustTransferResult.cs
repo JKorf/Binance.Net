@@ -3,7 +3,7 @@
     /// <summary>
     /// Result of dust transfer
     /// </summary>
-    public class BinanceDustTransferResult
+    public record BinanceDustTransferResult
     {
         /// <summary>
         /// Total service charge
@@ -24,7 +24,7 @@
     /// <summary>
     /// Dust transfer entry
     /// </summary>
-    public class BinanceDustTransferResultEntry
+    public record BinanceDustTransferResultEntry
     {
         /// <summary>
         /// Quantity of dust

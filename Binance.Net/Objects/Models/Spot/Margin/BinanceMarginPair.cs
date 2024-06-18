@@ -3,7 +3,7 @@
     /// <summary>
     /// Margin pair info
     /// </summary>
-    public class BinanceMarginPair
+    public record BinanceMarginPair
     {
         /// <summary>
         /// Base asset of the pair

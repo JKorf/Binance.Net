@@ -3,7 +3,7 @@
     /// <summary>
     /// Transfer Futures Transactions
     /// </summary>
-    public class BinanceBrokerageTransferFuturesTransactions
+    public record BinanceBrokerageTransferFuturesTransactions
     {
         /// <summary>
         /// Success
@@ -25,7 +25,7 @@
     /// <summary>
     /// Transfer Futures Transaction
     /// </summary>
-    public class BinanceBrokerageTransferFuturesTransaction
+    public record BinanceBrokerageTransferFuturesTransaction
     {
         /// <summary>
         /// From Id

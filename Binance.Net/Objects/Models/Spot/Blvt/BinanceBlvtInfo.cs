@@ -3,7 +3,7 @@
     /// <summary>
     /// Leveraged token info
     /// </summary>
-    public class BinanceBlvtInfo
+    public record BinanceBlvtInfo
     {
         /// <summary>
         /// Name of the token
@@ -76,7 +76,7 @@
     /// <summary>
     /// Basket
     /// </summary>
-    public class BlvtCurrentBasket
+    public record BlvtCurrentBasket
     {
         /// <summary>
         /// Symbol

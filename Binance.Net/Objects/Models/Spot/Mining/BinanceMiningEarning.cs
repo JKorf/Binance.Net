@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Earning info
     /// </summary>
-    public class BinanceMiningEarnings
+    public record BinanceMiningEarnings
     {
         /// <summary>
         /// Total number of results
@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Earning info
     /// </summary>
-    public class BinanceMiningAccountEarning
+    public record BinanceMiningAccountEarning
     {
         /// <summary>
         /// Timestamp

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// C2C user trade
     /// </summary>
-    public class BinanceC2CUserTrade
+    public record BinanceC2CUserTrade
     {
         /// <summary>
         /// Order number

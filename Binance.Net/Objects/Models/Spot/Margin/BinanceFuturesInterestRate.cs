@@ -3,7 +3,7 @@
     /// <summary>
     /// Future hourly interest rate
     /// </summary>
-    public class BinanceFuturesInterestRate
+    public record BinanceFuturesInterestRate
     {
         /// <summary>
         /// Asset

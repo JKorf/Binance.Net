@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account futures details
     /// </summary>
-    public class BinanceSubAccountFuturesDetails
+    public record BinanceSubAccountFuturesDetails
     {
         /// <summary>
         /// Email of the sub account
@@ -76,7 +76,7 @@
     /// <summary>
     /// Sub account future asset details
     /// </summary>
-    public class BinanceSubAccountFuturesAsset
+    public record BinanceSubAccountFuturesAsset
     {
         /// <summary>
         /// The asset

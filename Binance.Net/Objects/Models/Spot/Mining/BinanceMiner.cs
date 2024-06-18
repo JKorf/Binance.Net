@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Miner list
     /// </summary>
-    public class BinanceMinerList
+    public record BinanceMinerList
     {
         /// <summary>
         /// Total number of entries
@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Miner details
     /// </summary>
-    public class BinanceMinerInfo
+    public record BinanceMinerInfo
     {
         /// <summary>
         /// Worker id

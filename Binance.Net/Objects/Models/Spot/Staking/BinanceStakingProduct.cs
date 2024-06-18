@@ -3,7 +3,7 @@
     /// <summary>
     /// Staking product info
     /// </summary>
-    public class BinanceStakingProduct
+    public record BinanceStakingProduct
     {
         /// <summary>
         /// Project id
@@ -23,7 +23,7 @@
     /// <summary>
     /// Staking product details
     /// </summary>
-    public class BinanceStakingProductDetails
+    public record BinanceStakingProductDetails
     {
         /// <summary>
         /// Lock up asset
@@ -50,7 +50,7 @@
     /// <summary>
     /// Staking product quota
     /// </summary>
-    public class BinanceStakingQuota
+    public record BinanceStakingQuota
     {
         /// <summary>
         /// Total Personal quota

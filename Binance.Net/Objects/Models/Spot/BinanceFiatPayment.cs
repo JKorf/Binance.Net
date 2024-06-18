@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Fiat payment info
     /// </summary>
-    public class BinanceFiatPayment
+    public record BinanceFiatPayment
     {
         /// <summary>
         /// Order number

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Isolated margin transfer
     /// </summary>
-    public class BinanceIsolatedMarginTransfer
+    public record BinanceIsolatedMarginTransfer
     {
         /// <summary>
         /// Quantity of the transfer

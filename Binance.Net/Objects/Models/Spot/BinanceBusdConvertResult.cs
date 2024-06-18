@@ -3,7 +3,7 @@
     /// <summary>
     /// Convert result
     /// </summary>
-    public class BinanceBusdConvertResult
+    public record BinanceBusdConvertResult
     {
         /// <summary>
         /// Transaction id

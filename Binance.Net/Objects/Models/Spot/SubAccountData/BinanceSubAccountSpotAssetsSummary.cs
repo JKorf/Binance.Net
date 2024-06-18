@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub accounts btc value summary
     /// </summary>
-    public class BinanceSubAccountSpotAssetsSummary
+    public record BinanceSubAccountSpotAssetsSummary
     {
         /// <summary>
         /// Total records
@@ -23,7 +23,7 @@
     /// <summary>
     /// Sub account btc value
     /// </summary>
-    public class BinanceSubAccountBtcValue
+    public record BinanceSubAccountBtcValue
     {
         /// <summary>
         /// Sub account email

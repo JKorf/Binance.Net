@@ -3,7 +3,7 @@
     /// <summary>
     /// Binance project info
     /// </summary>
-    public class BinanceProject
+    public record BinanceProject
     {
         /// <summary>
         /// The asset

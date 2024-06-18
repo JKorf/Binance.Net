@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Mark Price and Funding Rate
     /// </summary>
-    public class BinanceFuturesMarkPrice : IBinanceFuturesMarkPrice
+    public record BinanceFuturesMarkPrice : IBinanceFuturesMarkPrice
     {
         /// <summary>
         /// The symbol the information is about
@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Mark price for Coin-M future
     /// </summary>
-    public class BinanceFuturesCoinMarkPrice: BinanceFuturesMarkPrice
+    public record BinanceFuturesCoinMarkPrice: BinanceFuturesMarkPrice
     {
         /// <summary>
         /// The pair

@@ -6,7 +6,7 @@
     /// Combined streams
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinanceCombinedStream<T>
+    public record BinanceCombinedStream<T>
     {
         /// <summary>
         /// The stream combined

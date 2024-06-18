@@ -3,7 +3,7 @@
     /// <summary>
     /// Result
     /// </summary>
-    public class BinanceCrossMarginLeverageResult
+    public record BinanceCrossMarginLeverageResult
     {
         /// <summary>
         /// Success

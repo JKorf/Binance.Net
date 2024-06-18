@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub Account
     /// </summary>
-    public class BinanceBrokerageSubAccount : BinanceBrokerageSubAccountCommission
+    public record BinanceBrokerageSubAccount : BinanceBrokerageSubAccountCommission
     {
         /// <summary>
         /// Email

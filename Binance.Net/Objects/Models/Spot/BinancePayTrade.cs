@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Binance pay trade
     /// </summary>
-    public class BinancePayTrade
+    public record BinancePayTrade
     {
         /// <summary>
         /// Uid
@@ -81,7 +81,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Pay trade funds details
     /// </summary>
-    public class BinancePayTradeDetails
+    public record BinancePayTradeDetails
     {
         /// <summary>
         /// Asset
@@ -98,7 +98,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Pay trade receiver info
     /// </summary>
-    public class BinancePayTradeParticipantInfo
+    public record BinancePayTradeParticipantInfo
     {
         /// <summary>
         /// Nickname or merchant name

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// <summary>
     /// Subscribe result
     /// </summary>
-    public class BinanceBlvtSubscribeResult
+    public record BinanceBlvtSubscribeResult
     {
         /// <summary>
         /// Id

@@ -3,7 +3,7 @@
     /// <summary>
     /// Personal margin level information
     /// </summary>
-    public class BinanceMarginLevel
+    public record BinanceMarginLevel
     {
         /// <summary>
         /// The level at which your margin level is considered normal.

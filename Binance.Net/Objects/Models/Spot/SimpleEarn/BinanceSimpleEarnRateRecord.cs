@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn rate record
     /// </summary>
-    public class BinanceSimpleEarnRateRecord
+    public record BinanceSimpleEarnRateRecord
     {
         /// <summary>
         /// Product id

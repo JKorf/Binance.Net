@@ -3,7 +3,7 @@
     /// <summary>
     /// Information about leverage of symbol changed
     /// </summary>
-    public class BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
+    public record BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Leverage Update data
@@ -31,7 +31,7 @@
     /// <summary>
     /// Config update data
     /// </summary>
-    public class BinanceFuturesStreamLeverageUpdateData
+    public record BinanceFuturesStreamLeverageUpdateData
     {
         /// <summary>
         /// The symbol this balance is for
@@ -49,7 +49,7 @@
     /// <summary>
     /// Position mode update data
     /// </summary>
-    public class BinanceFuturesStreamConfigUpdateData
+    public record BinanceFuturesStreamConfigUpdateData
     {
         /// <summary>
         /// Multi-Assets Mode

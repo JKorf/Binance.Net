@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The result of query order
     /// </summary>
-    public class BinanceFuturesOrder
+    public record BinanceFuturesOrder
     {
         /// <summary>
         /// The symbol the order is for
@@ -160,7 +160,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Usdt futures order
     /// </summary>
-    public class BinanceUsdFuturesOrder : BinanceFuturesOrder
+    public record BinanceUsdFuturesOrder : BinanceFuturesOrder
     {
         /// <summary>
         /// 

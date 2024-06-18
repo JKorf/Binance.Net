@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account futures details
     /// </summary>
-    public class BinanceSubAccountFuturesDetailsV2
+    public record BinanceSubAccountFuturesDetailsV2
     {
         /// <summary>
         /// Futures account response (USDT margined)
@@ -21,7 +21,7 @@
     /// <summary>
     /// Sub account futures details
     /// </summary>
-    public class BinanceSubAccountFuturesDetailV2
+    public record BinanceSubAccountFuturesDetailV2
     {
         /// <summary>
         /// Email of the sub account
@@ -57,7 +57,7 @@
     /// <summary>
     /// Sub account futures details
     /// </summary>
-    public class BinanceSubAccountFuturesDetailV2Usdt : BinanceSubAccountFuturesDetailV2
+    public record BinanceSubAccountFuturesDetailV2Usdt : BinanceSubAccountFuturesDetailV2
     {
         /// <summary>
         /// Max quantity which can be withdrawn

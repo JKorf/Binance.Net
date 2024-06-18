@@ -3,7 +3,7 @@
     /// <summary>
     /// Enable Margin Result
     /// </summary>
-    public class BinanceBrokerageEnableMarginResult
+    public record BinanceBrokerageEnableMarginResult
     {
         /// <summary>
         /// Sub Account Id

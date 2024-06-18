@@ -3,7 +3,7 @@
     /// <summary>
     /// User balance
     /// </summary>
-    public class BinanceUserBalance : BinanceBalance
+    public record BinanceUserBalance : BinanceBalance
     {
         /// <summary>
         /// Frozen

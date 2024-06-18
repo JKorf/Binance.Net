@@ -3,7 +3,7 @@
     /// <summary>
     /// Rewards history
     /// </summary>
-    public class BinanceEthRewardsHistory
+    public record BinanceEthRewardsHistory
     {
         /// <summary>
         /// Asset

@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Convert
     /// <summary>
     /// Convert Quote
     /// </summary>
-    public class BinanceConvertResult
+    public record BinanceConvertResult
     {
         /// <summary>
         /// Order id

@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple earn locked product info
     /// </summary>
-    public class BinanceSimpleEarnLockedProduct
+    public record BinanceSimpleEarnLockedProduct
     {
         /// <summary>
         /// Project id
@@ -25,7 +25,7 @@
     /// <summary>
     /// Simple earn locked project details
     /// </summary>
-    public class BinanceSimpleEarnLockedProjectDetails
+    public record BinanceSimpleEarnLockedProjectDetails
     {
         /// <summary>
         /// Asset
@@ -82,7 +82,7 @@
     /// <summary>
     /// Simple earn locked project quota
     /// </summary>
-    public class BinanceSimpleEarnLockedProjectQuota
+    public record BinanceSimpleEarnLockedProjectQuota
     {
         /// <summary>
         /// Total personal quota

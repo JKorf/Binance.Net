@@ -4,7 +4,7 @@
     /// Query results
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinanceQueryRecords<T>
+    public record BinanceQueryRecords<T>
     {
         /// <summary>
         /// The list records

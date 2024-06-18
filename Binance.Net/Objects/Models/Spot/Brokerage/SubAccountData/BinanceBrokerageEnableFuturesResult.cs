@@ -3,7 +3,7 @@
     /// <summary>
     /// Enable Futures Result
     /// </summary>
-    public class BinanceBrokerageEnableFuturesResult
+    public record BinanceBrokerageEnableFuturesResult
     {
         /// <summary>
         /// Sub Account Id

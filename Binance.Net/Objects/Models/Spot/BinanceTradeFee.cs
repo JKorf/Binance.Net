@@ -3,7 +3,7 @@
     /// <summary>
     /// Trade fee info
     /// </summary>
-    public class BinanceTradeFee
+    public record BinanceTradeFee
     {
         /// <summary>
         /// The symbol this fee is for

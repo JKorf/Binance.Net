@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Forced liquidation info
     /// </summary>
-    public class BinanceForcedLiquidation
+    public record BinanceForcedLiquidation
     {
         /// <summary>
         /// Average price

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Symbol info
     /// </summary>
-    public class BinanceSymbol
+    public record BinanceSymbol
     {
         /// <summary>
         /// The symbol

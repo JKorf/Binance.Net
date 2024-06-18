@@ -3,7 +3,7 @@
     /// <summary>
     /// Rolling window tick info
     /// </summary>
-    public class BinanceRollingWindowTick
+    public record BinanceRollingWindowTick
     {
         /// <summary>
         /// The symbol this data is for

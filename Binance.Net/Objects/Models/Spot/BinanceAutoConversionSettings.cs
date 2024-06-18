@@ -3,7 +3,7 @@
     /// <summary>
     /// User auto conversion settings
     /// </summary>
-    public class BinanceAutoConversionSettings
+    public record BinanceAutoConversionSettings
     {
         /// <summary>
         /// Is auto convert enabled

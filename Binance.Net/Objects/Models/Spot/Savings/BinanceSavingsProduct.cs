@@ -3,7 +3,7 @@
     /// <summary>
     /// Savings product
     /// </summary>
-    public class BinanceSavingsProduct
+    public record BinanceSavingsProduct
     {
         /// <summary>
         /// The asset

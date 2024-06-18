@@ -3,7 +3,7 @@
     /// <summary>
     /// Rate history
     /// </summary>
-    public class BinanceBethRateHistory
+    public record BinanceBethRateHistory
     {
         /// <summary>
         /// Exchange rate

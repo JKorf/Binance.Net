@@ -3,7 +3,7 @@
     /// <summary>
     /// Information about an asset for a user
     /// </summary>
-    public class BinanceUserAsset
+    public record BinanceUserAsset
     {
         /// <summary>
         /// Asset code
@@ -68,7 +68,7 @@
     /// <summary>
     /// Network for an asset
     /// </summary>
-    public class BinanceNetwork
+    public record BinanceNetwork
     {
         /// <summary>
         /// Regex for an address on the network

@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Cloud mining payment/refund history
     /// </summary>
-    public class BinanceCloudMiningHistory
+    public record BinanceCloudMiningHistory
     {
         /// <summary>
         /// Creation time

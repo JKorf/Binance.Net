@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple earn product info
     /// </summary>
-    public class BinanceSimpleEarnFlexibleProduct
+    public record BinanceSimpleEarnFlexibleProduct
     {
         /// <summary>
         /// Asset

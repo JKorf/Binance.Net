@@ -3,7 +3,7 @@
     /// <summary>
     /// Staking position info
     /// </summary>
-    public class BinanceStakingPosition
+    public record BinanceStakingPosition
     {
         /// <summary>
         /// Position id

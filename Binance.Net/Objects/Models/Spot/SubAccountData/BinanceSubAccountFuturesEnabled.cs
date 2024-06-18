@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account futures trading enabled
     /// </summary>
-    public class BinanceSubAccountFuturesEnabled
+    public record BinanceSubAccountFuturesEnabled
     {
         /// <summary>
         /// Email of the account

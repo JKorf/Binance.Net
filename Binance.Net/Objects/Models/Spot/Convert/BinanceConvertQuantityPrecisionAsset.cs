@@ -3,7 +3,7 @@
     /// <summary>
     /// Precision per asset
     /// </summary>
-    public class BinanceConvertQuantityPrecisionAsset
+    public record BinanceConvertQuantityPrecisionAsset
     {
         /// <summary>
         /// Asset

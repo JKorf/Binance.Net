@@ -3,7 +3,7 @@
     /// <summary>
     /// Isolated margin symbol info
     /// </summary>
-    public class BinanceIsolatedMarginSymbol
+    public record BinanceIsolatedMarginSymbol
     {
         /// <summary>
         /// Symbol name

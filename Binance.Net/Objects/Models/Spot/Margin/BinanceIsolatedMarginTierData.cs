@@ -3,7 +3,7 @@
     /// <summary>
     /// Isolated margin tier data
     /// </summary>
-    public class BinanceIsolatedMarginTierData
+    public record BinanceIsolatedMarginTierData
     {
         /// <summary>
         /// Average price

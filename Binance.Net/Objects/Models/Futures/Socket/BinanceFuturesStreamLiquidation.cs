@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// A event received by a Binance websocket
     /// </summary>
-    public class BinanceFuturesStreamLiquidationData : BinanceStreamEvent
+    public record BinanceFuturesStreamLiquidationData : BinanceStreamEvent
     {
         /// <summary>
         /// The data of the event
@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// 
     /// </summary>
-    public class BinanceFuturesStreamLiquidation : IBinanceFuturesLiquidation
+    public record BinanceFuturesStreamLiquidation : IBinanceFuturesLiquidation
     {
         /// <summary>
         /// Symbol

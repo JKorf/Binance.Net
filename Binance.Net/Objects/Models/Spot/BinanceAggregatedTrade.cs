@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Compressed aggregated trade information. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
     /// </summary>
-    public class BinanceAggregatedTrade : IBinanceAggregatedTrade
+    public record BinanceAggregatedTrade : IBinanceAggregatedTrade
     {
         /// <summary>
         /// The id of this aggregation

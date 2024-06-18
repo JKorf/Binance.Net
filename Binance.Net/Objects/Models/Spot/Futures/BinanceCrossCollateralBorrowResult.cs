@@ -3,7 +3,7 @@
     /// <summary>
     /// Borrow result
     /// </summary>
-    public class BinanceCrossCollateralBorrowResult
+    public record BinanceCrossCollateralBorrowResult
     {
         /// <summary>
         /// Id

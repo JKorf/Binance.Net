@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Transfer history entry
     /// </summary>
-    public class BinanceTransferHistory
+    public record BinanceTransferHistory
     {
         /// <summary>
         /// Quanity of the transfer

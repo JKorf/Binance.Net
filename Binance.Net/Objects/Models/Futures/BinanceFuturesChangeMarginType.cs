@@ -3,7 +3,7 @@
     /// <summary>
     /// Result from a change margin type request
     /// </summary>
-    public class BinanceFuturesChangeMarginTypeResult
+    public record BinanceFuturesChangeMarginTypeResult
     {
         /// <summary>
         /// Response code

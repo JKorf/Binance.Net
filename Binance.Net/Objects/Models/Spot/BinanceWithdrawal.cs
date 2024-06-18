@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about a withdrawal
     /// </summary>
-    public class BinanceWithdrawal
+    public record BinanceWithdrawal
     {
         /// <summary>
         /// The id of the withdrawal

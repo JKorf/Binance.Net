@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open interest
     /// </summary>
-    public class BinanceFuturesOpenInterest
+    public record BinanceFuturesOpenInterest
     {
         /// <summary>
         /// The symbol the information is about
@@ -28,7 +28,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open interest
     /// </summary>
-    public class BinanceFuturesCoinOpenInterest: BinanceFuturesOpenInterest
+    public record BinanceFuturesCoinOpenInterest: BinanceFuturesOpenInterest
     {
         /// <summary>
         /// The pair

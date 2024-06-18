@@ -3,7 +3,7 @@
     /// <summary>
     /// Purchase result
     /// </summary>
-    public class BinanceLendingPurchaseResult
+    public record BinanceLendingPurchaseResult
     {
         /// <summary>
         /// The id of the purchase

@@ -3,7 +3,7 @@
     /// <summary>
     /// Miner details
     /// </summary>
-    public class BinanceMinerDetails
+    public record BinanceMinerDetails
     {
         /// <summary>
         /// Name of the worker
@@ -23,7 +23,7 @@
     /// <summary>
     /// Hash rate
     /// </summary>
-    public class BinanceHashRate
+    public record BinanceHashRate
     {
         /// <summary>
         /// Timestamp

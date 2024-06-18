@@ -3,7 +3,7 @@
     /// <summary>
     /// Leveraged token subscription info
     /// </summary>
-    public class BinanceBlvtSubscription
+    public record BinanceBlvtSubscription
     {
         /// <summary>
         /// Id

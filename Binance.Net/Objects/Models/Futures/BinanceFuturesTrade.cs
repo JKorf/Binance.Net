@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade info
     /// </summary>
-    public class BinanceFuturesTrade
+    public record BinanceFuturesTrade
     {
         /// <summary>
         /// The symbol
@@ -73,7 +73,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade details
     /// </summary>
-    public class BinanceFuturesUsdtTrade: BinanceFuturesTrade
+    public record BinanceFuturesUsdtTrade: BinanceFuturesTrade
     {
         /// <summary>
         /// Quote quantity
@@ -85,7 +85,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade details
     /// </summary>
-    public class BinanceFuturesCoinTrade : BinanceFuturesTrade
+    public record BinanceFuturesCoinTrade : BinanceFuturesTrade
     {
         /// <summary>
         /// The pair

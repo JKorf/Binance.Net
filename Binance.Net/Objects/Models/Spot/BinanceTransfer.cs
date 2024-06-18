@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Transfer info
     /// </summary>
-    public class BinanceTransfer
+    public record BinanceTransfer
     {
         /// <summary>
         /// The asset which was transfered

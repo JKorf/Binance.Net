@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn locked product preview
     /// </summary>
-    public class BinanceSimpleEarnLockedPreview
+    public record BinanceSimpleEarnLockedPreview
     {
         /// <summary>
         /// Reward asset

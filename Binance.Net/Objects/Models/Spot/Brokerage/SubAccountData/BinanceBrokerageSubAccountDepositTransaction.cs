@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub Account Deposit Transaction
     /// </summary>
-    public class BinanceBrokerageSubAccountDepositTransaction
+    public record BinanceBrokerageSubAccountDepositTransaction
     {
         /// <summary>
         /// Sub Account Id

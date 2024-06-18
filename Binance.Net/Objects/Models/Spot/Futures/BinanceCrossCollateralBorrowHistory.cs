@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
     /// <summary>
     /// Borrow history
     /// </summary>
-    public class BinanceCrossCollateralBorrowHistory
+    public record BinanceCrossCollateralBorrowHistory
     {
         /// <summary>
         /// Id

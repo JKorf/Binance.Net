@@ -3,7 +3,7 @@
     /// <summary>
     /// Long Short Ratio Info
     /// </summary>
-    public class BinanceFuturesLongShortRatio
+    public record BinanceFuturesLongShortRatio
     {
         /// <summary>
         /// The symbol or pair the information is about

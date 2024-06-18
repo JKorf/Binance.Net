@@ -3,7 +3,7 @@
     /// <summary>
     /// Composite index info
     /// </summary>
-    public class BinanceFuturesStreamCompositeIndex : BinanceStreamEvent
+    public record BinanceFuturesStreamCompositeIndex : BinanceStreamEvent
     {
         /// <summary>
         /// The symbol
@@ -32,7 +32,7 @@
     /// <summary>
     /// Composite index asset info
     /// </summary>
-    public class BinanceFuturesStreamCompositeIndexAsset
+    public record BinanceFuturesStreamCompositeIndexAsset
     {
         /// <summary>
         /// Base asset name

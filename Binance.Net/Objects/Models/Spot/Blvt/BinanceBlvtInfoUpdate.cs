@@ -3,7 +3,7 @@
     /// <summary>
     /// Blvt info update
     /// </summary>
-    public class BinanceBlvtInfoUpdate: BinanceStreamEvent
+    public record BinanceBlvtInfoUpdate: BinanceStreamEvent
     {
         /// <summary>
         /// Token name
@@ -46,7 +46,7 @@
     /// <summary>
     /// Basket
     /// </summary>
-    public class BlvtBasket
+    public record BlvtBasket
     {
         /// <summary>
         /// Symbol

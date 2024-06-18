@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Aggregated information about trades for a symbol
     /// </summary>
-    public class BinanceStreamTrade: BinanceStreamEvent, IBinanceTrade
+    public record BinanceStreamTrade: BinanceStreamEvent, IBinanceTrade
     {
         /// <summary>
         /// The symbol the trade was for

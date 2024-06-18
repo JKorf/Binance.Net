@@ -3,7 +3,7 @@
     /// <summary>
     /// Account Info
     /// </summary>
-    public class BinanceBrokerageAccountInfo
+    public record BinanceBrokerageAccountInfo
     {
         /// <summary>
         /// Max Maker Commission

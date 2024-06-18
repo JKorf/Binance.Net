@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// Candlestick information for symbol
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BinanceSpotKline: BinanceKlineBase
+    public record BinanceSpotKline: BinanceKlineBase
     {
         /// <summary>
         /// The volume traded during this candlestick

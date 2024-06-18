@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The result of placing a new OCO order
     /// </summary>
-    public class BinanceOrderOcoList
+    public record BinanceOrderOcoList
     {
         /// <summary>
         /// The id of the order list
@@ -53,7 +53,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Order reference
     /// </summary>
-    public class BinanceOrderId
+    public record BinanceOrderId
     {
         /// <summary>
         /// The symbol of the order
@@ -72,7 +72,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The result of placing a new order
     /// </summary>
-    public class BinancePlacedOcoOrder: BinanceOrderBase
+    public record BinancePlacedOcoOrder: BinanceOrderBase
     {
         /// <summary>
         /// The time the order was placed

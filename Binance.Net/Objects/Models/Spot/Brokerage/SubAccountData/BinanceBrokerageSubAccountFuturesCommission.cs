@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub Account Futures Commission
     /// </summary>
-    public class BinanceBrokerageSubAccountFuturesCommission
+    public record BinanceBrokerageSubAccountFuturesCommission
     {
         /// <summary>
         /// Sub Account Id

@@ -3,7 +3,7 @@
     /// <summary>
     /// Mining coin info
     /// </summary>
-    public class BinanceMiningCoin
+    public record BinanceMiningCoin
     {
         /// <summary>
         /// The name of the coin

@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub Account Api Key
     /// </summary>
-    public class BinanceBrokerageSubAccountApiKey
+    public record BinanceBrokerageSubAccountApiKey
     {
         /// <summary>
         /// Sub Account Id

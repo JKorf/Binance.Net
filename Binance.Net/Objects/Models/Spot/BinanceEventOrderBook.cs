@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Stream order book
     /// </summary>
-    public class BinanceEventOrderBook: BinanceOrderBook, IBinanceEventOrderBook
+    public record BinanceEventOrderBook: BinanceOrderBook, IBinanceEventOrderBook
     {
         /// <summary>
         /// The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book

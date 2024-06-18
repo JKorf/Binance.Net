@@ -3,7 +3,7 @@
     /// <summary>
     /// Extension to be able to deserialize an error response as well
     /// </summary>
-    internal class BinanceFuturesMultipleOrderCancelResult : BinanceFuturesOrder
+    internal record BinanceFuturesMultipleOrderCancelResult : BinanceFuturesOrder
     {
         public int Code { get; set; }
 
@@ -14,7 +14,7 @@
     /// <summary>
     /// Extension to be able to deserialize an error response as well
     /// </summary>
-    internal class BinanceUsdFuturesMultipleOrderCancelResult : BinanceUsdFuturesOrder
+    internal record BinanceUsdFuturesMultipleOrderCancelResult : BinanceUsdFuturesOrder
     {
         public int Code { get; set; }
 

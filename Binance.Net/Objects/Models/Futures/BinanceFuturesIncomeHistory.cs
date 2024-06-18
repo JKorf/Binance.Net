@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Futures income history result
     /// </summary>
-    public class BinanceFuturesIncomeHistory
+    public record BinanceFuturesIncomeHistory
     {
         /// <summary>
         /// Symbol for the resulting income history, may be null if not associated with a trading pair

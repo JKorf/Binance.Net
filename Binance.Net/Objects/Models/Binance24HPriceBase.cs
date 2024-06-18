@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models
     /// <summary>
     /// 24 hour rolling window price data
     /// </summary>
-    public abstract class Binance24HPriceBase : IBinance24HPrice
+    public abstract record Binance24HPriceBase : IBinance24HPrice
     {
         /// <summary>
         /// The symbol the price is for

@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn flexible product subscription preview
     /// </summary>
-    public class BinanceSimpleEarnFlexiblePreview
+    public record BinanceSimpleEarnFlexiblePreview
     {
         /// <summary>
         /// Reward asset

@@ -3,7 +3,7 @@
     /// <summary>
     /// Transaction download info
     /// </summary>
-    public class BinanceFuturesDownloadIdInfo
+    public record BinanceFuturesDownloadIdInfo
     {
         /// <summary>
         /// Average time taken for data download in the past 30 days

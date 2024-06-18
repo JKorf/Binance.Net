@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
     /// <summary>
     /// Adjust result
     /// </summary>
-    public class BinanceCrossCollateralAdjustLtvResult
+    public record BinanceCrossCollateralAdjustLtvResult
     {
         /// <summary>
         /// Collateral asset

@@ -3,7 +3,7 @@
     /// <summary>
     /// Flexible product position
     /// </summary>
-    public class BinanceFlexibleProductPosition
+    public record BinanceFlexibleProductPosition
     {
         /// <summary>
         /// Annual interest rate

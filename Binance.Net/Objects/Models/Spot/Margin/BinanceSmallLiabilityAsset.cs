@@ -3,7 +3,7 @@
     /// <summary>
     /// Small liability asset
     /// </summary>
-    public class BinanceSmallLiabilityAsset
+    public record BinanceSmallLiabilityAsset
     {
         /// <summary>
         /// Asset

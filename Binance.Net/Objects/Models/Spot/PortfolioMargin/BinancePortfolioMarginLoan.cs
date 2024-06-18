@@ -3,7 +3,7 @@
     /// <summary>
     /// Bankruptcy loan info
     /// </summary>
-    public class BinancePortfolioMarginLoan
+    public record BinancePortfolioMarginLoan
     {
         /// <summary>
         /// Asset

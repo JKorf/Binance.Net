@@ -3,7 +3,7 @@
     /// <summary>
     /// Wallet balance
     /// </summary>
-    public class BinanceWalletBalance
+    public record BinanceWalletBalance
     {
         /// <summary>
         /// Is the wallet activated

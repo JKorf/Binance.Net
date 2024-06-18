@@ -3,7 +3,7 @@
     /// <summary>
     /// IP restriction info
     /// </summary>
-    public class BinanceIpRestriction
+    public record BinanceIpRestriction
     {
         /// <summary>
         /// Is currently restricted

@@ -3,7 +3,7 @@
     /// <summary>
     /// Max quantities
     /// </summary>
-    public class BinanceCrossCollateralAdjustMaxAmounts
+    public record BinanceCrossCollateralAdjustMaxAmounts
     {
         /// <summary>
         /// The max in amount

@@ -3,7 +3,7 @@
     /// <summary>
     /// Quota left
     /// </summary>
-    public class BinanceStakingPersonalQuota
+    public record BinanceStakingPersonalQuota
     {
         /// <summary>
         /// Quota left

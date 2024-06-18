@@ -3,7 +3,7 @@
     /// <summary>
     /// Cross margin interest data
     /// </summary>
-    public class BinanceInterestMarginData
+    public record BinanceInterestMarginData
     {
         /// <summary>
         /// Vip level

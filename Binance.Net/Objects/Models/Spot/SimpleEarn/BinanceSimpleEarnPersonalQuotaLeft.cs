@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn personal quota left
     /// </summary>
-    public class BinanceSimpleEarnPersonalQuotaLeft
+    public record BinanceSimpleEarnPersonalQuotaLeft
     {
         /// <summary>
         /// Personal quota left

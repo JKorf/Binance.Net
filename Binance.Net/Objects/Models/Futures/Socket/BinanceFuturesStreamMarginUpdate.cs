@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Margin update
     /// </summary>
-    public class BinanceFuturesStreamMarginUpdate : BinanceStreamEvent
+    public record BinanceFuturesStreamMarginUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Cross Wallet Balance. Only pushed with crossed position margin call
@@ -28,7 +28,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Update data about an margin
     /// </summary>
-    public class BinanceFuturesStreamMarginPosition
+    public record BinanceFuturesStreamMarginPosition
     {
         /// <summary>
         /// Symbol

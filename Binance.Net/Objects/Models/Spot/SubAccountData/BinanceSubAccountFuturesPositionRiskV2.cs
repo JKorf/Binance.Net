@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account position risk
     /// </summary>
-    public class BinanceSubAccountFuturesPositionRiskV2
+    public record BinanceSubAccountFuturesPositionRiskV2
     {
         /// <summary>
         /// Futures account response (USDT margined)
@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account position risk
     /// </summary>
-    public class BinanceSubAccountFuturesPositionRiskCoin
+    public record BinanceSubAccountFuturesPositionRiskCoin
     {
         /// <summary>
         /// The entry price

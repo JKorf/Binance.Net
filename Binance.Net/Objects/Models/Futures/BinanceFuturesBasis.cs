@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Basis info
     /// </summary>
-    public class BinanceFuturesBasis
+    public record BinanceFuturesBasis
     {
         /// <summary>
         /// The pair

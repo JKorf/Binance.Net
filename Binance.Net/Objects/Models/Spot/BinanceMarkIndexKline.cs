@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// Kline for mark or index price
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BinanceMarkIndexKline
+    public record BinanceMarkIndexKline
     {
         /// <summary>
         /// The time this candlestick opened

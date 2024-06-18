@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Snapshot data of a spot account
     /// </summary>
-    public class BinanceSpotAccountSnapshot
+    public record BinanceSpotAccountSnapshot
     {
         /// <summary>
         /// Timestamp of the data
@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Data of the snapshot
     /// </summary>
-    public class BinanceSpotAccountSnapshotData
+    public record BinanceSpotAccountSnapshotData
     {
         /// <summary>
         /// The total value of assets in btc

@@ -3,7 +3,7 @@
     /// <summary>
     /// After adjustment rate
     /// </summary>
-    public class BinanceCrossCollateralAfterAdjust
+    public record BinanceCrossCollateralAfterAdjust
     {
         /// <summary>
         /// The rate after adjustment

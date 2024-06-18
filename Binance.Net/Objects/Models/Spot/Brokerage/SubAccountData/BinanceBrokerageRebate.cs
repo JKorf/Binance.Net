@@ -3,7 +3,7 @@
     /// <summary>
     /// Brokerage Rebate
     /// </summary>
-    public class BinanceBrokerageRebate
+    public record BinanceBrokerageRebate
     {
         /// <summary>
         /// Sub Account Id

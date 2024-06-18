@@ -3,7 +3,7 @@
     /// <summary>
     /// Api Key Create Result
     /// </summary>
-    public class BinanceBrokerageApiKeyCreateResult
+    public record BinanceBrokerageApiKeyCreateResult
     {
         /// <summary>
         /// Sub Account Id

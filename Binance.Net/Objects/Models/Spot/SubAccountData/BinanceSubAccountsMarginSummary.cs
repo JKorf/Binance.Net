@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub accounts margin summary
     /// </summary>
-    public class BinanceSubAccountsMarginSummary
+    public record BinanceSubAccountsMarginSummary
     {
         /// <summary>
         /// Total btc asset
@@ -27,7 +27,7 @@
     /// <summary>
     /// Sub account margin info
     /// </summary>
-    public class BinanceSubAccountMarginInfo
+    public record BinanceSubAccountMarginInfo
     {
         /// <summary>
         /// Sub account email

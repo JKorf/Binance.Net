@@ -3,7 +3,7 @@
     /// <summary>
     /// Open Interest History info
     /// </summary>
-    public class BinanceFuturesOpenInterestHistory
+    public record BinanceFuturesOpenInterestHistory
     {
         /// <summary>
         /// The symbol the information is about

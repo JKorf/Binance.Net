@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Positions update
     /// </summary>
-    public class BinanceStreamPositionsUpdate : BinanceStreamEvent
+    public record BinanceStreamPositionsUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Time of last account update
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceStreamBalance: IBinanceBalance
+    public record BinanceStreamBalance: IBinanceBalance
     {
         /// <summary>
         /// The asset this balance is for

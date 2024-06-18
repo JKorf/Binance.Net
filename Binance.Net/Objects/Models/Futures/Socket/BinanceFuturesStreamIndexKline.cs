@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
-    public class BinanceStreamIndexKlineData : BinanceStreamEvent
+    public record BinanceStreamIndexKlineData : BinanceStreamEvent
     {
         /// <summary>
         /// The symbol the data is for
@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Index kline
     /// </summary>
-    public class BinanceFuturesStreamIndexKline
+    public record BinanceFuturesStreamIndexKline
     {
         /// <summary>
         /// Open time

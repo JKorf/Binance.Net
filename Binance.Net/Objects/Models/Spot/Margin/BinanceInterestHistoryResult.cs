@@ -3,7 +3,7 @@
     /// <summary>
     /// Interest history entry info
     /// </summary>
-    public class BinanceInterestHistory
+    public record BinanceInterestHistory
     {
         /// <summary>
         /// Transaction id

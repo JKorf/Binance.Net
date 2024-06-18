@@ -3,7 +3,7 @@
     /// <summary>
     /// Quantile estimation
     /// </summary>
-    public class BinanceFuturesQuantileEstimation
+    public record BinanceFuturesQuantileEstimation
     {
         /// <summary>
         /// The symbol
@@ -18,7 +18,7 @@
     /// <summary>
     /// Quantile info
     /// </summary>
-    public class BinanceFuturesAdlQuantile
+    public record BinanceFuturesAdlQuantile
     {
         /// <summary>
         /// Long position

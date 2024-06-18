@@ -3,7 +3,7 @@
     /// <summary>
     /// Redemption quota left
     /// </summary>
-    public class BinanceRedemptionQuotaLeft
+    public record BinanceRedemptionQuotaLeft
     {
         /// <summary>
         /// The asset

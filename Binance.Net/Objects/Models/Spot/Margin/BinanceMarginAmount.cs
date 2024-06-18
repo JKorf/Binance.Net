@@ -3,7 +3,7 @@
     /// <summary>
     /// The result quantity of getting maxBorrowable or maxTransferable 
     /// </summary>
-    public class BinanceMarginAmount
+    public record BinanceMarginAmount
     {
         /// <summary>
         /// The quantity

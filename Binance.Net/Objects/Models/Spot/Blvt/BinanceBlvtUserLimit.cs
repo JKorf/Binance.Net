@@ -3,7 +3,7 @@
     /// <summary>
     /// Leveraged tokens user limits
     /// </summary>
-    public class BinanceBlvtUserLimit
+    public record BinanceBlvtUserLimit
     {
         /// <summary>
         /// Token name

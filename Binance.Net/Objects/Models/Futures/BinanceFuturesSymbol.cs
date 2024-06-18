@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public class BinanceFuturesSymbol
+    public record BinanceFuturesSymbol
     {
         /// <summary>
         /// Filters for order on this symbol
@@ -158,7 +158,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public class BinanceFuturesUsdtSymbol: BinanceFuturesSymbol
+    public record BinanceFuturesUsdtSymbol: BinanceFuturesSymbol
     {
         /// <summary>
         /// The status of the symbol
@@ -176,7 +176,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public class BinanceFuturesCoinSymbol: BinanceFuturesSymbol
+    public record BinanceFuturesCoinSymbol: BinanceFuturesSymbol
     {
 
         /// <summary>

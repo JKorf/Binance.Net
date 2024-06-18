@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account details
     /// </summary>
-    public class BinanceSubAccountBlvt
+    public record BinanceSubAccountBlvt
     {
         /// <summary>
         /// The email associated with the sub account

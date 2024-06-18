@@ -3,7 +3,7 @@
     /// <summary>
     /// Interest rate history
     /// </summary>
-    public class BinanceInterestRateHistory
+    public record BinanceInterestRateHistory
     {
         /// <summary>
         /// The asset

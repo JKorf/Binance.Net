@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account historic transfer
     /// </summary>
-    public class BinanceSubAccountTransferSubAccount
+    public record BinanceSubAccountTransferSubAccount
     {
         /// <summary>
         /// Counter party of the transfer

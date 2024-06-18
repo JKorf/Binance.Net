@@ -3,7 +3,7 @@
     /// <summary>
     /// Index info
     /// </summary>
-    public class BinanceFuturesCompositeIndexInfo
+    public record BinanceFuturesCompositeIndexInfo
     {
         /// <summary>
         /// The symbol
@@ -30,7 +30,7 @@
     /// <summary>
     /// Composite index asset
     /// </summary>
-    public class BinanceFuturesCompositeIndexInfoAsset
+    public record BinanceFuturesCompositeIndexInfoAsset
     {
         /// <summary>
         /// Base asset name

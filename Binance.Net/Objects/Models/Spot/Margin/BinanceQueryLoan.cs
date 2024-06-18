@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Loan info
     /// </summary>
-    public class BinanceLoan
+    public record BinanceLoan
     {
         /// <summary>
         /// Isolated symbol

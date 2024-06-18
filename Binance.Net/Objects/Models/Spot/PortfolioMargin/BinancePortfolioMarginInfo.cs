@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
     /// <summary>
     /// Portfolio margin account info
     /// </summary>
-    public class BinancePortfolioMarginInfo
+    public record BinancePortfolioMarginInfo
     {
         /// <summary>
         /// Portfolio margin account maintenance margin rate

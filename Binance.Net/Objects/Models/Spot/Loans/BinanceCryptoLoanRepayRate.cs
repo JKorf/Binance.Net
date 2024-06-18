@@ -3,7 +3,7 @@
     /// <summary>
     /// Repay rate info
     /// </summary>
-    public class BinanceCryptoLoanRepayRate
+    public record BinanceCryptoLoanRepayRate
     {
         /// <summary>
         /// Loan asset

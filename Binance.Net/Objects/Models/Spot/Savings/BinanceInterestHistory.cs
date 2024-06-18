@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
     /// <summary>
     /// Interest record
     /// </summary>
-    public class BinanceLendingInterestHistory
+    public record BinanceLendingInterestHistory
     {
         /// <summary>
         /// Interest

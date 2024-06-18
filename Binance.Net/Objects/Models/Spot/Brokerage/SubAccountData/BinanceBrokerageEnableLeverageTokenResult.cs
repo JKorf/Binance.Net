@@ -3,7 +3,7 @@
     /// <summary>
     /// Enable Leverage Token Result
     /// </summary>
-    public class BinanceBrokerageEnableLeverageTokenResult
+    public record BinanceBrokerageEnableLeverageTokenResult
     {
         /// <summary>
         /// Sub Account Id

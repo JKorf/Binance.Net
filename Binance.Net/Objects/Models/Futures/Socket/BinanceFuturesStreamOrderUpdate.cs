@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Order update
     /// </summary>
-    public class BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
+    public record BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
     {
         /// <summary>
         /// Update data
@@ -28,7 +28,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Update data about an order
     /// </summary>
-    public class BinanceFuturesStreamOrderUpdateData
+    public record BinanceFuturesStreamOrderUpdateData
     {
         /// <summary>
         /// The symbol the order is for

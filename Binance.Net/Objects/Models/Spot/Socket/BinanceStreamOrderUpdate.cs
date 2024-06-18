@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Update data about an order
     /// </summary>
-    public class BinanceStreamOrderUpdate: BinanceStreamEvent
+    public record BinanceStreamOrderUpdate: BinanceStreamEvent
     {
         /// <summary>
         /// The id of the order as assigned by Binance

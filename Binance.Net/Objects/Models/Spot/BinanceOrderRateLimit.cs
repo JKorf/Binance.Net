@@ -3,7 +3,7 @@
     /// <summary>
     /// Rate limit info
     /// </summary>
-    public class BinanceCurrentRateLimit: BinanceRateLimit
+    public record BinanceCurrentRateLimit: BinanceRateLimit
     {
         /// <summary>
         /// The current used amount

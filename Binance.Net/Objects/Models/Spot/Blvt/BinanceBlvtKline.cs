@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// Blvt kline
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BinanceBlvtKline
+    public record BinanceBlvtKline
     {
         /// <summary>
         /// The time this candlestick opened

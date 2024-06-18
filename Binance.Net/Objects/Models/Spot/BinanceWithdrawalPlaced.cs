@@ -3,7 +3,7 @@
     /// <summary>
     /// Result of placing a withdrawal
     /// </summary>
-    public class BinanceWithdrawalPlaced
+    public record BinanceWithdrawalPlaced
     {
         /// <summary>
         /// The id

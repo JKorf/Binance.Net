@@ -3,7 +3,7 @@
     /// <summary>
     /// Information about an account
     /// </summary>
-    public class BinanceFuturesAccountInfo
+    public record BinanceFuturesAccountInfo
     {
         /// <summary>
         /// Information about an account assets

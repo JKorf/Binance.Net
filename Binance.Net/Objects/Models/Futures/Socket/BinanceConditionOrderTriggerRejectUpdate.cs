@@ -4,7 +4,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public class BinanceConditionOrderTriggerRejectUpdate : BinanceStreamEvent
+    public record BinanceConditionOrderTriggerRejectUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Timestamp
@@ -23,7 +23,7 @@
     /// <summary>
     /// Reject info
     /// </summary>
-    public class BinanceConditionOrderTriggerReject
+    public record BinanceConditionOrderTriggerReject
     {
         /// <summary>
         /// The symbol

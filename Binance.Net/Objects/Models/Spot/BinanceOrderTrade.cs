@@ -3,7 +3,7 @@
     /// <summary>
     /// Trade info
     /// </summary>
-    public class BinanceOrderTrade
+    public record BinanceOrderTrade
     {
         /// <summary>
         /// The id of the trade

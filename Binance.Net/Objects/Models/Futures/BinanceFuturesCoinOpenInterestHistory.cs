@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open Interest History info
     /// </summary>
-    public class BinanceFuturesCoinOpenInterestHistory
+    public record BinanceFuturesCoinOpenInterestHistory
     {
         /// <summary>
         /// The symbol the information is about

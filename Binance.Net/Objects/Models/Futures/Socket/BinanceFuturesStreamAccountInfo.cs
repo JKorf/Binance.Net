@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Account update
     /// </summary>
-    public class BinanceFuturesStreamAccountUpdate: BinanceStreamEvent
+    public record BinanceFuturesStreamAccountUpdate: BinanceStreamEvent
     {
         /// <summary>
         /// The update data
@@ -28,7 +28,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Account update data
     /// </summary>
-    public class BinanceFuturesStreamAccountUpdateData
+    public record BinanceFuturesStreamAccountUpdateData
     {
         /// <summary>
         /// Account update reason type
@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceFuturesStreamBalance
+    public record BinanceFuturesStreamBalance
     {
         /// <summary>
         /// The asset this balance is for
@@ -79,7 +79,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Information about an asset position
     /// </summary>
-    public class BinanceFuturesStreamPosition
+    public record BinanceFuturesStreamPosition
     {
         /// <summary>
         /// The symbol this balance is for

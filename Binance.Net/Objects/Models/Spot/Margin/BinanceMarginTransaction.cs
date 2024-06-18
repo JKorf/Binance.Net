@@ -3,7 +3,7 @@
     /// <summary>
     /// The result of transferring
     /// </summary>
-    public class BinanceTransaction
+    public record BinanceTransaction
     {
         /// <summary>
         /// The Transaction id as assigned by Binance

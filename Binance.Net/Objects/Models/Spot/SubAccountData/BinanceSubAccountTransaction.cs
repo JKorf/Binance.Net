@@ -3,7 +3,7 @@
     /// <summary>
     /// Transaction
     /// </summary>
-    public class BinanceSubAccountTransaction
+    public record BinanceSubAccountTransaction
     {
         /// <summary>
         /// The transaction id

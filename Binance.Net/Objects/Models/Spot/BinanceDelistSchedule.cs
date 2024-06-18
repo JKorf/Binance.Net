@@ -3,7 +3,7 @@
     /// <summary>
     /// Spot symbol delist info
     /// </summary>
-    public class BinanceDelistSchedule
+    public record BinanceDelistSchedule
     {
         /// <summary>
         /// Delist time

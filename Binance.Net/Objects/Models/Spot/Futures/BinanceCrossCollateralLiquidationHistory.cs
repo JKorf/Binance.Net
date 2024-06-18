@@ -3,7 +3,7 @@
     /// <summary>
     /// Liquidation history
     /// </summary>
-    public class BinanceCrossCollateralLiquidationHistory
+    public record BinanceCrossCollateralLiquidationHistory
     {
         /// <summary>
         /// Quantity for liquidation

@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account margin trade details
     /// </summary>
-    public class BinanceSubAccountMarginDetails
+    public record BinanceSubAccountMarginDetails
     {
         /// <summary>
         /// Email of the account
@@ -42,14 +42,14 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Margin trade detail
     /// </summary>
-    public class BinanceMarginTradeCoeff
+    public record BinanceMarginTradeCoeff
     {
         /// <summary>
         /// Liquidation margin ratio
         /// </summary>
         public decimal ForceLiquidationBar { get; set; }
         /// <summary>
-        /// Margin class margin ratio
+        /// Margin record margin ratio
         /// </summary>
         public decimal MarginCallBar { get; set; }
         /// <summary>

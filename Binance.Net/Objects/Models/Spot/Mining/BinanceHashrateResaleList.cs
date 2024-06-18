@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Resale list
     /// </summary>
-    public class BinanceHashrateResaleList
+    public record BinanceHashrateResaleList
     {
         /// <summary>
         /// Total number of results
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Resale item
     /// </summary>
-    public class BinanceHashrateResaleItem
+    public record BinanceHashrateResaleItem
     {
         /// <summary>
         /// Mining id

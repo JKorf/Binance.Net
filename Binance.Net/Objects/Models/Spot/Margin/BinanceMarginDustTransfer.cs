@@ -3,7 +3,7 @@
     /// <summary>
     /// Margin dust transfer info
     /// </summary>
-    public class BinanceMarginDustTransfer
+    public record BinanceMarginDustTransfer
     {
         /// <summary>
         /// Total service charge
@@ -25,7 +25,7 @@
     /// <summary>
     /// Transfer results
     /// </summary>
-    public class BinanceMargingDustTransferResult
+    public record BinanceMargingDustTransferResult
     {
         /// <summary>
         /// Quantity

@@ -3,7 +3,7 @@
     /// <summary>
     /// Simple Earn result
     /// </summary>
-    public class BinanceSimpleEarnResult
+    public record BinanceSimpleEarnResult
     {
         /// <summary>
         /// Result

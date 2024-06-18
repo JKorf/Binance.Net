@@ -3,7 +3,7 @@
     /// <summary>
     /// Purchase id
     /// </summary>
-    public class BinanceSimpleEarnPurchase
+    public record BinanceSimpleEarnPurchase
     {
         /// <summary>
         /// Success

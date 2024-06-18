@@ -3,7 +3,7 @@
     /// <summary>
     /// Bnb burn status
     /// </summary>
-    public class BinanceBnbBurnStatus
+    public record BinanceBnbBurnStatus
     {
         /// <summary>
         /// If spot trading BNB burn is enabled

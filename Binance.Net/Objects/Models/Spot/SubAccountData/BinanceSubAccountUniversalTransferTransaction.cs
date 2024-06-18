@@ -3,7 +3,7 @@ using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
-    internal class BinanceSubAccountUniversalTransfersList
+    internal record BinanceSubAccountUniversalTransfersList
     {
         /// <summary>
         /// Transactions
@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Binance sub account universal transaction
     /// </summary>
-    public class BinanceSubAccountUniversalTransferTransaction
+    public record BinanceSubAccountUniversalTransferTransaction
     {
         /// <summary>
         /// Transaction id

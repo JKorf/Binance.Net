@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub-account Status on Margin/Futures
     /// </summary>
-    public class BinanceSubAccountStatus
+    public record BinanceSubAccountStatus
     {
         /// <summary>
         /// User email

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     /// <summary>
     /// Transfer Transaction Universal
     /// </summary>
-    public class BinanceBrokerageTransferTransactionUniversal
+    public record BinanceBrokerageTransferTransactionUniversal
     {
         /// <summary>
         /// Transaction Id

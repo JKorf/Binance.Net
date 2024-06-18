@@ -3,7 +3,7 @@
     /// <summary>
     /// Small liability history
     /// </summary>
-    public class BinanceSmallLiabilityHistory
+    public record BinanceSmallLiabilityHistory
     {
         /// <summary>
         /// Asset

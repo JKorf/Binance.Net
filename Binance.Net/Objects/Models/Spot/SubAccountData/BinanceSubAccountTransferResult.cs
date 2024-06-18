@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account transfer result
     /// </summary>
-    public class BinanceSubAccountTransferResult
+    public record BinanceSubAccountTransferResult
     {
         /// <summary>
         /// Whether the transfer was successful

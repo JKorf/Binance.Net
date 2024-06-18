@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Convert
     /// <summary>
     /// Convert trade info
     /// </summary>
-    public class BinanceConvertOrderStatus
+    public record BinanceConvertOrderStatus
     {
         /// <summary>
         /// Order id

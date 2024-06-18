@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     /// <summary>
     /// Algo orders
     /// </summary>
-    public class BinanceAlgoOrders
+    public record BinanceAlgoOrders
     {
         /// <summary>
         /// Total items
@@ -21,7 +21,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     /// <summary>
     /// Algo order info
     /// </summary>
-    public class BinanceAlgoOrder
+    public record BinanceAlgoOrder
     {
         /// <summary>
         /// Algo id

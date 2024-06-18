@@ -3,7 +3,7 @@
     /// <summary>
     /// Deposit address info
     /// </summary>
-    public class BinanceDepositAddress
+    public record BinanceDepositAddress
     {
         /// <summary>
         /// The deposit address

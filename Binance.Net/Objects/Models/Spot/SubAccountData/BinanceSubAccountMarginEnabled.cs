@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account margin trading enabled
     /// </summary>
-    public class BinanceSubAccountMarginEnabled
+    public record BinanceSubAccountMarginEnabled
     {
         /// <summary>
         /// Email of the account

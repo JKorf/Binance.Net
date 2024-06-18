@@ -1,6 +1,6 @@
 ﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
-    internal class BinanceSubAccountWrapper
+    internal record BinanceSubAccountWrapper
     {
         public IEnumerable<BinanceSubAccount>? SubAccounts { get; set; }
     }
@@ -8,7 +8,7 @@
     /// <summary>
     /// Sub account details
     /// </summary>
-    public class BinanceSubAccount
+    public record BinanceSubAccount
     {
         /// <summary>
         /// The email associated with the sub account

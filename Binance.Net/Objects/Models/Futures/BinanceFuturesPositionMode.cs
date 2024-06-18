@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// User's position mode
     /// </summary>
-    public class BinanceFuturesPositionMode
+    public record BinanceFuturesPositionMode
     {
         /// <summary>
         /// true": Hedge Mode mode; "false": One-way Mode

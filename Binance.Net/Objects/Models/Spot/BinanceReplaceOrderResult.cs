@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The result of replacing an order
     /// </summary>
-    public class BinanceReplaceOrderResult: BinanceReplaceResult
+    public record BinanceReplaceOrderResult: BinanceReplaceResult
     {
         /// <summary>
         /// Cancel result
@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Replace order
     /// </summary>
-    public class BinanceReplaceOrder: BinancePlacedOrder
+    public record BinanceReplaceOrder: BinancePlacedOrder
     {
         /// <summary>
         /// Failure message
@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Replace cancel order info
     /// </summary>
-    public class BinanceReplaceCancelOrder: BinanceOrderBase
+    public record BinanceReplaceCancelOrder: BinanceOrderBase
     {
         /// <summary>
         /// Failure message
@@ -62,7 +62,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Replace result
     /// </summary>
-    public class BinanceReplaceResult
+    public record BinanceReplaceResult
     {
         /// <summary>
         /// Failure message

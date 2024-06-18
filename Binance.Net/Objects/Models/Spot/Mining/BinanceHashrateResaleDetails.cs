@@ -3,7 +3,7 @@
     /// <summary>
     /// Resale list
     /// </summary>
-    public class BinanceHashrateResaleDetails
+    public record BinanceHashrateResaleDetails
     {
         /// <summary>
         /// Total number of results
@@ -22,7 +22,7 @@
     /// <summary>
     /// Resale item
     /// </summary>
-    public class BinanceHashrateResaleDetailsItem
+    public record BinanceHashrateResaleDetailsItem
     {
         /// <summary>
         /// Config id

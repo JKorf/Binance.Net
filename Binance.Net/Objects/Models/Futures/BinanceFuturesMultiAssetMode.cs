@@ -3,7 +3,7 @@
     /// <summary>
     /// Multi asset mode info
     /// </summary>
-    public class BinanceFuturesMultiAssetMode
+    public record BinanceFuturesMultiAssetMode
     {
         /// <summary>
         /// Is multi assets mode enabled

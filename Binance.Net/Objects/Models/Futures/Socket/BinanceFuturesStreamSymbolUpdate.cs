@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Futures stream symbol update
     /// </summary>
-    public class BinanceFuturesStreamSymbolUpdate : BinanceStreamEvent
+    public record BinanceFuturesStreamSymbolUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Symbol
@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Bracket update
     /// </summary>
-    public class BinanceBracketUpdate
+    public record BinanceBracketUpdate
     {
         /// <summary>
         /// Notional bracket

@@ -3,7 +3,7 @@
     /// <summary>
     /// Exchange info
     /// </summary>
-    public class BinanceFuturesExchangeInfo
+    public record BinanceFuturesExchangeInfo
     {
         /// <summary>
         /// The timezone the server uses
@@ -27,7 +27,7 @@
     /// <summary>
     /// Exchange info
     /// </summary>
-    public class BinanceFuturesUsdtExchangeInfo: BinanceFuturesExchangeInfo
+    public record BinanceFuturesUsdtExchangeInfo: BinanceFuturesExchangeInfo
     {
         /// <summary>
         /// All symbols supported
@@ -43,7 +43,7 @@
     /// <summary>
     /// Exchange info
     /// </summary>
-    public class BinanceFuturesCoinExchangeInfo : BinanceFuturesExchangeInfo
+    public record BinanceFuturesCoinExchangeInfo : BinanceFuturesExchangeInfo
     {
         /// <summary>
         /// All symbols supported

@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Busd convert history
     /// </summary>
-    public class BinanceBusdHistory
+    public record BinanceBusdHistory
     {
         /// <summary>
         /// Transaction id

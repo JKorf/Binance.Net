@@ -3,7 +3,7 @@
     /// <summary>
     /// Cross colateral wallet info
     /// </summary>
-    public class BinanceCrossCollateralWallet
+    public record BinanceCrossCollateralWallet
     {
         /// <summary>
         /// Total cross collateral
@@ -34,7 +34,7 @@
     /// <summary>
     /// Cross collateral data
     /// </summary>
-    public class BinanceCrossCollateralWalletEntry
+    public record BinanceCrossCollateralWalletEntry
     {
         /// <summary>
         /// Loan asset

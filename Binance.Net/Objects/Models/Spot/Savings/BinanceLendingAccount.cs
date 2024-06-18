@@ -3,7 +3,7 @@
     /// <summary>
     /// Lending account
     /// </summary>
-    public class BinanceLendingAccount
+    public record BinanceLendingAccount
     {
         /// <summary>
         /// Total quantity in btc
@@ -44,7 +44,7 @@
     /// <summary>
     /// Lending position amount
     /// </summary>
-    public class BinanceLendingPositionAmount
+    public record BinanceLendingPositionAmount
     {
         /// <summary>
         /// Amount of the asset

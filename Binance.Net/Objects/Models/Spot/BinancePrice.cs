@@ -3,7 +3,7 @@
     /// <summary>
     /// The price of a symbol
     /// </summary>
-    public class BinancePrice
+    public record BinancePrice
     {
         /// <summary>
         /// The symbol the price is for
@@ -23,7 +23,7 @@
     /// <summary>
     /// Futures-Coin price
     /// </summary>
-    public class BinanceFuturesCoinPrice: BinancePrice
+    public record BinanceFuturesCoinPrice: BinancePrice
     {
         /// <summary>
         /// Name of the pair

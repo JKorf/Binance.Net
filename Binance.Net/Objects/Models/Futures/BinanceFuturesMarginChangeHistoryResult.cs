@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Result of the margin change history request
     /// </summary>
-    public class BinanceFuturesMarginChangeHistoryResult
+    public record BinanceFuturesMarginChangeHistoryResult
     {
         /// <summary>
         /// Request quantity of margin used

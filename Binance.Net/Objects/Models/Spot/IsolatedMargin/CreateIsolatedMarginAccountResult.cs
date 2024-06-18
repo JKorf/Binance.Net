@@ -3,7 +3,7 @@
     /// <summary>
     /// Result of creating isolated margin account
     /// </summary>
-    public class CreateIsolatedMarginAccountResult
+    public record CreateIsolatedMarginAccountResult
     {
         /// <summary>
         /// Success

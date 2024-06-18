@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about the best price/quantity available for a symbol
     /// </summary>
-    public class BinanceBookPrice : IBinanceBookPrice
+    public record BinanceBookPrice : IBinanceBookPrice
     {
         /// <summary>
         /// Last trade update id

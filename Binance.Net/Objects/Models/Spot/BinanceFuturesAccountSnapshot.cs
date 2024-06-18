@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Snapshot data of a futures account
     /// </summary>
-    public class BinanceFuturesAccountSnapshot
+    public record BinanceFuturesAccountSnapshot
     {
         /// <summary>
         /// Timestamp of the data
@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Data of the snapshot
     /// </summary>
-    public class BinanceFuturesAccountSnapshotData
+    public record BinanceFuturesAccountSnapshotData
     {
         /// <summary>
         /// List of assets
@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Asset
     /// </summary>
-    public class BinanceFuturesAsset
+    public record BinanceFuturesAsset
     {
         /// <summary>
         /// Name of the asset
@@ -65,7 +65,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Position
     /// </summary>
-    public class BinanceFuturesSnapshotPosition
+    public record BinanceFuturesSnapshotPosition
     {
         /// <summary>
         /// The symbol

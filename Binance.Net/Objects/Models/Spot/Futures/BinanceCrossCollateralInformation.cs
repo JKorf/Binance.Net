@@ -3,7 +3,7 @@
     /// <summary>
     /// Collateral info
     /// </summary>
-    public class BinanceCrossCollateralInformation
+    public record BinanceCrossCollateralInformation
     {
         /// <summary>
         /// The loan asset

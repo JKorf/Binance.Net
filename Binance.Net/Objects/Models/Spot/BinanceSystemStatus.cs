@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The status of Binance
     /// </summary>
-    public class BinanceSystemStatus
+    public record BinanceSystemStatus
     {
         /// <summary>
         /// Status

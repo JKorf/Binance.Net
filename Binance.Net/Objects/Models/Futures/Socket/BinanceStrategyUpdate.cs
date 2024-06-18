@@ -3,7 +3,7 @@
     /// <summary>
     /// Strategy update
     /// </summary>
-    public class BinanceStrategyUpdate: BinanceStreamEvent
+    public record BinanceStrategyUpdate: BinanceStreamEvent
     {
         /// <summary>
         /// Update info
@@ -21,7 +21,7 @@
     /// <summary>
     /// Strategy update info
     /// </summary>
-    public class BinanceStrategyInfo
+    public record BinanceStrategyInfo
     {
         /// <summary>
         /// The strategy id

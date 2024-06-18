@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Parameters for a new futures batch order
     /// </summary>
-    public class BinanceFuturesBatchOrder
+    public record BinanceFuturesBatchOrder
     {
         /// <summary>
         /// Symbol of the order

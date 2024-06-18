@@ -3,7 +3,7 @@
     /// <summary>
     /// Spot Asset Info
     /// </summary>
-    public class BinanceBrokerageSpotAssetInfo
+    public record BinanceBrokerageSpotAssetInfo
     {
         /// <summary>
         /// Data
@@ -20,7 +20,7 @@
     /// <summary>
     /// Account Spot Asset Info
     /// </summary>
-    public class BinanceBrokerageSubAccountSpotAssetInfo
+    public record BinanceBrokerageSubAccountSpotAssetInfo
     {
         /// <summary>
         /// Sub Account Id

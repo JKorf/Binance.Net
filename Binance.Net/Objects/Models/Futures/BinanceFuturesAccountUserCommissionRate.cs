@@ -3,7 +3,7 @@
     /// <summary>
     /// User commission rate
     /// </summary>
-    public class BinanceFuturesAccountUserCommissionRate
+    public record BinanceFuturesAccountUserCommissionRate
     {
         /// <summary>
         /// Symbol

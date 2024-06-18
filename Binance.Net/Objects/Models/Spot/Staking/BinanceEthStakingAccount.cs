@@ -3,7 +3,7 @@
     /// <summary>
     /// Eth staking account
     /// </summary>
-    public class BinanceEthStakingAccount
+    public record BinanceEthStakingAccount
     {
         /// <summary>
         /// Total profit in Beth

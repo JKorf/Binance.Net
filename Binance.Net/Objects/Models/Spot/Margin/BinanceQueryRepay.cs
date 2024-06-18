@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Repay info
     /// </summary>
-    public class BinanceRepay
+    public record BinanceRepay
     {
         /// <summary>
         /// Isolated symbol

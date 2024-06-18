@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Trade status
     /// </summary>
-    public class BinanceTradingStatus
+    public record BinanceTradingStatus
     {
         /// <summary>
         /// Is locked
@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Indicator info
     /// </summary>
-    public class BinanceIndicator
+    public record BinanceIndicator
     {
         /// <summary>
         /// Indicator name

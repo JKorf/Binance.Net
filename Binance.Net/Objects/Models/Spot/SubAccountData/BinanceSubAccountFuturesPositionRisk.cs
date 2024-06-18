@@ -3,7 +3,7 @@
     /// <summary>
     /// Sub account position risk
     /// </summary>
-    public class BinanceSubAccountFuturesPositionRisk
+    public record BinanceSubAccountFuturesPositionRisk
     {
         /// <summary>
         /// The entry price

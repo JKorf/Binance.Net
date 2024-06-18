@@ -3,7 +3,7 @@
     /// <summary>
     /// Price index for a symbol
     /// </summary>
-    public class BinanceMarginPriceIndex
+    public record BinanceMarginPriceIndex
     {
         /// <summary>
         /// Symbol

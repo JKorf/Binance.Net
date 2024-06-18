@@ -3,7 +3,7 @@
     /// <summary>
     /// IP Restriction
     /// </summary>
-    public class BinanceBrokerageIpRestrictionBase
+    public record BinanceBrokerageIpRestrictionBase
     {
         /// <summary>
         /// Sub Account Id
@@ -30,7 +30,7 @@
     /// <summary>
     /// IP Restriction
     /// </summary>
-    public class BinanceBrokerageIpRestriction : BinanceBrokerageIpRestrictionBase
+    public record BinanceBrokerageIpRestriction : BinanceBrokerageIpRestrictionBase
     {
         /// <summary>
         /// Ip Restrict

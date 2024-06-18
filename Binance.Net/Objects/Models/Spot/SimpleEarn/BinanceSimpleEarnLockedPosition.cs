@@ -3,7 +3,7 @@
     /// <summary>
     /// Locked product position info
     /// </summary>
-    public class BinanceSimpleEarnLockedPosition
+    public record BinanceSimpleEarnLockedPosition
     {
         /// <summary>
         /// Asset

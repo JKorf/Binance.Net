@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about an account
     /// </summary>
-    public class BinanceAccountInfo
+    public record BinanceAccountInfo
     {
         /// <summary>
         /// Fee percentage to pay when making trades
@@ -83,7 +83,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public class BinanceBalance : IBinanceBalance
+    public record BinanceBalance : IBinanceBalance
     {
         /// <summary>
         /// The asset this balance is for

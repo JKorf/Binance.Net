@@ -3,7 +3,7 @@
     /// <summary>
     /// Info on a product
     /// </summary>
-    public class BinanceProduct
+    public record BinanceProduct
     {
         /// <summary>
         /// Name of the symbol

@@ -3,7 +3,7 @@
     /// <summary>
     /// Repay result
     /// </summary>
-    public class BinanceCrossCollateralRepayResult
+    public record BinanceCrossCollateralRepayResult
     {
         /// <summary>
         /// Id

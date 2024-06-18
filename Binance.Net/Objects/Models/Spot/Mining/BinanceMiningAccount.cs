@@ -3,7 +3,7 @@
     /// <summary>
     /// Mining account
     /// </summary>
-    public class BinanceMiningAccount
+    public record BinanceMiningAccount
     {
         /// <summary>
         /// Type

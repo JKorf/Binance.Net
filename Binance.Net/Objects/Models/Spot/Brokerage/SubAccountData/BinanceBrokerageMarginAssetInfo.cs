@@ -3,7 +3,7 @@
     /// <summary>
     /// Margin Asset Info
     /// </summary>
-    public class BinanceBrokerageMarginAssetInfo
+    public record BinanceBrokerageMarginAssetInfo
     {
         /// <summary>
         /// Data
@@ -20,7 +20,7 @@
     /// <summary>
     /// Account Margin Asset Info
     /// </summary>
-    public class BinanceBrokerageSubAccountMarginAssetInfo
+    public record BinanceBrokerageSubAccountMarginAssetInfo
     {
         /// <summary>
         /// Sub Account Id

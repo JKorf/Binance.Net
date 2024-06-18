@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     /// <summary>
     /// Flexible product subscription record
     /// </summary>
-    public class BinanceSimpleEarnFlexibleRecord
+    public record BinanceSimpleEarnFlexibleRecord
     {
         /// <summary>
         /// Quantity
