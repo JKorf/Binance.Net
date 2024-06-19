@@ -125,7 +125,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override Query? GetAuthenticationRequest() => null;
+        protected override Query? GetAuthenticationRequest(SocketConnection connection) => null;
 
         internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
         {
