@@ -95,7 +95,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
             parameters.AddOptionalEnum("priceMatch", priceMatch);
             parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
-            parameters.AddOptionalSeconds("goodTillDate", goodTillDate);
+            parameters.AddOptionalMilliseconds("goodTillDate", goodTillDate);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 0, true);
             var result = await _baseClient.SendAsync<BinanceUsdFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
