@@ -155,6 +155,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.11.0 - 23 Jun 2024
+    * Updated CryptoExchange.Net to version 7.7.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.0
+    * Added dedicated connection configuration; a websocket connection can now be established before making the first request by calling `binanceSocketClient.SpotApi.PrepareConnectionsAsync();`
+    * Added CancellationToken optional parameter to websocket requests
+    * Updated response models from classes to records
+
 * Version 9.10.0 - 11 Jun 2024
     * Added new SpotApi.Trading.PlaceOtoOrderListAsync and SpotApi.Trading.PlaceOtocoOrderListAsync endpoints
     * Fixed GetProductsAsync endpoints by allowing automatic decompression
