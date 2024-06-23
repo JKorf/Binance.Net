@@ -16,23 +16,26 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Ping to test connection
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#test-connectivity" /></para>
         /// </summary>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<object>>> PingAsync();
+        Task<CallResult<BinanceResponse<object>>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get the server time
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#check-server-time" /></para>
         /// </summary>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<DateTime>>> GetServerTimeAsync();
+        Task<CallResult<BinanceResponse<DateTime>>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets information about the exchange including rate limits and symbol list
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#exchange-information" /></para>
         /// </summary>
-        /// <param name="symbols"></param>
+        /// <param name="symbols">Filter by symbols</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnumerable<string>? symbols = null);
+        Task<CallResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
@@ -43,22 +46,25 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max results</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceStreamAggregatedTrade>>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceStreamAggregatedTrade>>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-order-book-ticker" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookTickersAsync(IEnumerable<string>? symbols = null);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
         /// <summary>
         /// Gets current average price for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-average-price" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol);
+        Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default);
         /// <summary>
         /// Get candlestick data for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#klines" /></para>
@@ -68,38 +74,43 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max results</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the order book for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#order-book" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">Number of entries</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null);
+        Task<CallResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the recent trades for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#recent-trades" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="limit">Max results</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetRecentTradesAsync(string symbol, int? limit = null);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#rolling-window-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceRollingWindowTick>>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceRollingWindowTick>>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
         /// <summary>
         /// Get data regarding the last 24 hours
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-price-ticker" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(IEnumerable<string>? symbols = null);
+        Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the historical trades for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades" /></para>
@@ -107,8 +118,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">The symbol</param>
         /// <param name="fromId">Filter by from trade id</param>
         /// <param name="limit">Max results</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#ui-klines" /></para>
@@ -118,8 +130,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max results</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null);
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol

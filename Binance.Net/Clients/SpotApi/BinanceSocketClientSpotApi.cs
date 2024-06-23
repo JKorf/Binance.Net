@@ -54,6 +54,8 @@ namespace Binance.Net.Clients.SpotApi
             MessageSendSizeLimit = 4000;
 
             RateLimiter = BinanceExchange.RateLimiter.SpotSocket;
+
+            SetDedicatedConnection(ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), true);
         }
         #endregion
 
@@ -85,7 +87,7 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1)
+        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {
@@ -111,7 +113,7 @@ namespace Binance.Net.Clients.SpotApi
             };
 
             var query = new BinanceSpotQuery<BinanceResponse<T>>(request, false, weight);
-            var result = await QueryAsync(url, query).ConfigureAwait(false);
+            var result = await QueryAsync(url, query, ct).ConfigureAwait(false);
             if (!result.Success && result.Error is BinanceRateLimitError rle)
             {
                 if (rle.RetryAfter != null && RateLimiter != null && ClientOptions.RateLimiterEnabled)
@@ -125,7 +127,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override Query? GetAuthenticationRequest() => null;
+        protected override Query? GetAuthenticationRequest(SocketConnection connection) => null;
 
         internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
         {
