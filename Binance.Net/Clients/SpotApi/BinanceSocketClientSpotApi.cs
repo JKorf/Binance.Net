@@ -87,7 +87,7 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1)
+        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {
@@ -113,7 +113,7 @@ namespace Binance.Net.Clients.SpotApi
             };
 
             var query = new BinanceSpotQuery<BinanceResponse<T>>(request, false, weight);
-            var result = await QueryAsync(url, query).ConfigureAwait(false);
+            var result = await QueryAsync(url, query, ct).ConfigureAwait(false);
             if (!result.Success && result.Error is BinanceRateLimitError rle)
             {
                 if (rle.RetryAfter != null && RateLimiter != null && ClientOptions.RateLimiterEnabled)
