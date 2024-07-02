@@ -52,6 +52,7 @@ namespace Binance.Net
 
         private void Initialize()
         {
+            EndpointLimit = new RateLimitGate("Endpoint Limit");
             SpotRestIp = new RateLimitGate("Spot Rest")
                                             .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new PathStartFilter("api/"), 6000, TimeSpan.FromMinutes(1), RateLimitWindowType.Fixed)) // IP limit of 6000 request weight per minute to /api endpoints
                                             .AddGuard(new RateLimitGuard(RateLimitGuard.PerEndpoint, new PathStartFilter("sapi/"), 12000, TimeSpan.FromMinutes(1), RateLimitWindowType.Fixed)); // IP limit of 12000 request weight per endpoint per minute to /sapi endpoints
@@ -68,6 +69,7 @@ namespace Binance.Net
             FuturesSocket = new RateLimitGate("Futures Socket")
                                             .AddGuard(new RateLimitGuard(RateLimitGuard.PerEndpoint, new IGuardFilter[] { new LimitItemTypeFilter(RateLimitItemType.Request) }, 10, TimeSpan.FromSeconds(1), RateLimitWindowType.Fixed)); // 10 requests per second per path (connection)
 
+            EndpointLimit.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             SpotRestIp.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             SpotRestUid.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             SpotSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
@@ -75,6 +77,7 @@ namespace Binance.Net
             FuturesSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
         }
 
+        internal IRateLimitGate EndpointLimit { get; private set; }
 
         internal IRateLimitGate SpotRestIp { get; private set; } 
 

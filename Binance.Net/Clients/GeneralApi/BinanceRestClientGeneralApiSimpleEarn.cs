@@ -2,6 +2,7 @@
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.SimpleEarn;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -64,7 +65,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalEnum("sourceAccount", sourceAccount);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/subscribe", BinanceExchange.RateLimiter.SpotRestIp, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/subscribe", BinanceExchange.RateLimiter.EndpointLimit, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceSimpleEarnPurchase>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -84,7 +86,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalEnum("sourceAccount", sourceAccount);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/subscribe", BinanceExchange.RateLimiter.SpotRestIp, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/subscribe", BinanceExchange.RateLimiter.EndpointLimit, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceSimpleEarnPurchase>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -104,7 +107,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalEnum("destAccount", destinationAccount);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/redeem", BinanceExchange.RateLimiter.SpotRestIp, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/flexible/redeem", BinanceExchange.RateLimiter.EndpointLimit, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceSimpleEarnRedemption>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -121,7 +125,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/redeem", BinanceExchange.RateLimiter.SpotRestIp, 1, true, endpointLimitCount: 1, endpointLimitPeriod: TimeSpan.FromSeconds(3));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/redeem", BinanceExchange.RateLimiter.EndpointLimit, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceSimpleEarnRedemption>(request, parameters, ct).ConfigureAwait(false);
         }
 

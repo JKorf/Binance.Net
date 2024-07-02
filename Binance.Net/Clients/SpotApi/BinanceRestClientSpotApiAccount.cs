@@ -8,6 +8,7 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.PortfolioMargin;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -119,7 +120,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("offset", offset);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/withdraw/history", BinanceExchange.RateLimiter.SpotRestUid, 0, true, endpointLimitCount: 10, endpointLimitPeriod: TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/withdraw/history", BinanceExchange.RateLimiter.SpotRestUid, 18000, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             return await _baseClient.SendAsync<IEnumerable<BinanceWithdrawal>>(request, parameters, ct).ConfigureAwait(false);
         }
 
