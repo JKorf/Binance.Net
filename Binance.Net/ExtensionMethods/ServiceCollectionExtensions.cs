@@ -4,7 +4,10 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
 using Binance.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
+using Microsoft.Extensions.Configuration;
 using System.Net;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -27,29 +30,43 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<BinanceSocketOptions>? defaultSocketOptionsDelegate = null,
             ServiceLifetime? socketClientLifeTime = null)
         {
-            var restOptions = BinanceRestOptions.Default.Copy();
-
             if (defaultRestOptionsDelegate != null)
-            {
-                defaultRestOptionsDelegate(restOptions);
-                BinanceRestClient.SetDefaultOptions(defaultRestOptionsDelegate);
-            }
-
+                services.Configure(defaultRestOptionsDelegate);
             if (defaultSocketOptionsDelegate != null)
-                BinanceSocketClient.SetDefaultOptions(defaultSocketOptionsDelegate);
+                services.Configure(defaultSocketOptionsDelegate);
 
-            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>(options =>
+            AddServices(services, socketClientLifeTime);
+            return services;
+        }
+
+
+        public static IServiceCollection AddBinance(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            ServiceLifetime? socketClientLifeTime = null)
+        {
+            services.Configure<BinanceRestOptions>(configuration.GetSection("Binance").GetSection("Rest"));
+            services.Configure<BinanceSocketOptions>(configuration.GetSection("Binance").GetSection("Socket"));
+            AddServices(services, socketClientLifeTime);
+            return services;
+        }
+
+        private static void AddServices(IServiceCollection services, ServiceLifetime? socketClientLifeTime = null)
+        {
+            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>((serviceProvider, options) =>
             {
-                options.Timeout = restOptions.RequestTimeout;
-            }).ConfigurePrimaryHttpMessageHandler(() => {
+                var restOptions = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>();
+                options.Timeout = restOptions.Value.RequestTimeout;
+            }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
+                var restOptions = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>();
                 var handler = new HttpClientHandler();
                 handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                if (restOptions.Proxy != null)
+                if (restOptions.Value.Proxy != null)
                 {
                     handler.Proxy = new WebProxy
                     {
-                        Address = new Uri($"{restOptions.Proxy.Host}:{restOptions.Proxy.Port}"),
-                        Credentials = restOptions.Proxy.Password == null ? null : new NetworkCredential(restOptions.Proxy.Login, restOptions.Proxy.Password)
+                        Address = new Uri($"{restOptions.Value.Proxy.Host}:{restOptions.Value.Proxy.Port}"),
+                        Credentials = restOptions.Value.Proxy.Password == null ? null : new NetworkCredential(restOptions.Value.Proxy.Login, restOptions.Value.Proxy.Password)
                     };
                 }
                 return handler;
@@ -65,7 +82,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
             else
                 services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime.Value));
-            return services;
         }
     }
 }

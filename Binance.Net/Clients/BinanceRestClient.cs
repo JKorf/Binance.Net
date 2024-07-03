@@ -9,6 +9,8 @@ using Binance.Net.Clients.UsdFuturesApi;
 using Binance.Net.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
+using Microsoft.Extensions.Options;
+using System.Net.Http;
 
 namespace Binance.Net.Clients
 {
@@ -34,21 +36,28 @@ namespace Binance.Net.Clients
         /// Create a new instance of the BinanceRestClient using provided options
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BinanceRestClient(Action<BinanceRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
+        public BinanceRestClient(Action<BinanceRestOptions>? optionsDelegate = null) : base(null, "Binance")
         {
+            var options = new BinanceRestOptions();
+            if (optionsDelegate != null)
+                optionsDelegate(options);
+            Initialize(options);
+
+            GeneralApi = AddApiClient(new BinanceRestClientGeneralApi(_logger, null, this, options));
+            SpotApi = AddApiClient(new BinanceRestClientSpotApi(_logger, null, options));
+            UsdFuturesApi = AddApiClient(new BinanceRestClientUsdFuturesApi(_logger, null, options));
+            CoinFuturesApi = AddApiClient(new BinanceRestClientCoinFuturesApi(_logger, null, options));
         }
 
         /// <summary>
         /// Create a new instance of the BinanceRestClient using provided options
         /// </summary>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
+        /// <param name="optionConfig">Option configuration</param>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="httpClient">Http client for this client</param>
-        public BinanceRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, Action<BinanceRestOptions>? optionsDelegate = null) : base(loggerFactory, "Binance")
+        public BinanceRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, IOptions<BinanceRestOptions>? optionConfig = null) : base(loggerFactory, "Binance")
         {
-            var options = BinanceRestOptions.Default.Copy();
-            if (optionsDelegate != null)
-                optionsDelegate(options);
+            var options = optionConfig?.Value ?? new BinanceRestOptions();
             Initialize(options);
 
             GeneralApi = AddApiClient(new BinanceRestClientGeneralApi(_logger, httpClient, this, options));
