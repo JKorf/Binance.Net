@@ -7,14 +7,22 @@ using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Binance.Net.Clients
 {
     /// <inheritdoc cref="IBinanceSocketClient" />
     public class BinanceSocketClient : BaseSocketClient, IBinanceSocketClient
     {
-        #region fields
-        #endregion
+        /// <summary>
+        /// Default options
+        /// </summary>
+        public static BinanceSocketOptions DefaultOptions { get; private set; } = new BinanceSocketOptions()
+        {
+            Environment = BinanceEnvironment.Live,
+            SocketSubscriptionsCombineTarget = 10
+        };
 
         #region Api clients
 
@@ -33,28 +41,28 @@ namespace Binance.Net.Clients
         /// <summary>
         /// Create a new instance of BinanceSocketClient
         /// </summary>
-        /// <param name="loggerFactory">The logger factory</param>
-        public BinanceSocketClient(ILoggerFactory? loggerFactory = null) : this((x) => { }, loggerFactory)
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public BinanceSocketClient(Action<BinanceSocketOptions>? optionsDelegate = null) : base(null, "Binance")
         {
+            var options = DefaultOptions.Copy();
+            if (optionsDelegate != null)
+                optionsDelegate(options);
+            Initialize(options);
+
+            SpotApi = AddApiClient(new BinanceSocketClientSpotApi(_logger, options));
+            UsdFuturesApi = AddApiClient(new BinanceSocketClientUsdFuturesApi(_logger, options));
+            CoinFuturesApi = AddApiClient(new BinanceSocketClientCoinFuturesApi(_logger, options));
         }
 
         /// <summary>
         /// Create a new instance of BinanceSocketClient
         /// </summary>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BinanceSocketClient(Action<BinanceSocketOptions> optionsDelegate) : this(optionsDelegate, null)
-        {
-        }
-
-        /// <summary>
-        /// Create a new instance of BinanceSocketClient
-        /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BinanceSocketClient(Action<BinanceSocketOptions> optionsDelegate, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Binance")
+        /// <param name="optionConfig">Option configuration delegate</param>
+        [ActivatorUtilitiesConstructor]
+        public BinanceSocketClient(IOptions<BinanceSocketOptions> optionConfig, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Binance")
         {
-            var options = BinanceSocketOptions.Default.Copy();
-            optionsDelegate(options);
+            var options = optionConfig?.Value ?? DefaultOptions.Copy();
             Initialize(options);
 
             SpotApi = AddApiClient(new BinanceSocketClientSpotApi(_logger, options));
@@ -69,9 +77,7 @@ namespace Binance.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<BinanceSocketOptions> optionsDelegate)
         {
-            var options = BinanceSocketOptions.Default.Copy();
-            optionsDelegate(options);
-            BinanceSocketOptions.Default = options;
+            optionsDelegate(DefaultOptions);
         }
 
         /// <inheritdoc />

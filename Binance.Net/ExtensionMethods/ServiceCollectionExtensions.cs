@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Net;
 using Microsoft.Extensions.Options;
 using System;
+using System.Net.Http;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -17,7 +18,10 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
+        /// Add the Binance.Net services:<br />
+        /// <see cref="IBinanceRestClient">IBinanceRestClient</see>: Client for accessing the Binance REST API<br />
+        /// <see cref="IBinanceSocketClient">IBinanceSocketClient</see>: Client for accessing the Binance Socket API<br />
+        /// <see cref="IBinanceOrderBookFactory">IBinanceOrderBookFactory</see>: Factory for creating locally synced order books
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
@@ -39,7 +43,16 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-
+        /// <summary>
+        /// Add the Binance.Net services:<br />
+        /// <see cref="IBinanceRestClient">IBinanceRestClient</see>: Client for accessing the Binance REST API<br />
+        /// <see cref="IBinanceSocketClient">IBinanceSocketClient</see>: Client for accessing the Binance Socket API<br />
+        /// <see cref="IBinanceOrderBookFactory">IBinanceOrderBookFactory</see>: Factory for creating locally synced order books
+        /// </summary>
+        /// <param name="services">The service collection</param>
+        /// <param name="configuration">The IConfiguration instance</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
+        /// <returns></returns>
         public static IServiceCollection AddBinance(
             this IServiceCollection services,
             IConfiguration configuration,
@@ -53,10 +66,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private static void AddServices(IServiceCollection services, ServiceLifetime? socketClientLifeTime = null)
         {
-            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>((serviceProvider, options) =>
+            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>((httpClient, serviceProvider) =>
             {
                 var restOptions = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>();
-                options.Timeout = restOptions.Value.RequestTimeout;
+                httpClient.Timeout = restOptions.Value.RequestTimeout;
+                return new BinanceRestClient(httpClient, serviceProvider.GetRequiredService<ILoggerFactory>(), restOptions);
             }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
                 var restOptions = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>();
                 var handler = new HttpClientHandler();
@@ -78,10 +92,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.CommonFuturesClient);
-            if (socketClientLifeTime == null)
-                services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
-            else
-                services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime.Value));
+            services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), (serviceProvider) =>
+            {
+                var socketOptions = serviceProvider.GetRequiredService<IOptions<BinanceSocketOptions>>();
+                var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+                return new BinanceSocketClient(socketOptions, loggerFactory);
+            }, socketClientLifeTime ?? ServiceLifetime.Singleton));
         }
     }
 }

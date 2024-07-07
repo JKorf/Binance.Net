@@ -8,15 +8,6 @@ namespace Binance.Net.Objects.Options
     public class BinanceRestOptions : RestExchangeOptions<BinanceEnvironment>
     {
         /// <summary>
-        /// Default options for new clients
-        /// </summary>
-        public static BinanceRestOptions Default { get; set; } = new BinanceRestOptions()
-        {
-            Environment = BinanceEnvironment.Live,
-            AutoTimestamp = true
-        };
-
-        /// <summary>
         /// The default receive window for requests
         /// </summary>
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);

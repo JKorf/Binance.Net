@@ -8,15 +8,6 @@ namespace Binance.Net.Objects.Options
     public class BinanceSocketOptions : SocketExchangeOptions<BinanceEnvironment>
     {
         /// <summary>
-        /// Default options for new clients
-        /// </summary>
-        public static BinanceSocketOptions Default { get; set; } = new BinanceSocketOptions()
-        {
-            Environment = BinanceEnvironment.Live,
-            SocketSubscriptionsCombineTarget = 10
-        };
-
-        /// <summary>
         /// Options for the Spot API
         /// </summary>
         public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions();

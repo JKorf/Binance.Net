@@ -156,6 +156,11 @@
         <member name="T:Binance.Net.Clients.BinanceRestClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient" />
         </member>
+        <member name="P:Binance.Net.Clients.BinanceRestClient.DefaultOptions">
+            <summary>
+            Default options
+            </summary>
+        </member>
         <member name="P:Binance.Net.Clients.BinanceRestClient.GeneralApi">
             <inheritdoc />
         </member>
@@ -168,17 +173,18 @@
         <member name="P:Binance.Net.Clients.BinanceRestClient.CoinFuturesApi">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceRestOptions})">
+        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceRestOptions},System.Net.Http.HttpClient)">
             <summary>
             Create a new instance of the BinanceRestClient using provided options
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="httpClient">Http client for this client</param>
         </member>
-        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,System.Action{Binance.Net.Objects.Options.BinanceRestOptions})">
+        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Binance.Net.Objects.Options.BinanceRestOptions})">
             <summary>
             Create a new instance of the BinanceRestClient using provided options
             </summary>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="optionConfig">Option configuration</param>
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
@@ -194,6 +200,11 @@
         <member name="T:Binance.Net.Clients.BinanceSocketClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceSocketClient" />
         </member>
+        <member name="P:Binance.Net.Clients.BinanceSocketClient.DefaultOptions">
+            <summary>
+            Default options
+            </summary>
+        </member>
         <member name="P:Binance.Net.Clients.BinanceSocketClient.SpotApi">
             <inheritdoc />
         </member>
@@ -203,24 +214,18 @@
         <member name="P:Binance.Net.Clients.BinanceSocketClient.CoinFuturesApi">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
-            <summary>
-            Create a new instance of BinanceSocketClient
-            </summary>
-            <param name="loggerFactory">The logger factory</param>
-        </member>
         <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions})">
             <summary>
             Create a new instance of BinanceSocketClient
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(Microsoft.Extensions.Options.IOptions{Binance.Net.Objects.Options.BinanceSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Create a new instance of BinanceSocketClient
             </summary>
             <param name="loggerFactory">The logger factory</param>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="optionConfig">Option configuration delegate</param>
         </member>
         <member name="M:Binance.Net.Clients.BinanceSocketClient.SetDefaultOptions(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions})">
             <summary>
@@ -28135,11 +28140,6 @@
             Options for the BinanceRestClient
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceRestOptions.Default">
-            <summary>
-            Default options for new clients
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Options.BinanceRestOptions.ReceiveWindow">
             <summary>
             The default receive window for requests
@@ -28183,11 +28183,6 @@
         <member name="T:Binance.Net.Objects.Options.BinanceSocketOptions">
             <summary>
             Options for the BinanceSocketClient
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.Default">
-            <summary>
-            Default options for new clients
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.SpotOptions">
@@ -28478,11 +28473,26 @@
         </member>
         <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceRestOptions},System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
             <summary>
-            Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
+            Add the Binance.Net services:<br />
+            <see cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient">IBinanceRestClient</see>: Client for accessing the Binance REST API<br />
+            <see cref="T:Binance.Net.Interfaces.Clients.IBinanceSocketClient">IBinanceSocketClient</see>: Client for accessing the Binance Socket API<br />
+            <see cref="T:Binance.Net.Interfaces.IBinanceOrderBookFactory">IBinanceOrderBookFactory</see>: Factory for creating locally synced order books
             </summary>
             <param name="services">The service collection</param>
             <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
             <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
+            <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Add the Binance.Net services:<br />
+            <see cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient">IBinanceRestClient</see>: Client for accessing the Binance REST API<br />
+            <see cref="T:Binance.Net.Interfaces.Clients.IBinanceSocketClient">IBinanceSocketClient</see>: Client for accessing the Binance Socket API<br />
+            <see cref="T:Binance.Net.Interfaces.IBinanceOrderBookFactory">IBinanceOrderBookFactory</see>: Factory for creating locally synced order books
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="configuration">The IConfiguration instance</param>
             <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
             <returns></returns>
         </member>
