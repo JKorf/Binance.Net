@@ -7,7 +7,7 @@ using Binance.Net.Objects.Models.Futures;
 namespace Binance.Net.Clients.UsdFuturesApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientUsdFuturesApiAccount : IBinanceRestClientUsdFuturesApiAccount
+    internal class BinanceRestClientUsdFuturesApiAccount : IBinanceRestClientUsdFuturesApiAccount
     {
         private static readonly RequestDefinitionCache _definitions = new();
         private readonly BinanceRestClientUsdFuturesApi _baseClient;

@@ -10,7 +10,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 namespace Binance.Net.Clients.UsdFuturesApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientUsdFuturesApiExchangeData : IBinanceRestClientUsdFuturesApiExchangeData
+    internal class BinanceRestClientUsdFuturesApiExchangeData : IBinanceRestClientUsdFuturesApiExchangeData
     {
         private readonly ILogger _logger;
         private static readonly RequestDefinitionCache _definitions = new();

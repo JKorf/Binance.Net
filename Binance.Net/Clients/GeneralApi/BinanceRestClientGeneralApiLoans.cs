@@ -7,7 +7,7 @@ using Binance.Net.Objects.Models.Spot.Loans;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientGeneralApiLoans : IBinanceRestClientGeneralApiLoans
+    internal class BinanceRestClientGeneralApiLoans : IBinanceRestClientGeneralApiLoans
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

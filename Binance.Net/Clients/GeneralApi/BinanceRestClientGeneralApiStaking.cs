@@ -6,7 +6,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientGeneralApiStaking : IBinanceRestClientGeneralApiStaking
+    internal class BinanceRestClientGeneralApiStaking : IBinanceRestClientGeneralApiStaking
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

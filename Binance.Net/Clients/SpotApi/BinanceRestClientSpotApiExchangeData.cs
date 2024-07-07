@@ -14,7 +14,7 @@ using Binance.Net.Objects.Models.Spot.Margin;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientSpotApiExchangeData : IBinanceRestClientSpotApiExchangeData
+    internal class BinanceRestClientSpotApiExchangeData : IBinanceRestClientSpotApiExchangeData
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

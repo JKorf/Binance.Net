@@ -9,7 +9,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc cref="IBinanceRestClientGeneralApi" />
-    public class BinanceRestClientGeneralApi : RestApiClient, IBinanceRestClientGeneralApi
+    internal class BinanceRestClientGeneralApi : RestApiClient, IBinanceRestClientGeneralApi
     {
         #region fields 
         /// <inheritdoc />

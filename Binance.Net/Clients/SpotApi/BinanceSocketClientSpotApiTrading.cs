@@ -7,7 +7,7 @@ using Binance.Net.Objects;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceSocketClientSpotApiTrading : IBinanceSocketClientSpotApiTrading
+    internal class BinanceSocketClientSpotApiTrading : IBinanceSocketClientSpotApiTrading
     {
         private readonly BinanceSocketClientSpotApi _client;
         private readonly ILogger _logger;

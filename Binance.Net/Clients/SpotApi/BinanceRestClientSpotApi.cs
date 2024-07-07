@@ -14,7 +14,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IBinanceRestClientSpotApi" />
-    public class BinanceRestClientSpotApi : RestApiClient, IBinanceRestClientSpotApi, ISpotClient
+    internal class BinanceRestClientSpotApi : RestApiClient, IBinanceRestClientSpotApi, ISpotClient
     {
         #region fields 
         /// <inheritdoc />

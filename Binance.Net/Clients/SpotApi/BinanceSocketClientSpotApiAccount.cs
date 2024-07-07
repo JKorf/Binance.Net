@@ -9,7 +9,7 @@ using Binance.Net.Objects.Models;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceSocketClientSpotApiAccount : IBinanceSocketClientSpotApiAccount
+    internal class BinanceSocketClientSpotApiAccount : IBinanceSocketClientSpotApiAccount
     {
         private readonly BinanceSocketClientSpotApi _client;
 

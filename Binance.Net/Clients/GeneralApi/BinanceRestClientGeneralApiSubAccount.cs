@@ -8,7 +8,7 @@ using Binance.Net.Objects.Models.Spot.SubAccountData;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientGeneralApiSubAccount : IBinanceRestClientGeneralApiSubAccount
+    internal class BinanceRestClientGeneralApiSubAccount : IBinanceRestClientGeneralApiSubAccount
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

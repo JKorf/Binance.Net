@@ -7,7 +7,7 @@ using CryptoExchange.Net.CommonObjects;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientCoinFuturesApiTrading : IBinanceRestClientCoinFuturesApiTrading
+    internal class BinanceRestClientCoinFuturesApiTrading : IBinanceRestClientCoinFuturesApiTrading
     {
         private static readonly RequestDefinitionCache _definitions = new();
         private readonly ILogger _logger;

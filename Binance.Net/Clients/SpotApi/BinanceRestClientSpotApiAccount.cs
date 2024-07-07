@@ -13,7 +13,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientSpotApiAccount : IBinanceRestClientSpotApiAccount
+    internal class BinanceRestClientSpotApiAccount : IBinanceRestClientSpotApiAccount
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

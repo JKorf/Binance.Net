@@ -14,7 +14,7 @@ using CryptoExchange.Net.Sockets;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
+    internal class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
     {
         #region fields
         /// <inheritdoc />

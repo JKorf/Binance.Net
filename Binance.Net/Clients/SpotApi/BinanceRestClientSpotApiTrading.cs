@@ -14,7 +14,7 @@ using System;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientSpotApiTrading : IBinanceRestClientSpotApiTrading
+    internal class BinanceRestClientSpotApiTrading : IBinanceRestClientSpotApiTrading
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

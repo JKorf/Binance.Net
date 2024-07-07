@@ -8,7 +8,7 @@ using Binance.Net.Objects.Models.Spot.Margin;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientGeneralApiFutures : IBinanceRestClientGeneralApiFutures
+    internal class BinanceRestClientGeneralApiFutures : IBinanceRestClientGeneralApiFutures
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

@@ -7,7 +7,7 @@ using Binance.Net.Objects.Models.Spot.Mining;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientGeneralApiMining : IBinanceRestClientGeneralApiMining
+    internal class BinanceRestClientGeneralApiMining : IBinanceRestClientGeneralApiMining
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

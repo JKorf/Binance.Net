@@ -8,7 +8,7 @@ using Binance.Net.Objects.Models.Spot;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientCoinFuturesApiAccount : IBinanceRestClientCoinFuturesApiAccount
+    internal class BinanceRestClientCoinFuturesApiAccount : IBinanceRestClientCoinFuturesApiAccount
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 

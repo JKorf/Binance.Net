@@ -17,7 +17,7 @@ using CryptoExchange.Net.Sockets;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc cref="IBinanceSocketClientCoinFuturesApi" />
-    public class BinanceSocketClientCoinFuturesApi : SocketApiClient, IBinanceSocketClientCoinFuturesApi
+    internal class BinanceSocketClientCoinFuturesApi : SocketApiClient, IBinanceSocketClientCoinFuturesApi
     {
         #region fields
         private const string _klineStreamEndpoint = "@kline";

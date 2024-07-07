@@ -13,7 +13,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 namespace Binance.Net.Clients.UsdFuturesApi
 {
     /// <inheritdoc cref="IBinanceRestClientUsdFuturesApi" />
-    public class BinanceRestClientUsdFuturesApi : RestApiClient, IBinanceRestClientUsdFuturesApi, IFuturesClient
+    internal class BinanceRestClientUsdFuturesApi : RestApiClient, IBinanceRestClientUsdFuturesApi, IFuturesClient
     {
         #region fields 
         /// <inheritdoc />

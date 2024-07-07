@@ -8,7 +8,7 @@ using CryptoExchange.Net.CommonObjects;
 namespace Binance.Net.Clients.UsdFuturesApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientUsdFuturesApiTrading : IBinanceRestClientUsdFuturesApiTrading
+    internal class BinanceRestClientUsdFuturesApiTrading : IBinanceRestClientUsdFuturesApiTrading
     {
         private readonly ILogger _logger;
         private static readonly RequestDefinitionCache _definitions = new();

@@ -12,7 +12,7 @@ using CryptoExchange.Net.Objects.Sockets;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BinanceSocketClientSpotApiExchangeData : IBinanceSocketClientSpotApiExchangeData
+    internal class BinanceSocketClientSpotApiExchangeData : IBinanceSocketClientSpotApiExchangeData
     {
         private readonly ILogger _logger;
         private readonly BinanceSocketClientSpotApi _client;

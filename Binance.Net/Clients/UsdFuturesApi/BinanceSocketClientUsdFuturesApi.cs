@@ -18,7 +18,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     /// <summary>
     /// Client providing access to the Binance Usd futures websocket Api
     /// </summary>
-    public class BinanceSocketClientUsdFuturesApi : SocketApiClient, IBinanceSocketClientUsdFuturesApi
+    internal class BinanceSocketClientUsdFuturesApi : SocketApiClient, IBinanceSocketClientUsdFuturesApi
     {
         #region fields
         private const string _klineStreamEndpoint = "@kline";

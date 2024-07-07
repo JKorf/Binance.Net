@@ -6,7 +6,7 @@ using Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
-    public class BinanceRestClientGeneralApiBrokerage : IBinanceRestClientGeneralApiBrokerage
+    internal class BinanceRestClientGeneralApiBrokerage : IBinanceRestClientGeneralApiBrokerage
     {
         private readonly BinanceRestClientGeneralApi _baseClient;
 
