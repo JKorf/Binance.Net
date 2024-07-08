@@ -35,9 +35,9 @@ namespace Microsoft.Extensions.DependencyInjection
             ServiceLifetime? socketClientLifeTime = null)
         {
             if (defaultRestOptionsDelegate != null)
-                services.Configure(defaultRestOptionsDelegate);
+                services.Configure<BinanceRestOptions>((x) => defaultRestOptionsDelegate(BinanceRestClient.DefaultOptions));
             if (defaultSocketOptionsDelegate != null)
-                services.Configure(defaultSocketOptionsDelegate);
+                services.Configure<BinanceRestOptions>((x) => defaultSocketOptionsDelegate(BinanceSocketClient.DefaultOptions));
 
             AddServices(services, socketClientLifeTime);
             return services;

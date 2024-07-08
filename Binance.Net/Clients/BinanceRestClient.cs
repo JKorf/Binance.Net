@@ -69,7 +69,7 @@ namespace Binance.Net.Clients
         [ActivatorUtilitiesConstructor]
         public BinanceRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, IOptions<BinanceRestOptions>? optionConfig = null) : base(loggerFactory, "Binance")
         {
-            var options = optionConfig?.Value ?? DefaultOptions.Copy();
+            var options = optionConfig?.Value ?? DefaultOptions.Copy(); // Environment not set, how does that work form config?
             Initialize(options);
 
             GeneralApi = AddApiClient(new BinanceRestClientGeneralApi(_logger, httpClient, this, options));
