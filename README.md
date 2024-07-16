@@ -155,6 +155,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 9.12.0 - 16 Jul 2024
+    * Updated CryptoExchange.Net to version 7.9.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.9.0
+    * Updated internal classes to internal access modifier
+    * Updated WebSocket rate limit rule to prevent triggering disconnect
+
 * Version 9.11.1 - 02 Jul 2024
     * Updated CryptoExchange.Net to V7.8.0
     * Updated ratelimiting for per-endpoint limits
