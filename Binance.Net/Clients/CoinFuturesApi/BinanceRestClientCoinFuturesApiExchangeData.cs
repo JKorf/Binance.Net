@@ -429,7 +429,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
-        #region Taker Buy/Sell Volume Ratio
+        #region Get Basis
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceFuturesBasis>>> GetBasisAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
