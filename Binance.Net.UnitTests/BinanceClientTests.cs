@@ -17,6 +17,9 @@ using Binance.Net.Objects.Options;
 using NUnit.Framework.Legacy;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.JsonNet;
+using System.Linq.Expressions;
+using System.Threading;
+using CryptoExchange.Net;
 
 namespace Binance.Net.UnitTests
 {

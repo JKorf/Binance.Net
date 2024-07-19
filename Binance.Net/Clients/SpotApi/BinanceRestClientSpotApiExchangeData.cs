@@ -136,7 +136,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region asset details
+        #region Get Asset Details
         /// <inheritdoc />
         public async Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
