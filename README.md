@@ -26,10 +26,23 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 |UWP|`10.0.16299` and higher|
 |Unity|`2018.1` and higher|
 
-## Get the library
-[![Nuget version](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
+## Install the library
+
+### NuGet 
+[![NuGet version](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
+
+*Binance.Net is temporarily not available on NuGet* 
 
 	dotnet add package Binance.Net
+	
+### GitHub packages
+Binance.Net is available on [GitHub packages](https://github.com/JKorf/Binance.Net/pkgs/nuget/Binance.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
+
+### Download release
+[![GitHub Release](https://img.shields.io/github/v/release/JKorf/Binance.Net?style=for-the-badge&label=GitHub)](https://github.com/JKorf/Binance.Net/releases)
+
+The NuGet package files are added along side the source with the latest GitHub release which can found [here](https://github.com/JKorf/Binance.Net/releases).
+
 	
 ## How to use
 *REST Endpoints*  
