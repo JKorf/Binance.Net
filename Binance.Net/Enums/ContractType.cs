@@ -13,6 +13,11 @@ namespace Binance.Net.Enums
         [Map("PERPETUAL")]
         Perpetual,
         /// <summary>
+        /// Perpetual delivering
+        /// </summary>
+        [Map("PERPETUAL DELIVERING")]
+        PerpetualDelivering,
+        /// <summary>
         /// Current month
         /// </summary>
         [Map("CURRENT_MONTH")]

@@ -51,7 +51,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.StartUserStreamAsync(), "StartUserStream", "listenKey");
             await tester.ValidateAsync(client => client.SpotApi.Account.KeepAliveUserStreamAsync("123"), "KeepAliveUserStream");
             await tester.ValidateAsync(client => client.SpotApi.Account.StopUserStreamAsync("123"), "StopUserStream");
-            await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginLevelInformationAsync("123"), "GetMarginLevelInformation");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginLevelInformationAsync(), "GetMarginLevelInformation");
             await tester.ValidateAsync(client => client.SpotApi.Account.MarginBorrowAsync("ETH", 1), "MarginBorrow");
             await tester.ValidateAsync(client => client.SpotApi.Account.MarginRepayAsync("ETH", 1), "MarginRepay");
             await tester.ValidateAsync(client => client.SpotApi.Account.CrossMarginAdjustMaxLeverageAsync(1), "CrossMarginAdjustMaxLeverage");
@@ -87,8 +87,8 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.GetAutoConvertStableCoinConfigAsync(), "GetAutoConvertStableCoinConfig");
             await tester.ValidateAsync(client => client.SpotApi.Account.SetAutoConvertStableCoinConfigAsync("ETH", true), "SetAutoConvertStableCoinConfig");
             await tester.ValidateAsync(client => client.SpotApi.Account.ConvertBusdAsync("1", "ETH", 1, "USDT"), "ConvertBusd");
-            await tester.ValidateAsync(client => client.SpotApi.Account.GetBusdConvertHistoryAsync(), "GetBusdConvertHistory");
-            await tester.ValidateAsync(client => client.SpotApi.Account.GetCloudMiningHistoryAsync(), "GetCloudMiningHistory");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetBusdConvertHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow), "GetBusdConvertHistory");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetCloudMiningHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow), "GetCloudMiningHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetIsolatedMarginFeeDataAsync(), "GetIsolatedMarginFeeData");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeAssetsAsync(), "GetCrossMarginSmallLiabilityExchangeAssets");
             await tester.ValidateAsync(client => client.SpotApi.Account.CrossMarginSmallLiabilityExchangeAsync(new[] { "ETH" }), "CrossMarginSmallLiabilityExchange");
