@@ -1,7 +1,0 @@
-{
-    "subAccountId": "1",
-    "makerCommission": 15,
-    "takerCommission": 15,
-    "marginMakerCommission": 15,
-    "marginTakerCommission": 15
-}

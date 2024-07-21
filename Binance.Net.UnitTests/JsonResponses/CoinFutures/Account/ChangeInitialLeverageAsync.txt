@@ -1,5 +1,0 @@
-{
-    "leverage": 21,
-    "maxQty": "1000",  // maximum quantity of base asset
-    "symbol": "BTCUSD_200925"
-}

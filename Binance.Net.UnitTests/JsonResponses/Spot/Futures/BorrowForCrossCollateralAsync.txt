@@ -1,8 +1,0 @@
-{
-    "coin": "USDT",
-    "amount": "4.50000000",
-    "collateralCoin": "BUSD",
-    "collateralAmount": "5.00000000",
-    "time": 1582540328433,
-    "borrowId": "438648398970089472"
-}

@@ -1,7 +1,0 @@
-{
-    "symbol": "BTCUSD_200626",
-    "pair": "BTCUSD",
-    "openInterest": "15004",
-    "contractType": "CURRENT_QUARTER",
-    "time": 1591261042378
-}

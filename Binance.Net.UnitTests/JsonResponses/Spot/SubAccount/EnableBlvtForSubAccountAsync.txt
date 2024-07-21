@@ -1,4 +1,0 @@
-{
-    "email":"123@test.com",
-    "enableBlvt":true
-}

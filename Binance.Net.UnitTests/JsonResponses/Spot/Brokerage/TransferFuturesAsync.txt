@@ -1,5 +1,0 @@
-{
-    "success":true,
-    "txnId":"2966662589",
-    "clientTranId":"a123"
-}

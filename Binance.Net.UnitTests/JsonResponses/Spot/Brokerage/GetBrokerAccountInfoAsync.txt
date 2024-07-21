@@ -1,8 +1,0 @@
-{
-    "maxMakerCommission":20,
-    "minMakerCommission":5,
-    "maxTakerCommission":20,
-    "minTakerCommission":5,
-    "subAccountQty":400,
-    "maxSubAccountQty":1000
-}

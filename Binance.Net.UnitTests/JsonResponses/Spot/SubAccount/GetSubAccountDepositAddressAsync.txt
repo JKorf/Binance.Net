@@ -1,6 +1,0 @@
-{
-    "address":"TDunhSa7jkTNuKrusUTU1MUHtqXoBPKETV",
-    "coin":"USDT",
-    "tag":"",
-    "url":"https://tronscan.org/#/address/TDunhSa7jkTNuKrusUTU1MUHtqXoBPKETV"
-}

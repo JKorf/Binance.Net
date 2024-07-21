@@ -1,6 +1,0 @@
-{
-    "asset": "USDT",
-    "dailyQuota": "10000000.00000000",
-    "leftQuota": "0.00000000",
-    "minRedemptionAmount": "0.10000000"
-}
