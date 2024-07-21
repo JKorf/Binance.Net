@@ -8,11 +8,13 @@
         /// <summary>
         /// Email
         /// </summary>
+        [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
 
         /// <summary>
         /// Tag
         /// </summary>
+        [JsonPropertyName("tag")]
         public string Tag { get; set; } = string.Empty;
 
         /// <summary>

@@ -10,10 +10,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Is locked
         /// </summary>
+        [JsonPropertyName("isLocked")]
         public bool IsLocked { get; set; }
         /// <summary>
         /// Planned time of recovery
         /// </summary>
+        [JsonPropertyName("plannedRecoverTime")]
         public int PlannedRecoverTime { get; set; }
 
         /// <summary>
@@ -25,11 +27,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Dictionary of indicator lists for symbols
         /// </summary>
+        [JsonPropertyName("indicators")]
         public Dictionary<string, IEnumerable<BinanceIndicator>> Indicators { get; set; } = new Dictionary<string, IEnumerable<BinanceIndicator>>();
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 

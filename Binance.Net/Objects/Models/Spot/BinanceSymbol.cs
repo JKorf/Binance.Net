@@ -16,18 +16,22 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The status of the symbol
         /// </summary>
+        [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// The base asset
         /// </summary>
+        [JsonPropertyName("baseAsset")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// The precision of the base asset
         /// </summary>
+        [JsonPropertyName("baseAssetPrecision")]
         public int BaseAssetPrecision { get; set; }
         /// <summary>
         /// The quote asset
         /// </summary>
+        [JsonPropertyName("quoteAsset")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// The precision of the quote asset
@@ -38,30 +42,37 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Allowed order types
         /// </summary>
+        [JsonPropertyName("orderTypes")]
         public IEnumerable<SpotOrderType> OrderTypes { get; set; } = Array.Empty<SpotOrderType>();
         /// <summary>
-        /// Ice berg orders allowed
+        /// Iceberg orders allowed
         /// </summary>
-        public bool IceBergAllowed { get; set; }
+        [JsonPropertyName("icebergAllowed")]
+        public bool IcebergAllowed { get; set; }
         /// <summary>
         /// Cancel replace allowed
         /// </summary>
+        [JsonPropertyName("cancelReplaceAllowed")]
         public bool CancelReplaceAllowed { get; set; }
         /// <summary>
         /// Spot trading orders allowed
         /// </summary>
+        [JsonPropertyName("isSpotTradingAllowed")]
         public bool IsSpotTradingAllowed { get; set; }
         /// <summary>
         /// Trailling stop orders are allowed
         /// </summary>
+        [JsonPropertyName("allowTrailingStop")]
         public bool AllowTrailingStop { get; set; }
         /// <summary>
         /// Margin trading orders allowed
         /// </summary>
+        [JsonPropertyName("isMarginTradingAllowed")]
         public bool IsMarginTradingAllowed { get; set; }
         /// <summary>
         /// If OCO(One Cancels Other) orders are allowed
         /// </summary>
+        [JsonPropertyName("ocoAllowed")]
         public bool OCOAllowed { get; set; }
         /// <summary>
         /// If OTO(One Triggers Other) orders are allowed
@@ -86,6 +97,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Permissions types
         /// </summary>
+        [JsonPropertyName("permissions")]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         
         // To be implemented and tested
@@ -95,6 +107,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
+        [JsonPropertyName("filters")]
         public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
         /// <summary>
         /// Default self trade prevention

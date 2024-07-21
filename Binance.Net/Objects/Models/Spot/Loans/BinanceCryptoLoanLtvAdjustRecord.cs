@@ -18,6 +18,7 @@
         /// <summary>
         /// Direction
         /// </summary>
+        [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
         /// Amount
@@ -27,19 +28,23 @@
         /// <summary>
         /// Pre adjust ltv
         /// </summary>
+        [JsonPropertyName("preLtv")]
         public decimal PreLtv { get; set; }
         /// <summary>
         /// Post adjust ltv
         /// </summary>
+        [JsonPropertyName("afterLtv")]
         public decimal AfterLtv { get; set; }
         /// <summary>
         /// Adjust time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("adjustTime")]
         public DateTime AdjustTime { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
     }
 }

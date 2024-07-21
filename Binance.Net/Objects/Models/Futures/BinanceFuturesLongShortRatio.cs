@@ -14,11 +14,13 @@
         /// <summary>
         /// Pair
         /// </summary>
+        [JsonPropertyName("pair")]
         public string? Pair { get; set; } = string.Empty;
 
         /// <summary>
         /// long/short ratio
         /// </summary>
+        [JsonPropertyName("longShortRatio")]
         public decimal LongShortRatio { get; set; }
 
         /// <summary>

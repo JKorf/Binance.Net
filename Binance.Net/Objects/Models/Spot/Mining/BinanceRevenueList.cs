@@ -11,14 +11,17 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Total number of results
         /// </summary>
+        [JsonPropertyName("totalNum")]
         public int TotalNum { get; set; }
         /// <summary>
         /// Page size
         /// </summary>
+        [JsonPropertyName("pageSize")]
         public int PageSize { get; set; }
         /// <summary>
         /// Revenue items
         /// </summary>
+        [JsonPropertyName("accountProfits")]
         public IEnumerable<BinanceRevenueItem> AccountProfits { get; set; } = Array.Empty<BinanceRevenueItem>();
     }
 
@@ -41,10 +44,12 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Earning type
         /// </summary>
-        public BinanceEarningType Type { get; set; }
+        [JsonPropertyName("type")]
+        public EarningType Type { get; set; }
         /// <summary>
         /// Day hashrate
         /// </summary>
+        [JsonPropertyName("dayHashRate")]
         public decimal DayHashRate { get; set; }
         /// <summary>
         /// Profit quantity
@@ -54,6 +59,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Hash transfer
         /// </summary>
+        [JsonPropertyName("hashTransfer")]
         public decimal? HashTransfer { get; set; }
         /// <summary>
         /// Transfer quantity
@@ -63,6 +69,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Status
         /// </summary>
+        [JsonPropertyName("status")]
         public MinerStatus Status { get; set; }
     }
 }

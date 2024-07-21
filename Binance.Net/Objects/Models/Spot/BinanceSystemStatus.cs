@@ -11,6 +11,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Status
         /// </summary>
+        [JsonPropertyName("status")]
         public SystemStatus Status { get; set; }
         /// <summary>
         /// Additional info

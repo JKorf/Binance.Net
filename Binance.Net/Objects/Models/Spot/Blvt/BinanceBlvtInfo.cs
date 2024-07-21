@@ -8,44 +8,54 @@
         /// <summary>
         /// Name of the token
         /// </summary>
+        [JsonPropertyName("tokenName")]
         public string TokenName { get; set; } = string.Empty;
         /// <summary>
         /// Description of the token
         /// </summary>
+        [JsonPropertyName("description")]
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
         /// Underlying asset
         /// </summary>
+        [JsonPropertyName("underlying")]
         public string Underlying { get; set; } = string.Empty;
         /// <summary>
         /// Token issued
         /// </summary>
+        [JsonPropertyName("tokenIssued")]
         public decimal TokenIssued { get; set; }
         /// <summary>
         /// Basket
         /// </summary>
+        [JsonPropertyName("basked")]
         public string Basket { get; set; } = string.Empty;
         /// <summary>
         /// Nav
         /// </summary>
+        [JsonPropertyName("nav")]
         public decimal Nav { get; set; }
         /// <summary>
         /// Real leverage
         /// </summary>
+        [JsonPropertyName("realLeverage")]
         public decimal RealLeverage { get; set; }
         /// <summary>
         /// Funding rate
         /// </summary>
+        [JsonPropertyName("fundingRate")]
         public decimal FundingRate { get; set; }
         /// <summary>
         /// Daily management fee
         /// </summary>
+        [JsonPropertyName("dailyManagementfee")]
         public decimal DailyManagementFee { get; set; }
 
         /// <summary>
         /// Current baskets
         /// </summary>
+        [JsonPropertyName("currentBaskets")]
         public IEnumerable<BlvtCurrentBasket> CurrentBaskets { get; set; } = Array.Empty<BlvtCurrentBasket>();
         /// <summary>
         /// Redeem fee percentage
@@ -55,6 +65,7 @@
         /// <summary>
         /// Daily redeem limit
         /// </summary>
+        [JsonPropertyName("dailyRedeemLimit")]
         public decimal DailyRedeemLimit { get; set; }
         /// <summary>
         /// Purchase fee percentage
@@ -64,12 +75,14 @@
         /// <summary>
         /// Daily purchase limit
         /// </summary>
+        [JsonPropertyName("dailyPurchaseLimit")]
         public decimal DailyPurchaseLimit { get; set; }
 
         /// <summary>
         /// Data timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 
@@ -81,6 +94,7 @@
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
@@ -90,6 +104,7 @@
         /// <summary>
         /// Notional value
         /// </summary>
+        [JsonPropertyName("notionalValue")]
         public decimal NotionalValue { get; set; }
     }
 }

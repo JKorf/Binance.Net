@@ -12,6 +12,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Time the deposit was added to Binance
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("insertTime")]
         public DateTime InsertTime { get; set; }
         /// <summary>
         /// The quantity deposited
@@ -26,14 +27,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The address of the deposit
         /// </summary>
+        [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
         /// The tag of the address of the deposit
         /// </summary>
+        [JsonPropertyName("addressTag")]
         public string AddressTag { get; set; } = string.Empty;
         /// <summary>
         /// The network
         /// </summary>
+        [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// The  id
@@ -48,11 +52,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The status of the deposit
         /// </summary>
+        [JsonPropertyName("status")]
         public DepositStatus Status { get; set; }
 
         /// <summary>
         /// The transfer type
         /// </summary>
+        [JsonPropertyName("transferType")]
         public WithdrawDepositTransferType TransferType { get; set; }
 
         /// <summary>

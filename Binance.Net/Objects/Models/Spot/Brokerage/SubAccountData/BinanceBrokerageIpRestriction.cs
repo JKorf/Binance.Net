@@ -8,16 +8,19 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
+        [JsonPropertyName("subAccountId")]
         public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
         /// Api key
         /// </summary>
+        [JsonPropertyName("apiKey")]
         public string ApiKey { get; set; } = string.Empty;
 
         /// <summary>
         /// IP list
         /// </summary>
+        [JsonPropertyName("ipList")]
         public IEnumerable<string> IpList { get; set; } = Array.Empty<string>();
 
         /// <summary>
@@ -35,6 +38,7 @@
         /// <summary>
         /// Ip Restrict
         /// </summary>
+        [JsonPropertyName("ipRestrict")]
         public bool IpRestrict { get; set; }
     }
 }

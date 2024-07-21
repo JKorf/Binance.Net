@@ -11,14 +11,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The id of the withdrawal
         /// </summary>
+        [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
         /// Withdraw order id
         /// </summary>
+        [JsonPropertyName("withdrawOrderId")]
         public string? WithdrawOrderId { get; set; }
         /// <summary>
         /// The time the withdrawal was applied for
         /// </summary>
+        [JsonPropertyName("applyTime")]
         public DateTime ApplyTime { get; set; }
         /// <summary>
         /// The quantity of the withdrawal
@@ -28,10 +31,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The address the asset was withdrawn to
         /// </summary>
+        [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
         /// Tag for the address
         /// </summary>
+        [JsonPropertyName("addressTag")]
         public string AddressTag { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id of the withdrawal
@@ -41,6 +46,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Transaction fee for the withdrawal
         /// </summary>
+        [JsonPropertyName("transactionFee")]
         public decimal TransactionFee { get; set; }
         /// <summary>
         /// The asset that was withdrawn
@@ -50,6 +56,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Network that was used
         /// </summary>
+        [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Confirm times for withdraw
@@ -59,11 +66,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The status of the withdrawal
         /// </summary>
+        [JsonPropertyName("status")]
         public WithdrawalStatus Status { get; set; }
 
         /// <summary>
         /// Transfer type: 1 for internal transfer, 0 for external transfer 
         /// </summary>
+        [JsonPropertyName("transferType")]
         public WithdrawDepositTransferType TransferType { get; set; }
         /// <summary>
         /// Transaction key

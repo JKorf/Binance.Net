@@ -11,6 +11,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The asset which was transfered
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity transfered
@@ -20,10 +21,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Transfer type
         /// </summary>
+        [JsonPropertyName("type")]
         public UniversalTransferType Type { get; set; }
         /// <summary>
         /// Status
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Id
@@ -34,6 +37,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 }

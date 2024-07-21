@@ -31,24 +31,29 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The method
         /// </summary>
+        [JsonPropertyName("method")]
         public string Method { get; set; } = string.Empty;
         /// <summary>
         /// The total fee of the order
         /// </summary>
+        [JsonPropertyName("totalFee")]
         public decimal TotalFee { get; set; }
         /// <summary>
         /// The status 
         /// </summary>
+        [JsonPropertyName("status")]
         public FiatWithdrawDepositStatus Status { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 }

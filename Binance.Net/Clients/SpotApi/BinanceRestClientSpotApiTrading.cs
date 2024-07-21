@@ -9,7 +9,6 @@ using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.ConvertTransfer;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.CommonObjects;
-using Newtonsoft.Json;
 using System;
 
 namespace Binance.Net.Clients.SpotApi

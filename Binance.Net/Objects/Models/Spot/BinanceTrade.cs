@@ -8,24 +8,29 @@
         /// <summary>
         /// The symbol the trade is for
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The id of the trade
         /// </summary>
+        [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
         /// The order id the trade belongs to
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
 
         /// <summary>
         /// Id of the order list this order belongs to
         /// </summary>
+        [JsonPropertyName("orderListId")]
         public long? OrderListId { get; set; }
-        
+
         /// <summary>
         /// The price of the trade
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// The quantity of the trade
@@ -55,18 +60,22 @@
         /// <summary>
         /// Whether account was the buyer in the trade
         /// </summary>
+        [JsonPropertyName("isBuyer")]
         public bool IsBuyer { get; set; }
         /// <summary>
         /// Whether account was the maker in the trade
         /// </summary>
+        [JsonPropertyName("isMaker")]
         public bool IsMaker { get; set; }
         /// <summary>
         /// Whether trade was made with the best match
         /// </summary>
+        [JsonPropertyName("isBestMatch")]
         public bool IsBestMatch { get; set; }
         /// <summary>
         /// If isolated margin (for margin account orders)
         /// </summary>
+        [JsonPropertyName("isIsolated")]
         public bool? IsIsolated { get; set; }
     }
 }

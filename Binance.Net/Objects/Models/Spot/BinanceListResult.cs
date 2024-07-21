@@ -10,19 +10,23 @@
         /// Data start time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("startTime")]
         public DateTime StartTime { get; set; }
         /// <summary>
         /// Emd to,e
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("endTime")]
         public DateTime EndTime { get; set; }
         /// <summary>
         /// Limit
         /// </summary>
+        [JsonPropertyName("limit")]
         public int Limit { get; set; }
         /// <summary>
         /// More data available
         /// </summary>
+        [JsonPropertyName("moreData")]
         public bool MoreData { get; set; }
         /// <summary>
         /// The data

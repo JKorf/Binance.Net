@@ -1,23 +1,28 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// Sub Account Deposit Status
     /// </summary>
-    public enum BinanceBrokerageSubAccountDepositStatus
+    public enum SubAccountDepositStatus
     {
         /// <summary>
         /// Pending
         /// </summary>
-        Pending = 0,
-        
+        [Map("0")]
+        Pending,
+
         /// <summary>
         /// Success
         /// </summary>
-        Success = 1,
-        
+        [Map("1")]
+        Success,
+
         /// <summary>
         /// Credited but cannot withdraw
         /// </summary>
-        CreditedButCannotWithdraw = 6,
+        [Map("6")]
+        CreditedButCannotWithdraw,
     }
 }

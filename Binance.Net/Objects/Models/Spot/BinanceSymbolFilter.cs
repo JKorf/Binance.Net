@@ -12,6 +12,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The type of this filter
         /// </summary>
+        [JsonPropertyName("filterType")]
         public SymbolFilterType FilterType { get; set; }
     }
 

@@ -13,6 +13,7 @@
         /// <summary>
         /// Price of the trade
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// Quantity of the trade

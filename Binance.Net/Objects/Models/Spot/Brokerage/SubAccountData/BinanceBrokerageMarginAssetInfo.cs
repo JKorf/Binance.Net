@@ -8,12 +8,14 @@
         /// <summary>
         /// Data
         /// </summary>
+        [JsonPropertyName("data")]
         public IEnumerable<BinanceBrokerageSubAccountMarginAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountMarginAssetInfo>();
 
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 
@@ -25,8 +27,9 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
+        [JsonPropertyName("subAccountId")]
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Margin enable
         /// </summary>
@@ -36,21 +39,25 @@
         /// <summary>
         /// Total Asset Of Btc
         /// </summary>
+        [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
-        
+
         /// <summary>
         /// Total Liability Of Btc
         /// </summary>
+        [JsonPropertyName("totalLiabilityBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
-        
+
         /// <summary>
         /// Total Net Asset Of Btc
         /// </summary>
+        [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
-        
+
         /// <summary>
         /// Margin level
         /// </summary>
+        [JsonPropertyName("marginLevel")]
         public decimal MarginLevel { get; set; }
     }
 }

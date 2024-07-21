@@ -16,6 +16,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// Account type the data is for
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>
         /// Snapshot data
@@ -32,23 +33,28 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// The margin level
         /// </summary>
+        [JsonPropertyName("marginLevel")]
         public decimal MarginLevel { get; set; }
         /// <summary>
         /// Total BTC asset
         /// </summary>
+        [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
         /// Total BTC liability
         /// </summary>
+        [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
         /// Total net BTC asset
         /// </summary>
+        [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
 
         /// <summary>
         /// Assets
         /// </summary>
+        [JsonPropertyName("userAssets")]
         public IEnumerable<BinanceMarginBalance> UserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 }

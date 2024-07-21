@@ -8,10 +8,12 @@
         /// <summary>
         /// The symbol the price is for
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price of the symbol
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// Timestamp

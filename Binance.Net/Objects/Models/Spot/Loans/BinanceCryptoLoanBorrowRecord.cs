@@ -30,24 +30,29 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Hourly interest rate
         /// </summary>
+        [JsonPropertyName("hourlyInterestRate")]
         public decimal HourlyInterestRate { get; set; }
         /// <summary>
         /// Loan term
         /// </summary>
+        [JsonPropertyName("loanTerm")]
         public int LoanTerm { get; set; }
         /// <summary>
         /// Borrow order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
         /// Borrow timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("borrowTime")]
         public DateTime BorrowTime { get; set; }
         /// <summary>
         /// Status of the order
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status")]
         public BorrowStatus Status { get; set; }
     }
 }

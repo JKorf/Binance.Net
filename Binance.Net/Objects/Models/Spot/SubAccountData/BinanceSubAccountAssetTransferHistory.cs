@@ -33,17 +33,20 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// From email
         /// </summary>
-        public string From { get; set; } = "";
+        [JsonPropertyName("from")]
+        public string From { get; set; } = string.Empty;
 
         /// <summary>
         /// To email
         /// </summary>
-        public string To { get; set; } = "";
+        [JsonPropertyName("to")]
+        public string To { get; set; } = string.Empty;
 
         /// <summary>
         /// Asset
         /// </summary>
-        public string Asset { get; set; } = "";
+        [JsonPropertyName("asset")]
+        public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Quantity

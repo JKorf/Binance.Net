@@ -8,22 +8,27 @@
         /// <summary>
         /// The symbol this data is for
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The current close price. This is the latest price for this symbol.
         /// </summary>
+        [JsonPropertyName("lastPrice")]
         public decimal LastPrice { get; set; }
         /// <summary>
         /// Tick open price
         /// </summary>
+        [JsonPropertyName("openPrice")]
         public decimal OpenPrice { get; set; }
         /// <summary>
         /// Tick high price
         /// </summary>
+        [JsonPropertyName("highPrice")]
         public decimal HighPrice { get; set; }
         /// <summary>
         /// Tick low price
         /// </summary>
+        [JsonPropertyName("lowPrice")]
         public decimal LowPrice { get; set; }
         /// <summary>
         /// The first trade id of the tick
@@ -53,10 +58,12 @@
         /// <summary>
         /// Volume
         /// </summary>
+        [JsonPropertyName("volume")]
         public decimal Volume { get; set; }
         /// <summary>
         /// Quote volume
         /// </summary>
+        [JsonPropertyName("quoteVolume")]
         public decimal QuoteVolume { get; set; }
     }
 }

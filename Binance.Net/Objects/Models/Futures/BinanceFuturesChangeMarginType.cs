@@ -8,6 +8,7 @@
         /// <summary>
         /// Response code
         /// </summary>
+        [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
         /// Response message

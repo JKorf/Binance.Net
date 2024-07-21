@@ -20,23 +20,28 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Current LTV
         /// </summary>
+        [JsonPropertyName("currentLtv")]
         public decimal? CurrentLTV { get; set; }
         /// <summary>
         /// Remaining principal
         /// </summary>
+        [JsonPropertyName("remainingPrincipal")]
         public decimal? RemainingPrincipal { get; set; }
         /// <summary>
         /// Repay status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("repayStatus")]
         public BorrowStatus RepayStatus { get; set; }
         /// <summary>
         /// Remaining collateral
         /// </summary>
+        [JsonPropertyName("remainingCollateral")]
         public decimal? RemainingCollateral { get; set; }
         /// <summary>
         /// Remaining interest
         /// </summary>
+        [JsonPropertyName("remainingInterest")]
         public decimal? RemainingInterest { get; set; }
     }
 }

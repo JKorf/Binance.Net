@@ -11,19 +11,23 @@ namespace Binance.Net.Objects.Models.Spot
         /// Cancel result
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("cancelResult")]
         public OrderOperationResult CancelResult { get; set; }
         /// <summary>
         /// New order result
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("newOrderResult")]
         public OrderOperationResult NewOrderResult { get; set; }
         /// <summary>
         /// Cancel order response. Make sure to check that the CancelResult is Success, else the CancelResponse.Message will contain more info
         /// </summary>
+        [JsonPropertyName("cancelResponse")]
         public BinanceReplaceCancelOrder? CancelResponse { get; set; }
         /// <summary>
         /// New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
         /// </summary>
+        [JsonPropertyName("newOrderResponse")]
         public BinanceReplaceOrder? NewOrderResponse { get; set; }
     }
 
@@ -40,6 +44,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Error code if not successful
         /// </summary>
+        [JsonPropertyName("code")]
         public int? Code { get; set; }
     }
 
@@ -56,6 +61,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Error code if not successful
         /// </summary>
+        [JsonPropertyName("code")]
         public int? Code { get; set; }
     }
 
@@ -72,6 +78,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Error code if not successful
         /// </summary>
+        [JsonPropertyName("code")]
         public int? Code { get; set; }
     }
 }

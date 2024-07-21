@@ -8,6 +8,7 @@
         /// <summary>
         /// Id
         /// </summary>
+        [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
         /// Quantity
@@ -17,6 +18,7 @@
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of the transaction

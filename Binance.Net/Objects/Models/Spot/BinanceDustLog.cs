@@ -8,10 +8,12 @@
         /// <summary>
         /// Total counts of exchange
         /// </summary>
+        [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
         /// Rows
         /// </summary>
+        [JsonPropertyName("userAssetDribblets")]
         public IEnumerable<BinanceDustLog> UserAssetDribblets { get; set; } = Array.Empty<BinanceDustLog>();
     }
 

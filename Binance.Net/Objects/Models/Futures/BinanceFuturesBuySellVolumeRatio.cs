@@ -8,6 +8,7 @@
         /// <summary>
         /// buy/sell ratio
         /// </summary>
+        [JsonPropertyName("buySellRatio")]
         public decimal BuySellRatio { get; set; }
 
         /// <summary>

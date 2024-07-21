@@ -10,19 +10,23 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Identifier
         /// </summary>
+        [JsonPropertyName("id")]
         public int Id { get; set; }
         /// <summary>
         /// Result status
         /// </summary>
+        [JsonPropertyName("status")]
         public int Status { get; set; }
         /// <summary>
         /// Error info
         /// </summary>
+        [JsonPropertyName("error")]
         public BinanceResponseError? Error { get; set; }
 
         /// <summary>
         /// Rate limit info
         /// </summary>
+        [JsonPropertyName("rateLimits")]
         public IEnumerable<BinanceCurrentRateLimit> Ratelimits { get; set; } = new List<BinanceCurrentRateLimit>();
 
     }
@@ -36,6 +40,7 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Data result
         /// </summary>
+        [JsonPropertyName("result")]
         public T Result { get; set; } = default!;
     }
 

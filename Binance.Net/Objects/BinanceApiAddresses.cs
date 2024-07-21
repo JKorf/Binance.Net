@@ -8,15 +8,15 @@
         /// <summary>
         /// The address used by the BinanceClient for the Spot API
         /// </summary>
-        public string RestClientAddress { get; set; } = "";
+        public string RestClientAddress { get; set; } = string.Empty;
         /// <summary>
         /// The address used by the BinanceSocketClient for the Spot streams
         /// </summary>
-        public string SocketClientStreamAddress { get; set; } = "";
+        public string SocketClientStreamAddress { get; set; } = string.Empty;
         /// <summary>
         /// The address used by the BinanceSocketClient for the Spot API
         /// </summary>
-        public string SocketClientApiAddress { get; set; } = "";
+        public string SocketClientApiAddress { get; set; } = string.Empty;
         /// <summary>
         /// The address used by the BinanceSocketClient for connecting to the BLVT streams
         /// </summary>

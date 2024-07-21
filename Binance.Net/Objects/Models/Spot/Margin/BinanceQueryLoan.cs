@@ -11,10 +11,12 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Isolated symbol
         /// </summary>
+        [JsonPropertyName("isolatedSymbol")]
         public string? IsolatedSymbol { get; set; }
         /// <summary>
         /// The asset of the loan
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id of the loan
@@ -24,10 +26,12 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Principal repaid 
         /// </summary>
+        [JsonPropertyName("principal")]
         public decimal Principal { get; set; }
         /// <summary>
         /// Interest repaid 
         /// </summary>
+        [JsonPropertyName("interest")]
         public decimal Interest { get; set; }
         /// <summary>
         /// Quantity repaid 
@@ -42,6 +46,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// The status of the loan
         /// </summary>
+        [JsonPropertyName("status")]
         public MarginStatus Status { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Busd convert type
     /// </summary>
-    public enum BinanceBusdConvertType
+    public enum BusdConvertType
     {
         /// <summary>
         /// Auto convert when deposit

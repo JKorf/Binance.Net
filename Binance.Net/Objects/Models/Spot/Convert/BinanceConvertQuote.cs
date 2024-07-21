@@ -8,18 +8,22 @@
         /// <summary>
         /// Quote id
         /// </summary>
+        [JsonPropertyName("quoteId")]
         public string? QuoteId { get; set; }
         /// <summary>
         /// Price ratio
         /// </summary>
+        [JsonPropertyName("ratio")]
         public decimal Ratio { get; set; }
         /// <summary>
         /// Inverse price ratio
         /// </summary>
+        [JsonPropertyName("inverseRatio")]
         public decimal InverseRatio { get; set; }
         /// <summary>
         /// Valid Timestamp
         /// </summary>
+        [JsonPropertyName("validTimestamp")]
         public long ValidTimestamp { get; set; }
         /// <summary>
         /// Base quantity

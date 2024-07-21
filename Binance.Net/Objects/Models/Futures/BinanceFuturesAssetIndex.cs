@@ -8,6 +8,7 @@
         /// <summary>
         /// The symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
@@ -17,14 +18,17 @@
         /// <summary>
         /// Index
         /// </summary>
+        [JsonPropertyName("index")]
         public decimal Index { get; set; }
         /// <summary>
         /// Bid buffer
         /// </summary>
+        [JsonPropertyName("bidBuffer")]
         public decimal BidBuffer { get; set; }
         /// <summary>
         /// Ask buffer
         /// </summary>
+        [JsonPropertyName("askBuffer")]
         public decimal AskBuffer { get; set; }
         /// <summary>
         /// Bid price
@@ -39,10 +43,12 @@
         /// <summary>
         /// Auto exchange bid buffer
         /// </summary>
+        [JsonPropertyName("autoExchangeBidBuffer")]
         public decimal AutoExchangeBidBuffer { get; set; }
         /// <summary>
         /// Auto exchange ask buffer
         /// </summary>
+        [JsonPropertyName("autoExchangeAskBuffer")]
         public decimal AutoExchangeAskBuffer { get; set; }
         /// <summary>
         /// Auto exchange bid price

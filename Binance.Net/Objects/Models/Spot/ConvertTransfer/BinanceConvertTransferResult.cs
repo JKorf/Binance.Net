@@ -13,6 +13,7 @@
         /// <summary>
         /// Status of the transfer (definitions currently unknown)
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
     }
 }

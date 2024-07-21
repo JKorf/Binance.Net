@@ -3,10 +3,10 @@ using System.IO;
 using System.Net.WebSockets;
 using System.Security.Authentication;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 
 namespace Binance.Net.UnitTests.TestImplementations
 {
@@ -101,7 +101,7 @@ namespace Binance.Net.UnitTests.TestImplementations
 
         public void InvokeMessage<T>(T data)
         {
-            OnStreamMessage?.Invoke(WebSocketMessageType.Text, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)))).Wait();
+            OnStreamMessage?.Invoke(WebSocketMessageType.Text, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(data)))).Wait();
         }
 
         public void SetProxy(ApiProxy proxy)

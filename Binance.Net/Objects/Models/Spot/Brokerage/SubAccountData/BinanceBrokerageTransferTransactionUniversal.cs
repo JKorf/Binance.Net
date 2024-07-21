@@ -23,20 +23,24 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// <summary>
         /// To id
         /// </summary>
+        [JsonPropertyName("toId")]
         public string ToId { get; set; } = string.Empty;
         
         /// <summary>
         /// From account type
         /// </summary>
+        [JsonPropertyName("fromAccountType")]
         public BrokerageAccountType FromAccountType { get; set; }
         
         /// <summary>
         /// To account type
+        [JsonPropertyName("toAccountType")]
         public BrokerageAccountType ToAccountType { get; set; }
-        
+
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         
         /// <summary>
@@ -54,6 +58,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// <summary>
         /// Status
         /// </summary>
+        [JsonPropertyName("status")]
         public BrokerageTransferTransactionStatus Status { get; set; }
     }
 }

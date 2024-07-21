@@ -8,6 +8,7 @@
         /// <summary>
         /// The current used amount
         /// </summary>
+        [JsonPropertyName("count")]
         public int Count { get; set; }
     }
 }

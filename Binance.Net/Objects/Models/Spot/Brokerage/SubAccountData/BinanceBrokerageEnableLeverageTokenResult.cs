@@ -8,8 +8,9 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
+        [JsonPropertyName("subAccountId")]
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Is Leverage Token Enabled
         /// </summary>

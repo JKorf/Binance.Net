@@ -28,10 +28,12 @@
         /// <summary>
         /// Hourly interest rate
         /// </summary>
+        [JsonPropertyName("hourlyInterestRate")]
         public decimal HourlyInterestRate { get; set; }
         /// <summary>
         /// Borrow order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
     }
 }

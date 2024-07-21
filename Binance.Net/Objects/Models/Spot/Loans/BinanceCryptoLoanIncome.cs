@@ -11,10 +11,12 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Income type
         /// </summary>
+        [JsonPropertyName("type")]
         public LoanIncomeType Type { get; set; }
         /// <summary>
         /// Quantity
@@ -25,6 +27,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>

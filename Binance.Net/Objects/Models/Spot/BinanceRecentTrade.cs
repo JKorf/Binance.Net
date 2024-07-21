@@ -15,6 +15,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The price of the trade
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <inheritdoc />
         public abstract decimal BaseQuantity { get; set; }
@@ -33,6 +34,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Whether the trade was made at the best match
         /// </summary>
+        [JsonPropertyName("isBestMatch")]
         public bool IsBestMatch { get; set; }
     }
 

@@ -8,18 +8,22 @@
         /// <summary>
         /// Total btc
         /// </summary>
+        [JsonPropertyName("totalTransferBtc")]
         public decimal TotalTransferBtc { get; set; }
         /// <summary>
         /// Total bnb
         /// </summary>
+        [JsonPropertyName("totalTransferBNB")]
         public decimal TotalTransferBnb { get; set; }
         /// <summary>
         /// Dribblet percentage
         /// </summary>
+        [JsonPropertyName("dribbletPercentage")]
         public decimal DribbletPercentage { get; set; }
         /// <summary>
         /// Details
         /// </summary>
+        [JsonPropertyName("details")]
         public IEnumerable<BinanceMarginDustAssetDetails> Details { get; set; } = Array.Empty<BinanceMarginDustAssetDetails>();
     }
 

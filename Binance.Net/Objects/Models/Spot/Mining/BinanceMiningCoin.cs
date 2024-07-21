@@ -18,6 +18,7 @@
         /// <summary>
         /// The pool index
         /// </summary>
+        [JsonPropertyName("poolIndex")]
         public int PoolIndex { get; set; }
 
         /// <summary>

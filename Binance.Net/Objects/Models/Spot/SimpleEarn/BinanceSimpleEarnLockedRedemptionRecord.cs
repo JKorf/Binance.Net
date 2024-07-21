@@ -35,6 +35,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Status
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Lock period

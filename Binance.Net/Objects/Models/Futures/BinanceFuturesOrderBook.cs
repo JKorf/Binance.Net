@@ -10,10 +10,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Pair
         /// </summary>
+        [JsonPropertyName("pair")]
         public string? Pair { get; set; } = string.Empty;
         /// <summary>
         /// The symbol of the order book 
         /// </summary>
+        [JsonPropertyName("symbol")]
         public new string Symbol { get; set; } = string.Empty;
 
         /// <summary>

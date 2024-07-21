@@ -16,16 +16,19 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
         /// <summary>
         /// Transfer asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Status of the transfer
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of the transfer
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Transaction id

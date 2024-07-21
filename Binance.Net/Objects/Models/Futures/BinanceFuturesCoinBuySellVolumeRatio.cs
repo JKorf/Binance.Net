@@ -11,10 +11,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The pair
         /// </summary>
+        [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// Contract type
         /// </summary>
+        [JsonPropertyName("contractType")]
         public ContractType ContractType { get; set; }
         /// <summary>
         /// The taker buy volume
@@ -40,6 +42,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Data timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 }
