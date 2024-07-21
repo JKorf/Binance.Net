@@ -11,11 +11,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Is buyer
         /// </summary>
+        [JsonPropertyName("buyer")]
         public bool Buyer { get; set; }
         /// <summary>
         /// Paid fee
@@ -31,18 +33,22 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Trade id
         /// </summary>
+        [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
         /// Is maker
         /// </summary>
+        [JsonPropertyName("maker")]
         public bool Maker { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
         /// Price
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// Quantity
@@ -52,14 +58,17 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Realized pnl
         /// </summary>
+        [JsonPropertyName("realizedPnl")]
         public decimal RealizedPnl { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
+        [JsonPropertyName("positionSide")]
         public PositionSide PositionSide { get; set; }
         /// <summary>
         /// Timestamp
@@ -88,11 +97,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The pair
         /// </summary>
+        [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
 
         /// <summary>
         /// The margin asset
         /// </summary>
+        [JsonPropertyName("marginAsset")]
         public string MarginAsset { get; set; } = string.Empty;
 
         /// <summary>

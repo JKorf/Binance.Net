@@ -4,7 +4,9 @@
     {
         [JsonPropertyName("msg")]
         public string? Message { get; set; }
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
+        [JsonPropertyName("transfers")]
         public IEnumerable<BinanceSubAccountTransfer>? Transfers { get; set; }
     }
 
@@ -16,14 +18,17 @@
         /// <summary>
         /// From which email the transfer originated
         /// </summary>
+        [JsonPropertyName("from")]
         public string From { get; set; } = string.Empty;
         /// <summary>
         /// To which email the transfer was to
         /// </summary>
+        [JsonPropertyName("to")]
         public string To { get; set; } = string.Empty;
         /// <summary>
         /// The asset of the transfer
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The quantity of the transfer
@@ -38,7 +43,8 @@
         /// <summary>
         /// Status of the transaction
         /// </summary>
-        public string Status { get; set; } = "";
+        [JsonPropertyName("status")]
+        public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Transaction Id
         /// </summary>

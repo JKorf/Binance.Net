@@ -11,6 +11,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order number
         /// </summary>
+        [JsonPropertyName("orderNumber")]
         public string OrderNumber { get; set; } = string.Empty;
         /// <summary>
         /// Advert number
@@ -20,18 +21,22 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Trade type
         /// </summary>
+        [JsonPropertyName("tradeType")]
         public OrderSide TradeType { get; set; }
         /// <summary>
         /// Crypto asset traded
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Fiat type
         /// </summary>
+        [JsonPropertyName("fiat")]
         public string Fiat { get; set; } = string.Empty;
         /// <summary>
         /// Fiat symbol
         /// </summary>
+        [JsonPropertyName("fiatSymbol")]
         public string FiatSymbol { get; set; } = string.Empty;
         /// <summary>
         /// Quantity traded
@@ -41,20 +46,24 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Total price of the trade
         /// </summary>
+        [JsonPropertyName("totalPrice")]
         public decimal TotalPrice { get; set; }
         /// <summary>
         /// Price per unit
         /// </summary>
+        [JsonPropertyName("unitPrice")]
         public decimal UnitPrice { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderStatus")]
         public C2COrderStatus OrderStatus { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Transaction fee in crypto
@@ -64,10 +73,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Counter part nickname
         /// </summary>
+        [JsonPropertyName("counterPartyNickName")]
         public string CounterPartNickName { get; set; } = string.Empty;
         /// <summary>
         /// Advertisement role
         /// </summary>
+        [JsonPropertyName("advertisementRole")]
         public string AdvertisementRole { get; set; } = string.Empty;
     }
 }

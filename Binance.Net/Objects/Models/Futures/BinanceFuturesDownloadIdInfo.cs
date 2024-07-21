@@ -13,6 +13,7 @@
         /// <summary>
         /// Download id
         /// </summary>
+        [JsonPropertyName("downloadId")]
         public string DownloadId { get; set; } = string.Empty;
     }
 }

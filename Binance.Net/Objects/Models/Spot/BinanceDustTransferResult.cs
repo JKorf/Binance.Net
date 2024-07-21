@@ -18,6 +18,7 @@
         /// <summary>
         /// Transfer entries
         /// </summary>
+        [JsonPropertyName("transferResult")]
         public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
     }
 
@@ -34,6 +35,7 @@
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of conversion

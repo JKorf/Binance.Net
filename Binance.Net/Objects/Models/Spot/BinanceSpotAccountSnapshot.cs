@@ -16,6 +16,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Account type the data is for
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>
         /// Snapshot data
@@ -32,10 +33,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The total value of assets in btc
         /// </summary>
+        [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
         /// List of balances
         /// </summary>
+        [JsonPropertyName("balances")]
         public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
 
     }

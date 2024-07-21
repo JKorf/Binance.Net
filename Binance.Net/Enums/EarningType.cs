@@ -5,7 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Mining earnings type
     /// </summary>
-    public enum BinanceEarningType
+    public enum EarningType
     {
         /// <summary>
         /// Mining wallet

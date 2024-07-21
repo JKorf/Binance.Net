@@ -18,6 +18,7 @@
         /// <summary>
         /// Direction
         /// </summary>
+        [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
         /// Amount
@@ -27,6 +28,7 @@
         /// <summary>
         /// Current ltv
         /// </summary>
+        [JsonPropertyName("currentLtv")]
         public decimal CurrentLtv { get; set; }
     }
 }

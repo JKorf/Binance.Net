@@ -8,6 +8,7 @@
         /// <summary>
         /// Is auto convert enabled
         /// </summary>
+        [JsonPropertyName("convertEnabled")]
         public bool ConvertEnabled { get; set; }
         /// <summary>
         /// Assets
@@ -17,6 +18,7 @@
         /// <summary>
         /// Exchange rates
         /// </summary>
+        [JsonPropertyName("exchangeRates")]
         public Dictionary<string, decimal> ExchangeRates { get; set; } = new Dictionary<string, decimal>();
     }
 }

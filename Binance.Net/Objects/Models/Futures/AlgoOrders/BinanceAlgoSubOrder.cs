@@ -11,6 +11,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Amount of sub orders
         /// </summary>
+        [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
         /// Executed quantity
@@ -25,6 +26,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Sub orders
         /// </summary>
+        [JsonPropertyName("subOrders")]
         public IEnumerable<BinanceAlgoSubOrder> SubOrders { get; set; } = Array.Empty<BinanceAlgoSubOrder>();
     }
 
@@ -36,10 +38,12 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Algo id
         /// </summary>
+        [JsonPropertyName("algoId")]
         public long AlgoId { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
         /// Order status
@@ -64,11 +68,13 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Fee asset
         /// </summary>
+        [JsonPropertyName("feeAsset")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// Book time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("bookTime")]
         public DateTime BookTime { get; set; }
         /// <summary>
         /// Average price
@@ -78,18 +84,22 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Side
         /// </summary>
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Sub id
         /// </summary>
+        [JsonPropertyName("subId")]
         public long SubId { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>
+        [JsonPropertyName("timeInForce")]
         public string TimeInForce { get; set; } = string.Empty;
         /// <summary>
         /// Original quantity

@@ -8,10 +8,12 @@
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("clientAlgoId")]
         public string ClientAlgoId { get; set; } = string.Empty;
         /// <summary>
         /// Successful
         /// </summary>
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
     }
 }

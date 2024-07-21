@@ -10,10 +10,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The current page
         /// </summary>
+        [JsonPropertyName("page")]
         public int Page { get; set; }
         /// <summary>
         /// Total number of records
         /// </summary>
+        [JsonPropertyName("totalRecords")]
         public int TotalRecords { get; set; }
         /// <summary>
         /// Total number of pages
@@ -23,6 +25,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Rebate data for this page
         /// </summary>
+        [JsonPropertyName("data")]
         public IEnumerable<BinanceRebate> Data { get; set; } = Array.Empty<BinanceRebate>();
     }
 
@@ -34,10 +37,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Type of rebate
         /// </summary>
+        [JsonPropertyName("type")]
         public RebateType Type { get; set; }
         /// <summary>
         /// Quantity
@@ -48,6 +53,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Last udpate time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 }

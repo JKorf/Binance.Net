@@ -31,18 +31,22 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Boolean indicating if this account can trade
         /// </summary>
+        [JsonPropertyName("canTrade")]
         public bool CanTrade { get; set; }
         /// <summary>
         /// Boolean indicating if this account can withdraw
         /// </summary>
+        [JsonPropertyName("canWithdraw")]
         public bool CanWithdraw { get; set; }
         /// <summary>
         /// Boolean indicating if this account can deposit
         /// </summary>
+        [JsonPropertyName("canDeposit")]
         public bool CanDeposit { get; set; }
         /// <summary>
         /// Account is brokered
         /// </summary>
+        [JsonPropertyName("brokered")]
         public bool Brokered { get; set; }
         /// <summary>
         /// Require self trade prevention
@@ -63,19 +67,23 @@ namespace Binance.Net.Objects.Models.Spot
         /// The time of the update
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The type of account
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>
         /// Permissions types
         /// </summary>
+        [JsonPropertyName("permissions")]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// List of assets with their current balances
         /// </summary>
+        [JsonPropertyName("balances")]
         public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
     }
 
@@ -87,6 +95,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The asset this balance is for
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The quantity that isn't locked in a trade
@@ -96,6 +105,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The quantity that is currently locked in a trade
         /// </summary>
+        [JsonPropertyName("locked")]
         public decimal Locked { get; set; }
         /// <summary>
         /// The total balance of this asset (Free + Locked)

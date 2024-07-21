@@ -9,10 +9,12 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
         /// <summary>
         /// Current enabled accounts
         /// </summary>
+        [JsonPropertyName("enabledAccount")]
         public int EnabledAccount { get; set; }
         /// <summary>
         /// Max accounts
         /// </summary>
+        [JsonPropertyName("maxAccount")]
         public int MaxAccount { get; set; }
     }
 }

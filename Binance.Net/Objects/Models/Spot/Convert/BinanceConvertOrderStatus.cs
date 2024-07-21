@@ -10,6 +10,7 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Order status
@@ -40,15 +41,18 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// <summary>
         /// Price ratio
         /// </summary>
+        [JsonPropertyName("ratio")]
         public decimal Ratio { get; set; }
         /// <summary>
         /// Inverse price ratio
         /// </summary>
+        [JsonPropertyName("inverseRatio")]
         public decimal InverseRatio { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
     }
 }

@@ -10,14 +10,17 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The symbol the information is about
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The current market price
         /// </summary>
+        [JsonPropertyName("markPrice")]
         public decimal MarkPrice { get; set; }
         /// <summary>
         /// The current index price
         /// </summary>
+        [JsonPropertyName("indexPrice")]
         public decimal IndexPrice { get; set; }
         /// <summary>
         /// The last funding rate
@@ -28,15 +31,18 @@ namespace Binance.Net.Objects.Models.Futures
         /// The time the funding rate is applied
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("nextFundingTime")]
         public DateTime NextFundingTime { get; set; }
         /// <summary>
         /// Estimated settle price
         /// </summary>
+        [JsonPropertyName("estimatedSettlePrice")]
         public decimal? EstimatedSettlePrice { get; set; }
 
         /// <summary>
         /// Interest rate
         /// </summary>
+        [JsonPropertyName("interestRate")]
         public decimal? InterestRate { get; set; }
         /// <summary>
         /// Timestamp
@@ -54,6 +60,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The pair
         /// </summary>
+        [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
     }
 }

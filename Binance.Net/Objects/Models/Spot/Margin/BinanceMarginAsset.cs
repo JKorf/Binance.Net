@@ -18,10 +18,12 @@
         /// <summary>
         /// Is borrowable
         /// </summary>
+        [JsonPropertyName("isBorrowable")]
         public bool IsBorrowable { get; set; }
         /// <summary>
         /// Is mortgageable
         /// </summary>
+        [JsonPropertyName("isMortgageable")]
         public bool IsMortgageable { get; set; }
         /// <summary>
         /// Minimal quantity which can be borrowed

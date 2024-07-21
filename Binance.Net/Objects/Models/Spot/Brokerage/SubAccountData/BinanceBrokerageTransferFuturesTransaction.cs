@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Transfer Futures Transactions
@@ -8,12 +10,14 @@
         /// <summary>
         /// Success
         /// </summary>
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
-        
+
         /// <summary>
         /// Futures type
         /// </summary>
-        public BinanceBrokerageFuturesType FuturesType { get; set; }
+        [JsonPropertyName("futuresType")]
+        public FuturesAccountType FuturesType { get; set; }
         
         /// <summary>
         /// Transfer
@@ -30,18 +34,21 @@
         /// <summary>
         /// From Id
         /// </summary>
+        [JsonPropertyName("fromId")]
         public string FromId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// To Id
         /// </summary>
+        [JsonPropertyName("toId")]
         public string ToId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Quantity
         /// </summary>

@@ -3,7 +3,7 @@
     internal class BinanceSocketMessage
     {
         [JsonPropertyName("method")]
-        public string Method { get; set; } = "";
+        public string Method { get; set; } = string.Empty;
 
         [JsonPropertyName("id")]
         public int Id { get; set; }

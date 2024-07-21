@@ -13,6 +13,7 @@
         /// <summary>
         /// Day hashrate
         /// </summary>
+        [JsonPropertyName("dayHashRate")]
         public decimal DayHashRate { get; set; }
         /// <summary>
         /// Valid shares
@@ -27,18 +28,22 @@
         /// <summary>
         /// Todays profit
         /// </summary>
+        [JsonPropertyName("profitToday")]
         public Dictionary<string, decimal> ProfitToday { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// Yesterdays profit
         /// </summary>
+        [JsonPropertyName("profitYesterday")]
         public Dictionary<string, decimal> ProfitYesterday { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// User name
         /// </summary>
+        [JsonPropertyName("userName")]
         public string UserName { get; set; } = string.Empty;
         /// <summary>
         /// Hashrate unit
         /// </summary>
+        [JsonPropertyName("unit")]
         public string Unit { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm

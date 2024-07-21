@@ -8,6 +8,7 @@
         /// <summary>
         /// Result code
         /// </summary>
+        [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
         /// Message
@@ -25,6 +26,7 @@
         /// <summary>
         /// The data
         /// </summary>
+        [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
     }
 }

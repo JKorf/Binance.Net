@@ -8,15 +8,18 @@
         /// <summary>
         /// Name of the worker
         /// </summary>
+        [JsonPropertyName("workerName")]
         public string WorkerName { get; set; } = string.Empty;
 
         /// <summary>
         /// Data type
         /// </summary>
+        [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         /// <summary>
         /// Hash rate data
         /// </summary>
+        [JsonPropertyName("hashRateDatas")]
         public IEnumerable<BinanceHashRate> HashRateDatas { get; set; } = Array.Empty<BinanceHashRate>();
     }
 
@@ -34,10 +37,12 @@
         /// <summary>
         /// Hashrate
         /// </summary>
+        [JsonPropertyName("hashRate")]
         public decimal HashRate { get; set; }
         /// <summary>
         /// Rejected
         /// </summary>
+        [JsonPropertyName("reject")]
         public decimal Reject { get; set; }
     }
 }

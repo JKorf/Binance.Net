@@ -15,6 +15,7 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
         /// <summary>
         /// Account equity, in USD
         /// </summary>
+        [JsonPropertyName("accountEquity")]
         public decimal AccountEquity { get; set; }
         /// <summary>
         /// Portfolio margin account actual equity, in USD
@@ -30,6 +31,7 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
         /// Account status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("accountStatus")]
         public PortfolioMarginAccountStatus AccountStatus { get; set; }
         /// <summary>
         /// Account type

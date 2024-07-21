@@ -25,6 +25,7 @@
         /// <summary>
         /// Brackets
         /// </summary>
+        [JsonPropertyName("brackets")]
         public IEnumerable<BinanceFuturesBracket> Brackets { get; set; } = Array.Empty<BinanceFuturesBracket>();
 
     }
@@ -37,11 +38,13 @@
         /// <summary>
         /// Bracket
         /// </summary>
+        [JsonPropertyName("bracket")]
         public int Bracket { get; set; }
 
         /// <summary>
         /// Max initial leverage for this bracket
         /// </summary>
+        [JsonPropertyName("initialLeverage")]
         public int InitialLeverage { get; set; }
 
         /// <summary>

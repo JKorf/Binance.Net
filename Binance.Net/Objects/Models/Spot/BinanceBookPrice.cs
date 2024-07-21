@@ -15,6 +15,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The symbol the information is about
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The highest bid price for the symbol

@@ -11,42 +11,52 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
+        [JsonPropertyName("filters")]
         public IEnumerable<BinanceFuturesSymbolFilter> Filters { get; set; } = Array.Empty<BinanceFuturesSymbolFilter>();
         /// <summary>
         /// Contract type
         /// </summary>
+        [JsonPropertyName("contractType")]
         public ContractType? ContractType { get; set; }
         /// <summary>
         /// The maintenance margin percent
         /// </summary>
+        [JsonPropertyName("mainMarginPercent")]
         public decimal MaintMarginPercent { get; set; }
         /// <summary>
         /// The price Precision
         /// </summary>
+        [JsonPropertyName("pricePrecision")]
         public int PricePrecision { get; set; }
         /// <summary>
         /// The quantity precision
         /// </summary>
+        [JsonPropertyName("quantityPrecision")]
         public int QuantityPrecision { get; set; }
         /// <summary>
-        /// The required margin percent
+        /// The required margin percentage
         /// </summary>
+        [JsonPropertyName("requiredMarginPercent")]
         public decimal RequiredMarginPercent { get; set; }
         /// <summary>
         /// The base asset
         /// </summary>
+        [JsonPropertyName("baseAsset")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Margin asset
         /// </summary>
+        [JsonPropertyName("marginAsset")]
         public string MarginAsset { get; set; } = string.Empty;
         /// <summary>
         /// The quote asset
         /// </summary>
+        [JsonPropertyName("quoteAsset")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// The precision of the base asset
         /// </summary>
+        [JsonPropertyName("baseAssetPrecision")]
         public int BaseAssetPrecision { get; set; }
         /// <summary>
         /// The precision of the quote asset
@@ -56,6 +66,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Allowed order types
         /// </summary>
+        [JsonPropertyName("orderTypes")]
         public IEnumerable<FuturesOrderType> OrderTypes { get; set; } = Array.Empty<FuturesOrderType>();
         /// <summary>
         /// The symbol
@@ -80,6 +91,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Trigger protect
         /// </summary>
+        [JsonPropertyName("triggerProtect")]
         public decimal TriggerProtect { get; set; }
         /// <summary>
         /// Currently Empty
@@ -89,26 +101,24 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Sub types
         /// </summary>
+        [JsonPropertyName("underlyingSubType")]
         public IEnumerable<string> UnderlyingSubType { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Liquidation fee
         /// </summary>
+        [JsonPropertyName("liquidationFee")]
         public decimal LiquidationFee { get; set; }
         /// <summary>
         /// The max price difference rate (from mark price) a market order can make
         /// </summary>
+        [JsonPropertyName("marketTakeBound")]
         public decimal MarketTakeBound { get; set; }
-
-        /// <summary>
-        /// Currently Empty
-        /// </summary>
-        [JsonIgnore]
-        public object[] UnderlyingSupType { get; set; } = Array.Empty<object>();
 
         /// <summary>
         /// Allowed order time in force
         /// </summary>
+        [JsonPropertyName("timeInForce")]
         public IEnumerable<TimeInForce> TimeInForce { get; set; } = Array.Empty<TimeInForce>();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
@@ -160,6 +170,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The status of the symbol
         /// </summary>
+        [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
 
         /// <summary>
@@ -184,6 +195,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Contract size
         /// </summary>
+        [JsonPropertyName("contractSize")]
         public int ContractSize { get; set; }
 
         /// <summary>

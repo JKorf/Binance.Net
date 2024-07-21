@@ -31,15 +31,18 @@ namespace Binance.Net.Objects.Models.Spot
         /// Order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType")]
         public PayOrderType OrderType { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
+        [JsonPropertyName("transactionId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Transaction time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("transactionTime")]
         public DateTime TransactionTime { get; set; }
         /// <summary>
         /// Quantity

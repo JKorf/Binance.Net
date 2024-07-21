@@ -8,23 +8,27 @@
         /// <summary>
         /// Max Maker Commission
         /// </summary>
+        [JsonPropertyName("maxMakerCommission")]
         public decimal MaxMakerCommission { get; set; }
-        
+
         /// <summary>
         /// Min Maker Commission
         /// </summary>
+        [JsonPropertyName("minMakerCommission")]
         public decimal MinMakerCommission { get; set; }
-        
+
         /// <summary>
         /// Max Taker Commission
         /// </summary>
+        [JsonPropertyName("maxTakerCommission")]
         public decimal MaxTakerCommission { get; set; }
-        
+
         /// <summary>
         /// Min Taker Commission
         /// </summary>
+        [JsonPropertyName("minTakerCommission")]
         public decimal MinTakerCommission { get; set; }
-        
+
         /// <summary>
         /// Sub Account Quantity
         /// </summary>

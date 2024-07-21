@@ -359,13 +359,11 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(BinanceBrokerageFuturesType futuresType,
+        public async Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(FuturesAccountType futuresType,
             string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>
-                             {
-                                 {"futuresType", ((int)futuresType).ToString(CultureInfo.InvariantCulture)}
-                             };
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("futuresType", futuresType);
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
@@ -435,13 +433,13 @@ namespace Binance.Net.Clients.GeneralApi
         {
             asset.ValidateNotNull(nameof(asset));
 
-            var parameters = new Dictionary<string, object>
-                             {
-                                 {"asset", asset},
-                                 {"amount", quantity.ToString(CultureInfo.InvariantCulture)},
-                                 {"fromAccountType", JsonConvert.SerializeObject(fromAccountType, new BrokerageAccountTypeConverter(false))},
-                                 {"toAccountType", JsonConvert.SerializeObject(toAccountType, new BrokerageAccountTypeConverter(false))}
-                             };
+            var parameters = new ParameterCollection()
+            {
+                {"asset", asset},
+                {"amount", quantity.ToString(CultureInfo.InvariantCulture)}
+            };
+            parameters.AddEnum("fromAccountType", fromAccountType);
+            parameters.AddEnum("toAccountType", toAccountType);
             parameters.AddOptionalParameter("fromId", fromId);
             parameters.AddOptionalParameter("toId", toId);
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
@@ -491,17 +489,17 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBrokerageTransferFuturesResult>> TransferFuturesAsync(string asset, decimal quantity, BinanceBrokerageFuturesType futuresType,
+        public async Task<WebCallResult<BinanceBrokerageTransferFuturesResult>> TransferFuturesAsync(string asset, decimal quantity, FuturesAccountType futuresType,
             string? fromId, string? toId, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"asset", asset},
                                  {"amount", quantity.ToString(CultureInfo.InvariantCulture)},
-                                 {"futuresType", ((int)futuresType).ToString(CultureInfo.InvariantCulture)}
                              };
+            parameters.AddEnum("futuresType", futuresType);
             parameters.AddOptionalParameter("fromId", fromId);
             parameters.AddOptionalParameter("toId", toId);
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
@@ -533,16 +531,16 @@ namespace Binance.Net.Clients.GeneralApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageTransferFuturesTransactions>> GetTransferFuturesHistoryAsync(string subAccountId,
-            BinanceBrokerageFuturesType futuresType, DateTime? startDate = null, DateTime? endDate = null,
+            FuturesAccountType futuresType, DateTime? startDate = null, DateTime? endDate = null,
             int? page = null, int? limit = null, string? clientTransferId = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection()
                              {
-                                 {"subAccountId", subAccountId},
-                                 {"futuresType", ((int)futuresType).ToString(CultureInfo.InvariantCulture)}
+                                 {"subAccountId", subAccountId}
                              };
+            parameters.AddEnum("futuresType", futuresType);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -555,13 +553,13 @@ namespace Binance.Net.Clients.GeneralApi
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccountDepositTransaction>>> GetSubAccountDepositHistoryAsync(string? subAccountId = null,
-            string? asset = null, BinanceBrokerageSubAccountDepositStatus? status = null, DateTime? startDate = null, DateTime? endDate = null,
+            string? asset = null, SubAccountDepositStatus? status = null, DateTime? startDate = null, DateTime? endDate = null,
             int? limit = null, int? offset = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("coin", asset);
-            parameters.AddOptionalParameter("status", status.HasValue ? ((int)status).ToString(CultureInfo.InvariantCulture) : null);
+            parameters.AddOptionalEnum("status", status);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -608,15 +606,15 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBrokerageFuturesRebate>>> GetBrokerFuturesCommissionRebatesHistoryAsync(BinanceBrokerageFuturesType futuresType,
+        public async Task<WebCallResult<IEnumerable<BinanceBrokerageFuturesRebate>>> GetBrokerFuturesCommissionRebatesHistoryAsync(FuturesAccountType futuresType,
             DateTime startDate, DateTime endDate, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
-                                 {"futuresType", ((int)futuresType).ToString(CultureInfo.InvariantCulture)},
                                  {"startTime", DateTimeConverter.ConvertToMilliseconds(startDate)!},
                                  {"endTime",  DateTimeConverter.ConvertToMilliseconds(endDate)!}
                              };
+            parameters.AddEnum("futuresType", futuresType);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

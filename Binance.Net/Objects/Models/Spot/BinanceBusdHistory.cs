@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("type")]
         [JsonConverter(typeof(EnumConverter))]
-        public BinanceBusdConvertType Type { get; set; }
+        public BusdConvertType Type { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>

@@ -25,6 +25,7 @@
         /// <summary>
         /// Only present if a margin trade happened
         /// </summary>
+        [JsonPropertyName("marginBuyBorrowAsset")]
         public string? MarginBuyBorrowAsset { get; set; }
     }
 }

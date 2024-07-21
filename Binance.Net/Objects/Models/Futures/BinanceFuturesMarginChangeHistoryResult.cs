@@ -16,10 +16,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Base asset used for margin
         /// </summary>
+        [JsonPropertyName("asset")]
         public string? Asset { get; set; }
         /// <summary>
         /// Symbol margin is placed on
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string? Symbol { get; set; }
         /// <summary>
         /// Delta type
@@ -35,10 +37,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Direction of the margin change request
         /// </summary>
+        [JsonPropertyName("type")]
         public FuturesMarginChangeDirectionType Type { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
+        [JsonPropertyName("positionSide")]
         public PositionSide PositionSide { get; set; }
     }
 

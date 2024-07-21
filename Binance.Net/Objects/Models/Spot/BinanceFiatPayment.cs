@@ -36,14 +36,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The total fee of the order
         /// </summary>
+        [JsonPropertyName("totalFee")]
         public decimal TotalFee { get; set; }
         /// <summary>
         /// The price of the order
         /// </summary>
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// The status of the order
         /// </summary>
+        [JsonPropertyName("status")]
         public FiatPaymentStatus Status { get; set; }
         /// <summary>
         /// The payment method
@@ -54,11 +57,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 }

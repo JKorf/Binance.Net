@@ -23,6 +23,7 @@
         /// <summary>
         /// Assets
         /// </summary>
+        [JsonPropertyName("details")]
         public IEnumerable<BinanceElligableDust> Details { get; set; } = Array.Empty<BinanceElligableDust>();
     }
 
@@ -34,10 +35,12 @@
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Full name of the asset
         /// </summary>
+        [JsonPropertyName("assetFullName")]
         public string AssetFullName { get; set; } = string.Empty;
         /// <summary>
         /// Amount free
@@ -47,14 +50,17 @@
         /// <summary>
         /// BTC value
         /// </summary>
+        [JsonPropertyName("toBTC")]
         public decimal ToBTC { get; set; }
         /// <summary>
         /// BNB value without fee
         /// </summary>
+        [JsonPropertyName("toBNB")]
         public decimal ToBNB { get; set; }
         /// <summary>
         /// BNB value with fee
         /// </summary>
+        [JsonPropertyName("toBNBOffExchange")]
         public decimal ToBNBOffExchange { get; set; }
         /// <summary>
         /// Fee
