@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("sortAscending", sortAscending == null ? null : sortAscending == true ? "1" : "0");
             parameters.AddOptionalParameter("sortColumn", sortColumn);
-            parameters.AddOptionalParameter("workerStatus", workerStatus == null ? null : JsonConvert.SerializeObject(workerStatus, new MinerStatusConverter(false)));
+            parameters.AddOptionalEnum("workerStatus", workerStatus);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMinerList>>(request, parameters, ct).ConfigureAwait(false);

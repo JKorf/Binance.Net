@@ -19,12 +19,12 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// The transaction id of the repay
         /// </summary>`
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public long TransactionId { get; set; }
         /// <summary>
         /// Total quantity repaid
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Interest repaid
@@ -37,12 +37,12 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Time of repay completed
         /// </summary>
-        [JsonProperty("timestamp"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// The status of the repay
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(MarginStatusConverter))]
+        [JsonPropertyName("status")]
         public MarginStatus Status { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Type of income as string
         /// </summary>
-        [JsonProperty("incomeType")]
+        [JsonPropertyName("incomeType")]
         public string? IncomeTypeString { get; set; }
 
         /// <summary>
@@ -40,13 +40,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// Time of the income
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
         /// Transaction id if relevant
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Trade id if existing

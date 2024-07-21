@@ -8,7 +8,7 @@
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public string? TransactionId { get; set; }
         /// <summary>
         /// Isolated symbol
@@ -25,7 +25,7 @@
         /// <summary>
         /// The quantity of interest
         /// </summary>
-        [JsonProperty("interest")]
+        [JsonPropertyName("interest")]
         public decimal InterestQuantity { get; set; }
         /// <summary>
         /// Timestamp

@@ -10,6 +10,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Not trading yet
         /// </summary>
+        [Map("PRE_TRADING")]
         PreTrading,
         /// <summary>
         /// Pending trading
@@ -24,22 +25,27 @@ namespace Binance.Net.Enums
         /// <summary>
         /// No longer trading
         /// </summary>
+        [Map("POST_TRADING")]
         PostTrading,
         /// <summary>
         /// Not trading
         /// </summary>
+        [Map("END_OF_DAY")]
         EndOfDay,
         /// <summary>
         /// Halted
         /// </summary>
+        [Map("HALT")]
         Halt,
         /// <summary>
         /// 
         /// </summary>
+        [Map("AUCTION_MATCH")]
         AuctionMatch,
         /// <summary>
         /// 
         /// </summary>
+        [Map("BREAK")]
         Break,
         /// <summary>
         /// Closed

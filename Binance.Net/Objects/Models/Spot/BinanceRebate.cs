@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Total number of pages
         /// </summary>
-        [JsonProperty("totalPageNum")]
+        [JsonPropertyName("totalPageNum")]
         public int TotalPages { get; set; }
         /// <summary>
         /// Rebate data for this page
@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Last udpate time

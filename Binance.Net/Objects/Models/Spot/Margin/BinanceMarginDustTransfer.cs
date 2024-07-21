@@ -8,17 +8,17 @@
         /// <summary>
         /// Total service charge
         /// </summary>
-        [JsonProperty("totalServiceCharge")]
+        [JsonPropertyName("totalServiceCharge")]
         public decimal TotalServiceCharge { get; set; }
         /// <summary>
         /// Total transfered
         /// </summary>
-        [JsonProperty("totalTransfered")]
+        [JsonPropertyName("totalTransfered")]
         public decimal TotalTransfered { get; set; }
         /// <summary>
         /// Transfer results
         /// </summary>
-        [JsonProperty("transferResult")]
+        [JsonPropertyName("transferResult")]
         public IEnumerable<BinanceMargingDustTransferResult> TransferResults { get; set; } = Array.Empty<BinanceMargingDustTransferResult>();
     }
 
@@ -30,33 +30,33 @@
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Source asset
         /// </summary>
-        [JsonProperty("fromAsset")]
+        [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("operateTime")]
+        [JsonPropertyName("operateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
         /// Service charge quantity
         /// </summary>
-        [JsonProperty("serviceChargeAmount")]
+        [JsonPropertyName("serviceChargeAmount")]
         public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
         /// Transfered quantity
         /// </summary>
-        [JsonProperty("transferedAmount")]
+        [JsonPropertyName("transferedAmount")]
         public decimal TransferedQuantity { get; set; }
     }
 }

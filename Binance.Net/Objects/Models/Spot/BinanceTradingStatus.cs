@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Conditions
         /// </summary>
-        [JsonProperty("triggerCondition")]
+        [JsonPropertyName("triggerCondition")]
         public Dictionary<string, int> TriggerConditions { get; set; } = new Dictionary<string, int>();
 
         /// <summary>
@@ -41,23 +41,23 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Indicator name
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public IndicatorType IndicatorType { get; set; }
 
         /// <summary>
         /// Count
         /// </summary>
-        [JsonProperty("c")]
+        [JsonPropertyName("c")]
         public int Count { get; set; }
         /// <summary>
         /// Current value
         /// </summary>
-        [JsonProperty("v")]
+        [JsonPropertyName("v")]
         public decimal CurrentValue { get; set; }
         /// <summary>
         /// Trigger value
         /// </summary>
-        [JsonProperty("t")]
+        [JsonPropertyName("t")]
         public decimal TriggerValue { get; set; }
     }
 }

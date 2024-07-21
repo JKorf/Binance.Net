@@ -8,7 +8,7 @@
         /// <summary>
         /// The id of the trade
         /// </summary>
-        [JsonProperty("tradeId")]
+        [JsonPropertyName("tradeId")]
         public long Id { get; set; }
         /// <summary>
         /// Price of the trade
@@ -17,17 +17,17 @@
         /// <summary>
         /// Quantity of the trade
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Fee paid over this trade
         /// </summary>
-        [JsonProperty("commission")]
+        [JsonPropertyName("commission")]
         public decimal Fee { get; set; }
         /// <summary>
         /// The asset the fee is paid in
         /// </summary>
-        [JsonProperty("commissionAsset")]
+        [JsonPropertyName("commissionAsset")]
         public string FeeAsset { get; set; } = string.Empty;
     }
 }

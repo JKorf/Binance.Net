@@ -15,7 +15,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Contract type
         /// </summary>
-        [JsonConverter(typeof(ContractTypeConverter))]
         public ContractType? ContractType { get; set; }
         /// <summary>
         /// The maintenance margin percent
@@ -52,32 +51,31 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The precision of the quote asset
         /// </summary>
-        [JsonProperty("quotePrecision")]
+        [JsonPropertyName("quotePrecision")]
         public int QuoteAssetPrecision { get; set; }
         /// <summary>
         /// Allowed order types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(FuturesOrderTypeConverter))]
         public IEnumerable<FuturesOrderType> OrderTypes { get; set; } = Array.Empty<FuturesOrderType>();
         /// <summary>
         /// The symbol
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Pair
         /// </summary>
-        [JsonProperty("pair")]
+        [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
         /// <summary>
         /// Delivery Date
         /// </summary>
-        [JsonProperty("deliveryDate"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("deliveryDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime DeliveryDate { get; set; }
         /// <summary>
         /// Delivery Date
         /// </summary>
-        [JsonProperty("onboardDate"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("onboardDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime ListingDate { get; set; }
         /// <summary>
         /// Trigger protect
@@ -86,7 +84,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Currently Empty
         /// </summary>
-        [JsonProperty("underlyingType"), JsonConverter(typeof(UnderlyingTypeConverter))]
+        [JsonPropertyName("underlyingType")]
         public UnderlyingType UnderlyingType { get; set; }
         /// <summary>
         /// Sub types
@@ -111,7 +109,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Allowed order time in force
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(EnumConverter))]
         public IEnumerable<TimeInForce> TimeInForce { get; set; } = Array.Empty<TimeInForce>();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
@@ -163,13 +160,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The status of the symbol
         /// </summary>
-        [JsonConverter(typeof(SymbolStatusConverter))]
         public SymbolStatus Status { get; set; }
 
         /// <summary>
         /// The status of the symbol
         /// </summary>
-        [JsonProperty("settlePlan")]
+        [JsonPropertyName("settlePlan")]
         public decimal SettlePlan { get; set; }
     }
 
@@ -182,8 +178,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The status of the symbol
         /// </summary>
-        [JsonConverter(typeof(SymbolStatusConverter))]
-        [JsonProperty("contractStatus")]
+        [JsonPropertyName("contractStatus")]
         public SymbolStatus Status { get; set; }
 
         /// <summary>
@@ -194,7 +189,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Equal quantity precision
         /// </summary>
-        [JsonProperty("equalQtyPrecision")]
+        [JsonPropertyName("equalQtyPrecision")]
         public int EqualQuantityPrecision { get; set; }
        
     }

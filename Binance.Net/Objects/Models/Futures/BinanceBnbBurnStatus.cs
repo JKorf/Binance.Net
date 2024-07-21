@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Fee burn status
         /// </summary>
-        [JsonProperty("feeBurn")]
+        [JsonPropertyName("feeBurn")]
         public bool FeeBurn { get; set; }
     }
 }

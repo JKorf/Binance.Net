@@ -12,7 +12,7 @@
         /// <summary>
         /// Average annual interest rage
         /// </summary>
-        [JsonProperty("avgAnnualInterestRate")]
+        [JsonPropertyName("avgAnnualInterestRate")]
         public decimal AverageAnnualInterestRate { get; set; }
         /// <summary>
         /// Can purchase
@@ -33,7 +33,7 @@
         /// <summary>
         /// Minimal quantity to purchase
         /// </summary>
-        [JsonProperty("minPurchaseAmount")]
+        [JsonPropertyName("minPurchaseAmount")]
         public decimal MinimalPurchaseQuantity { get; set; }
         /// <summary>
         /// Product id
@@ -42,7 +42,7 @@
         /// <summary>
         /// Purchased quantity
         /// </summary>
-        [JsonProperty("purchasedAmount")]
+        [JsonPropertyName("purchasedAmount")]
         public decimal PurchasedQuantity { get; set; }
         /// <summary>
         /// Status of the product
@@ -51,12 +51,12 @@
         /// <summary>
         /// Upper limit
         /// </summary>
-        [JsonProperty("upLimit")]
+        [JsonPropertyName("upLimit")]
         public decimal UpperLimit { get; set; }
         /// <summary>
         /// Upper limit per user
         /// </summary>
-        [JsonProperty("upLimitPerUser")]
+        [JsonPropertyName("upLimitPerUser")]
         public decimal UpperLimitPerUser { get; set; }
     }
 }

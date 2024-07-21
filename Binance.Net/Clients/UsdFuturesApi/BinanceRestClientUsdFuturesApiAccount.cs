@@ -75,8 +75,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "marginType", JsonConvert.SerializeObject(marginType, new FuturesMarginTypeConverter(false)) }
             };
+            parameters.AddEnum("marginType", marginType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/marginType", BinanceExchange.RateLimiter.FuturesRest, 1, true);
@@ -94,9 +94,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "type", JsonConvert.SerializeObject(type, new FuturesMarginChangeDirectionTypeConverter(false)) }
             };
-            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddEnum("type", type);
+            parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/positionMargin", BinanceExchange.RateLimiter.FuturesRest, 1, true);
@@ -114,7 +114,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol }
             };
-            parameters.AddOptionalParameter("type", type.HasValue ? JsonConvert.SerializeObject(type, new FuturesMarginChangeDirectionTypeConverter(false)) : null);
+            parameters.AddOptionalEnum("type", type);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

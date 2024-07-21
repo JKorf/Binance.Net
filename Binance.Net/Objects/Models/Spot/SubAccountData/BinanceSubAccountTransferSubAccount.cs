@@ -31,7 +31,6 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Transfer type
         /// </summary>
-        [JsonConverter(typeof(SubAccountTransferSubAccountTypeConverter))]
         public SubAccountTransferSubAccountType Type { get; set; }
         /// <summary>
         /// Asset
@@ -41,17 +40,17 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Timestamp of the transfer
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

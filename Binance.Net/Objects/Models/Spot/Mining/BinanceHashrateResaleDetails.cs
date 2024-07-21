@@ -52,12 +52,12 @@
         /// <summary>
         /// Coin name
         /// </summary>
-        [JsonProperty("coinName")]
+        [JsonPropertyName("coinName")]
         public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Transferred income
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
     }
 }

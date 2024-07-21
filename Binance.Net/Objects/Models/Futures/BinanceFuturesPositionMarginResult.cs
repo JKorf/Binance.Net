@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
 
         /// <summary>
@@ -30,7 +30,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Direction of the requested margin change
         /// </summary>
-        [JsonConverter(typeof(FuturesMarginChangeDirectionTypeConverter))]
         public FuturesMarginChangeDirectionType Type { get; set; }
     }
 

@@ -29,7 +29,7 @@
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Hashrate

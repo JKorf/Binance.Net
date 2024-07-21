@@ -8,12 +8,12 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Next interest rate
         /// </summary>
-        [JsonProperty("nextHourlyInterestRate")]
+        [JsonPropertyName("nextHourlyInterestRate")]
         public decimal NextHourlyInterestRate { get; set; }
     }
 }

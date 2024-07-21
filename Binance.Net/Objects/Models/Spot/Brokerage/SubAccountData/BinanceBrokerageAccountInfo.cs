@@ -28,13 +28,13 @@
         /// <summary>
         /// Sub Account Quantity
         /// </summary>
-        [JsonProperty("subAccountQty")]
+        [JsonPropertyName("subAccountQty")]
         public int SubAccountQuantity { get; set; }
         
         /// <summary>
         /// Max Sub Account Quantity
         /// </summary>
-        [JsonProperty("maxSubAccountQty")]
+        [JsonPropertyName("maxSubAccountQty")]
         public int MaxSubAccountQuantity { get; set; }
     }
 }

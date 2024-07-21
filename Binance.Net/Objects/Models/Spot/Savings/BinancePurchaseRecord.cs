@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Quantity purchased
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Asset name
@@ -25,7 +25,6 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Lending type
         /// </summary>
-        [JsonConverter(typeof(LendingTypeConverter))]
         public LendingType LendingType { get; set; }
         /// <summary>
         /// Lot

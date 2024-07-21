@@ -8,7 +8,7 @@
         /// <summary>
         /// The Transaction id as assigned by Binance
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
     }
 }

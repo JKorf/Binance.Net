@@ -24,12 +24,12 @@
         /// <summary>
         /// Base quantity
         /// </summary>
-        [JsonProperty("toAmount")]
+        [JsonPropertyName("toAmount")]
         public decimal BaseQuantity { get; set; }
         /// <summary>
         /// Quote quantity
         /// </summary>
-        [JsonProperty("fromAmount")]
+        [JsonPropertyName("fromAmount")]
         public decimal QuoteQuantity { get; set; }
        
     }

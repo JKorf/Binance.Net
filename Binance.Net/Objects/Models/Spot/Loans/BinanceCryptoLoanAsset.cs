@@ -8,75 +8,75 @@
         /// <summary>
         /// Loan asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// Hourly interest rate for 7 days
         /// </summary>
-        [JsonProperty("_7dHourlyInterestRate")]
+        [JsonPropertyName("_7dHourlyInterestRate")]
         public decimal HourlyInterest7Days { get; set; }
 
         /// <summary>
         /// Daily interest rate for 7 days
         /// </summary>
-        [JsonProperty("_7dDailyInterestRate")]
+        [JsonPropertyName("_7dDailyInterestRate")]
         public decimal DailyInterest7Days { get; set; }
         /// <summary>
         /// Hourly interest rate for 14 days
         /// </summary>
-        [JsonProperty("_14dHourlyInterestRate")]
+        [JsonPropertyName("_14dHourlyInterestRate")]
         public decimal HourlyInterest14Days { get; set; }
 
         /// <summary>
         /// Daily interest rate for 14 days
         /// </summary>
-        [JsonProperty("_14dDailyInterestRate")]
+        [JsonPropertyName("_14dDailyInterestRate")]
         public decimal DailyInterest14Days { get; set; }
         /// <summary>
         /// Daily interest rate for 30 days
         /// </summary>
-        [JsonProperty("_30dHourlyInterestRate")]
+        [JsonPropertyName("_30dHourlyInterestRate")]
         public decimal HourlyInterest30Days { get; set; }
         /// <summary>
         /// Daily interest rate for 30 days
         /// </summary>
-        [JsonProperty("_30dDailyInterestRate")]
+        [JsonPropertyName("_30dDailyInterestRate")]
         public decimal DailyInterest30Days { get; set; }
         /// <summary>
         /// Daily interest rate for 90 days
         /// </summary>
-        [JsonProperty("_90dHourlyInterestRate")]
+        [JsonPropertyName("_90dHourlyInterestRate")]
         public decimal HourlyInterest90Days { get; set; }
         /// <summary>
         /// Daily interest rate for 90 days
         /// </summary>
-        [JsonProperty("_90dDailyInterestRate")]
+        [JsonPropertyName("_90dDailyInterestRate")]
         public decimal DailyInterest90Days { get; set; }
         /// <summary>
         /// Daily interest rate for 180 days
         /// </summary>
-        [JsonProperty("_180dHourlyInterestRate")]
+        [JsonPropertyName("_180dHourlyInterestRate")]
         public decimal HourlyInterest180Days { get; set; }
         /// <summary>
         /// Daily interest rate for 180 days
         /// </summary>
-        [JsonProperty("_180dDailyInterestRate")]
+        [JsonPropertyName("_180dDailyInterestRate")]
         public decimal DailyInterest180Days { get; set; }
 
         /// <summary>
         /// Min limit
         /// </summary>
-        [JsonProperty("minLimit")]
+        [JsonPropertyName("minLimit")]
         public decimal MinLimit { get; set; }
         /// <summary>
         /// Min limit
         /// </summary>
-        [JsonProperty("maxLimit")]
+        [JsonPropertyName("maxLimit")]
         public decimal MaxLimit { get; set; }
         /// <summary>
         /// Vip level
         /// </summary>
-        [JsonProperty("vipLevel")]
+        [JsonPropertyName("vipLevel")]
         public int VipLevel { get; set; }
     }
 }

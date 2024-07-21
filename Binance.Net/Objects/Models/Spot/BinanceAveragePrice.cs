@@ -8,17 +8,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Duration in minutes
         /// </summary>
-        [JsonProperty("mins")]
+        [JsonPropertyName("mins")]
         public int Minutes { get; set; }
         /// <summary>
         /// The average price
         /// </summary>
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// The last trade time
         /// </summary>
-        [JsonProperty("closeTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("closeTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime LastTradeTime { get; set; }
     }
 }

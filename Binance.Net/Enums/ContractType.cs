@@ -30,6 +30,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Current quarter delivering
         /// </summary>
+        [Map("CURRENT_QUARTER DELIVERING")]
         CurrentQuarterDelivering,
         /// <summary>
         /// Next quarter
@@ -39,6 +40,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Next quarter delivering
         /// </summary>
+        [Map("NEXT_QUARTER DELIVERING")]
         NextQuarterDelivering,
         /// <summary>
         /// Next month
@@ -48,6 +50,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// Unknown
         /// </summary>
+        [Map("")]
         Unknown
     }
 }

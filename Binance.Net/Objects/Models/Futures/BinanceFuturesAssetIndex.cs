@@ -12,7 +12,7 @@
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Index
@@ -29,12 +29,12 @@
         /// <summary>
         /// Bid price
         /// </summary>
-        [JsonProperty("bidRate")]
+        [JsonPropertyName("bidRate")]
         public decimal BidPrice { get; set; }
         /// <summary>
         /// Ask price
         /// </summary>
-        [JsonProperty("askRate")]
+        [JsonPropertyName("askRate")]
         public decimal AskPrice { get; set; }
         /// <summary>
         /// Auto exchange bid buffer
@@ -47,12 +47,12 @@
         /// <summary>
         /// Auto exchange bid price
         /// </summary>
-        [JsonProperty("autoExchangeBidRate")]
+        [JsonPropertyName("autoExchangeBidRate")]
         public decimal AutoExchangeBidPrice { get; set; }
         /// <summary>
         /// Auto exchange ask price
         /// </summary>
-        [JsonProperty("autoExchangeAskRate")]
+        [JsonPropertyName("autoExchangeAskRate")]
         public decimal AutoExchangeAskPrice { get; set; }
     }
 }

@@ -11,13 +11,13 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// <summary>
         /// Transaction Id
         /// </summary>
-        [JsonProperty("txnId")]
+        [JsonPropertyName("txnId")]
         public string Id { get; set; } = string.Empty;
         
         /// <summary>
         /// Client Transfer Id
         /// </summary>
-        [JsonProperty("clientTranId")]
+        [JsonPropertyName("clientTranId")]
         public string ClientTransferId { get; set; } = string.Empty;
         
         /// <summary>
@@ -38,19 +38,18 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         
         /// <summary>
         /// Date
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Date { get; set; }
         
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(BrokerageTransferTransactionStatusConverter))]
         public BrokerageTransferTransactionStatus Status { get; set; }
     }
 }

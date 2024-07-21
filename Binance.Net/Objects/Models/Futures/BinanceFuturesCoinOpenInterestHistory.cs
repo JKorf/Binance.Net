@@ -16,7 +16,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Contract type
         /// </summary>
-        [JsonConverter(typeof(ContractTypeConverter))]
         public ContractType ContractType { get; set; }
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("timestamp"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
     }
 }

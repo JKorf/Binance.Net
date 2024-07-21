@@ -8,24 +8,24 @@
         /// <summary>
         /// The symbol
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price
         /// </summary>
-        [JsonProperty("p")]
+        [JsonPropertyName("p")]
         public decimal Price { get; set; }
 
         /// <summary>
         /// Base asset
         /// </summary>
-        [JsonProperty("C")]
+        [JsonPropertyName("C")]
         public string BaseAsset { get; set; } = string.Empty;
 
         /// <summary>
         /// Composition
         /// </summary>
-        [JsonProperty("c")]
+        [JsonPropertyName("c")]
         public IEnumerable<BinanceFuturesStreamCompositeIndexAsset> Composition { get; set; } = Array.Empty<BinanceFuturesStreamCompositeIndexAsset>();
     }
 
@@ -37,27 +37,27 @@
         /// <summary>
         /// Base asset name
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset name
         /// </summary>
-        [JsonProperty("q")]
+        [JsonPropertyName("q")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Weight in quantity
         /// </summary>
-        [JsonProperty("w")]
+        [JsonPropertyName("w")]
         public decimal WeightInQuantity { get; set; }
         /// <summary>
         /// Weight in percentage
         /// </summary>
-        [JsonProperty("W")]
+        [JsonPropertyName("W")]
         public decimal WeightInPercentage { get; set; }
         /// <summary>
         /// Index price
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public decimal IndexPrice { get; set; }
     }
 }

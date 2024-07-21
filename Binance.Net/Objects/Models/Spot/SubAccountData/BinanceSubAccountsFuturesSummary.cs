@@ -41,7 +41,7 @@
         /// <summary>
         /// Sub accounts info
         /// </summary>
-        [JsonProperty("subAccountList")]
+        [JsonPropertyName("subAccountList")]
         public IEnumerable<BinanceSubAccountFuturesInfo> SubAccounts { get; set; } = Array.Empty<BinanceSubAccountFuturesInfo>();
     }
 

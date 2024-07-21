@@ -18,7 +18,7 @@
         /// <summary>
         /// Create Date
         /// </summary>
-        [JsonProperty("createTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateDate { get; set; }
     }
 }

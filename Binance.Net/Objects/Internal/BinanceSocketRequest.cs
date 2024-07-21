@@ -2,22 +2,22 @@
 {
     internal class BinanceSocketMessage
     {
-        [JsonProperty("method")]
+        [JsonPropertyName("method")]
         public string Method { get; set; } = "";
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
     }
 
     internal class BinanceSocketRequest : BinanceSocketMessage
     {
-        [JsonProperty("params")]
+        [JsonPropertyName("params")]
         public string[] Params { get; set; } = Array.Empty<string>();
     }
 
     internal class BinanceSocketQuery : BinanceSocketMessage
     {
-        [JsonProperty("params")]
+        [JsonPropertyName("params")]
         public Dictionary<string, object> Params { get; set; } = new Dictionary<string, object>();
     }
 }

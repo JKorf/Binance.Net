@@ -30,12 +30,12 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Trade details
         /// </summary>
-        [JsonProperty("marginTradeCoeffVo")]
+        [JsonPropertyName("marginTradeCoeffVo")]
         public BinanceMarginTradeCoeff? MarginTradeCoeff { get; set; }
         /// <summary>
         /// Asset list
         /// </summary>
-        [JsonProperty("marginUserAssetVoList")]
+        [JsonPropertyName("marginUserAssetVoList")]
         public IEnumerable<BinanceMarginBalance> MarginUserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 

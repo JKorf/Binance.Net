@@ -44,12 +44,12 @@
         /// <summary>
         /// Account type
         /// </summary>
-        [JsonProperty("accountType")]
+        [JsonPropertyName("accountType")]
         public string AccountType { get; set; } = string.Empty;
         /// <summary>
         /// Balance list
         /// </summary>
-        [JsonProperty("userAssets")]
+        [JsonPropertyName("userAssets")]
         public IEnumerable<BinanceMarginBalance> Balances { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 
@@ -69,7 +69,7 @@
         /// <summary>
         /// The quantity that isn't locked in a trade
         /// </summary>
-        [JsonProperty("free")]
+        [JsonPropertyName("free")]
         public decimal Available { get; set; }
         /// <summary>
         /// Fee to need pay by borrowed

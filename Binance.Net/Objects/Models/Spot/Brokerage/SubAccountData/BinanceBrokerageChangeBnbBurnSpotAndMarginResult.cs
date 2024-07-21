@@ -13,7 +13,7 @@
         /// <summary>
         /// Is Spot BNB Burn
         /// </summary>
-        [JsonProperty("spotBNBBurn")]
+        [JsonPropertyName("spotBNBBurn")]
         public bool IsSpotBnbBurn { get; set; }
     }
 }

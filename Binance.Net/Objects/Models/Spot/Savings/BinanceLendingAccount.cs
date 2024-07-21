@@ -8,22 +8,22 @@
         /// <summary>
         /// Total quantity in btc
         /// </summary>
-        [JsonProperty("totalAmountInBTC")]
+        [JsonPropertyName("totalAmountInBTC")]
         public decimal TotalQuantityInBTC { get; set; }
         /// <summary>
         /// Total quantity in usdt
         /// </summary>
-        [JsonProperty("totalAmountInUSDT")]
+        [JsonPropertyName("totalAmountInUSDT")]
         public decimal TotalQuantityInUSDT { get; set; }
         /// <summary>
         /// Total fixed quantity in btc
         /// </summary>
-        [JsonProperty("totalFixedAmountInBTC")]
+        [JsonPropertyName("totalFixedAmountInBTC")]
         public decimal TotalFixedQuantityInBTC { get; set; }
         /// <summary>
         /// Total fixed quantity in usdt
         /// </summary>
-        [JsonProperty("totalFixedAmountInUSDT")]
+        [JsonPropertyName("totalFixedAmountInUSDT")]
         public decimal TotalFixedQuantityInUSDT { get; set; }
         /// <summary>
         /// Total flexible in btc
@@ -37,7 +37,7 @@
         /// <summary>
         /// Position amounts
         /// </summary>
-        [JsonProperty("positionAmountVos")]
+        [JsonPropertyName("positionAmountVos")]
         public IEnumerable<BinanceLendingPositionAmount> PositionAmounts { get; set; } = Array.Empty<BinanceLendingPositionAmount>();
     }
 
@@ -49,17 +49,17 @@
         /// <summary>
         /// Amount of the asset
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Amount in btc
         /// </summary>
-        [JsonProperty("amountInBTC")]
+        [JsonPropertyName("amountInBTC")]
         public decimal QuantityInBTC { get; set; }
         /// <summary>
         /// Amount in usdt
         /// </summary>
-        [JsonProperty("amountInUSDT")]
+        [JsonPropertyName("amountInUSDT")]
         public decimal QuantityInUSDT { get; set; }
         /// <summary>
         /// Asset name

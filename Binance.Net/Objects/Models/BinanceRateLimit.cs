@@ -15,12 +15,12 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// The type the rate limit applies to
         /// </summary>
-        [JsonProperty("rateLimitType"), JsonConverter(typeof(RateLimitConverter))]
+        [JsonPropertyName("rateLimitType")]
         public RateLimitType Type { get; set; }
         /// <summary>
         /// The amount of calls the limit is
         /// </summary>
-        [JsonProperty("intervalNum")]
+        [JsonPropertyName("intervalNum")]
         public int IntervalNumber { get; set; }
         /// <summary>
         /// The amount of calls the limit is

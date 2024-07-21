@@ -8,15 +8,15 @@
         /// <summary>
         /// Symbol or pair
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted 
         /// </summary>
-        [JsonProperty("notionalCoef")]
+        [JsonPropertyName("notionalCoef")]
         public decimal? NotionalCoef { get; set; }
-        [JsonProperty("pair")]
+        [JsonPropertyName("pair")]
         private string Pair
         {
             set => Symbol = value;
@@ -47,9 +47,9 @@
         /// <summary>
         /// Cap of this bracket
         /// </summary>
-        [JsonProperty("notionalCap")]
+        [JsonPropertyName("notionalCap")]
         public long Cap { get; set; }
-        [JsonProperty("qtyCap")]
+        [JsonPropertyName("qtyCap")]
         private long QuantityCap
         {
             set => Cap = value;
@@ -58,9 +58,9 @@
         /// <summary>
         /// Floor of this bracket
         /// </summary>
-        [JsonProperty("notionalFloor")]
+        [JsonPropertyName("notionalFloor")]
         public long Floor { get; set; }
-        [JsonProperty("qtylFloor")]
+        [JsonPropertyName("qtylFloor")]
         private long QuantityFloor
         {
             set => Floor = value;
@@ -69,13 +69,13 @@
         /// <summary>
         /// Maintenance ratio for this bracket
         /// </summary>
-        [JsonProperty("maintMarginRatio")]
+        [JsonPropertyName("maintMarginRatio")]
         public decimal MaintenanceMarginRatio { get; set; }
 
         /// <summary>
         /// Auxiliary number for quick calculation 
         /// </summary>
-        [JsonProperty("cum")]
+        [JsonPropertyName("cum")]
         public decimal MaintAmount { get; set; }
     }
 }

@@ -10,13 +10,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The symbol of the order book 
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The ID of the last update
         /// </summary>
-        [JsonProperty("lastUpdateId")]
+        [JsonPropertyName("lastUpdateId")]
         public long LastUpdateId { get; set; }
         
         /// <summary>

@@ -8,12 +8,12 @@
         /// <summary>
         /// Staking quota left
         /// </summary>
-        [JsonProperty("leftStakingPersonalQuota")]
+        [JsonPropertyName("leftStakingPersonalQuota")]
         public decimal LeftStakingPersonalQuota { get; set; }
         /// <summary>
         /// Redemption quota left
         /// </summary>
-        [JsonProperty("leftRedemptionPersonalQuota")]
+        [JsonPropertyName("leftRedemptionPersonalQuota")]
         public decimal LeftRedemptionPersonalQuota { get; set; }
     }
 }

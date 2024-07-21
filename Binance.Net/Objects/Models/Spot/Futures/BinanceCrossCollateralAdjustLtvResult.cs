@@ -11,28 +11,27 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Loan asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// The direction
         /// </summary>
-        [JsonConverter(typeof(AdjustRateDirectionConverter))]
         public AdjustRateDirection Direction { get; set; }
         /// <summary>
         /// The quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
     }
 }

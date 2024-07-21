@@ -8,7 +8,7 @@
         /// <summary>
         /// The result status
         /// </summary>
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public string? Data { get; set; }
     }
 }

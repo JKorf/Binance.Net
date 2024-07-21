@@ -16,12 +16,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The quantity deposited
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The asset deposited
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The address of the deposit
@@ -38,39 +38,37 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The  id
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// The status of the deposit
         /// </summary>
-        [JsonConverter(typeof(DepositStatusConverter))]
         public DepositStatus Status { get; set; }
 
         /// <summary>
         /// The transfer type
         /// </summary>
-        [JsonConverter(typeof(WithdrawDepositTransferTypeConverter))]
         public WithdrawDepositTransferType TransferType { get; set; }
 
         /// <summary>
         /// Confirmations
         /// </summary>
-        [JsonProperty("confirmTimes")]
+        [JsonPropertyName("confirmTimes")]
         public string Confirmations { get; set; } = string.Empty;
         /// <summary>
         /// Network confirmations for unlocking
         /// </summary>
-        [JsonProperty("unlockConfirm")]
+        [JsonPropertyName("unlockConfirm")]
         public string ConfirmationsForUnlock { get; set; } = string.Empty;
         /// <summary>
         /// The wallet type
         /// </summary>
-        [JsonProperty("walletType")]
+        [JsonPropertyName("walletType")]
         [JsonConverter(typeof(EnumConverter))]
         public WalletType WalletType { get; set; }
     }

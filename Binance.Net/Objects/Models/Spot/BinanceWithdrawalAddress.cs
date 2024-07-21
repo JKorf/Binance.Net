@@ -8,42 +8,42 @@
         /// <summary>
         /// Address
         /// </summary>
-        [JsonProperty("address")]
+        [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
         /// Address tag
         /// </summary>
-        [JsonProperty("addressTag")]
+        [JsonPropertyName("addressTag")]
         public string? AddressTag { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Name
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Network
         /// </summary>
-        [JsonProperty("network")]
+        [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// Origin
         /// </summary>
-        [JsonProperty("origin")]
+        [JsonPropertyName("origin")]
         public string? Origin { get; set; }
         /// <summary>
         /// Origin type
         /// </summary>
-        [JsonProperty("originType")]
+        [JsonPropertyName("originType")]
         public string OriginType { get; set; } = string.Empty;
         /// <summary>
         /// Is whitelisted
         /// </summary>
-        [JsonProperty("whiteStatus")]
+        [JsonPropertyName("whiteStatus")]
         public bool Whitelisted { get; set; }
     }
 }

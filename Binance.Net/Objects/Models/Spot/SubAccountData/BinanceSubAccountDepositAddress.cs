@@ -12,7 +12,7 @@
         /// <summary>
         /// Asset type
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Tag for the deposit address

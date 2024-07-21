@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Quantity purchased
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Asset name
@@ -34,7 +34,6 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Redeem type
         /// </summary>
-        [JsonConverter(typeof(RedeemTypeConverter))]
         public RedeemType Type { get; set; }
         /// <summary>
         /// Id of the project

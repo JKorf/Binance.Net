@@ -99,7 +99,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 var result = data.Data.Data;
                 onMessage(data.As<IBinanceStreamKlineData>(result).WithStreamId(data.Data.Stream).WithSymbol(data.Data.Data.Symbol));
         });
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + _klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -152,10 +152,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As(data.Data.Data).WithStreamId(data.Data.Stream).WithSymbol(data.Data.Data.Symbol)));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       "_" +
-                                      JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)).ToLower() +
+                                      EnumConverter.GetString(contractType).ToLower() +
                                       _continuousKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+                                      EnumConverter.GetString(interval)).ToArray();
             return await SubscribeAsync( BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
@@ -174,7 +174,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       _indexKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+                                      EnumConverter.GetString(interval)).ToArray();
             return await SubscribeAsync( BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
@@ -193,7 +193,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                           _markKlineStreamEndpoint +
                                          "_" +
-                                         JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+                                         EnumConverter.GetString(interval)).ToArray();
             return await SubscribeAsync( BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 

@@ -8,7 +8,7 @@
         /// <summary>
         /// Asset code
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Deposit all is enabled
@@ -17,7 +17,7 @@
         /// <summary>
         /// Quantity free
         /// </summary>
-        [JsonProperty("free")]
+        [JsonPropertyName("free")]
         public decimal Available { get; set; }
         /// <summary>
         /// Quantity frozen
@@ -77,17 +77,17 @@
         /// <summary>
         /// Asset name
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Deposit description
         /// </summary>
-        [JsonProperty("depositDesc")]
+        [JsonPropertyName("depositDesc")]
         public string DepositDescription { get; set; } = string.Empty;
         /// <summary>
         /// Deposit enabled
         /// </summary>
-        [JsonProperty("depositEnable")]
+        [JsonPropertyName("depositEnable")]
         public bool DepositEnabled { get; set; }
         /// <summary>
         /// Is default network
@@ -100,7 +100,7 @@
         /// <summary>
         /// Minimal confirmations for balance confirmation
         /// </summary>
-        [JsonProperty("minConfirm")]
+        [JsonPropertyName("minConfirm")]
         public int MinConfirmations { get; set; }
         /// <summary>
         /// Name
@@ -122,12 +122,12 @@
         /// <summary>
         /// Withdraw description
         /// </summary>
-        [JsonProperty("withdrawDesc")]
+        [JsonPropertyName("withdrawDesc")]
         public string WithdrawDescription { get; set; } = string.Empty;
         /// <summary>
         /// Withdraw is enabled
         /// </summary>
-        [JsonProperty("withdrawEnable")]
+        [JsonPropertyName("withdrawEnable")]
         public bool WithdrawEnabled { get; set; }
         /// <summary>
         /// Fee for withdrawing
@@ -152,12 +152,12 @@
         /// <summary>
         /// Estimated arrival time
         /// </summary>
-        [JsonProperty("estimatedArrivalTime")]
+        [JsonPropertyName("estimatedArrivalTime")]
         public int? EstimatedArrivalTime { get; set; }
         /// <summary>
         /// Whether the network is busy
         /// </summary>
-        [JsonProperty("busy")]
+        [JsonPropertyName("busy")]
         public bool Busy { get; set; }
     }
 }

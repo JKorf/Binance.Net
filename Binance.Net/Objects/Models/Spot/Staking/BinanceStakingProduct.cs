@@ -12,7 +12,7 @@
         /// <summary>
         /// Product details
         /// </summary>
-        [JsonProperty("detail")]
+        [JsonPropertyName("detail")]
         public BinanceStakingProductDetails Details { get; set; } = null!;
         /// <summary>
         /// Product quota
@@ -55,7 +55,7 @@
         /// <summary>
         /// Total Personal quota
         /// </summary>
-        [JsonProperty("totalPersonalQuota")]
+        [JsonPropertyName("totalPersonalQuota")]
         public decimal Quota { get; set; }
         /// <summary>
         /// Minimum amount per order

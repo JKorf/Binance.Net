@@ -19,27 +19,27 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// Order status
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
-        [JsonProperty("orderStatus")]
+        [JsonPropertyName("orderStatus")]
         public ConvertOrderStatus Status { get; set; }
         /// <summary>
         /// Quote asset 
         /// </summary>
-        [JsonProperty("fromAsset")]
+        [JsonPropertyName("fromAsset")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quote quantity
         /// </summary>
-        [JsonProperty("fromAmount")]
+        [JsonPropertyName("fromAmount")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
         /// Base asset
         /// </summary>
-        [JsonProperty("toAsset")]
+        [JsonPropertyName("toAsset")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Base quantity
         /// </summary>
-        [JsonProperty("toAmount")]
+        [JsonPropertyName("toAmount")]
         public decimal BaseQuantity { get; set; }
         /// <summary>
         /// Price ratio

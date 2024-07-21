@@ -20,13 +20,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Paid fee
         /// </summary>
-        [JsonProperty("commission")]
+        [JsonPropertyName("commission")]
         public decimal Fee { get; set; }
 
         /// <summary>
         /// Asset the fee is paid in
         /// </summary>
-        [JsonProperty("commissionAsset")]
+        [JsonPropertyName("commissionAsset")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// Trade id
@@ -47,7 +47,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Realized pnl
@@ -56,17 +56,15 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(PositionSideConverter))]
         public PositionSide PositionSide { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 
@@ -78,7 +76,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Quote quantity
         /// </summary>
-        [JsonProperty("quoteQty")]
+        [JsonPropertyName("quoteQty")]
         public decimal QuoteQuantity { get; set; }
     }
 
@@ -100,7 +98,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Base quantity
         /// </summary>
-        [JsonProperty("baseQty")]
+        [JsonPropertyName("baseQty")]
         public decimal BaseQuantity { get; set; }
     }
 }

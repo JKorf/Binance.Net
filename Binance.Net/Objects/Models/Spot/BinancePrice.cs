@@ -16,7 +16,7 @@
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
     }
 
@@ -28,7 +28,7 @@
         /// <summary>
         /// Name of the pair
         /// </summary>
-        [JsonProperty("ps")]
+        [JsonPropertyName("ps")]
         public string Pair { get; set; } = string.Empty;
     }
 }

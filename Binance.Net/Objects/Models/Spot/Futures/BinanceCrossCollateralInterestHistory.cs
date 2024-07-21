@@ -8,34 +8,34 @@
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Interest asset
         /// </summary>
-        [JsonProperty("interestCoin")]
+        [JsonPropertyName("interestCoin")]
         public string InterestAsset { get; set; } = string.Empty;
         /// <summary>
         /// Interest
         /// </summary>
-        [JsonProperty("interest")]
+        [JsonPropertyName("interest")]
         public decimal Interest { get; set; }
 
         /// <summary>
         /// Interest free limit used
         /// </summary>
-        [JsonProperty("interestFreeLimitUsed")]
+        [JsonPropertyName("interestFreeLimitUsed")]
         public decimal InterestFreeLimitUsed { get; set; }
         /// <summary>
         /// Principal interest
         /// </summary>
-        [JsonProperty("principalForInterest")]
+        [JsonPropertyName("principalForInterest")]
         public decimal PrincipalInterest { get; set; }
 
         /// <summary>
         /// Time
         /// </summary>
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }

@@ -28,7 +28,7 @@
         /// <summary>
         /// Maximum Withdraw Quantity
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
+        [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
 
         /// <summary>
@@ -44,7 +44,7 @@
         /// <summary>
         /// Unrealized Profit
         /// </summary>
-        [JsonProperty("unrealizedProfit")]
+        [JsonPropertyName("unrealizedProfit")]
         public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
@@ -60,7 +60,7 @@
         /// <summary>
         /// Unrealized profit of crossed positions
         /// </summary>
-        [JsonProperty("crossUnPnl")]
+        [JsonPropertyName("crossUnPnl")]
         public decimal CrossUnrealizedPnl { get; set; }
 
         /// <summary>

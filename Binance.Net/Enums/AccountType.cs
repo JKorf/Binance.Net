@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of account
     /// </summary>
+    [JsonConverter(typeof(AccountTypeConverter))]
     public enum AccountType
     {
         /// <summary>

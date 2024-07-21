@@ -15,12 +15,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Quantity transfered
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Transfer type
         /// </summary>
-        [JsonConverter(typeof(UniversalTransferTypeConverter))]
         public UniversalTransferType Type { get; set; }
         /// <summary>
         /// Status
@@ -29,7 +28,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long Id { get; set; }
         /// <summary>
         /// Timestamp

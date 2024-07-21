@@ -10,45 +10,45 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The symbol of the order book (only filled from stream updates)
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The time the event happened
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
 
         /// <summary>
         /// The ID of the first update
         /// </summary>
-        [JsonProperty("U")]
+        [JsonPropertyName("U")]
         public long? FirstUpdateId { get; set; }
 
         /// <summary>
         /// The ID of the last update
         /// </summary>
-        [JsonProperty("u")]
+        [JsonPropertyName("u")]
         public long LastUpdateId { get; set; }
 
 
         /// <summary>
         /// The ID of the last update Id in last stream
         /// </summary>
-        [JsonProperty("pu")]
+        [JsonPropertyName("pu")]
         public long LastUpdateIdStream { get; set; }
 
 
         /// <summary>
         /// The list of diff bids
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
         /// <summary>
         /// The list of diff asks
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }

@@ -32,7 +32,7 @@
         /// <summary>
         /// Time at which the symbol gets delisted
         /// </summary>
-        [JsonProperty("delistTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? DelistTime { get; set; }
     }
 }

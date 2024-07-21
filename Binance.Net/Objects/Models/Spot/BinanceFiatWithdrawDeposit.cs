@@ -11,22 +11,22 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order number
         /// </summary>
-        [JsonProperty("orderNo")]
+        [JsonPropertyName("orderNo")]
         public string OrderNumber { get; set; } = string.Empty;
         /// <summary>
         /// The used asset
         /// </summary>
-        [JsonProperty("fiatCurrency")]
+        [JsonPropertyName("fiatCurrency")]
         public string FiatAsset { get; set; } = string.Empty;
         /// <summary>
         /// The quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The indicated quantity
         /// </summary>
-        [JsonProperty("indicatedAmount")]
+        [JsonPropertyName("indicatedAmount")]
         public decimal IndicatedQuantity { get; set; }
         /// <summary>
         /// The method
@@ -39,7 +39,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The status 
         /// </summary>
-        [JsonConverter(typeof(FiatWithdrawDepositStatusConverter))]
         public FiatWithdrawDepositStatus Status { get; set; }
         /// <summary>
         /// Creation time

@@ -39,12 +39,12 @@
         /// <summary>
         /// Loan asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity locked
@@ -53,7 +53,7 @@
         /// <summary>
         /// Loan quantity
         /// </summary>
-        [JsonProperty("loanAmount")]
+        [JsonPropertyName("loanAmount")]
         public decimal LoanQuantity { get; set; }
         /// <summary>
         /// Current collateral rate

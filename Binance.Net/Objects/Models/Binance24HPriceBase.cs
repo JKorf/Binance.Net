@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// The weighted average price in the last 24 hours
         /// </summary>
-        [JsonProperty("weightedAvgPrice")]
+        [JsonPropertyName("weightedAvgPrice")]
         public decimal WeightedAveragePrice { get; set; }
         /// <summary>
         /// The most recent trade price
@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// The most recent trade quantity
         /// </summary>
-        [JsonProperty("lastQty")]
+        [JsonPropertyName("lastQty")]
         public decimal LastQuantity { get; set; }
         /// <summary>
         /// The open price 24 hours ago
@@ -66,17 +66,17 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// The first trade ID in the last 24 hours
         /// </summary>
-        [JsonProperty("firstId")]
+        [JsonPropertyName("firstId")]
         public long FirstTradeId { get; set; }
         /// <summary>
         /// The last trade ID in the last 24 hours
         /// </summary>
-        [JsonProperty("lastId")]
+        [JsonPropertyName("lastId")]
         public long LastTradeId { get; set; }
         /// <summary>
         /// The amount of trades made in the last 24 hours
         /// </summary>
-        [JsonProperty("count")]
+        [JsonPropertyName("count")]
         public long TotalTrades { get; set; }
     }
 }

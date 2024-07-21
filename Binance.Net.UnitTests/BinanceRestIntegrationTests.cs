@@ -1,12 +1,8 @@
 ﻿using Binance.Net.Clients;
-using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

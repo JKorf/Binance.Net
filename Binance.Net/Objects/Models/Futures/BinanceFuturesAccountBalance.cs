@@ -18,7 +18,7 @@
         /// <summary>
         /// The total balance of this asset
         /// </summary>
-        [JsonProperty("balance")]
+        [JsonPropertyName("balance")]
         public decimal WalletBalance { get; set; }
 
         /// <summary>
@@ -29,7 +29,7 @@
         /// <summary>
         /// Unrealized profit of crossed positions
         /// </summary>
-        [JsonProperty("crossUnPnl")]
+        [JsonPropertyName("crossUnPnl")]
         public decimal CrossUnrealizedPnl { get; set; }
 
         /// <summary>
@@ -51,7 +51,7 @@
         /// <summary>
         /// Maximum quantity for transfer out
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
+        [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
 
         /// <summary>

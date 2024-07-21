@@ -11,149 +11,149 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The symbol the order is for
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Pair
         /// </summary>
-        [JsonProperty("pair")]
+        [JsonPropertyName("pair")]
         public string? Pair { get; set; }
 
         /// <summary>
         /// The order id as assigned by Binance
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public long Id { get; set; }
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
-        [JsonProperty("clientOrderId")]
+        [JsonPropertyName("clientOrderId")]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The price of the order
         /// </summary>
-        [JsonProperty("price")]
+        [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
         /// The average price of the order
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonPropertyName("avgPrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// Quantity that has been filled
         /// </summary>
-        [JsonProperty("executedQty")]
+        [JsonPropertyName("executedQty")]
         public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Cumulative quantity
         /// </summary>
-        [JsonProperty("cumQty")]
+        [JsonPropertyName("cumQty")]
         public decimal? CummulativeQuantity { get; set; }
         /// <summary>
         /// Cumulative quantity in quote asset ( for USD futures )
         /// </summary>
-        [JsonProperty("cumQuote")]
+        [JsonPropertyName("cumQuote")]
         public decimal? QuoteQuantityFilled { get; set; }
 
         /// <summary>
         /// Cumulative quantity in quote asset ( for Coin futures )
         /// </summary>
-        [JsonProperty("cumBase")]
+        [JsonPropertyName("cumBase")]
         public decimal? BaseQuantityFilled { get; set; }
         /// <summary>
         /// The original quantity of the order
         /// </summary>
-        [JsonProperty("origQty")]
+        [JsonPropertyName("origQty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Reduce Only
         /// </summary>
-        [JsonProperty("reduceOnly")]
+        [JsonPropertyName("reduceOnly")]
         public bool ReduceOnly { get; set; }
 
         /// <summary>
         /// If order is for closing a position
         /// </summary>
-        [JsonProperty("closePosition")]
+        [JsonPropertyName("closePosition")]
         public bool ClosePosition { get; set; }
 
         /// <summary>
         /// The side of the order
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(OrderSideConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
 
         /// <summary>
         /// The current status of the order
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(OrderStatusConverter))]
+        [JsonPropertyName("status")]
         public OrderStatus Status { get; set; }
 
         /// <summary>
         /// Stop price for the order
         /// </summary>
-        [JsonProperty("stopPrice")]
+        [JsonPropertyName("stopPrice")]
         public decimal? StopPrice { get; set; }
 
         /// <summary>
         /// For what time the order lasts
         /// </summary>
-        [JsonProperty("timeInForce"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("timeInForce"), JsonConverter(typeof(EnumConverter))]
         public TimeInForce TimeInForce { get; set; }
 
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonProperty("type"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        [JsonPropertyName("type")]
         public FuturesOrderType Type { get; set; }
 
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonProperty("origType"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        [JsonPropertyName("origType")]
         public FuturesOrderType OriginalType { get; set; }
 
         /// <summary>
         /// Activation price, only return with TRAILING_STOP_MARKET order
         /// </summary>
-        [JsonProperty("activatePrice")]
+        [JsonPropertyName("activatePrice")]
         public decimal? ActivatePrice { get; set; }
 
         /// <summary>
         /// Callback rate, only return with TRAILING_STOP_MARKET order
         /// </summary>
-        [JsonProperty("priceRate")]
+        [JsonPropertyName("priceRate")]
         public decimal? CallbackRate { get; set; }
 
         /// <summary>
         /// The time the order was updated
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
 
         /// <summary>
         /// The time the order was created
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// The working type
         /// </summary>
-        [JsonProperty("workingType"), JsonConverter(typeof(WorkingTypeConverter))]
+        [JsonPropertyName("workingType")]
         public WorkingType WorkingType { get; set; }
 
         /// <summary>
         /// The position side of the order
         /// </summary>
-        [JsonProperty("positionSide"), JsonConverter(typeof(PositionSideConverter))]
+        [JsonPropertyName("positionSide")]
         public PositionSide PositionSide { get; set; }
         
         /// <summary>
         /// Price protect
         /// </summary>
-        [JsonProperty("priceProtect")]
+        [JsonPropertyName("priceProtect")]
         public bool PriceProtect { get; set; }
     }
 
@@ -165,19 +165,19 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("priceMatch"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter))]
         public PriceMatch PriceMatch { get; set; }
 
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonProperty("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
 
         /// <summary>
         /// Auto cancel at this date
         /// </summary>
-        [JsonProperty("goodTillDate"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("goodTillDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? GoodTillDate { get; set; }
     }
 }

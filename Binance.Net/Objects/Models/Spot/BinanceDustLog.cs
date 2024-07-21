@@ -23,27 +23,27 @@
         /// <summary>
         /// Total transferred
         /// </summary>
-        [JsonProperty("totalTransferedAmount")]
+        [JsonPropertyName("totalTransferedAmount")]
         public decimal TransferredTotal { get; set; }
         /// <summary>
         /// Total service charge
         /// </summary>
-        [JsonProperty("totalServiceChargeAmount")]
+        [JsonPropertyName("totalServiceChargeAmount")]
         public decimal ServiceChargeTotal { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("transId")]
+        [JsonPropertyName("transId")]
         public long TransactionId { get; set; }
         /// <summary>
         /// Detail logs
         /// </summary>
-        [JsonProperty("userAssetDribbletDetails")]
+        [JsonPropertyName("userAssetDribbletDetails")]
         public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("operateTime")]
+        [JsonPropertyName("operateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
     }
@@ -56,33 +56,33 @@
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("transId")]
+        [JsonPropertyName("transId")]
         public long TransactionId { get; set; }
         /// <summary>
         /// Service charge
         /// </summary>
-        [JsonProperty("serviceChargeAmount")]
+        [JsonPropertyName("serviceChargeAmount")]
         public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("operateTime")]
+        [JsonPropertyName("operateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
         /// Transferred quantity
         /// </summary>
-        [JsonProperty("transferedAmount")]
+        [JsonPropertyName("transferedAmount")]
         public decimal TransferredQuantity { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("fromAsset")]
+        [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
     }
 }

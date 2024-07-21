@@ -16,7 +16,7 @@
         /// <summary>
         /// Time of calculation
         /// </summary>
-        [JsonProperty("calcTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("calcTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CalculationTime { get; set; }
     }
 }

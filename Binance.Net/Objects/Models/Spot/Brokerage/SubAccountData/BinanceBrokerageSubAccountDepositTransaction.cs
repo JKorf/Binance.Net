@@ -23,19 +23,19 @@
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         
         /// <summary>
         /// Date
         /// </summary>
-        [JsonProperty("insertTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("insertTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         
         /// <summary>
@@ -51,7 +51,7 @@
         /// <summary>
         /// Transaction Id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
         
         /// <summary>

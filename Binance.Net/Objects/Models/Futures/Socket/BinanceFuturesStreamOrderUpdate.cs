@@ -11,13 +11,13 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Update data
         /// </summary>
-        [JsonProperty("o")]
+        [JsonPropertyName("o")]
         public BinanceFuturesStreamOrderUpdateData UpdateData { get; set; } = new BinanceFuturesStreamOrderUpdateData();
 
         /// <summary>
         /// Transaction time
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T")]
         public DateTime TransactionTime { get; set; }
         /// <summary>
         /// The listen key the update was for
@@ -33,172 +33,172 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The symbol the order is for
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The new client order id
         /// </summary>
-        [JsonProperty("c")]
+        [JsonPropertyName("c")]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order
         /// </summary>
-        [JsonProperty("S"), JsonConverter(typeof(OrderSideConverter))]
+        [JsonPropertyName("S")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// The type of the order
         /// </summary>
-        [JsonProperty("o"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        [JsonPropertyName("o")]
         public FuturesOrderType Type { get; set; }
         /// <summary>
         /// The timespan the order is active
         /// </summary>
-        [JsonProperty("f"), JsonConverter(typeof(TimeInForceConverter))]
+        [JsonPropertyName("f")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// The quantity of the order
         /// </summary>
-        [JsonProperty("q")]
+        [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The price of the order
         /// </summary>
-        [JsonProperty("p")]
+        [JsonPropertyName("p")]
         public decimal Price { get; set; }
         /// <summary>
         /// The average price of the order
         /// </summary>
-        [JsonProperty("ap")]
+        [JsonPropertyName("ap")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// The stop price of the order
         /// </summary>
-        [JsonProperty("sp")]
+        [JsonPropertyName("sp")]
         public decimal StopPrice { get; set; }
         /// <summary>
         /// The execution type
         /// </summary>
-        [JsonProperty("x"), JsonConverter(typeof(ExecutionTypeConverter))]
+        [JsonPropertyName("x")]
         public ExecutionType ExecutionType { get; set; }
         /// <summary>
         /// The status of the order
         /// </summary>
-        [JsonProperty("X"), JsonConverter(typeof(OrderStatusConverter))]
+        [JsonPropertyName("X")]
         public OrderStatus Status { get; set; }
         /// <summary>
         /// The id of the order as assigned by Binance
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public long OrderId { get; set; }
         /// <summary>
         /// The quantity of the last filled trade of this order
         /// </summary>
-        [JsonProperty("l")]
+        [JsonPropertyName("l")]
         public decimal QuantityOfLastFilledTrade { get; set; }
         /// <summary>
         /// The quantity of all trades that were filled for this order
         /// </summary>
-        [JsonProperty("z")]
+        [JsonPropertyName("z")]
         public decimal AccumulatedQuantityOfFilledTrades { get; set; }
         /// <summary>
         /// The price of the last filled trade
         /// </summary>
-        [JsonProperty("L")]
+        [JsonPropertyName("L")]
         public decimal PriceLastFilledTrade { get; set; }
         /// <summary>
         /// The fee payed
         /// </summary>
-        [JsonProperty("n")]
+        [JsonPropertyName("n")]
         public decimal Fee { get; set; }
         /// <summary>
         /// The asset the fee was taken from
         /// </summary>
-        [JsonProperty("N")]
+        [JsonPropertyName("N")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time of the update
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// The trade id
         /// </summary>
-        [JsonProperty("t")]
+        [JsonPropertyName("t")]
         public long TradeId { get; set; }
         /// <summary>
         /// Bid Notional
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public decimal BidNotional { get; set; }
         /// <summary>
         /// Ask Notional
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public decimal AskNotional { get; set; }
         /// <summary>
         /// Whether the buyer is the maker
         /// </summary>
-        [JsonProperty("m")]
+        [JsonPropertyName("m")]
         public bool BuyerIsMaker { get; set; }
         /// <summary>
         /// Is this reduce only
         /// </summary>
-        [JsonProperty("R")]
+        [JsonPropertyName("R")]
         public bool IsReduce { get; set; }
         /// <summary>
         /// Stop price working type
         /// </summary>
-        [JsonProperty("wt"), JsonConverter(typeof(WorkingTypeConverter))]
+        [JsonPropertyName("wt")]
         public WorkingType StopPriceWorking { get; set; }
         /// <summary>
         /// Original Order Type
         /// </summary>
-        [JsonProperty("ot"), JsonConverter(typeof(FuturesOrderTypeConverter))]
+        [JsonPropertyName("ot")]
         public FuturesOrderType OriginalType { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonProperty("ps"), JsonConverter(typeof(PositionSideConverter))]
+        [JsonPropertyName("ps")]
         public PositionSide PositionSide { get; set; }
         /// <summary>
         /// If Close-All, only pushed with conditional order
         /// </summary>
-        [JsonProperty("cp")]
+        [JsonPropertyName("cp")]
         public bool PushedConditionalOrder { get; set; }
         /// <summary>
         /// Activation Price, only pushed with TRAILING_STOP_MARKET order
         /// </summary>
-        [JsonProperty("AP")]
+        [JsonPropertyName("AP")]
         public decimal ActivationPrice { get; set; }
         /// <summary>
         /// Callback Rate, only pushed with TRAILING_STOP_MARKET order
         /// </summary>
-        [JsonProperty("cr")]
+        [JsonPropertyName("cr")]
         public decimal CallbackRate { get; set; }
         /// <summary>
         /// Realized profit of the trade
         /// </summary>
-        [JsonProperty("rp")]
+        [JsonPropertyName("rp")]
         public decimal RealizedProfit { get; set; }
         /// <summary>
         /// Is price protection enable
         /// </summary>
-        [JsonProperty("pP")]
+        [JsonPropertyName("pP")]
         public bool PriceProtection { get; set; }
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonProperty("V"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("V")]
         public SelfTradePreventionMode SelfTradePrevention { get; set; }
         /// <summary>
         /// Price match mode
         /// </summary>
-        [JsonProperty("pm"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("pm")]
         public PriceMatch PriceMatchMode { get; set; }
         /// <summary>
         /// The GoodTillDate if GTD time in force
         /// </summary>
-        [JsonProperty("gtd"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("gtd")]
         public DateTime? GoodTillDate { get; set; }
     }
 }

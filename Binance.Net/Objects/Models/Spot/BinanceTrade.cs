@@ -30,27 +30,27 @@
         /// <summary>
         /// The quantity of the trade
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The quote quantity of the trade
         /// </summary>
-        [JsonProperty("quoteQty")]
+        [JsonPropertyName("quoteQty")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
         /// The fee paid for the trade
         /// </summary>
-        [JsonProperty("commission")]
+        [JsonPropertyName("commission")]
         public decimal Fee { get; set; }
         /// <summary>
         /// The asset the fee is paid in
         /// </summary>
-        [JsonProperty("commissionAsset")]
+        [JsonPropertyName("commissionAsset")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// The time the trade was made
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Whether account was the buyer in the trade

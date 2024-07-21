@@ -13,7 +13,7 @@
         /// <summary>
         /// Is Leverage Token Enabled
         /// </summary>
-        [JsonProperty("enableBlvt")]
+        [JsonPropertyName("enableBlvt")]
         public bool IsLeverageTokenEnabled { get; set; }
     }
 }

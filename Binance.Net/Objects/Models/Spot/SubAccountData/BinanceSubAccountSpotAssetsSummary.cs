@@ -16,7 +16,7 @@
         /// <summary>
         /// Sub account values
         /// </summary>
-        [JsonProperty("spotSubUserAssetBtcVoList")]
+        [JsonPropertyName("spotSubUserAssetBtcVoList")]
         public IEnumerable<BinanceSubAccountBtcValue> SubAccountsBtcValues { get; set; } = Array.Empty<BinanceSubAccountBtcValue>();
     }
 

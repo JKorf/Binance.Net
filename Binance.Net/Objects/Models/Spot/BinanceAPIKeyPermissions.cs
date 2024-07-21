@@ -49,7 +49,7 @@
         /// <summary>
         /// Portfolio margin trading enabled
         /// </summary>
-        [JsonProperty("enablePortfolioMarginTrading")]
+        [JsonPropertyName("enablePortfolioMarginTrading")]
         public bool EnablePortfolioMarginTrading { get; set; }
         /// <summary>
         /// Expiration time for spot and margin trading permission

@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Timestamp of the data
         /// </summary>
-        [JsonConverter(typeof(DateTimeConverter)), JsonProperty("updateTime")]
+        [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("updateTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Account type the data is for
@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Snapshot data
         /// </summary>
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public BinanceMarginAccountSnapshotData Data { get; set; } = default!;
     }
 

@@ -12,12 +12,12 @@
         /// <summary>
         /// The fee for trades where you're the maker
         /// </summary>
-        [JsonProperty("makerCommission")]
+        [JsonPropertyName("makerCommission")]
         public decimal MakerFee { get; set; }
         /// <summary>
         /// The fee for trades where you're the taker
         /// </summary>
-        [JsonProperty("takerCommission")]
+        [JsonPropertyName("takerCommission")]
         public decimal TakerFee { get; set; }
     }
 }

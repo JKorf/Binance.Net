@@ -34,32 +34,30 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(PositionSideConverter))]
         public PositionSide? PositionSide { get; set; }
         /// <summary>
         /// Total quantity
         /// </summary>
-        [JsonProperty("totalQty")]
+        [JsonPropertyName("totalQty")]
         public decimal TotalQuantity { get; set; }
         /// <summary>
         /// Executed quantity
         /// </summary>
-        [JsonProperty("executedQty")]
+        [JsonPropertyName("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// exceuted amount
         /// </summary>
-        [JsonProperty("executedAmt")]
+        [JsonPropertyName("executedAmt")]
         public decimal ExecutedAmount { get; set; }
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonPropertyName("avgPrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// Client algo id

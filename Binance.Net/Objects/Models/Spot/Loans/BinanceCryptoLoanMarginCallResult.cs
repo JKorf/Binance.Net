@@ -8,27 +8,27 @@
         /// <summary>
         /// Order id
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Pre margin call 
         /// </summary>
-        [JsonProperty("preMarginCall")]
+        [JsonPropertyName("preMarginCall")]
         public decimal PreMarginCall { get; set; }
         /// <summary>
         /// After margin call
         /// </summary>
-        [JsonProperty("afterMarginCall")]
+        [JsonPropertyName("afterMarginCall")]
         public decimal AfterMarginCall { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("customizeTime")]
+        [JsonPropertyName("customizeTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }

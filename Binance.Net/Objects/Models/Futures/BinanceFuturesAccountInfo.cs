@@ -28,13 +28,13 @@
         /// <summary>
         /// Boolean indicating if this account is in multi asset mode
         /// </summary>
-        [JsonProperty("multiAssetsMargin")]
+        [JsonPropertyName("multiAssetsMargin")]
         public bool MultiAssetsMargin { get; set; }
 
         /// <summary>
         /// Trade group id
         /// </summary>
-        [JsonProperty("tradeGroupId")]
+        [JsonPropertyName("tradeGroupId")]
         public int TradeGroupId { get; set; }
 
         /// <summary>
@@ -45,7 +45,7 @@
         /// <summary>
         /// Maximum withdraw quantity
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
+        [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
 
         /// <summary>
@@ -106,7 +106,7 @@
         /// <summary>
         /// The time of account info was updated
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
     }
 }

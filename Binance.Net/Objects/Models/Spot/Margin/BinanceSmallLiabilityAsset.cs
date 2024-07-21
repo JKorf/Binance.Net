@@ -8,27 +8,27 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Interest
         /// </summary>
-        [JsonProperty("interest")]
+        [JsonPropertyName("interest")]
         public decimal Interest { get; set; }
         /// <summary>
         /// Principal
         /// </summary>
-        [JsonProperty("principal")]
+        [JsonPropertyName("principal")]
         public decimal Principal { get; set; }
         /// <summary>
         /// Liability asset
         /// </summary>
-        [JsonProperty("liabilityAsset")]
+        [JsonPropertyName("liabilityAsset")]
         public string LiabilityAsset { get; set; } = string.Empty;
         /// <summary>
         /// Liability quantity
         /// </summary>
-        [JsonProperty("liabilityQty")]
+        [JsonPropertyName("liabilityQty")]
         public decimal LiabilityQuantity { get; set; }
     }
 }
