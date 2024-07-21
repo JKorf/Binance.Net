@@ -33,7 +33,7 @@
         /// <summary>
         /// Date
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Date { get; set; }
     }
 }

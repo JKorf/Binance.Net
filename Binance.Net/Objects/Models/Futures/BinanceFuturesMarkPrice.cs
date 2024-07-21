@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The last funding rate
         /// </summary>
-        [JsonProperty("lastFundingRate")]
+        [JsonPropertyName("lastFundingRate")]
         public decimal? FundingRate { get; set; }
         /// <summary>
         /// The time the funding rate is applied
@@ -42,7 +42,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
     }
 

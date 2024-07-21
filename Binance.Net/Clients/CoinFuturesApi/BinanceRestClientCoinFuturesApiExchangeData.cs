@@ -144,9 +144,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var parameters = new ParameterCollection {
                 { "pair", symbolPair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
             };
-
+            parameters.AddEnum("period", period);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -166,10 +165,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
             var parameters = new ParameterCollection {
-                { "pair", symbolPair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "pair", symbolPair }
             };
 
+            parameters.AddEnum("period", period);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -189,10 +188,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
             var parameters = new ParameterCollection {
-                { "pair", symbolPair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) }
+                { "pair", symbolPair }
             };
 
+            parameters.AddEnum("period", period);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -213,9 +212,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var parameters = new ParameterCollection {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
             };
 
+            parameters.AddEnum("interval", interval);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -276,8 +275,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new ParameterCollection {
                 { "symbol", symbol },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
             };
+            parameters.AddEnum("interval", interval);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -297,10 +296,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new ParameterCollection {
-                { "pair", pair },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) },
-                { "contractType", JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)) }
+                { "pair", pair }
             };
+            parameters.AddEnum("interval", interval);
+            parameters.AddEnum("contractType", contractType);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -320,9 +319,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new ParameterCollection {
-                { "pair", pair },
-                { "interval", JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false)) }
+                { "pair", pair }
             };
+            parameters.AddEnum("interval", interval);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -389,11 +388,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
             var parameters = new ParameterCollection {
-                { "pair", pair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) },
-                { "contractType", JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)) }
+                { "pair", pair }
             };
 
+            parameters.AddEnum("period", period);
+            parameters.AddEnum("contractType", contractType);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -413,11 +412,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
             var parameters = new ParameterCollection {
-                { "pair", pair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) },
-                { "contractType", JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)) }
+                { "pair", pair }
             };
 
+            parameters.AddEnum("period", period);
+            parameters.AddEnum("contractType", contractType);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -437,11 +436,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
             var parameters = new ParameterCollection {
-                { "pair", pair },
-                { "period", JsonConvert.SerializeObject(period, new PeriodIntervalConverter(false)) },
-                { "contractType", JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)) }
+                { "pair", pair }
             };
 
+            parameters.AddEnum("period", period);
+            parameters.AddEnum("contractType", contractType);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));

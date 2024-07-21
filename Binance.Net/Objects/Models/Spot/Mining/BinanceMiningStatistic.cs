@@ -8,7 +8,7 @@
         /// <summary>
         /// Hashrate last fifteen minutes
         /// </summary>
-        [JsonProperty("fifteenMinHashRate")]
+        [JsonPropertyName("fifteenMinHashRate")]
         public decimal FifteenMinuteHashRate { get; set; }
         /// <summary>
         /// Day hashrate
@@ -17,12 +17,12 @@
         /// <summary>
         /// Valid shares
         /// </summary>
-        [JsonProperty("validNum")]
+        [JsonPropertyName("validNum")]
         public int ValidShares { get; set; }
         /// <summary>
         /// Invalid shares
         /// </summary>
-        [JsonProperty("invalidNum")]
+        [JsonPropertyName("invalidNum")]
         public int InvalidShares { get; set; }
         /// <summary>
         /// Todays profit
@@ -43,7 +43,7 @@
         /// <summary>
         /// Algorithm
         /// </summary>
-        [JsonProperty("algo")]
+        [JsonPropertyName("algo")]
         public string Algorithm { get; set; } = string.Empty;
     }
 }

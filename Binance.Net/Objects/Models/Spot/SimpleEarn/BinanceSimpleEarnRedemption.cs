@@ -8,12 +8,12 @@
         /// <summary>
         /// Success
         /// </summary>
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
         /// <summary>
         /// Redeem id
         /// </summary>
-        [JsonProperty("redeemId")]
+        [JsonPropertyName("redeemId")]
         public long RedeemId { get; set; }
     }
 }

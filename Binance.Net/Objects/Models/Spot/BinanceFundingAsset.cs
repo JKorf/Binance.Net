@@ -12,7 +12,7 @@
         /// <summary>
         /// Quantity available
         /// </summary>
-        [JsonProperty("free")]
+        [JsonPropertyName("free")]
         public decimal Available { get; set; }
         /// <summary>
         /// Quantity locked

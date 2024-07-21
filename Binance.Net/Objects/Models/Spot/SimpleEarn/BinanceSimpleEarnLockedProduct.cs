@@ -8,17 +8,17 @@
         /// <summary>
         /// Project id
         /// </summary>
-        [JsonProperty("projectId")]
+        [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         /// <summary>
         /// Details
         /// </summary>
-        [JsonProperty("detail")]
+        [JsonPropertyName("detail")]
         public BinanceSimpleEarnLockedProjectDetails Details { get; set; } = null!;
         /// <summary>
         /// Quota
         /// </summary>
-        [JsonProperty("quota")]
+        [JsonPropertyName("quota")]
         public BinanceSimpleEarnLockedProjectQuota Quota { get; set; } = null!;
     }
 
@@ -30,52 +30,52 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Reward asset
         /// </summary>
-        [JsonProperty("rewardAsset")]
+        [JsonPropertyName("rewardAsset")]
         public string RewardAsset { get; set; } = string.Empty;
         /// <summary>
         /// Duration
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int Duration { get; set; }
         /// <summary>
         /// Renewable
         /// </summary>
-        [JsonProperty("renewable")]
+        [JsonPropertyName("renewable")]
         public bool Renewable { get; set; }
         /// <summary>
         /// Is sold out
         /// </summary>
-        [JsonProperty("isSoldOut")]
+        [JsonPropertyName("isSoldOut")]
         public bool IsSoldOut { get; set; }
         /// <summary>
         /// Apr
         /// </summary>
-        [JsonProperty("apr")]
+        [JsonPropertyName("apr")]
         public decimal Apr { get; set; }
         /// <summary>
         /// Status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Subscription start time
         /// </summary>
-        [JsonProperty("subscriptionStartTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("subscriptionStartTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? SubscriptionStartTime { get; set; }
         /// <summary>
         /// Extra reward asset
         /// </summary>
-        [JsonProperty("extraRewardAsset")]
+        [JsonPropertyName("extraRewardAsset")]
         public string ExtraRewardAsset { get; set; } = string.Empty;
         /// <summary>
         /// Extra reward apr
         /// </summary>
-        [JsonProperty("extraRewardAPR")]
+        [JsonPropertyName("extraRewardAPR")]
         public decimal ExtraRewardApr { get; set; }
     }
 
@@ -87,12 +87,12 @@
         /// <summary>
         /// Total personal quota
         /// </summary>
-        [JsonProperty("totalPersonalQuota")]
+        [JsonPropertyName("totalPersonalQuota")]
         public decimal TotalPersonalQuota { get; set; }
         /// <summary>
         /// Minimum
         /// </summary>
-        [JsonProperty("minimum")]
+        [JsonPropertyName("minimum")]
         public decimal Minimum { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// Project status
@@ -8,10 +10,12 @@
         /// <summary>
         /// Holding
         /// </summary>
+        [Map("HOLDING")] 
         Holding,
         /// <summary>
         /// Redeemed
         /// </summary>
+        [Map("REDEEMED")]
         Redeemed
     }
 }

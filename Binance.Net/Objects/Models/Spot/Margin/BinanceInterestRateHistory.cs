@@ -12,7 +12,7 @@
         /// <summary>
         /// The daily interest
         /// </summary>
-        [JsonProperty("dailyInterestRate")]
+        [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterest { get; set; }
         /// <summary>
         /// Timestamp

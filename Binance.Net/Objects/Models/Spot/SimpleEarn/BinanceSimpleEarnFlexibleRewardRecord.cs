@@ -10,27 +10,27 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Project id
         /// </summary>
-        [JsonProperty("projectId")]
+        [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         /// <summary>
         /// Rewards
         /// </summary>
-        [JsonProperty("rewards")]
+        [JsonPropertyName("rewards")]
         public decimal Rewards { get; set; }
         /// <summary>
         /// Reward type
         /// </summary>
-        [JsonProperty("type"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter))]
         public RewardType Type { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

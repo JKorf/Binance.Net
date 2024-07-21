@@ -8,17 +8,17 @@
         /// <summary>
         /// VIP level
         /// </summary>
-        [JsonProperty("vipLevel")]
+        [JsonPropertyName("vipLevel")]
         public int VipLevel { get; set; }
         /// <summary>
         /// Is margin enabled
         /// </summary>
-        [JsonProperty("isMarginEnabled")]
+        [JsonPropertyName("isMarginEnabled")]
         public bool IsMarginEnabled { get; set; }
         /// <summary>
         /// Is futures enabled
         /// </summary>
-        [JsonProperty("isFutureEnabled")]
+        [JsonPropertyName("isFutureEnabled")]
         public bool IsFuturesEnabled { get; set; }
     }
 }

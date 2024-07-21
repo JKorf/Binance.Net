@@ -15,7 +15,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Contract type
         /// </summary>
-        [JsonConverter(typeof(ContractTypeConverter))]
         public ContractType ContractType { get; set; }
         /// <summary>
         /// Futures price
@@ -36,7 +35,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Annualized basis rate
         /// </summary>
-        [JsonProperty("annualizedBasisRate")]
+        [JsonPropertyName("annualizedBasisRate")]
         public decimal? AnnualizedBasisRate { get; set; }
         /// <summary>
         /// Data timestamp

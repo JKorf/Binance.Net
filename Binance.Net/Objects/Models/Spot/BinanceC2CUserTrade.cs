@@ -15,12 +15,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Advert number
         /// </summary>
-        [JsonProperty("advNo")]
+        [JsonPropertyName("advNo")]
         public string AdvertNumber { get; set; } = string.Empty;
         /// <summary>
         /// Trade type
         /// </summary>
-        [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide TradeType { get; set; }
         /// <summary>
         /// Crypto asset traded
@@ -37,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Quantity traded
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Total price of the trade
@@ -60,7 +59,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Transaction fee in crypto
         /// </summary>
-        [JsonProperty("commission")]
+        [JsonPropertyName("commission")]
         public decimal Fee { get; set; }
         /// <summary>
         /// Counter part nickname

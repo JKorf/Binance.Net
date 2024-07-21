@@ -8,7 +8,7 @@
         /// <summary>
         /// The quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
 
         /// <summary>

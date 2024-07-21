@@ -13,13 +13,13 @@
         /// <summary>
         /// Is Futures Enabled
         /// </summary>
-        [JsonProperty("enableFutures")]
+        [JsonPropertyName("enableFutures")]
         public bool IsFuturesEnabled { get; set; }
         
         /// <summary>
         /// Update Date
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateDate { get; set; }
     }
 }

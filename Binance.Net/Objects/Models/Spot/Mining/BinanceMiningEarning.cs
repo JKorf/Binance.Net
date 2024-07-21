@@ -31,33 +31,32 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Coin
         /// </summary>
-        [JsonProperty("coinName")]
+        [JsonPropertyName("coinName")]
         public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Earning type
         /// </summary>
-        [JsonConverter(typeof(BinanceEarningTypeConverter))]
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public BinanceEarningType Type { get; set; }
         /// <summary>
         /// Sub account id
         /// </summary>
-        [JsonProperty("puid")]
+        [JsonPropertyName("puid")]
         public long? SubAccountId { get; set; }
         /// <summary>
         /// Mining account
         /// </summary>
-        [JsonProperty("subName")]
+        [JsonPropertyName("subName")]
         public string SubName { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
     }
 }

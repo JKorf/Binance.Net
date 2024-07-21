@@ -36,7 +36,7 @@
         /// <summary>
         /// Max quantity which can be withdrawn
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
+        [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity{ get; set; }
         /// <summary>
         /// Total initial margin
@@ -97,7 +97,7 @@
         /// <summary>
         /// Max quantity which can be withdrawn
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
+        [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
         /// Open order initial margin

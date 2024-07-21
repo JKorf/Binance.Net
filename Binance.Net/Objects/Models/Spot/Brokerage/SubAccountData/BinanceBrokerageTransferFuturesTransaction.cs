@@ -18,7 +18,7 @@
         /// <summary>
         /// Transfer
         /// </summary>
-        [JsonProperty("transfer")]
+        [JsonPropertyName("transfer")]
         public IEnumerable<BinanceBrokerageTransferFuturesTransaction> Transactions { get; set; } = Array.Empty<BinanceBrokerageTransferFuturesTransaction>();
     }
     
@@ -45,25 +45,25 @@
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         
         /// <summary>
         /// Transaction Id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public string Id { get; set; } = string.Empty;
         
         /// <summary>
         /// Client Transfer Id
         /// </summary>
-        [JsonProperty("clientTranId")]
+        [JsonPropertyName("clientTranId")]
         public string ClientTransferId { get; set; } = string.Empty;
         
         /// <summary>
         /// Date
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Date { get; set; }
     }
 }

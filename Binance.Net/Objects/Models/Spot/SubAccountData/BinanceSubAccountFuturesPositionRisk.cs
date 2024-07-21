@@ -28,7 +28,7 @@
         /// <summary>
         /// Position quantity
         /// </summary>
-        [JsonProperty("positionAmount")]
+        [JsonPropertyName("positionAmount")]
         public decimal PositionQuantity { get; set; }
         /// <summary>
         /// Symbol

@@ -8,7 +8,7 @@
         /// <summary>
         /// Is currently restricted
         /// </summary>
-        [JsonProperty("ipRestrict")]
+        [JsonPropertyName("ipRestrict")]
         public bool IpRestricted { get; set; }
         /// <summary>
         /// Ip whitelist

@@ -8,17 +8,17 @@
         /// <summary>
         /// Total BTC value
         /// </summary>
-        [JsonProperty("totalTransferBtc")]
+        [JsonPropertyName("totalTransferBtc")]
         public decimal TotalTransferBTC { get; set; }
         /// <summary>
         /// Total BNB value
         /// </summary>
-        [JsonProperty("totalTransferBNB")]
+        [JsonPropertyName("totalTransferBNB")]
         public decimal TotalTransferBNB { get; set; }
         /// <summary>
         /// Commission fee
         /// </summary>
-        [JsonProperty("dribbletPercentage")]
+        [JsonPropertyName("dribbletPercentage")]
         public decimal FeePercentage { get; set; }
         /// <summary>
         /// Assets
@@ -42,7 +42,7 @@
         /// <summary>
         /// Amount free
         /// </summary>
-        [JsonProperty("amountFree")]
+        [JsonPropertyName("amountFree")]
         public decimal QuantityFree { get; set; }
         /// <summary>
         /// BTC value
@@ -59,7 +59,7 @@
         /// <summary>
         /// Fee
         /// </summary>
-        [JsonProperty("exchange")]
+        [JsonPropertyName("exchange")]
         public decimal Fee { get; set; }
     }
 }

@@ -19,7 +19,7 @@
         /// <summary>
         /// Max quantity
         /// </summary>
-        [JsonProperty("maxQty")]
+        [JsonPropertyName("maxQty")]
         public string? MaxQuantity { get; set; }
         /// <summary>
         /// Symbol the request is for

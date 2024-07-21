@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// A filter for order placed on a symbol. Can be either a <see cref="BinanceSymbolPriceFilter"/>, <see cref="BinanceSymbolLotSizeFilter"/>, <see cref="BinanceSymbolMaxAlgorithmicOrdersFilter"/>
     /// </summary>
-    [JsonConverter(typeof(SymbolFuturesFilterConverter))]
+    [JsonConverter(typeof(SymbolFilterConverter))]
     public record BinanceFuturesSymbolFilter
     {
         /// <summary>

@@ -35,7 +35,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Failure message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string? Message { get; set; }
         /// <summary>
         /// Error code if not successful
@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Failure message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string? Message { get; set; }
         /// <summary>
         /// Error code if not successful
@@ -67,7 +67,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Failure message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string? Message { get; set; }
         /// <summary>
         /// Error code if not successful

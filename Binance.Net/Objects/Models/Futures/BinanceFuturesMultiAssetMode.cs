@@ -8,7 +8,7 @@
         /// <summary>
         /// Is multi assets mode enabled
         /// </summary>
-        [JsonProperty("multiAssetsMargin")]
+        [JsonPropertyName("multiAssetsMargin")]
         public bool MultiAssetMode { get; set; }
     }
 }

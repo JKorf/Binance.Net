@@ -8,169 +8,169 @@
         /// <summary>
         /// Name of the symbol
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// Status of the symbol
         /// </summary>
-        [JsonProperty("st")]
+        [JsonPropertyName("st")]
         public string Status { get; set; } = string.Empty;
 
         /// <summary>
         /// Name of the base asset
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Name of the quote asset
         /// </summary>
-        [JsonProperty("q")]
+        [JsonPropertyName("q")]
         public string QuoteAsset { get; set; } = string.Empty;
 
         /// <summary>
         /// Char of the base asset
         /// </summary>
-        [JsonProperty("ba")]
+        [JsonPropertyName("ba")]
         public string? BaseAssetChar { get; set; }
         /// <summary>
         /// Char of the quote asset
         /// </summary>
-        [JsonProperty("qa")]
+        [JsonPropertyName("qa")]
         public string? QuoteAssetChar { get; set; }
 
         /// <summary>
         /// Base asset name
         /// </summary>
-        [JsonProperty("an")]
+        [JsonPropertyName("an")]
         public string BaseAssetName { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset name
         /// </summary>
-        [JsonProperty("qn")]
+        [JsonPropertyName("qn")]
         public string QuoteAssetName { get; set; } = string.Empty;
 
         /// <summary>
         /// Open price
         /// </summary>
-        [JsonProperty("o")]
+        [JsonPropertyName("o")]
         public decimal? OpenPrice { get; set; }
         /// <summary>
         /// High price
         /// </summary>
-        [JsonProperty("h")]
+        [JsonPropertyName("h")]
         public decimal? HighPrice { get; set; }
         /// <summary>
         /// Low price
         /// </summary>
-        [JsonProperty("l")]
+        [JsonPropertyName("l")]
         public decimal? LowPrice { get; set; }
         /// <summary>
         /// Close price
         /// </summary>
-        [JsonProperty("c")]
+        [JsonPropertyName("c")]
         public decimal? ClosePrice { get; set; }
         /// <summary>
         /// Base volume
         /// </summary>
-        [JsonProperty("v")]
+        [JsonPropertyName("v")]
         public decimal Volume { get; set; }
         /// <summary>
         /// Quote volume
         /// </summary>
-        [JsonProperty("qv")]
+        [JsonPropertyName("qv")]
         public decimal QuoteVolume { get; set; }
 
         /// <summary>
         /// Amount of coins in circulation
         /// </summary>
-        [JsonProperty("cs")]
+        [JsonPropertyName("cs")]
         public decimal? CirculatingSupply { get; set; }
         /// <summary>
         /// Tags
         /// </summary>
-        [JsonProperty("tags")]
+        [JsonPropertyName("tags")]
         public IEnumerable<string> Tags { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Is Etf enabled
         /// </summary>
-        [JsonProperty("etf")]
+        [JsonPropertyName("etf")]
         public bool? LeveragedTokenTrading { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public decimal? I { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("ts")]
+        [JsonPropertyName("ts")]
         public decimal? Ts { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("y")]
+        [JsonPropertyName("y")]
         public decimal? Y { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("as")]
+        [JsonPropertyName("as")]
         public decimal? As { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("pn")]
+        [JsonPropertyName("pn")]
         public string? Pn { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("pm")]
+        [JsonPropertyName("pm")]
         public string? Pm { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("pom")]
+        [JsonPropertyName("pom")]
         public bool? Pom { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("pomt")]
+        [JsonPropertyName("pomt")]
         public bool? Pomt { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("lc")]
+        [JsonPropertyName("lc")]
         public bool? Lc { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("g")]
+        [JsonPropertyName("g")]
         public bool? G { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("sd")]
+        [JsonPropertyName("sd")]
         public bool? Sd { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("r")]
+        [JsonPropertyName("r")]
         public bool? R { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("hd")]
+        [JsonPropertyName("hd")]
         public bool? Hd { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("rb")]
+        [JsonPropertyName("rb")]
         public bool? Rb { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("ks")]
+        [JsonPropertyName("ks")]
         public bool? Ks { get; set; }
     }
 }

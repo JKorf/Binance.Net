@@ -8,7 +8,7 @@
         /// <summary>
         /// Minimal quantity you can withdraw
         /// </summary>
-        [JsonProperty("minWithdrawAmount")]
+        [JsonPropertyName("minWithdrawAmount")]
         public decimal MinimalWithdrawQuantity { get; set; }
         /// <summary>
         /// Whether deposits are enabled

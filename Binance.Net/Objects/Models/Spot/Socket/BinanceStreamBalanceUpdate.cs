@@ -8,12 +8,12 @@
         /// <summary>
         /// The asset which changed
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The balance delta
         /// </summary>
-        [JsonProperty("d")]
+        [JsonPropertyName("d")]
         public decimal BalanceDelta { get; set; }
         /// <summary>
         /// The listen key the update was for
@@ -22,7 +22,7 @@
         /// <summary>
         /// The time the deposit/withdrawal was cleared
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime ClearTime { get; set; }
     }
 }

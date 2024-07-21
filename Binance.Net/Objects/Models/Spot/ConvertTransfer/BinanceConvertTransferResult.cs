@@ -8,7 +8,7 @@
         /// <summary>
         /// Transfer id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransferId { get; set; }
         /// <summary>
         /// Status of the transfer (definitions currently unknown)

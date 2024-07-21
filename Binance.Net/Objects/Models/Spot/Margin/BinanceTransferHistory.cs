@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Quanity of the transfer
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Asset of the transfer
@@ -29,32 +29,32 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public decimal TransactionId { get; set; }
         /// <summary>
         /// Direction of the transfer
         /// </summary>
-        [JsonProperty("type"), JsonConverter(typeof(TransferDirectionConverter))]
+        [JsonPropertyName("type")]
         public TransferDirection Direction { get; set; }
         /// <summary>
         /// Transfer from
         /// </summary>
-        [JsonProperty("transFrom")]
+        [JsonPropertyName("transFrom")]
         public string TransferFrom { get; set; } = string.Empty;
         /// <summary>
         /// Transfer to
         /// </summary>
-        [JsonProperty("transTo")]
+        [JsonPropertyName("transTo")]
         public string TransferTo { get; set; } = string.Empty;
         /// <summary>
         /// Transfer from symbol
         /// </summary>
-        [JsonProperty("fromSymbol")]
+        [JsonPropertyName("fromSymbol")]
         public string? FromSymbol { get; set; } = string.Empty;
         /// <summary>
         /// Transfer to symbol
         /// </summary>
-        [JsonProperty("toSymbol")]
+        [JsonPropertyName("toSymbol")]
         public string? ToSymbol { get; set; } = string.Empty;
     }
 }

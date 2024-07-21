@@ -11,22 +11,22 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Fee percentage to pay when making trades
         /// </summary>
-        [JsonProperty("makerCommission")]
+        [JsonPropertyName("makerCommission")]
         public decimal MakerFee { get; set; }
         /// <summary>
         /// Fee percentage to pay when taking trades
         /// </summary>
-        [JsonProperty("takerCommission")]
+        [JsonPropertyName("takerCommission")]
         public decimal TakerFee { get; set; }
         /// <summary>
         /// Fee percentage to pay when buying
         /// </summary>
-        [JsonProperty("buyerCommission")]
+        [JsonPropertyName("buyerCommission")]
         public decimal BuyerFee { get; set; }
         /// <summary>
         /// Fee percentage to pay when selling
         /// </summary>
-        [JsonProperty("sellerCommission")]
+        [JsonPropertyName("sellerCommission")]
         public decimal SellerFee { get; set; }
         /// <summary>
         /// Boolean indicating if this account can trade
@@ -47,17 +47,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Require self trade prevention
         /// </summary>
-        [JsonProperty("requireSelfTradePrevention")]
+        [JsonPropertyName("requireSelfTradePrevention")]
         public bool RequireSelfTradePrevention { get; set; }
         /// <summary>
         /// Prevent smart order routing
         /// </summary>
-        [JsonProperty("preventSor")]
+        [JsonPropertyName("preventSor")]
         public bool PreventSmartOrderRouting { get; set; }
         /// <summary>
         /// User id
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonPropertyName("uid")]
         public long UserId { get; set; }
         /// <summary>
         /// The time of the update
@@ -72,7 +72,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(EnumConverter), ItemConverterParameters = new object[] { false, false })]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         /// <summary>
         /// List of assets with their current balances
@@ -92,7 +91,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The quantity that isn't locked in a trade
         /// </summary>
-        [JsonProperty("free")]
+        [JsonPropertyName("free")]
         public decimal Available { get; set; }
         /// <summary>
         /// The quantity that is currently locked in a trade

@@ -10,32 +10,32 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// Update id
         /// </summary>
-        [JsonProperty("u")]
+        [JsonPropertyName("u")]
         public long UpdateId { get; set; }
         /// <summary>
         /// The symbol
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Price of the best bid
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public decimal BestBidPrice { get; set; }
         /// <summary>
         /// Quantity of the best bid
         /// </summary>
-        [JsonProperty("B")]
+        [JsonPropertyName("B")]
         public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// Price of the best ask
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public decimal BestAskPrice { get; set; }
         /// <summary>
         /// Quantity of the best ask
         /// </summary>
-        [JsonProperty("A")]
+        [JsonPropertyName("A")]
         public decimal BestAskQuantity { get; set; }
     }
 }

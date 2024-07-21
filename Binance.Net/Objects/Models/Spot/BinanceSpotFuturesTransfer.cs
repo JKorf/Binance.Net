@@ -15,17 +15,16 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
         /// The quantity transferred
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The transfer direction
         /// </summary>
-        [JsonConverter(typeof(FuturesTransferTypeConverter))]
         public FuturesTransferType Type { get; set; }
         /// <summary>
         /// Timestamp
@@ -36,7 +35,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The status of the transfer
         /// </summary>
-        [JsonConverter(typeof(FuturesTransferStatusConverter))]
         public FuturesTransferStatus Status { get; set; }
     }
 }

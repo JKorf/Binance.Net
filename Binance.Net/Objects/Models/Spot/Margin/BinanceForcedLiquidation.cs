@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonPropertyName("avgPrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// The executed quantity
         /// </summary>
-        [JsonProperty("executedQty")]
+        [JsonPropertyName("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// Order id
@@ -29,12 +29,11 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Total quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Side
         /// </summary>
-        [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Symbol
@@ -43,13 +42,12 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonConverter(typeof(TimeInForceConverter))]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("updatedTime")]
+        [JsonPropertyName("updatedTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Is isolated margin

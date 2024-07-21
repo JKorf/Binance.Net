@@ -8,13 +8,13 @@
         /// <summary>
         /// Quantity for liquidation
         /// </summary>
-        [JsonProperty("collateralAmountForLiquidation")]
+        [JsonPropertyName("collateralAmountForLiquidation")]
         public decimal CollateralQuantityForLiquidation { get; set; }
 
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Start time of liquidation
@@ -24,17 +24,17 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Rest collateral quantity after liquidation
         /// </summary>
-        [JsonProperty("restCollateralAmountAfterLiquidation")]
+        [JsonPropertyName("restCollateralAmountAfterLiquidation")]
         public decimal RestCollateralQuantityAfterLiquidation { get; set; }
         /// <summary>
         /// Rest loan quantity
         /// </summary>
-        [JsonProperty("restLoanAmount")]
+        [JsonPropertyName("restLoanAmount")]
         public decimal RestLoanQuantity { get; set; }
 
         /// <summary>

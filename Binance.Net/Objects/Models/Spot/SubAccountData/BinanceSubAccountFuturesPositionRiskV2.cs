@@ -11,13 +11,13 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Futures account response (USDT margined)
         /// </summary>
-        [JsonProperty("futurePositionRiskVos")]
+        [JsonPropertyName("futurePositionRiskVos")]
         public IEnumerable<BinanceSubAccountFuturesPositionRisk> UsdtMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRisk>();
 
         /// <summary>
         /// Delivery account response (COIN margined)
         /// </summary>
-        [JsonProperty("deliveryPositionRiskVos")]
+        [JsonPropertyName("deliveryPositionRiskVos")]
         public IEnumerable<BinanceSubAccountFuturesPositionRiskCoin> CoinMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRiskCoin>();
     }
 
@@ -64,13 +64,12 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(PositionSideConverter))]
         public PositionSide PositionSide { get; set; }
 
         /// <summary>
         /// Position amount
         /// </summary>
-        [JsonProperty("positionAmount")]
+        [JsonPropertyName("positionAmount")]
         public decimal PositionQuantity { get; set; }
 
         /// <summary>

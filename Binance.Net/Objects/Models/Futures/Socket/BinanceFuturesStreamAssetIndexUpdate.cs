@@ -8,52 +8,52 @@
         /// <summary>
         /// Symbol
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Index price
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public decimal IndexPrice { get; set; }
         /// <summary>
         /// Bid buffer
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public decimal BidBuffer { get; set; }
         /// <summary>
         /// Ask buffer
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public decimal AskBuffer { get; set; }
         /// <summary>
         /// Bid rate
         /// </summary>
-        [JsonProperty("B")]
+        [JsonPropertyName("B")]
         public decimal BidRate { get; set; }
         /// <summary>
         /// Ask rate
         /// </summary>
-        [JsonProperty("A")]
+        [JsonPropertyName("A")]
         public decimal AskRate { get; set; }
         /// <summary>
         /// Auto exchange bid buffer
         /// </summary>
-        [JsonProperty("q")]
+        [JsonPropertyName("q")]
         public decimal AutoExchangeBidBuffer { get; set; }
         /// <summary>
         /// Auto exchange ask buffer
         /// </summary>
-        [JsonProperty("g")]
+        [JsonPropertyName("g")]
         public decimal AutoExchangeAskBuffer { get; set; }
         /// <summary>
         /// Auto exchange bid rate
         /// </summary>
-        [JsonProperty("Q")]
+        [JsonPropertyName("Q")]
         public decimal AutoExchangeBidRate { get; set; }
         /// <summary>
         /// Auto exchange ask rate
         /// </summary>
-        [JsonProperty("G")]
+        [JsonPropertyName("G")]
         public decimal AutoExchangeAskRate { get; set; }
     }
 }

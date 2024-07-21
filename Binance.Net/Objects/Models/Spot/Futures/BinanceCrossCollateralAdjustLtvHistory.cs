@@ -11,19 +11,19 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
 
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Pre adjustment rate
@@ -36,7 +36,6 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Direction
         /// </summary>
-        [JsonConverter(typeof(AdjustRateDirectionConverter))]
         public AdjustRateDirection Direction { get; set; }
 
         /// <summary>

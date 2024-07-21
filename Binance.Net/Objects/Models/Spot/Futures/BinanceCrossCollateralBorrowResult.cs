@@ -12,27 +12,27 @@
         /// <summary>
         /// The asset borrowed
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The asset used for collateral
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// The quantity borrowed
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The collateral quantity
         /// </summary>
-        [JsonProperty("collateralAmount")]
+        [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
         /// The timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

@@ -27,7 +27,7 @@
         /// <summary>
         /// The data
         /// </summary>
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         public IEnumerable<T> Data { get; set; } = Array.Empty<T>();
     }
 }

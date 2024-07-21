@@ -8,37 +8,37 @@
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Product Id
         /// </summary>
-        [JsonProperty("productId")]
+        [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("createTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("createTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Type
         /// </summary>
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         /// <summary>
         /// Product name
         /// </summary>
-        [JsonProperty("productName")]
+        [JsonPropertyName("productName")]
         public string ProductName { get; set; } = string.Empty;
         /// <summary>
         /// Order id
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
     }
 }

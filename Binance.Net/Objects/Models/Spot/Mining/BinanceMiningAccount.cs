@@ -16,7 +16,7 @@
         /// <summary>
         /// Hash rates
         /// </summary>
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         public IEnumerable<BinanceHashRate> Hashrates { get; set; } = Array.Empty<BinanceHashRate>();
     }
 }

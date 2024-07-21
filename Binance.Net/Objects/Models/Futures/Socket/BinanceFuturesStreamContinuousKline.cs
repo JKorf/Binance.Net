@@ -13,20 +13,20 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The symbol the data is for
         /// </summary>
-        [JsonProperty("ps")]
+        [JsonPropertyName("ps")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The contract type
         /// </summary>
-        [JsonProperty("ct")]
+        [JsonPropertyName("ct")]
         public ContractType ContractType { get; set; } = ContractType.Unknown;
 
         /// <summary>
         /// The data
         /// </summary>
-        [JsonProperty("k")]
-        [JsonConverter(typeof(InterfaceConverter<BinanceStreamKline>))]
+        [JsonPropertyName("k")]
+        [JsonConverter(typeof(InterfaceConverter<BinanceStreamKline, IBinanceStreamKline>))]
         public IBinanceStreamKline Data { get; set; } = default!;
     }
 }

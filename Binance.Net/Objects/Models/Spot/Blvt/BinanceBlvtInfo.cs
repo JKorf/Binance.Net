@@ -50,7 +50,7 @@
         /// <summary>
         /// Redeem fee percentage
         /// </summary>
-        [JsonProperty("redeemFeePct")]
+        [JsonPropertyName("redeemFeePct")]
         public decimal RedeemFeePercentage { get; set; }
         /// <summary>
         /// Daily redeem limit
@@ -59,7 +59,7 @@
         /// <summary>
         /// Purchase fee percentage
         /// </summary>
-        [JsonProperty("purchaseFeePct")]
+        [JsonPropertyName("purchaseFeePct")]
         public decimal PurchaseFeePercentage { get; set; }
         /// <summary>
         /// Daily purchase limit
@@ -85,7 +85,7 @@
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Notional value

@@ -8,13 +8,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The execution code
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public int Code { get; set; }
 
         /// <summary>
         /// The execution message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
     }
 }

@@ -8,7 +8,7 @@
         /// <summary>
         /// Transfer id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransferId { get; set; }
         /// <summary>
         /// Status of the transfer (definitions currently unknown)
@@ -30,7 +30,7 @@
         /// <summary>
         /// Deducted quantity
         /// </summary>
-        [JsonProperty("deductedAmount")]
+        [JsonPropertyName("deductedAmount")]
         public decimal DeductedQuantity { get; set; }
         /// <summary>
         /// Target asset
@@ -39,7 +39,7 @@
         /// <summary>
         /// Target quantity
         /// </summary>
-        [JsonProperty("targetAmount")]
+        [JsonPropertyName("targetAmount")]
         public decimal TargetQuantity { get; set; }
         /// <summary>
         /// Account type

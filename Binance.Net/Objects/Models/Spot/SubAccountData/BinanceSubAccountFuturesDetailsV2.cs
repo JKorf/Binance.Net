@@ -8,13 +8,13 @@
         /// <summary>
         /// Futures account response (USDT margined)
         /// </summary>
-        [JsonProperty("futureAccountResp")]
+        [JsonPropertyName("futureAccountResp")]
         public BinanceSubAccountFuturesDetailV2Usdt UsdtMarginedFutures { get; set; } = default!;
 
         /// <summary>
         /// Delivery account response (COIN margined)
         /// </summary>
-        [JsonProperty("deliveryAccountResp")]
+        [JsonPropertyName("deliveryAccountResp")]
         public BinanceSubAccountFuturesDetailV2 CoinMarginedFutures { get; set; } = default!;
     }
 
@@ -62,7 +62,7 @@
         /// <summary>
         /// Max quantity which can be withdrawn
         /// </summary>
-        [JsonProperty("maxWithdrawAmount")]
+        [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
         /// Total initial margin

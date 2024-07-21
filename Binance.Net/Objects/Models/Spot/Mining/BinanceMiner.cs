@@ -38,7 +38,6 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(MinerStatusConverter))]
         public MinerStatus Status { get; set; }
         /// <summary>
         /// Hash rate

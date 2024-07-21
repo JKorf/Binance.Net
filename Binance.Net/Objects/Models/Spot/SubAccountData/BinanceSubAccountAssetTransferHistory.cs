@@ -4,16 +4,16 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     internal record BinanceSubAccountAssetTransferHistoryList
     {
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
-        [JsonProperty("futuresType")]
+        [JsonPropertyName("futuresType")]
         [JsonConverter(typeof(EnumConverter))]
         public FuturesAccountType AccountType { get; set; }
 
         /// <summary>
         /// Transfers
         /// </summary>
-        [JsonProperty("transfers")]
+        [JsonPropertyName("transfers")]
         public IEnumerable<BinanceSubAccountAssetTransferHistory> Transfers { get; set; } =
             new List<BinanceSubAccountAssetTransferHistory>();
 
@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
 
         /// <summary>
@@ -48,14 +48,14 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// The time transaction was created
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
     }
 }

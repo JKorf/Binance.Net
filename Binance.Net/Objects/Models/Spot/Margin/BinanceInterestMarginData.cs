@@ -8,49 +8,49 @@
         /// <summary>
         /// Vip level
         /// </summary>
-        [JsonProperty("vipLevel")]
+        [JsonPropertyName("vipLevel")]
         public string VipLevel { get; set; } = string.Empty;
 
         /// <summary>
         /// The coin
         /// </summary>        
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Coin { get; set; } = string.Empty;
 
         /// <summary>
         /// If coin can be transferred into cross
         /// </summary>
-        [JsonProperty("transferIn")]
+        [JsonPropertyName("transferIn")]
         public bool TransferIn { get; set; } = false;
 
         /// <summary>
         /// If coin can be borrowed in cross
         /// </summary>        
-        [JsonProperty("borrowable")]
+        [JsonPropertyName("borrowable")]
         public bool Borrowable { get; set; } = false;
 
         /// <summary>
         /// The daily interest
         /// </summary>
-        [JsonProperty("dailyInterest")]
+        [JsonPropertyName("dailyInterest")]
         public decimal DailyInterest { get; set; }
 
         /// <summary>
         /// The yearly interest
         /// </summary>
-        [JsonProperty("yearlyInterest")]
+        [JsonPropertyName("yearlyInterest")]
         public decimal YearlyInterest { get; set; }
 
         /// <summary>
         /// The yearly interest
         /// </summary>
-        [JsonProperty("borrowLimit")]
+        [JsonPropertyName("borrowLimit")]
         public decimal BorrowLimit { get; set; }
 
         /// <summary>
         /// Cross marginable pairs for this coin
         /// </summary>
-        [JsonProperty("marginablePairs")]
+        [JsonPropertyName("marginablePairs")]
         public string[]? MarginablePairs { get; set; }
 
     }

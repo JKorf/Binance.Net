@@ -13,7 +13,7 @@
         /// <summary>
         /// Is Interest BNB Burn
         /// </summary> 
-        [JsonProperty("interestBNBBurn")]
+        [JsonPropertyName("interestBNBBurn")]
         public bool IsInterestBnbBurn { get; set; }
     }
 }

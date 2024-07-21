@@ -8,12 +8,12 @@
         /// <summary>
         /// The max in amount
         /// </summary>
-        [JsonProperty("maxInAmount")]
+        [JsonPropertyName("maxInAmount")]
         public decimal MaxInQuantity { get; set; }
         /// <summary>
         /// The max out amount
         /// </summary>
-        [JsonProperty("maxOutAmount")]
+        [JsonPropertyName("maxOutAmount")]
         public decimal MaxOutQuantity { get; set; }
     }
 }

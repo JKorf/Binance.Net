@@ -15,12 +15,12 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Executed quantity
         /// </summary>
-        [JsonProperty("executedQty")]
+        [JsonPropertyName("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// Executed amount
         /// </summary>
-        [JsonProperty("executedAmt")]
+        [JsonPropertyName("executedAmt")]
         public decimal ExecutedAmount { get; set; }
         /// <summary>
         /// Sub orders
@@ -44,23 +44,22 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("orderStatus")]
-        [JsonConverter(typeof(OrderStatusConverter))]
+        [JsonPropertyName("orderStatus")]
         public OrderStatus Status { get; set; }
         /// <summary>
         /// Executed quantity
         /// </summary>
-        [JsonProperty("executedQty")]
+        [JsonPropertyName("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
         /// Exceuted amount
         /// </summary>
-        [JsonProperty("executedAmt")]
+        [JsonPropertyName("executedAmt")]
         public decimal ExecutedAmount { get; set; }
         /// <summary>
         /// Fee amount
         /// </summary>
-        [JsonProperty("feeAmt")]
+        [JsonPropertyName("feeAmt")]
         public decimal FeeAmount { get; set; }
         /// <summary>
         /// Fee asset
@@ -74,12 +73,11 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonPropertyName("avgPrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
         /// Side
         /// </summary>
-        [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Symbol
@@ -96,7 +94,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Original quantity
         /// </summary>
-        [JsonProperty("origQty")]
+        [JsonPropertyName("origQty")]
         public decimal OriginalQuantity { get; set; }
     }
 }

@@ -47,17 +47,17 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Error code
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
         /// Error message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
         /// <summary>
         /// Error data
         /// </summary>
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public BinanceResponseErrorData? Data { get; set; }
     }
 
@@ -69,12 +69,12 @@ namespace Binance.Net.Objects
         /// <summary>
         /// Server time
         /// </summary>
-        [JsonProperty("serverTime")]
+        [JsonPropertyName("serverTime")]
         public DateTime? ServerTime { get; set; }
         /// <summary>
         /// Retry after time
         /// </summary>
-        [JsonProperty("retryAfter")]
+        [JsonPropertyName("retryAfter")]
         public DateTime? RetryAfter { get; set; }
     }
 }

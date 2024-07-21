@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Request quantity of margin used
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Base asset used for margin
@@ -24,23 +24,21 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Delta type
         /// </summary>
-        [JsonProperty("deltaType")]
+        [JsonPropertyName("deltaType")]
         public string? DeltaType { get; set; }
         /// <summary>
         /// Time of the margin change request
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Direction of the margin change request
         /// </summary>
-        [JsonConverter(typeof(FuturesMarginChangeDirectionTypeConverter))]
         public FuturesMarginChangeDirectionType Type { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(PositionSideConverter))]
         public PositionSide PositionSide { get; set; }
     }
 

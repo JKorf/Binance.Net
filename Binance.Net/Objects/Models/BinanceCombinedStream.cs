@@ -11,13 +11,13 @@
         /// <summary>
         /// The stream combined
         /// </summary>
-        [JsonProperty("stream")]
+        [JsonPropertyName("stream")]
         public string Stream { get; set; } = string.Empty;
 
         /// <summary>
         /// The data of stream
         /// </summary>
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
     }
 }

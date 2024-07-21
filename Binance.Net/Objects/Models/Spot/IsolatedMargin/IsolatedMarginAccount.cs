@@ -56,7 +56,6 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
         /// <summary>
         /// Margin level status
         /// </summary>
-        [JsonConverter(typeof(MarginLevelStatusConverter))]
         public MarginLevelStatus MarginLevelStatus { get; set; }
         /// <summary>
         /// Margin ratio

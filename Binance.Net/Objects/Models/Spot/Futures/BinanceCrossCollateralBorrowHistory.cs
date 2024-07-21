@@ -21,7 +21,7 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral rate
@@ -43,18 +43,17 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Collateral quantity
         /// </summary>
-        [JsonProperty("collateralAmount")]
+        [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
         /// The status of the transfer
         /// </summary>
-        [JsonConverter(typeof(FuturesTransferStatusConverter))]
-        [JsonProperty("orderStatus")]
+        [JsonPropertyName("orderStatus")]
         public FuturesTransferStatus Status { get; set; }
     }
 }

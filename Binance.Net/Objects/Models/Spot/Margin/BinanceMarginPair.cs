@@ -8,12 +8,12 @@
         /// <summary>
         /// Base asset of the pair
         /// </summary>
-        [JsonProperty("base")]
+        [JsonPropertyName("base")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quote asset of the pair
         /// </summary>
-        [JsonProperty("quote")]
+        [JsonPropertyName("quote")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
         /// Id
@@ -38,7 +38,7 @@
         /// <summary>
         /// Time at which the symbol gets delisted
         /// </summary>
-        [JsonProperty("delistTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? DelistTime { get; set; }
     }
 }

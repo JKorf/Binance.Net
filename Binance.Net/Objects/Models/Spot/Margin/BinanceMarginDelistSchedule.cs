@@ -8,7 +8,7 @@
         /// <summary>
         /// Delist time
         /// </summary>
-        [JsonProperty("delistTime")]
+        [JsonPropertyName("delistTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime DelistTime { get; set; }
         /// <summary>

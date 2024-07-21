@@ -12,7 +12,7 @@
         /// <summary>
         /// Response message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string? Message { get; set; }
     }
 }

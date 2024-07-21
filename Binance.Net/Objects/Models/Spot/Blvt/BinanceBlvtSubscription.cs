@@ -17,7 +17,7 @@
         /// <summary>
         /// Subscription quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// NAV price of subscription

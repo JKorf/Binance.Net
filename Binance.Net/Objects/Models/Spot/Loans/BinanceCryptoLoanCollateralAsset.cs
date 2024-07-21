@@ -8,32 +8,32 @@
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string ColleteralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Initial ltv
         /// </summary>
-        [JsonProperty("initialLTV")]
+        [JsonPropertyName("initialLTV")]
         public decimal InitialLtv { get; set; }
         /// <summary>
         /// Margin call ltv
         /// </summary>
-        [JsonProperty("marginCallLTV")]
+        [JsonPropertyName("marginCallLTV")]
         public decimal MarginCallLtv { get; set; }
         /// <summary>
         /// Liquidation ltv
         /// </summary>
-        [JsonProperty("liquidationLTV")]
+        [JsonPropertyName("liquidationLTV")]
         public decimal LiquidationLtv { get; set; }
         /// <summary>
         /// Max limit
         /// </summary>
-        [JsonProperty("maxLimit")]
+        [JsonPropertyName("maxLimit")]
         public decimal MaxLimit { get; set; }
         /// <summary>
         /// Vip level
         /// </summary>
-        [JsonProperty("vipLevel")]
+        [JsonPropertyName("vipLevel")]
         public int VipLevel { get; set; }
     }
 }

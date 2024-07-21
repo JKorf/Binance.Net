@@ -30,7 +30,7 @@
         /// <summary>
         /// Margin enable
         /// </summary>
-        [JsonProperty("marginEnable")]
+        [JsonPropertyName("marginEnable")]
         public bool IsMarginEnable { get; set; }
         
         /// <summary>

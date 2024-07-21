@@ -10,22 +10,22 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// The loaning asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// The loan quantity
         /// </summary>
-        [JsonProperty("initialLoanAmount")]
+        [JsonPropertyName("initialLoanAmount")]
         public decimal InitialLoanQuantity { get; set; }
         /// <summary>
         /// The collateral quantity
         /// </summary>
-        [JsonProperty("initialCollateralAmount")]
+        [JsonPropertyName("initialCollateralAmount")]
         public decimal InitialCollateralQuantity { get; set; }
         /// <summary>
         /// Hourly interest rate

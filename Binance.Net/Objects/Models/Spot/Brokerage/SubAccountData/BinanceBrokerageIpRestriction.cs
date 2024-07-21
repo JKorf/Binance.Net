@@ -23,7 +23,7 @@
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("updateTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateDate { get; set; }
     }
     

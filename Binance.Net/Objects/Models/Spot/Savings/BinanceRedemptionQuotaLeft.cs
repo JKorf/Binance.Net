@@ -20,7 +20,7 @@
         /// <summary>
         /// Minimal redemption quantity
         /// </summary>
-        [JsonProperty("minRedemptionAmount")]
+        [JsonPropertyName("minRedemptionAmount")]
         public decimal MinimalRedemptionQuantity { get; set; }
     }
 }

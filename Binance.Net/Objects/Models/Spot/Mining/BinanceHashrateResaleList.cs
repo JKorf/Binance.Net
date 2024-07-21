@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Details
         /// </summary>
-        [JsonProperty("configDetails")]
+        [JsonPropertyName("configDetails")]
         public IEnumerable<BinanceHashrateResaleItem> ResaleItmes { get; set; } = Array.Empty<BinanceHashrateResaleItem>();
     }
 
@@ -62,7 +62,6 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(HashrateResaleStatusConverter))]
         public HashrateResaleStatus Status { get; set; }
     }
 }

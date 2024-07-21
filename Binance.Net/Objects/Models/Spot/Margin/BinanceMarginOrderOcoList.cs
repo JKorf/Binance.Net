@@ -8,7 +8,7 @@
         /// <summary>
         /// Margin buy borrow quantity
         /// </summary>
-        [JsonProperty("marginBuyBorrowAmount")]
+        [JsonPropertyName("marginBuyBorrowAmount")]
         public decimal? MarginBuyBorrowQuantity { get; set; }
         /// <summary>
         /// Margin buy borrow asset

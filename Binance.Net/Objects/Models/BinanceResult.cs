@@ -12,7 +12,7 @@
         /// <summary>
         /// Message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
     }
 

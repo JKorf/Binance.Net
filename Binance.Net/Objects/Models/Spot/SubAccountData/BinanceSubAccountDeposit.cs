@@ -16,12 +16,12 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// The quantity deposited
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The asset deposited
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Network
@@ -38,7 +38,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// The transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Confirmation status
@@ -51,7 +51,6 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// The status of the deposit
         /// </summary>
-        [JsonConverter(typeof(DepositStatusConverter))]
         public DepositStatus Status { get; set; }
     }
 }

@@ -12,7 +12,7 @@
         /// <summary>
         /// Assets
         /// </summary>
-        [JsonProperty("coins")]
+        [JsonPropertyName("coins")]
         public IEnumerable<string> Assets { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Exchange rates

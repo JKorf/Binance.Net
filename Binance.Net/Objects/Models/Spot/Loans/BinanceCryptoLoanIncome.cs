@@ -15,12 +15,11 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Income type
         /// </summary>
-        [JsonConverter(typeof(LoanIncomeTypeConverter))]
         public LoanIncomeType Type { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Timestamp
@@ -31,7 +30,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public string TransactionId { get; set; } = string.Empty;
     }
 }

@@ -20,7 +20,7 @@
         /// <summary>
         /// Asset the address is for
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
     }
 }

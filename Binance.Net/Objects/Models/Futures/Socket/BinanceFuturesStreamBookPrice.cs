@@ -10,18 +10,18 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? TransactionTime { get; set; }
         /// <summary>
         /// The time the event happened
         /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("E"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime EventTime { get; set; }
 
         /// <summary>
         /// The type of the event
         /// </summary>
-        [JsonProperty("e")] 
+        [JsonPropertyName("e")] 
         public string Event { get; set; } = string.Empty;
     }
 }

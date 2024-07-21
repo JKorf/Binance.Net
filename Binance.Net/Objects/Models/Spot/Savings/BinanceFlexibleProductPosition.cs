@@ -16,12 +16,12 @@
         /// <summary>
         /// Average annual interest rate
         /// </summary>
-        [JsonProperty("avgAnnualInterestRate")]
+        [JsonPropertyName("avgAnnualInterestRate")]
         public decimal AverageAnnualInterestRate { get; set; }
         /// <summary>
         /// Tier Average annual interest rate
         /// </summary>
-        [JsonProperty("tierAnnualInterestRate")]
+        [JsonPropertyName("tierAnnualInterestRate")]
         public Dictionary<string, decimal> TierAnnualInterestRate { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// Can redeem
@@ -34,17 +34,17 @@
         /// <summary>
         /// Quantity free
         /// </summary>
-        [JsonProperty("freeAmount")]
+        [JsonPropertyName("freeAmount")]
         public decimal FreeQuantity { get; set; }
         /// <summary>
         /// Quantity frozen
         /// </summary>
-        [JsonProperty("freezeAmount")]
+        [JsonPropertyName("freezeAmount")]
         public decimal FreezeQuantity { get; set; }
         /// <summary>
         /// Quantity locked
         /// </summary>
-        [JsonProperty("lockedAmount")]
+        [JsonPropertyName("lockedAmount")]
         public decimal LockedQuantity { get; set; }
 
         /// <summary>
@@ -58,17 +58,17 @@
         /// <summary>
         /// Redeeming quantity
         /// </summary>
-        [JsonProperty("redeemingAmount")]
+        [JsonPropertyName("redeemingAmount")]
         public decimal RedeemingQuantity { get; set; }
         /// <summary>
         /// Quantity purchased today
         /// </summary>
-        [JsonProperty("todayPurchasedAmount")]
+        [JsonPropertyName("todayPurchasedAmount")]
         public decimal TodayPurchasedQuantity { get; set; }
         /// <summary>
         /// Total quantity
         /// </summary>
-        [JsonProperty("totalAmount")]
+        [JsonPropertyName("totalAmount")]
         public decimal TotalQuantity { get; set; }
         /// <summary>
         /// Total interest

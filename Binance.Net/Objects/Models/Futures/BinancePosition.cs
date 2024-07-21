@@ -24,13 +24,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Unrealized profit
         /// </summary>
-        [JsonProperty("unrealizedProfit")]
+        [JsonPropertyName("unrealizedProfit")]
         public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(PositionSideConverter))]
         public PositionSide PositionSide { get; set; }
     }
 
@@ -67,7 +66,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Position quantity
         /// </summary>
-        [JsonProperty("positionAmt")]
+        [JsonPropertyName("positionAmt")]
         public decimal Quantity { get; set; }
 
         /// <summary>
@@ -97,12 +96,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Break even price
         /// </summary>
-        [JsonProperty("breakEvenPrice")]
+        [JsonPropertyName("breakEvenPrice")]
         public decimal BreakEvenPrice { get; set; }
         /// <summary>
         /// Max quantity
         /// </summary>
-        [JsonProperty("maxQty")]
+        [JsonPropertyName("maxQty")]
         public decimal MaxQuantity { get; set; }
     }
 
@@ -114,7 +113,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Margin type
         /// </summary>
-        [JsonConverter(typeof(FuturesMarginTypeConverter))]
         public FuturesMarginType MarginType { get; set; }
 
         /// <summary>
@@ -140,13 +138,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Position quantity
         /// </summary>
-        [JsonProperty("positionAmt")]
+        [JsonPropertyName("positionAmt")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// Break even price
         /// </summary>
-        [JsonProperty("breakEvenPrice")]
+        [JsonPropertyName("breakEvenPrice")]
         public decimal BreakEvenPrice { get; set; }
 
         /// <summary>
@@ -164,17 +162,17 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Max notional
         /// </summary>
-        [JsonProperty("maxNotionalValue")]
+        [JsonPropertyName("maxNotionalValue")]
         public decimal MaxNotional { get; set; }
         /// <summary>
         /// Notional value
         /// </summary>
-        [JsonProperty("notional")]
+        [JsonPropertyName("notional")]
         public decimal Notional { get; set; }
         /// <summary>
         /// Isolated wallet
         /// </summary>
-        [JsonProperty("isolatedWallet")]
+        [JsonPropertyName("isolatedWallet")]
         public decimal IsolatedWallet { get; set; }
     }
 
@@ -186,12 +184,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Notional value
         /// </summary>
-        [JsonProperty("notionalValue")]
+        [JsonPropertyName("notionalValue")]
         public decimal NotionalValue { get; set; }
         /// <summary>
         /// Max quantity
         /// </summary>
-        [JsonProperty("maxQty")]
+        [JsonPropertyName("maxQty")]
         public decimal MaxQuantity { get; set; }
     }
 }

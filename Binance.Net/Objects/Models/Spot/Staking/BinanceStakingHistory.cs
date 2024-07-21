@@ -12,7 +12,7 @@
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
@@ -26,7 +26,7 @@
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Lock period

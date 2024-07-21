@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Transactions
         /// </summary>
-        [JsonProperty("result")]
+        [JsonPropertyName("result")]
         public IEnumerable<BinanceSubAccountUniversalTransferTransaction> Transactions { get; set; } =
             new List<BinanceSubAccountUniversalTransferTransaction>();
 
@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
 
         /// <summary>
@@ -38,13 +38,11 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// From account type
         /// </summary>
-        [JsonConverter(typeof(TransferAccountTypeConverter))]
         public TransferAccountType FromAccountType { get; set; }
 
         /// <summary>
         /// To account type
         /// </summary>
-        [JsonConverter(typeof(TransferAccountTypeConverter))]
         public TransferAccountType ToAccountType { get; set; }
 
         /// <summary>
@@ -60,14 +58,14 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// The time the universal transaction was created
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("createTimeStamp")]
+        [JsonPropertyName("createTimeStamp")]
         public DateTime CreateTime { get; set; }
     }
 }

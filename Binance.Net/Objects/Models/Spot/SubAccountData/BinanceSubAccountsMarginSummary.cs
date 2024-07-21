@@ -20,7 +20,7 @@
         /// <summary>
         /// Sub account details
         /// </summary>
-        [JsonProperty("subAccountList")]
+        [JsonPropertyName("subAccountList")]
         public IEnumerable<BinanceSubAccountMarginInfo> SubAccounts { get; set; } = Array.Empty<BinanceSubAccountMarginInfo>();
     }
 

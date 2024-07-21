@@ -12,7 +12,7 @@
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonConverter(typeof(DateTimeConverter)), JsonProperty("time")]
+        [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
@@ -23,7 +23,7 @@
         /// <summary>
         /// Base asset list
         /// </summary>
-        [JsonProperty("baseAssetList")]
+        [JsonPropertyName("baseAssetList")]
         public IEnumerable<BinanceFuturesCompositeIndexInfoAsset> BaseAssets { get; set; } = Array.Empty<BinanceFuturesCompositeIndexInfoAsset>();
     }
 

@@ -27,17 +27,17 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Released collateral quantity
@@ -46,7 +46,6 @@ namespace Binance.Net.Objects.Models.Spot.Futures
         /// <summary>
         /// The status of the transfer
         /// </summary>
-        [JsonConverter(typeof(FuturesTransferStatusConverter))]
         public FuturesTransferStatus Status { get; set; }
         /// <summary>
         /// Repay type

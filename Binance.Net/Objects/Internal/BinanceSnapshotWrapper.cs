@@ -3,9 +3,9 @@
     internal class BinanceSnapshotWrapper<T>
     {
         public int Code { get; set; }
-        [JsonProperty("msg")] 
+        [JsonPropertyName("msg")] 
         public string Message { get; set; } = string.Empty;
-        [JsonProperty("snapshotVos")]
+        [JsonPropertyName("snapshotVos")]
         public T SnapshotData { get; set; } = default!;
     }
 }

@@ -31,22 +31,21 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("time")]
+        [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Coin
         /// </summary>
-        [JsonProperty("coinName")]
+        [JsonPropertyName("coinName")]
         public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Earning type
         /// </summary>
-        [JsonConverter(typeof(BinanceEarningTypeConverter))]
         public BinanceEarningType Type { get; set; }
         /// <summary>
         /// Profit quantity
         /// </summary>
-        [JsonProperty("profitAmount")]
+        [JsonPropertyName("profitAmount")]
         public decimal ProfitQuantity { get; set; }
         /// <summary>
         /// Status

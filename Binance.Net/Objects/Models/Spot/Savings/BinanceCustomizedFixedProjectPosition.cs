@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// Create timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonProperty("createTimestamp")]
+        [JsonPropertyName("createTimestamp")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Duration
@@ -76,12 +76,10 @@ namespace Binance.Net.Objects.Models.Spot.Lending
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(ProjectStatusConverter))]
         public ProjectStatus Status { get; set; }
         /// <summary>
         /// Type
         /// </summary>
-        [JsonConverter(typeof(ProjectTypeConverter))]
         public ProjectType Type { get; set; }
 
     }

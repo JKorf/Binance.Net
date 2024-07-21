@@ -30,7 +30,7 @@
         /// <summary>
         /// Futures enable
         /// </summary>
-        [JsonProperty("futuresEnable")]
+        [JsonPropertyName("futuresEnable")]
         public bool IsFuturesEnable { get; set; }
         
         /// <summary>

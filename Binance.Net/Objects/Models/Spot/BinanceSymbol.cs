@@ -11,12 +11,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The symbol
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// The status of the symbol
         /// </summary>
-        [JsonConverter(typeof(SymbolStatusConverter))]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// The base asset
@@ -33,13 +32,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The precision of the quote asset
         /// </summary>
-        [JsonProperty("quotePrecision")]
+        [JsonPropertyName("quotePrecision")]
         public int QuoteAssetPrecision { get; set; }
 
         /// <summary>
         /// Allowed order types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(SpotOrderTypeConverter))]
         public IEnumerable<SpotOrderType> OrderTypes { get; set; } = Array.Empty<SpotOrderType>();
         /// <summary>
         /// Ice berg orders allowed
@@ -68,31 +66,30 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// If OTO(One Triggers Other) orders are allowed
         /// </summary>
-        [JsonProperty("otoAllowed")]
+        [JsonPropertyName("otoAllowed")]
         public bool OTOAllowed { get; set; }
         /// <summary>
         /// Whether or not it is allowed to specify the quantity of a market order in the quote asset
         /// </summary>
-        [JsonProperty("quoteOrderQtyMarketAllowed")]
+        [JsonPropertyName("quoteOrderQtyMarketAllowed")]
         public bool QuoteOrderQuantityMarketAllowed { get; set; }
         /// <summary>
         /// The precision of the base asset fee
         /// </summary>
-        [JsonProperty("baseCommissionPrecision")]
+        [JsonPropertyName("baseCommissionPrecision")]
         public int BaseFeePrecision { get; set; }
         /// <summary>
         /// The precision of the quote asset fee
         /// </summary>
-        [JsonProperty("quoteCommissionPrecision")]
+        [JsonPropertyName("quoteCommissionPrecision")]
         public int QuoteFeePrecision { get; set; }
         /// <summary>
         /// Permissions types
         /// </summary>
-        [JsonProperty(ItemConverterType = typeof(EnumConverter), ItemConverterParameters = new object[] { false, false })]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
         
         // To be implemented and tested
-        //[JsonProperty("permissionSets")]
+        //[JsonPropertyName("permissionSets")]
         //public IEnumerable<IEnumerable<AccountType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<AccountType>>();
 
         /// <summary>
@@ -102,13 +99,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Default self trade prevention
         /// </summary>
-        [JsonProperty("defaultSelfTradePreventionMode")]
+        [JsonPropertyName("defaultSelfTradePreventionMode")]
         [JsonConverter(typeof(EnumConverter))]
         public SelfTradePreventionMode DefaultSelfTradePreventionMode { get; set; }
         /// <summary>
         /// Allowed self trade prevention modes
         /// </summary>
-        [JsonProperty("allowedSelfTradePreventionModes", ItemConverterType = typeof(EnumConverter))]
+        [JsonPropertyName("allowedSelfTradePreventionModes")]
         public IEnumerable<SelfTradePreventionMode> AllowedSelfTradePreventionModes { get; set; } = Array.Empty<SelfTradePreventionMode>();
         /// <summary>
         /// Filter for max amount of iceberg parts for this symbol

@@ -8,17 +8,17 @@
         /// <summary>
         /// The loaning asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral quantity
         /// </summary>
-        [JsonProperty("collateralAmount")]
+        [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
         /// Borrow order id

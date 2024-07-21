@@ -2,7 +2,7 @@
 {
     internal record BinanceSubAccountTransferWrapper
     {
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string? Message { get; set; }
         public bool Success { get; set; }
         public IEnumerable<BinanceSubAccountTransfer>? Transfers { get; set; }
@@ -28,12 +28,12 @@
         /// <summary>
         /// The quantity of the transfer
         /// </summary>
-        [JsonProperty("qty")]
+        [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The timestamp of the transfer
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Status of the transaction
@@ -42,7 +42,7 @@
         /// <summary>
         /// Transaction Id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
     }
 }

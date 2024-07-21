@@ -12,7 +12,7 @@
         /// <summary>
         /// Loan amount
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
     }
 }

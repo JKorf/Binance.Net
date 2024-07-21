@@ -13,19 +13,19 @@
         /// <summary>
         /// buy volume
         /// </summary>
-        [JsonProperty("buyVol")]
+        [JsonPropertyName("buyVol")]
         public decimal BuyVolume { get; set; }
 
         /// <summary>
         /// sell volume
         /// </summary>
-        [JsonProperty("sellVol")]
+        [JsonPropertyName("sellVol")]
         public decimal SellVolume { get; set; }
 
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("timestamp"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
     }
 }

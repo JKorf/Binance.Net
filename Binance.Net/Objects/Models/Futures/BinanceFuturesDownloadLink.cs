@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Link expiration time
         /// </summary>
-        [JsonProperty("expirationTimestamp")]
+        [JsonPropertyName("expirationTimestamp")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ExpirationTime { get; set; }
         /// <summary>

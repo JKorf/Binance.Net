@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The id of the order list
         /// </summary>
-        [JsonProperty("orderListId")]
+        [JsonPropertyName("orderListId")]
         public long Id { get; set; }
         /// <summary>
         /// The contingency type
@@ -20,12 +20,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The order list status
         /// </summary>
-        [JsonConverter(typeof(ListStatusTypeConverter))]
         public ListStatusType ListStatusType { get; set; }
         /// <summary>
         /// The order status
         /// </summary>
-        [JsonConverter(typeof(ListOrderStatusConverter))]
         public ListOrderStatus ListOrderStatus { get; set; }
         /// <summary>
         /// The client id of the order list
@@ -77,7 +75,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The time the order was placed
         /// </summary>
-        [JsonProperty("transactTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("transactTime"), JsonConverter(typeof(DateTimeConverter))]
         public new DateTime CreateTime { get; set; }
     }
 }

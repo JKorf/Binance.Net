@@ -8,13 +8,13 @@
         /// <summary>
         /// Delist time
         /// </summary>
-        [JsonProperty("delistTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime DelistTime { get; set; }
 
         /// <summary>
         /// Symbols being delisted
         /// </summary>
-        [JsonProperty("symbols")]
+        [JsonPropertyName("symbols")]
         public IEnumerable<string> Symbols { get; set; } = new List<string>();
     }
 }

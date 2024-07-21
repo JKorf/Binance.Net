@@ -20,7 +20,7 @@
         /// <summary>
         /// Locked quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Purchase time
@@ -46,7 +46,7 @@
         /// <summary>
         /// Earned quantity
         /// </summary>
-        [JsonProperty("rewardAmt")]
+        [JsonPropertyName("rewardAmt")]
         public decimal RewardQuantity { get; set; }
         /// <summary>
         /// Rewards asset of extra staking type
@@ -59,7 +59,7 @@
         /// <summary>
         /// Rewards of extra staking type, distribute when order expires
         /// </summary>
-        [JsonProperty("estExtraRewardAmt")]
+        [JsonPropertyName("estExtraRewardAmt")]
         public decimal? EstimatedExtraRewardQuantity { get; set; }
         /// <summary>
         /// Next estimated interest payment
@@ -77,7 +77,7 @@
         /// <summary>
         /// Early redemption amount
         /// </summary>
-        [JsonProperty("redeemAmountEarly")]
+        [JsonPropertyName("redeemAmountEarly")]
         public decimal? RedeemQuantityEarly { get; set; }
         /// <summary>
         /// Interest accrual end date
@@ -96,7 +96,7 @@
         /// <summary>
         /// Quantity under redemption
         /// </summary>
-        [JsonProperty("redeemingAmt")]
+        [JsonPropertyName("redeemingAmt")]
         public decimal RedeemQuantity { get; set; }
         /// <summary>
         /// Arrival time of partial redemption amount of order
