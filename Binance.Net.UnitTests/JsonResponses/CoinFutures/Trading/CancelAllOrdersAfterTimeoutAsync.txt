@@ -1,4 +1,0 @@
-{
-    "symbol": "BTCUSD_200925", 
-    "countdownTime": "100000"
-}

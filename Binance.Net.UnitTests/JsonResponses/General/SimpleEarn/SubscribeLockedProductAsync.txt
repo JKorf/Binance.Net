@@ -1,5 +1,0 @@
-{
-  "purchaseId": 40607,
-  "positionId": "12345",
-  "success": true
-}

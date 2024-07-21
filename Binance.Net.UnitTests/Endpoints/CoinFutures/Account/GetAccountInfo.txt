@@ -4,19 +4,19 @@ true
 {
     "assets": [
         {
-            "asset": "BTC",  // asset name 
-            "walletBalance": "0.00241969",  // total wallet balance
-            "unrealizedProfit": "0.00000000",  // unrealized profit or loss
-            "marginBalance": "0.00241969",  // margin balance
-            "maintMargin": "0.00000000",    // maintenance margin
-            "initialMargin": "0.00000000",  // total intial margin required with the latest mark price
-            "positionInitialMargin": "0.00000000",  // positions margin required with the latest mark price
-            "openOrderInitialMargin": "0.00000000",  // open orders intial margin required with the latest mark price
-            "maxWithdrawAmount": "0.00241969",  // available amount for transfer out
-            "crossWalletBalance": "0.00241969",  // wallet balance for crossed margin
-            "crossUnPnl": "0.00000000",  // total unrealized profit or loss of crossed positions
-            "availableBalance": "0.00241969",  // available margin balance
-            "updateTime": 1625474304765  //update time
+            "asset": "BTC",  
+            "walletBalance": "0.00241969",  
+            "unrealizedProfit": "0.00000000",
+            "marginBalance": "0.00241969",  
+            "maintMargin": "0.00000000",    
+            "initialMargin": "0.00000000", 
+            "positionInitialMargin": "0.00000000", 
+            "openOrderInitialMargin": "0.00000000", 
+            "maxWithdrawAmount": "0.00241969",  
+            "crossWalletBalance": "0.00241969", 
+            "crossUnPnl": "0.00000000", 
+            "availableBalance": "0.00241969",  
+            "updateTime": 1625474304765 
         }
      ],
      "positions": [

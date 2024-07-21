@@ -1,4 +1,0 @@
-{
-    "txnId":12831061179,
-    "clientTranId":"abc"
-}

@@ -1,3 +1,0 @@
-{
-    "tranId": 100000001    //transaction id
-}

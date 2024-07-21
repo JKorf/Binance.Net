@@ -1,4 +1,0 @@
-{
-    "subAccountId":1,
-    "spotBNBBurn":true
-}

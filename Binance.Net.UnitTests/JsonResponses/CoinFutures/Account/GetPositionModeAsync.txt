@@ -1,3 +1,0 @@
-{
-    "dualSidePosition": true // "true": Hedge Mode; "false": One-way Mode
-}
