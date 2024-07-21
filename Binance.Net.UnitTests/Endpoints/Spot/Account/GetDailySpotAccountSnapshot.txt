@@ -2,8 +2,8 @@ GET
 /sapi/v1/accountSnapshot
 true
 {
-   "code":200, // 200 for success; others are error codes
-   "msg":"", // error message
+   "code":200, 
+   "msg":"", 
    "snapshotVos":[
       {
          "data":{

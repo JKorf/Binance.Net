@@ -13,7 +13,7 @@
         /// <summary>
         /// Count down time in milliseconds
         /// </summary>
-        [JsonPropertyName("countDowntime")]
+        [JsonPropertyName("countdownTime")]
         public int CountDownTime { get; set; }
     }
 }

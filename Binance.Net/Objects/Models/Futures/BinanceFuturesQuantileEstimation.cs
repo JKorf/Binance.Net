@@ -25,22 +25,22 @@
         /// <summary>
         /// Long position
         /// </summary>
-        [JsonPropertyName("long")]
+        [JsonPropertyName("LONG")]
         public int Long { get; set; }
         /// <summary>
         /// Short position
         /// </summary>
-        [JsonPropertyName("short")]
+        [JsonPropertyName("SHORT")]
         public int Short { get; set; }
         /// <summary>
         /// Hedge
         /// </summary>
-        [JsonPropertyName("hedge")]
+        [JsonPropertyName("HEDGE")]
         public int Hedge { get; set; }
         /// <summary>
         /// Hedge
         /// </summary>
-        [JsonPropertyName("both")]
+        [JsonPropertyName("BOTH")]
         public int Both { get; set; }
     }
 }

@@ -27,7 +27,7 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        [JsonPropertyName("subAccountId")]
+        [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>

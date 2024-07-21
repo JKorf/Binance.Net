@@ -8,6 +8,6 @@ false
     "qty": "1",
     "baseQty": "0.01037108",
     "time": 1499865549590,
-    "isBuyerMaker": true,
+    "isBuyerMaker": true
   }
 ]

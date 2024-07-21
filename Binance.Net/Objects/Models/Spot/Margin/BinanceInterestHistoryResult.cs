@@ -9,7 +9,7 @@
         /// Transaction id
         /// </summary>
         [JsonPropertyName("txId")]
-        public string? TransactionId { get; set; }
+        public long? TransactionId { get; set; }
         /// <summary>
         /// Isolated symbol
         /// </summary>

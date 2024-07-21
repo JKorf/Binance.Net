@@ -96,7 +96,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Unrealized profit
         /// </summary>
-        [JsonPropertyName("unrealizedProfit")]
+        [JsonPropertyName("unRealizedProfit")]
         public decimal? UnrealizedProfit { get; set; }
     }
 }

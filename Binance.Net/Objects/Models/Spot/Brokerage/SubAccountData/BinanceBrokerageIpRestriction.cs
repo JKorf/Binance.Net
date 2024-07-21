@@ -8,13 +8,13 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
-        [JsonPropertyName("subAccountId")]
+        [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
         /// Api key
         /// </summary>
-        [JsonPropertyName("apiKey")]
+        [JsonPropertyName("apikey")]
         public string ApiKey { get; set; } = string.Empty;
 
         /// <summary>

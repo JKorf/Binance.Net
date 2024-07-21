@@ -9,7 +9,7 @@
         /// Vip level
         /// </summary>
         [JsonPropertyName("vipLevel")]
-        public string VipLevel { get; set; } = string.Empty;
+        public int VipLevel { get; set; }
 
         /// <summary>
         /// The coin

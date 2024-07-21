@@ -3,12 +3,12 @@ GET
 false
 [
   {
-    "a": 416690,            // Aggregate tradeId
-    "p": "9642.4",          // Price
-    "q": "3",               // Quantity
-    "f": 595259,            // First tradeId
-    "l": 595259,            // Last tradeId
-    "T": 1591250548649,     // Timestamp
-    "m": false,             // Was the buyer the maker?
+    "a": 416690,         
+    "p": "9642.4",         
+    "q": "3",               
+    "f": 595259,           
+    "l": 595259,            
+    "T": 1591250548649,   
+    "m": false     
   }
 ]

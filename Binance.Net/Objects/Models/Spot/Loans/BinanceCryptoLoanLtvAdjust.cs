@@ -28,7 +28,7 @@
         /// <summary>
         /// Current ltv
         /// </summary>
-        [JsonPropertyName("currentLtv")]
+        [JsonPropertyName("currentLTV")]
         public decimal CurrentLtv { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -12,7 +13,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Filters for order on this symbol
         /// </summary>
         [JsonPropertyName("filters")]
-        public IEnumerable<BinanceFuturesSymbolFilter> Filters { get; set; } = Array.Empty<BinanceFuturesSymbolFilter>();
+        public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
         /// <summary>
         /// Contract type
         /// </summary>
@@ -21,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The maintenance margin percent
         /// </summary>
-        [JsonPropertyName("mainMarginPercent")]
+        [JsonPropertyName("maintMarginPercent")]
         public decimal MaintMarginPercent { get; set; }
         /// <summary>
         /// The price Precision

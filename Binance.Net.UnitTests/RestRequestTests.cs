@@ -352,7 +352,7 @@ namespace Binance.Net.UnitTests
             });
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/CoinFutures/ExchangeData", "https://dapi.binance.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetServerTimeAsync(), "GetServerTime", "serverTime");
-            await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo");
+            await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo", ignoreProperties: new List<string> { "orderTypes", "timeInForce" });
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetOrderBookAsync("ETHUSDT"), "GetOrderBook");
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetAggregatedTradeHistoryAsync("ETHUSDT"), "GetAggregatedTradeHistory");
             await tester.ValidateAsync(client => client.CoinFuturesApi.ExchangeData.GetFundingRatesAsync("ETHUSDT"), "GetFundingRates");

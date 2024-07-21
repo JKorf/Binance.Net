@@ -8,6 +8,7 @@
         /// <summary>
         /// The pair the price is for
         /// </summary>
+        [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
 
         /// <inheritdoc />

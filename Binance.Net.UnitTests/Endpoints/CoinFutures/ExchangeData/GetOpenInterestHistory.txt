@@ -5,8 +5,8 @@ false
    {
       "pair": "BTCUSD",
       "contractType": "CURRENT_QUARTER",
-      "sumOpenInterest": "20403",  //unit: cont
-      "sumOpenInterestValue": "176196512.23400000", //unit: base asset
+      "sumOpenInterest": "20403",
+      "sumOpenInterestValue": "176196512.23400000",
       "timestamp": 1591261042378
    },
    {

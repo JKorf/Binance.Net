@@ -12,7 +12,7 @@ true
     "collateralCoin": "BNB",
     "initialCollateralAmount": "49.27565492",
     "borrowTime": 1575018510000,
-    "status": "Repaid" // Accruing_Interest, Overdue, Liquidating, Repaying, Repaid, Liquidated, Pending, Failed
+    "status": "Repaid" 
     }
   ],
   "total": 1

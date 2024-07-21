@@ -38,7 +38,7 @@
         /// <summary>
         /// Current LTV
         /// </summary>
-        [JsonPropertyName("currentLtv")]
+        [JsonPropertyName("currentLTV")]
         public decimal CurrentLTV { get; set; }
         /// <summary>
         /// Expiration time

@@ -48,10 +48,15 @@ namespace Binance.Net.Objects.Models.Spot
         /// The max factor the price can deviate down
         /// </summary>
         public decimal MultiplierDown { get; set; }
+
         /// <summary>
         /// The amount of minutes the average price of trades is calculated over. 0 means the last price is used
         /// </summary>
-        public int AveragePriceMinutes { get; set; }
+        public int? MultiplierDecimal { get; set; }
+        /// <summary>
+        /// The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+        /// </summary>
+        public int? AveragePriceMinutes { get; set; }
     }
 
     /// <summary>

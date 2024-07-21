@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net;
+﻿using Binance.Net.UnitTests.TestImplementations;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using System;

@@ -6,7 +6,7 @@ false
         "symbol": "BTCUSD_PERP",
     "fundingTime": 1698768000000,   
     "fundingRate": "-0.00300000",
-    "markPrice": "34651.40000000"  // mark price associated with a particular funding fee charge
+    "markPrice": "34651.40000000"  
   },
     {
         "symbol": "BTCUSD_PERP",

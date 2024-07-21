@@ -70,7 +70,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Network confirmations for unlocking
         /// </summary>
         [JsonPropertyName("unlockConfirm")]
-        public string ConfirmationsForUnlock { get; set; } = string.Empty;
+        public int ConfirmationsForUnlock { get; set; }
         /// <summary>
         /// The wallet type
         /// </summary>

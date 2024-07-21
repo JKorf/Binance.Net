@@ -22,7 +22,7 @@ true
      "positions": [
          {
             "symbol": "BTCUSD_201225",
-            "positionAmt":"0",  // position amount
+            "positionAmt":"0",
             "initialMargin": "0",
             "maintMargin": "0",
             "unrealizedProfit": "0.00000000",
@@ -30,10 +30,10 @@ true
             "openOrderInitialMargin": "0",
             "leverage": "125",
             "isolated": false,
-            "positionSide": "BOTH", // BOTH means that it is the position of Oneway Mode  
+            "positionSide": "BOTH",
             "entryPrice": "0.0",
-            "breakEvenPrice": "0.0",  // breakeven price
-            "maxQty": "50",  // maximum quantity of base asset
+            "breakEvenPrice": "0.0", 
+            "maxQty": "50", 
             "updateTime": 0
         },
         {
@@ -46,9 +46,9 @@ true
             "openOrderInitialMargin": "0",
             "leverage": "125",
             "isolated": false,
-            "positionSide": "LONG",  // LONG or SHORT means that it is the position of Hedge Mode 
+            "positionSide": "LONG", 
             "entryPrice": "0.0",
-            "breakEvenPrice": "0.0",  // breakeven price
+            "breakEvenPrice": "0.0",  
             "maxQty": "50",
             "updateTime": 0
         },
@@ -62,9 +62,9 @@ true
             "openOrderInitialMargin": "0",
             "leverage": "125",
             "isolated": false,
-            "positionSide": "SHORT",  // LONG or SHORT means that it is the position of Hedge Mode 
+            "positionSide": "SHORT",
             "entryPrice": "0.0",
-            "breakEvenPrice": "0.0",  // breakeven price
+            "breakEvenPrice": "0.0",
             "maxQty": "50",
             "updateTime":1627026881327
         }

@@ -16229,6 +16229,11 @@
             The max factor the price can deviate down
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceFilter.MultiplierDecimal">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
             <summary>
             The amount of minutes the average price of trades is calculated over. 0 means the last price is used
@@ -25050,126 +25055,6 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesBracket.MaintAmount">
             <summary>
             Auxiliary number for quick calculation 
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbolFilter">
-            <summary>
-            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxAlgorithmicOrdersFilter"/>
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbolFilter.FilterType">
-            <summary>
-            The type of this filter
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter">
-            <summary>
-            Price filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter.MinPrice">
-            <summary>
-            The minimal price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter.MaxPrice">
-            <summary>
-            The max price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter.TickSize">
-            <summary>
-            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter">
-            <summary>
-            Lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter">
-            <summary>
-            Market lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxOrdersFilter">
-             <summary>
-            Max orders filter
-             </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
-            <summary>
-            The max number of orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxAlgorithmicOrdersFilter">
-            <summary>
-            Max algo orders filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
-            <summary>
-            The max number of Algorithmic orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter">
-            <summary>
-            Price percentage filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter.MultiplierUp">
-            <summary>
-            The max factor the price can deviate up
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter.MultiplierDown">
-            <summary>
-            The max factor the price can deviate down
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter.MultiplierDecimal">
-            <summary>
-            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMinNotionalFilter">
-            <summary>
-            Min notional filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMinNotionalFilter.MinNotional">
-            <summary>
-            The minimal total quote quantity of an order. This is calculated by Price * Quantity.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesTrade">

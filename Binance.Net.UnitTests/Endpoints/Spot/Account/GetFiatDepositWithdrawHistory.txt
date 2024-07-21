@@ -10,9 +10,9 @@ true
       "fiatCurrency": "BRL",
       "indicatedAmount": "10.00",  
       "amount": "10.00", 
-      "totalFee": "0.00",   // Trade fee
-      "method": "BankAccount",  // Trade method
-      "status": "Expired",  // Processing, Failed, Successful, Finished, Refunding, Refunded, Refund Failed, Order Partial credit Stopped
+      "totalFee": "0.00",  
+      "method": "BankAccount", 
+      "status": "Expired", 
       "createTime": 1626144956000,
       "updateTime": 1626400907000   
    }

@@ -7,13 +7,13 @@ true
    "data": [
    {
       "orderNo": "353fca443f06466db0c4dc89f94f027a",
-      "sourceAmount": "20.0",  // Fiat trade amount
-      "fiatCurrency": "EUR",   // Fiat token
-      "obtainAmount": "4.462", // Crypto trade amount
-      "cryptoCurrency": "LUNA",  // Crypto token
-      "totalFee": "0.2",     // Trade fee
+      "sourceAmount": "20.0", 
+      "fiatCurrency": "EUR",   
+      "obtainAmount": "4.462",
+      "cryptoCurrency": "LUNA",  
+      "totalFee": "0.2",  
       "price": "4.437472", 
-      "status": "Failed",  // Processing, Completed, Failed, Refunded
+      "status": "Failed",  
       "paymentMethod": "Credit Card",
       "createTime": 1624529919000,
       "updateTime": 1624529919000  
