@@ -8,7 +8,7 @@ true
             "asset":"USDT",
             "amount":"1",
             "type":"MAIN_UMFUTURE",
-            "status": "CONFIRMED", // status: CONFIRMED / FAILED / PENDING
+            "status": "CONFIRMED",
             "tranId": 11415955596,
             "timestamp":1544433328000
         },

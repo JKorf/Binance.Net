@@ -32,9 +32,9 @@ true
         },
         "symbol": "BTCUSDT",
         "isolatedCreated": true, 
-        "enabled": true, // true-enabled, false-disabled
+        "enabled": true,
         "marginLevel": "0.00000000", 
-        "marginLevelStatus": "EXCESSIVE", // "EXCESSIVE", "NORMAL", "MARGIN_CALL", "PRE_LIQUIDATION", "FORCE_LIQUIDATION"
+        "marginLevelStatus": "EXCESSIVE", 
         "marginRatio": "0.00000000",
         "indexPrice": "10000.00000000",
         "liquidatePrice": "1000.00000000",

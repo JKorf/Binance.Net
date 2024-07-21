@@ -6,12 +6,12 @@ true
    "type": "GENERAL",
    "code": "000000000",
    "data": {
-        "page": 1,  // current page
-        "totalRecords": 2,  // total records
-        "totalPageNum": 1,  // total pages
+        "page": 1,  
+        "totalRecords": 2, 
+        "totalPageNum": 1, 
         "data": [
             {
-                "asset": "USDT",  // rebate asset
+                "asset": "USDT", 
                 "type": 1,
                 "amount": "0.0001126", 
                 "updateTime": 1637651320000

@@ -3,6 +3,6 @@ GET
 true
 {
     "symbol": "BTCUSD_PERP",
-    "makerCommissionRate": "0.00015",  // 0.015%
-    "takerCommissionRate": "0.00040"   // 0.040%
+    "makerCommissionRate": "0.00015",  
+    "takerCommissionRate": "0.00040"  
 }

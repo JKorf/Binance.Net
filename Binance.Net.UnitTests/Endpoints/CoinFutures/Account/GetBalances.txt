@@ -3,7 +3,7 @@ GET
 true
 [
     {
-        "accountAlias": "SgsR",    // unique account code
+        "accountAlias": "SgsR",    
         "asset": "BTC",
         "balance": "0.00250000",
         "withdrawAvailable": "0.00250000",

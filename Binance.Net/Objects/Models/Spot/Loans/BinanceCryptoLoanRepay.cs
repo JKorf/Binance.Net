@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Current LTV
         /// </summary>
-        [JsonPropertyName("currentLtv")]
+        [JsonPropertyName("currentLTV")]
         public decimal? CurrentLTV { get; set; }
         /// <summary>
         /// Remaining principal

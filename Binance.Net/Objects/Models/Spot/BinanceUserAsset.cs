@@ -135,7 +135,7 @@
         /// <summary>
         /// Confirmation number for balance unlock
         /// </summary>
-        [JsonPropertyName("unlockConfirm")]
+        [JsonPropertyName("unLockConfirm")]
         public int UnlockConfirm { get; set; }
 
         /// <summary>

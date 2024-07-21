@@ -4,14 +4,14 @@ true
 {
       "borrowEnabled": true,
       "marginLevel": "11.64405625",
-      "CollateralMarginLevel" : "3.2",
+      "collateralMarginLevel" : "3.2",
       "totalAssetOfBtc": "6.82728457",
       "totalLiabilityOfBtc": "0.58633215",
       "totalNetAssetOfBtc": "6.24095242",
-      "TotalCollateralValueInUSDT": "5.82728457",
+      "totalCollateralValueInUSDT": "5.82728457",
       "tradeEnabled": true,
       "transferEnabled": true,
-      "accountType": "Margin_1",  // // Margin_1 for Cross Margin Classic, Margin_2 for Cross Margin Pro
+      "accountType": "Margin_1", 
       "userAssets": [
           {
               "asset": "BTC",

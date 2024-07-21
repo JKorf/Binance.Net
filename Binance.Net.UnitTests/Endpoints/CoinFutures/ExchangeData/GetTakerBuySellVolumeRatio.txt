@@ -5,19 +5,19 @@ false
    {
       "pair": "BTCUSD",
       "contractType": "CURRENT_QUARTER",
-      "takerBuyVol": "387",  //unit: cont
-      "takerSellVol": "248",  //unit: cont
-      "takerBuyVolValue": "2342.1220", //unit: base asset
-      "takerSellVolValue": "4213.9800", //unit: base asset
+      "takerBuyVol": "387", 
+      "takerSellVol": "248", 
+      "takerBuyVolValue": "2342.1220", 
+      "takerSellVolValue": "4213.9800", 
       "timestamp": 1591261042378
    },
    {
      "pair": "BTCUSD",
       "contractType": "CURRENT_QUARTER",
-      "takerBuyVol": "234",  //unit: cont
-      "takerSellVol": "121",  //unit: cont
-      "takerBuyVolValue": "4563.1320", //unit: base asset
-      "takerSellVolValue": "3313.3940", //unit: base asset
+      "takerBuyVol": "234",  
+      "takerSellVol": "121",  
+      "takerBuyVolValue": "4563.1320",
+      "takerSellVolValue": "3313.3940",
       "timestamp": 1585615200000
    }
 ]

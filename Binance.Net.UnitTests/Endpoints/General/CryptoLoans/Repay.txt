@@ -8,5 +8,5 @@ true
   "collateralCoin": "BNB",
   "remainingCollateral": "5.253",
   "currentLTV": "0.25",
-  "repayStatus": "Repaid" // Repaid, Repaying
+  "repayStatus": "Repaid" 
 }

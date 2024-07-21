@@ -28,12 +28,12 @@
         /// <summary>
         /// Pre adjust ltv
         /// </summary>
-        [JsonPropertyName("preLtv")]
+        [JsonPropertyName("preLTV")]
         public decimal PreLtv { get; set; }
         /// <summary>
         /// Post adjust ltv
         /// </summary>
-        [JsonPropertyName("afterLtv")]
+        [JsonPropertyName("afterLTV")]
         public decimal AfterLtv { get; set; }
         /// <summary>
         /// Adjust time
