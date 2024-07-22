@@ -29,7 +29,7 @@
         /// <summary>
         /// Basket
         /// </summary>
-        [JsonPropertyName("basked")]
+        [JsonPropertyName("basket")]
         public string Basket { get; set; } = string.Empty;
         /// <summary>
         /// Nav
@@ -49,7 +49,7 @@
         /// <summary>
         /// Daily management fee
         /// </summary>
-        [JsonPropertyName("dailyManagementfee")]
+        [JsonPropertyName("dailyManagementFee")]
         public decimal DailyManagementFee { get; set; }
 
         /// <summary>

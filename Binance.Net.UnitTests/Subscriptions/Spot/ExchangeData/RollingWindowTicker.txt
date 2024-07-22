@@ -5,22 +5,22 @@
 	"stream": "btcusdt@ticker_1h",
 	"data": 
      {
-	  "e": "1hTicker",    // Event type
-	  "E": 1672515782136,     // Event time
-	  "s": "BNBBTC",      // Symbol
-	  "p": "0.0015",      // Price change
-	  "P": "250.00",      // Price change percent
-	  "o": "0.0010",      // Open price
-	  "h": "0.0025",      // High price
-	  "l": "0.0010",      // Low price
-	  "c": "0.0025",      // Last price
-	  "w": "0.0018",      // Weighted average price
-	  "v": "10000",       // Total traded base asset volume
-	  "q": "18",          // Total traded quote asset volume
-	  "O": 0,             // Statistics open time
-	  "C": 86400000,      // Statistics close time
-	  "F": 0,             // First trade ID
-	  "L": 18150,         // Last trade Id
-	  "n": 18151          // Total number of trades
+	  "e": "1hTicker",   
+	  "E": 1672515782136,     
+	  "s": "BNBBTC",     
+	  "p": "0.0015",     
+	  "P": "250.00",      
+	  "o": "0.0010",     
+	  "h": "0.0025",      
+	  "l": "0.0010",      
+	  "c": "0.0025",     
+	  "w": "0.0018",      
+	  "v": "10000",      
+	  "q": "18",          
+	  "O": 0,             
+	  "C": 86400000,     
+	  "F": 0,             
+	  "L": 18150,        
+	  "n": 18151          
 	}
 }

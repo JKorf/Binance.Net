@@ -5,11 +5,6 @@
     /// </summary>
     public record BinancePlacedOrder: BinanceOrderBase
     {
-        /// <summary>
-        /// The time the order was placed
-        /// </summary>
-        [JsonPropertyName("transactTime"), JsonConverter(typeof(DateTimeConverter))]
-        public new DateTime CreateTime { get; set; }
         
         /// <summary>
         /// Trades for the order

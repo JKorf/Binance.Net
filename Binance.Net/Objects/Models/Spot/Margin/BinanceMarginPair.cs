@@ -23,7 +23,7 @@
         /// <summary>
         /// Is buying allowed
         /// </summary>
-        [JsonPropertyName("idBuyAllowed")]
+        [JsonPropertyName("isBuyAllowed")]
         public bool IsBuyAllowed { get; set; }
         /// <summary>
         /// Is selling allowed

@@ -26,27 +26,27 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// The kline data
     /// </summary>
-    public record BinanceStreamKline: BinanceKlineBase, IBinanceStreamKline
+    public record BinanceStreamKline: IBinanceStreamKline
     {
         /// <summary>
         /// The open time of this candlestick
         /// </summary>
         [JsonPropertyName("t"), JsonConverter(typeof(DateTimeConverter))]
-        public new DateTime OpenTime { get; set; }
+        public DateTime OpenTime { get; set; }
 
         /// <inheritdoc />
         [JsonPropertyName("v")]
-        public override decimal Volume { get; set; }
+        public decimal Volume { get; set; }
 
         /// <summary>
         /// The close time of this candlestick
         /// </summary>
         [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
-        public new DateTime CloseTime { get; set; }
+        public DateTime CloseTime { get; set; }
 
         /// <inheritdoc />
         [JsonPropertyName("q")]
-        public override decimal QuoteVolume { get; set; }
+        public decimal QuoteVolume { get; set; }
 
         /// <summary>
         /// The symbol this candlestick is for
@@ -56,6 +56,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The interval of this candlestick
         /// </summary>
+        [JsonPropertyName("i"), JsonConverter(typeof(EnumConverter))]
         public KlineInterval Interval { get; set; }
         /// <summary>
         /// The first trade id in this candlestick
@@ -71,34 +72,34 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The open price of this candlestick
         /// </summary>
         [JsonPropertyName("o")]
-        public new decimal OpenPrice { get; set; }
+        public decimal OpenPrice { get; set; }
         /// <summary>
         /// The close price of this candlestick
         /// </summary>
         [JsonPropertyName("c")]
-        public new decimal ClosePrice { get; set; }
+        public decimal ClosePrice { get; set; }
         /// <summary>
         /// The highest price of this candlestick
         /// </summary>
         [JsonPropertyName("h")]
-        public new decimal HighPrice { get; set; }
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// The lowest price of this candlestick
         /// </summary>
         [JsonPropertyName("l")]
-        public new decimal LowPrice { get; set; }
+        public decimal LowPrice { get; set; }
         /// <summary>
         /// The amount of trades in this candlestick
         /// </summary>
         [JsonPropertyName("n")]
-        public new int TradeCount { get; set; }
+        public int TradeCount { get; set; }
 
         /// <inheritdoc />
         [JsonPropertyName("V")]
-        public override decimal TakerBuyBaseVolume { get; set; }
+        public decimal TakerBuyBaseVolume { get; set; }
         /// <inheritdoc />
         [JsonPropertyName("Q")]
-        public override decimal TakerBuyQuoteVolume { get; set; }
+        public decimal TakerBuyQuoteVolume { get; set; }
 
         /// <summary>
         /// Boolean indicating whether this candlestick is closed

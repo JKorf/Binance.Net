@@ -8,12 +8,12 @@ namespace Binance.Net.Converters
 
         public override TInterface? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return (TImp)JsonSerializer.Deserialize(ref reader, typeof(TImp))!;
+            return (TImp)JsonSerializer.Deserialize(ref reader, typeof(TImp), options)!;
         }
 
         public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize(writer, value, typeof(TImp));
+            JsonSerializer.Serialize(writer, value, typeof(TImp), options);
         }
     }
 }

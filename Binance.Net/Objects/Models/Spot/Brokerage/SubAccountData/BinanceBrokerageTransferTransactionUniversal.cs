@@ -34,6 +34,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         
         /// <summary>
         /// To account type
+        /// </summary>
         [JsonPropertyName("toAccountType")]
         public BrokerageAccountType ToAccountType { get; set; }
 

@@ -73,7 +73,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Counter part nickname
         /// </summary>
-        [JsonPropertyName("counterPartyNickName")]
+        [JsonPropertyName("counterPartNickName")]
         public string CounterPartNickName { get; set; } = string.Empty;
         /// <summary>
         /// Advertisement role

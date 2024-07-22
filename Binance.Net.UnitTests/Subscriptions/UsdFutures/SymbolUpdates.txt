@@ -5,23 +5,23 @@
 	"stream": "!contractInfo",
 	"data": 
        {
-        "e":"contractInfo",          // Event Type
-        "E":1669356423908,           // Event Time
-        "s":"IOTAUSDT",              // Symbol
-        "ps":"IOTAUSDT",             // Pair
-        "ct":"PERPETUAL",            // Contract type
-        "dt":4133404800000,          // Delivery date time 
-        "ot":1569398400000,          // onboard date time 
-        "cs":"TRADING",              // Contract status 
+        "e":"contractInfo",       
+        "E":1669356423908,        
+        "s":"IOTAUSDT",         
+        "ps":"IOTAUSDT",    
+        "ct":"PERPETUAL",          
+        "dt":4133404800000,        
+        "ot":1569398400000,          
+        "cs":"TRADING",            
         "bks":[
             {
-                "bs":1,              // Notional bracket
-                "bnf":0,             // Floor notional of this bracket
-                "bnc":5000,          // Cap notional of this bracket
-                "mmr":0.01,          // Maintenance ratio for this bracket
-                "cf":0,              // Auxiliary number for quick calculation 
-                "mi":21,             // Min leverage for this bracket
-                "ma":50              // Max leverage for this bracket
+                "bs":1,       
+                "bnf":0,          
+                "bnc":5000,       
+                "mmr":0.01,      
+                "cf":0,        
+                "mi":21,         
+                "ma":50         
             },
             {
                 "bs":2,

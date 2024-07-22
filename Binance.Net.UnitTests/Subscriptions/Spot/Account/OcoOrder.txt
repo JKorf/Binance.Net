@@ -5,21 +5,21 @@
 	"stream": "123",
 	"data": 
      {
-      "e": "listStatus",                //Event Type
-      "E": 1564035303637,               //Event Time
-      "s": "ETHBTC",                    //Symbol
-      "g": 2,                           //OrderListId
-      "c": "OCO",                       //Contingency Type
-      "l": "EXEC_STARTED",              //List Status Type
-      "L": "EXECUTING",                 //List Order Status
-      "r": "NONE",                      //List Reject Reason
-      "C": "F4QN4G8DlFATFlIUQ0cjdD",    //List Client Order ID
-      "T": 1564035303625,               //Transaction Time
-      "O": [                            //An array of objects
+      "e": "listStatus",            
+      "E": 1564035303637,              
+      "s": "ETHBTC",                   
+      "g": 2,                           
+      "c": "OCO",                  
+      "l": "EXEC_STARTED",            
+      "L": "EXECUTING",         
+      "r": "NONE",                    
+      "C": "F4QN4G8DlFATFlIUQ0cjdD",  
+      "T": 1564035303625,              
+      "O": [                           
         {
-          "s": "ETHBTC",                //Symbol
-          "i": 17,                      // orderId
-          "c": "AJYsMjErWJesZvqlJCTUgL" //ClientOrderId
+          "s": "ETHBTC",               
+          "i": 17,                    
+          "c": "AJYsMjErWJesZvqlJCTUgL" 
         },
         {
           "s": "ETHBTC",

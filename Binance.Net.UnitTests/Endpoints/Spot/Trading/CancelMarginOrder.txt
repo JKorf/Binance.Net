@@ -3,7 +3,7 @@ DELETE
 true
 {
   "symbol": "LTCBTC",
-  "isIsolated": true,       // if isolated margin
+  "isIsolated": true,  
   "orderId": "28",
   "origClientOrderId": "myOrder1",
   "clientOrderId": "cancelMyOrder1",

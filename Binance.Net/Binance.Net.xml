@@ -15281,11 +15281,6 @@
             The result of placing a new order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOcoOrder.CreateTime">
-            <summary>
-            The time the order was placed
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceCurrentRateLimit">
             <summary>
             Rate limit info
@@ -15469,11 +15464,6 @@
         <member name="T:Binance.Net.Objects.Models.Spot.BinancePlacedOrder">
             <summary>
             The result of placing a new order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOrder.CreateTime">
-            <summary>
-            The time the order was placed
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOrder.Trades">
@@ -18416,7 +18406,11 @@
             From account type
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.ToAccountType" -->
+        <member name="P:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.ToAccountType">
+            <summary>
+            To account type
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal.Asset">
             <summary>
             Asset

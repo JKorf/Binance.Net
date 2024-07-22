@@ -1,5 +1,7 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -51,7 +53,8 @@ namespace Binance.Net.Objects.Models.Futures
         /// Trade id if existing
         /// </summary>
         [JsonPropertyName("tradeId")]
-        public string TradeId { get; set; } = string.Empty;
+        [JsonConverter(typeof(NumberStringConverter))]
+        public string? TradeId { get; set; }
     }
 
 }

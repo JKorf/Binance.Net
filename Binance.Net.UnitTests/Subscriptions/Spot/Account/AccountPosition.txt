@@ -5,14 +5,14 @@
 	"stream": "123",
 	"data": 
      {
-      "e": "outboundAccountPosition", //Event type
-      "E": 1564034571105,             //Event Time
-      "u": 1564034571073,             //Time of last account update
-      "B": [                          //Balances Array
+      "e": "outboundAccountPosition", 
+      "E": 1564034571105,             
+      "u": 1564034571073,             
+      "B": [                        
         {
-          "a": "ETH",                 //Asset
-          "f": "10000.000000",        //Free
-          "l": "0.000000"             //Locked
+          "a": "ETH",                 
+          "f": "10000.000000",       
+          "l": "0.000000"          
         }
       ]
     }

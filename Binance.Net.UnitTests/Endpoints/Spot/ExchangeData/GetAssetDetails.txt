@@ -3,11 +3,11 @@ GET
 true
 {
         "CTR": {
-            "minWithdrawAmount": "70.00000000", //min withdraw amount
-            "depositStatus": false,//deposit status (false if ALL of networks' are false)
-            "withdrawFee": 35, // withdraw fee
-            "withdrawStatus": true, //withdraw status (false if ALL of networks' are false)
-            "depositTip": "Delisted, Deposit Suspended" //reason
+            "minWithdrawAmount": "70.00000000", 
+            "depositStatus": false,
+            "withdrawFee": 35,
+            "withdrawStatus": true, 
+            "depositTip": "Delisted, Deposit Suspended" 
         },
         "SKY": {
             "minWithdrawAmount": "0.02000000",

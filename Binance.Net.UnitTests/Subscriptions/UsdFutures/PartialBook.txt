@@ -5,17 +5,17 @@
 	"stream": "btcusdt@depth5@100ms",
 	"data": 
        {
-          "e": "depthUpdate", // Event type
-          "E": 1571889248277, // Event time
-          "T": 1571889248276, // Transaction time
+          "e": "depthUpdate",
+          "E": 1571889248277, 
+          "T": 1571889248276, 
           "s": "BTCUSDT",
           "U": 390497796,
           "u": 390497878,
           "pu": 390497794,
-          "b": [          // Bids to be updated
+          "b": [          
             [
-              "7403.89",  // Price Level to be
-              "0.002"     // Quantity
+              "7403.89", 
+              "0.002"    
             ],
             [
               "7403.90",
@@ -34,10 +34,10 @@
               "2.562"
             ]
           ],
-          "a": [          // Asks to be updated
+          "a": [          
             [
-              "7405.96",  // Price level to be
-              "3.340"     // Quantity
+              "7405.96",  
+              "3.340"     
             ],
             [
               "7406.63",

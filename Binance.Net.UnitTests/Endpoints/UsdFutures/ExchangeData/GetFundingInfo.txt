@@ -7,6 +7,6 @@ false
         "adjustedFundingRateCap": "0.02500000",
         "adjustedFundingRateFloor": "-0.02500000",
         "fundingIntervalHours": 8,
-        "disclaimer": false   // ingore
+        "disclaimer": false   
     }
 ]

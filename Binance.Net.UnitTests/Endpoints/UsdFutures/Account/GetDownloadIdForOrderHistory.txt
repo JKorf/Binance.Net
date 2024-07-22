@@ -2,6 +2,6 @@ GET
 /fapi/v1/order/asyn
 true
 {
-    "avgCostTimestampOfLast30d":7241837, // Average time taken for data download in the past 30 days
-    "downloadId":"546975389218332672",
+    "avgCostTimestampOfLast30d":7241837,
+    "downloadId":"546975389218332672"
 }

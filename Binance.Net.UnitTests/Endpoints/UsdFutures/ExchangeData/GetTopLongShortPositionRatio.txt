@@ -4,9 +4,9 @@ false
 [
     { 
         "symbol":"BTCUSDT",
-        "longShortRatio":"1.4342",// long/short position ratio of top traders
-        "longAccount": "0.5891", // long positions ratio of top traders
-        "shortAccount":"0.4656", // short positions ratio of top traders
+        "longShortRatio":"1.4342",
+        "longAccount": "0.5891",
+        "shortAccount":"0.4656", 
         "timestamp":"1583139600000"
     }, 
     {     
@@ -15,5 +15,5 @@ false
         "longAccount": "0.3583", 
         "shortAccount":"0.6417",                    
         "timestamp":"1583139900000"        
-    },       
+    }
 ]

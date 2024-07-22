@@ -3,12 +3,12 @@ GET
 true
 [
     {
-        "amendmentId": 5363,    // Order modification ID
+        "amendmentId": 5363,  
         "symbol": "BTCUSDT",
         "pair": "BTCUSDT",
         "orderId": 20072994037,
         "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",
-        "time": 1629184560899,  // Order modification time
+        "time": 1629184560899,  
         "amendment": {
             "price": {
                 "before": "30004",
@@ -18,7 +18,7 @@ true
                 "before": "1",
                 "after": "1"
             },
-            "count": 3  // Order modification count, representing the number of times the order has been modified
+            "count": 3  
         },
         "priceMatch":"QUEUE_20"
     },
