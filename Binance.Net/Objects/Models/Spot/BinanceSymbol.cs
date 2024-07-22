@@ -99,10 +99,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("permissions")]
         public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
-        
-        // To be implemented and tested
-        //[JsonPropertyName("permissionSets")]
-        //public IEnumerable<IEnumerable<AccountType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<AccountType>>();
+        /// <summary>
+        /// Permission sets
+        /// </summary>
+        [JsonPropertyName("permissionSets"), JsonConverter(typeof(AccountTypeConverter))]
+        public IEnumerable<IEnumerable<AccountType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<AccountType>>();
 
         /// <summary>
         /// Filters for order on this symbol
