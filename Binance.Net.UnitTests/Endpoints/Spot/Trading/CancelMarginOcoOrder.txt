@@ -9,7 +9,7 @@ true
   "listClientOrderId": "C3wyj4WVEktd7u9aVBRXcN",
   "transactionTime": 1574040868128,
   "symbol": "LTCBTC",
-  "isIsolated": false,       // if isolated margin
+  "isIsolated": false,     
   "orders": [
     {
       "symbol": "LTCBTC",

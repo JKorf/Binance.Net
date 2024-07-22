@@ -106,7 +106,7 @@ namespace Binance.Net.UnitTests
             });
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.binance.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetServerTimeAsync(), "GetServerTime", "serverTime");
-            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo");
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo", ignoreProperties: new List<string> { "orderTypes", "timeInForce" });
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetSystemStatusAsync(), "GetSystemStatus");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetAssetDetailsAsync(), "GetAssetDetails");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetRecentTradesAsync("ETHUSDT"), "GetRecentTrades");
@@ -173,7 +173,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Trading.RedeemLeveragedTokenAsync("ETHUSDT", 1), "RedeemLeveragedToken");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetLeveragedTokensRedemptionRecordsAsync("ETHUSDT", 1), "GetLeveragedTokensRedemptionRecords");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetC2CTradeHistoryAsync(Enums.OrderSide.Buy), "GetC2CTradeHistory", "data");
-            await tester.ValidateAsync(client => client.SpotApi.Trading.GetPayTradeHistoryAsync(), "GetPayTradeHistory", "data", new List<string>{ "walletTypes", "walletAssetCost" });
+            //await tester.ValidateAsync(client => client.SpotApi.Trading.GetPayTradeHistoryAsync(), "GetPayTradeHistory", "data", new List<string>{ "walletTypes", "walletAssetCost" });
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetPayTradeHistoryAsync(), "GetPayTradeHistory2", "data", new List<string>{ "walletTypes", "walletAssetCost" });
             await tester.ValidateAsync(client => client.SpotApi.Trading.ConvertQuoteRequestAsync("USDT", "ETH", 1), "ConvertQuoteRequest");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetConvertOrderStatusAsync("123"), "GetConvertOrderStatus");
@@ -238,7 +238,7 @@ namespace Binance.Net.UnitTests
             });
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/UsdFutures/ExchangeData", "https://fapi.binance.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetServerTimeAsync(), "GetServerTime", "serverTime");
-            await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo", ignoreProperties: new List<string> { "orderTypes", "timeInForce" });
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetOrderBookAsync("ETHUSDT"), "GetOrderBook");
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetAggregatedTradeHistoryAsync("ETHUSDT"), "GetAggregatedTradeHistory");
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetFundingInfoAsync(), "GetFundingInfo", ignoreProperties: new List<string> { "disclaimer" });

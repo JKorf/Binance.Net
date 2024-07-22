@@ -14,9 +14,9 @@ true
   "timeInForce": "GTC",
   "type": "MARKET",
   "side": "SELL",
-  "marginBuyBorrowAmount": 5,       // will not return if no margin trade happens
-  "marginBuyBorrowAsset": "BTC",    // will not return if no margin trade happens
-  "isIsolated": true,       // if isolated margin
+  "marginBuyBorrowAmount": 5,     
+  "marginBuyBorrowAsset": "BTC",   
+  "isIsolated": true,     
   "selfTradePreventionMode": "NONE",
   "fills": [
     {

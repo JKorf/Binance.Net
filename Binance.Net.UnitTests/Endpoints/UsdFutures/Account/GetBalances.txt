@@ -3,14 +3,14 @@ GET
 true
 [
     {
-        "accountAlias": "SgsR",    // unique account code
-        "asset": "USDT",    // asset name
-        "balance": "122607.35137903", // wallet balance
-        "crossWalletBalance": "23.72469206", // crossed wallet balance
-        "crossUnPnl": "0.00000000",  // unrealized profit of crossed positions
-        "availableBalance": "23.72469206",       // available balance
-        "maxWithdrawAmount": "23.72469206",     // maximum amount for transfer out
-        "marginAvailable": true,    // whether the asset can be used as margin in Multi-Assets mode
+        "accountAlias": "SgsR",    
+        "asset": "USDT", 
+        "balance": "122607.35137903",
+        "crossWalletBalance": "23.72469206", 
+        "crossUnPnl": "0.00000000",  
+        "availableBalance": "23.72469206",       
+        "maxWithdrawAmount": "23.72469206",     
+        "marginAvailable": true,    
         "updateTime": 1617939110373
     }
 ]

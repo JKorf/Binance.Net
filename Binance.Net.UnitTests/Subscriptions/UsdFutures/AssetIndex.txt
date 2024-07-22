@@ -8,16 +8,16 @@
     {
       "e":"assetIndexUpdate",
       "E":1686749230000,
-      "s":"ADAUSD",           // asset index symbol
-      "i":"0.27462452",       // index price
-      "b":"0.10000000",       // bid buffer
-      "a":"0.10000000",       // ask buffer
-      "B":"0.24716207",       // bid rate
-      "A":"0.30208698",       // ask rate
-      "q":"0.05000000",       // auto exchange bid buffer
-      "g":"0.05000000",       // auto exchange ask buffer 
-      "Q":"0.26089330",       // auto exchange bid rate
-      "G":"0.28835575"        // auto exchange ask rate
+      "s":"ADAUSD",         
+      "i":"0.27462452",     
+      "b":"0.10000000",    
+      "a":"0.10000000",    
+      "B":"0.24716207",      
+      "A":"0.30208698",       
+      "q":"0.05000000",      
+      "g":"0.05000000",       
+      "Q":"0.26089330",    
+      "G":"0.28835575"       
     },
     {
       "e":"assetIndexUpdate",

@@ -2,5 +2,5 @@ GET
 /fapi/v1/multiAssetsMargin
 true
 {
-    "multiAssetsMargin": true // "true": Multi-Assets Mode; "false": Single-Asset Mode
+    "multiAssetsMargin": true 
 }

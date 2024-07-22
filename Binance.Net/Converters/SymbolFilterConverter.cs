@@ -47,9 +47,9 @@ namespace Binance.Net.Converters
                     case SymbolFilterType.MinNotional:
                         result = new BinanceSymbolMinNotionalFilter
                         {
-                            MinNotional = decimal.Parse(obj.GetProperty("minNotional").GetString(), NumberStyles.Float, CultureInfo.InvariantCulture),
-                            ApplyToMarketOrders = obj.GetProperty("applyToMarket").GetBoolean(),
-                            AveragePriceMinutes = obj.GetProperty("avgPriceMins").GetInt32()
+                            MinNotional = decimal.Parse(obj.TryGetProperty("minNotional", out var minNotional) ? minNotional.GetString() : obj.GetProperty("notional").GetString(), NumberStyles.Float, CultureInfo.InvariantCulture),
+                            ApplyToMarketOrders = obj.TryGetProperty("applyToMarket", out var applyToMarket) ? applyToMarket.GetBoolean() : null,
+                            AveragePriceMinutes = obj.TryGetProperty("avgPriceMins", out var avgPrice) ? avgPrice.GetInt32() : null
                         };
                         break;
                     case SymbolFilterType.Notional:
@@ -73,7 +73,7 @@ namespace Binance.Net.Converters
                     case SymbolFilterType.MaxNumberAlgorithmicOrders:
                         result = new BinanceSymbolMaxAlgorithmicOrdersFilter
                         {
-                            MaxNumberAlgorithmicOrders = obj.GetProperty("maxNumAlgoOrders").GetInt32()
+                            MaxNumberAlgorithmicOrders = obj.TryGetProperty("maxNumAlgoOrders", out var algoOrderEl) ? algoOrderEl.GetInt32() : obj.GetProperty("limit").GetInt32()
                         };
                         break;
                     case SymbolFilterType.MaxNumberOrders:

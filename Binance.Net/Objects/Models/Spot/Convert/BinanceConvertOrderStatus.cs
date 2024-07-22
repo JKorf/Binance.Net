@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// Order id
         /// </summary>
         [JsonPropertyName("orderId")]
-        public string OrderId { get; set; } = string.Empty;
+        public long OrderId { get; set; }
         /// <summary>
         /// Order status
         /// </summary>

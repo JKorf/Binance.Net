@@ -5,23 +5,23 @@
 	"stream": "btcusdt@depth@100ms",
 	"data": 
        {
-      "e": "depthUpdate", // Event type
-      "E": 123456789,     // Event time
-      "T": 123456788,     // Transaction time 
-      "s": "BTCUSDT",     // Symbol
-      "U": 157,           // First update ID in event
-      "u": 160,           // Final update ID in event
-      "pu": 149,          // Final update Id in last stream(ie `u` in last stream)
-      "b": [              // Bids to be updated
+      "e": "depthUpdate", 
+      "E": 123456789,   
+      "T": 123456788,     
+      "s": "BTCUSDT",    
+      "U": 157,          
+      "u": 160,        
+      "pu": 149,       
+      "b": [        
         [
-          "0.0024",       // Price level to be updated
-          "10"            // Quantity
+          "0.0024",     
+          "10"           
         ]
       ],
-      "a": [              // Asks to be updated
+      "a": [             
         [
-          "0.0026",       // Price level to be updated
-          "100"          // Quantity
+          "0.0026",       
+          "100"         
         ]
       ]
     }

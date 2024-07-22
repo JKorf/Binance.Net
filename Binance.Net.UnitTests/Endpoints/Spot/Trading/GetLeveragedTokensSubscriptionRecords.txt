@@ -5,10 +5,10 @@ true
   {
     "id": 1,  
     "tokenName": "LINKUP",
-    "amount": "0.54216292", // Subscription amount
-    "nav": "18.42621386", // NAV price of subscription 
-    "fee": "0.00999000", // Subscription fee in usdt
-    "totalCharge": "9.99999991", // Subscription cost in usdt
+    "amount": "0.54216292",
+    "nav": "18.42621386", 
+    "fee": "0.00999000", 
+    "totalCharge": "9.99999991", 
     "timestamp":1599127217916  
   }
 ]

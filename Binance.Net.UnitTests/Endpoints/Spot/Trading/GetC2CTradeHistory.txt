@@ -12,12 +12,12 @@ true
       "asset": "BUSD", 
       "fiat": "CNY",  
       "fiatSymbol": "",
-      "amount": "5000.00000000",  // Quantity (in Crypto)
+      "amount": "5000.00000000",  
       "totalPrice": "33400.00000000",
-      "unitPrice": "6.68", // Unit Price (in Fiat)
-      "orderStatus": "COMPLETED",  // PENDING, TRADING, BUYER_PAYED, DISTRIBUTING, COMPLETED, IN_APPEAL, CANCELLED, CANCELLED_BY_SYSTEM
+      "unitPrice": "6.68", 
+      "orderStatus": "COMPLETED",  
       "createTime": 1619361369000,
-      "commission": "0",   // Transaction Fee (in Crypto)
+      "commission": "0",   
       "counterPartNickName": "ab***",
       "advertisementRole": "TAKER"        
      }

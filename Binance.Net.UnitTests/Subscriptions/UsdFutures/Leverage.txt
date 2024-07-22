@@ -5,12 +5,12 @@
 	"stream": "123",
 	"data": 
     {
-    "e":"ACCOUNT_CONFIG_UPDATE",       // Event Type
-    "E":1611646737479,                 // Event Time
-    "T":1611646737476,                 // Transaction Time
+    "e":"ACCOUNT_CONFIG_UPDATE",     
+    "E":1611646737479,                
+    "T":1611646737476,               
     "ac":{                              
-        "s":"BTCUSDT",                     // symbol
-        "l":25                             // leverage
+        "s":"BTCUSDT",                     
+        "l":25                             
 
         }
     }

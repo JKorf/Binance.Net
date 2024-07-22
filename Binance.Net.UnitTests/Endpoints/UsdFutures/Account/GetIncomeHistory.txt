@@ -3,14 +3,14 @@ GET
 true
 [
     {
-        "symbol": "",                   // trade symbol, if existing
-        "incomeType": "TRANSFER",   // income type
-        "income": "-0.37500000",  // income amount
-        "asset": "USDT",                // income asset
-        "info":"TRANSFER",          // extra information
+        "symbol": "",             
+        "incomeType": "TRANSFER", 
+        "income": "-0.37500000",  
+        "asset": "USDT",          
+        "info":"TRANSFER",        
         "time": 1570608000000,      
-        "tranId":"9689322392",      // transaction id
-        "tradeId":""                    // trade id, if existing
+        "tranId":"9689322392",      
+        "tradeId":""             
     },
     {
         "symbol": "BTCUSDT",

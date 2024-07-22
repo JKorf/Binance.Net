@@ -122,17 +122,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// Binance uid
         /// </summary>
         [JsonPropertyName("binanceId")]
-        public string BinanceId { get; set; } = string.Empty;
+        public long BinanceId { get; set; }
         /// <summary>
         /// Binance pay id
         /// </summary>
         [JsonPropertyName("accountId")]
-        public string AccountId { get; set; } = string.Empty;
+        public long AccountId { get; set; }
         /// <summary>
         /// International area code
         /// </summary>
         [JsonPropertyName("countryCode")]
-        public string CountryCode { get; set; } = string.Empty;
+        public long CountryCode { get; set; }
         /// <summary>
         /// Phone number
         /// </summary>

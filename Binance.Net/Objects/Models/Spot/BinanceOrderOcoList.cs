@@ -83,10 +83,5 @@ namespace Binance.Net.Objects.Models.Spot
     /// </summary>
     public record BinancePlacedOcoOrder: BinanceOrderBase
     {
-        /// <summary>
-        /// The time the order was placed
-        /// </summary>
-        [JsonPropertyName("transactTime"), JsonConverter(typeof(DateTimeConverter))]
-        public new DateTime CreateTime { get; set; }
     }
 }

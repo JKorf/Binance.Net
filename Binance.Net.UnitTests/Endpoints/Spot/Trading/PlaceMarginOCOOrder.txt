@@ -9,9 +9,9 @@ true
   "listClientOrderId": "JYVpp3F0f5CAG15DhtrqLp",
   "transactionTime": 1563417480525,
   "symbol": "LTCBTC",
-  "marginBuyBorrowAmount": "5",       // will not return if no margin trade happens
-  "marginBuyBorrowAsset": "BTC",    // will not return if no margin trade happens
-  "isIsolated": false,       // if isolated margin
+  "marginBuyBorrowAmount": "5",     
+  "marginBuyBorrowAsset": "BTC",   
+  "isIsolated": false,
   "orders": [
     {
       "symbol": "LTCBTC",

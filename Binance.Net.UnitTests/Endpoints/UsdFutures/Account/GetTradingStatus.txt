@@ -2,35 +2,35 @@ GET
 /fapi/v1/apiTradingStatus
 true
 {
-    "indicators": { // indicator: quantitative rules indicators, value: user's indicators value, triggerValue: trigger indicator value threshold of quantitative rules. 
+    "indicators": { 
         "BTCUSDT": [
             {
                 "isLocked": true,
                 "plannedRecoverTime": 1545741270000,
-                "indicator": "UFR",  // Unfilled Ratio (UFR)
-                "value": 0.05,  // Current value
-                "triggerValue": 0.995  // Trigger value
+                "indicator": "UFR",  
+                "value": 0.05, 
+                "triggerValue": 0.995  
             },
             {
                 "isLocked": true,
                 "plannedRecoverTime": 1545741270000,
-                "indicator": "IFER",  // IOC/FOK Expiration Ratio (IFER)
-                "value": 0.99,  // Current value
-                "triggerValue": 0.99  // Trigger value
+                "indicator": "IFER",  
+                "value": 0.99,  
+                "triggerValue": 0.99  
             },
             {
                 "isLocked": true,
                 "plannedRecoverTime": 1545741270000,
-                "indicator": "GCR",  // GTC Cancellation Ratio (GCR)
-                "value": 0.99,  // Current value
-                "triggerValue": 0.99  // Trigger value
+                "indicator": "GCR", 
+                "value": 0.99,  
+                "triggerValue": 0.99  
             },
             {
                 "isLocked": true,
                 "plannedRecoverTime": 1545741270000,
-                "indicator": "DR",  // Dust Ratio (DR)
-                "value": 0.99,  // Current value
-                "triggerValue": 0.99  // Trigger value
+                "indicator": "DR",
+                "value": 0.99,  
+                "triggerValue": 0.99  
             }
         ],
         "ETHUSDT": [

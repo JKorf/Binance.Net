@@ -17,12 +17,12 @@ false
             "rateLimitType": "ORDERS"
         }
     ],
-    "serverTime": 1565613908500,    // Ignore please. If you want to check current server time, please check via "GET /fapi/v1/time"
-    "assets": [ // assets information
+    "serverTime": 1565613908500,   
+    "assets": [ 
         {
             "asset": "BUSD",
-            "marginAvailable": true, // whether the asset can be used as margin in Multi-Assets mode
-            "autoAssetExchange": 0 // auto-exchange threshold in Multi-Assets margin mode
+            "marginAvailable": true, 
+            "autoAssetExchange": 0 
         },
         {
             "asset": "USDT",
@@ -43,19 +43,19 @@ false
             "deliveryDate": 4133404800000,
             "onboardDate": 1598252400000,
             "status": "TRADING",
-            "maintMarginPercent": "2.5000",   // ignore
-            "requiredMarginPercent": "5.0000",  // ignore
+            "maintMarginPercent": "2.5000",   
+            "requiredMarginPercent": "5.0000",  
             "baseAsset": "BLZ", 
             "quoteAsset": "USDT",
             "marginAsset": "USDT",
-            "pricePrecision": 5,    // please do not use it as tickSize
-            "quantityPrecision": 0, // please do not use it as stepSize
+            "pricePrecision": 5,    
+            "quantityPrecision": 0, 
             "baseAssetPrecision": 8,
             "quotePrecision": 8, 
             "underlyingType": "COIN",
             "underlyingSubType": ["STORAGE"],
             "settlePlan": 0,
-            "triggerProtect": "0.15", // threshold for algo order with "priceProtect"
+            "triggerProtect": "0.15", 
             "filters": [
                 {
                     "filterType": "PRICE_FILTER",
@@ -85,7 +85,7 @@ false
                 },
                 {
                     "filterType": "MIN_NOTIONAL",
-                    "notional": "5.0", 
+                    "notional": "5.0"
                 },
                 {
                     "filterType": "PERCENT_PRICE",
@@ -109,8 +109,8 @@ false
                 "FOK", 
                 "GTX" 
             ],
-            "liquidationFee": "0.010000",   // liquidation fee rate
-            "marketTakeBound": "0.30",  // the max price difference rate( from mark price) a market order can make
+            "liquidationFee": "0.010000",  
+            "marketTakeBound": "0.30"
         }
     ],
     "timezone": "UTC" 

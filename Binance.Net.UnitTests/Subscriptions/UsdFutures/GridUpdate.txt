@@ -5,20 +5,20 @@
 	"stream": "123",
 	"data": 
        {
-        "e": "GRID_UPDATE", // Event Type
-        "T": 1669262908216, // Transaction Time
-        "E": 1669262908218, // Event Time
+        "e": "GRID_UPDATE", 
+        "T": 1669262908216, 
+        "E": 1669262908218, 
         "gu": { 
-                "si": 176057039, // Strategy ID
-                "st": "GRID", // Strategy Type
-                "ss": "WORKING", // Strategy Status
-                "s": "BTCUSDT", // Symbol
-                "r": "-0.00300716", // Realized PNL
-                "up": "16720", // Unmatched Average Price
-                "uq": "-0.001", // Unmatched Qty
-                "uf": "-0.00300716", // Unmatched Fee
-                "mp": "0.0", // Matched PNL
-                "ut": 1669262908197 // Update Time
+                "si": 176057039, 
+                "st": "GRID", 
+                "ss": "WORKING",
+                "s": "BTCUSDT", 
+                "r": "-0.00300716", 
+                "up": "16720", 
+                "uq": "-0.001",
+                "uf": "-0.00300716", 
+                "mp": "0.0",
+                "ut": 1669262908197 
             }
     }
 }

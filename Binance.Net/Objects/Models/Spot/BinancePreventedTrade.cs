@@ -25,7 +25,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Maker order id
         /// </summary>
-        [JsonPropertyName("markerOrderId")]
+        [JsonPropertyName("makerOrderId")]
         public long MakerOrderId { get; set; }
         /// <summary>
         /// Trade group id

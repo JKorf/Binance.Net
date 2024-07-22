@@ -2,7 +2,7 @@ GET
 /api/v3/avgPrice
 false
 {
-  "mins": 5,                    // Average price interval (in minutes)
-  "price": "9.35751834",        // Average price
-  "closeTime": 1694061154503    // Last trade time
+  "mins": 5,                
+  "price": "9.35751834",       
+  "closeTime": 1694061154503   
 }

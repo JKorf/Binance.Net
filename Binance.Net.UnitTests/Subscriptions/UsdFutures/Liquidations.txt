@@ -5,20 +5,20 @@
 	"stream": "btcusdt@forceOrder",
 	"data": 
        {
-        "e":"forceOrder",                   // Event Type
-        "E":1568014460893,                  // Event Time
+        "e":"forceOrder",                
+        "E":1568014460893,           
         "o":{
-            "s":"BTCUSDT",                   // Symbol
-            "S":"SELL",                      // Side
-            "o":"LIMIT",                     // Order Type
-            "f":"IOC",                       // Time in Force
-            "q":"0.014",                     // Original Quantity
-            "p":"9910",                      // Price
-            "ap":"9910",                     // Average Price
-            "X":"FILLED",                    // Order Status
-            "l":"0.014",                     // Order Last Filled Quantity
-            "z":"0.014",                     // Order Filled Accumulated Quantity
-            "T":1568014460893,              // Order Trade Time
+            "s":"BTCUSDT",                
+            "S":"SELL",                 
+            "o":"LIMIT",                   
+            "f":"IOC",                    
+            "q":"0.014",                   
+            "p":"9910",                
+            "ap":"9910",               
+            "X":"FILLED",         
+            "l":"0.014",                 
+            "z":"0.014",              
+            "T":1568014460893     
         }
     }
 }

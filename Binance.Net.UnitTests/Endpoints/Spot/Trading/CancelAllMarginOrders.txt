@@ -4,7 +4,7 @@ true
 [
   {
     "symbol": "BTCUSDT",
-    "isIsolated": true,       // if isolated margin
+    "isIsolated": true,   
     "origClientOrderId": "E6APeyTJvkMvLMYMqu1KQ4",
     "orderId": 11,
     "orderListId": -1,
@@ -21,7 +21,7 @@ true
   },
   {
     "symbol": "BTCUSDT",
-    "isIsolated": false,       // if isolated margin
+    "isIsolated": false,      
     "origClientOrderId": "A3EF2HCwxgZPFMrfwbgrhv",
     "orderId": 13,
     "orderListId": -1,
