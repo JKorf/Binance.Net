@@ -83,6 +83,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Account.GetIsolatedMarginFeeDataAsync(default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetTradeFeeAsync(default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetAccountVipLevelAndStatusAsync(default, default), true);
+            await RunAndCheckResult(client => client.SpotApi.Account.GetCommissionRatesAsync("ETHUSDT", default, default), true);
 
             // Not available without margin account
             //await RunAndCheckResult(client => client.SpotApi.Account.GetMarginTransferHistoryAsync(Enums.TransferDirection.RollOut, default, default, default, default, default, default, default), true);

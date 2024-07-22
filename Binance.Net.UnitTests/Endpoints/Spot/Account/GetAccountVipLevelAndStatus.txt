@@ -1,0 +1,8 @@
+GET
+/sapi/v1/account/info
+true
+{
+  "vipLevel": 0,
+  "isMarginEnabled": true,     
+  "isFutureEnabled": true      
+}

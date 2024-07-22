@@ -94,6 +94,8 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.CrossMarginSmallLiabilityExchangeAsync(new[] { "ETH" }), "CrossMarginSmallLiabilityExchange");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeHistoryAsync(), "GetCrossMarginSmallLiabilityExchangeHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetTradeFeeAsync(), "GetTradeFee");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetAccountVipLevelAndStatusAsync(), "GetAccountVipLevelAndStatus");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetCommissionRatesAsync("ETHUSDT"), "GetCommissionRates");
         }
 
         [Test]
