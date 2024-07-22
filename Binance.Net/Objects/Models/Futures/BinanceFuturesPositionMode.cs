@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// true": Hedge Mode mode; "false": One-way Mode
         /// </summary>
-        [JsonPropertyName("dualSidePosition"), JsonConverter(typeof(PositionModeConverter))]
-        public PositionMode PositionMode { get; set; }
+        [JsonPropertyName("dualSidePosition")]
+        public bool IsHedgeMode { get; set; }
     }
 }

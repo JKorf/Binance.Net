@@ -2414,6 +2414,71 @@
             Trade group 27
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup028">
+            <summary>
+            Trade group 28
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup029">
+            <summary>
+            Trade group 29
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup030">
+            <summary>
+            Trade group 30
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup031">
+            <summary>
+            Trade group 31
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup032">
+            <summary>
+            Trade group 32
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup033">
+            <summary>
+            Trade group 33
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup034">
+            <summary>
+            Trade group 34
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup035">
+            <summary>
+            Trade group 35
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup036">
+            <summary>
+            Trade group 36
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup037">
+            <summary>
+            Trade group 37
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup038">
+            <summary>
+            Trade group 38
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup039">
+            <summary>
+            Trade group 39
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup040">
+            <summary>
+            Trade group 40
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
             <summary>
             Account update reason
@@ -14795,9 +14860,14 @@
             The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.LastUpdateIdStream">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.LastUpdateId">
             <summary>
             Setter for last update id, need for Json.Net
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.Symbol">
+            <summary>
+            The symbol of the order book 
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.EventType">
@@ -14810,14 +14880,14 @@
             Event time of the update
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.BidsStream">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.Bids">
             <summary>
-            Setter for bids (needed forJson.Net)
+            The list of bids
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.AsksStream">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.Asks">
             <summary>
-            Setter for asks (needed forJson.Net)
+            The list of asks
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceExchangeInfo">
@@ -16097,6 +16167,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.Permissions">
             <summary>
             Permissions types
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PermissionSets">
+            <summary>
+            Permission sets
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.Filters">
@@ -24766,7 +24841,7 @@
             User's position mode
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMode.PositionMode">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMode.IsHedgeMode">
             <summary>
             true": Hedge Mode mode; "false": One-way Mode
             </summary>
