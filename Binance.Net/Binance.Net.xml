@@ -1316,6 +1316,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAccountVipLevelAndStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetCommissionRatesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -8785,6 +8788,16 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetCommissionRatesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get current account commission rates.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-commission-rates-user_data" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData">
             <summary>
             Binance Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -14503,6 +14516,81 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Status">
             <summary>
             Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceCommissions">
+            <summary>
+            Binance commissions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.StandardCommissions">
+            <summary>
+            Standard commission rates on trades from the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.TaxCommissions">
+            <summary>
+            Tax commission rates for trades from the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Discount">
+            <summary>
+            Discount commission when paying in BNB
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo">
+            <summary>
+            Commission info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.Discount">
+            <summary>
+            Standard commission is reduced by this rate when paying commission in BNB.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.EnabledForAccount">
+            <summary>
+            Enabled for account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.EnabledForSymbol">
+            <summary>
+            Enabled for symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.DiscountAsset">
+            <summary>
+            Discount asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo">
+            <summary>
+            Commission info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Maker">
+            <summary>
+            Maker fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Taker">
+            <summary>
+            Taker fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Buyer">
+            <summary>
+            Buyer fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Sell">
+            <summary>
+            Seller fee
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDelistSchedule">
