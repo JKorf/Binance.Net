@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Clients;
+using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using System;

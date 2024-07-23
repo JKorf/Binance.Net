@@ -13,6 +13,13 @@ Binance.Net is a strongly typed client library for accessing the [Binance REST a
 * Support for different environments (binance.com, binance.us, testnet)
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
 
+## NOTICE
+***
+Due to NuGet unlisting my package and locking my account for no apparent reason I'm currently unable to release new versions via NuGet. I believe this is an error as the package does not break any rules (I checked!), but NuGet support is very unresponsive.
+
+If you want to help to fix this, feel free to send NuGet support a message at `support@nuget.org`.
+***
+
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
 
