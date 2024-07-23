@@ -38,7 +38,7 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ### NuGet 
 [![NuGet version](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
 
-*Binance.Net is temporarily only available by direct version reference; see notive above* 
+*Binance.Net is temporarily only available by direct version reference; see notice above* 
 
 	dotnet add package Binance.Net --version 9.11.1
 	
