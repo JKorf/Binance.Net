@@ -38,9 +38,9 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ### NuGet 
 [![NuGet version](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
 
-*Binance.Net is temporarily not available on NuGet* 
+*Binance.Net is temporarily only available by direct version reference; see notive above* 
 
-	dotnet add package Binance.Net
+	dotnet add package Binance.Net --version 9.11.1
 	
 ### GitHub packages
 Binance.Net is available on [GitHub packages](https://github.com/JKorf/Binance.Net/pkgs/nuget/Binance.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
