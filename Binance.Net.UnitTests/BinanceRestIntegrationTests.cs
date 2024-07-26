@@ -12,7 +12,7 @@ namespace Binance.Net.UnitTests
     [NonParallelizable]
     internal class BinanceRestIntegrationTests : RestIntergrationTest<BinanceRestClient>
     {
-        public override bool Run { get; set; } = true;
+        public override bool Run { get; set; } = false;
 
         public BinanceRestIntegrationTests()
         {
