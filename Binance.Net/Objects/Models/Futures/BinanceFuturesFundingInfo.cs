@@ -8,22 +8,22 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// The symbol the information is about
         /// </summary>
-        [JsonProperty("symbol")]
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Adjusted funding rate cap
         /// </summary>
-        [JsonProperty("adjustedFundingRateCap")]
+        [JsonPropertyName("adjustedFundingRateCap")]
         public decimal AdjustedFundingRateCap { get; set; }
         /// <summary>
         /// Adjusted funding rate floor
         /// </summary>
-        [JsonProperty("adjustedFundingRateFloor")]
+        [JsonPropertyName("adjustedFundingRateFloor")]
         public decimal AdjustedFundingRateFloor { get; set; }
         /// <summary>
         /// Funding interval in hours
         /// </summary>
-        [JsonProperty("fundingIntervalHours")]
+        [JsonPropertyName("fundingIntervalHours")]
         public int FundingIntervalHours { get; set; }
     }
 }

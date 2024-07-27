@@ -2,6 +2,7 @@
 {
     internal record BinanceListenKey
     {
+        [JsonPropertyName("listenKey")]
         public string ListenKey { get; set; } = string.Empty;
     }
 }

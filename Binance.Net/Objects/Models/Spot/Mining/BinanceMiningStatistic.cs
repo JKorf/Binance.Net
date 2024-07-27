@@ -8,42 +8,47 @@
         /// <summary>
         /// Hashrate last fifteen minutes
         /// </summary>
-        [JsonProperty("fifteenMinHashRate")]
+        [JsonPropertyName("fifteenMinHashRate")]
         public decimal FifteenMinuteHashRate { get; set; }
         /// <summary>
         /// Day hashrate
         /// </summary>
+        [JsonPropertyName("dayHashRate")]
         public decimal DayHashRate { get; set; }
         /// <summary>
         /// Valid shares
         /// </summary>
-        [JsonProperty("validNum")]
+        [JsonPropertyName("validNum")]
         public int ValidShares { get; set; }
         /// <summary>
         /// Invalid shares
         /// </summary>
-        [JsonProperty("invalidNum")]
+        [JsonPropertyName("invalidNum")]
         public int InvalidShares { get; set; }
         /// <summary>
         /// Todays profit
         /// </summary>
+        [JsonPropertyName("profitToday")]
         public Dictionary<string, decimal> ProfitToday { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// Yesterdays profit
         /// </summary>
+        [JsonPropertyName("profitYesterday")]
         public Dictionary<string, decimal> ProfitYesterday { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// User name
         /// </summary>
+        [JsonPropertyName("userName")]
         public string UserName { get; set; } = string.Empty;
         /// <summary>
         /// Hashrate unit
         /// </summary>
+        [JsonPropertyName("unit")]
         public string Unit { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm
         /// </summary>
-        [JsonProperty("algo")]
+        [JsonPropertyName("algo")]
         public string Algorithm { get; set; } = string.Empty;
     }
 }

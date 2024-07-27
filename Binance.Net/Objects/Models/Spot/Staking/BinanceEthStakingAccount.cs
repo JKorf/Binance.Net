@@ -8,12 +8,12 @@
         /// <summary>
         /// Total profit in Beth
         /// </summary>
-        [JsonProperty("cumulativeProfitInBETH")]
+        [JsonPropertyName("cumulativeProfitInBETH")]
         public decimal TotalProfitInBeth { get; set; }
         /// <summary>
         /// Last day profit in Beth
         /// </summary>
-        [JsonProperty("lastDayProfitInBETH")]
+        [JsonPropertyName("lastDayProfitInBETH")]
         public decimal LastDayProfitInBeth { get; set; }
     }
 }

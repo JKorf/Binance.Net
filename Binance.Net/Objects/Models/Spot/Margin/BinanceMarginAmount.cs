@@ -8,12 +8,13 @@
         /// <summary>
         /// The quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// The borrow limit
         /// </summary>
+        [JsonPropertyName("borrowLimit")]
         public decimal BorrowLimit { get; set; }
     }
 }

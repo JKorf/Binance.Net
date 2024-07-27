@@ -63,6 +63,10 @@ namespace Binance.Net.Clients.GeneralApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
+
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 

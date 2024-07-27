@@ -3,22 +3,22 @@ GET
 true
 [
   {
-    "id": "b6ae22b3aa844210a7041aee7589627c",  // Withdrawal id in Binance
-    "amount": "8.91000000",   // withdrawal amount
-    "transactionFee": "0.004", // transaction fee
+    "id": "b6ae22b3aa844210a7041aee7589627c",
+    "amount": "8.91000000",  
+    "transactionFee": "0.004", 
     "coin": "USDT",
     "status": 6,
     "address": "0x94df8b352de7f46f64b01d3666bf6e936e44ce60",
-    "txId": "0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268",   // withdrawal transaction id
-    "applyTime": "2019-10-12 11:12:02",  // UTC time
+    "txId": "0xb5ef8c13b968a406cc62a93a8bd80f9e9a906ef1b3fcf20a2e48573c17659268",
+    "applyTime": "2019-10-12 11:12:02", 
     "network": "ETH",
-    "transferType": 0, // 1 for internal transfer, 0 for external transfer   
-    "withdrawOrderId": "WITHDRAWtest123", // // will not be returned if there's no withdrawOrderId for this withdraw.
-    "info": "The address is not valid. Please confirm with the recipient",  // reason for withdrawal failure
-    "confirmNo":3,  // confirm times for withdraw
-    "walletType": 1,  //1: Funding Wallet 0:Spot Wallet
+    "transferType": 0,
+    "withdrawOrderId": "WITHDRAWtest123",
+    "info": "The address is not valid. Please confirm with the recipient",  
+    "confirmNo":3,  
+    "walletType": 1, 
     "txKey": "",
-    "completeTime": "2023-03-23 16:52:41" // complete UTC time when user's asset is deduct from withdrawing, only if status =  6(success)
+    "completeTime": "2023-03-23 16:52:41" 
   },
   {
     "id": "156ec387f49b41df8724fa744fa82719",

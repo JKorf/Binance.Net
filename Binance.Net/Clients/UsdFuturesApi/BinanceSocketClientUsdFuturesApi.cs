@@ -68,6 +68,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+
         #region Mark Price Stream
 
         /// <inheritdoc />
@@ -116,7 +120,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data).WithStreamId(data.Data.Stream).WithSymbol(data.Data.Data.Symbol)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + _klineStreamEndpoint + "_" + JsonConvert.SerializeObject(i, new KlineIntervalConverter(false)))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => a.ToLower(CultureInfo.InvariantCulture) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
             return await SubscribeAsync(BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -134,10 +138,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamContinuousKlineData>>>(data => onMessage(data.As(data.Data.Data).WithStreamId(data.Data.Stream).WithSymbol(data.Data.Data.Symbol)));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       "_" +
-                                      JsonConvert.SerializeObject(contractType, new ContractTypeConverter(false)).ToLower() +
+                                      EnumConverter.GetString(contractType).ToLower() +
                                       _continuousContractKlineStreamEndpoint +
                                       "_" +
-                                      JsonConvert.SerializeObject(interval, new KlineIntervalConverter(false))).ToArray();
+                                      EnumConverter.GetString(interval)).ToArray();
             return await SubscribeAsync(BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 
@@ -412,9 +416,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {
-            var id = message.GetValue<string>(_idPath);
+            var id = message.GetValue<int?>(_idPath);
             if (id != null)
-                return id;
+                return id.ToString();
 
             return message.GetValue<string>(_streamPath);
         }

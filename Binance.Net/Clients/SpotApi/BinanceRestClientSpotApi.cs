@@ -71,6 +71,10 @@ namespace Binance.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
+
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
@@ -120,22 +124,22 @@ namespace Binance.Net.Clients.SpotApi
 
             string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_brokerId, 32);
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new SpotOrderTypeConverter(false)) }
             };
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("sideEffectType", sideEffectType == null ? null : JsonConvert.SerializeObject(sideEffectType, new SideEffectTypeConverter(false)));
+            parameters.AddOptionalEnum("sideEffectType", sideEffectType);
             parameters.AddOptionalParameter("isIsolated", isIsolated);
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("strategyId", strategyId);
             parameters.AddOptionalParameter("strategyType", strategyType);

@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// Time of last account update
         /// </summary>
-        [JsonProperty("u"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("u"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// The listen key the update was for
@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// Balances
         /// </summary>
-        [JsonProperty("B")]
+        [JsonPropertyName("B")]
         public IEnumerable<BinanceStreamBalance> Balances { get; set; } = Array.Empty<BinanceStreamBalance>();
     }
 
@@ -31,17 +31,17 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The asset this balance is for
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The quantity that isn't locked in a trade
         /// </summary>
-        [JsonProperty("f")]
+        [JsonPropertyName("f")]
         public decimal Available { get; set; }
         /// <summary>
         /// The quantity that is currently locked in a trade
         /// </summary>
-        [JsonProperty("l")]
+        [JsonPropertyName("l")]
         public decimal Locked { get; set; }
         /// <summary>
         /// The total balance of this asset (Free + Locked)

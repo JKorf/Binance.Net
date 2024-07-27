@@ -8,8 +8,8 @@ true
             "tag":"bob123",
             "makerCommission": 0.001,
             "takerCommission": 0.001,
-            "marginMakerCommission": -1,  // if margin disabled, return -1
-            "marginTakerCommission": -1,  // if margin disabled, return -1
+            "marginMakerCommission": -1, 
+            "marginTakerCommission": -1, 
             "createTime":1544433328000
         },
         {

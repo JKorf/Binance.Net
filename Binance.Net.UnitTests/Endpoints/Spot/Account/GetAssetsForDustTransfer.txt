@@ -6,14 +6,14 @@ true
         {
             "asset": "ADA",         
             "assetFullName": "ADA", 
-            "amountFree": "6.21",   //Convertible amount
-            "toBTC": "0.00016848",  //BTC amount
-            "toBNB": "0.01777302",  //BNB amount
-            "toBNBOffExchange": "0.01741756", //BNB amount
-            "exchange": "0.00035546" //Commission fee
+            "amountFree": "6.21",   
+            "toBTC": "0.00016848",  
+            "toBNB": "0.01777302", 
+            "toBNBOffExchange": "0.01741756", 
+            "exchange": "0.00035546" 
         }
     ],
     "totalTransferBtc": "0.00016848",
     "totalTransferBNB": "0.01777302",
-    "dribbletPercentage": "0.02"     //Commission fee
+    "dribbletPercentage": "0.02"    
 }  

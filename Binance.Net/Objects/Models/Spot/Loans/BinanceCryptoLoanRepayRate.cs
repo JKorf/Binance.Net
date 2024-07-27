@@ -8,22 +8,22 @@
         /// <summary>
         /// Loan asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// Collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Repay quantity
         /// </summary>
-        [JsonProperty("repayAmount")]
+        [JsonPropertyName("repayAmount")]
         public decimal RepayQuantity { get; set; }
         /// <summary>
         /// Rate
         /// </summary>
-        [JsonProperty("rate")]
+        [JsonPropertyName("rate")]
         public decimal Rate { get; set; }
     }
 }

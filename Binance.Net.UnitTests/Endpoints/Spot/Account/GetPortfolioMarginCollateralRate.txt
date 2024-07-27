@@ -9,5 +9,5 @@ false
    {
        "asset": "BUSD",
        "collateralRate": "1.0000"
-   },
+   }
 ]

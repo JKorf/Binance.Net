@@ -69,11 +69,11 @@ namespace Binance.Net.Clients.GeneralApi
 
             var parameters = new ParameterCollection
             {
-                { "fromAccountType", JsonConvert.SerializeObject(fromAccountType, new TransferAccountTypeConverter(false)) },
-                { "toAccountType", JsonConvert.SerializeObject(toAccountType, new TransferAccountTypeConverter(false)) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
+            parameters.AddEnum("fromAccountType", fromAccountType);
+            parameters.AddEnum("toAccountType", toAccountType);
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("fromEmail", fromEmail);
             parameters.AddOptionalParameter("toEmail", toEmail);
@@ -273,9 +273,9 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection
             {
                 { "email", email },
-                { "futuresType", JsonConvert.SerializeObject(futuresAccountType, new FuturesAccountTypeConverter(false)) }
             };
 
+            parameters.AddEnum("futuresType", futuresAccountType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/sub-account/futures/account", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
@@ -320,9 +320,8 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection
             {
                 { "email", email },
-                { "futuresType", JsonConvert.SerializeObject(futuresAccountType, new FuturesAccountTypeConverter(false)) }
             };
-
+            parameters.AddEnum("futuresType", futuresAccountType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/sub-account/futures/positionRisk", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
@@ -334,7 +333,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Futures Transfer for Sub-account (For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal quantity, SubAccountFuturesTransferType type, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountTransaction>> TransferSubAccountFuturesAsync(string email, string asset, decimal quantity, FuturesTransferType type, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
             asset.ValidateNotNull(nameof(asset));
@@ -343,10 +342,9 @@ namespace Binance.Net.Clients.GeneralApi
             {
                 { "email", email },
                 { "asset", asset },
-                { "type", JsonConvert.SerializeObject(type, new SubAccountFuturesTransferTypeConverter(false)) },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
-
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sub-account/futures/transfer", BinanceExchange.RateLimiter.SpotRestIp, 1, true, parameterPosition: HttpMethodParameterPosition.InUri);
@@ -366,10 +364,9 @@ namespace Binance.Net.Clients.GeneralApi
             {
                 { "email", email },
                 { "asset", asset },
-                { "type", JsonConvert.SerializeObject(type, new SubAccountMarginTransferTypeConverter(false)) },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
-
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sub-account/margin/transfer", BinanceExchange.RateLimiter.SpotRestIp, 1, true, parameterPosition: HttpMethodParameterPosition.InUri);
@@ -426,7 +423,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("asset", asset);
-            parameters.AddOptionalParameter("type", type == null ? null : JsonConvert.SerializeObject(type, new SubAccountTransferSubAccountTypeConverter(false)));
+            parameters.AddOptionalEnum("type", type);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));

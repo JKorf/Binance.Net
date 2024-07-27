@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Details
         /// </summary>
-        [JsonProperty("configDetails")]
+        [JsonPropertyName("configDetails")]
         public IEnumerable<BinanceHashrateResaleItem> ResaleItmes { get; set; } = Array.Empty<BinanceHashrateResaleItem>();
     }
 
@@ -31,38 +31,45 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Mining id
         /// </summary>
+        [JsonPropertyName("configId")]
         public int ConfigId { get; set; }
         /// <summary>
         /// From user
         /// </summary>
+        [JsonPropertyName("poolUsername")]
         public string PoolUserName { get; set; } = string.Empty;
         /// <summary>
         /// To user
         /// </summary>
+        [JsonPropertyName("toPoolUsername")]
         public string ToPoolUserName { get; set; } = string.Empty;
         /// <summary>
         /// Algorithm
         /// </summary>
+        [JsonPropertyName("algoName")]
         public string AlgoName { get; set; } = string.Empty;
         /// <summary>
         /// Hash rate
         /// </summary>
+        [JsonPropertyName("hashRate")]
         public decimal Hashrate { get; set; }
         /// <summary>
         /// Start day
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("startDay")]
         public DateTime StartDay { get; set; }
         /// <summary>
         /// End day
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("endDay")]
         public DateTime EndDay { get; set; }
 
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(HashrateResaleStatusConverter))]
+        [JsonPropertyName("status")]
         public HashrateResaleStatus Status { get; set; }
     }
 }

@@ -4,9 +4,9 @@ true
 [
     {
         "asset": "USDT",
-        "free": "1",    // avalible balance
-        "locked": "0",  // locked asset
-        "freeze": "0",  // freeze asset
+        "free": "1",  
+        "locked": "0", 
+        "freeze": "0", 
         "withdrawing": "0",  
         "btcValuation": "0.00000091"  
     }

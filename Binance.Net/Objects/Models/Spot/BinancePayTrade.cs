@@ -10,71 +10,74 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Uid
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonPropertyName("uid")]
         public long? Uid { get; set; }
         /// <summary>
         /// Counter party id
         /// </summary>
-        [JsonProperty("counterpartyId")]
+        [JsonPropertyName("counterpartyId")]
         public long? CounterPartyId { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Note
         /// </summary>
-        [JsonProperty("note")]
+        [JsonPropertyName("note")]
         public string? Note { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType")]
         public PayOrderType OrderType { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
+        [JsonPropertyName("transactionId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Transaction time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("transactionTime")]
         public DateTime TransactionTime { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Total fee
         /// </summary>
-        [JsonProperty("totalPaymentFee")]
+        [JsonPropertyName("totalPaymentFee")]
         public decimal TotalPaymentFee { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Main wallet type
         /// </summary>
-        [JsonProperty("walletType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("walletType"), JsonConverter(typeof(EnumConverter))]
         public PayWalletType WalletType { get; set; }
         /// <summary>
         /// Fund details
         /// </summary>
-        [JsonProperty("fundsDetail")]
+        [JsonPropertyName("fundsDetail")]
         public IEnumerable<BinancePayTradeDetails> Details { get; set; } = Array.Empty<BinancePayTradeDetails>();
         /// <summary>
         /// Payer info
         /// </summary>
-        [JsonProperty("payerInfo")]
+        [JsonPropertyName("payerInfo")]
         public BinancePayTradeParticipantInfo PayerInfo { get; set; } = new BinancePayTradeParticipantInfo();
         /// <summary>
         /// Receiver info
         /// </summary>
-        [JsonProperty("receiverInfo")]
+        [JsonPropertyName("receiverInfo")]
         public BinancePayTradeParticipantInfo ReceiverInfo { get; set; } = new BinancePayTradeParticipantInfo();
     }
 
@@ -86,12 +89,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
     }
 
@@ -103,47 +106,47 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Nickname or merchant name
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Account type，USER for personal，MERCHANT for merchant
         /// </summary>
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         /// <summary>
         /// Email
         /// </summary>
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Binance uid
         /// </summary>
-        [JsonProperty("binanceId")]
-        public string BinanceId { get; set; } = string.Empty;
+        [JsonPropertyName("binanceId")]
+        public long BinanceId { get; set; }
         /// <summary>
         /// Binance pay id
         /// </summary>
-        [JsonProperty("accountId")]
-        public string AccountId { get; set; } = string.Empty;
+        [JsonPropertyName("accountId")]
+        public long AccountId { get; set; }
         /// <summary>
         /// International area code
         /// </summary>
-        [JsonProperty("countryCode")]
-        public string CountryCode { get; set; } = string.Empty;
+        [JsonPropertyName("countryCode")]
+        public long CountryCode { get; set; }
         /// <summary>
         /// Phone number
         /// </summary>
-        [JsonProperty("phoneNumber")]
+        [JsonPropertyName("phoneNumber")]
         public string PhoneNumber { get; set; } = string.Empty;
         /// <summary>
         /// Country code
         /// </summary>
-        [JsonProperty("mobileCode")]
+        [JsonPropertyName("mobileCode")]
         public string MobileCode { get; set; } = string.Empty;
         /// <summary>
         /// Unmask data
         /// </summary>
-        [JsonProperty("unmaskData")]
+        [JsonPropertyName("unmaskData")]
         public bool? UnmaskData { get; set; }
     }
 }

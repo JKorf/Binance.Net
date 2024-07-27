@@ -10,46 +10,47 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Position id
         /// </summary>
-        [JsonProperty("positionId")]
+        [JsonPropertyName("positionId")]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
         /// Redeem id
         /// </summary>
-        [JsonProperty("redeemId")]
+        [JsonPropertyName("redeemId")]
         public long RedeemId { get; set; }
         /// <summary>
         /// Status
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Lock period
         /// </summary>
-        [JsonProperty("lockPeriod")]
+        [JsonPropertyName("lockPeriod")]
         public int LockPeriod { get; set; }
         /// <summary>
         /// Delivery date
         /// </summary>
-        [JsonProperty("deliverDate"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("deliverDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime DeliveryDate { get; set; }
         /// <summary>
         /// Type
         /// </summary>
-        [JsonProperty("type"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter))]
         public RedemptionType Type { get; set; }
     }
 }

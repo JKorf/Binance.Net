@@ -8,27 +8,32 @@
         /// <summary>
         /// The asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity available
         /// </summary>
-        [JsonProperty("free")]
+        [JsonPropertyName("free")]
         public decimal Available { get; set; }
         /// <summary>
         /// Quantity locked
         /// </summary>
+        [JsonPropertyName("locked")]
         public decimal Locked { get; set; }
         /// <summary>
         /// Quantity frozen
         /// </summary>
+        [JsonPropertyName("freeze")]
         public decimal Freeze { get; set; }
         /// <summary>
         /// Quantity withdrawing
         /// </summary>
+        [JsonPropertyName("withdrawing")]
         public decimal Withdrawing { get; set; }
         /// <summary>
         /// Value in btc
         /// </summary>
+        [JsonPropertyName("btcValuation")]
         public decimal BtcValuation { get; set; }
     }
 }

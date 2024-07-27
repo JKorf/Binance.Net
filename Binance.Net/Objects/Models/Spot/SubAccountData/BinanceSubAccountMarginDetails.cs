@@ -10,32 +10,37 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Email of the account
         /// </summary>
+        [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
         /// Margin level
         /// </summary>
+        [JsonPropertyName("marginLevel")]
         public decimal MarginLevel { get; set; }
         /// <summary>
         /// Total asset in btc
         /// </summary>
+        [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
         /// Total liability
         /// </summary>
+        [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
         /// Total net asset
         /// </summary>
+        [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
         /// <summary>
         /// Trade details
         /// </summary>
-        [JsonProperty("marginTradeCoeffVo")]
+        [JsonPropertyName("marginTradeCoeffVo")]
         public BinanceMarginTradeCoeff? MarginTradeCoeff { get; set; }
         /// <summary>
         /// Asset list
         /// </summary>
-        [JsonProperty("marginUserAssetVoList")]
+        [JsonPropertyName("marginUserAssetVoList")]
         public IEnumerable<BinanceMarginBalance> MarginUserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 
@@ -47,14 +52,17 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// <summary>
         /// Liquidation margin ratio
         /// </summary>
+        [JsonPropertyName("forceLiquidationBar")]
         public decimal ForceLiquidationBar { get; set; }
         /// <summary>
         /// Margin record margin ratio
         /// </summary>
+        [JsonPropertyName("marginCallBar")]
         public decimal MarginCallBar { get; set; }
         /// <summary>
         /// Initial margin ratio
         /// </summary>
+        [JsonPropertyName("normalBar")]
         public decimal NormalBar { get; set; }
     }
 }

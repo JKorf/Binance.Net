@@ -11,26 +11,29 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Entry price
         /// </summary>
+        [JsonPropertyName("entryPrice")]
         public decimal EntryPrice { get; set; }
 
         /// <summary>
         /// Leverage
         /// </summary>
+        [JsonPropertyName("leverage")]
         public int Leverage { get; set; }
         /// <summary>
         /// Unrealized profit
         /// </summary>
-        [JsonProperty("unrealizedProfit")]
+        [JsonPropertyName("unrealizedProfit")]
         public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonConverter(typeof(PositionSideConverter))]
+        [JsonPropertyName("positionSide")]
         public PositionSide PositionSide { get; set; }
     }
 
@@ -42,38 +45,44 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Initial margin
         /// </summary>
+        [JsonPropertyName("initialMargin")]
         public decimal InitialMargin { get; set; }
 
         /// <summary>
         /// Maint margin
         /// </summary>
+        [JsonPropertyName("mainMargin")]
         public decimal MaintMargin { get; set; }
 
         /// <summary>
         /// Position initial margin
         /// </summary>
+        [JsonPropertyName("positionInitialMargin")]
         public decimal PositionInitialMargin { get; set; }
-        
+
         /// <summary>
         /// Open order initial margin
         /// </summary>
+        [JsonPropertyName("openOrderInitialMargin")]
         public decimal OpenOrderInitialMargin { get; set; }
 
         /// <summary>
         /// Isolated
         /// </summary>
+        [JsonPropertyName("isolated")]
         public bool Isolated { get; set; }
 
         /// <summary>
         /// Position quantity
         /// </summary>
-        [JsonProperty("positionAmt")]
+        [JsonPropertyName("positionAmt")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime? UpdateTime { get; set; }
     }
 
@@ -85,6 +94,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Max notional
         /// </summary>
+        [JsonPropertyName("maxNotional")]
         public decimal MaxNotional { get; set; }
     }
 
@@ -97,12 +107,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Break even price
         /// </summary>
-        [JsonProperty("breakEvenPrice")]
+        [JsonPropertyName("breakEvenPrice")]
         public decimal BreakEvenPrice { get; set; }
         /// <summary>
         /// Max quantity
         /// </summary>
-        [JsonProperty("maxQty")]
+        [JsonPropertyName("maxQty")]
         public decimal MaxQuantity { get; set; }
     }
 
@@ -114,45 +124,50 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Margin type
         /// </summary>
-        [JsonConverter(typeof(FuturesMarginTypeConverter))]
+        [JsonPropertyName("marginType")]
         public FuturesMarginType MarginType { get; set; }
 
         /// <summary>
         /// Is auto add margin
         /// </summary>
+        [JsonPropertyName("isAutoAddMargin")]
         public bool IsAutoAddMargin { get; set; }
 
         /// <summary>
         /// Isolated margin
         /// </summary>
+        [JsonPropertyName("isolatedMargin")]
         public decimal IsolatedMargin { get; set; }
 
         /// <summary>
         /// Liquidation price
         /// </summary>
+        [JsonPropertyName("liquidationPrice")]
         public decimal LiquidationPrice { get; set; }
 
         /// <summary>
         /// Mark price
         /// </summary>
+        [JsonPropertyName("markPrice")]
         public decimal MarkPrice { get; set; }
 
         /// <summary>
         /// Position quantity
         /// </summary>
-        [JsonProperty("positionAmt")]
+        [JsonPropertyName("positionAmt")]
         public decimal Quantity { get; set; }
 
         /// <summary>
         /// Break even price
         /// </summary>
-        [JsonProperty("breakEvenPrice")]
+        [JsonPropertyName("breakEvenPrice")]
         public decimal BreakEvenPrice { get; set; }
 
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 
@@ -164,17 +179,17 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Max notional
         /// </summary>
-        [JsonProperty("maxNotionalValue")]
+        [JsonPropertyName("maxNotionalValue")]
         public decimal MaxNotional { get; set; }
         /// <summary>
         /// Notional value
         /// </summary>
-        [JsonProperty("notional")]
+        [JsonPropertyName("notional")]
         public decimal Notional { get; set; }
         /// <summary>
         /// Isolated wallet
         /// </summary>
-        [JsonProperty("isolatedWallet")]
+        [JsonPropertyName("isolatedWallet")]
         public decimal IsolatedWallet { get; set; }
     }
 
@@ -186,12 +201,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Notional value
         /// </summary>
-        [JsonProperty("notionalValue")]
+        [JsonPropertyName("notionalValue")]
         public decimal NotionalValue { get; set; }
         /// <summary>
         /// Max quantity
         /// </summary>
-        [JsonProperty("maxQty")]
+        [JsonPropertyName("maxQty")]
         public decimal MaxQuantity { get; set; }
     }
 }

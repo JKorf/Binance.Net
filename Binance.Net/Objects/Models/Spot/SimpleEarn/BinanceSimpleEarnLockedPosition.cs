@@ -8,62 +8,62 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Position id
         /// </summary>
-        [JsonProperty("positionId")]
+        [JsonPropertyName("positionId")]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
         /// Project id
         /// </summary>
-        [JsonProperty("projectId")]
+        [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         /// <summary>
         /// Position quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Purchase time
         /// </summary>
-        [JsonProperty("purchaseTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("purchaseTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? PurchaseTime { get; set; }
         /// <summary>
         /// Duration in days
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonPropertyName("duration")]
         public int Duration { get; set; }
         /// <summary>
         /// Accrual days
         /// </summary>
-        [JsonProperty("accrualDays")]
+        [JsonPropertyName("accrualDays")]
         public int AccrualDays { get; set; }
         /// <summary>
         /// Reward asset
         /// </summary>
-        [JsonProperty("rewardAsset")]
+        [JsonPropertyName("rewardAsset")]
         public string RewardAsset { get; set; } = string.Empty;
         /// <summary>
         /// APY
         /// </summary>
-        [JsonProperty("APY")]
+        [JsonPropertyName("APY")]
         public decimal APY { get; set; }
         /// <summary>
         /// Is renewable
         /// </summary>
-        [JsonProperty("isRenewable")]
+        [JsonPropertyName("isRenewable")]
         public bool IsRenewable { get; set; }
         /// <summary>
         /// Is auto renew enabled
         /// </summary>
-        [JsonProperty("isAutoRenew")]
+        [JsonPropertyName("isAutoRenew")]
         public bool IsAutoRenew { get; set; }
         /// <summary>
         /// Redeem date
         /// </summary>
-        [JsonProperty("redeemDate"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("redeemDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? RedeemDate { get; set; }
     }
 }

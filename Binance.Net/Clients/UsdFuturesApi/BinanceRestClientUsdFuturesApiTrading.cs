@@ -4,6 +4,8 @@ using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using CryptoExchange.Net.CommonObjects;
+using System.Drawing;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -75,22 +77,22 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var parameters = new ParameterCollection()
             {
-                { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new FuturesOrderTypeConverter(false)) }
+                { "symbol", symbol }
             };
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
-            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddOptionalEnum("timeInForce", timeInForce);
+            parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("activationPrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("workingType", workingType == null ? null : JsonConvert.SerializeObject(workingType, new WorkingTypeConverter(false)));
+            parameters.AddOptionalEnum("workingType", workingType);
             parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLower());
             parameters.AddOptionalParameter("closePosition", closePosition?.ToString().ToLower());
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
             parameters.AddOptionalEnum("priceMatch", priceMatch);
@@ -145,27 +147,26 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 var orderParameters = new ParameterCollection()
                 {
                     { "symbol", order.Symbol },
-                    { "side", JsonConvert.SerializeObject(order.Side, new OrderSideConverter(false)) },
-                    { "type", JsonConvert.SerializeObject(order.Type, new FuturesOrderTypeConverter(false)) },
                     { "newOrderRespType", "RESULT" }
                 };
-
+                orderParameters.AddEnum("side", order.Side);
+                orderParameters.AddEnum("type", order.Type);
                 orderParameters.AddOptionalParameter("quantity", order.Quantity?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("newClientOrderId", clientOrderId);
+                orderParameters.AddOptionalEnum("timeInForce", order.TimeInForce);
+                orderParameters.AddOptionalEnum("positionSide", order.PositionSide);
                 orderParameters.AddOptionalParameter("price", order.Price?.ToString(CultureInfo.InvariantCulture));
-                orderParameters.AddOptionalParameter("timeInForce", order.TimeInForce == null ? null : JsonConvert.SerializeObject(order.TimeInForce, new TimeInForceConverter(false)));
-                orderParameters.AddOptionalParameter("positionSide", order.PositionSide == null ? null : JsonConvert.SerializeObject(order.PositionSide, new PositionSideConverter(false)));
                 orderParameters.AddOptionalParameter("stopPrice", order.StopPrice?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("activationPrice", order.ActivationPrice?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("callbackRate", order.CallbackRate?.ToString(CultureInfo.InvariantCulture));
-                orderParameters.AddOptionalParameter("workingType", order.WorkingType == null ? null : JsonConvert.SerializeObject(order.WorkingType, new WorkingTypeConverter(false)));
+                orderParameters.AddOptionalEnum("workingType", order.WorkingType);
                 orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly?.ToString().ToLower());
                 orderParameters.AddOptionalParameter("priceProtect", order.PriceProtect?.ToString().ToUpper());
                 parameterOrders.Add(orderParameters);
                 i++;
             }
 
-            parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
+            parameters.Add("batchOrders", JsonSerializer.Serialize(parameterOrders));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
@@ -319,18 +320,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 var orderParameters = new ParameterCollection()
                 {
                     { "symbol", order.Symbol },
-                    { "side", JsonConvert.SerializeObject(order.Side, new OrderSideConverter(false)) },
                     { "quantity", order.Quantity.ToString(CultureInfo.InvariantCulture) },
                     { "price", order.Price.ToString(CultureInfo.InvariantCulture) },
                 };
-
+                orderParameters.AddEnum("side", order.Side);
                 orderParameters.AddOptionalParameter("orderId", order.OrderId);
                 orderParameters.AddOptionalParameter("origClientOrderId", order.ClientOrderId);
                 parameterOrders.Add(orderParameters);
                 i++;
             }
 
-            parameters.Add("batchOrders", JsonConvert.SerializeObject(parameterOrders));
+            parameters.Add("batchOrders", JsonSerializer.Serialize(parameterOrders));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Put, "fapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
@@ -484,7 +484,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("autoCloseType", closeType.HasValue ? JsonConvert.SerializeObject(closeType, new AutoCloseTypeConverter(false)) : null);
+            parameters.AddOptionalEnum("autoCloseType", closeType);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
@@ -540,11 +540,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "urgency", EnumConverter.GetString(urgency) },
             };
-            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddEnum("side", side);
+            parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("clientAlgoId", clientOrderId);
             parameters.AddOptionalParameter("reduceOnly", reduceOnly);
             parameters.AddOptionalParameter("limitPrice", limitPrice);
@@ -574,11 +574,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection()
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "duration", duration },
             };
-            parameters.AddOptionalParameter("positionSide", positionSide == null ? null : JsonConvert.SerializeObject(positionSide, new PositionSideConverter(false)));
+            parameters.AddEnum("side", side);
+            parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("clientAlgoId", clientOrderId);
             parameters.AddOptionalParameter("reduceOnly", reduceOnly);
             parameters.AddOptionalParameter("limitPrice", limitPrice);
@@ -622,7 +622,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("side", side == null? null: JsonConvert.SerializeObject(side, new OrderSideConverter(false)));
+            parameters.AddOptionalEnum("side", side);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page);
@@ -650,6 +650,20 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return await _baseClient.SendToAddressAsync<BinanceAlgoSubOrderList>(_spotBaseAddress, request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
+
+        #endregion
+
+        #region Get Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinancePositionV3>>> GetPositionsAsync(string? symbol = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v3/positionRisk", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BinancePositionV3>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
 
         #endregion
 

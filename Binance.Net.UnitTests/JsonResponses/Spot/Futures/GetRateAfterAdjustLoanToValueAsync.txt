@@ -1,3 +1,0 @@
-{
-    "afterCollateralRate":"0.89736451"
-}

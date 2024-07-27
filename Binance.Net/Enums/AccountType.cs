@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -156,6 +157,71 @@ namespace Binance.Net.Enums
         /// Trade group 27
         /// </summary>
         [Map("TRD_GRP_027")]
-        TradeGroup027
+        TradeGroup027,
+        /// <summary>
+        /// Trade group 28
+        /// </summary>
+        [Map("TRD_GRP_028")]
+        TradeGroup028,
+        /// <summary>
+        /// Trade group 29
+        /// </summary>
+        [Map("TRD_GRP_029")]
+        TradeGroup029,
+        /// <summary>
+        /// Trade group 30
+        /// </summary>
+        [Map("TRD_GRP_030")]
+        TradeGroup030,
+        /// <summary>
+        /// Trade group 31
+        /// </summary>
+        [Map("TRD_GRP_031")]
+        TradeGroup031,
+        /// <summary>
+        /// Trade group 32
+        /// </summary>
+        [Map("TRD_GRP_032")]
+        TradeGroup032,
+        /// <summary>
+        /// Trade group 33
+        /// </summary>
+        [Map("TRD_GRP_033")]
+        TradeGroup033,
+        /// <summary>
+        /// Trade group 34
+        /// </summary>
+        [Map("TRD_GRP_034")]
+        TradeGroup034,
+        /// <summary>
+        /// Trade group 35
+        /// </summary>
+        [Map("TRD_GRP_035")]
+        TradeGroup035,
+        /// <summary>
+        /// Trade group 36
+        /// </summary>
+        [Map("TRD_GRP_036")]
+        TradeGroup036,
+        /// <summary>
+        /// Trade group 37
+        /// </summary>
+        [Map("TRD_GRP_037")]
+        TradeGroup037,
+        /// <summary>
+        /// Trade group 38
+        /// </summary>
+        [Map("TRD_GRP_038")]
+        TradeGroup038,
+        /// <summary>
+        /// Trade group 39
+        /// </summary>
+        [Map("TRD_GRP_039")]
+        TradeGroup039,
+        /// <summary>
+        /// Trade group 40
+        /// </summary>
+        [Map("TRD_GRP_040")]
+        TradeGroup040
     }
 }

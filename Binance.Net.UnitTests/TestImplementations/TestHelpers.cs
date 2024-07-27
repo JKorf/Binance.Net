@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Clients;
@@ -17,7 +18,6 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Newtonsoft.Json;
 
 namespace Binance.Net.UnitTests.TestImplementations
 {
@@ -97,7 +97,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public static IBinanceRestClient CreateResponseClient<T>(T response, Action<BinanceRestOptions> options = null)
         {
             var client = (BinanceRestClient)CreateClient(options);
-            SetResponse(client, JsonConvert.SerializeObject(response));
+            SetResponse(client, JsonSerializer.Serialize(response));
             return client;
         }
 

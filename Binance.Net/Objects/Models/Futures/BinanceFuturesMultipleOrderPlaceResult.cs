@@ -5,8 +5,9 @@
     /// </summary>
     internal record BinanceFuturesMultipleOrderPlaceResult: BinanceFuturesOrder
     {
+        [JsonPropertyName("code")]
         public int Code { get; set; }
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
     }
 
@@ -15,8 +16,9 @@
     /// </summary>
     internal record BinanceUsdFuturesMultipleOrderPlaceResult : BinanceUsdFuturesOrder
     {
+        [JsonPropertyName("code")]
         public int Code { get; set; }
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
     }
 }

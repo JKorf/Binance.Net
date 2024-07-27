@@ -3,14 +3,14 @@ GET
 false
 {
   "lastUpdateId": 16769853,
-  "symbol": "BTCUSD_PERP", // Symbol
-  "pair": "BTCUSD",      // Pair
-  "E": 1591250106370,   // Message output time
-  "T": 1591250106368,   // Transaction time
+  "symbol": "BTCUSD_PERP",
+  "pair": "BTCUSD",     
+  "E": 1591250106370,   
+  "T": 1591250106368,   
   "bids": [
     [
-      "9638.0",         // PRICE
-      "431"             // QTY
+      "9638.0",         
+      "431"           
     ]
   ],
   "asks": [

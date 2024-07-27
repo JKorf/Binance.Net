@@ -1,7 +1,0 @@
-{
-  "loanCoin": "BUSD",
-  "collateralCoin": "BNB",
-  "direction": "ADDITIONAL",
-  "amount": "5.235",
-  "currentLTV": "0.52"
-}

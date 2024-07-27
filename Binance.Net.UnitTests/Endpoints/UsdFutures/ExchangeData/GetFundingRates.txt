@@ -6,7 +6,7 @@ false
         "symbol": "BTCUSDT",            
         "fundingTime": 1698768000000,   
         "fundingRate": "0.00010000",    
-        "markPrice": "34287.54619963"   // mark price associated with a particular funding fee charge
+        "markPrice": "34287.54619963"  
     },
     {
         "symbol": "BTCUSDT",

@@ -8,12 +8,14 @@
         /// <summary>
         /// Data
         /// </summary>
+        [JsonPropertyName("data")]
         public IEnumerable<BinanceBrokerageSubAccountSpotAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountSpotAssetInfo>();
 
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 
@@ -25,11 +27,13 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
+        [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
         
         /// <summary>
         /// Total Balance Of Btc
         /// </summary>
+        [JsonPropertyName("totalBalanceOfBtc")]
         public decimal TotalBalanceOfBtc { get; set; }
     }
 }

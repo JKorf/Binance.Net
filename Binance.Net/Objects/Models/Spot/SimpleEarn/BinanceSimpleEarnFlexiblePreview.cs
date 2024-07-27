@@ -8,32 +8,32 @@
         /// <summary>
         /// Reward asset
         /// </summary>
-        [JsonProperty("rewardAsset")]
+        [JsonPropertyName("rewardAsset")]
         public string RewardAsset { get; set; } = string.Empty;
         /// <summary>
         /// Airdrop asset
         /// </summary>
-        [JsonProperty("airDropAsset")]
+        [JsonPropertyName("airDropAsset")]
         public string AirDropAsset { get; set; } = string.Empty;
         /// <summary>
         /// Total amount
         /// </summary>
-        [JsonProperty("totalAmount")]
+        [JsonPropertyName("totalAmount")]
         public decimal TotalQuantity { get; set; }
         /// <summary>
         /// Estimated daily bonus rewards
         /// </summary>
-        [JsonProperty("estDailyBonusRewards")]
+        [JsonPropertyName("estDailyBonusRewards")]
         public decimal EstimatedDailyBonusRewards { get; set; }
         /// <summary>
         /// Estimated daily realtime rewards
         /// </summary>
-        [JsonProperty("estDailyRealTimeRewards")]
+        [JsonPropertyName("estDailyRealTimeRewards")]
         public decimal EstimatedDailyRealTimeRewards { get; set; }
         /// <summary>
         /// Estimated daily airdrop rewards
         /// </summary>
-        [JsonProperty("estDailyAirdropRewards")]
+        [JsonPropertyName("estDailyAirdropRewards")]
         public decimal EstimatedDailyAirdropRewards { get; set; }
     }
 }

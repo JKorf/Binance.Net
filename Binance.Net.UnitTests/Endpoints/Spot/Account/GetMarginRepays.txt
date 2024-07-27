@@ -4,12 +4,12 @@ true
 {
   "rows": [
       {
-        "isolatedSymbol": "BNBUSDT",     // isolated symbol, will not be returned for crossed margin
-        "amount": "14.00000000",   // Total amount borrowed/repaid
+        "isolatedSymbol": "BNBUSDT",    
+        "amount": "14.00000000",   
         "asset": "BNB",   
-        "interest": "0.01866667",    // Interest repaid
-        "principal": "13.98133333",   // Principal repaid
-        "status": "CONFIRMED",   //one of PENDING (pending execution), CONFIRMED (successfully execution), FAILED (execution failed, nothing happened to your account);
+        "interest": "0.01866667",   
+        "principal": "13.98133333",   
+        "status": "CONFIRMED",   
         "timestamp": 1563438204000,
         "txId": 2970933056
       }

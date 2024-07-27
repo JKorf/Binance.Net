@@ -10,26 +10,30 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Is locked
         /// </summary>
+        [JsonPropertyName("isLocked")]
         public bool IsLocked { get; set; }
         /// <summary>
         /// Planned time of recovery
         /// </summary>
+        [JsonPropertyName("plannedRecoverTime")]
         public int PlannedRecoverTime { get; set; }
 
         /// <summary>
         /// Conditions
         /// </summary>
-        [JsonProperty("triggerCondition")]
+        [JsonPropertyName("triggerCondition")]
         public Dictionary<string, int> TriggerConditions { get; set; } = new Dictionary<string, int>();
 
         /// <summary>
         /// Dictionary of indicator lists for symbols
         /// </summary>
+        [JsonPropertyName("indicators")]
         public Dictionary<string, IEnumerable<BinanceIndicator>> Indicators { get; set; } = new Dictionary<string, IEnumerable<BinanceIndicator>>();
         /// <summary>
         /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 
@@ -41,23 +45,23 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Indicator name
         /// </summary>
-        [JsonProperty("i")]
+        [JsonPropertyName("i")]
         public IndicatorType IndicatorType { get; set; }
 
         /// <summary>
         /// Count
         /// </summary>
-        [JsonProperty("c")]
+        [JsonPropertyName("c")]
         public int Count { get; set; }
         /// <summary>
         /// Current value
         /// </summary>
-        [JsonProperty("v")]
+        [JsonPropertyName("v")]
         public decimal CurrentValue { get; set; }
         /// <summary>
         /// Trigger value
         /// </summary>
-        [JsonProperty("t")]
+        [JsonPropertyName("t")]
         public decimal TriggerValue { get; set; }
     }
 }

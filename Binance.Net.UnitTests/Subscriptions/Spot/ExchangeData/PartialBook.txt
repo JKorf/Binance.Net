@@ -5,17 +5,17 @@
 	"stream": "btcusdt@depth5@100ms",
 	"data": 
      {
-      "lastUpdateId": 160,  // Last update ID
-      "bids": [             // Bids to be updated
+      "lastUpdateId": 160,  
+      "bids": [           
         [
-          "0.0024",         // Price level to be updated
-          "10"              // Quantity
+          "0.0024",      
+          "10"            
         ]
       ],
-      "asks": [             // Asks to be updated
+      "asks": [            
         [
-          "0.0026",         // Price level to be updated
-          "100"             // Quantity
+          "0.0026",        
+          "100"         
         ]
       ]
     }

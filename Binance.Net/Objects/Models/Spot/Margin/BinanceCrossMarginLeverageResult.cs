@@ -8,6 +8,7 @@
         /// <summary>
         /// Success
         /// </summary>
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
     }
 }

@@ -5,8 +5,8 @@ false
    {
       "pair": "BTCUSD",
       "longShortRatio": "0.1960",
-      "longAccount": "0.6622",  //66.22%
-      "shortAccount": "0.3378",  //33.78%
+      "longAccount": "0.6622",  
+      "shortAccount": "0.3378",  
       "timestamp": 1583139600000
    },
    {

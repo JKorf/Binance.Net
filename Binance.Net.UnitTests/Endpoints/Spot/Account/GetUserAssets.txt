@@ -16,22 +16,22 @@ true
             {
                 "addressRegex": "^(bnb1)[0-9a-z]{38}$",
                 "coin": "BTC",
-                "depositDesc": "Wallet Maintenance, Deposit Suspended", // shown only when "depositEnable" is false.
+                "depositDesc": "Wallet Maintenance, Deposit Suspended",
                 "depositEnable": false,
                 "isDefault": false,        
                 "memoRegex": "^[0-9A-Za-z\\-_]{1,120}$",
-                "minConfirm": 1,  // min number for balance confirmation
+                "minConfirm": 1,  
                 "name": "BEP2",
                 "network": "BNB",            
                 "specialTips": "Both a MEMO and an Address are required to successfully deposit your BEP2-BTCB tokens to Binance.",
-                "unLockConfirm": 0,  // confirmation number for balance unlock 
-                "withdrawDesc": "Wallet Maintenance, Withdrawal Suspended", // shown only when "withdrawEnable" is false.
+                "unLockConfirm": 0,  
+                "withdrawDesc": "Wallet Maintenance, Withdrawal Suspended",
                 "withdrawEnable": false,
                 "withdrawFee": "0.00000220",
                 "withdrawIntegerMultiple": "0.00000001",
                 "withdrawMax": "9999999999.99999999",
                 "withdrawMin": "0.00000440",
-                "sameAddress": true,  // If the coin needs to provide memo to withdraw
+                "sameAddress": true, 
                 "estimatedArrivalTime": 25,
                 "busy": false
             },

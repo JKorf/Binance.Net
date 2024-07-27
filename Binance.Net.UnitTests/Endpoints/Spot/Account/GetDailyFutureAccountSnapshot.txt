@@ -2,15 +2,15 @@ GET
 /sapi/v1/accountSnapshot
 true
 {
-   "code":200, // 200 for success; others are error codes
-   "msg":"", // error message
+   "code":200,
+   "msg":"",
    "snapshotVos":[
       {
          "data":{
             "assets":[
                {
                   "asset":"USDT",
-                  "marginBalance":"118.99782335", // Not real-time data, can ignore
+                  "marginBalance":"118.99782335", 
                   "walletBalance":"120.23811389"
                }
             ],
@@ -20,7 +20,7 @@ true
                   "markPrice":"7257.66239673",
                   "positionAmt":"0.01000000",
                   "symbol":"BTCUSDT",
-                  "unRealizedProfit":"1.24029054"  // Only show the value at the time of opening the position
+                  "unRealizedProfit":"1.24029054"  
                }
             ]
          },

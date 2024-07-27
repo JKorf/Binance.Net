@@ -11,12 +11,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(SystemStatusConverter))]
+        [JsonPropertyName("status")]
         public SystemStatus Status { get; set; }
         /// <summary>
         /// Additional info
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string? Message { get; set; }
     }
 }

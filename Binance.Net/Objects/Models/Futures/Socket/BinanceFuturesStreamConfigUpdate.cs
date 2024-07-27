@@ -8,19 +8,19 @@
         /// <summary>
         /// Leverage Update data
         /// </summary>
-        [JsonProperty("ac")]
+        [JsonPropertyName("ac")]
         public BinanceFuturesStreamLeverageUpdateData? LeverageUpdateData { get; set; }
 
         /// <summary>
         /// Position mode Update data
         /// </summary>
-        [JsonProperty("ai")]
+        [JsonPropertyName("ai")]
         public BinanceFuturesStreamConfigUpdateData? ConfigUpdateData { get; set; }
 
         /// <summary>
         /// Transaction time
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
         /// <summary>
         /// The listen key the update was for
@@ -36,13 +36,13 @@
         /// <summary>
         /// The symbol this balance is for
         /// </summary>
-        [JsonProperty("s")]
+        [JsonPropertyName("s")]
         public string? Symbol { get; set; }
 
         /// <summary>
         /// The symbol this leverage is for
         /// </summary>
-        [JsonProperty("l")]
+        [JsonPropertyName("l")]
         public int Leverage { get; set; }
     }
 
@@ -54,7 +54,7 @@
         /// <summary>
         /// Multi-Assets Mode
         /// </summary>
-        [JsonProperty("j")]
+        [JsonPropertyName("j")]
         public bool MultiAssetMode { get; set; }
     }
 }

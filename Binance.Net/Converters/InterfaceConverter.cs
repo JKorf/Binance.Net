@@ -1,20 +1,19 @@
-﻿namespace Binance.Net.Converters
+﻿using System.Text.Json;
+
+namespace Binance.Net.Converters
 {
-    internal class InterfaceConverter<TImp>: JsonConverter
+    internal class InterfaceConverter<TImp, TInterface> : JsonConverter<TInterface> where TImp: TInterface
     {
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(Type objectType) => objectType == typeof(TInterface);
+
+        public override TInterface? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return true;
+            return (TImp)JsonSerializer.Deserialize(ref reader, typeof(TImp), options)!;
         }
 
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options)
         {
-            return serializer.Deserialize<TImp>(reader);
-        }
-
-        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
+            JsonSerializer.Serialize(writer, value, typeof(TImp), options);
         }
     }
 }

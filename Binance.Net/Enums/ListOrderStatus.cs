@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Enums
+﻿using CryptoExchange.Net.Attributes;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// List order status
@@ -8,14 +10,17 @@
         /// <summary>
         /// Executing
         /// </summary>
+        [Map("EXECUTING")]
         Executing,
         /// <summary>
         /// Executed
         /// </summary>
+        [Map("REJECT")]
         Done,
         /// <summary>
         /// Rejected
         /// </summary>
+        [Map("ALL_DONE")]
         Rejected
     }
 }

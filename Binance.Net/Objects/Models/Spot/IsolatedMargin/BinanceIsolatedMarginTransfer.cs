@@ -11,36 +11,39 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
         /// <summary>
         /// Quantity of the transfer
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Transfer asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
         /// Status of the transfer
         /// </summary>
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of the transfer
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// From
         /// </summary>
-        [JsonProperty("transFrom"), JsonConverter(typeof(IsolatedMarginTransferDirectionConverter))]
+        [JsonPropertyName("transFrom")]
         public IsolatedMarginTransferDirection From { get; set; }
         /// <summary>
         /// To
         /// </summary>
-        [JsonProperty("transTo"), JsonConverter(typeof(IsolatedMarginTransferDirectionConverter))]
+        [JsonPropertyName("transTo")]
         public IsolatedMarginTransferDirection To { get; set; }
     }
 }

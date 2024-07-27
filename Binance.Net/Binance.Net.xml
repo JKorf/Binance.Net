@@ -700,7 +700,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetSubAccountMarginAssetInfoAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Enums.FuturesAccountType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.ChangeBnbBurnForSubAccountSpotAndMarginAsync(System.String,System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -721,16 +721,16 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.TransferAsync(System.String,System.Decimal,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesAccountType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetTransferHistoryAsync(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Enums.FuturesAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.SubAccountDepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetBrokerAccountInfoAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -739,7 +739,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetBrokerCommissionRebatesRecentAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Enums.FuturesAccountType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures">
@@ -988,7 +988,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSubAccount.GetSubAccountsFuturesPositionRiskAsync(Binance.Net.Enums.FuturesAccountType,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountFuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.FuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSubAccount.TransferSubAccountMarginAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountMarginTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1314,6 +1314,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetAccountVipLevelAndStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetCommissionRatesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData">
@@ -1902,7 +1905,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetAccountInfoAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetBalancesAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -1948,6 +1951,12 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.SetBnbBurnStatusAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetSymbolConfigurationAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetAccountConfigurationAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData">
@@ -2112,6 +2121,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetAlgoSubOrdersAsync(System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi">
             <summary>
             Client providing access to the Binance Usd futures websocket Api
@@ -2234,6 +2246,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Converters.SymbolFilterConverter.CreateConverter(System.Type,System.Text.Json.JsonSerializerOptions)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Enums.AccountSource">
@@ -2411,6 +2426,71 @@
             Trade group 27
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup028">
+            <summary>
+            Trade group 28
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup029">
+            <summary>
+            Trade group 29
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup030">
+            <summary>
+            Trade group 30
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup031">
+            <summary>
+            Trade group 31
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup032">
+            <summary>
+            Trade group 32
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup033">
+            <summary>
+            Trade group 33
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup034">
+            <summary>
+            Trade group 34
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup035">
+            <summary>
+            Trade group 35
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup036">
+            <summary>
+            Trade group 36
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup037">
+            <summary>
+            Trade group 37
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup038">
+            <summary>
+            Trade group 38
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup039">
+            <summary>
+            Trade group 39
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AccountType.TradeGroup040">
+            <summary>
+            Trade group 40
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
             <summary>
             Account update reason
@@ -2486,6 +2566,11 @@
             Options Settle Profit
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.AccountUpdateReason.AutoExchange">
+            <summary>
+            Auto exchange
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.AccountUpdateReason.CoinSwapWithdraw">
             <summary>
             Coin swap withdraw
@@ -2524,96 +2609,6 @@
         <member name="F:Binance.Net.Enums.AutoCloseType.Liquidation">
             <summary>
             Liquidation
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.BinanceBusdConvertType">
-            <summary>
-            Busd convert type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.AutoConvertDeposit">
-            <summary>
-            Auto convert when deposit
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.AutoConvertWithdrawal">
-            <summary>
-            Auto convert when withdraw
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.WithdrawalFailed">
-            <summary>
-            In case withdraw failed
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.ApiConvert">
-            <summary>
-            Convert via sapi call
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceBusdConvertType.AutoConvert">
-            <summary>
-            Busd auto convert job
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.BinanceEarningType">
-            <summary>
-            Mining earnings type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.MiningWallet">
-            <summary>
-            Mining wallet
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.MergedMining">
-            <summary>
-            Merged mining
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.ActivityBonus">
-            <summary>
-            Activity bonus
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.Rebate">
-            <summary>
-            Rebate
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.SmartPool">
-            <summary>
-            Smart pool
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.MiningAddress">
-            <summary>
-            Mining address
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.PoolSavings">
-            <summary>
-            Pool savings
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.Transfered">
-            <summary>
-            Transfered
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.IncomeTransfer">
-            <summary>
-            Income transfer
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.HashrateResaleMiningWallet">
-            <summary>
-            Hashrate resale - mining wallet
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.BinanceEarningType.HashrateResalePoolSavings">
-            <summary>
-            Hashrate resale - pool savings
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.BlvtStatus">
@@ -2687,13 +2682,19 @@
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageAccountType.Spot">
-            <summary> Spot </summary>
+            <summary> 
+            Spot 
+            </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageAccountType.FuturesUsdt">
-            <summary> Futures USDT </summary>
+            <summary> 
+            Futures USDT
+            </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageAccountType.FuturesCoin">
-            <summary> Futures Coin </summary>
+            <summary>
+            Futures Coin
+            </summary>
         </member>
         <member name="T:Binance.Net.Enums.BrokerageTransferTransactionStatus">
             <summary>
@@ -2701,16 +2702,54 @@
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageTransferTransactionStatus.Init">
-            <summary> Init </summary>
+            <summary>
+            Init
+            </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageTransferTransactionStatus.Process">
-            <summary> Process </summary>
+            <summary>
+            Process
+            </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageTransferTransactionStatus.Success">
-            <summary> Success </summary>
+            <summary> 
+            Success 
+            </summary>
         </member>
         <member name="F:Binance.Net.Enums.BrokerageTransferTransactionStatus.Failure">
-            <summary> Failure </summary>
+            <summary> 
+            Failure 
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.BusdConvertType">
+            <summary>
+            Busd convert type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BusdConvertType.AutoConvertDeposit">
+            <summary>
+            Auto convert when deposit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BusdConvertType.AutoConvertWithdrawal">
+            <summary>
+            Auto convert when withdraw
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BusdConvertType.WithdrawalFailed">
+            <summary>
+            In case withdraw failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BusdConvertType.ApiConvert">
+            <summary>
+            Convert via sapi call
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.BusdConvertType.AutoConvert">
+            <summary>
+            Busd auto convert job
+            </summary>
         </member>
         <member name="T:Binance.Net.Enums.C2COrderStatus">
             <summary>
@@ -2910,6 +2949,66 @@
         <member name="F:Binance.Net.Enums.DownloadStatus.Completed">
             <summary>
             Ready for download
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.EarningType">
+            <summary>
+            Mining earnings type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.MiningWallet">
+            <summary>
+            Mining wallet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.MergedMining">
+            <summary>
+            Merged mining
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.ActivityBonus">
+            <summary>
+            Activity bonus
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.Rebate">
+            <summary>
+            Rebate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.SmartPool">
+            <summary>
+            Smart pool
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.MiningAddress">
+            <summary>
+            Mining address
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.PoolSavings">
+            <summary>
+            Pool savings
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.Transfered">
+            <summary>
+            Transfered
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.IncomeTransfer">
+            <summary>
+            Income transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.HashrateResaleMiningWallet">
+            <summary>
+            Hashrate resale - mining wallet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.EarningType.HashrateResalePoolSavings">
+            <summary>
+            Hashrate resale - pool savings
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.ExecutionType">
@@ -4337,6 +4436,26 @@
             Interest
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.SubAccountDepositStatus">
+            <summary>
+            Sub Account Deposit Status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountDepositStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountDepositStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SubAccountDepositStatus.CreditedButCannotWithdraw">
+            <summary>
+            Credited but cannot withdraw
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SubAccountMarginTransferType">
             <summary>
             Sub account margin transfer type
@@ -4365,31 +4484,6 @@
         <member name="F:Binance.Net.Enums.SubAccountTransferSubAccountType.TransferOut">
             <summary>
             From sub account to main spot account
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.SubAccountFuturesTransferType">
-            <summary>
-            Transfer type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromSpotToUsdtFutures">
-            <summary>
-            From sub account spot to sub account usdt-m futures
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromUsdtFuturesToSpot">
-            <summary>
-            From sub account usdt-m futures to sub account spot
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromSpotToCoinFutures">
-            <summary>
-            From sub account spot to sub account coin-m futures
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.SubAccountFuturesTransferType.FromCoinFuturesToSpot">
-            <summary>
-            From sub account coin-m futures to sub account spot
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SubscriptionStatus">
@@ -6466,7 +6560,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer result</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.TransferFuturesAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesAccountType,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Sub Account Transfer (Futures)
             <para>You need to enable "internal transfer" option for the api key which requests this endpoint</para>
@@ -6502,7 +6596,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetTransferFuturesHistoryAsync(System.String,Binance.Net.Enums.FuturesAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Transfer History (Futures)
             </summary>
@@ -6517,7 +6611,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Transfer history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetSubAccountDepositHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.SubAccountDepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Sub Account Deposit History
             <para>Please notice the default startDate and endDate to make sure that time interval is within 0-7 days</para>
@@ -6548,7 +6642,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Rebates history</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Enums.FuturesAccountType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Broker Futures Commission Rebate Record
             </summary>
@@ -6615,7 +6709,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage.GetSubAccountFuturesAssetInfoAsync(Binance.Net.Enums.FuturesAccountType,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Sub Account Futures Asset info
             <para>If subAccountId is not sent, the size must be sent</para>
@@ -7597,7 +7691,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Position risk</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.SubAccountFuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSubAccount.TransferSubAccountFuturesAsync(System.String,System.String,System.Decimal,Binance.Net.Enums.FuturesTransferType,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Transfers from or to a futures sub account
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#futures-transfer-for-sub-account-for-master-account" /></para>
@@ -8699,6 +8793,16 @@
             Get account VIP level and margin/futures enabled status
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-info-user_data" /></para>
             </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetCommissionRatesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get current account commission rates.
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-commission-rates-user_data" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -10600,7 +10704,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetPositionInformationAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Gets account information
+            DEPRECATED; USE Trading.GetPositionsAsync INSTEAD
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data" /></para>
             </summary>
             <param name="symbol">Symbol</param>
@@ -10710,14 +10814,12 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetAccountInfoAsync(System.Threading.CancellationToken)">
             <summary>
-            Gets account information, including balances
-            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#account-information-v2-user_data" /></para>
+            Get account information, including position and balances
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /></para>
             </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>The account information</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetBalancesAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>.
@@ -10882,6 +10984,21 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetSymbolConfigurationAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get user symbol configuration
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetAccountConfigurationAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get user account configuration
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData">
             <summary>
@@ -11496,6 +11613,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get position information
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi">
             <summary>
@@ -14423,6 +14548,81 @@
             Status
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceCommissions">
+            <summary>
+            Binance commissions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.StandardCommissions">
+            <summary>
+            Standard commission rates on trades from the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.TaxCommissions">
+            <summary>
+            Tax commission rates for trades from the order.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Discount">
+            <summary>
+            Discount commission when paying in BNB
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo">
+            <summary>
+            Commission info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.Discount">
+            <summary>
+            Standard commission is reduced by this rate when paying commission in BNB.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.EnabledForAccount">
+            <summary>
+            Enabled for account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.EnabledForSymbol">
+            <summary>
+            Enabled for symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.DiscountAsset">
+            <summary>
+            Discount asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo">
+            <summary>
+            Commission info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Maker">
+            <summary>
+            Maker fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Taker">
+            <summary>
+            Taker fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Buyer">
+            <summary>
+            Buyer fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissionInfo.Sell">
+            <summary>
+            Seller fee
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDelistSchedule">
             <summary>
             Spot symbol delist info
@@ -14778,9 +14978,14 @@
             The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.LastUpdateIdStream">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.LastUpdateId">
             <summary>
             Setter for last update id, need for Json.Net
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.Symbol">
+            <summary>
+            The symbol of the order book 
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.EventType">
@@ -14793,14 +14998,14 @@
             Event time of the update
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.BidsStream">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.Bids">
             <summary>
-            Setter for bids (needed forJson.Net)
+            The list of bids
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.AsksStream">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEventOrderBook.Asks">
             <summary>
-            Setter for asks (needed forJson.Net)
+            The list of asks
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceExchangeInfo">
@@ -15055,7 +15260,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesSnapshotPosition.PositionAmt">
             <summary>
-            PositionAmt
+            Position amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesSnapshotPosition.UnrealizedProfit">
@@ -15264,11 +15469,6 @@
             The result of placing a new order
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOcoOrder.CreateTime">
-            <summary>
-            The time the order was placed
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceCurrentRateLimit">
             <summary>
             Rate limit info
@@ -15452,11 +15652,6 @@
         <member name="T:Binance.Net.Objects.Models.Spot.BinancePlacedOrder">
             <summary>
             The result of placing a new order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOrder.CreateTime">
-            <summary>
-            The time the order was placed
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOrder.Trades">
@@ -16037,9 +16232,9 @@
             Allowed order types
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IceBergAllowed">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IcebergAllowed">
             <summary>
-            Ice berg orders allowed
+            Iceberg orders allowed
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.CancelReplaceAllowed">
@@ -16090,6 +16285,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.Permissions">
             <summary>
             Permissions types
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PermissionSets">
+            <summary>
+            Permission sets
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.Filters">
@@ -16210,6 +16410,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceFilter.MultiplierDown">
             <summary>
             The max factor the price can deviate down
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceFilter.MultiplierDecimal">
+            <summary>
+            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolPercentPriceFilter.AveragePriceMinutes">
@@ -17842,21 +18047,6 @@
             Date
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType">
-            <summary>
-            Futures type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType.USDT">
-            <summary>
-            USDT-Ⓜ Futures
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageFuturesType.COIN">
-            <summary>
-            COIN-Ⓜ Futures
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageIpRestrictionBase">
             <summary>
             IP Restriction
@@ -18142,26 +18332,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountCreateResult.Tag">
             <summary>
             Tag
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositStatus">
-            <summary>
-            Sub Account Deposit Status
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositStatus.Pending">
-            <summary>
-            Pending
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositStatus.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositStatus.CreditedButCannotWithdraw">
-            <summary>
-            Credited but cannot withdraw
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageSubAccountDepositTransaction">
@@ -18727,481 +18897,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.CreateTime">
             <summary>
             Creation time
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory">
-            <summary>
-            Adjust history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.Quantity">
-            <summary>
-            Quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.PreCollateralRate">
-            <summary>
-            Pre adjustment rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.AfterCollateralRate">
-            <summary>
-            After adjustment rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.Direction">
-            <summary>
-            Direction
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvHistory.AdjustTime">
-            <summary>
-            Time of adjustment
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvResult">
-            <summary>
-            Adjust result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.LoanAsset">
-            <summary>
-            Loan asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.Direction">
-            <summary>
-            The direction
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.Quantity">
-            <summary>
-            The quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustLtvResult.Timestamp">
-            <summary>
-            The time
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustMaxAmounts">
-            <summary>
-            Max quantities
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustMaxAmounts.MaxInQuantity">
-            <summary>
-            The max in amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAdjustMaxAmounts.MaxOutQuantity">
-            <summary>
-            The max out amount
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAfterAdjust">
-            <summary>
-            After adjustment rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralAfterAdjust.AfterCollateralRate">
-            <summary>
-            The rate after adjustment
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory">
-            <summary>
-            Borrow history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.BorrowId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.ConfirmedTime">
-            <summary>
-            Time of confirmation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.CollateralRate">
-            <summary>
-            The collateral rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.LeftTotal">
-            <summary>
-            Total left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.LeftPrincipal">
-            <summary>
-            Principal left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.DeadLine">
-            <summary>
-            Dead line
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.CollateralQuantity">
-            <summary>
-            Collateral quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowHistory.Status">
-            <summary>
-            The status of the transfer
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult">
-            <summary>
-            Borrow result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult.BorrowId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult.Asset">
-            <summary>
-            The asset borrowed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult.CollateralAsset">
-            <summary>
-            The asset used for collateral
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult.Quantity">
-            <summary>
-            The quantity borrowed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult.CollateralQuantity">
-            <summary>
-            The collateral quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralBorrowResult.Timestamp">
-            <summary>
-            The timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation">
-            <summary>
-            Collateral info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.LoanAsset">
-            <summary>
-            The loan asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.CollateralAsset">
-            <summary>
-            The collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.Rate">
-            <summary>
-            Rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.MarginCallCollateralRate">
-            <summary>
-            Margin call collateral rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.LiquidationCollateralRate">
-            <summary>
-            Liquidation collateal rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.CurrentCollateralRate">
-            <summary>
-            Current collateral rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.InterestRate">
-            <summary>
-            Interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInformation.InterestGracePeriod">
-            <summary>
-            In days
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory">
-            <summary>
-            Interest history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory.InterestAsset">
-            <summary>
-            Interest asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory.Interest">
-            <summary>
-            Interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory.InterestFreeLimitUsed">
-            <summary>
-            Interest free limit used
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory.PrincipalInterest">
-            <summary>
-            Principal interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralInterestHistory.Timestamp">
-            <summary>
-            Time
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory">
-            <summary>
-            Liquidation history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.CollateralQuantityForLiquidation">
-            <summary>
-            Quantity for liquidation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.ForceLiquidationStartTime">
-            <summary>
-            Start time of liquidation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.RestCollateralQuantityAfterLiquidation">
-            <summary>
-            Rest collateral quantity after liquidation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.RestLoanQuantity">
-            <summary>
-            Rest loan quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralLiquidationHistory.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory">
-            <summary>
-            Repay history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.RepayId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.ConfirmedTime">
-            <summary>
-            Time of confirmation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.UpdateTime">
-            <summary>
-            Time of last update
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.Quantity">
-            <summary>
-            Quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.ReleasedCollateral">
-            <summary>
-            Released collateral quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.Status">
-            <summary>
-            The status of the transfer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.RepayType">
-            <summary>
-            Repay type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.RepayCollateral">
-            <summary>
-            Collateral repayment
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayHistory.Price">
-            <summary>
-            Loan/collateral exchange rate
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayResult">
-            <summary>
-            Repay result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayResult.RepayId">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayResult.Asset">
-            <summary>
-            The asset borrowed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayResult.CollateralAsset">
-            <summary>
-            The asset used for collateral
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralRepayResult.Quantity">
-            <summary>
-            The quantity borrowed
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet">
-            <summary>
-            Cross colateral wallet info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet.TotalCrossCollateral">
-            <summary>
-            Total cross collateral
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet.TotalBorrowed">
-            <summary>
-            Total borrowed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet.TotalInterest">
-            <summary>
-            Total interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet.InterestFreeLimit">
-            <summary>
-            Interest free limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWallet.CrossCollaterals">
-            <summary>
-            Cross collaterals
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry">
-            <summary>
-            Cross collateral data
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.LoanAsset">
-            <summary>
-            Loan asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.CollateralAsset">
-            <summary>
-            Collateral asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.Locked">
-            <summary>
-            Quantity locked
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.LoanQuantity">
-            <summary>
-            Loan quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.CurrentCollateralRate">
-            <summary>
-            Current collateral rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.InterestFreeLimitUsed">
-            <summary>
-            Used interest free limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.PrincipalForInterest">
-            <summary>
-            Principal interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Futures.BinanceCrossCollateralWalletEntry.Interest">
-            <summary>
-            Interest
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginSymbol">
@@ -21529,591 +21224,6 @@
             Loan amount
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition">
-            <summary>
-            Customized fixed project position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.CanTransfer">
-            <summary>
-            Can transfer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.CreateTime">
-            <summary>
-            Create timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Duration">
-            <summary>
-            Duration
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.EndTime">
-            <summary>
-            End time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Interest">
-            <summary>
-            Interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.InterestRate">
-            <summary>
-            Interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Lot">
-            <summary>
-            Lot
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.PositionId">
-            <summary>
-            Position id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Principal">
-            <summary>
-            Principal
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.ProjectId">
-            <summary>
-            Project id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.ProjectName">
-            <summary>
-            Project name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.PurchaseTime">
-            <summary>
-            Time of purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.RedeemDate">
-            <summary>
-            Redeem date
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.StartTime">
-            <summary>
-            Start time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceCustomizedFixedProjectPosition.Type">
-            <summary>
-            Type
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition">
-            <summary>
-            Flexible product position
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.AnnualInterestRate">
-            <summary>
-            Annual interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.AverageAnnualInterestRate">
-            <summary>
-            Average annual interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TierAnnualInterestRate">
-            <summary>
-            Tier Average annual interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.CanRedeem">
-            <summary>
-            Can redeem
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.DailyInterestRate">
-            <summary>
-            Daily interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.FreeQuantity">
-            <summary>
-            Quantity free
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.FreezeQuantity">
-            <summary>
-            Quantity frozen
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.LockedQuantity">
-            <summary>
-            Quantity locked
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.ProductId">
-            <summary>
-            The product id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.ProductName">
-            <summary>
-            The product name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.RedeemingQuantity">
-            <summary>
-            Redeeming quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TodayPurchasedQuantity">
-            <summary>
-            Quantity purchased today
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TotalQuantity">
-            <summary>
-            Total quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceFlexibleProductPosition.TotalInterest">
-            <summary>
-            Total interest
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory">
-            <summary>
-            Interest record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Interest">
-            <summary>
-            Interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.LendingType">
-            <summary>
-            Lending type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingInterestHistory.ProductName">
-            <summary>
-            Name of the product
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount">
-            <summary>
-            Lending account
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalQuantityInBTC">
-            <summary>
-            Total quantity in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalQuantityInUSDT">
-            <summary>
-            Total quantity in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInBTC">
-            <summary>
-            Total fixed quantity in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFixedQuantityInUSDT">
-            <summary>
-            Total fixed quantity in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFlexibleInBTC">
-            <summary>
-            Total flexible in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.TotalFlexibleInUSDT">
-            <summary>
-            Total flexible in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingAccount.PositionAmounts">
-            <summary>
-            Position amounts
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount">
-            <summary>
-            Lending position amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.Quantity">
-            <summary>
-            Amount of the asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.QuantityInBTC">
-            <summary>
-            Amount in btc
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.QuantityInUSDT">
-            <summary>
-            Amount in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPositionAmount.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult">
-            <summary>
-            Purchase result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.DailyPurchaseId">
-            <summary>
-            The id of the purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.Success">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingChangeToDailyResult.Timestamp">
-            <summary>
-            Time
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPurchaseResult">
-            <summary>
-            Purchase result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceLendingPurchaseResult.PurchaseId">
-            <summary>
-            The id of the purchase
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceProject">
-            <summary>
-            Binance project info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.DisplayPriority">
-            <summary>
-            Display priority
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Duration">
-            <summary>
-            Duration
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.InterestPerLot">
-            <summary>
-            Interest per lot
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.InterestRate">
-            <summary>
-            Interest rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotSize">
-            <summary>
-            Lot size
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsLowLimit">
-            <summary>
-            Lots low limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsPurchased">
-            <summary>
-            Lots purchased
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.LotsUpLimit">
-            <summary>
-            Lots upper limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.MaxLotsPerUser">
-            <summary>
-            Max number of lots per user
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.NeedKYC">
-            <summary>
-            Needs know your customer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.ProjectId">
-            <summary>
-            Project id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.ProjectName">
-            <summary>
-            Project name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.Type">
-            <summary>
-            Type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceProject.WithAreaLimitation">
-            <summary>
-            Has area limitation
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft">
-            <summary>
-            Purchase quota left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseQuotaLeft.LeftQuota">
-            <summary>
-            The quota left
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord">
-            <summary>
-            Purchase record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Quantity">
-            <summary>
-            Quantity purchased
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.CreateTime">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.LendingType">
-            <summary>
-            Lending type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Lot">
-            <summary>
-            Lot
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.ProductName">
-            <summary>
-            Name of the product
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.PurchaseId">
-            <summary>
-            Purchase id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinancePurchaseRecord.Status">
-            <summary>
-            Purchase status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft">
-            <summary>
-            Redemption quota left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.DailyQuota">
-            <summary>
-            Daily quota
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.LeftQuota">
-            <summary>
-            Left quota
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionQuotaLeft.MinimalRedemptionQuantity">
-            <summary>
-            Minimal redemption quantity
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord">
-            <summary>
-            Redemption record
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Quantity">
-            <summary>
-            Quantity purchased
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Asset">
-            <summary>
-            Asset name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.CreateTime">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.StartTime">
-            <summary>
-            Start time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Interest">
-            <summary>
-            Interest
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Type">
-            <summary>
-            Redeem type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.ProjectId">
-            <summary>
-            Id of the project
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.ProjectName">
-            <summary>
-            Name of the project
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Principal">
-            <summary>
-            Principal
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceRedemptionRecord.Status">
-            <summary>
-            Purchase status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct">
-            <summary>
-            Savings product
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Asset">
-            <summary>
-            The asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.AverageAnnualInterestRate">
-            <summary>
-            Average annual interest rage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.CanPurchase">
-            <summary>
-            Can purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.CanRedeem">
-            <summary>
-            Can redeem
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.DailyInterestPerThousand">
-            <summary>
-            Daily interest per thousand
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Featured">
-            <summary>
-            Is featured
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.MinimalPurchaseQuantity">
-            <summary>
-            Minimal quantity to purchase
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.ProductId">
-            <summary>
-            Product id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.PurchasedQuantity">
-            <summary>
-            Purchased quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.Status">
-            <summary>
-            Status of the product
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimit">
-            <summary>
-            Upper limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Lending.BinanceSavingsProduct.UpperLimitPerUser">
-            <summary>
-            Upper limit per user
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnAccount">
             <summary>
             Simple earn account info
@@ -23094,266 +22204,6 @@
             Redemption quota left
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory">
-            <summary>
-            Historical staking info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.PositionId">
-            <summary>
-            Position id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Project">
-            <summary>
-            Project
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Quantity">
-            <summary>
-            Quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.LockPeriod">
-            <summary>
-            Lock period
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.DeliverDate">
-            <summary>
-            Redemption date
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Type">
-            <summary>
-            Type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPersonalQuota">
-            <summary>
-            Quota left
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPersonalQuota.PersonalQuotaLeft">
-            <summary>
-            Quota left
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition">
-            <summary>
-            Staking position info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PositionId">
-            <summary>
-            Position id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.ProductId">
-            <summary>
-            Project id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Asset">
-            <summary>
-            Locked asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Quantity">
-            <summary>
-            Locked quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PurchaseTime">
-            <summary>
-            Purchase time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Duration">
-            <summary>
-            Lock period in days
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.AccrualDays">
-            <summary>
-            Accrue days
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RewardAsset">
-            <summary>
-            Reward asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Apy">
-            <summary>
-            Apy
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RewardQuantity">
-            <summary>
-            Earned quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.ExtraRewardAsset">
-            <summary>
-            Rewards asset of extra staking type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.ExtraRewardApy">
-            <summary>
-            Extra rewards Apy
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.EstimatedExtraRewardQuantity">
-            <summary>
-            Rewards of extra staking type, distribute when order expires
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.NextInterestPay">
-            <summary>
-            Next estimated interest payment
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.NextInterestPayDate">
-            <summary>
-            Next interest payment date
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PayInterestPeriod">
-            <summary>
-            Interest cycle
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RedeemQuantityEarly">
-            <summary>
-            Early redemption amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.InterestEndDate">
-            <summary>
-            Interest accrual end date
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.DeliverDate">
-            <summary>
-            Redemption arrival time
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RedeemPeriod">
-            <summary>
-            Redemption interval
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.RedeemQuantity">
-            <summary>
-            Quantity under redemption
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.PartialQuantityDeliverDate">
-            <summary>
-            Arrival time of partial redemption amount of order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.CanRedeemEarly">
-            <summary>
-            When it is true, early redemption can be operated 
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Renewable">
-            <summary>
-            When it is true, auto staking can be operated
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Type">
-            <summary>
-            Order type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPosition.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct">
-            <summary>
-            Staking product info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct.ProjectId">
-            <summary>
-            Project id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct.Details">
-            <summary>
-            Product details
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProduct.Quota">
-            <summary>
-            Product quota
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails">
-            <summary>
-            Staking product details
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Asset">
-            <summary>
-            Lock up asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.RewardAsset">
-            <summary>
-            Reward asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Duration">
-            <summary>
-            Duration in days
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Renewable">
-            <summary>
-            Renewable
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingProductDetails.Apy">
-            <summary>
-            Apy
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingQuota">
-            <summary>
-            Staking product quota
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingQuota.Quota">
-            <summary>
-            Total Personal quota
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingQuota.Minimum">
-            <summary>
-            Minimum amount per order
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingResult">
             <summary>
             Staking result
@@ -23362,16 +22212,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingResult.Success">
             <summary>
             Successful
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPositionResult">
-            <summary>
-            Staking result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingPositionResult.PositionId">
-            <summary>
-            Id of the position
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccount">
@@ -24769,6 +23609,51 @@
             Available for withdraw
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration">
+            <summary>
+            Account configuration
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.FeeTier">
+            <summary>
+            Fee tier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.CanTrade">
+            <summary>
+            Can trade
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.CanDeposit">
+            <summary>
+            Can deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.CanWithdraw">
+            <summary>
+            Can withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.DualSidePosition">
+            <summary>
+            Dual side position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.MultiAssetsMargin">
+            <summary>
+            Multi assets margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountConfiguration.TradeGroupId">
+            <summary>
+            Trade group id
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfo">
             <summary>
             Information about an account
@@ -24872,6 +23757,201 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfo.UpdateTime">
             <summary>
             The time of account info was updated
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3">
+            <summary>
+            Account info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalInitialMargin">
+            <summary>
+            Total initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalMaintenanceMargin">
+            <summary>
+            Total maintenance margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalWalletBalance">
+            <summary>
+            Total wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalUnrealizedProfit">
+            <summary>
+            Total unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalMarginBalance">
+            <summary>
+            Total margin balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalPositionInitialMargin">
+            <summary>
+            Total position initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalOpenOrderInitialMargin">
+            <summary>
+            Total open order initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalCrossWalletBalance">
+            <summary>
+            Total cross wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.TotalCrossUnrealizedPnl">
+            <summary>
+            Total cross unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.MaxWithdrawQuantity">
+            <summary>
+            Max withdraw quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoV3.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset">
+            <summary>
+            Asset information
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.WalletBalance">
+            <summary>
+            Wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.UnrealizedProfit">
+            <summary>
+            Unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.MaintenanceMargin">
+            <summary>
+            Maintenance margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.PositionInitialMargin">
+            <summary>
+            Position initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.OpenOrderInitialMargin">
+            <summary>
+            Open order initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.CrossWalletBalance">
+            <summary>
+            Cross wallet balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.CrossUnrealizedPnl">
+            <summary>
+            Cross unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.AvailableBalance">
+            <summary>
+            Available balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.MaxWithdrawQuantity">
+            <summary>
+            Max withdraw quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoAsset.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition">
+            <summary>
+            Position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.PositionAmount">
+            <summary>
+            Position amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.UnrealizedProfit">
+            <summary>
+            Unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.Notional">
+            <summary>
+            Notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.IsolatedWallet">
+            <summary>
+            Isolated wallet
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.MaintenanceMargin">
+            <summary>
+            Maintenance margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfoPosition.UpdateTime">
+            <summary>
+            Update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountUserCommissionRate">
@@ -25542,14 +24622,9 @@
             Symbol for the resulting income history, may be null if not associated with a trading pair
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesIncomeHistory.IncomeTypeString">
-            <summary>
-            Type of income as string
-            </summary>
-        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesIncomeHistory.IncomeType">
             <summary>
-            Type of income
+            Type of income as string
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesIncomeHistory.Income">
@@ -26124,7 +25199,7 @@
             User's position mode
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMode.PositionMode">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMode.IsHedgeMode">
             <summary>
             true": Hedge Mode mode; "false": One-way Mode
             </summary>
@@ -26201,7 +25276,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbol.RequiredMarginPercent">
             <summary>
-            The required margin percent
+            The required margin percentage
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbol.BaseAsset">
@@ -26277,11 +25352,6 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbol.MarketTakeBound">
             <summary>
             The max price difference rate (from mark price) a market order can make
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbol.UnderlyingSupType">
-            <summary>
-            Currently Empty
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbol.TimeInForce">
@@ -26412,126 +25482,6 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesBracket.MaintAmount">
             <summary>
             Auxiliary number for quick calculation 
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbolFilter">
-            <summary>
-            A filter for order placed on a symbol. Can be either a <see cref="T:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter"/>, <see cref="T:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter"/>, <see cref="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxAlgorithmicOrdersFilter"/>
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbolFilter.FilterType">
-            <summary>
-            The type of this filter
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter">
-            <summary>
-            Price filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter.MinPrice">
-            <summary>
-            The minimal price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter.MaxPrice">
-            <summary>
-            The max price the order can be for
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPriceFilter.TickSize">
-            <summary>
-            The tick size of the price. The price can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter">
-            <summary>
-            Lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter">
-            <summary>
-            Market lot size filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter.MinQuantity">
-            <summary>
-            The minimal quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter.MaxQuantity">
-            <summary>
-            The maximum quantity of an order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMarketLotSizeFilter.StepSize">
-            <summary>
-            The tick size of the quantity. The quantity can not have more precision as this and can only be incremented in steps of this.
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxOrdersFilter">
-             <summary>
-            Max orders filter
-             </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxOrdersFilter.MaxNumberOrders">
-            <summary>
-            The max number of orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxAlgorithmicOrdersFilter">
-            <summary>
-            Max algo orders filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMaxAlgorithmicOrdersFilter.MaxNumberAlgorithmicOrders">
-            <summary>
-            The max number of Algorithmic orders for this symbol
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter">
-            <summary>
-            Price percentage filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter.MultiplierUp">
-            <summary>
-            The max factor the price can deviate up
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter.MultiplierDown">
-            <summary>
-            The max factor the price can deviate down
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolPercentPriceFilter.MultiplierDecimal">
-            <summary>
-            The amount of minutes the average price of trades is calculated over. 0 means the last price is used
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolMinNotionalFilter">
-            <summary>
-            Min notional filter
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolMinNotionalFilter.MinNotional">
-            <summary>
-            The minimal total quote quantity of an order. This is calculated by Price * Quantity.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesTrade">
@@ -26889,6 +25839,141 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin.MaxQuantity">
             <summary>
             Max quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionV3">
+            <summary>
+            Position information
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.PositionAmt">
+            <summary>
+            Position amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.EntryPrice">
+            <summary>
+            Entry price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.BreakEvenPrice">
+            <summary>
+            Break even price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.UnrealizedProfit">
+            <summary>
+            Unrealized profit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.LiquidationPrice">
+            <summary>
+            Liquidation price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.Notional">
+            <summary>
+            Notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.IsolatedWallet">
+            <summary>
+            Isolated wallet
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.MaintenanceMargin">
+            <summary>
+            Maintenance margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.PositionInitialMargin">
+            <summary>
+            Position initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.OpenOrderInitialMargin">
+            <summary>
+            Open order initial margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.Adl">
+            <summary>
+            Auto deleverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.BidNotional">
+            <summary>
+            Bid notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.AskNotional">
+            <summary>
+            Ask notional
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration">
+            <summary>
+            Symbol configuration
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.IsAutoAddMargin">
+            <summary>
+            Is auto add margin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.MaxNotionalValue">
+            <summary>
+            Max notional value
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate">

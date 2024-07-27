@@ -10,44 +10,49 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// The loaning asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// The loan quantity
         /// </summary>
-        [JsonProperty("initialLoanAmount")]
+        [JsonPropertyName("initialLoanAmount")]
         public decimal InitialLoanQuantity { get; set; }
         /// <summary>
         /// The collateral quantity
         /// </summary>
-        [JsonProperty("initialCollateralAmount")]
+        [JsonPropertyName("initialCollateralAmount")]
         public decimal InitialCollateralQuantity { get; set; }
         /// <summary>
         /// Hourly interest rate
         /// </summary>
+        [JsonPropertyName("hourlyInterestRate")]
         public decimal HourlyInterestRate { get; set; }
         /// <summary>
         /// Loan term
         /// </summary>
+        [JsonPropertyName("loanTerm")]
         public int LoanTerm { get; set; }
         /// <summary>
         /// Borrow order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
         /// Borrow timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("borrowTime")]
         public DateTime BorrowTime { get; set; }
         /// <summary>
         /// Status of the order
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("status")]
         public BorrowStatus Status { get; set; }
     }
 }

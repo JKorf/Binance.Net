@@ -10,22 +10,24 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Pair
         /// </summary>
+        [JsonPropertyName("pair")]
         public string? Pair { get; set; } = string.Empty;
         /// <summary>
         /// The symbol of the order book 
         /// </summary>
+        [JsonPropertyName("symbol")]
         public new string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// The symbol of the order book 
         /// </summary>
-        [JsonProperty("E"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("E"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime MessageTime { get; set; }
 
         /// <summary>
         /// The ID of the last update
         /// </summary>
-        [JsonProperty("T"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
     }
 }

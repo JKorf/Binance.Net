@@ -8,11 +8,13 @@
         /// <summary>
         /// Success
         /// </summary>
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
 
         /// <summary>
         /// Symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
     }
 }

@@ -17,8 +17,8 @@ false
             "rateLimitType": "ORDERS"
         }
     ],
-    "serverTime": 1565613908500, // Ignore please. If you want to check current server time, please check via "GET /dapi/v1/time"
-    "symbols": [ // contract symbols
+    "serverTime": 1565613908500, 
+    "symbols": [ 
         {
             "filters": [
                 {
@@ -63,10 +63,10 @@ false
                 "FOK",
                 "GTX"
             ],
-            "liquidationFee": "0.010000",   // liquidation fee rate
-            "marketTakeBound": "0.30",  // the max price difference rate( from mark price) a market order can make
-            "symbol": "BTCUSD_200925", // contract symbol name
-            "pair": "BTCUSD",  // underlying symbol
+            "liquidationFee": "0.010000",   
+            "marketTakeBound": "0.30",  
+            "symbol": "BTCUSD_200925", 
+            "pair": "BTCUSD",
             "contractType": "CURRENT_QUARTER", 
             "deliveryDate": 1601020800000,
             "onboardDate": 1590739200000,
@@ -75,14 +75,14 @@ false
             "quoteAsset": "USD",
             "baseAsset": "BTC",   
             "marginAsset": "BTC",
-            "pricePrecision": 1,    // please do not use it as tickSize
-            "quantityPrecision": 0, // please do not use it as stepSize
+            "pricePrecision": 1,  
+            "quantityPrecision": 0,
             "baseAssetPrecision": 8,
             "quotePrecision": 8,
-            "equalQtyPrecision": 4,  // ignore
-            "triggerProtect": "0.0500", // threshold for algo order with "priceProtect"
-            "maintMarginPercent": "2.5000",  // ignore
-            "requiredMarginPercent": "5.0000",  // ignore
+            "equalQtyPrecision": 4,  
+            "triggerProtect": "0.0500", 
+            "maintMarginPercent": "2.5000", 
+            "requiredMarginPercent": "5.0000", 
             "underlyingType": "COIN", 
             "underlyingSubType": [] 
         }

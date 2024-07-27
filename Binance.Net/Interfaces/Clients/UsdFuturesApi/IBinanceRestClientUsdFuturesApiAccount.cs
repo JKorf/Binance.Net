@@ -10,7 +10,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     public interface IBinanceRestClientUsdFuturesApiAccount
     {
         /// <summary>
-        /// Gets account information
+        /// DEPRECATED; USE Trading.GetPositionsAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Symbol</param>
@@ -124,13 +124,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets account information, including balances
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#account-information-v2-user_data" /></para>
+        /// Get account information, including position and balances
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /></para>
         /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
-        Task<WebCallResult<BinanceFuturesAccountInfo>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesAccountInfoV3>> GetAccountInfoAsync(CancellationToken ct = default);
 
         /// <summary>.
         /// Gets account balances
@@ -295,5 +293,21 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> SetBnbBurnStatusAsync(bool feeBurn, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get user symbol configuration
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /></para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<BinanceSymbolConfiguration>>> GetSymbolConfigurationAsync(string? symbol = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get user account configuration
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceFuturesAccountConfiguration>> GetAccountConfigurationAsync(CancellationToken ct = default);
+
     }
 }

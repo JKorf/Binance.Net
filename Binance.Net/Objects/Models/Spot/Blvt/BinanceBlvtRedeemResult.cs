@@ -11,30 +11,33 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
         /// <summary>
         /// Id
         /// </summary>
+        [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
         /// Status
         /// </summary>
-        [JsonConverter(typeof(BlvtStatusConverter))]
+        [JsonPropertyName("status")]
         public BlvtStatus Status { get; set; }
         /// <summary>
         /// Name of the token
         /// </summary>
+        [JsonPropertyName("tokenName")]
         public string TokenName { get; set; } = string.Empty;
         /// <summary>
         /// Redemption value in usdt
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Redemption token quantity
         /// </summary>
-        [JsonProperty("redeemAmount")]
+        [JsonPropertyName("redeemAmount")]
         public decimal RedeemQuantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 }

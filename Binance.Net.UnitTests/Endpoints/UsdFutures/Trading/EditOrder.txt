@@ -23,8 +23,8 @@ true
     "workingType": "CONTRACT_PRICE",
     "priceProtect": false,
     "origType": "LIMIT",
-    "priceMatch": "NONE",              //price match mode
-    "selfTradePreventionMode": "NONE", //self trading preventation mode
-    "goodTillDate": 0,      //order pre-set auot cancel time for TIF GTD order
+    "priceMatch": "NONE",         
+    "selfTradePreventionMode": "NONE", 
+    "goodTillDate": 0,      
     "updateTime": 1629182711600
 }

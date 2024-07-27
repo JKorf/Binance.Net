@@ -8,72 +8,72 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Latest annual percentage rate
         /// </summary>
-        [JsonProperty("latestAnnualPercentageRate")]
+        [JsonPropertyName("latestAnnualPercentageRate")]
         public decimal LatestAnnualPercentageRate { get; set; }
         /// <summary>
         /// Tier annual percentage rate
         /// </summary>
-        [JsonProperty("tierAnnualPercentageRate")]
+        [JsonPropertyName("tierAnnualPercentageRate")]
         public Dictionary<string, decimal> TierAnnualPercentageRate { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
         /// Can redeem product
         /// </summary>
-        [JsonProperty("canRedeem")]
+        [JsonPropertyName("canRedeem")]
         public bool CanRedeem { get; set; }
         /// <summary>
         /// product id
         /// </summary>
-        [JsonProperty("productId")]
+        [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
         /// Total quantity of position
         /// </summary>
-        [JsonProperty("totalAmount")]
+        [JsonPropertyName("totalAmount")]
         public decimal TotalQuantity { get; set; }
         /// <summary>
         /// Air drop percentage rate of yesterday
         /// </summary>
-        [JsonProperty("yesterdayAirdropPercentageRate")]
+        [JsonPropertyName("yesterdayAirdropPercentageRate")]
         public decimal YesterdayAirdropPercentageRate { get; set; }
         /// <summary>
         /// Air drop asset
         /// </summary>
-        [JsonProperty("airDropAsset")]
+        [JsonPropertyName("airDropAsset")]
         public string AirDropAsset { get; set; } = string.Empty;
         /// <summary>
         /// Collateral quantity
         /// </summary>
-        [JsonProperty("collateralAmount")]
+        [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
         /// Realtime rewards of yesterday
         /// </summary>
-        [JsonProperty("yesterdayRealTimeRewards")]
+        [JsonPropertyName("yesterdayRealTimeRewards")]
         public decimal YesterdayRealTimeRewards { get; set; }
         /// <summary>
         /// Cumulative bonus rewards
         /// </summary>
-        [JsonProperty("cumulativeBonusRewards")]
+        [JsonPropertyName("cumulativeBonusRewards")]
         public decimal CumulativeBonusRewards { get; set; }
         /// <summary>
         /// Cumulative realtime rewards
         /// </summary>
-        [JsonProperty("cumulativeRealTimeRewards")]
+        [JsonPropertyName("cumulativeRealTimeRewards")]
         public decimal CumulativeRealTimeRewards { get; set; }
         /// <summary>
         /// Cumulative total rewards
         /// </summary>
-        [JsonProperty("cumulativeTotalRewards")]
+        [JsonPropertyName("cumulativeTotalRewards")]
         public decimal CumulativeTotalRewards { get; set; }
         /// <summary>
         /// Is auto subscribe enabled
         /// </summary>
-        [JsonProperty("autoSubscribe")]
+        [JsonPropertyName("autoSubscribe")]
         public bool AutoSubscribe { get; set; }
     }
 }

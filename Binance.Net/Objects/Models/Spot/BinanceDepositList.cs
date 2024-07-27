@@ -12,65 +12,69 @@ namespace Binance.Net.Objects.Models.Spot
         /// Time the deposit was added to Binance
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("insertTime")]
         public DateTime InsertTime { get; set; }
         /// <summary>
         /// The quantity deposited
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The asset deposited
         /// </summary>
-        [JsonProperty("coin")]
+        [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The address of the deposit
         /// </summary>
+        [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
         /// The tag of the address of the deposit
         /// </summary>
+        [JsonPropertyName("addressTag")]
         public string AddressTag { get; set; } = string.Empty;
         /// <summary>
         /// The network
         /// </summary>
+        [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
         /// The  id
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
         /// The transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// The status of the deposit
         /// </summary>
-        [JsonConverter(typeof(DepositStatusConverter))]
+        [JsonPropertyName("status")]
         public DepositStatus Status { get; set; }
 
         /// <summary>
         /// The transfer type
         /// </summary>
-        [JsonConverter(typeof(WithdrawDepositTransferTypeConverter))]
+        [JsonPropertyName("transferType")]
         public WithdrawDepositTransferType TransferType { get; set; }
 
         /// <summary>
         /// Confirmations
         /// </summary>
-        [JsonProperty("confirmTimes")]
+        [JsonPropertyName("confirmTimes")]
         public string Confirmations { get; set; } = string.Empty;
         /// <summary>
         /// Network confirmations for unlocking
         /// </summary>
-        [JsonProperty("unlockConfirm")]
-        public string ConfirmationsForUnlock { get; set; } = string.Empty;
+        [JsonPropertyName("unlockConfirm")]
+        public int ConfirmationsForUnlock { get; set; }
         /// <summary>
         /// The wallet type
         /// </summary>
-        [JsonProperty("walletType")]
+        [JsonPropertyName("walletType")]
         [JsonConverter(typeof(EnumConverter))]
         public WalletType WalletType { get; set; }
     }

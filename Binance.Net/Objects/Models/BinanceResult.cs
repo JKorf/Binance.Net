@@ -8,11 +8,12 @@
         /// <summary>
         /// Result code
         /// </summary>
+        [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
         /// Message
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
     }
 
@@ -25,6 +26,7 @@
         /// <summary>
         /// The data
         /// </summary>
+        [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
     }
 }

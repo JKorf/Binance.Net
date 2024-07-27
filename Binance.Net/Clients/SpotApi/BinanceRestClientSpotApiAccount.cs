@@ -97,7 +97,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("network", network);
             parameters.AddOptionalParameter("transactionFeeFlag", transactionFeeFlag);
             parameters.AddOptionalParameter("addressTag", addressTag);
-            parameters.AddOptionalParameter("walletType", walletType != null ? JsonConvert.SerializeObject(walletType, new WalletTypeConverter(false)) : null);
+            parameters.AddOptionalEnum("walletType", walletType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/capital/withdraw/apply", BinanceExchange.RateLimiter.SpotRestUid, 600, true, parameterPosition: HttpMethodParameterPosition.InUri);
@@ -113,7 +113,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("withdrawOrderId", withdrawOrderId);
-            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new WithdrawalStatusConverter(false)) : null);
+            parameters.AddOptionalEnum("status", status);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -149,7 +149,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("status", status != null ? JsonConvert.SerializeObject(status, new DepositStatusConverter(false)) : null);
+            parameters.AddOptionalEnum("status", status);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -431,11 +431,11 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new ParameterCollection
             {
-                { "type", JsonConvert.SerializeObject(type, new UniversalTransferTypeConverter(false)) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
 
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("fromSymbol", fromSymbol);
             parameters.AddOptionalParameter("toSymbol", toSymbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -449,10 +449,8 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfersAsync(UniversalTransferType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection
-            {
-                { "type", JsonConvert.SerializeObject(type, new UniversalTransferTypeConverter(false)) }
-            };
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
@@ -595,10 +593,8 @@ namespace Binance.Net.Clients.SpotApi
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
 
-            var parameters = new ParameterCollection
-            {
-                { "direction", JsonConvert.SerializeObject(direction, new TransferDirectionConverter(false)) }
-            };
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("direction", direction);
             parameters.AddOptionalParameter("isolatedSymbol", isolatedSymbol);
             parameters.AddOptionalParameter("size", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
@@ -1325,6 +1321,21 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/account/info", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceVipLevelAndStatus>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Trade Fee
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceCommissions>> GetCommissionRatesAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/account/commission", BinanceExchange.RateLimiter.SpotRestIp, 20, true);
+            return await _baseClient.SendAsync<BinanceCommissions>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

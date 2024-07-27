@@ -8,13 +8,14 @@
         /// <summary>
         /// The pair the price is for
         /// </summary>
+        [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
 
         /// <inheritdoc />
-        [JsonProperty("baseVolume")]
+        [JsonPropertyName("baseVolume")]
         public override decimal Volume { get; set; }
         /// <inheritdoc />
-        [JsonProperty("volume")]
+        [JsonPropertyName("volume")]
         public override decimal QuoteVolume { get; set; }
     }
 }

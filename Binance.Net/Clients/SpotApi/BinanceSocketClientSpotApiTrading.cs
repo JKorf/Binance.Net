@@ -166,13 +166,13 @@ namespace Binance.Net.Clients.SpotApi
         {
             string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
-                { "type", JsonConvert.SerializeObject(type, new SpotOrderTypeConverter(false)) },
                 { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
             };
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("cancelOrderId", cancelOrderId);
@@ -182,10 +182,10 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("timeInForce", timeInForce == null ? null : JsonConvert.SerializeObject(timeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newOrderRespType", orderResponseType == null ? null : JsonConvert.SerializeObject(orderResponseType, new OrderResponseTypeConverter(false)));
+            parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
 
             return await _client.QueryAsync<BinanceReplaceOrderResult>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.cancelReplace", parameters, true, true, ct: ct).ConfigureAwait(false);
@@ -245,15 +245,15 @@ namespace Binance.Net.Clients.SpotApi
             limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
             stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "price", price.ToString(CultureInfo.InvariantCulture) },
                 { "stopPrice", stopPrice.ToString(CultureInfo.InvariantCulture) }
             };
 
+            parameters.AddEnum("side", side);
             parameters.AddOptionalParameter("limitStrategyId", limitStrategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limitStrategyType", limitStrategyType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQty?.ToString(CultureInfo.InvariantCulture));
@@ -270,7 +270,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
-            parameters.AddOptionalParameter("stopLimitTimeInForce", stopLimitTimeInForce == null ? null : JsonConvert.SerializeObject(stopLimitTimeInForce, new TimeInForceConverter(false)));
+            parameters.AddOptionalEnum("stopLimitTimeInForce", stopLimitTimeInForce);
 
             return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
@@ -314,11 +314,11 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "aboveType", EnumConverter.GetString(aboveOrderType) },
                 { "belowType", EnumConverter.GetString(belowOrderType) },
             };
+            parameters.AddEnum("side", side);
 
             parameters.AddOptional("aboveClientOrderId", aboveClientOrderId);
             parameters.AddOptional("aboveIcebergQty", aboveIcebergQuantity);

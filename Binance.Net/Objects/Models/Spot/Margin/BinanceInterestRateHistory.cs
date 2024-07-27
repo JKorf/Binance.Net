@@ -8,20 +8,23 @@
         /// <summary>
         /// The asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// The daily interest
         /// </summary>
-        [JsonProperty("dailyInterestRate")]
+        [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterest { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Vip level
         /// </summary>
-        public string VipLevel { get; set; } = string.Empty;
+        [JsonPropertyName("vipLevel")]
+        public int VipLevel { get; set; }
     }
 }

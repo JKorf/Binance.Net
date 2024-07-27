@@ -8,7 +8,7 @@
         /// <summary>
         /// Personal quota left
         /// </summary>
-        [JsonProperty("leftPersonalQuota")]
+        [JsonPropertyName("leftPersonalQuota")]
         public decimal PersonalQuotaLeft { get; set; }
     }
 }

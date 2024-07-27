@@ -4,8 +4,8 @@ false
 [
     { 
         "symbol": "DEFIUSDT",
-        "time": 1589437530011,    // Current time
-        "component": "baseAsset", //Component asset
+        "time": 1589437530011,  
+        "component": "baseAsset", 
         "baseAssetList":[
             {
                 "baseAsset":"BAL",

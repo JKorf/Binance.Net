@@ -5,7 +5,7 @@ true
   {
     "symbol": "LTCBTC",
     "orderId": 1,
-    "orderListId": -1, //Unless OCO, the value will always be -1
+    "orderListId": -1, 
     "clientOrderId": "myOrder1",
     "price": "0.1",
     "origQty": "1.0",

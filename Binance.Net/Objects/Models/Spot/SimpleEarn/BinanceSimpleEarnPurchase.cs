@@ -8,17 +8,17 @@
         /// <summary>
         /// Success
         /// </summary>
-        [JsonProperty("success")]
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
         /// <summary>
         /// Purchase id
         /// </summary>
-        [JsonProperty("purchaseId")]
+        [JsonPropertyName("purchaseId")]
         public long PurchaseId { get; set; }
         /// <summary>
         /// Position id
         /// </summary>
-        [JsonProperty("positionId")]
+        [JsonPropertyName("positionId")]
         public string? PositionId { get; set; }
     }
 }

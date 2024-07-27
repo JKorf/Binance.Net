@@ -17,8 +17,8 @@ false
         "baseVolume": "5192.94797687",
         "openTime": 1591170300000,
         "closeTime": 1591256718418,
-        "firstId": 600507, // First tradeId
-        "lastId": 697803,  // Last tradeId
-        "count": 97297    // Trade count    
+        "firstId": 600507, 
+        "lastId": 697803,  
+        "count": 97297   
     }
 ]

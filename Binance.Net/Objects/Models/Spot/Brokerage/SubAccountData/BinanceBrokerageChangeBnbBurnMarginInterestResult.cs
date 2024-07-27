@@ -8,12 +8,13 @@
         /// <summary>
         /// Sub Account Id
         /// </summary>
+        [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Is Interest BNB Burn
         /// </summary> 
-        [JsonProperty("interestBNBBurn")]
+        [JsonPropertyName("interestBNBBurn")]
         public bool IsInterestBnbBurn { get; set; }
     }
 }

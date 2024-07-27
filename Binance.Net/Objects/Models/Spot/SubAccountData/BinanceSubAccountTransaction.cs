@@ -8,7 +8,7 @@
         /// <summary>
         /// The transaction id
         /// </summary>
-        [JsonProperty("txnId")]
+        [JsonPropertyName("txnId")]
         public string TransactionId { get; set; } = string.Empty;
     }
 }

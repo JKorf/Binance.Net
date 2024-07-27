@@ -5,7 +5,7 @@ true
   "symbol": "LTCBTC",
   "origClientOrderId": "myOrder1",
   "orderId": 4,
-  "orderListId": -1, //Unless part of an OCO, the value will always be -1.
+  "orderListId": -1, 
   "clientOrderId": "cancelMyOrder1",
   "transactTime": 1684804350068,
   "price": "2.00000000",

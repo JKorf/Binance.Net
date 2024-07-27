@@ -13,18 +13,19 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Timestamp of the data
         /// </summary>
-        [JsonConverter(typeof(DateTimeConverter)), JsonProperty("updateTime")]
+        [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("updateTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Account type the data is for
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("type")]
         public AccountType Type { get; set; }
 
         /// <summary>
         /// Snapshot data
         /// </summary>
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public BinanceFuturesAccountSnapshotData Data { get; set; } = default!;
     }
 
@@ -36,10 +37,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// List of assets
         /// </summary>
+        [JsonPropertyName("assets")]
         public IEnumerable<BinanceFuturesAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
         /// <summary>
         /// List of positions
         /// </summary>
+        [JsonPropertyName("position")]
         public IEnumerable<BinanceFuturesSnapshotPosition> Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
     }
 
@@ -51,14 +54,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Name of the asset
         /// </summary>
+        [JsonPropertyName("asset")]
         public string? Asset { get; set; }
         /// <summary>
         /// Margin balance
         /// </summary>
+        [JsonPropertyName("marginBalance")]
         public decimal MarginBalance { get; set; }
         /// <summary>
         /// Wallet balance
         /// </summary>
+        [JsonPropertyName("walletBalance")]
         public decimal? WalletBalance { get; set; }
     }
 
@@ -70,22 +76,27 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string? Symbol { get; set; }
         /// <summary>
         /// Entry price
         /// </summary>
+        [JsonPropertyName("entryPrice")]
         public decimal EntryPrice { get; set; }
         /// <summary>
         /// Mark price
         /// </summary>
+        [JsonPropertyName("markPrice")]
         public decimal? MarkPrice { get; set; }
         /// <summary>
-        /// PositionAmt
+        /// Position amount
         /// </summary>
+        [JsonPropertyName("positionAmt")]
         public decimal? PositionAmt { get; set; }
         /// <summary>
         /// Unrealized profit
         /// </summary>
+        [JsonPropertyName("unRealizedProfit")]
         public decimal? UnrealizedProfit { get; set; }
     }
 }

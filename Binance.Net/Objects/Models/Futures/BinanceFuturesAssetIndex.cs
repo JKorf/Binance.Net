@@ -8,51 +8,57 @@
         /// <summary>
         /// The symbol
         /// </summary>
+        [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Index
         /// </summary>
+        [JsonPropertyName("index")]
         public decimal Index { get; set; }
         /// <summary>
         /// Bid buffer
         /// </summary>
+        [JsonPropertyName("bidBuffer")]
         public decimal BidBuffer { get; set; }
         /// <summary>
         /// Ask buffer
         /// </summary>
+        [JsonPropertyName("askBuffer")]
         public decimal AskBuffer { get; set; }
         /// <summary>
         /// Bid price
         /// </summary>
-        [JsonProperty("bidRate")]
+        [JsonPropertyName("bidRate")]
         public decimal BidPrice { get; set; }
         /// <summary>
         /// Ask price
         /// </summary>
-        [JsonProperty("askRate")]
+        [JsonPropertyName("askRate")]
         public decimal AskPrice { get; set; }
         /// <summary>
         /// Auto exchange bid buffer
         /// </summary>
+        [JsonPropertyName("autoExchangeBidBuffer")]
         public decimal AutoExchangeBidBuffer { get; set; }
         /// <summary>
         /// Auto exchange ask buffer
         /// </summary>
+        [JsonPropertyName("autoExchangeAskBuffer")]
         public decimal AutoExchangeAskBuffer { get; set; }
         /// <summary>
         /// Auto exchange bid price
         /// </summary>
-        [JsonProperty("autoExchangeBidRate")]
+        [JsonPropertyName("autoExchangeBidRate")]
         public decimal AutoExchangeBidPrice { get; set; }
         /// <summary>
         /// Auto exchange ask price
         /// </summary>
-        [JsonProperty("autoExchangeAskRate")]
+        [JsonPropertyName("autoExchangeAskRate")]
         public decimal AutoExchangeAskPrice { get; set; }
     }
 }

@@ -8,5 +8,5 @@ false
   "bidQty": "431.00000000",
   "askPrice": "4.00000200",
   "askQty": "9.00000000",
-  "time": 1589437530011   // Transaction time
+  "time": 1589437530011 
 }

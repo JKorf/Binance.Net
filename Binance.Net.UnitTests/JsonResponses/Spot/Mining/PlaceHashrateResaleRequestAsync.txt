@@ -1,5 +1,0 @@
-{
-  "code": 0,
-  "msg": "",
-  "data": 171  // Mining Account
-}

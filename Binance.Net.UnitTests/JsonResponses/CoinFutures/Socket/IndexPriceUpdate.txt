@@ -1,6 +1,0 @@
-  {
-    "e": "indexPriceUpdate",  // Event type
-    "E": 1591261236000,       // Event time
-    "i": "BTCUSD",            // Pair
-    "p": "9636.57860000",     // Index Price
-  }

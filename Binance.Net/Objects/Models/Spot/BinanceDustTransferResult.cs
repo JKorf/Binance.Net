@@ -8,16 +8,17 @@
         /// <summary>
         /// Total service charge
         /// </summary>
-        [JsonProperty("totalServiceCharge")]
+        [JsonPropertyName("totalServiceCharge")]
         public decimal TotalServiceCharge { get; set; }
         /// <summary>
         /// Total transferred
         /// </summary>
-        [JsonProperty("totalTransfered")]
+        [JsonPropertyName("totalTransfered")]
         public decimal TotalTransferred { get; set; }
         /// <summary>
         /// Transfer entries
         /// </summary>
+        [JsonPropertyName("transferResult")]
         public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
     }
 
@@ -29,31 +30,32 @@
         /// <summary>
         /// Quantity of dust
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Asset
         /// </summary>
+        [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp of conversion
         /// </summary>
-        [JsonConverter(typeof(DateTimeConverter)), JsonProperty("operateTime")]
+        [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("operateTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Service charge
         /// </summary>
-        [JsonProperty("serviceChargeAmount")]
+        [JsonPropertyName("serviceChargeAmount")]
         public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("tranId")]
+        [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
         /// BNB result quantity
         /// </summary>
-        [JsonProperty("transferedAmount")]
+        [JsonPropertyName("transferedAmount")]
         public decimal TransferredQuantity { get; set; }
     }
 }

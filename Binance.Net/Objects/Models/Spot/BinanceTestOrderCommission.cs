@@ -8,17 +8,17 @@
         /// <summary>
         /// Standard fee rates on trades from the order
         /// </summary>
-        [JsonProperty("standardCommissionForOrder")]
+        [JsonPropertyName("standardCommissionForOrder")]
         public BinanceFee StandardFeeForOrder { get; set; } = null!;
         /// <summary>
         /// Tax fee rates on trades from the order
         /// </summary>
-        [JsonProperty("taxCommissionForOrder")]
+        [JsonPropertyName("taxCommissionForOrder")]
         public BinanceFee TaxFeeForOrder { get; set; } = null!;
         /// <summary>
         /// Discount info
         /// </summary>
-        [JsonProperty("discount")]
+        [JsonPropertyName("discount")]
         public BinanceDiscount Discount { get; set; } = null!;
     }
 
@@ -30,12 +30,12 @@
         /// <summary>
         /// Maker fee
         /// </summary>
-        [JsonProperty("maker")]
+        [JsonPropertyName("maker")]
         public decimal Maker { get; set; }
         /// <summary>
         /// Taker fee
         /// </summary>
-        [JsonProperty("taker")]
+        [JsonPropertyName("taker")]
         public decimal Taker { get; set; }
     }
 
@@ -47,22 +47,22 @@
         /// <summary>
         /// Is discount enabled for the account
         /// </summary>
-        [JsonProperty("enabledForAccount")]
+        [JsonPropertyName("enabledForAccount")]
         public bool EnabledForAccount { get; set; }
         /// <summary>
         /// Is discount enabled for the symbol
         /// </summary>
-        [JsonProperty("enabledForSymbol")]
+        [JsonPropertyName("enabledForSymbol")]
         public bool EnabledForSymbol { get; set; }
         /// <summary>
         /// The discount asset
         /// </summary>
-        [JsonProperty("discountAsset")]
+        [JsonPropertyName("discountAsset")]
         public string DiscountAsset { get; set; } = string.Empty;
         /// <summary>
         /// Discount rate
         /// </summary>
-        [JsonProperty("discount")]
+        [JsonPropertyName("discount")]
         public decimal Discount { get; set; }
     }
 }

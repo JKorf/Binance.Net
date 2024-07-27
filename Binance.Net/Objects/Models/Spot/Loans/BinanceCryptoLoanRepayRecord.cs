@@ -10,43 +10,49 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// The loaning asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Borrow order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
         /// Repay timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("repayTime")]
         public DateTime RepayTime { get; set; }
         /// <summary>
         /// Status of the repay
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("repayStatus")]
         public BorrowStatus RepayStatus { get; set; }
         /// <summary>
         /// Collateral return
         /// </summary>
+        [JsonPropertyName("collateralReturn")]
         public decimal CollateralReturn { get; set; }
         /// <summary>
         /// Collateral used
         /// </summary>
+        [JsonPropertyName("collateralUsed")]
         public decimal CollateralUsed { get; set; }
         /// <summary>
         /// Repay quantity
         /// </summary>
-        [JsonProperty("repayAmount")]
+        [JsonPropertyName("repayAmount")]
         public decimal RepayQuantity { get; set; }
         /// <summary>
         /// 1 for "repay with borrowed asset", 2 for "repay with collateral"
         /// </summary>
+        [JsonPropertyName("repayType")]
         public int RepayType { get; set; }
     }
 }

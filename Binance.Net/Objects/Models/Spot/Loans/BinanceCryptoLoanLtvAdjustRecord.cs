@@ -8,38 +8,43 @@
         /// <summary>
         /// The loaning asset
         /// </summary>
-        [JsonProperty("loanCoin")]
+        [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
         /// The collateral asset
         /// </summary>
-        [JsonProperty("collateralCoin")]
+        [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Direction
         /// </summary>
+        [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
         /// Amount
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Pre adjust ltv
         /// </summary>
+        [JsonPropertyName("preLTV")]
         public decimal PreLtv { get; set; }
         /// <summary>
         /// Post adjust ltv
         /// </summary>
+        [JsonPropertyName("afterLTV")]
         public decimal AfterLtv { get; set; }
         /// <summary>
         /// Adjust time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("adjustTime")]
         public DateTime AdjustTime { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
+        [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
     }
 }

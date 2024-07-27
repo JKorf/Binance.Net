@@ -8,32 +8,32 @@
         /// <summary>
         /// Asset
         /// </summary>
-        [JsonProperty("asset")]
+        [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Target asset
         /// </summary>
-        [JsonProperty("targetAsset")]
+        [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
         /// Target quantity
         /// </summary>
-        [JsonProperty("targetAmount")]
+        [JsonPropertyName("targetAmount")]
         public decimal TargetQuantity { get; set; }
         /// <summary>
         /// Biz type
         /// </summary>
-        [JsonProperty("bizType")]
+        [JsonPropertyName("bizType")]
         public string BizType { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("timestamp")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }

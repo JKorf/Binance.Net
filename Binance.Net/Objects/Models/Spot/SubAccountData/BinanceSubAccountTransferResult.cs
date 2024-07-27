@@ -8,11 +8,12 @@
         /// <summary>
         /// Whether the transfer was successful
         /// </summary>
+        [JsonPropertyName("success")]
         public bool Success { get; set; }
         /// <summary>
         /// The transaction id of the transfer
         /// </summary>
-        [JsonProperty("txnId")]
+        [JsonPropertyName("txnId")]
         public string? TransactionId { get; set; }
     }
 }

@@ -8,6 +8,7 @@
         /// <summary>
         /// The email associated with the sub account
         /// </summary>
-        public string Email { get; set; } = string.Empty;        
+        [JsonPropertyName("email")]
+        public string Email { get; set; } = string.Empty;
     }
 }

@@ -7,7 +7,7 @@ false
     "price": "4.00000100",
     "qty": "12.00000000",
     "quoteQty": "48.000012",
-    "time": 1499865549590, // Trade executed timestamp, as same as `T` in the stream
+    "time": 1499865549590, 
     "isBuyerMaker": true,
     "isBestMatch": true
   }
