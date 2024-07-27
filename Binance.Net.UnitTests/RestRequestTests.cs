@@ -211,7 +211,6 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.StartUserStreamAsync(), "StartUserStream", "listenKey");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.KeepAliveUserStreamAsync("123"), "KeepAliveUserStream");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.StopUserStreamAsync("123"), "StopUserStream");
-            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountInfoAsync(), "GetAccountInfo", ignoreProperties: new List<string> { "bidNotional", "askNotional" });
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetBalancesAsync(), "GetBalances");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetMultiAssetsModeAsync(), "GetMultiAssetsMode");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.SetMultiAssetsModeAsync(true), "SetMultiAssetsMode");
@@ -227,6 +226,9 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetOrderRateLimitAsync(), "GetOrderRateLimit");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetBnbBurnStatusAsync(), "GetBnbBurnStatus");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.SetBnbBurnStatusAsync(true), "SetBnbBurnStatus");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetSymbolConfigurationAsync(), "GetSymbolConfiguration");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountConfigurationAsync(), "GetAccountConfiguration");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountInfoAsync(), "GetAccountInfoV3");
         }
 
         [Test]
@@ -291,7 +293,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetOrdersAsync("ETHUSDT"), "GetOrders");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetForcedOrdersAsync("ETHUSDT"), "GetForcedOrders");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetUserTradesAsync("ETHUSDT"), "GetUserTrades");
-           
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetPositionsAsync(), "GetPositions");
         }
 
         [Test]

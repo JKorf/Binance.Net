@@ -1,0 +1,13 @@
+GET
+/fapi/v1/accountConfig
+true
+{   
+    "feeTier": 0,       
+    "canTrade": true,      
+    "canDeposit": true,      
+    "canWithdraw": true,   
+    "dualSidePosition": true,
+    "updateTime": 0,        
+    "multiAssetsMargin": false,
+    "tradeGroupId": -1
+}

@@ -1,5 +1,5 @@
 GET
-/fapi/v2/balance
+/fapi/v3/balance
 true
 [
     {
