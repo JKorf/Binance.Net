@@ -180,8 +180,8 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetUserCommissionRateAsync("ETHUSDT", default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetOrderRateLimitAsync(default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetBnbBurnStatusAsync(default, default), true);
-            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetSymbolConfigurationAsync(default, default), true);
-            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetAccountConfigurationAsync(default), true);
+            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetSymbolConfigurationAsync(default, default, default), true);
+            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetAccountConfigurationAsync(default, default), true);
         }
 
         [Test]
