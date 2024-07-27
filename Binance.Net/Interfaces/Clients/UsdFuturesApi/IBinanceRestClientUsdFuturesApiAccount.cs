@@ -127,8 +127,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// Get account information, including position and balances
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /></para>
         /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BinanceFuturesAccountInfoV3>> GetAccountInfoAsync(CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesAccountInfoV3>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>.
         /// Gets account balances
@@ -299,15 +300,17 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BinanceSymbolConfiguration>>> GetSymbolConfigurationAsync(string? symbol = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceSymbolConfiguration>>> GetSymbolConfigurationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get user account configuration
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config" /></para>
         /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BinanceFuturesAccountConfiguration>> GetAccountConfigurationAsync(CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesAccountConfiguration>> GetAccountConfigurationAsync(long? receiveWindow = null, CancellationToken ct = default);
 
     }
 }

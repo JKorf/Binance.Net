@@ -656,10 +656,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Positions
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinancePositionV3>>> GetPositionsAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinancePositionV3>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("symbol", symbol);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v3/positionRisk", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var result = await _baseClient.SendAsync<IEnumerable<BinancePositionV3>>(request, parameters, ct).ConfigureAwait(false);
             return result;
