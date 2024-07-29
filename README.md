@@ -13,13 +13,6 @@ Binance.Net is a strongly typed client library for accessing the [Binance REST a
 * Support for different environments (binance.com, binance.us, testnet)
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
 
-## NOTICE
-***
-Due to NuGet unlisting my package and locking my account for no apparent reason I'm currently unable to release new versions via NuGet. I believe this is an error as the package does not break any rules (I checked!), but NuGet support is very unresponsive.
-
-If you want to help to fix this, feel free to send NuGet support a message at `support@nuget.org`.
-***
-
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
 
@@ -38,9 +31,7 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ### NuGet 
 [![NuGet version](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
 
-*Binance.Net is temporarily only available by direct version reference; see notice above* 
-
-	dotnet add package Binance.Net --version 9.11.1
+	dotnet add package Binance.Net
 	
 ### GitHub packages
 Binance.Net is available on [GitHub packages](https://github.com/JKorf/Binance.Net/pkgs/nuget/Binance.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
