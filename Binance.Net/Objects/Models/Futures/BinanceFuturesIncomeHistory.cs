@@ -48,6 +48,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Transaction id if relevant
         /// </summary>
         [JsonPropertyName("tranId")]
+        [JsonConverter(typeof(NumberStringConverter))]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Trade id if existing
