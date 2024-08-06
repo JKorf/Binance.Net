@@ -13,8 +13,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets account position information
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#position-information-user_data" /></para>
         /// </summary>
-        /// <param name="marginAsset">Filter by margin asset</param>
-        /// <param name="pair">Filter by pair</param>
+        /// <param name="marginAsset">Filter by margin asset, for example `ETH`</param>
+        /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
@@ -62,7 +62,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Requests to change the initial leverage of the given symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-initial-leverage-trade" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to change the initial leverage for</param>
+        /// <param name="symbol">Symbol to change the initial leverage for, for example `BTCUSD_PERP`</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -73,7 +73,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Change the margin type for an open position
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-margin-type-trade" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to change the position type for</param>
+        /// <param name="symbol">Symbol to change the position type for, for example `BTCUSD_PERP`</param>
         /// <param name="marginType">The type of margin to use</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -84,7 +84,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Change the margin on an open position
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#modify-isolated-position-margin-trade" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to adjust the position margin for</param>
+        /// <param name="symbol">Symbol to adjust the position margin for, for example `BTCUSD_PERP`</param>
         /// <param name="amount">The amount of margin to be used</param>
         /// <param name="type">Whether to reduce or add margin to the position</param>
         /// <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
@@ -97,7 +97,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Requests the margin change history for a specific symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-position-margin-change-history-trade" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to get margin history for</param>
+        /// <param name="symbol">Symbol to get margin history for, for example `BTCUSD_PERP`</param>
         /// <param name="type">Filter the history by the direction of margin change</param>
         /// <param name="startTime">Margin changes newer than this date will be retrieved</param>
         /// <param name="endTime">Margin changes older than this date will be retrieved</param>
@@ -111,7 +111,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets the income history for the futures account
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-income-history-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get income history from</param>
+        /// <param name="symbol">The symbol to get income history from, for example `BTCUSD_PERP`</param>
         /// <param name="incomeType">The income type filter to apply to the request</param>
         /// <param name="startTime">Time to start getting income history from</param>
         /// <param name="endTime">Time to stop getting income history from</param>
@@ -125,7 +125,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets Notional and Leverage Brackets.
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#notional-bracket-for-pair-user_data" /></para>
         /// </summary>
-        /// <param name="symbolOrPair">The symbol or pair to get the data for</param>
+        /// <param name="symbolOrPair">The symbol or pair to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets</returns>
@@ -135,7 +135,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Get position ADL quantile estimations
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#position-adl-quantile-estimation-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Only get for this symbol</param>
+        /// <param name="symbol">Only get for this symbol, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -146,7 +146,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets account commission rates
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-commission-rate-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>User commission rate information</returns>

@@ -32,7 +32,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets information about the exchange including rate limits and symbol list
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#exchange-information" /></para>
         /// </summary>
-        /// <param name="symbols">Filter by symbols</param>
+        /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
@@ -41,7 +41,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#aggregate-trades" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="fromId">Filter by from trade id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -53,7 +53,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets the best price/quantity on the order book for a symbol.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-order-book-ticker" /></para>
         /// </summary>
-        /// <param name="symbols">Filter by symbols</param>
+        /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
@@ -61,7 +61,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets current average price for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-average-price" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default);
@@ -69,7 +69,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get candlestick data for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#klines" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -81,7 +81,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets the order book for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#order-book" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Number of entries</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -90,7 +90,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets the recent trades for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#recent-trades" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -99,7 +99,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get data based on the last x time, specified as windowSize
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#rolling-window-price-change-statistics" /></para>
         /// </summary>
-        /// <param name="symbols">Filter by symbols</param>
+        /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<IEnumerable<BinanceRollingWindowTick>>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
@@ -107,7 +107,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get data regarding the last 24 hours
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-price-ticker" /></para>
         /// </summary>
-        /// <param name="symbols">Filter by symbols</param>
+        /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
@@ -115,7 +115,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets the historical trades for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="fromId">Filter by from trade id</param>
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
@@ -125,7 +125,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#ui-klines" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -138,7 +138,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -148,7 +148,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the aggregated trades update stream for the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -225,7 +225,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the book ticker update stream for the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -234,7 +234,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the book ticker update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -244,7 +244,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the candlestick update stream for the provided symbols and intervals
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="intervals">The intervals of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -255,7 +255,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the candlestick update stream for the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -265,7 +265,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the candlestick update stream for the provided symbol and intervals
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="intervals">The intervals of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -275,7 +275,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the candlestick update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -285,7 +285,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to mini ticker updates stream for a list of symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-mini-ticker-stream" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe to</param>
+        /// <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -295,7 +295,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to mini ticker updates stream for a specific symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-mini-ticker-stream" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="symbol">The symbol to subscribe to, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -304,7 +304,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the depth update stream for the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#diff-depth-stream" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="updateInterval">Update interval in milliseconds</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -315,7 +315,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the order book updates for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#diff-depth-stream" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="updateInterval">Update interval in milliseconds</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -326,7 +326,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the depth updates for the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe on</param>
+        /// <param name="symbols">The symbols to subscribe on, for example `ETHUSDT`</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol, 5, 10 or 20</param>
         /// <param name="updateInterval">Update interval in milliseconds, 1000ms or 100ms</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -338,7 +338,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the depth updates for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe on</param>
+        /// <param name="symbol">The symbol to subscribe on, for example `ETHUSDT`</param>
         /// <param name="levels">The amount of entries to be returned in the update, 5, 10 or 20</param>
         /// <param name="updateInterval">Update interval in milliseconds, 1000ms or 100ms</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -349,7 +349,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribe to rolling window ticker updates stream for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-rolling-window-statistics-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe</param>
+        /// <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="windowSize">Window size, either 1 hour or 4 hours</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -359,7 +359,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to ticker updates stream for a specific symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols to subscribe to</param>
+        /// <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -369,7 +369,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to ticker updates stream for a specific symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="symbol">The symbol to subscribe to, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -379,7 +379,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the trades update stream for the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-streams" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -388,7 +388,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-streams" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>

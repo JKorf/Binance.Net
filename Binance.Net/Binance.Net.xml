@@ -5211,8 +5211,8 @@
             Gets account position information
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#position-information-user_data" /></para>
             </summary>
-            <param name="marginAsset">Filter by margin asset</param>
-            <param name="pair">Filter by pair</param>
+            <param name="marginAsset">Filter by margin asset, for example `ETH`</param>
+            <param name="pair">Filter by pair, for example `BTCUSD`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
@@ -5259,7 +5259,7 @@
             Requests to change the initial leverage of the given symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-initial-leverage-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to change the initial leverage for</param>
+            <param name="symbol">Symbol to change the initial leverage for, for example `BTCUSD_PERP`</param>
             <param name="leverage">The amount of initial leverage to change to</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -5270,7 +5270,7 @@
             Change the margin type for an open position
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#change-margin-type-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to change the position type for</param>
+            <param name="symbol">Symbol to change the position type for, for example `BTCUSD_PERP`</param>
             <param name="marginType">The type of margin to use</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -5281,7 +5281,7 @@
             Change the margin on an open position
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#modify-isolated-position-margin-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to adjust the position margin for</param>
+            <param name="symbol">Symbol to adjust the position margin for, for example `BTCUSD_PERP`</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
             <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
@@ -5294,7 +5294,7 @@
             Requests the margin change history for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-position-margin-change-history-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to get margin history for</param>
+            <param name="symbol">Symbol to get margin history for, for example `BTCUSD_PERP`</param>
             <param name="type">Filter the history by the direction of margin change</param>
             <param name="startTime">Margin changes newer than this date will be retrieved</param>
             <param name="endTime">Margin changes older than this date will be retrieved</param>
@@ -5308,7 +5308,7 @@
             Gets the income history for the futures account
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-income-history-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get income history from</param>
+            <param name="symbol">The symbol to get income history from, for example `BTCUSD_PERP`</param>
             <param name="incomeType">The income type filter to apply to the request</param>
             <param name="startTime">Time to start getting income history from</param>
             <param name="endTime">Time to stop getting income history from</param>
@@ -5322,7 +5322,7 @@
             Gets Notional and Leverage Brackets.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#notional-bracket-for-pair-user_data" /></para>
             </summary>
-            <param name="symbolOrPair">The symbol or pair to get the data for</param>
+            <param name="symbolOrPair">The symbol or pair to get the data for, for example `BTCUSD_PERP`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets</returns>
@@ -5332,7 +5332,7 @@
             Get position ADL quantile estimations
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#position-adl-quantile-estimation-user_data" /></para>
             </summary>
-            <param name="symbol">Only get for this symbol</param>
+            <param name="symbol">Only get for this symbol, for example `BTCUSD_PERP`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5342,7 +5342,7 @@
             Gets account commission rates
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-commission-rate-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `BTCUSD_PERP`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>User commission rate information</returns>
@@ -5429,7 +5429,7 @@
             Gets the recent trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#recent-trades-list" /></para>
             </summary>
-            <param name="symbol">The symbol to get recent trades for</param>
+            <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
             <param name="limit">Result limit</param>
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
@@ -5439,7 +5439,7 @@
             Gets the historical  trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#old-trades-lookup-market_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get recent trades for</param>
+            <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
             <param name="limit">Result limit</param>
             <param name="fromId">From which trade id on results should be retrieved</param>
             <param name="ct">Cancellation token</param>
@@ -5450,7 +5450,7 @@
             Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#compressed-aggregate-trades-list" /></para>
             </summary>
-            <param name="symbol">The symbol to get the trades for</param>
+            <param name="symbol">The symbol to get the trades for, for example `BTCUSD_PERP`</param>
             <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
             <param name="startTime">Time to start getting trades from</param>
             <param name="endTime">Time to stop getting trades from</param>
@@ -5463,7 +5463,7 @@
             Get candlestick data for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-data" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
             <param name="endTime">End time to get candlestick data</param>
@@ -5476,7 +5476,7 @@
             Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-funding-rate-info" /></para>
             </summary>
-            <param name="ct"></param>
+            <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiExchangeData.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -5484,7 +5484,7 @@
             Get funding rate history for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-and-mark-price" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="startTime">Start time to get funding rate history</param>
             <param name="endTime">End time to get funding rate history</param>
             <param name="limit">Max number of results</param>
@@ -5496,7 +5496,7 @@
             Gets Top Trader Long/Short Ratio (Accounts)
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-accounts" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
@@ -5509,7 +5509,7 @@
             Gets Top Trader Long/Short Ratio (Positions)
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#top-trader-long-short-ratio-positions" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
@@ -5522,7 +5522,7 @@
             Gets Global Long/Short Ratio (Accounts)
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#long-short-ratio" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get global long/short ratio (accounts)</param>
@@ -5535,7 +5535,7 @@
             Kline/candlestick bars for the mark price of a symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-data" /></para>
             </summary>
-            <param name="symbol">The symbol get the data for</param>
+            <param name="symbol">The symbol get the data for, for example `BTCUSD_PERP`</param>
             <param name="interval">The interval of the klines</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time</param>
@@ -5548,7 +5548,7 @@
             Gets the order book for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#order-book" /></para>
             </summary>
-            <param name="symbol">The symbol to get the order book for</param>
+            <param name="symbol">The symbol to get the order book for, for example `BTCUSD_PERP`</param>
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The order book for the symbol</returns>
@@ -5558,8 +5558,8 @@
             Get Mark Price and Funding Rate for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-and-mark-price" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="pair">Filter by pair</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
+            <param name="pair">Filter by pair, for example `BTCUSD`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5568,7 +5568,7 @@
             Get candlestick data for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-data" /></para>
             </summary>
-            <param name="pair">The symbol to get the data for</param>
+            <param name="pair">The symbol to get the data for, for example `BTCUSD`</param>
             <param name="contractType">The contract type</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
@@ -5582,7 +5582,7 @@
             Get candlestick data for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-kline-candlestick-data" /></para>
             </summary>
-            <param name="pair">The symbol to get the data for</param>
+            <param name="pair">The symbol to get the data for, for example `BTCUSD`</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
             <param name="endTime">End time to get candlestick data</param>
@@ -5595,8 +5595,8 @@
             Get data regarding the last 24 hours change
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#24hr-ticker-price-change-statistics" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
-            <param name="pair">Filter by pair</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
+            <param name="pair">Filter by pair, for example `BTCUSD`</param>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
@@ -5605,8 +5605,8 @@
             Gets the best price/quantity on the order book for a symbol.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#symbol-order-book-ticker" /></para>
             </summary>
-            <param name="symbol">Symbol to get book price for</param>
-            <param name="pair">Filter by pair</param>
+            <param name="symbol">Symbol to get book price for, for example `BTCUSD_PERP`</param>
+            <param name="pair">Filter by pair, for example `BTCUSD`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
@@ -5615,7 +5615,7 @@
             Get present open interest of a specific symbol.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#open-interest" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="ct">Cancellation token</param>
             <returns>Open Interest info</returns>
         </member>
@@ -5624,7 +5624,7 @@
             Gets Open Interest History
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#open-interest-statistics" /></para>
             </summary>
-            <param name="pair">The pair to get the data for</param>
+            <param name="pair">The pair to get the data for, for example `BTCUSD`</param>
             <param name="contractType">The contract type</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
@@ -5638,7 +5638,7 @@
             Gets Taker Buy/Sell Volume Ratio
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#taker-buy-sell-volume" /></para>
             </summary>
-            <param name="pair">The pair to get the data for</param>
+            <param name="pair">The pair to get the data for, for example `BTCUSD`</param>
             <param name="contractType">The contract type</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
@@ -5652,7 +5652,7 @@
             Gets basis
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#basis" /></para>
             </summary>
-            <param name="pair">The pair to get the data for</param>
+            <param name="pair">The pair to get the data for, for example `BTCUSD`</param>
             <param name="contractType">The contract type</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
@@ -5666,8 +5666,8 @@
             Get a list of the prices of all symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#symbol-price-ticker" /></para>
             </summary>
-            <param name="symbol">Retrieve for a symbol</param>
-            <param name="pair">Retrieve prices for a specific pair</param>
+            <param name="symbol">Retrieve for a symbol, for example `BTCUSD_PERP`</param>
+            <param name="pair">Retrieve prices for a specific pair, for example `BTCUSD`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
@@ -5681,7 +5681,7 @@
             Places a new order
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -5716,7 +5716,7 @@
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#query-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -5728,7 +5728,7 @@
             Cancels a pending order
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -5740,7 +5740,7 @@
             Cancels all open orders
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-all-open-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -5751,7 +5751,7 @@
             so that the existing countdown time can be canceled and replaced by a new one.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#auto-cancel-all-open-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -5762,7 +5762,7 @@
             Cancels muliple orders
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
             <param name="orderIdList">The list of order ids to cancel</param>
             <param name="origClientOrderIdList">The list of client order ids to cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -5774,7 +5774,7 @@
             Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#query-current-open-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -5786,7 +5786,7 @@
             Gets a list of open orders
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#current-all-open-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get open orders for</param>
+            <param name="symbol">The symbol to get open orders for, for example `BTCUSD_PERP`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
@@ -5796,7 +5796,7 @@
             Gets all orders for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get orders for</param>
+            <param name="symbol">The symbol to get orders for, for example `BTCUSD_PERP`</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -5810,7 +5810,7 @@
             Gets a list of users forced orders
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-39-s-force-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get forced orders for</param>
+            <param name="symbol">The symbol to get forced orders for, for example `BTCUSD_PERP`</param>
             <param name="closeType">Filter by reason for close</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -5823,8 +5823,8 @@
             Gets all user trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#account-trade-list-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol to get trades for</param>
-            <param name="pair">Symbol to get trades for</param>
+            <param name="symbol">Symbol to get trades for, for example `BTCUSD_PERP`</param>
+            <param name="pair">Symbol to get trades for, for example `BTCUSD`</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
             <param name="orderId">Get the trades for a specific order</param>
@@ -5844,7 +5844,7 @@
             Subscribes to the aggregated trades update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5854,7 +5854,7 @@
             Subscribes to the aggregated trades update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5863,7 +5863,7 @@
             <summary>
             Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
             </summary>
-            <param name="symbol">Symbol to subscribe</param>
+            <param name="symbol">Symbol to subscribe, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -5872,7 +5872,7 @@
             <summary>
             Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
             </summary>
-            <param name="symbols">Symbols to subscribe</param>
+            <param name="symbols">Symbols to subscribe, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -5882,7 +5882,7 @@
             Subscribes to the candlestick update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5893,7 +5893,7 @@
             Subscribes to the candlestick update stream for the provided symbol and intervals
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5904,7 +5904,7 @@
             Subscribes to the candlestick update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5915,7 +5915,7 @@
             Subscribes to the candlestick update stream for the provided symbols and intervals
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5926,7 +5926,7 @@
             Subscribes to mini ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-mini-ticker-stream" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5936,7 +5936,7 @@
             Subscribes to mini ticker updates stream for a list of symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-mini-ticker-stream" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5955,7 +5955,7 @@
             Subscribes to ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-ticker-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5965,7 +5965,7 @@
             Subscribes to ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-ticker-streams" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -5993,7 +5993,7 @@
             Subscribes to the book ticker update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -6003,7 +6003,7 @@
             Subscribes to the book ticker update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -6013,7 +6013,7 @@
             Subscribes to specific symbol forced liquidations stream
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -6023,7 +6023,7 @@
             Subscribes to list of symbol forced liquidations stream
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -6042,7 +6042,7 @@
             Subscribes to the depth updates for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#partial-book-depth-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe on</param>
+            <param name="symbol">The symbol to subscribe on, for example `BTCUSD_PERP`</param>
             <param name="levels">The amount of entries to be returned in the update</param>
             <param name="updateInterval">Update interval in milliseconds</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -6054,7 +6054,7 @@
             Subscribes to the depth updates for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#partial-book-depth-streams" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe on</param>
+            <param name="symbols">The symbols to subscribe on, for example `BTCUSD_PERP`</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -6066,7 +6066,7 @@
             Subscribes to the order book updates for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6077,7 +6077,7 @@
             Subscribes to the depth update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6104,7 +6104,7 @@
             Subscribes to the Index price update stream for a single pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-stream" /></para>
             </summary>
-            <param name="pair">The symbol</param>
+            <param name="pair">The symbol, for example `BTCUSD_PERP`</param>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6115,7 +6115,7 @@
             Subscribes to the Index price update stream for a list of pairs
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-stream" /></para>
             </summary>
-            <param name="pairs">The pairs</param>
+            <param name="pairs">The pairs, for example `BTCUSD`</param>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6126,7 +6126,7 @@
             Subscribes to the Mark price update stream for a single symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6137,9 +6137,9 @@
             Subscribe to the Mark price update stream for all symbols
              <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair" /></para>
              </summary>
-             <param name="onMessage"></param>
-             <param name="updateInterval"></param>
-             <param name="ct"></param>
+             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
+             <param name="onMessage">The event handler for the received data</param>
+             <param name="ct">Cancellation token for closing this subscription</param>
              <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
@@ -6147,7 +6147,7 @@
             Subscribes to the Mark price update stream for a list of symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6158,7 +6158,7 @@
             Subscribes to the continuous contract candlestick update stream for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-streams" /></para>
             </summary>
-            <param name="pair">The pair</param>
+            <param name="pair">The pair, for example `BTCUSD`</param>
             <param name="contractType">The contract type</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -6170,7 +6170,7 @@
             Subscribes to the continuous contract candlestick update stream for the provided pairs
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-streams" /></para>
             </summary>
-            <param name="pairs">The pairs</param>
+            <param name="pairs">The pairs, for example `BTCUSD`</param>
             <param name="contractType">The contract type</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -6182,7 +6182,7 @@
             Subscribes to the index candlestick update stream for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-kline-candlestick-streams" /></para>
             </summary>
-            <param name="pair">The pair</param>
+            <param name="pair">The pair, for example `BTCUSD`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6193,7 +6193,7 @@
             Subscribes to the index candlestick update stream for the provided pairs
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-kline-candlestick-streams" /></para>
             </summary>
-            <param name="pairs">The pairs</param>
+            <param name="pairs">The pairs, for example `BTCUSD`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6204,7 +6204,7 @@
             Subscribes to the mark price candlestick update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6215,7 +6215,7 @@
             Subscribes to the mark price candlestick update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -6227,7 +6227,7 @@
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi">
             <summary>
@@ -8015,7 +8015,7 @@
             Get funding wallet assets
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#funding-wallet-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="needBtcValuation">Return BTC valuation</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8044,7 +8044,7 @@
             Retrieve balance info
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-asset-user_data" /></para>
             </summary>
-            <param name="asset">Return for this asset</param>
+            <param name="asset">Return for this asset, for example `ETH`</param>
             <param name="needBtcValuation">Whether the response should include the BtcValuation. If false (default) BtcValuation will be 0.</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8064,7 +8064,7 @@
             Get asset dividend records
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#asset-dividend-record-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="startTime">Filter by start time from</param>
             <param name="endTime">Filter by end time till</param>
             <param name="limit">Page size</param>
@@ -8122,7 +8122,7 @@
             Converts dust (small amounts of) assets to BNB 
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#dust-transfer-user_data" /></para>
             </summary>
-            <param name="assets">The assets to convert to BNB</param>
+            <param name="assets">The assets to convert to BNB, for example `ETH`</param>
             <param name="accountType">Spot or Margin account</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8154,7 +8154,7 @@
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-universal-transfer-user_data" /></para>
             </summary>
             <param name="type">The type of transfer</param>
-            <param name="asset">The asset to transfer</param>
+            <param name="asset">The asset to transfer, for example `ETH`</param>
             <param name="quantity">The quantity to transfer</param>
             <param name="fromSymbol">From symbol when transfering from/to isolated margin</param>
             <param name="toSymbol">To symbol when transfering from/to isolated margin</param>
@@ -8235,7 +8235,7 @@
             Withdraw assets from Binance to an address
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#withdraw-user_data" /></para>
             </summary>
-            <param name="asset">The asset to withdraw</param>
+            <param name="asset">The asset to withdraw, for example `ETH`</param>
             <param name="address">The address to send the funds to</param>
             <param name="addressTag">Secondary address identifier for assets like XRP,XMR etc.</param>
             <param name="withdrawOrderId">Custom client order id</param>
@@ -8253,7 +8253,7 @@
             Gets the withdrawal history
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#withdraw-history-supporting-network-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="withdrawOrderId">Filter by withdraw order id</param>
             <param name="status">Filter by status</param>
             <param name="startTime">Filter start time from</param>
@@ -8278,7 +8278,7 @@
             Gets the deposit history
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#deposit-history-supporting-network-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="status">Filter by status</param>
             <param name="limit">Amount of results</param>
             <param name="offset">Offset the results</param>
@@ -8293,7 +8293,7 @@
             Gets the deposit address for an asset
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#deposit-address-supporting-network-user_data" /></para>
             </summary>
-            <param name="asset">Asset to get address for</param>
+            <param name="asset">Asset to get address for, for example `ETH`</param>
             <param name="network">Network</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8313,7 +8313,7 @@
             Borrow. Apply for a loan. 
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-borrow-repay-margin" /></para>
             </summary>
-            <param name="asset">The asset being borrow, e.g., BTC</param>
+            <param name="asset">The asset being borrow, for example `ETH`</param>
             <param name="quantity">The quantity to be borrow</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="symbol">The isolated symbol</param>
@@ -8326,7 +8326,7 @@
             Repay loan for margin account.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-borrow-repay-margin" /></para>
             </summary>
-            <param name="asset">The asset being repay, e.g., BTC</param>
+            <param name="asset">The asset being repay, for example `ETH`</param>
             <param name="quantity">The quantity to be borrow</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="symbol">The isolated symbol</param>
@@ -8354,7 +8354,7 @@
             Query loan records
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-borrow-repay-records-in-margin-account-user_data" /></para>
             </summary>
-            <param name="asset">The records asset</param>
+            <param name="asset">The records asset, for example `ETH`</param>
             <param name="transactionId">The id of loan transaction</param>
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
@@ -8371,7 +8371,7 @@
             Query repay records
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-borrow-repay-records-in-margin-account-user_data" /></para>
             </summary>
-            <param name="asset">The records asset</param>
+            <param name="asset">The records asset, for example `ETH`</param>
             <param name="transactionId">The id of repay transaction</param>
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
@@ -8388,7 +8388,7 @@
             Get history of interest
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-interest-history-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="page">Results page</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
@@ -8404,7 +8404,7 @@
             Get history of interest rate
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-interest-rate-history-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="vipLevel">Vip level</param>
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
@@ -8418,7 +8418,7 @@
             Get cross margin interest data
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-cross-margin-fee-data-user_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="vipLevel">Vip level</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8452,7 +8452,7 @@
             Query max borrow quantity
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-max-borrow-user_data" /></para>
             </summary>
-            <param name="asset">The records asset</param>
+            <param name="asset">The records asset, for example `ETH`</param>
             <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8463,7 +8463,7 @@
             Query max transfer-out quantity 
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-max-transfer-out-amount-user_data" /></para>
             </summary>
-            <param name="asset">The records asset</param>
+            <param name="asset">The records asset, for example `ETH`</param>
             <param name="isolatedSymbol">The isolated symbol</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8474,7 +8474,7 @@
             Get isolated margin tier data
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-tier-data-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETH`</param>
             <param name="tier">Tier</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8503,7 +8503,7 @@
             Enable an isolated margin account
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#enable-isolated-margin-account-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="symbol">Symbol to enable isoldated margin account for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8513,7 +8513,7 @@
             Disabled an isolated margin account info
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#disable-isolated-margin-account-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to enable isoldated margin account for</param>
+            <param name="symbol">Symbol to enable isoldated margin account for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8560,7 +8560,7 @@
             The stream will close after 60 minutes unless a keep alive is send.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin" /></para>
             </summary>
-            <param name="symbol">The isolated symbol</param>
+            <param name="symbol">The isolated symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
@@ -8570,7 +8570,7 @@
             Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin" /></para>
             </summary>
-            <param name="symbol">The isolated symbol</param>
+            <param name="symbol">The isolated symbol, for example `ETHUSDT`</param>
             <param name="listenKey">The listen key to keep alive</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8580,7 +8580,7 @@
             Close the user stream for margin account
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#listen-key-isolated-margin" /></para>
             </summary>
-            <param name="symbol">The isolated symbol</param>
+            <param name="symbol">The isolated symbol, for example `ETHUSDT`</param>
             <param name="listenKey">The listen key to keep alive</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8686,7 +8686,7 @@
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#busd-convert-trade" /></para>
             </summary>
             <param name="clientTransferId">The unique user-defined transaction id, min length 20</param>
-            <param name="asset">The current asset</param>
+            <param name="asset">The current asset, for example `ETH`</param>
             <param name="quantity">Quantity</param>
             <param name="targetAsset">	Target asset you want to convert</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -8700,7 +8700,7 @@
             </summary>
             <param name="transferId">Filter by transferId</param>
             <param name="clientTransferId">Filter by clientTransferId</param>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="page">Page</param>
@@ -8716,7 +8716,7 @@
             </summary>
             <param name="transferId">Filter by transferId</param>
             <param name="clientTransferId">Filter by clientTransferId</param>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="page">Page</param>
@@ -8740,7 +8740,7 @@
             Get isolated margin fee data collection with any vip level or user's current specific data as https://www.binance.com/en/margin-fee
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-isolated-margin-fee-data-user_data" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="vipLevel">User's current specific margin data will be returned if vipLevel is omitted</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8760,7 +8760,7 @@
             Cross Margin Small Liability Exchange
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#small-liability-exchange-margin" /></para>
             </summary>
-            <param name="assets">Assets</param>
+            <param name="assets">Assets, for example `ETH`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8783,7 +8783,7 @@
             Gets the trade fee for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-fee-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol to get withdrawal fee for</param>
+            <param name="symbol">Symbol to get withdrawal fee for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Trade fees</returns>
@@ -8802,7 +8802,7 @@
             Get current account commission rates.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-commission-rates-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8858,7 +8858,7 @@
             Get's information about the exchange including rate limits and information on the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
-            <param name="symbol">Symbol to get data for token</param>
+            <param name="symbol">Symbol to get data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
@@ -8867,7 +8867,7 @@
             Get's information about the exchange including rate limits and information on the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
-            <param name="symbols">Symbols to get data for token</param>
+            <param name="symbols">Symbols to get data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
@@ -8902,7 +8902,7 @@
             Gets the recent trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#recent-trades-list" /></para>
             </summary>
-            <param name="symbol">The symbol to get recent trades for</param>
+            <param name="symbol">The symbol to get recent trades for, for example `ETHUSDT`</param>
             <param name="limit">Result limit</param>
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
@@ -8912,7 +8912,7 @@
             Gets the historical trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#old-trade-lookup-market_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get recent trades for</param>
+            <param name="symbol">The symbol to get recent trades for, for example `ETHUSDT`</param>
             <param name="limit">Result limit</param>
             <param name="fromId">From which trade id on results should be retrieved</param>
             <param name="ct">Cancellation token</param>
@@ -8923,7 +8923,7 @@
             Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#compressed-aggregate-trades-list" /></para>
             </summary>
-            <param name="symbol">The symbol to get the trades for</param>
+            <param name="symbol">The symbol to get the trades for, for example `ETHUSDT`</param>
             <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
             <param name="startTime">Time to start getting trades from</param>
             <param name="endTime">Time to stop getting trades from</param>
@@ -8936,7 +8936,7 @@
             Get candlestick data for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-data" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
             <param name="endTime">End time to get candlestick data</param>
@@ -8949,7 +8949,7 @@
             Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#uiklines" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
             <param name="endTime">End time to get candlestick data</param>
@@ -8962,7 +8962,7 @@
             Gets the order book for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#order-book" /></para>
             </summary>
-            <param name="symbol">The symbol to get the order book for</param>
+            <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The order book for the symbol</returns>
@@ -8972,7 +8972,7 @@
             Gets current average price for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#current-average-price" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -8981,7 +8981,7 @@
             Get data regarding the last 24 hours for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
@@ -8990,7 +8990,7 @@
             Get data regarding the last 24 hours for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#24hr-ticker-price-change-statistics" /></para>
             </summary>
-            <param name="symbols">The symbols to get the data for</param>
+            <param name="symbols">The symbols to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
@@ -9007,7 +9007,7 @@
             Get price change stats for a trading day
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trading-day-ticker" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -9017,7 +9017,7 @@
             Get price change stats for a trading day
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trading-day-ticker" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -9027,7 +9027,7 @@
             Get data based on the last x time, specified as windowSize
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
             </summary>
-            <param name="symbol">The symbol to get data for</param>
+            <param name="symbol">The symbol to get data for, for example `ETHUSDT`</param>
             <param name="windowSize">The window size to use</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -9037,7 +9037,7 @@
             Get data based on the last x time, specified as windowSize
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
             </summary>
-            <param name="symbols">The symbols to get data for</param>
+            <param name="symbols">The symbols to get data for, for example `ETHUSDT`</param>
             <param name="windowSize">The window size to use</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -9047,7 +9047,7 @@
             Gets the best price/quantity on the order book for a symbol.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#rolling-window-price-change-statistics" /></para>
             </summary>
-            <param name="symbol">Symbol to get book price for</param>
+            <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
@@ -9056,7 +9056,7 @@
             Gets the best price/quantity on the order book for a symbol.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-order-book-ticker" /></para>
             </summary>
-            <param name="symbol">Symbol to get book price for</param>
+            <param name="symbols">Symbols to get book price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
@@ -9073,7 +9073,7 @@
             Gets the price of a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker" /></para>
             </summary>
-            <param name="symbol">The symbol to get the price for</param>
+            <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
@@ -9082,7 +9082,7 @@
              Gets the prices of symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#symbol-price-ticker" /></para>
             </summary>
-            <param name="symbols">The symbols to get the price for</param>
+            <param name="symbols">The symbols to get the price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
@@ -9099,7 +9099,7 @@
             Get all assets available for margin trading
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-margin-assets-market_data" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of margin assets</returns>
         </member>
@@ -9108,7 +9108,7 @@
             Get all asset pairs available for margin trading
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-cross-margin-pairs-market_data" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of margin pairs</returns>
         </member>
@@ -9117,7 +9117,7 @@
             Get margin price index
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-priceindex-market_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get</param>
+            <param name="symbol">The symbol to get, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Margin price index</returns>
         </member>
@@ -9127,7 +9127,7 @@
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-isolated-margin-symbol-user_data" /></para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -9168,7 +9168,7 @@
             Get futures hourly interest rate
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-a-future-hourly-interest-rate-user_data" /></para>
             </summary>
-            <param name="assets">Assets</param>
+            <param name="assets">Assets, for example `ETH`</param>
             <param name="isolated">Isolated or cross</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -9188,8 +9188,8 @@
             Get list all convert pairs
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#list-all-convert-pairs" /></para>
             </summary>
-            <param name="quoteAsset">Quote asset</param>
-            <param name="baseAsset">Base asset</param>
+            <param name="quoteAsset">Quote asset, for example `ETH`</param>
+            <param name="baseAsset">Base asset, for example `ETH`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -9221,7 +9221,7 @@
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#test-new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type (limit/market)</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
@@ -9246,7 +9246,7 @@
             Places a new order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -9270,7 +9270,7 @@
             Cancels a pending order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="newClientOrderId">Unique identifier for this cancel</param>
@@ -9284,7 +9284,7 @@
             Cancels all open orders on a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-all-open-orders-on-a-symbol-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -9293,7 +9293,7 @@
             <summary>
             Cancel an existing order and place a new order on the same symbol
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="cancelReplaceMode">Replacement behavior</param>
@@ -9321,7 +9321,7 @@
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -9333,7 +9333,7 @@
             Gets a list of open orders
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#current-open-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get open orders for</param>
+            <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
@@ -9343,7 +9343,7 @@
             Gets all orders for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get orders for</param>
+            <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -9357,7 +9357,7 @@
             DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The quantity of the symbol</param>
@@ -9384,7 +9384,7 @@
             Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="quantity">The quantity of the symbol</param>
             <param name="aboveOrderType">The above leg order type</param>
@@ -9415,7 +9415,7 @@
             Cancels a pending oco order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderListId">The id of the order list to cancel</param>
             <param name="listClientOrderId">The client order id of the order list to cancel</param>
             <param name="newClientOrderId">The new client order list id for the order list</param>
@@ -9461,7 +9461,7 @@
             Place a new OTOCO (One Triggers Other) order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-oco-trade" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
             <param name="workingSide">Working order side</param>
             <param name="workingQuantity">Working order quantity</param>
@@ -9493,7 +9493,7 @@
             Place a new OTOCO (One Triggers One Cancels The Other) order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-otoco-trade" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
             <param name="workingSide">Working order side</param>
             <param name="workingQuantity">Working order quantity</param>
@@ -9534,7 +9534,7 @@
             Gets user trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol to get trades for</param>
+            <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
             <param name="orderId">Get trades for this order id</param>
             <param name="limit">The max number of results</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -9549,7 +9549,7 @@
             Margin account new order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -9573,7 +9573,7 @@
             Cancel an active order for margin account
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="origClientOrderId">The client order id of the order</param>
@@ -9587,7 +9587,7 @@
             Cancel all active orders for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-all-open-orders-on-a-symbol-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the to cancel orders for</param>
+            <param name="symbol">The symbol the to cancel orders for, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -9598,7 +9598,7 @@
             Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
@@ -9611,7 +9611,7 @@
             Gets a list of open margin account orders
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-open-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get open orders for</param>
+            <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -9622,7 +9622,7 @@
             Gets all margin account orders for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-all-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get orders for</param>
+            <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
@@ -9637,7 +9637,7 @@
             Gets all user margin account trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-trade-list-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol to get trades for</param>
+            <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">The max number of results</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="startTime">Orders newer than this date will be retrieved</param>
@@ -9652,7 +9652,7 @@
             Places a new margin OCO(One cancels other) order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-new-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The quantity of the symbol</param>
@@ -9678,7 +9678,7 @@
             Cancels a pending margin oco order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="orderListId">The id of the order list to cancel</param>
             <param name="listClientOrderId">The client order id of the order list to cancel</param>
@@ -9692,7 +9692,7 @@
             Retrieves data for a specific margin oco order. Either orderListId or listClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-oco-user_data" /></para>
             </summary>
-            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="orderListId">The list order id of the order</param>
             <param name="origClientOrderId">Either orderListId or listClientOrderId must be provided</param>
@@ -9705,7 +9705,7 @@
             Retrieves a list of margin oco orders matching the parameters
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-all-oco-user_data" /></para>
             </summary>
-            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="fromId">Only return oco orders with id higher than this</param>
             <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
@@ -9720,7 +9720,7 @@
             Retrieves a list of open margin oco orders
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-open-oco-user_data" /></para>
             </summary>
-            <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+            <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
             <param name="isIsolated">For isolated margin or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -9807,8 +9807,8 @@
             Request a quote for convert asset (selling asset) for base asset (buying asset)
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#send-quote-request-user_data" /></para>
             </summary>
-            <param name="quoteAsset">Quote asset</param>
-            <param name="baseAsset">Base asset</param>
+            <param name="quoteAsset">Quote asset, for example `ETH`</param>
+            <param name="baseAsset">Base asset, for example `ETH`</param>
             <param name="quoteQuantity">Quote quantity</param>
             <param name="baseQuantity">Quote quantity</param>
             <param name="walletType">The wallet type for convert</param>
@@ -9823,8 +9823,8 @@
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#accept-quote-trade" /></para>
             </summary>
             <param name="quoteId">The quote id of the order</param>
-            <param name="receiveWindow"></param>
-            <param name="ct"></param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -9855,7 +9855,7 @@
             Get prevented matches because of self trade prevention
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-prevented-matches-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="preventedMatchId">Filter by prevented match id</param>
             <param name="orderId">Filter by order id</param>
             <param name="fromPreventedMatchId">Filter by min prevented match id</param>
@@ -9869,7 +9869,7 @@
             Place a new spot time weighted average price order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade-2" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
             <param name="quantity">Order quantity</param>
             <param name="duration">Duration in seconds. 300 - 86400</param>
@@ -9903,7 +9903,7 @@
             Get list of closed algo orders
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data-2" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="side">Filter by side</param>
             <param name="startTime">Fitler by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -9964,7 +9964,7 @@
             Get order rate limit status
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-order-rate-limits-user_data" /></para>
             </summary>
-            <param name="symbols">Filter by symbols</param>
+            <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10034,7 +10034,7 @@
             Gets information about the exchange including rate limits and symbol list
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#exchange-information" /></para>
             </summary>
-            <param name="symbols">Filter by symbols</param>
+            <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10043,7 +10043,7 @@
             Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#aggregate-trades" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="fromId">Filter by from trade id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -10056,7 +10056,7 @@
             Gets the best price/quantity on the order book for a symbol.
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-order-book-ticker" /></para>
             </summary>
-            <param name="symbols">Filter by symbols</param>
+            <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10065,7 +10065,7 @@
             Gets current average price for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-average-price" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10074,7 +10074,7 @@
             Get candlestick data for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#klines" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -10087,7 +10087,7 @@
             Gets the order book for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#order-book" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="limit">Number of entries</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -10097,7 +10097,7 @@
             Gets the recent trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#recent-trades" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="limit">Max results</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -10107,7 +10107,7 @@
             Get data based on the last x time, specified as windowSize
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#rolling-window-price-change-statistics" /></para>
             </summary>
-            <param name="symbols">Filter by symbols</param>
+            <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10116,7 +10116,7 @@
             Get data regarding the last 24 hours
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-price-ticker" /></para>
             </summary>
-            <param name="symbols">Filter by symbols</param>
+            <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10125,7 +10125,7 @@
             Gets the historical trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="fromId">Filter by from trade id</param>
             <param name="limit">Max results</param>
             <param name="ct">Cancellation token</param>
@@ -10136,7 +10136,7 @@
             Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#ui-klines" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -10149,7 +10149,7 @@
             Subscribes to the aggregated trades update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10159,7 +10159,7 @@
             Subscribes to the aggregated trades update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#aggregate-trade-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10239,7 +10239,7 @@
             Subscribes to the book ticker update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10249,7 +10249,7 @@
             Subscribes to the book ticker update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10259,7 +10259,7 @@
             Subscribes to the candlestick update stream for the provided symbols and intervals
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10270,7 +10270,7 @@
             Subscribes to the candlestick update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10281,7 +10281,7 @@
             Subscribes to the candlestick update stream for the provided symbol and intervals
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10292,7 +10292,7 @@
             Subscribes to the candlestick update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10303,7 +10303,7 @@
             Subscribes to mini ticker updates stream for a list of symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-mini-ticker-stream" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10313,7 +10313,7 @@
             Subscribes to mini ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-mini-ticker-stream" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10323,7 +10323,7 @@
             Subscribes to the depth update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#diff-depth-stream" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="updateInterval">Update interval in milliseconds</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10334,7 +10334,7 @@
             Subscribes to the order book updates for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#diff-depth-stream" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="updateInterval">Update interval in milliseconds</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10345,7 +10345,7 @@
             Subscribes to the depth updates for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe on</param>
+            <param name="symbols">The symbols to subscribe on, for example `ETHUSDT`</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol, 5, 10 or 20</param>
             <param name="updateInterval">Update interval in milliseconds, 1000ms or 100ms</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -10357,7 +10357,7 @@
             Subscribes to the depth updates for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#partial-book-depth-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe on</param>
+            <param name="symbol">The symbol to subscribe on, for example `ETHUSDT`</param>
             <param name="levels">The amount of entries to be returned in the update, 5, 10 or 20</param>
             <param name="updateInterval">Update interval in milliseconds, 1000ms or 100ms</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -10369,7 +10369,7 @@
             Subscribe to rolling window ticker updates stream for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-rolling-window-statistics-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe</param>
+            <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
             <param name="windowSize">Window size, either 1 hour or 4 hours</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -10380,7 +10380,7 @@
             Subscribes to ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10390,7 +10390,7 @@
             Subscribes to ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-ticker-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10400,7 +10400,7 @@
             Subscribes to the trades update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10410,7 +10410,7 @@
             Subscribes to the trades update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#trade-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -10425,7 +10425,7 @@
             Cancel all open orders for the symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-open-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10434,7 +10434,7 @@
             Cancel an Oco order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
             <param name="clientOrderId">Client order id</param>
             <param name="newClientOrderId">New client order id for the order</param>
@@ -10446,7 +10446,7 @@
             Cancel an order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
             <param name="clientOrderId">Client order id</param>
             <param name="newClientOrderId">New client order id for the order</param>
@@ -10458,7 +10458,7 @@
             Get an oco order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-oco-history-user_data" /></para>
             </summary>
-            <param name="orderId">Order id</param>
+            <param name="orderId">Order id, for example `ETHUSDT`</param>
             <param name="clientOrderId">Client order id</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -10488,7 +10488,7 @@
             Get open orders
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-open-orders-user_data" /></para>
             </summary>
-            <param name="symbol">Filter by symbols</param>
+            <param name="symbol">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10497,7 +10497,7 @@
             Get order by either orderId or clientOrderId
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#query-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
             <param name="clientOrderId">Client order id</param>
             <param name="ct">Cancellation token</param>
@@ -10508,7 +10508,7 @@
             Get order history
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-order-history-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="fromOrderId">Filter from order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -10521,7 +10521,7 @@
             Get prevented trades because of self trade prevention
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-prevented-matches-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="preventedTradeId">Filter by prevented trade id</param>
             <param name="orderId">Filter by order id</param>
             <param name="fromPreventedTradeId">Filter from prevented id</param>
@@ -10534,7 +10534,7 @@
             Gets user trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-trade-history-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="fromOrderId">Filter from order id</param>
             <param name="startTime">Filter by start time</param>
@@ -10548,7 +10548,7 @@
             DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
             <param name="quantity">The quantity of the symbol</param>
@@ -10576,7 +10576,7 @@
             Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-list-oco-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="quantity">The quantity of the symbol</param>
             <param name="aboveOrderType">The above leg order type</param>
@@ -10606,7 +10606,7 @@
             Places a new order
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -10628,7 +10628,7 @@
             Places a new test order. Test orders are not actually being executed and just test the functionality.
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#test-new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type (limit/market)</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
@@ -10650,7 +10650,7 @@
             Cancel an existing order and place a new order on the same symbol
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-and-replace-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="cancelReplaceMode">Replacement behavior</param>
@@ -10707,7 +10707,7 @@
             DEPRECATED; USE Trading.GetPositionsAsync INSTEAD
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of Positions</returns>
@@ -10736,7 +10736,7 @@
             Requests to change the initial leverage of the given symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-initial-leverage-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to change the initial leverage for</param>
+            <param name="symbol">Symbol to change the initial leverage for, for example `ETHUSDT`</param>
             <param name="leverage">The amount of initial leverage to change to</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -10747,7 +10747,7 @@
             Change the margin type for an open position
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-margin-type-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to change the position type for</param>
+            <param name="symbol">Symbol to change the position type for, for example `ETHUSDT`</param>
             <param name="marginType">The type of margin to use</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -10758,7 +10758,7 @@
             Change the margin on an open position
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#modify-isolated-position-margin-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to adjust the position margin for</param>
+            <param name="symbol">Symbol to adjust the position margin for, for example `ETHUSDT`</param>
             <param name="amount">The amount of margin to be used</param>
             <param name="type">Whether to reduce or add margin to the position</param>
             <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
@@ -10771,7 +10771,7 @@
             Requests the margin change history for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-position-margin-change-history-trade" /></para>
             </summary>
-            <param name="symbol">Symbol to get margin history for</param>
+            <param name="symbol">Symbol to get margin history for, for example `ETHUSDT`</param>
             <param name="type">Filter the history by the direction of margin change</param>
             <param name="startTime">Margin changes newer than this date will be retrieved</param>
             <param name="endTime">Margin changes older than this date will be retrieved</param>
@@ -10785,7 +10785,7 @@
             Gets the income history for the futures account
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-income-history-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get income history from</param>
+            <param name="symbol">The symbol to get income history from, for example `ETHUSDT`</param>
             <param name="incomeType">The income type filter to apply to the request</param>
             <param name="startTime">Time to start getting income history from</param>
             <param name="endTime">Time to stop getting income history from</param>
@@ -10799,7 +10799,7 @@
             Gets Notional and Leverage Brackets.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#notional-and-leverage-brackets-user_data" /></para>
             </summary>
-            <param name="symbolOrPair">The symbol or pair to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Notional and Leverage Brackets</returns>
@@ -10809,7 +10809,7 @@
             Get position ADL quantile estimations
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#position-adl-quantile-estimation-user_data" /></para>
             </summary>
-            <param name="symbol">Only get for this symbol</param>
+            <param name="symbol">Only get for this symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -10864,7 +10864,7 @@
             Gets account commission rates
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-commission-rate-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>User commission rate information</returns>
@@ -10991,7 +10991,7 @@
             Get user symbol configuration
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
@@ -11038,7 +11038,7 @@
             Get klines for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-data" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">The kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -11059,7 +11059,7 @@
             Get funding rate history for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-funding-rate-history" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="startTime">Start time to get funding rate history</param>
             <param name="endTime">End time to get funding rate history</param>
             <param name="limit">Max number of results</param>
@@ -11071,7 +11071,7 @@
             Gets Top Trader Long/Short Ratio (Accounts)
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-accounts" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
@@ -11084,7 +11084,7 @@
             Gets Top Trader Long/Short Ratio (Positions)
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#top-trader-long-short-ratio-positions" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
@@ -11097,7 +11097,7 @@
             Gets Global Long/Short Ratio (Accounts)
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#long-short-ratio" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get global long/short ratio (accounts)</param>
@@ -11110,7 +11110,7 @@
             Kline/candlestick bars for the mark price of a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-kline-candlestick-data" /></para>
             </summary>
-            <param name="symbol">The symbol get the data for</param>
+            <param name="symbol">The symbol get the data for, for example `ETHUSDT`</param>
             <param name="interval">The interval of the klines</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time</param>
@@ -11123,7 +11123,7 @@
             Gets the order book for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#order-book" /></para>
             </summary>
-            <param name="symbol">The symbol to get the order book for</param>
+            <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns>The order book for the symbol</returns>
@@ -11133,7 +11133,7 @@
             Get the most recent trades for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#recent-trades-list" /></para>
             </summary>
-            <param name="symbol">The symbol to get trades for</param>
+            <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">Max amount of results</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -11143,7 +11143,7 @@
             Get trade history for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#old-trades-lookup-market_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get trades for</param>
+            <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">The max amount of results</param>
             <param name="fromId">Retrun trades after this trade id</param>
             <param name="ct">Cancellation token</param>
@@ -11154,7 +11154,7 @@
             Get Mark Price and Funding Rate for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
@@ -11171,7 +11171,7 @@
             Get data regarding the last 24 hours change
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#24hr-ticker-price-change-statistics" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
@@ -11188,7 +11188,7 @@
             Gets the best price/quantity on the order book for a symbol.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#symbol-order-book-ticker" /></para>
             </summary>
-            <param name="symbol">Symbol to get book price for</param>
+            <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
@@ -11205,7 +11205,7 @@
             Get present open interest of a specific symbol.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#open-interest" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Open Interest info</returns>
         </member>
@@ -11214,7 +11214,7 @@
             Gets Open Interest History
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#open-interest-statistics" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get open interest history</param>
@@ -11227,7 +11227,7 @@
             Gets Taker Buy/Sell Volume Ratio
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#taker-buy-sell-volume" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
             <param name="startTime">Start time to get taker buy/sell volume ratio</param>
@@ -11240,7 +11240,7 @@
             Gets composite index info
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#composite-index-symbol-information" /></para>
             </summary>
-            <param name="symbol">The symbol to get the data for</param>
+            <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -11249,7 +11249,7 @@
             Gets the price of a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#symbol-price-ticker" /></para>
             </summary>
-            <param name="symbol">The symbol to get the price for</param>
+            <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
@@ -11266,7 +11266,7 @@
             Get candlestick data for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-data" /></para>
             </summary>
-            <param name="pair">The symbol to get the data for</param>
+            <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="contractType">The contract type</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
@@ -11280,7 +11280,7 @@
             Get Kline/candlestick data for the index price of a pair.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#index-price-kline-candlestick-data" /></para>
             </summary>
-            <param name="pair">The symbol to get the data for</param>
+            <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="interval">The candlestick timespan</param>
             <param name="startTime">Start time to get candlestick data</param>
             <param name="endTime">End time to get candlestick data</param>
@@ -11301,7 +11301,7 @@
             Get asset index for Multi-Assets mode for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -11310,7 +11310,7 @@
             Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#compressed-aggregate-trades-list" /></para>
             </summary>
-            <param name="symbol">The symbol to get the trades for</param>
+            <param name="symbol">The symbol to get the trades for, for example `ETHUSDT`</param>
             <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
             <param name="startTime">Time to start getting trades from</param>
             <param name="endTime">Time to stop getting trades from</param>
@@ -11323,7 +11323,7 @@
             Get basis data
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#basis" /></para>
             </summary>
-            <param name="symbol">The pair to get the data for</param>
+            <param name="symbol">The pair to get the data for, for example `ETHUSDT`</param>
             <param name="contractType">The contract type</param>
             <param name="period">The period timespan</param>
             <param name="limit">Max number of results</param>
@@ -11342,7 +11342,7 @@
             Places a new order
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
             <param name="type">The order type</param>
             <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -11380,7 +11380,7 @@
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#query-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -11392,7 +11392,7 @@
             Cancels a pending order
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#cancel-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -11404,7 +11404,7 @@
             Cancels all open orders
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#cancel-all-open-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for canceled order</returns>
@@ -11415,7 +11415,7 @@
             so that the existing countdown time can be canceled and replaced by a new one.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#auto-cancel-all-open-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -11426,7 +11426,7 @@
             Cancels muliple orders
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#cancel-multiple-orders-trade" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderIdList">The list of order ids to cancel</param>
             <param name="origClientOrderIdList">The list of client order ids to cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -11438,7 +11438,7 @@
             Edit an existing order
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#modify-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
             <param name="quantity">New quantity</param>
             <param name="price">New price</param>
@@ -11463,7 +11463,7 @@
             Get order edit history
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-order-modify-history-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get orders for</param>
+            <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="clientOrderId">Filter by client order id</param>
             <param name="startTime">If set, only orders edited after this time will be returned</param>
@@ -11478,7 +11478,7 @@
             Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#query-current-open-order-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol the order is for</param>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
             <param name="origClientOrderId">The client order id of the order</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -11490,7 +11490,7 @@
             Gets a list of open orders
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#current-all-open-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get open orders for</param>
+            <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of open orders</returns>
@@ -11500,7 +11500,7 @@
             Gets all orders for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#all-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get orders for</param>
+            <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
             <param name="startTime">If set, only orders placed after this time will be returned</param>
             <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -11514,7 +11514,7 @@
             Gets a list of users forced orders
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-39-s-force-orders-user_data" /></para>
             </summary>
-            <param name="symbol">The symbol to get forced orders for</param>
+            <param name="symbol">The symbol to get forced orders for, for example `ETHUSDT`</param>
             <param name="closeType">Filter by reason for close</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -11527,7 +11527,7 @@
             Gets all user trades for provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data" /></para>
             </summary>
-            <param name="symbol">Symbol to get trades for</param>
+            <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">The max number of results</param>
             <param name="orderId">Get the trades for a specific order</param>
             <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -11542,7 +11542,7 @@
             Place a new Volume Participation order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#volume-participation-vp-new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
             <param name="quantity">Order quantity</param>
             <param name="urgency">Represent the relative speed of the current execution</param>
@@ -11559,7 +11559,7 @@
             Place a new Time Weighted Average Price order
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
             <param name="quantity">Order quantity</param>
             <param name="duration">Duration in seconds. Less than 5 minutes will be defaulted to 5 minutes, more than 24 hours will be defaulted to 24 hours.</param>
@@ -11595,7 +11595,7 @@
             Get list of closed algo orders
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="side">Filter by side</param>
             <param name="startTime">Fitler by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -11622,7 +11622,7 @@
             Get position information
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
@@ -11636,7 +11636,7 @@
             Subscribes to the aggregated trades update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11645,7 +11645,7 @@
             <summary>
             Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
             </summary>
-            <param name="symbol">Symbol to subscribe</param>
+            <param name="symbol">Symbol to subscribe, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11655,7 +11655,7 @@
             <summary>
             Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
             </summary>
-            <param name="symbols">Symbols to subscribe</param>
+            <param name="symbols">Symbols to subscribe, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11666,7 +11666,7 @@
             Subscribes to the aggregated trades update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11676,7 +11676,7 @@
             Subscribes to the Mark price update stream for a single symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11687,7 +11687,7 @@
             Subscribes to the Mark price update stream for a list of symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11698,7 +11698,7 @@
             Subscribes to the candlestick update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11709,7 +11709,7 @@
             Subscribes to the candlestick update stream for the provided symbol and intervals
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11720,7 +11720,7 @@
             Subscribes to the candlestick update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11731,7 +11731,7 @@
             Subscribes to the candlestick update stream for the provided symbols and intervals
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#kline-candlestick-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11742,7 +11742,7 @@
             Subscribes to the continuous contract candlestick update stream for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-streams" /></para>
             </summary>
-            <param name="pair">The pair</param>
+            <param name="pair">The pair, for example `ETHUSDT`</param>
             <param name="contractType">The contract type</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -11754,7 +11754,7 @@
             Subscribes to the continuous contract candlestick update stream for the provided pairs
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#continuous-contract-kline-candlestick-streams" /></para>
             </summary>
-            <param name="pairs">The pairs</param>
+            <param name="pairs">The pairs, for example `ETHUSDT`</param>
             <param name="contractType">The contract type</param>
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -11766,7 +11766,7 @@
             Subscribes to mini ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-mini-ticker-stream" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11776,7 +11776,7 @@
             Subscribes to mini ticker updates stream for a list of symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-mini-ticker-stream" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11795,7 +11795,7 @@
             Subscribes to ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-ticker-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe to</param>
+            <param name="symbol">The symbol to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11805,7 +11805,7 @@
             Subscribes to ticker updates stream for a specific symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-ticker-streams" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe to</param>
+            <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11833,7 +11833,7 @@
             Subscribes to the book ticker update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-book-ticker-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11843,7 +11843,7 @@
             Subscribes to the book ticker update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#individual-symbol-book-ticker-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11853,7 +11853,7 @@
             Subscribes to specific symbol forced liquidations stream
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#liquidation-order-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11863,7 +11863,7 @@
             Subscribes to list of symbol forced liquidations stream
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#liquidation-order-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11882,7 +11882,7 @@
             Subscribes to the depth updates for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#partial-book-depth-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe on</param>
+            <param name="symbol">The symbol to subscribe on, for example `ETHUSDT`</param>
             <param name="levels">The amount of entries to be returned in the update, 5, 10 or 20</param>
             <param name="updateInterval">Update interval in milliseconds, 100, 250 or 500</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -11894,7 +11894,7 @@
             Subscribes to the depth updates for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#partial-book-depth-streams" /></para>
             </summary>
-            <param name="symbols">The symbols to subscribe on</param>
+            <param name="symbols">The symbols to subscribe on, for example `ETHUSDT`</param>
             <param name="levels">The amount of entries to be returned in the update of each symbol</param>
             <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -11906,7 +11906,7 @@
             Subscribes to the order book updates for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#diff-book-depth-streams" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11917,7 +11917,7 @@
             Subscribes to the depth update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#diff-book-depth-streams" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -11963,7 +11963,7 @@
             Subscribes to composite index updates stream for a symbol
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#composite-index-symbol-information-streams" /></para>
             </summary>
-            <param name="symbol">The symbol to subscribe</param>
+            <param name="symbol">The symbol to subscribe, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
@@ -11982,7 +11982,7 @@
             Subscribe to asset index updates for a single
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>

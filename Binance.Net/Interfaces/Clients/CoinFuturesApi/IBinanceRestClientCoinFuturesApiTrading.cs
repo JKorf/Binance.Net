@@ -12,7 +12,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Places a new order
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#new-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -68,7 +68,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#query-order-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -80,7 +80,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Cancels a pending order
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -92,7 +92,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Cancels all open orders
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-all-open-orders-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
@@ -103,7 +103,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// so that the existing countdown time can be canceled and replaced by a new one.
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#auto-cancel-all-open-orders-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -114,7 +114,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Cancels muliple orders
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="orderIdList">The list of order ids to cancel</param>
         /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -126,7 +126,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#query-current-open-order-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -138,7 +138,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets a list of open orders
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#current-all-open-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="symbol">The symbol to get open orders for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
@@ -148,7 +148,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets all orders for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="symbol">The symbol to get orders for, for example `BTCUSD_PERP`</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
         /// <param name="startTime">If set, only orders placed after this time will be returned</param>
         /// <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -162,7 +162,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets a list of users forced orders
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-39-s-force-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get forced orders for</param>
+        /// <param name="symbol">The symbol to get forced orders for, for example `BTCUSD_PERP`</param>
         /// <param name="closeType">Filter by reason for close</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -177,8 +177,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Gets all user trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#account-trade-list-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
-        /// <param name="pair">Symbol to get trades for</param>
+        /// <param name="symbol">Symbol to get trades for, for example `BTCUSD_PERP`</param>
+        /// <param name="pair">Symbol to get trades for, for example `BTCUSD`</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
         /// <param name="orderId">Get the trades for a specific order</param>

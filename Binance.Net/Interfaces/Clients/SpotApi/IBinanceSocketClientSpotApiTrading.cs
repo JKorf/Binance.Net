@@ -13,7 +13,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancel all open orders for the symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-open-orders-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default);
@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancel an Oco order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="newClientOrderId">New client order id for the order</param>
@@ -32,7 +32,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancel an order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="newClientOrderId">New client order id for the order</param>
@@ -43,7 +43,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get an oco order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-oco-history-user_data" /></para>
         /// </summary>
-        /// <param name="orderId">Order id</param>
+        /// <param name="orderId">Order id, for example `ETHUSDT`</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -70,7 +70,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get open orders
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-open-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbols</param>
+        /// <param name="symbol">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default);
@@ -78,7 +78,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#query-order-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
@@ -88,7 +88,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get order history
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-order-history-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="fromOrderId">Filter from order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -100,7 +100,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get prevented trades because of self trade prevention
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-prevented-matches-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="preventedTradeId">Filter by prevented trade id</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="fromPreventedTradeId">Filter from prevented id</param>
@@ -112,7 +112,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets user trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-trade-history-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="fromOrderId">Filter from order id</param>
         /// <param name="startTime">Filter by start time</param>
@@ -126,7 +126,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The quantity of the symbol</param>
@@ -154,7 +154,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-list-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="quantity">The quantity of the symbol</param>
         /// <param name="aboveOrderType">The above leg order type</param>
@@ -210,7 +210,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Places a new order
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -232,7 +232,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#test-new-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type (limit/market)</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
@@ -254,7 +254,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancel an existing order and place a new order on the same symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-and-replace-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="cancelReplaceMode">Replacement behavior</param>

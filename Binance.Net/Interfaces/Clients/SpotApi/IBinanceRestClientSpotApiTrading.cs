@@ -18,7 +18,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#test-new-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type (limit/market)</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel)</param>
@@ -60,7 +60,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Places a new order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -100,7 +100,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancels a pending order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="newClientOrderId">Unique identifier for this cancel</param>
@@ -114,7 +114,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancels all open orders on a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-all-open-orders-on-a-symbol-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for canceled order</returns>
@@ -123,7 +123,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <summary>
         /// Cancel an existing order and place a new order on the same symbol
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="cancelReplaceMode">Replacement behavior</param>
@@ -171,7 +171,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-order-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -183,7 +183,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets a list of open orders
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#current-open-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
@@ -193,7 +193,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets all orders for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
         /// <param name="startTime">If set, only orders placed after this time will be returned</param>
         /// <param name="endTime">If set, only orders placed before this time will be returned</param>
@@ -207,7 +207,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The quantity of the symbol</param>
@@ -253,7 +253,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="quantity">The quantity of the symbol</param>
         /// <param name="aboveOrderType">The above leg order type</param>
@@ -311,7 +311,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancels a pending oco order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderListId">The id of the order list to cancel</param>
         /// <param name="listClientOrderId">The client order id of the order list to cancel</param>
         /// <param name="newClientOrderId">The new client order list id for the order list</param>
@@ -357,7 +357,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Place a new OTOCO (One Triggers Other) order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
         /// <param name="workingSide">Working order side</param>
         /// <param name="workingQuantity">Working order quantity</param>
@@ -414,7 +414,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Place a new OTOCO (One Triggers One Cancels The Other) order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-order-list-otoco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
         /// <param name="workingSide">Working order side</param>
         /// <param name="workingQuantity">Working order quantity</param>
@@ -490,7 +490,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets user trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-trade-list-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="orderId">Get trades for this order id</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
@@ -505,7 +505,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Margin account new order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-new-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -545,7 +545,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancel an active order for margin account
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-order-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
@@ -559,7 +559,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancel all active orders for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-all-open-orders-on-a-symbol-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the to cancel orders for</param>
+        /// <param name="symbol">The symbol the to cancel orders for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -570,7 +570,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-order-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
@@ -583,7 +583,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets a list of open margin account orders
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-open-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for</param>
+        /// <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -594,7 +594,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets all margin account orders for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-all-orders-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol to get orders for</param>
+        /// <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
         /// <param name="startTime">If set, only orders placed after this time will be returned</param>
@@ -609,7 +609,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets all user margin account trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-trade-list-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="limit">The max number of results</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="startTime">Orders newer than this date will be retrieved</param>
@@ -624,7 +624,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Places a new margin OCO(One cancels other) order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-new-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="stopLimitTimeInForce">Lifetime of the stop order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
         /// <param name="quantity">The quantity of the symbol</param>
@@ -668,7 +668,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Cancels a pending margin oco order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#margin-account-cancel-oco-trade" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderListId">The id of the order list to cancel</param>
         /// <param name="listClientOrderId">The client order id of the order list to cancel</param>
@@ -682,7 +682,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Retrieves data for a specific margin oco order. Either orderListId or listClientOrderId should be provided.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-oco-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+        /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="orderListId">The list order id of the order</param>
         /// <param name="origClientOrderId">Either orderListId or listClientOrderId must be provided</param>
@@ -695,7 +695,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Retrieves a list of margin oco orders matching the parameters
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-all-oco-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+        /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="fromId">Only return oco orders with id higher than this</param>
         /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
@@ -710,7 +710,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Retrieves a list of open margin oco orders
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-open-oco-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin</param>
+        /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -797,8 +797,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Request a quote for convert asset (selling asset) for base asset (buying asset)
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#send-quote-request-user_data" /></para>
         /// </summary>
-        /// <param name="quoteAsset">Quote asset</param>
-        /// <param name="baseAsset">Base asset</param>
+        /// <param name="quoteAsset">Quote asset, for example `ETH`</param>
+        /// <param name="baseAsset">Base asset, for example `ETH`</param>
         /// <param name="quoteQuantity">Quote quantity</param>
         /// <param name="baseQuantity">Quote quantity</param>
         /// <param name="walletType">The wallet type for convert</param>
@@ -813,8 +813,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#accept-quote-trade" /></para>
         /// </summary>
         /// <param name="quoteId">The quote id of the order</param>
-        /// <param name="receiveWindow"></param>
-        /// <param name="ct"></param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceConvertResult>> ConvertAcceptQuoteAsync(string quoteId, long? receiveWindow = null, CancellationToken ct = default);
 
@@ -845,7 +845,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get prevented matches because of self trade prevention
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-prevented-matches-user_data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="preventedMatchId">Filter by prevented match id</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="fromPreventedMatchId">Filter by min prevented match id</param>
@@ -859,7 +859,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Place a new spot time weighted average price order
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#time-weighted-average-price-twap-new-order-trade-2" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>
         /// <param name="quantity">Order quantity</param>
         /// <param name="duration">Duration in seconds. 300 - 86400</param>
@@ -901,7 +901,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get list of closed algo orders
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-historical-algo-orders-user_data-2" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="side">Filter by side</param>
         /// <param name="startTime">Fitler by start time</param>
         /// <param name="endTime">Filter by end time</param>
