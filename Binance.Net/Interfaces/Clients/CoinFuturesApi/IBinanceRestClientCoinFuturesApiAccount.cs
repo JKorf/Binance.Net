@@ -153,7 +153,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceFuturesAccountUserCommissionRate>> GetUserCommissionRateAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client
+        /// Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client.The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#start-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>

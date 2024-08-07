@@ -314,10 +314,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<BinanceFuturesStreamSymbolUpdate>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-data-streams" /></para>
         /// </summary>
-        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method</param>
         /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>

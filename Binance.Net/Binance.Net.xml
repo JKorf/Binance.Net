@@ -5349,7 +5349,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client
+            Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client.The stream will close after 60 minutes unless <see cref="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">KeepAliveUserStreamAsync</see> is called.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#start-user-data-stream-user_stream" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
@@ -6085,10 +6085,10 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
             <summary>
-            Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
+            Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-data-streams" /></para>
             </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="listenKey">Listen key retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method</param>
             <param name="onLeverageUpdate">The event handler for leverage changed update</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
@@ -9979,7 +9979,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
+            Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Threading.CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">KeepAliveUserStreamAsync</see> is called.
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#start-user-data-stream-user_stream" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
@@ -9996,10 +9996,10 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Threading.CancellationToken)">
             <summary>
-            Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
+            Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-data-streams" /></para>
             </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="listenKey">Listen key retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">StartUserStreamAsync</see> method</param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
@@ -10871,7 +10871,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
-            Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client
+            Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client. The stream will close after 60 minutes unless <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">KeepAliveUserStreamAsync</see> is called.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#start-user-data-stream-user_stream" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
@@ -11933,10 +11933,10 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Threading.CancellationToken)">
             <summary>
-            Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
+            Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-data-streams" /></para>
             </summary>
-            <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+            <param name="listenKey">Listen key retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method</param>
             <param name="onLeverageUpdate">The event handler for leverage changed update</param>
             <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
             <param name="onAccountUpdate">The event handler for whenever an account update is received</param>

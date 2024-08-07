@@ -38,7 +38,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns></returns>
         Task<CallResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="SubscribeToUserDataUpdatesAsync(string, Action{DataEvent{BinanceStreamOrderUpdate}}?, Action{DataEvent{BinanceStreamOrderList}}?, Action{DataEvent{BinanceStreamPositionsUpdate}}?, Action{DataEvent{BinanceStreamBalanceUpdate}}?, Action{DataEvent{BinanceStreamEvent}}?, CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#start-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -54,10 +54,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Spot.UserStreams.StartUserStream method should be called.
+        /// Subscribes to the account update stream. Prior to using this, the <see cref="StartUserStreamAsync(CancellationToken)">StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-data-streams" /></para>
         /// </summary>
-        /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
+        /// <param name="listenKey">Listen key retrieved by the <see cref="StartUserStreamAsync(CancellationToken)">StartUserStreamAsync</see> method</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
