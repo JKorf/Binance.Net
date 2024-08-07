@@ -20,7 +20,7 @@
         /// <summary>
         /// Maint Margin
         /// </summary>
-        [JsonPropertyName("mainMargin")]
+        [JsonPropertyName("maintMargin")]
         public decimal MaintMargin { get; set; }
 
         /// <summary>

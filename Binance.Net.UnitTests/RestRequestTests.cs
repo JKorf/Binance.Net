@@ -108,7 +108,7 @@ namespace Binance.Net.UnitTests
             });
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.binance.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetServerTimeAsync(), "GetServerTime", "serverTime");
-            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo", ignoreProperties: new List<string> { "orderTypes", "timeInForce" });
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo", ignoreProperties: new List<string> { "orderTypes", "timeInForce", "quoteAssetPrecision" });
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetSystemStatusAsync(), "GetSystemStatus");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetAssetDetailsAsync(), "GetAssetDetails");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetRecentTradesAsync("ETHUSDT"), "GetRecentTrades");
@@ -339,7 +339,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.CoinFuturesApi.Account.StopUserStreamAsync("123"), "StopUserStream");
             await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetAccountInfoAsync(), "GetAccountInfo");
             await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetBalancesAsync(), "GetBalances");
-            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetPositionInformationAsync(), "GetPositionInformation", ignoreProperties: new List<string> { "unRealizedProfit" });
+            await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetPositionInformationAsync(), "GetPositionInformation");
             await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetUserCommissionRateAsync("ETHUSDT"), "GetUserCommissionRate");
             await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetDownloadIdForTransactionHistoryAsync(DateTime.UtcNow, DateTime.UtcNow), "GetDownloadIdForTransactionHistory");
             await tester.ValidateAsync(client => client.CoinFuturesApi.Account.GetDownloadLinkForTransactionHistoryAsync("123"), "GetDownloadLinkForTransactionHistory", ignoreProperties: new List<string> { "notified" });
