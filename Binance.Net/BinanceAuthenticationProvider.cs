@@ -27,8 +27,18 @@ namespace Binance.Net
             if (!auth)
                 return;
 
-            var parameters = parameterPosition == HttpMethodParameterPosition.InUri ? uriParameters : bodyParameters;
-            parameters ??= new Dictionary<string, object>();
+            IDictionary<string, object> parameters;
+            if (parameterPosition == HttpMethodParameterPosition.InUri)
+            {
+                uriParameters ??= new Dictionary<string, object>();
+                parameters = uriParameters;
+            }
+            else
+            {
+                bodyParameters ??= new Dictionary<string, object>();
+                parameters = bodyParameters;
+            }
+
             var timestamp = GetMillisecondTimestamp(apiClient);
             parameters.Add("timestamp", timestamp);
 
