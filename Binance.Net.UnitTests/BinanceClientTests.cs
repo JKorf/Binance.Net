@@ -143,7 +143,7 @@ namespace Binance.Net.UnitTests
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
 
             // assert
-            Assert.That(authProvider.GetApiKey() == "TestKey");
+            Assert.That(authProvider.ApiKey == "TestKey");
         }
 
         [Test]
@@ -156,13 +156,15 @@ namespace Binance.Net.UnitTests
 
             // act
             var headers = new Dictionary<string, string>();
+            IDictionary<string, object> uriParams = null;
+            IDictionary<string, object> bodyParams = null;
             authProvider.AuthenticateRequest(
                 new BinanceRestApiClient(new TraceLogger(), new BinanceRestOptions(), new BinanceRestOptions().SpotOptions),
                 request.Uri,
                 HttpMethod.Get,
-                new SortedDictionary<string, object>(),
-                new SortedDictionary<string, object>(),
-                headers,
+                ref uriParams,
+                ref bodyParams,
+                ref headers,
                 true, ArrayParametersSerialization.MultipleValues,
                 HttpMethodParameterPosition.InUri,
                 RequestBodyFormat.Json);

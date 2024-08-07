@@ -105,7 +105,7 @@ namespace Binance.Net.Clients.SpotApi
                 }
                 else
                 {
-                    parameters.Add("apiKey", authProvider.GetApiKey());
+                    parameters.Add("apiKey", authProvider.ApiKey);
                 }
             }
 
