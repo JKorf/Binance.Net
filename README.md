@@ -176,6 +176,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.1.0 - 07 Aug 2024
+    * Updated CryptoExchange.Net to version 7.11.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.0
+    * Updated XML code comments
+    * Fixed BinanceFuturesAccountAsset MaintMargin deserialization
+    * Fixed BinancePosition MaintMargin deserialization
+    * Fixed BinancePosition UnrealizedProfit deserialization for Coin-M futures
+
 * Version 10.0.1 - 05 Aug 2024
     * Fixed deserialization issue UsdtFuturesApi.Account.GetIncomeHistoryAsync
 
