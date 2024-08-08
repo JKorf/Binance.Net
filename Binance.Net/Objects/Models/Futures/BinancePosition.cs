@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("unrealizedProfit")]
         public decimal UnrealizedPnl { get; set; }
-        [JsonPropertyName("unRealizedProfit")]
+        [JsonInclude, JsonPropertyName("unRealizedProfit")]
         internal decimal UnRealizedPnl { set => UnrealizedPnl = value; }
 
         /// <summary>
