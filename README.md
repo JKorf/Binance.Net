@@ -996,7 +996,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 * Version 5.1.2 - 26 May 2020
     * Added CancelAllOrdersAfterTimeout futures endpoint
     * Added timestamp to various models
-    * Added closePosition paramter for future orders
+    * Added closePosition parameter for future orders
 
 * Version 5.1.1 - 20 May 2020
     * Fixed ChangeInitialLeverage endpoint
