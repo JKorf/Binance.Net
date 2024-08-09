@@ -27,5 +27,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <returns></returns>
         public IFuturesClient CommonFuturesClient { get; }
+
+        public IBinanceRestClientUsdFuturesApiShared SharedClient { get; }
     }
 }

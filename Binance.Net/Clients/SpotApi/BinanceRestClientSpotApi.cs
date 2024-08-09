@@ -14,7 +14,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IBinanceRestClientSpotApi" />
-    internal class BinanceRestClientSpotApi : RestApiClient, IBinanceRestClientSpotApi, ISpotClient
+    internal partial class BinanceRestClientSpotApi : RestApiClient, IBinanceRestClientSpotApi, ISpotClient
     {
         #region fields 
         /// <inheritdoc />
@@ -76,7 +76,7 @@ namespace Binance.Net.Clients.SpotApi
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         #region helpers
 
@@ -230,6 +230,8 @@ namespace Binance.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public ISpotClient CommonSpotClient => this;
+
+        public IBinanceRestClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public string GetSymbolName(string baseAsset, string quoteAsset) =>

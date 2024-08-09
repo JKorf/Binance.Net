@@ -13,7 +13,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc cref="IBinanceRestClientCoinFuturesApi" />
-    internal class BinanceRestClientCoinFuturesApi : RestApiClient, IBinanceRestClientCoinFuturesApi, IFuturesClient
+    internal partial class BinanceRestClientCoinFuturesApi : RestApiClient, IBinanceRestClientCoinFuturesApi, IFuturesClient
     {
         #region fields 
         /// <inheritdoc />
@@ -75,7 +75,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null)
+        {
+            return (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture) + "_PERP";
+        }
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {
@@ -256,6 +259,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         public IFuturesClient CommonFuturesClient => this;
+        public IBinanceRestClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
         public string GetSymbolName(string baseAsset, string quoteAsset) =>

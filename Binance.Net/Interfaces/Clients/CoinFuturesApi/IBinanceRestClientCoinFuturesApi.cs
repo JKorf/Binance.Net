@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Interfaces.CommonClients;
+﻿using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+using CryptoExchange.Net.Interfaces.CommonClients;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
@@ -27,5 +28,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// </summary>
         /// <returns></returns>
         public IFuturesClient CommonFuturesClient { get; }
+        public IBinanceRestClientCoinFuturesApiShared SharedClient { get; }
+
     }
 }

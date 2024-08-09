@@ -13,7 +13,7 @@ using CryptoExchange.Net.RateLimiting.Interfaces;
 namespace Binance.Net.Clients.UsdFuturesApi
 {
     /// <inheritdoc cref="IBinanceRestClientUsdFuturesApi" />
-    internal class BinanceRestClientUsdFuturesApi : RestApiClient, IBinanceRestClientUsdFuturesApi, IFuturesClient
+    internal partial class BinanceRestClientUsdFuturesApi : RestApiClient, IBinanceRestClientUsdFuturesApi, IFuturesClient
     {
         #region fields 
         /// <inheritdoc />
@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public event Action<OrderId>? OnOrderCanceled;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
 
         #region constructor/destructor
         internal BinanceRestClientUsdFuturesApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)
@@ -279,6 +279,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         /// <inheritdoc />
         public IFuturesClient CommonFuturesClient => this;
+        public IBinanceRestClientUsdFuturesApiShared SharedClient => this;
 
         internal void InvokeOrderPlaced(OrderId id)
         {
@@ -291,8 +292,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        public string GetSymbolName(string baseAsset, string quoteAsset) =>
-            (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
+        public string GetSymbolName(string baseAsset, string quoteAsset)
+        {
+            return (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture);
+        }
 
         async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId, string? clientOrderId, CancellationToken ct)
         {
