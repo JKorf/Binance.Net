@@ -49,7 +49,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public event Action<OrderId>? OnOrderCanceled;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
+        {
+            var suffix = futuresType == null ? string.Empty : "_PERP";
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + suffix;
+        }
 
         #region constructor/destructor
         internal BinanceRestClientUsdFuturesApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)

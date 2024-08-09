@@ -68,7 +68,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null)
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
             => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
 
         #region methods

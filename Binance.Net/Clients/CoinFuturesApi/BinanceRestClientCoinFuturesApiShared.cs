@@ -16,7 +16,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return new WebCallResult<IEnumerable<SharedKline>>(new ArgumentError("Interval not supported"));
 
             var result = await ExchangeData.GetKlinesAsync(
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.FuturesType),
+                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
                 interval,
                 request.StartTime,
                 request.EndTime,
@@ -59,7 +59,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         async Task<WebCallResult<SharedTicker>> ITickerClient.GetTickerAsync(TickerRequest request, CancellationToken ct)
         {
-            var result = await ExchangeData.GetTickersAsync(symbol: FormatSymbol(request.BaseAsset, request.QuoteAsset, request.FuturesType), ct: ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetTickersAsync(symbol: FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.As<SharedTicker>(default);
 
@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeClient.GetTradesAsync(TradeRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.FuturesType),
+                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit,

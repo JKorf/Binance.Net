@@ -66,7 +66,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
