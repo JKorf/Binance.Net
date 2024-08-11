@@ -6,10 +6,10 @@ using System.Text;
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     public interface IBinanceRestClientCoinFuturesApiShared :
-        ITickerClient,
-        IFuturesSymbolClient,
-        IKlineClient,
-        ITradeClient
+        ITickerRestClient,
+        IFuturesSymbolRestClient,
+        IKlineRestClient,
+        ITradeRestClient
     {
     }
 }

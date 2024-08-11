@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Interfaces.Clients.SpotApi
+﻿using CryptoExchange.Net.SharedApis.Interfaces;
+
+namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Spot API socket subscriptions and requests
@@ -17,5 +19,7 @@
         /// Trading data and queries
         /// </summary>
         IBinanceSocketClientSpotApiTrading Trading { get; }
+
+        IBinanceSocketClientSpotApiShared SharedClient { get; }
     }
 }

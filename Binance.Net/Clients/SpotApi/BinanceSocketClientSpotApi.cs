@@ -9,12 +9,13 @@ using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.SharedApis.Interfaces;
 using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    internal class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
+    internal partial class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
     {
         #region fields
         /// <inheritdoc />
@@ -58,6 +59,8 @@ namespace Binance.Net.Clients.SpotApi
             SetDedicatedConnection(ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), true);
         }
         #endregion
+
+        public IBinanceSocketClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();

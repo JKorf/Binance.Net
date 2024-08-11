@@ -13,7 +13,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
 
-        async Task<WebCallResult<IEnumerable<SharedKline>>> IKlineClient.GetKlinesAsync(KlineRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval.TotalSeconds;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
@@ -41,7 +41,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
             if (!result)
@@ -61,7 +61,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }));
         }
 
-        async Task<WebCallResult<SharedTicker>> ITickerClient.GetTickerAsync(TickerRequest request, CancellationToken ct)
+        async Task<WebCallResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetTickerAsync(FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), ct).ConfigureAwait(false);
             if (!result)
@@ -75,7 +75,22 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeClient.GetTradesAsync(TradeRequest request, CancellationToken ct)
+        async Task<WebCallResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
+        {
+            var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<SharedTicker>>(default);
+
+            return result.As<IEnumerable<SharedTicker>>(result.Data.Select(x => new SharedTicker
+            {
+                Symbol = x.Symbol,
+                HighPrice = x.HighPrice,
+                LastPrice = x.LastPrice,
+                LowPrice = x.LowPrice,
+            }));
+        }
+
+        async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
                 FormatSymbol(request.BaseAsset, request.QuoteAsset), // Don't pass api type; need only the pair

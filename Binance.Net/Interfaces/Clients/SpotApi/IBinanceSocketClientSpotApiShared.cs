@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
-    public interface IBinanceRestClientSpotApiShared:
-        ITickerRestClient,
-        ISpotSymbolRestClient,
-        IKlineRestClient,
-        ITradeRestClient
+    public interface IBinanceSocketClientSpotApiShared :
+        ITickerSocketClient,
+        ITickersSocketClient
     {
     }
 }
