@@ -25950,6 +25950,26 @@
             Update time
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.MaxNotionalValue">
+            <summary>
+            Max notional value of the position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.MarginType">
+            <summary>
+            Max notional value of the position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.IsAutoAddMargin">
+            <summary>
+            Is auto add margin enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration">
             <summary>
             Symbol configuration
