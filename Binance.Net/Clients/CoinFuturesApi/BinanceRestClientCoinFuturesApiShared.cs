@@ -1,5 +1,6 @@
 ﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using CryptoExchange.Net.SharedApis.Interfaces;
+using CryptoExchange.Net.SharedApis.Models.Rest;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
 
@@ -26,15 +27,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result)
                 return result.As<IEnumerable<SharedKline>>(default);
 
-            return result.As(result.Data.Select(x => new SharedKline
-            {
-                BaseVolume = x.Volume,
-                ClosePrice = x.ClosePrice,
-                HighPrice = x.HighPrice,
-                LowPrice = x.LowPrice,
-                OpenPrice = x.OpenPrice,
-                OpenTime = x.OpenTime
-            }));
+            return result.As(result.Data.Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)));
         }
 
         async Task<WebCallResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
@@ -43,11 +36,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result)
                 return result.As<IEnumerable<SharedFuturesSymbol>>(default);
 
-            return result.As(result.Data.Symbols.Select(s => new SharedFuturesSymbol
+            return result.As(result.Data.Symbols.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Name)
             {
-                BaseAsset = s.BaseAsset,
-                QuoteAsset = s.QuoteAsset,
-                Name = s.Name,
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
                 QuantityStep = s.LotSizeFilter?.StepSize,
@@ -64,13 +54,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return result.As<SharedTicker>(default);
 
             var ticker = result.Data.Single();
-            return result.As(new SharedTicker
-            {
-                Symbol = ticker.Symbol,
-                HighPrice = ticker.HighPrice,
-                LastPrice = ticker.LastPrice,
-                LowPrice = ticker.LowPrice,
-            });
+            return result.As(new SharedTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice, ticker.LowPrice));
         }
 
         async Task<WebCallResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
@@ -79,13 +63,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result)
                 return result.As<IEnumerable<SharedTicker>>(default);
 
-            return result.As<IEnumerable<SharedTicker>>(result.Data.Select( x => new SharedTicker
-            {
-                Symbol = x.Symbol,
-                HighPrice = x.HighPrice,
-                LastPrice = x.LastPrice,
-                LowPrice = x.LowPrice,
-            }));
+            return result.As<IEnumerable<SharedTicker>>(result.Data.Select( x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice)));
         }
 
         async Task<WebCallResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
@@ -99,12 +77,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result)
                 return result.As<IEnumerable<SharedTrade>>(default);
 
-            return result.As(result.Data.Select(x => new SharedTrade
-            {
-                Price = x.Price,
-                Quantity = x.Quantity,
-                Timestamp = x.TradeTime
-            }));
+            return result.As(result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)));
         }
     }
 }

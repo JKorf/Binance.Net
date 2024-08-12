@@ -239,7 +239,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
-        #endregion
+        #endregion 
 
         #region Aggregate Trade Streams
 
