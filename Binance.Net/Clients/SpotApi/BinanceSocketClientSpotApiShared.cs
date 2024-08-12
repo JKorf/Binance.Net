@@ -82,6 +82,8 @@ namespace Binance.Net.Clients.SpotApi
                         QuoteQuantity = update.Data.QuoteQuantity,
                         QuoteQuantityFilled = update.Data.QuoteQuantityFilled,
                         UpdateTime = update.Data.UpdateTime,
+                        Fee = update.Data.Fee,
+                        FeeAsset = update.Data.FeeAsset,
                         TimeInForce = update.Data.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.ImmediateOrCancel : update.Data.TimeInForce == Enums.TimeInForce.FillOrKill ? CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.FillOrKill : update.Data.TimeInForce == Enums.TimeInForce.GoodTillDate ? CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.GoodTillDate : CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.GoodTillCanceled
                     }
                 })),
