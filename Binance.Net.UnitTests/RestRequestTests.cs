@@ -228,7 +228,8 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.SetBnbBurnStatusAsync(true), "SetBnbBurnStatus");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetSymbolConfigurationAsync(), "GetSymbolConfiguration");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountConfigurationAsync(), "GetAccountConfiguration");
-            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountInfoAsync(), "GetAccountInfoV3");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountInfoV2Async(), "GetAccountInfo", ignoreProperties: new List<string> { "bidNotional", "askNotional" });
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Account.GetAccountInfoV3Async(), "GetAccountInfoV3");
         }
 
         [Test]
