@@ -136,7 +136,7 @@
         /// 
         /// </summary>
         [JsonPropertyName("pomt")]
-        public bool? Pomt { get; set; }
+        public DateTime? Pomt { get; set; }
         /// <summary>
         /// 
         /// </summary>
