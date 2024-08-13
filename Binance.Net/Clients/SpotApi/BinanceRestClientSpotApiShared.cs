@@ -85,5 +85,14 @@ namespace Binance.Net.Clients.SpotApi
 
             return result.As(result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)));
         }
+
+        async Task<WebCallResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(SharedRequest request, CancellationToken ct)
+        {
+            var result = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<IEnumerable<SharedBalance>>(default);
+
+            return result.As(result.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)));
+        }
     }
 }
