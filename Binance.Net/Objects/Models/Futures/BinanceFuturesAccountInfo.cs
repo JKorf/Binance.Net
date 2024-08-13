@@ -68,7 +68,7 @@
         /// <summary>
         /// Total maint margin
         /// </summary>
-        [JsonPropertyName("totalMainMargin")]
+        [JsonPropertyName("totalMaintMargin")]
         public decimal TotalMaintMargin { get; set; }
 
         /// <summary>

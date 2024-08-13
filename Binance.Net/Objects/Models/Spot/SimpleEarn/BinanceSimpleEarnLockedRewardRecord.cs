@@ -14,7 +14,7 @@
         /// Position id
         /// </summary>
         [JsonPropertyName("positionId")]
-        public string PositionId { get; set; } = string.Empty;
+        public long PositionId { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>

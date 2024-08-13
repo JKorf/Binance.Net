@@ -110,5 +110,26 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("updateTime")]
         public DateTime? UpdateTime { get; set; }
+
+        /// <summary>
+        /// Leverage
+        /// </summary>
+        [JsonPropertyName("leverage")]
+        public decimal? Leverage { get; set; }
+        /// <summary>
+        /// Max notional value of the position
+        /// </summary>
+        [JsonPropertyName("maxNotionalValue")]
+        public decimal? MaxNotionalValue { get; set; }
+        /// <summary>
+        /// Max notional value of the position
+        /// </summary>
+        [JsonPropertyName("marginType")]
+        public FuturesMarginType? MarginType { get; set; }
+        /// <summary>
+        /// Is auto add margin enabled
+        /// </summary>
+        [JsonPropertyName("isAutoAddMargin")]
+        public bool? IsAutoAddMargin { get; set; }
     }
 }

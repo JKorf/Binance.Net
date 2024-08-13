@@ -576,7 +576,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId, CancellationToken ct)
         {
-            var balances = await Account.GetAccountInfoAsync(ct: ct).ConfigureAwait(false);
+            var balances = await Account.GetAccountInfoV2Async(ct: ct).ConfigureAwait(false);
             if (!balances)
                 return balances.As<IEnumerable<Balance>>(null);
 

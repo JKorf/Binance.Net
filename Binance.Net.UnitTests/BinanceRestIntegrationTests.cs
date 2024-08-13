@@ -172,7 +172,8 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetIncomeHistoryAsync(default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetBracketsAsync(default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetPositionAdlQuantileEstimationAsync(default, default, default), true);
-            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetAccountInfoAsync(default, default), true);
+            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetAccountInfoV2Async(default, default), true);
+            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetAccountInfoV3Async(default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetBalancesAsync(default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetMultiAssetsModeAsync(default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetPositionInformationAsync(default, default, default), true);
