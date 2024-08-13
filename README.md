@@ -176,6 +176,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.2.0 - 13 Aug 2024
+    * Re-added the UsdFuturesApi.Account.GetAccountInfoV2Async endpoint as the V3 endpoint is missing data
+    * Renamend UsdFuturesApi.Account.GetAccountInfoAsync to GetAccountInfoV3Async
+    * Fixed SpotApi.ExchangeData.GetProductsAsync deserialization
+
 * Version 10.1.1 - 08 Aug 2024
     * Fix UnrealizedPnl deserialization in CoinFuturesApi.Account.GetPositionInformationAsync
 
