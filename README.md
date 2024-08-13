@@ -180,6 +180,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
     * Re-added the UsdFuturesApi.Account.GetAccountInfoV2Async endpoint as the V3 endpoint is missing data
     * Renamend UsdFuturesApi.Account.GetAccountInfoAsync to GetAccountInfoV3Async
     * Fixed SpotApi.ExchangeData.GetProductsAsync deserialization
+	* Fixed GeneralApi.SimpleEarn.GetLockedRewardRecordsAsync deserialization
 
 * Version 10.1.1 - 08 Aug 2024
     * Fix UnrealizedPnl deserialization in CoinFuturesApi.Account.GetPositionInformationAsync
