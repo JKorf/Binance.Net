@@ -86,7 +86,7 @@ namespace Binance.Net.Clients.SpotApi
                         Fee = update.Data.Fee,
                         FeeAsset = update.Data.FeeAsset,
                         TimeInForce = update.Data.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : update.Data.TimeInForce == Enums.TimeInForce.GoodTillDate ? SharedTimeInForce.GoodTillDate : SharedTimeInForce.GoodTillCanceled,
-                        LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
+                        LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(update.Data.Symbol, update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
                         {
                             Role = update.Data.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
                         }

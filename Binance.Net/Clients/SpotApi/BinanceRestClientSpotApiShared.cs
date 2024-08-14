@@ -115,7 +115,7 @@ namespace Binance.Net.Clients.SpotApi
             return result.As(result.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)));
         }
 
-        async Task<WebCallResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotPlaceOrderRequest request, CancellationToken ct = default)
+        async Task<WebCallResult<SharedOrderId>> ISpotOrderRestClient.PlaceOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct = default)
         {
             if (request.OrderType == SharedOrderType.Other)
                 throw new ArgumentException("OrderType can't be `Other`", nameof(request.OrderType));
@@ -164,7 +164,7 @@ namespace Binance.Net.Clients.SpotApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct = default)
+        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenOrdersAsync(GetSpotOpenOrdersRequest request, CancellationToken ct = default)
         {
             string? symbol = null;
             if (request.BaseAsset != null && request.QuoteAsset != null)
@@ -194,7 +194,7 @@ namespace Binance.Net.Clients.SpotApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetClosedOrdersRequest request, CancellationToken ct = default)
+        async Task<WebCallResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedOrdersAsync(GetSpotClosedOrdersRequest request, CancellationToken ct = default)
         {
             var orders = await Trading.GetOrdersAsync(FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
                 startTime: request.StartTime,
