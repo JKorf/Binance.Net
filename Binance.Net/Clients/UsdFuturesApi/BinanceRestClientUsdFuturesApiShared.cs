@@ -29,24 +29,36 @@ namespace Binance.Net.Clients.UsdFuturesApi
         //        SharedKlineInterval.OneWeek,
         //        SharedKlineInterval.OneMonth);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
 
+            // Determine page token
+            DateTime? fromTimestamp = null;
+            if (pageToken is DateTimeToken dateTimeToken)
+                fromTimestamp = dateTimeToken.LastTime;
+
             var result = await ExchangeData.GetKlinesAsync(
-                FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
+                request.GetSymbol(FormatSymbol),
                 interval,
-                request.StartTime,
+                fromTimestamp ?? request.StartTime,
                 request.EndTime,
-                request.Limit,
+                request.Limit ?? 1000,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult< IEnumerable<SharedKline>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)));
+            // Get next token
+            DateTimeToken? nextToken = null;
+            if (result.Data.Count() == (request.Limit ?? 1000))
+                nextToken = new DateTimeToken(result.Data.Max(o => o.OpenTime).AddSeconds((int)interval));
+            if (nextToken?.LastTime >= request.EndTime)
+                nextToken = null;
+
+            return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
         }
 
         async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetSymbolsAsync(SharedRequest request, CancellationToken ct)
@@ -68,7 +80,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            var result = await ExchangeData.GetTickerAsync(FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType), ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetTickerAsync(request.GetSymbol(FormatSymbol), ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedTicker>(Exchange, default);
 
@@ -84,12 +96,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice)));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
-                FormatSymbol(request.BaseAsset, request.QuoteAsset), // Don't pass api type; need only the pair
-                startTime: request.StartTime,
-                endTime: request.EndTime,
+                request.GetSymbol((baseAsset, quoteAsset, apiType) => FormatSymbol(baseAsset, quoteAsset)), // Don't pass api type; need only the pair
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)

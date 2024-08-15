@@ -9,7 +9,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         ITickerRestClient,
         IFuturesSymbolRestClient,
         IKlineRestClient,
-        ITradeRestClient
+        IRecentTradeRestClient
     {
     }
 }
