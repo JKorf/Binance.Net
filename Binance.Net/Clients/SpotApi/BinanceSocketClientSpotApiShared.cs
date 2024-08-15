@@ -2,6 +2,7 @@
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces.Socket;
+using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.Socket;
 using CryptoExchange.Net.SharedApis.RequestModels;
 using CryptoExchange.Net.SharedApis.ResponseModels;
@@ -16,55 +17,55 @@ namespace Binance.Net.Clients.SpotApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
 
-        async Task<CallResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickerUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedTicker>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickerUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedTicker>>> handler, CancellationToken ct)
         {
             var result = await ExchangeData.SubscribeToAllMiniTickerUpdatesAsync(update => handler(update.As(update.Data.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice)))), ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(TickerSubscribeRequest request, Action<DataEvent<SharedTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(TickerSubscribeRequest request, Action<DataEvent<SharedTicker>> handler, CancellationToken ct)
         {
             var symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
             var result = await ExchangeData.SubscribeToMiniTickerUpdatesAsync(symbol, update => handler(update.As(new SharedTicker(update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice))), ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(TradeSubscribeRequest request, Action<DataEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(TradeSubscribeRequest request, Action<DataEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
         {
             var symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
             var result = await ExchangeData.SubscribeToTradeUpdatesAsync(symbol, update => handler(update.As<IEnumerable<SharedTrade>>(new[] { new SharedTrade(update.Data.Price, update.Data.Quantity, update.Data.TradeTime) })), ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(BookTickerSubscribeRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(BookTickerSubscribeRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
         {
             var symbol = FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType);
             var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbol, update => handler(update.As(new SharedBookTicker(update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
         {
             var listenKey = await Account.StartUserStreamAsync().ConfigureAwait(false);
             if (!listenKey)
-                return listenKey.As<UpdateSubscription>(default);
+                return new ExchangeResult<UpdateSubscription>(Exchange, listenKey.As<UpdateSubscription>(default));
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(listenKey.Data.Result,
                 onAccountPositionMessage: update => handler(update.As(update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)))), 
                 ct: ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<CallResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToOrderUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToOrderUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
         {
             var listenKey = await Account.StartUserStreamAsync().ConfigureAwait(false);
             if (!listenKey)
-                return listenKey.As<UpdateSubscription>(default);
+                return new ExchangeResult<UpdateSubscription>(Exchange, listenKey.As<UpdateSubscription>(default));
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(listenKey.Data.Result,
                 onOrderUpdateMessage: update => handler(update.As<IEnumerable<SharedSpotOrder>>(new[] { 
@@ -94,7 +95,7 @@ namespace Binance.Net.Clients.SpotApi
                 })),
                 ct: ct).ConfigureAwait(false);
 
-            return result;
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
     }
 }
