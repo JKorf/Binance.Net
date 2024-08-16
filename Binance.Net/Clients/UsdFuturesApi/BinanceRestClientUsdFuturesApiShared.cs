@@ -43,9 +43,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var result = await ExchangeData.GetKlinesAsync(
                 request.GetSymbol(FormatSymbol),
                 interval,
-                fromTimestamp ?? request.StartTime,
-                request.EndTime,
-                request.Limit ?? 1000,
+                fromTimestamp ?? request.Filter?.StartTime,
+                request.Filter?.EndTime,
+                request.Filter?.Limit ?? 1000,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -53,10 +53,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (result.Data.Count() == (request.Limit ?? 1000))
-                nextToken = new DateTimeToken(result.Data.Max(o => o.OpenTime).AddSeconds((int)interval));
-            if (nextToken?.LastTime >= request.EndTime)
-                nextToken = null;
+            if (request.Filter?.StartTime != null && result.Data.Any())
+            {
+                var maxOpenTime = result.Data.Max(x => x.OpenTime);
+                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+            }
 
             return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
         }
