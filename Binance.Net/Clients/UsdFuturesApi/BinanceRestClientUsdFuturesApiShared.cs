@@ -17,17 +17,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
 
-        //GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; }
-        //    = new GetKlinesOptions(
-        //        true,
-        //        false,
-        //        SharedKlineInterval.FiveMinutes,
-        //        SharedKlineInterval.FifteenMinutes,
-        //        SharedKlineInterval.OneHour,
-        //        SharedKlineInterval.FifteenMinutes,
-        //        SharedKlineInterval.OneDay,
-        //        SharedKlineInterval.OneWeek,
-        //        SharedKlineInterval.OneMonth);
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true)
+        {
+            MaxRequestDataPoints = 1000
+        };
 
         async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
@@ -89,7 +82,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return result.AsExchangeResult(Exchange, new SharedTicker(result.Data.Symbol, result.Data.LastPrice, result.Data.HighPrice, result.Data.LowPrice));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(SharedRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, CancellationToken ct)
         {
             var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
             if (!result)
@@ -98,16 +91,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice)));
         }
 
+        GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000);
         async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
-            var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
+            var result = await ExchangeData.GetRecentTradesAsync(
                 request.GetSymbol((baseAsset, quoteAsset, apiType) => FormatSymbol(baseAsset, quoteAsset)), // Don't pass api type; need only the pair
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult< IEnumerable<SharedTrade>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)));
+            return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime)));
         }
     }
 }
