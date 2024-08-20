@@ -348,9 +348,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="startTime">Filter start time from</param>
         /// <param name="endTime">Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="includeSource">Include source address to response</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of deposits</returns>
-        Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the deposit address for an asset

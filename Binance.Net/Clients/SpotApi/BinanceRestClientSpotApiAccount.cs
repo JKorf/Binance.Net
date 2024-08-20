@@ -143,7 +143,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Deposit history        
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceDeposit>>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("coin", asset);
@@ -153,6 +153,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("includeSource", includeSource.ToString());
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/deposit/hisrec", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<IEnumerable<BinanceDeposit>>(request, parameters, ct).ConfigureAwait(false);
