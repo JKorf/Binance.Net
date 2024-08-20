@@ -52,7 +52,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Account.GetFiatDepositWithdrawHistoryAsync(Enums.TransactionType.Withdrawal, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetWithdrawalHistoryAsync(default, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetWithdrawalAddressesAsync(default, default), true);
-            await RunAndCheckResult(client => client.SpotApi.Account.GetDepositHistoryAsync(default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(client => client.SpotApi.Account.GetDepositHistoryAsync(default, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetDailySpotAccountSnapshotAsync(default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetDailyFutureAccountSnapshotAsync(default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetAccountStatusAsync(default, default), true);
