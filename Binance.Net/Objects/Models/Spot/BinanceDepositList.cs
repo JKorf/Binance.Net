@@ -82,6 +82,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// Transaction source address. Note: Please note that the source address returned may not be accurate due to network-specific characteristics. If multiple source addresses found, only the first address will be returned
         /// </summary>
         [JsonPropertyName("sourceAddress")]
-        public string SourceAddress { get; set; } = string.Empty;
+        public string? SourceAddress { get; set; }
     }
 }
