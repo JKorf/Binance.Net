@@ -17,7 +17,7 @@ namespace Binance.Net.Clients.SpotApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
 
-        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickerUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedTicker>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickerUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedTicker>>> handler, CancellationToken ct)
         {
             var result = await ExchangeData.SubscribeToAllMiniTickerUpdatesAsync(update => handler(update.As(update.Data.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice)))), ct).ConfigureAwait(false);
 
@@ -48,7 +48,7 @@ namespace Binance.Net.Clients.SpotApi
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
         {
             var listenKey = await Account.StartUserStreamAsync().ConfigureAwait(false);
             if (!listenKey)
@@ -61,7 +61,7 @@ namespace Binance.Net.Clients.SpotApi
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
 
-        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToOrderUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(Action<DataEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
         {
             var listenKey = await Account.StartUserStreamAsync().ConfigureAwait(false);
             if (!listenKey)
