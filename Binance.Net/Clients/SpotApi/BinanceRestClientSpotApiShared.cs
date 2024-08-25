@@ -141,7 +141,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Trade History client
-        PaginatedEndpointOptions<GetTradeHistoryRequest> ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new PaginatedEndpointOptions<GetTradeHistoryRequest>(true, false);
+        GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(true, false);
 
         async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
