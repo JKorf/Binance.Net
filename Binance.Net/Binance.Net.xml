@@ -616,6 +616,9 @@
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.SimpleEarn">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CopyTrading">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -740,6 +743,12 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage.GetBrokerFuturesCommissionRebatesHistoryAsync(Binance.Net.Enums.FuturesAccountType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiCopyTrading.GetUserStatusAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiCopyTrading.GetLeadSymbolAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures">
@@ -1109,7 +1118,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetWithdrawalAddressesAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -6272,6 +6281,11 @@
             Endpoints related to Binance Simple Earn
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.CopyTrading">
+            <summary>
+            Endpoints related to Binance Copy Trading
+            </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage">
             <summary>
             Binance brokerage endpoints.
@@ -6724,6 +6738,29 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Asset info</returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiCopyTrading">
+            <summary>
+            Binance copy trading endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiCopyTrading.GetUserStatusAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Futures Lead Trader Status
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#copy-trading-endpoints" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiCopyTrading.GetLeadSymbolAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Futures Lead Trading Symbol Whitelist
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-futures-lead-trading-symbol-whitelist-user_data" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures">
             <summary>
@@ -8276,7 +8313,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDepositHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.DepositStatus},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Gets the deposit history
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#deposit-history-supporting-network-user_data" /></para>
@@ -8288,6 +8325,7 @@
             <param name="startTime">Filter start time from</param>
             <param name="endTime">Filter end time till</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="includeSource">Include source address to response</param>
             <param name="ct">Cancellation token</param>
             <returns>List of deposits</returns>
         </member>
@@ -14749,6 +14787,11 @@
             The wallet type
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.SourceAddress">
+            <summary>
+            Transaction source address. Note: Please note that the source address returned may not be accurate due to network-specific characteristics. If multiple source addresses found, only the first address will be returned
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDividendRecord">
             <summary>
             Dividend record
@@ -18913,6 +18956,41 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertTrade.CreateTime">
             <summary>
             Creation time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingLeadSymbol">
+            <summary>
+            Copy trading lead symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingLeadSymbol.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingLeadSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingLeadSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingUserStatus">
+            <summary>
+            Copy trading user status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingUserStatus.IsLeadTrader">
+            <summary>
+            Is lead trader
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingUserStatus.Timestamp">
+            <summary>
+            Time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginSymbol">
