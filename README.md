@@ -109,7 +109,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |User Data Streams|✓|`socketClient.SpotApi.Account`|
 |Margin User Data Streams|X||
 |Simple Earn Endpoints|✓|`restClient.GeneralApi.SimpleEarn`|
-|Auto-Invest Endpoints|X||
+|Auto-Invest Endpoints|✓|`restClient.GeneralApi.AutoInvest`|
 |Staking Endpoints|✓|`restClient.GeneralApi.Staking`|
 |Mining Endpoints|✓|`restClient.GeneralApi.Mining`|
 |Futures|✓|`restClient.GeneralApi.Futures`|
@@ -130,19 +130,22 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 ### USD-M Futures
 |API|Supported|Location|
 |--|--:|--|
-|Market data Endpoints|✓|`restClient.UsdFuturesApi.ExchangeData`|
+|Market Data|✓|`restClient.UsdFuturesApi.ExchangeData`|
+|Trade|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
 |Websocket Market Streams|✓|`socketClient.UsdFuturesApi`|
-|Account/Trades Endpoints|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
 |User Data Streams|✓|`socketClient.UsdFuturesApi`|
+|Account|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
+|Convert|✓|`restClient.UsdFuturesApi.ExchangeData` / `restClient.UsdFuturesApi.Trading`|
 |Classic Portfolio Margin Endpoints|X||
 
 ### COIN-M Futures
 |API|Supported|Location|
 |--|--:|--|
-|Market data Endpoints|✓|`restClient.CoinFuturesApi.ExchangeData`|
+|Market Data|✓|`restClient.CoinFuturesApi.ExchangeData`|
 |Websocket Market Streams|✓|`socketClient.CoinFuturesApi`|
-|Account/Trades Endpoints|✓|`restClient.CoinFuturesApi.Account` / `restClient.CoinFuturesApi.Trading`|
+|Trade|✓|`restClient.CoinFuturesApi.Account` / `restClient.CoinFuturesApi.Trading`|
 |User Data Streams|✓|`socketClient.CoinFuturesApi`|
+|Account|✓|`restClient.CoinFuturesApi.Account` / `restClient.CoinFuturesApi.Trading`|
 |Classic Portfolio Margin Endpoints|X||
 
 ### European Options
