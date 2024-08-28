@@ -1,0 +1,18 @@
+GET
+/sapi/v1/lending/auto-invest/index/info
+true
+{    
+    "indexId": 1,
+    "indexName":"BINANCE TOP 10 EW ",
+    "status": "RUNNING",  
+    "assetAllocation": [
+         {
+          "targetAsset": "ADA",
+          "allocation":"10"
+         },
+         {
+          "targetAsset": "BTC",
+          "allocation":"10"
+         } 
+    ]
+}

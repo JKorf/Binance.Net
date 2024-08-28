@@ -1,0 +1,23 @@
+GET
+/sapi/v1/lending/auto-invest/source-asset/list
+true
+{
+    "feeRate": "0.002",
+    "taxRate": "0.001",
+    "sourceAssets": [
+        {
+            "sourceAsset": "USDT",
+            "assetMinAmount": "0.1" ,
+            "assetMaxAmount": "1000000",
+            "scale": "2",
+            "flexibleAmount":"1111"       
+        },
+        {
+            "sourceAsset": "BUSD",
+            "assetMinAmount": "0.1" ,
+            "assetMaxAmount": "1000000",
+            "scale": "2",
+            "flexibleAmount":"1111"              
+        }
+    ]
+}

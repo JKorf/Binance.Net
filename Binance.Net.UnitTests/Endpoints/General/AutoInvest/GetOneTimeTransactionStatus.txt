@@ -1,0 +1,7 @@
+GET
+/sapi/v1/lending/auto-invest/one-off/status
+true
+{
+  "transactionId": 12345,
+  "status": "SUCCESS"
+}

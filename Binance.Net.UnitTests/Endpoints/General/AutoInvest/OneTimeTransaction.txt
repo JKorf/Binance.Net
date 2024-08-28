@@ -1,0 +1,7 @@
+POST
+/sapi/v1/lending/auto-invest/one-off
+true
+{
+  "transactionId": 12345,
+  "waitSecond": 5
+}

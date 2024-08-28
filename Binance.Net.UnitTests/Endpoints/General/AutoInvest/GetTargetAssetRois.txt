@@ -1,0 +1,13 @@
+GET
+/sapi/v1/lending/auto-invest/target-asset/roi/list
+true
+[
+    {
+        "date": "1648378800000", 
+        "simulateRoi": "1.75" 
+    },
+    {
+        "date": "1648478800000",
+        "simulateRoi": "2.9"
+    }
+]

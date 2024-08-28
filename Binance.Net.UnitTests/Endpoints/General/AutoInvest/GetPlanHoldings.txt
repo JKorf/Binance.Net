@@ -1,0 +1,37 @@
+GET
+/sapi/v1/lending/auto-invest/plan/id
+true
+{    
+    "planId": 111212,
+    "planType": "INDEX",
+    "editAllowed": "true", 
+    "flexibleAllowedToUse": "false",
+    "creationDateTime": 1648378800000,  
+    "firstExecutionDateTime": 1648378800000, 
+    "nextExecutionDateTime": 1648378800000,
+    "status": "ONGOING", 
+    "targetAsset": "BTC",
+    "sourceAsset": "BUSD", 
+    "planValueInUSD": "101.2", 
+    "pnlInUSD": "101.2",    
+    "roi": "1.023",       
+    "totalInvestedInUSD": "122",
+    "details": [
+        {
+            "targetAsset": "ADA",
+            "averagePriceInUSD": "3.4", 
+            "totalInvestedInUSD": "222.21",
+            "purchasedAmount": "122.12345678", 
+            "purchasedAmountUnit": "ADA",
+            "pnlInUSD": "109.2", 
+            "roi": "0.1",  
+            "percentage": "50", 
+            "assetStatus":"ACTIVE",
+            "availableAmount": "122.12345678", 
+            "availableAmountUnit": "ADA",     
+            "redeemedAmout": "122.12345678",   
+            "redeemedAmoutUnit": "ADA",       
+            "assetValueInUSD": "101.2"       
+        }
+    ]
+}  

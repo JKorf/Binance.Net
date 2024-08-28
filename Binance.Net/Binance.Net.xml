@@ -604,6 +604,9 @@
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CryptoLoans">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.AutoInvest">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.Mining">
             <inheritdoc />
         </member>
@@ -638,6 +641,60 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseRateLimitResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetSourceAndTargetAssetsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetSourceAssetsAsync(System.String,System.String,System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetTargetAssetsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetTargetAssetRoisAsync(System.String,Binance.Net.Enums.AutoInvestRoiType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetIndexInfoAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetPlansAsync(Binance.Net.Enums.AutoInvestPlanType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.OneTimeTransactionAsync(System.String,System.String,System.Decimal,System.String,System.Boolean,System.Int64,System.Collections.Generic.Dictionary{System.String,System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.EditPlanStatusAsync(System.Int64,Binance.Net.Enums.AutoInvestPlanStatus,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.EditPlanAsync(System.String,System.Decimal,Binance.Net.Enums.AutoInvestSubscriptionCycle,System.String,System.Collections.Generic.Dictionary{System.String,System.Decimal},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.RedeemIndexLinkedPlanAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetSubscriptionTransactionHistoryAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Binance.Net.Enums.AutoInvestPlanType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetOneTimeTransactionStatusAsync(System.Int64,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.CreatePlanAsync(System.String,Binance.Net.Enums.AutoInvestPlanType,System.Decimal,Binance.Net.Enums.AutoInvestSubscriptionCycle,System.Int32,System.String,System.Collections.Generic.Dictionary{System.String,System.Decimal},System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetIndexLinkedPlanRedemptionHistoryAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetPlanHoldingsAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetIndexLinkedPlanPositionDetailsAsync(System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetIndexLinkedPlanRebalanceHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiBrokerage">
@@ -2633,6 +2690,216 @@
         <member name="F:Binance.Net.Enums.AutoCloseType.Liquidation">
             <summary>
             Liquidation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestExecutionType">
+            <summary>
+            Execution type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestExecutionType.OneTime">
+            <summary>
+            One time
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestExecutionType.Recurring">
+            <summary>
+            Recurring
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestIndexStatus">
+            <summary>
+            Index status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestIndexStatus.Running">
+            <summary>
+            Running
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestIndexStatus.Rebalancing">
+            <summary>
+            Rebalancing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestIndexStatus.Paused">
+            <summary>
+            Paused
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestOneTimeTransactionStatus">
+            <summary>
+            Transaction status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestOneTimeTransactionStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestOneTimeTransactionStatus.Converting">
+            <summary>
+            Converting
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestPlanStatus">
+            <summary>
+            Plan status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanStatus.Ongoing">
+            <summary>
+            Ongoing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanStatus.Paused">
+            <summary>
+            Paused
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanStatus.Removed">
+            <summary>
+            Removed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestPlanType">
+            <summary>
+            Plan type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanType.Single">
+            <summary>
+            Single
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanType.Index">
+            <summary>
+            Index
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanType.Portfolio">
+            <summary>
+            Portfolio
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestPlanType.All">
+            <summary>
+            All
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestRedemptionStatus">
+            <summary>
+            Redemption status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRedemptionStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRedemptionStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestRoiType">
+            <summary>
+            Auto invest ROI type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRoiType.SevenDay">
+            <summary>
+            Seven days
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRoiType.ThreeMonth">
+            <summary>
+            Three months
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRoiType.SixMonth">
+            <summary>
+            Six months
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRoiType.OneYear">
+            <summary>
+            One year
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRoiType.ThreeYear">
+            <summary>
+            Three year
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestRoiType.FiveYear">
+            <summary>
+            Five year
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestSubscriptionCycle">
+            <summary>
+            Subscription cycle
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.OneHour">
+            <summary>
+            One hour
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.FourHour">
+            <summary>
+            Four hour
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.EightHour">
+            <summary>
+            Eight hour
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.TwelveHour">
+            <summary>
+            Twelve hour
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.Daily">
+            <summary>
+            Daily
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.Weekly">
+            <summary>
+            Weekly
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.BiWeekly">
+            <summary>
+            Bi-Weekly
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestSubscriptionCycle.Monthly">
+            <summary>
+            Monthly
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.AutoInvestTransactionStatus">
+            <summary>
+            Transaction status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestTransactionStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestTransactionStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AutoInvestTransactionStatus.Pending">
+            <summary>
+            Pending
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.BlvtStatus">
@@ -6273,6 +6540,11 @@
             Endpoints related to crypto loans
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.AutoInvest">
+            <summary>
+            Endpoints related to auto invest
+            </summary>
+        </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Mining">
             <summary>
             Endpoints related to mining
@@ -6297,6 +6569,196 @@
             <summary>
             Endpoints related to Binance Copy Trading
             </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest">
+            <summary>
+            Binance Auto Invest endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetSourceAndTargetAssetsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get auto invest source and target assets
+            <para><a href="https://developers.binance.com/docs/auto_invest/market-data" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetSourceAssetsAsync(System.String,System.String,System.Nullable{System.Boolean},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get source assets info
+            <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Query-source-asset-list" /></para>
+            </summary>
+            <param name="targetAsset">Filter by target asset</param>
+            <param name="usageType">Usage type, "RECURRING" or "ONE_TIME"</param>
+            <param name="flexibleAllowedToUse">Allowed to be used for flexible</param>
+            <param name="sourceType">MAIN_SITE (default) or TR (Turkey users)</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetTargetAssetsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get target assets info
+            <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Get-target-asset-list" /></para>
+            </summary>
+            <param name="targetAsset">Filter by target asset</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetTargetAssetRoisAsync(System.String,Binance.Net.Enums.AutoInvestRoiType,System.Threading.CancellationToken)">
+            <summary>
+            Get target asset ROIs
+            <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Get-target-asset-ROI-data" /></para>
+            </summary>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="roiType">ROI type</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetIndexInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get index info
+            <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Query-Index-Details" /></para>
+            </summary>
+            <param name="indexId">The id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetPlansAsync(Binance.Net.Enums.AutoInvestPlanType,System.Threading.CancellationToken)">
+            <summary>
+            Get auto invest plans
+            <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Get-list-of-plans" /></para>
+            </summary>
+            <param name="planType">Type of plans</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.OneTimeTransactionAsync(System.String,System.String,System.Decimal,System.String,System.Boolean,System.Int64,System.Collections.Generic.Dictionary{System.String,System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Make a one time transaction
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade" /></para>
+            </summary>
+            <param name="sourceType">The source type, "MAIN_SITE" for normal, "TR" for Turkey users</param>
+            <param name="requestId">Request id</param>
+            <param name="subscriptionQuantity">The quantity to subscribe</param>
+            <param name="sourceAsset">The source asset</param>
+            <param name="flexibleAllowedToUse">true: use flexible wallet</param>
+            <param name="indexId">Index id</param>
+            <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.EditPlanStatusAsync(System.Int64,Binance.Net.Enums.AutoInvestPlanStatus,System.Threading.CancellationToken)">
+            <summary>
+            Edit the status of a plan
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Change-Plan-Status" /></para>
+            </summary>
+            <param name="planId">The plan id</param>
+            <param name="status">New status</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.EditPlanAsync(System.String,System.Decimal,Binance.Net.Enums.AutoInvestSubscriptionCycle,System.String,System.Collections.Generic.Dictionary{System.String,System.Decimal},System.Nullable{System.Int32},System.String,System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Edit a plan
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Investment-plan-adjustment" /></para>
+            </summary>
+            <param name="planId">The plan id</param>
+            <param name="subscriptionQuantity">The quantity</param>
+            <param name="subscriptionCycle">The cycle</param>
+            <param name="subscriptionStartDay">Start day, 1..31. Required if cycle is monthly</param>
+            <param name="subscriptionStartWeekday">Start weekday, required if cycle is Weekly or Bi-Weekly</param>
+            <param name="subscriptionStartTime">Start hour, 1..24</param>
+            <param name="sourceAsset">Source asset</param>
+            <param name="flexibleAllowedToUse">True:use flexible wallet</param>
+            <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.RedeemIndexLinkedPlanAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Redeem index linked plan
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Redemption" /></para>
+            </summary>
+            <param name="indexId">The index id</param>
+            <param name="requestId">Request id</param>
+            <param name="redemptionPercentage">Redemption percentage</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetSubscriptionTransactionHistoryAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Binance.Net.Enums.AutoInvestPlanType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get subscription transaction history
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-subscription-transaction-history" /></para>
+            </summary>
+            <param name="planId">Filter by plan id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="targetAsset">Filter by target asset</param>
+            <param name="planType">Filter by plan type</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetOneTimeTransactionStatusAsync(System.Int64,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get one time transaction status
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-One-Time-Transaction-Status" /></para>
+            </summary>
+            <param name="transactionId">Transaction id</param>
+            <param name="requestId">Request id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.CreatePlanAsync(System.String,Binance.Net.Enums.AutoInvestPlanType,System.Decimal,Binance.Net.Enums.AutoInvestSubscriptionCycle,System.Int32,System.String,System.Collections.Generic.Dictionary{System.String,System.Decimal},System.String,System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Create new investment plan
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Investment-plan-creation" /></para>
+            </summary>
+            <param name="sourceType">Source type, "MAIN_SITE" for normal, "TR" for Turkey users</param>
+            <param name="requestId">Request id</param>
+            <param name="planType">Plan type</param>
+            <param name="subscriptionQuantity">Subscription quantity</param>
+            <param name="subscriptionCycle">Subscription cycle</param>
+            <param name="subscriptionStartDay">Subscription start day, 1..31. Required when cycle is montly</param>
+            <param name="subscriptionStartWeekday">Subscription start weekday, "MON" .. "SUN". Required when cycle is Weekly or BiWeekly</param>
+            <param name="subscriptionStartTime">Subscription start time hour, 0..24</param>
+            <param name="sourceAsset">Source asset</param>
+            <param name="flexibleAllowedToUse">True: flexible wallet</param>
+            <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetIndexLinkedPlanRedemptionHistoryAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get index linked plan redemption history
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-Index-Linked-Plan-Redemption" /></para>
+            </summary>
+            <param name="requestId">Request id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetPlanHoldingsAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get holding details of a plan
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-holding-details-of-the-plan" /></para>
+            </summary>
+            <param name="planId">Filter by plan id</param>
+            <param name="requestId">Request id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetIndexLinkedPlanPositionDetailsAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get index linked plan position details
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-Index-Linked-Plan-Position-Details" /></para>
+            </summary>
+            <param name="indexId">The index id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetIndexLinkedPlanRebalanceHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get index linked plan rebalance history
+            <para><a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Rebalance-Details" /></para>
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage">
             <summary>
@@ -14119,6 +14581,876 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade.Type">
             <summary>
             Update type
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssets">
+            <summary>
+            Auto invest assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssets.TargetAssets">
+            <summary>
+            Target assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssets.SourceAssets">
+            <summary>
+            Source assets
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditResult">
+            <summary>
+            Edit result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditResult.PlanId">
+            <summary>
+            Plan id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditResult.NextExecutionTime">
+            <summary>
+            Next execution date time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult">
+            <summary>
+            Edit result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult.PlanId">
+            <summary>
+            Plan id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult.NextExecutionTime">
+            <summary>
+            Next execution date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex">
+            <summary>
+            Auto invest index info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.IndexId">
+            <summary>
+            Index id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.IndexName">
+            <summary>
+            Index name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.AssetAllocation">
+            <summary>
+            Asset allocation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexSUB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexSUB.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexSUB.Allocation">
+            <summary>
+            Allocation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition">
+            <summary>
+            Plan position info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.IndexId">
+            <summary>
+            Index id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.TotalInvestedInUsd">
+            <summary>
+            Total invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.CurrentInvestedInUsd">
+            <summary>
+            Current invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.PnlInUsd">
+            <summary>
+            Pnl in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.Roi">
+            <summary>
+            Roi
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.AssetAllocation">
+            <summary>
+            Asset allocation
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.Details">
+            <summary>
+            Details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionAllocation">
+            <summary>
+            Asset allocation info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionAllocation.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionAllocation.Allocation">
+            <summary>
+            Allocation percentage
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails">
+            <summary>
+            Position details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.AveragePriceInUsd">
+            <summary>
+            Average price in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.TotalInvestedInUsd">
+            <summary>
+            Total invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.CurrentInvestedInUsd">
+            <summary>
+            Current invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.PurchasedQuantity">
+            <summary>
+            Purchased quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.PnlInUsd">
+            <summary>
+            Pnl in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.Roi">
+            <summary>
+            Roi
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.Percentage">
+            <summary>
+            Percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.AvailableQuantity">
+            <summary>
+            Available quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.RedeemedQuantity">
+            <summary>
+            Redeemed quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.AssetValueInUsd">
+            <summary>
+            Asset value in USD
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestOneTimeTransactionStatus">
+            <summary>
+            Transaction status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestOneTimeTransactionStatus.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestOneTimeTransactionStatus.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan">
+            <summary>
+            Invest plan info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.PlanValueInUsd">
+            <summary>
+            Plan value in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.PlanValueInBtc">
+            <summary>
+            Plan value in BTC
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.PnlInUsd">
+            <summary>
+            Profit and loss in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.Roi">
+            <summary>
+            Roi
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.Plans">
+            <summary>
+            Plans
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails">
+            <summary>
+            Plan info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.PlanId">
+            <summary>
+            Plan id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.PlanType">
+            <summary>
+            Plan type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.EditAllowed">
+            <summary>
+            Edit allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.CreateTime">
+            <summary>
+            Creation date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.FirstExecutionTime">
+            <summary>
+            First execution date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.NextExecutionTime">
+            <summary>
+            Next execution date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.LastUpdateTime">
+            <summary>
+            Last updated date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.TotalTargetQuantity">
+            <summary>
+            Total target quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SourceAsset">
+            <summary>
+            Source asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.TotalInvestedInUsd">
+            <summary>
+            Total invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SubscriptionQuantity">
+            <summary>
+            Subscription quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SubscriptionCycle">
+            <summary>
+            Subscription cycle
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SubscriptionStartDay">
+            <summary>
+            Subscription start day
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SubscriptionStartWeekday">
+            <summary>
+            Subscription start weekday
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SubscriptionStartTime">
+            <summary>
+            Subscription start time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.SourceWallet">
+            <summary>
+            Source wallet
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.FlexibleAllowedToUse">
+            <summary>
+            Flexible allowed to use
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.PlanValueInUsd">
+            <summary>
+            Plan value in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.PnlInUsd">
+            <summary>
+            Pnl in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.Roi">
+            <summary>
+            Roi
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings">
+            <summary>
+            Plan holdings
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.PlanId">
+            <summary>
+            Plan id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.PlanType">
+            <summary>
+            Plan type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.EditAllowed">
+            <summary>
+            Edit allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.FlexibleAllowedToUse">
+            <summary>
+            Flexible allowed to use
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.CreateTime">
+            <summary>
+            Creation date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.FirstExecutionTime">
+            <summary>
+            First execution date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.NextExecutionTime">
+            <summary>
+            Next execution date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.SourceAsset">
+            <summary>
+            Source asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.PlanValueInUsd">
+            <summary>
+            Plan value in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.PnlInUsd">
+            <summary>
+            Pnl in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.Roi">
+            <summary>
+            Roi
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.TotalInvestedInUsd">
+            <summary>
+            Total invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.Details">
+            <summary>
+            Details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails">
+            <summary>
+            Holding details
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.AveragePriceInUsd">
+            <summary>
+            Average price in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.TotalInvestedInUsd">
+            <summary>
+            Total invested in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.PurchasedQuantity">
+            <summary>
+            Purchased quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.PurchasedQuantityAsset">
+            <summary>
+            Purchased quantity asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.PnlInUsd">
+            <summary>
+            Pnl in USD
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.Roi">
+            <summary>
+            Roi
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.Percentage">
+            <summary>
+            Percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.AssetStatus">
+            <summary>
+            Asset status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.AvailableQuantity">
+            <summary>
+            Available quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.AvailableQuantityUnit">
+            <summary>
+            Available quantity unit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.RedeemedAmout">
+            <summary>
+            Redeemed amout
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.RedeemedAmoutAsset">
+            <summary>
+            Redeemed amout asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.AssetValueInUsd">
+            <summary>
+            Asset value in USD
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction">
+            <summary>
+            Plan transaction info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.PlanType">
+            <summary>
+            Plan type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.PlanName">
+            <summary>
+            Plan name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.PlanId">
+            <summary>
+            Plan id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.TransactionTime">
+            <summary>
+            Transaction time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.TransactionStatus">
+            <summary>
+            Transaction status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.FailedType">
+            <summary>
+            Failed type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.SourceAsset">
+            <summary>
+            Source asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.SourceAssetQuantity">
+            <summary>
+            Source asset quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.TargetAssetQuantity">
+            <summary>
+            Target asset quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.SourceWallet">
+            <summary>
+            Source wallet
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.FlexibleUsed">
+            <summary>
+            Flexible used
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.Fee">
+            <summary>
+            Transaction fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.FeeAsset">
+            <summary>
+            Transaction fee unit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.ExecutionPrice">
+            <summary>
+            Execution price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.ExecutionType">
+            <summary>
+            Execution type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.SubscriptionCycle">
+            <summary>
+            Subscription cycle
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo">
+            <summary>
+            Rebalance info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.IndexId">
+            <summary>
+            Index id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.IndexName">
+            <summary>
+            Index name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.RebalanceId">
+            <summary>
+            Rebalance id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.RebalanceFee">
+            <summary>
+            Rebalance fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.RebalanceFeeAsset">
+            <summary>
+            Rebalance fee unit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.TransactionDetails">
+            <summary>
+            Transaction details
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails.TransactionTime">
+            <summary>
+            Transaction date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails.RebalanceDirection">
+            <summary>
+            Rebalance direction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails.RebalanceQuantity">
+            <summary>
+            Rebalance quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption">
+            <summary>
+            Redemption info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.IndexId">
+            <summary>
+            Index id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.IndexName">
+            <summary>
+            Index name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.RedemptionId">
+            <summary>
+            Redemption id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.RedeemTime">
+            <summary>
+            Redemption date time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Fee">
+            <summary>
+            Transaction fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.FeeAsset">
+            <summary>
+            Transaction fee unit
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemptionResult">
+            <summary>
+            Redemption result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemptionResult.RedemptionId">
+            <summary>
+            Redemption id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRoi">
+            <summary>
+            Auto invest ROI
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRoi.Date">
+            <summary>
+            Date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRoi.SimulateRoi">
+            <summary>
+            Simulate roi
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssets">
+            <summary>
+            Auto invest source asset info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssets.FeeRate">
+            <summary>
+            Fee rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssets.TaxRate">
+            <summary>
+            Tax rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssets.SourceAssets">
+            <summary>
+            Source assets
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.SourceAsset">
+            <summary>
+            Source asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.AssetMinQuantity">
+            <summary>
+            Asset min quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.AssetMaxQuantity">
+            <summary>
+            Asset max quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.Scale">
+            <summary>
+            Scale
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.FlexibleQuantity">
+            <summary>
+            Flexible quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssets">
+            <summary>
+            Auto invest source asset info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssets.TargetAssets">
+            <summary>
+            Target assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssets.Assets">
+            <summary>
+            Target asset list
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAsset">
+            <summary>
+            Auto invest target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAsset.TargetAsset">
+            <summary>
+            Target asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAsset.Assets">
+            <summary>
+            Target asset list
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssetRoi">
+            <summary>
+            Auto invest target asset roi
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssetRoi.SimulateRoi">
+            <summary>
+            Simulate ROI
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssetRoi.DimensionValue">
+            <summary>
+            The dimension
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssetRoi.DimensionUnit">
+            <summary>
+            The dimension unit
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTradeResult">
+            <summary>
+            Trade result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTradeResult.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTradeResult.WaitSecond">
+            <summary>
+            Wait seconds after which the status should be checked
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Binance24HPrice">

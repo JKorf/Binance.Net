@@ -1,0 +1,35 @@
+GET
+/sapi/v1/lending/auto-invest/plan/list
+true
+{
+        "planValueInUSD": "123",
+        "planValueInBTC":"0.1",
+        "pnlInUSD":"120",
+        "roi":"2.3",
+        "plans": [
+            {
+                "planId": 12345,
+                "planType": "SINGLE",
+                "editAllowed": "true",
+                "creationDateTime": 1648378800000,
+                "firstExecutionDateTime": 1648378800000, 
+                "nextExecutionDateTime": 1648378800000,
+                "status": "ONGOING",
+                "lastUpdatedDateTime": 1648378800000,
+                "targetAsset": "BTC",
+                "totalTargetAmount":"0.111",
+                "sourceAsset": "BUSD",
+                "totalInvestedInUSD":"4.555",
+                "subscriptionAmount": "0.1",
+                "subscriptionCycle": "WEEKLY",
+                "subscriptionStartDay": null,
+                "subscriptionStartWeekday" : "MON",
+                "subscriptionStartTime": "1",
+                "sourceWallet": "SPOT_WALLET",
+                "flexibleAllowedToUse": "false",
+                "planValueInUSD": "101.2",
+                "pnlInUSD": "101.2",
+                "roi": "1.02"
+            }
+        ]
+} 

@@ -1,0 +1,8 @@
+POST
+/sapi/v1/lending/auto-invest/plan/edit-status
+true
+{
+  "planId": 12345,
+  "nextExecutionDateTime":1648378800000,
+  "status":"ONGOING"
+}

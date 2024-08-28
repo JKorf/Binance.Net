@@ -21,6 +21,11 @@
         public IBinanceRestClientGeneralApiLoans CryptoLoans { get; }
 
         /// <summary>
+        /// Endpoints related to auto invest
+        /// </summary>
+        public IBinanceRestClientGeneralApiAutoInvest AutoInvest { get; }
+
+        /// <summary>
         /// Endpoints related to mining
         /// </summary>
         public IBinanceRestClientGeneralApiMining Mining { get; }
