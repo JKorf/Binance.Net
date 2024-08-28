@@ -9,7 +9,7 @@
         /// Transaction Id
         /// </summary>
         [JsonPropertyName("txnId")]
-        public string Id { get; set; } = string.Empty;
+        public long Id { get; set; }
         
         /// <summary>
         /// Client Transfer Id
