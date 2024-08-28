@@ -2067,6 +2067,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetBasisAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetConvertSymbolsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -2134,6 +2137,15 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.ConvertQuoteRequestAsync(System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.ValidTime},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.ConvertAcceptQuoteAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi">
@@ -11382,6 +11394,15 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetConvertSymbolsAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get list of convert symbols
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /></para>
+            </summary>
+            <param name="fromAsset">From asset</param>
+            <param name="toAsset">To asset</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading">
             <summary>
             Binance USD-M futures trading endpoints, placing and mananging orders.
@@ -11674,6 +11695,35 @@
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.ConvertQuoteRequestAsync(System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.ValidTime},System.Threading.CancellationToken)">
+            <summary>
+            Get a convert quote
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Send-quote-request" /></para>
+            </summary>
+            <param name="fromAsset">The from asset, for example `ETH`</param>
+            <param name="toAsset">The to asset, for example `USD`</param>
+            <param name="fromQuantity">The from asset quantity, either this or toQuantity should be provided</param>
+            <param name="toQuantity">The to asset quantity, either this or fromQuantity should be provided</param>
+            <param name="validTime">The time the quote should be valid for</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.ConvertAcceptQuoteAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Accept a convert quote
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Accept-Quote" /></para>
+            </summary>
+            <param name="quoteId">Quote id previously requested</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get status of a convert order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Order-Status" /></para>
+            </summary>
+            <param name="quoteId">The quote id. Either this or orderId should be provided</param>
+            <param name="orderId">The order id. Either this or quoteId should be provided</param>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi">
@@ -24546,6 +24596,126 @@
             Weight in percentage
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote">
+            <summary>
+            Convert quote info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote.QuoteId">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote.Ratio">
+            <summary>
+            Ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote.InverseRatio">
+            <summary>
+            Inverse ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote.ValidTimestamp">
+            <summary>
+            Until when the quote is valid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote.ToQuantity">
+            <summary>
+            To quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote.FromQuantity">
+            <summary>
+            From quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus">
+            <summary>
+            Convert order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.FromAsset">
+            <summary>
+            From asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.FromQuantity">
+            <summary>
+            Quantity in the from asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.ToAsset">
+            <summary>
+            To asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.ToQuantity">
+            <summary>
+            Quantity in the to asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.Ratio">
+            <summary>
+            Ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.InverseRatio">
+            <summary>
+            Inverse ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertStatus.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol">
+            <summary>
+            Convert symbol info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol.FromAsset">
+            <summary>
+            From asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol.ToAsset">
+            <summary>
+            To asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol.FromAssetMinQuantity">
+            <summary>
+            Minimal convert from asset quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol.FromAssetMaxQuantity">
+            <summary>
+            Maximal convert from asset quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol.ToAssetMinQuantity">
+            <summary>
+            Minimal convert to asset quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertSymbol.ToAssetMaxQuantity">
+            <summary>
+            Maximal convert to asset quantity
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCountDownResult">
             <summary>
             Result of setting a countdown timer
@@ -25336,6 +25506,26 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAdlQuantile.Both">
             <summary>
             Hedge
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult">
+            <summary>
+            Convert quote result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult.Status">
+            <summary>
+            Order status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbol">

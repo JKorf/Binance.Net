@@ -295,6 +295,9 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetForcedOrdersAsync("ETHUSDT"), "GetForcedOrders");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetUserTradesAsync("ETHUSDT"), "GetUserTrades");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetPositionsAsync(), "GetPositions");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.ConvertQuoteRequestAsync("123", "123"), "ConvertQuoteRequest");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.ConvertAcceptQuoteAsync("123"), "ConvertAcceptQuote");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetConvertOrderStatusAsync("123"), "GetConvertOrderStatus");
         }
 
         [Test]

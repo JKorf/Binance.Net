@@ -334,5 +334,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BinanceFuturesBasis>>> GetBasisAsync(string symbol, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get list of convert symbols
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /></para>
+        /// </summary>
+        /// <param name="fromAsset">From asset</param>
+        /// <param name="toAsset">To asset</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<BinanceFuturesConvertSymbol>>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default);
     }
 }
