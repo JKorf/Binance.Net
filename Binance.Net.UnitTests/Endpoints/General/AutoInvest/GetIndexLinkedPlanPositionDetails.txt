@@ -1,0 +1,49 @@
+GET
+/sapi/v1/lending/auto-invest/index/user-summary
+true
+{    
+    "indexId": 1,
+    "totalInvestedInUSD":"114.555",
+    "currentInvestedInUSD": "101.2", 
+    "pnlInUSD": "101.2",    
+    "roi": "1.023",         
+    "assetAllocation": [
+         {
+          "targetAsset": "ADA",
+          "allocation":"10"
+         },
+         {
+          "targetAsset": "BTC",
+          "allocation":"10"
+         } 
+    ],
+    "details": [
+        {
+            "targetAsset": "ADA",
+            "averagePriceInUSD": "3.4",
+            "totalInvestedInUSD": "222.21",
+
+            "currentInvestedInUSD": "101.2", 
+            "purchasedAmount": "122.12345678", 
+            "pnlInUSD": "109.2",  
+            "roi": "0.1",    
+            "percentage": "10", 
+            "availableAmount": "122.12345678",
+            "redeemedAmount": "122.12345678", 
+            "assetValueInUSD": "101.2"
+        },
+        {
+            "targetAsset": "MATIC",
+            "averagePriceInUSD": "3.4",  
+            "totalInvestedInUSD": "222.21", 
+            "currentInvestedInUSD": "101.2",
+            "purchasedAmount": "122.12345678", 
+            "pnlInUSD": "109.2",  
+            "roi": "0.1",    
+            "percentage": "10", 
+            "availableAmount": "122.12345678",
+            "redeemedAmount": "122.12345678", 
+            "assetValueInUSD": "101.2"
+        }
+    ]
+}

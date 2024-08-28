@@ -668,5 +668,56 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Convert Quote Request
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesConvertQuote>> ConvertQuoteRequestAsync(string fromAsset, string toAsset, decimal? fromQuantity = null, decimal? toQuantity = null, ValidTime? validTime = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("fromAsset", fromAsset);
+            parameters.Add("toAsset", toAsset);
+            parameters.AddOptional("fromAmount", fromQuantity);
+            parameters.AddOptional("toAmount", toQuantity);
+            if (validTime != null)
+            {
+                var time = validTime == ValidTime.TenSeconds ? "10s" : validTime == ValidTime.ThirtySeconds ? "30s" : validTime == ValidTime.OneMinute ? "1m" : "2m";
+                parameters.Add("validTime", time);
+            }
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/fapi/v1/convert/getQuote", BinanceExchange.RateLimiter.FuturesRest, 50, true);
+            var result = await _baseClient.SendAsync<BinanceFuturesConvertQuote>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Convert Accept Quote
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesQuoteResult>> ConvertAcceptQuoteAsync(string quoteId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("quoteId", quoteId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/fapi/v1/convert/acceptQuote", BinanceExchange.RateLimiter.FuturesRest, 200, true);
+            var result = await _baseClient.SendAsync<BinanceFuturesQuoteResult>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Convert Order Status
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesConvertStatus>> GetConvertOrderStatusAsync(string? quoteId = null, string? orderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("quoteId", quoteId);
+            parameters.AddOptional("orderId", orderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/convert/orderStatus", BinanceExchange.RateLimiter.FuturesRest, 50, true);
+            var result = await _baseClient.SendAsync<BinanceFuturesConvertStatus>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
     }
 }

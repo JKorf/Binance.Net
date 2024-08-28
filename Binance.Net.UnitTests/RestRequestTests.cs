@@ -295,6 +295,9 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetForcedOrdersAsync("ETHUSDT"), "GetForcedOrders");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetUserTradesAsync("ETHUSDT"), "GetUserTrades");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetPositionsAsync(), "GetPositions");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.ConvertQuoteRequestAsync("123", "123"), "ConvertQuoteRequest");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.ConvertAcceptQuoteAsync("123"), "ConvertAcceptQuote");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetConvertOrderStatusAsync("123"), "GetConvertOrderStatus");
         }
 
         [Test]
@@ -446,6 +449,33 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetCollateralAssetsAsync(), "GetCollateralAssets");
             await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.GetCollateralRepayRateAsync("ETH", "USDT", 1), "GetCollateralRepayRate", ignoreProperties: new List<string> { "loanlCoin" });
             await tester.ValidateAsync(client => client.GeneralApi.CryptoLoans.CustomizeMarginCallAsync(123), "CustomizeMarginCall");
+        }
+
+        [Test]
+        public async Task ValidateGeneralAutoInvestCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/AutoInvest", "https://api.binance.com", IsAuthenticated, stjCompare: true);
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetSourceAndTargetAssetsAsync(), "GetSourceAndTargetAssets");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetSourceAssetsAsync("RECURRING"), "GetSourceAssets");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetTargetAssetsAsync(), "GetTargetAssets");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetTargetAssetRoisAsync("ETH", Enums.AutoInvestRoiType.SevenDay), "GetTargetAssetRois");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetIndexInfoAsync("123"), "GetIndexInfo");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetPlansAsync(Enums.AutoInvestPlanType.Index), "GetPlans");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.OneTimeTransactionAsync("123", "123", 0.1m, "123", true, 123, new Dictionary<string, decimal> { { "ETH", 100 } }), "OneTimeTransaction");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.EditPlanStatusAsync(123, Enums.AutoInvestPlanStatus.Ongoing), "EditPlanStatus");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.EditPlanAsync("123", 0.1m, Enums.AutoInvestSubscriptionCycle.Weekly, "123", new Dictionary<string, decimal> { { "ETH", 100 } }), "EditPlan");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetSubscriptionTransactionHistoryAsync(123), "GetSubscriptionTransactionHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetOneTimeTransactionStatusAsync(123, "123"), "GetOneTimeTransactionStatus");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetIndexLinkedPlanRedemptionHistoryAsync(123), "GetIndexLinkedPlanRedemptionHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetPlanHoldingsAsync(), "GetPlanHoldings");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetIndexLinkedPlanPositionDetailsAsync(123), "GetIndexLinkedPlanPositionDetails");
+            await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetIndexLinkedPlanRebalanceHistoryAsync(), "GetIndexLinkedPlanRebalanceHistory");
         }
 
         private bool IsAuthenticated(WebCallResult result)

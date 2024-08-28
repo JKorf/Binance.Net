@@ -1,0 +1,6 @@
+POST
+/sapi/v1/lending/auto-invest/redeem
+true
+{
+  "redemptionId":19      
+}

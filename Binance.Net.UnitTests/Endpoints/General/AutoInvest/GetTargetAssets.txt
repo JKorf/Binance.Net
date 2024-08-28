@@ -1,0 +1,40 @@
+GET
+/sapi/v1/lending/auto-invest/target-asset/list
+true
+{
+    "targetAssets": [
+        "BTC"
+    ],
+    "autoInvestAssetList": [
+        {
+            "targetAsset": "BTC",
+            "roiAndDimensionTypeList": [
+                {
+                    "simulateRoi": "5.004",
+                    "dimensionValue": "3",
+                    "dimensionUnit": "year"
+                },
+                {
+                    "simulateRoi": "2.004",
+                    "dimensionValue": "1",
+                    "dimensionUnit": "year"
+                },
+                {
+                    "simulateRoi": "1.004",
+                    "dimensionValue": "6",
+                    "dimensionUnit": "month"
+                },
+                {
+                    "simulateRoi": "0.904",
+                    "dimensionValue": "3",
+                    "dimensionUnit": "month"
+                },
+                {
+                    "simulateRoi": "0.14",
+                    "dimensionValue": "7",
+                    "dimensionUnit": "day"
+                }
+            ]
+        }
+    ]
+}

@@ -527,5 +527,21 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         #endregion
+
+        #region Get Convert Symbols
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceFuturesConvertSymbol>>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("fromAsset", fromAsset);
+            parameters.AddOptional("toAsset", toAsset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/convert/exchangeInfo", BinanceExchange.RateLimiter.FuturesRest, 20, false);
+            var result = await _baseClient.SendAsync<IEnumerable<BinanceFuturesConvertSymbol>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
     }
 }

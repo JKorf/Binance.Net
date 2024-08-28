@@ -21,6 +21,11 @@
         public IBinanceRestClientGeneralApiLoans CryptoLoans { get; }
 
         /// <summary>
+        /// Endpoints related to auto invest
+        /// </summary>
+        public IBinanceRestClientGeneralApiAutoInvest AutoInvest { get; }
+
+        /// <summary>
         /// Endpoints related to mining
         /// </summary>
         public IBinanceRestClientGeneralApiMining Mining { get; }
@@ -39,5 +44,10 @@
         /// Endpoints related to Binance Simple Earn
         /// </summary>
         IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
+
+        /// <summary>
+        /// Endpoints related to Binance Copy Trading
+        /// </summary>
+        IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
     }
 }

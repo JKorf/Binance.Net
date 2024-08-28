@@ -1,0 +1,8 @@
+POST
+/fapi/v1/convert/acceptQuote
+true
+{
+  "orderId":"933256278426274426",
+  "createTime":1623381330472,
+  "orderStatus":"PROCESS"
+}

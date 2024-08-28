@@ -1,0 +1,25 @@
+GET
+/sapi/v1/lending/auto-invest/history/list
+true
+[
+  {
+    "id":1111,
+    "targetAsset":"BTC", 
+    "planType":"SINGLE",
+    "planName":"BTC", 
+    "planId":1234, 
+    "transactionDateTime":1648378800000,
+    "transactionStatus":"SUCCESS", 
+    "failedType":"INSUFFICIENT_BALANCE",
+    "sourceAsset":"BUSD",
+    "sourceAssetAmount":"297.12345", 
+    "targetAssetAmount":"0.005", 
+    "sourceWallet":"SPOT_WALLET",
+    "flexibleUsed":"false",
+    "transactionFee":"0.002",
+    "transactionFeeUnit":"BUSD",
+    "executionPrice":"2342" ,
+    "executionType":"RECURRING",
+    "subscriptionCycle": "WEEKLY"
+  }
+]
