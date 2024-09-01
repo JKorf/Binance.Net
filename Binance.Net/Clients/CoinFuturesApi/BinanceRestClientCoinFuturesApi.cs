@@ -77,7 +77,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
         {
-            return (baseAsset + quoteAsset).ToUpper(CultureInfo.InvariantCulture) + "_PERP";
+            var suffix = futuresType == null ? string.Empty : "_PERP";
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + suffix;
         }
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)

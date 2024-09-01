@@ -1,9 +1,11 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
+using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Options;
 using Binance.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.SharedApis.Interfaces;
 using System.Net;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -61,6 +63,10 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.CommonSpotClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.CommonFuturesClient);
             services.AddTransient(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.CommonFuturesClient);
+
+            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBinanceSocketClient>().SpotApi.SharedClient);
+
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBinanceSocketClient, BinanceSocketClient>();
             else
