@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net.SharedApis.Interfaces;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Text;
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     public interface IBinanceRestClientCoinFuturesApiShared :
-        ITickerRestClient,
+        IFuturesTickerRestClient,
         IFuturesSymbolRestClient,
         IFuturesOrderRestClient,
         IKlineRestClient,
@@ -15,10 +16,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         ITradeHistoryRestClient,
         ILeverageRestClient,
         IPositionRestClient,
-        IMarkKlineRestClient,
-        IIndexKlineRestClient,
+        IMarkPriceKlineRestClient,
+        IIndexPriceKlineRestClient,
         IOrderBookRestClient,
-        IOpenInterestRestClient
+        IOpenInterestRestClient,
+        IFundingRateRestClient
     {
     }
 }

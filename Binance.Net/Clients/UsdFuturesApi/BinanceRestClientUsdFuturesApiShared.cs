@@ -2,8 +2,10 @@
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
+using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using CryptoExchange.Net.SharedApis.Models;
+using CryptoExchange.Net.SharedApis.Models.EndpointOptions;
 using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using CryptoExchange.Net.SharedApis.Models.Rest;
 using CryptoExchange.Net.SharedApis.RequestModels;
@@ -67,18 +69,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true, false)
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(true, false)
         {
             MaxRequestDataPoints = 1000
         };
 
-        async Task<ExchangeWebResult<IEnumerable<SharedMarkKline>>> IMarkKlineRestClient.GetMarkKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedMarkKline>>> IMarkPriceKlineRestClient.GetMarkPriceKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IMarkKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, exchangeParameters);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, validationError);
 
@@ -140,28 +142,53 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Ticker client
 
-        EndpointOptions<GetTickerRequest> ITickerRestClient.GetTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
-        async Task<ExchangeWebResult<SharedTicker>> ITickerRestClient.GetTickerAsync(GetTickerRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        EndpointOptions<GetTickerRequest> IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedFuturesTicker>> IFuturesTickerRestClient.GetFuturesTickerAsync(GetTickerRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((ITickerRestClient)this).GetTickerOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, request, exchangeParameters);
             if (validationError != null)
-                return new ExchangeWebResult<SharedTicker>(Exchange, validationError);
+                return new ExchangeWebResult<SharedFuturesTicker>(Exchange, validationError);
 
-            var result = await ExchangeData.GetTickerAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<SharedTicker>(Exchange, default);
+            var resultTicker = ExchangeData.GetTickerAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct);
+            var resultMarkPrice = ExchangeData.GetMarkPriceAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct);
+            await Task.WhenAll(resultTicker, resultMarkPrice).ConfigureAwait(false);
 
-            return result.AsExchangeResult(Exchange, new SharedTicker(result.Data.Symbol, result.Data.LastPrice, result.Data.HighPrice, result.Data.LowPrice, result.Data.Volume));
+            if (!resultTicker.Result)
+                return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+            if (!resultMarkPrice.Result)
+                return resultMarkPrice.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+
+            return resultTicker.Result.AsExchangeResult(Exchange, new SharedFuturesTicker(resultTicker.Result.Data.Symbol, resultTicker.Result.Data.LastPrice, resultTicker.Result.Data.HighPrice, resultTicker.Result.Data.LowPrice, resultTicker.Result.Data.Volume)
+            {
+                MarkPrice = resultMarkPrice.Result.Data.MarkPrice,
+                IndexPrice = resultMarkPrice.Result.Data.IndexPrice,
+                FundingRate = resultMarkPrice.Result.Data.FundingRate,
+                NextFundingTime = resultMarkPrice.Result.Data.NextFundingTime
+            });
         }
 
-        EndpointOptions ITickerRestClient.GetTickersOptions { get; } = new EndpointOptions("GetTickersRequest", false);
-        async Task<ExchangeWebResult<IEnumerable<SharedTicker>>> ITickerRestClient.GetTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        EndpointOptions IFuturesTickerRestClient.GetFuturesTickersOptions { get; } = new EndpointOptions("GetTickersRequest", false);
+        async Task<ExchangeWebResult<IEnumerable<SharedFuturesTicker>>> IFuturesTickerRestClient.GetFuturesTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, default);
+            var resultTickers = ExchangeData.GetTickersAsync(ct: ct);
+            var resultMarkPrices = ExchangeData.GetMarkPricesAsync(ct: ct);
+            await Task.WhenAll(resultTickers, resultMarkPrices).ConfigureAwait(false);
+            if (!resultTickers.Result)
+                return resultTickers.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
+            if (!resultMarkPrices.Result)
+                return resultMarkPrices.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume)));
+            return resultTickers.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, resultTickers.Result.Data.Select(x =>
+            {
+                var markPrice = resultMarkPrices.Result.Data.Single(p => p.Symbol == x.Symbol);
+                return new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume)
+                {
+                    IndexPrice = markPrice.IndexPrice,
+                    MarkPrice = markPrice.MarkPrice,
+                    FundingRate = markPrice.FundingRate,
+                    NextFundingTime = markPrice.NextFundingTime
+                };
+            }));
         }
 
         #endregion
@@ -222,6 +249,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 positionSide: request.PositionSide == SharedPositionSide.Both ? PositionSide.Both : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
                 reduceOnly: request.ReduceOnly,
                 closePosition: request.ClosePosition,
+                timeInForce: GetTimeInForce(request.TimeInForce),
                 newClientOrderId: request.ClientOrderId).ConfigureAwait(false);
 
             if (!result)
@@ -434,6 +462,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return order.AsExchangeResult(Exchange, new SharedId(order.Data.Id.ToString()));
         }
 
+        private TimeInForce? GetTimeInForce(SharedTimeInForce? tif)
+        {
+            if (tif == null)
+                return null;
+
+            if (tif == SharedTimeInForce.ImmediateOrCancel) return TimeInForce.ImmediateOrCancel;
+            if (tif == SharedTimeInForce.FillOrKill) return TimeInForce.FillOrKill;
+            if (tif == SharedTimeInForce.GoodTillCanceled) return TimeInForce.GoodTillCanceled;
+
+            return null;
+        }
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.PendingNew || status == OrderStatus.New || status == OrderStatus.PartiallyFilled || status == OrderStatus.PendingCancel) return SharedOrderStatus.Open;
@@ -501,10 +541,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!result.Data.Any())
                 return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError("Not found"));
 
-            return result.AsExchangeResult<SharedLeverage>(Exchange, new SharedLeverage(result.Data.FirstOrDefault().Leverage));
+            var sideData =
+                request.Side == SharedPositionSide.Short ? result.Data.SingleOrDefault(x => x.PositionSide == PositionSide.Short) :
+                request.Side == SharedPositionSide.Long ? result.Data.SingleOrDefault(x => x.PositionSide == PositionSide.Long) :
+                result.Data.SingleOrDefault(x => x.PositionSide == PositionSide.Both);
+
+            return result.AsExchangeResult(Exchange, new SharedLeverage(sideData.Leverage)
+            {
+                Side = request.Side
+            });
         }
 
-        EndpointOptions<SetLeverageRequest> ILeverageRestClient.SetLeverageOptions { get; } = new EndpointOptions<SetLeverageRequest>(true);
+        SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions(false);
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.SetLeverageAsync(SetLeverageRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, exchangeParameters);
@@ -515,7 +563,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, default);
 
-            return result.AsExchangeResult<SharedLeverage>(Exchange, new SharedLeverage(result.Data.Leverage));
+            return result.AsExchangeResult(Exchange, new SharedLeverage(result.Data.Leverage));
         }
         #endregion
 
@@ -574,18 +622,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true, false)
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(true, false)
         {
             MaxRequestDataPoints = 1000
         };
 
-        async Task<ExchangeWebResult<IEnumerable<SharedMarkKline>>> IIndexKlineRestClient.GetIndexKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedMarkKline>>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IIndexKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            var validationError = ((IIndexPriceKlineRestClient)this).GetIndexPriceKlinesOptions.ValidateRequest(Exchange, request, exchangeParameters);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, validationError);
 
@@ -635,6 +683,38 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return result.AsExchangeResult(Exchange, new SharedOpenInterest(result.Data.OpenInterest));
         }
 
+        #endregion
+
+        #region Funding Rate client
+        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(true, false);
+
+        async Task<ExchangeWebResult<IEnumerable<SharedFundingRate>>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedFundingRate>>(Exchange, validationError);
+
+            DateTime? fromTime = null;
+            if (pageToken is DateTimeToken token)
+                fromTime = token.LastTime;
+
+            // Get data
+            var result = await ExchangeData.GetFundingRatesAsync(
+                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                startTime: fromTime ?? request.StartTime,
+                endTime: request.EndTime,
+                limit: 1000,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, default);
+
+            DateTimeToken? nextToken = null;
+            if (result.Data.Count() == 1000)
+                nextToken = new DateTimeToken(result.Data.Max(x => x.FundingTime));
+
+            // Return
+            return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime)), nextToken);
+        }
         #endregion
     }
 }
