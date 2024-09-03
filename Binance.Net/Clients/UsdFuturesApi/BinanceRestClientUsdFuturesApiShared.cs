@@ -248,7 +248,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 price: request.Price,
                 positionSide: request.PositionSide == SharedPositionSide.Both ? PositionSide.Both : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
                 reduceOnly: request.ReduceOnly,
-                closePosition: request.ClosePosition,
                 timeInForce: GetTimeInForce(request.TimeInForce),
                 newClientOrderId: request.ClientOrderId).ConfigureAwait(false);
 
@@ -462,6 +461,48 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return order.AsExchangeResult(Exchange, new SharedId(order.Data.Id.ToString()));
         }
 
+        EndpointOptions<GetPositionsRequest> IFuturesOrderRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true);
+        async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
+
+            var result = await Account.GetPositionInformationAsync(symbol: request.Symbol?.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)), ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
+
+            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
+            {
+                UnrealizedPnl = x.UnrealizedPnl,
+                LiquidationPrice = x.LiquidationPrice,
+                Leverage = x.Leverage,
+                AverageEntryPrice = x.EntryPrice,
+                PositionSide = x.PositionSide == PositionSide.Both ? SharedPositionSide.Both : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
+            }).ToList());
+        }
+
+        EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true);
+        async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.ClosePositionAsync(ClosePositionRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var result = await Trading.PlaceOrderAsync(
+                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.PositionSide == SharedPositionSide.Long ? OrderSide.Sell : OrderSide.Buy,
+#warning check if works correctly. If side is both, what to do..?
+                FuturesOrderType.Market,
+                null,
+                closePosition: true,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedId>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, new SharedId(result.Data.Id.ToString()));
+        }
+
         private TimeInForce? GetTimeInForce(SharedTimeInForce? tif)
         {
             if (tif == null)
@@ -497,30 +538,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (tif == TimeInForce.GoodTillDate) return SharedTimeInForce.GoodTillDate;
 
             return null;
-        }
-
-        #endregion
-
-        #region Positions client
-
-        EndpointOptions<GetPositionsRequest> IPositionRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IPositionRestClient.GetPositionsAsync(GetPositionsRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
-        {
-            var validationError = ((IPositionRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, exchangeParameters);
-            if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
-
-            var result = await Account.GetPositionInformationAsync(symbol: request.Symbol?.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)), ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
-
-            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.Select(x => new SharedPosition(x.Symbol, x.Quantity, x.UpdateTime)
-            {
-                UnrealizedPnl = x.UnrealizedPnl,
-                LiquidationPrice = x.LiquidationPrice,
-                AverageEntryPrice = x.EntryPrice,
-                PositionSide = x.PositionSide == PositionSide.Both ? SharedPositionSide.Both : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
-            }).ToList());
         }
 
         #endregion
@@ -715,6 +732,24 @@ namespace Binance.Net.Clients.UsdFuturesApi
             // Return
             return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime)), nextToken);
         }
+        #endregion
+
+        #region Balance Client
+        EndpointOptions IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions("GetBalancesRequest", true);
+
+        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedBalance>>(Exchange, validationError);
+
+            var result = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedBalance(x.Asset, x.AvailableBalance, x.WalletBalance)));
+        }
+
         #endregion
     }
 }

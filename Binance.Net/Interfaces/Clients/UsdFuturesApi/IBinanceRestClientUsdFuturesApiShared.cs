@@ -8,6 +8,7 @@ using System.Text;
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     public interface IBinanceRestClientUsdFuturesApiShared :
+        IBalanceRestClient,
         IFuturesTickerRestClient,
         IFuturesSymbolRestClient,
         IFuturesOrderRestClient,
@@ -15,7 +16,6 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         IRecentTradeRestClient,
         ITradeHistoryRestClient,
         ILeverageRestClient,
-        IPositionRestClient,
         IMarkPriceKlineRestClient,
         IIndexPriceKlineRestClient,
         IOrderBookRestClient,
