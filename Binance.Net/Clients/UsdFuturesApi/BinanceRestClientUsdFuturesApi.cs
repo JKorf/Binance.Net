@@ -51,8 +51,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
         {
-            var suffix = futuresType == null ? string.Empty : "_PERP"; // _PERP Actually ever needed?
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + suffix;
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
         }
 
         #region constructor/destructor
