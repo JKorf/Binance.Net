@@ -99,8 +99,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesTicker>(Exchange, validationError);
 
-            var resultTicker = ExchangeData.GetTickersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.InverseFutures)), ct: ct);
-            var resultMarkPrice = ExchangeData.GetMarkPricesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.InverseFutures)), ct: ct);
+            var resultTicker = ExchangeData.GetTickersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct: ct);
+            var resultMarkPrice = ExchangeData.GetMarkPricesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct: ct);
             await Task.WhenAll(resultTicker, resultMarkPrice).ConfigureAwait(false);
             if (!resultTicker.Result)
                 return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
@@ -549,7 +549,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 fromTimestamp = dateTimeToken.LastTime;
 
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.InverseFutures)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                 interval,
                 request.Filter?.Limit ?? 1000,
                 fromTimestamp ?? request.Filter?.StartTime,
@@ -608,7 +608,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // Get data
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.InverseFutures)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                 startTime: fromId != null ? null : request.StartTime,
                 endTime: fromId != null ? null : request.EndTime,
                 limit: 1000,
@@ -682,7 +682,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedOpenInterest>(Exchange, validationError);
 
-            var result = await ExchangeData.GetOpenInterestAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.InverseFutures)), ct: ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetOpenInterestAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedOpenInterest>(Exchange, default);
 
@@ -706,7 +706,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // Get data
             var result = await ExchangeData.GetFundingRatesAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, ApiType.InverseFutures)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                 startTime: fromTime ?? request.StartTime,
                 endTime: request.EndTime,
                 limit: 1000,
