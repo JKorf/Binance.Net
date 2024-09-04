@@ -16,6 +16,7 @@ namespace Binance.Net.Clients.SpotApi
     internal partial class BinanceSocketClientSpotApi : IBinanceSocketClientSpotApiShared
     {
         public string Exchange => BinanceExchange.ExchangeName;
+        public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryInverse, ApiType.Spot };
 
         async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickerUpdatesAsync(ApiType? apiType, Action<DataEvent<IEnumerable<SharedSpotTicker>>> handler, CancellationToken ct)
         {
