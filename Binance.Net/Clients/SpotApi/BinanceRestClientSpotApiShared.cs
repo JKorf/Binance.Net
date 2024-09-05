@@ -42,9 +42,9 @@ namespace Binance.Net.Clients.SpotApi
             var result = await ExchangeData.GetKlinesAsync(
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                 interval,
-                fromTimestamp ?? request.Filter?.StartTime,
-                request.Filter?.EndTime?.AddSeconds(-1),
-                request.Filter?.Limit ?? 1000,
+                fromTimestamp ?? request.StartTime,
+                request.EndTime?.AddSeconds(-1),
+                request.Limit ?? 1000,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -52,10 +52,10 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.Any())
+            if (request.StartTime != null && result.Data.Any())
             {
                 var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -335,15 +335,15 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get data
             var orders = await Trading.GetOrdersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: fromTimestamp ?? request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 1000).ConfigureAwait(false);
+                startTime: fromTimestamp ?? request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 1000).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (orders.Data.Count() == (request.Filter?.Limit ?? 1000))
+            if (orders.Data.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(orders.Data.Max(o => o.CreateTime));
 
             return orders.AsExchangeResult(Exchange, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedSpotOrder(
@@ -410,9 +410,9 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get data
             var orders = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 500,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 500,
                 fromId: fromId
                 ).ConfigureAwait(false);
             if (!orders)
@@ -420,7 +420,7 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get next token
             FromIdToken? nextToken = null;
-            if (orders.Data.Count() == (request.Filter?.Limit ?? 500))
+            if (orders.Data.Count() == (request.Limit ?? 500))
                 nextToken = new FromIdToken(orders.Data.Max(o => o.Id).ToString());
 
             return orders.AsExchangeResult(Exchange, orders.Data.Select(x => new SharedUserTrade(
@@ -581,9 +581,9 @@ namespace Binance.Net.Clients.SpotApi
             // Get data
             var deposits = await Account.GetDepositHistoryAsync(
                 request.Asset,
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 100,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 100,
                 offset: offset,
                 ct: ct).ConfigureAwait(false);
             if (!deposits)
@@ -591,7 +591,7 @@ namespace Binance.Net.Clients.SpotApi
 
             // Determine next token
             OffsetToken? nextToken = null;
-            if (deposits.Data.Count() == (request.Filter?.Limit ?? 100))
+            if (deposits.Data.Count() == (request.Limit ?? 100))
                 nextToken = new OffsetToken((offset ?? 0) + deposits.Data.Count());
 
             return deposits.AsExchangeResult(Exchange, deposits.Data.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == DepositStatus.Success, x.InsertTime)
@@ -622,9 +622,9 @@ namespace Binance.Net.Clients.SpotApi
             // Get data
             var withdrawals = await Account.GetWithdrawalHistoryAsync(
                 request.Asset,
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 100,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 100,
                 offset: offset,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawals)
@@ -632,7 +632,7 @@ namespace Binance.Net.Clients.SpotApi
 
             // Determine next token
             OffsetToken nextToken;
-            if (withdrawals.Data.Count() == (request.Filter?.Limit ?? 100))
+            if (withdrawals.Data.Count() == (request.Limit ?? 100))
                 nextToken = new OffsetToken((offset ?? 0) + withdrawals.Data.Count());
 
             return withdrawals.AsExchangeResult(Exchange, withdrawals.Data.Select(x => new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
