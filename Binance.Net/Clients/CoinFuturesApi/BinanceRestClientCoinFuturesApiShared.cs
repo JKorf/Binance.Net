@@ -79,7 +79,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.Symbols.Select(s => new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualInverse : SharedSymbolType.DeliveryInverse, s.BaseAsset, s.QuoteAsset, s.Name)
+            var data = result.Data.Symbols.Where(x => apiType == ApiType.PerpetualInverse ? x.ContractType == ContractType.Perpetual : x.ContractType != ContractType.Perpetual);
+            return result.AsExchangeResult(Exchange, data.Select(s => new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualInverse : SharedSymbolType.DeliveryInverse, s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
