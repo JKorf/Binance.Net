@@ -3,17 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Binance.Net.Interfaces.Clients.SpotApi
+namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
-    public interface IBinanceSocketClientSpotApiShared :
+    public interface IBinanceSocketClientUsdFuturesApiShared:
         ITickerSocketClient,
         ITickersSocketClient,
-        ISpotOrderSocketClient,
         ITradeSocketClient,
         IBookTickerSocketClient,
-        IBalanceSocketClient,
-        IKlineSocketClient,
-        IOrderBookSocketClient
+        IOrderBookSocketClient,
+        IKlineSocketClient
     {
     }
 }

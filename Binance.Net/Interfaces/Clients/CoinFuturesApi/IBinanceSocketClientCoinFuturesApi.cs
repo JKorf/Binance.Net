@@ -11,6 +11,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     /// </summary>
     public interface IBinanceSocketClientCoinFuturesApi : ISocketApiClient, IDisposable
     {
+        IBinanceSocketClientCoinFuturesApiShared SharedClient { get; }
+
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>

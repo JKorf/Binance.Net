@@ -18,7 +18,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     /// <summary>
     /// Client providing access to the Binance Usd futures websocket Api
     /// </summary>
-    internal class BinanceSocketClientUsdFuturesApi : SocketApiClient, IBinanceSocketClientUsdFuturesApi
+    internal partial class BinanceSocketClientUsdFuturesApi : SocketApiClient, IBinanceSocketClientUsdFuturesApi
     {
         #region fields
         private const string _klineStreamEndpoint = "@kline";
@@ -66,11 +66,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
-
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
         #region Mark Price Stream
 

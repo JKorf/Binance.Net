@@ -17,7 +17,7 @@ using CryptoExchange.Net.Sockets;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc cref="IBinanceSocketClientCoinFuturesApi" />
-    internal class BinanceSocketClientCoinFuturesApi : SocketApiClient, IBinanceSocketClientCoinFuturesApi
+    internal partial class BinanceSocketClientCoinFuturesApi : SocketApiClient, IBinanceSocketClientCoinFuturesApi
     {
         #region fields
         private const string _klineStreamEndpoint = "@kline";
@@ -66,6 +66,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        public IBinanceSocketClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
