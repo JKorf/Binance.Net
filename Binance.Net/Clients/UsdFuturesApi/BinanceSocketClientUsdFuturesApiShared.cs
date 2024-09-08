@@ -23,9 +23,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Ticker client
 
         SubscriptionOptions<SubscribeTickerRequest> ITickerSocketClient.SubscribeTickerOptions { get; } = new SubscriptionOptions<SubscribeTickerRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<ExchangeEvent<SharedSpotTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<ExchangeEvent<SharedSpotTicker>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((ITickerSocketClient)this).SubscribeTickerOptions.ValidateRequest(Exchange, request, request.ApiType, SupportedApiTypes);
+            var validationError = ((ITickerSocketClient)this).SubscribeTickerOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -40,9 +40,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Tickers client
 
         SubscriptionOptions ITickersSocketClient.SubscribeAllTickersOptions { get; } = new SubscriptionOptions("SubscribeTickersRequest", false);
-        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(ApiType apiType, Action<ExchangeEvent<IEnumerable<SharedSpotTicker>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(ApiType apiType, Action<ExchangeEvent<IEnumerable<SharedSpotTicker>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((ITickersSocketClient)this).SubscribeAllTickersOptions.ValidateRequest(Exchange, apiType, SupportedApiTypes);
+            var validationError = ((ITickersSocketClient)this).SubscribeAllTickersOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -56,9 +56,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Trade client
 
         SubscriptionOptions<SubscribeTradeRequest> ITradeSocketClient.SubscribeTradeOptions { get; } = new SubscriptionOptions<SubscribeTradeRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<IEnumerable<SharedTrade>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(Exchange, request, request.ApiType, SupportedApiTypes);
+            var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -73,9 +73,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Book Ticker client
 
         SubscriptionOptions<SubscribeBookTickerRequest> IBookTickerSocketClient.SubscribeBookTickerOptions { get; } = new SubscriptionOptions<SubscribeBookTickerRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<ExchangeEvent<SharedBookTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<ExchangeEvent<SharedBookTicker>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IBookTickerSocketClient)this).SubscribeBookTickerOptions.ValidateRequest(Exchange, request, request.ApiType, SupportedApiTypes);
+            var validationError = ((IBookTickerSocketClient)this).SubscribeBookTickerOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -87,76 +87,89 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
-        //#region Balance client
-        //SubscriptionOptions IBalanceSocketClient.SubscribeBalanceOptions { get; } = new SubscriptionOptions("SubscribeBalanceRequest", false);
-        //async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(ApiType apiType, Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
-        //{
-        //    var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, apiType, SupportedApiTypes);
-        //    if (validationError != null)
-        //        return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+        #region Balance client
+        SubscriptionOptions IBalanceSocketClient.SubscribeBalanceOptions { get; } = new SubscriptionOptions("SubscribeBalanceRequest", false)
+        {
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ListenKey", typeof(string), "The listenkey for starting the user stream", "123123123")
+            }
+        };
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(ApiType apiType, Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-        //    var listenKey = await Account.StartUserStreamAsync().ConfigureAwait(false);
-        //    if (!listenKey)
-        //        return new ExchangeResult<UpdateSubscription>(Exchange, listenKey.As<UpdateSubscription>(default));
+            var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
+            var result = await SubscribeToUserDataUpdatesAsync(listenKey!,
+#warning correct?
+                onAccountUpdate: update => handler(update.AsExchangeEvent(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance + x.CrossWalletBalance)))),
+                ct: ct).ConfigureAwait(false);
 
-        //    var result = await Account.SubscribeToUserDataUpdatesAsync(listenKey.Data.Result,
-        //        onAccountPositionMessage: update => handler(update.As(update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)))), 
-        //        ct: ct).ConfigureAwait(false);
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
 
-        //    return new ExchangeResult<UpdateSubscription>(Exchange, result);
-        //}
+        #endregion
 
-        //#endregion
+        #region Futures Order client
 
-        //#region Spot Order client
+        SubscriptionOptions IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; } = new SubscriptionOptions("SubscribeFuturesOrderRequest", false)
+        {
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ListenKey", typeof(string), "The listenkey for starting the user stream", "123123123")
+            }
+        };
+        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(ApiType apiType, Action<ExchangeEvent<IEnumerable<SharedFuturesOrder>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-        //async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
-        //{
-        //    var listenKey = await Account.StartUserStreamAsync().ConfigureAwait(false);
-        //    if (!listenKey)
-        //        return new ExchangeResult<UpdateSubscription>(Exchange, listenKey.As<UpdateSubscription>(default));
+            var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
+            var result = await SubscribeToUserDataUpdatesAsync(listenKey,
+                onOrderUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedFuturesOrder>>(Exchange, new[] {
+                    new SharedFuturesOrder(
+                        update.Data.UpdateData.Symbol,
+                        update.Data.UpdateData.OrderId.ToString(),
+                        update.Data.UpdateData.Type == Enums.FuturesOrderType.Limit ? SharedOrderType.Limit : update.Data.UpdateData.Type == Enums.FuturesOrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
+                        update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                        update.Data.UpdateData.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.UpdateData.Status == Enums.OrderStatus.New || update.Data.UpdateData.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                        update.Data.UpdateData.UpdateTime)
+                    {
+                        ClientOrderId = update.Data.UpdateData.ClientOrderId,
+                        Price = update.Data.UpdateData.Price,
+                        Quantity = update.Data.UpdateData.Quantity,
+                        QuantityFilled = update.Data.UpdateData.AccumulatedQuantityOfFilledTrades,
+                        UpdateTime = update.Data.UpdateData.UpdateTime,
+                        Fee = update.Data.UpdateData.Fee,
+                        FeeAsset = update.Data.UpdateData.FeeAsset,
+                        AveragePrice = update.Data.UpdateData.AveragePrice,
+                        PositionSide = update.Data.UpdateData.PositionSide == Enums.PositionSide.Long ? SharedPositionSide.Long : update.Data.UpdateData.PositionSide == Enums.PositionSide.Short ? SharedPositionSide.Short : null,
+                        ReduceOnly = update.Data.UpdateData.IsReduce,
+                        TimeInForce = update.Data.UpdateData.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.UpdateData.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : update.Data.UpdateData.TimeInForce == Enums.TimeInForce.GoodTillDate ? SharedTimeInForce.GoodTillDate : SharedTimeInForce.GoodTillCanceled,
+                        LastTrade = update.Data.UpdateData.QuantityOfLastFilledTrade == 0 ? null : new SharedUserTrade(update.Data.UpdateData.Symbol, update.Data.UpdateData.OrderId.ToString(), update.Data.UpdateData.TradeId.ToString(), update.Data.UpdateData.QuantityOfLastFilledTrade, update.Data.UpdateData.PriceLastFilledTrade, update.Data.UpdateData.UpdateTime)
+                        {
+                            Role = update.Data.UpdateData.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
+                        }
+                    }
+                })),
+                ct: ct).ConfigureAwait(false);
 
-        //    var result = await Account.SubscribeToUserDataUpdatesAsync(listenKey.Data.Result,
-        //        onOrderUpdateMessage: update => handler(update.As<IEnumerable<SharedSpotOrder>>(new[] { 
-        //            new SharedSpotOrder(
-        //                update.Data.Symbol,
-        //                update.Data.Id.ToString(),
-        //                update.Data.Type == Enums.SpotOrderType.Limit ? SharedOrderType.Limit : update.Data.Type == Enums.SpotOrderType.Market ? SharedOrderType.Market : update.Data.Type == Enums.SpotOrderType.LimitMaker ? SharedOrderType.LimitMaker : SharedOrderType.Other,
-        //                update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-        //                update.Data.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.Status == Enums.OrderStatus.New || update.Data.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
-        //                update.Data.CreateTime)
-        //            {
-        //                ClientOrderId = update.Data.ClientOrderId,
-        //                Price = update.Data.Price,
-        //                Quantity = update.Data.Quantity,
-        //                QuantityFilled = update.Data.QuantityFilled,
-        //                QuoteQuantity = update.Data.QuoteQuantity,
-        //                QuoteQuantityFilled = update.Data.QuoteQuantityFilled,
-        //                UpdateTime = update.Data.UpdateTime,
-        //                Fee = update.Data.Fee,
-        //                FeeAsset = update.Data.FeeAsset,
-        //                TimeInForce = update.Data.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : update.Data.TimeInForce == Enums.TimeInForce.GoodTillDate ? SharedTimeInForce.GoodTillDate : SharedTimeInForce.GoodTillCanceled,
-        //                LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(update.Data.Symbol, update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
-        //                {
-        //                    Role = update.Data.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
-        //                }
-        //            }
-        //        })),
-        //        ct: ct).ConfigureAwait(false);
-
-        //    return new ExchangeResult<UpdateSubscription>(Exchange, result);
-        //}
-        //#endregion
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+        #endregion
 
         #region Kline client
         SubscribeKlineOptions IKlineSocketClient.SubscribeKlineOptions { get; } = new SubscribeKlineOptions(false);
-        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<ExchangeEvent<SharedKline>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<ExchangeEvent<SharedKline>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
                 return new ExchangeResult<UpdateSubscription>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IKlineSocketClient)this).SubscribeKlineOptions.ValidateRequest(Exchange, request, request.ApiType, SupportedApiTypes);
+            var validationError = ((IKlineSocketClient)this).SubscribeKlineOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -169,9 +182,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Order Book client
         SubscribeOrderBookOptions IOrderBookSocketClient.SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(false, new[] { 5, 10, 20 });
-        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<ExchangeEvent<SharedOrderBook>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<ExchangeEvent<SharedOrderBook>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IOrderBookSocketClient)this).SubscribeOrderBookOptions.ValidateRequest(Exchange, request, request.ApiType, SupportedApiTypes);
+            var validationError = ((IOrderBookSocketClient)this).SubscribeOrderBookOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 

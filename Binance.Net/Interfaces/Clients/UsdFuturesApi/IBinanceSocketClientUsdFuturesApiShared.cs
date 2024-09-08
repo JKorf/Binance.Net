@@ -11,7 +11,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         ITradeSocketClient,
         IBookTickerSocketClient,
         IOrderBookSocketClient,
-        IKlineSocketClient
+        IKlineSocketClient,
+        IBalanceSocketClient,
+        IFuturesOrderSocketClient
     {
     }
 }
