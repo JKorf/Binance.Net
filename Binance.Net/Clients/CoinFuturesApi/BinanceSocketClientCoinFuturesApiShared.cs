@@ -46,7 +46,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var result = await SubscribeToAllTickerUpdatesAsync(update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.LowPrice, x.HighPrice, x.Volume)))), ct: ct).ConfigureAwait(false);
+            var result = await SubscribeToAllTickerUpdatesAsync(update =>
+            {
+                var data = update.Data.Where(x => apiType == ApiType.PerpetualInverse ? x.Symbol.EndsWith("_PERP") : !x.Symbol.Contains("_PERP"));
+                if (!data.Any())
+                    return;
+                handler(update.AsExchangeEvent(Exchange, data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.LowPrice, x.HighPrice, x.Volume))));
+            }, ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
