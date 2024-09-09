@@ -49,9 +49,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public event Action<OrderId>? OnOrderCanceled;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
+        public override string FormatSymbol(string baseAsset, string quoteAsset, DateTime? deliverTime, ApiType? futuresType = null)
         {
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : "_" + deliverTime.Value.ToString("yyMMdd"));
         }
 
         #region constructor/destructor

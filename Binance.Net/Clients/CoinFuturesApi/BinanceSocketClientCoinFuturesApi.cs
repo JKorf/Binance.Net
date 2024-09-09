@@ -69,8 +69,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public IBinanceSocketClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null)
-            => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_PERP";
+        public override string FormatSymbol(string baseAsset, string quoteAsset, DateTime? deliverTime, ApiType? futuresType = null)
+        {
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? "_PERP" : "_" + deliverTime.Value.ToString("yyMMdd"));
+        }
 
         #region methods
 

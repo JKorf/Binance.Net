@@ -66,7 +66,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, DateTime? deliverTime, ApiType? futuresType = null)
+        {
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty: "_" + deliverTime.Value.ToString("yyMMdd"));
+        }
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
