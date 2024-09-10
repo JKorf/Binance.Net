@@ -31,7 +31,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.LowPrice, update.Data.HighPrice, update.Data.Volume))), ct: ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.LowPrice, update.Data.HighPrice, update.Data.Volume, update.Data.PriceChangePercent))), ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -56,7 +56,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 if (!data.Any())
                     return;
 
-                handler(update.AsExchangeEvent(Exchange, data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.LowPrice, x.HighPrice, x.Volume))));
+                handler(update.AsExchangeEvent(Exchange, data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.LowPrice, x.HighPrice, x.Volume, x.PriceChangePercent))));
             }, ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
