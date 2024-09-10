@@ -3,6 +3,7 @@ using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces.Socket;
+using CryptoExchange.Net.SharedApis.Interfaces.Socket.Futures;
 using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using CryptoExchange.Net.SharedApis.Models.Socket;
@@ -29,7 +30,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType));
+            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.LowPrice, update.Data.HighPrice, update.Data.Volume))), ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -68,7 +69,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType));
+            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var result = await SubscribeToAggregatedTradeUpdatesAsync(symbol, update => handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, new[] { new SharedTrade(update.Data.Price, update.Data.Quantity, update.Data.TradeTime) })), ct:ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -85,7 +86,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType));
+            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var result = await SubscribeToBookTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -179,7 +180,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType));
+            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var result = await SubscribeToKlineUpdatesAsync(symbol, interval, update => handler(update.AsExchangeEvent(Exchange, new SharedKline(update.Data.Data.OpenTime, update.Data.Data.ClosePrice, update.Data.Data.HighPrice, update.Data.Data.LowPrice, update.Data.Data.OpenPrice, update.Data.Data.Volume))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -194,11 +195,35 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType));
+            var symbol = request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var result = await SubscribeToPartialOrderBookUpdatesAsync(symbol, request.Limit ?? 20, 100, update => handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(update.Data.Asks, update.Data.Bids))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
+        #endregion
+
+        #region Position client
+        SubscriptionOptions IPositionSocketClient.SubscribePositionOptions { get; } = new SubscriptionOptions("SubscribePositionRequest", false)
+        {
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ListenKey", typeof(string), "The listenkey for starting the user stream", "123123123")
+            }
+        };
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(ApiType apiType, Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+
+            var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
+            var result = await SubscribeToUserDataUpdatesAsync(listenKey!,
+                onAccountUpdate: update => handler(update.AsExchangeEvent(Exchange, update.Data.UpdateData.Positions.Select(x => new SharedPosition(x.Symbol, x.Quantity, update.Data.EventTime)))),
+                ct: ct).ConfigureAwait(false);
+
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
         #endregion
     }
 }

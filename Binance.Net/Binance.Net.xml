@@ -265,7 +265,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.GetServerTimestampAsync">
@@ -466,7 +466,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -625,7 +625,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.GetServerTimestampAsync">
@@ -1130,7 +1130,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.GetServerTimestampAsync">
@@ -1670,7 +1670,7 @@
         <member name="P:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.Trading">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
@@ -1905,7 +1905,7 @@
             Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
             </summary>
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
@@ -2218,7 +2218,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.FormatSymbol(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{CryptoExchange.Net.Objects.ApiType})">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.ApiType,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}},System.Threading.CancellationToken)">

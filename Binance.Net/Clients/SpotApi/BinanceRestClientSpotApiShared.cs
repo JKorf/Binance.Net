@@ -40,7 +40,7 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get data
             var result = await ExchangeData.GetKlinesAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 fromTimestamp ?? request.StartTime,
                 request.EndTime?.AddSeconds(-1),
@@ -97,7 +97,7 @@ namespace Binance.Net.Clients.SpotApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedSpotTicker>(Exchange, validationError);
 
-            var result = await ExchangeData.GetTickerAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)), ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetTickerAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker>(Exchange, default);
 
@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get data
             var result = await ExchangeData.GetRecentTradesAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -157,7 +157,7 @@ namespace Binance.Net.Clients.SpotApi
 
             // Get data
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: fromId != null ? null : request.StartTime,
                 endTime: fromId != null ? null : request.EndTime,
                 limit:  1000,
@@ -184,7 +184,7 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeWebResult<SharedOrderBook>(Exchange, validationError);
 
             var result = await ExchangeData.GetOrderBookAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -241,7 +241,7 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceOrderAsync(
-                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? Enums.SpotOrderType.Limit : request.OrderType == SharedOrderType.Market ? Enums.SpotOrderType.Market: Enums.SpotOrderType.LimitMaker,
                 quantity: request.Quantity,
@@ -265,7 +265,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!long.TryParse(request.OrderId, out var orderId))
                 return new ExchangeWebResult<SharedSpotOrder>(Exchange, new ArgumentError("Invalid order id"));
 
-            var order = await Trading.GetOrderAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)), orderId).ConfigureAwait(false);
+            var order = await Trading.GetOrderAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), orderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedSpotOrder>(Exchange, default);
 
@@ -296,7 +296,7 @@ namespace Binance.Net.Clients.SpotApi
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
 
-            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, ApiType.Spot));
+            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset, deliveryDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliveryDate));
             var orders = await Trading.GetOpenOrdersAsync(symbol).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
@@ -334,7 +334,7 @@ namespace Binance.Net.Clients.SpotApi
                 fromTimestamp = dateTimeToken.LastTime;
 
             // Get data
-            var orders = await Trading.GetOrdersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+            var orders = await Trading.GetOrdersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: fromTimestamp ?? request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 1000).ConfigureAwait(false);
@@ -376,7 +376,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!long.TryParse(request.OrderId, out var orderId))
                 return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, new ArgumentError("Invalid order id"));
 
-            var orders = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)), orderId: orderId).ConfigureAwait(false);
+            var orders = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), orderId: orderId).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
@@ -409,7 +409,7 @@ namespace Binance.Net.Clients.SpotApi
                 fromId = long.Parse(fromIdToken.FromToken);
 
             // Get data
-            var orders = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)),
+            var orders = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 500,
@@ -449,7 +449,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!long.TryParse(request.OrderId, out var orderId))
                 return new ExchangeWebResult<SharedId>(Exchange, new ArgumentError("Invalid order id"));
 
-            var order = await Trading.CancelOrderAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, deliverDate, request.ApiType)), orderId).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), orderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, default);
 

@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, DateTime? deliverTime, ApiType? futuresType = null)
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType apiType, DateTime? deliverTime = null)
         {
             return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? "_PERP" : "_" + deliverTime.Value.ToString("yyMMdd"));
         }
