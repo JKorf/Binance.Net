@@ -22,7 +22,7 @@ true
                 "totalInvestedInUSD":"4.555",
                 "subscriptionAmount": "0.1",
                 "subscriptionCycle": "WEEKLY",
-                "subscriptionStartDay": null,
+                "subscriptionStartDay": 1,
                 "subscriptionStartWeekday" : "MON",
                 "subscriptionStartTime": "1",
                 "sourceWallet": "SPOT_WALLET",
