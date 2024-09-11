@@ -556,7 +556,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (tif == TimeInForce.GoodTillCanceled) return SharedTimeInForce.GoodTillCanceled;
             if (tif == TimeInForce.ImmediateOrCancel) return SharedTimeInForce.ImmediateOrCancel;
             if (tif == TimeInForce.FillOrKill) return SharedTimeInForce.FillOrKill;
-            if (tif == TimeInForce.GoodTillDate) return SharedTimeInForce.GoodTillDate;
 
             return null;
         }
