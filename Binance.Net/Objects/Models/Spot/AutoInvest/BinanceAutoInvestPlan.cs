@@ -116,7 +116,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         /// Subscription start day
         /// </summary>
         [JsonPropertyName("subscriptionStartDay")]
-        public string? SubscriptionStartDay { get; set; }
+        public int? SubscriptionStartDay { get; set; }
         /// <summary>
         /// Subscription start weekday
         /// </summary>
@@ -126,7 +126,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         /// Subscription start time
         /// </summary>
         [JsonPropertyName("subscriptionStartTime")]
-        public string? SubscriptionStartTime { get; set; }
+        public int? SubscriptionStartTime { get; set; }
         /// <summary>
         /// Source wallet
         /// </summary>

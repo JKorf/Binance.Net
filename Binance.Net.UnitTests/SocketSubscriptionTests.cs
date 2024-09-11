@@ -70,6 +70,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync<BinanceFuturesStreamMarginUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onMarginUpdate: handler), "MarginUpdate");
             await tester.ValidateAsync<BinanceFuturesStreamAccountUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onAccountUpdate: handler), "AccountUpdate");
             await tester.ValidateAsync<BinanceFuturesStreamOrderUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onOrderUpdate : handler), "OrderUpdate", ignoreProperties: new List<string> { "si", "ss" });
+            await tester.ValidateAsync<BinanceFuturesStreamTradeUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onTradeUpdate: handler), "TradeUpdate");
             await tester.ValidateAsync<BinanceStrategyUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onStrategyUpdate : handler), "StrategyUpdate");
             await tester.ValidateAsync<BinanceConditionOrderTriggerRejectUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onConditionalOrderTriggerRejectUpdate: handler), "ConditionalTrigger");
         }

@@ -92,7 +92,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get funding rate history for the provided symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-and-mark-price" /></para>
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-funding-rate-history-of-perpetual-futures" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="startTime">Start time to get funding rate history</param>

@@ -27,6 +27,7 @@ namespace Binance.Net.UnitTests
             Authenticated = key != null && sec != null;
             return new BinanceRestClient(null, loggerFactory, opts =>
             {
+                opts.AutoTimestamp = false;
                 opts.OutputOriginalData = true;
                 opts.ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null;
             });

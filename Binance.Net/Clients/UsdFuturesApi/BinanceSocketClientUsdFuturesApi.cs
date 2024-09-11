@@ -396,6 +396,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamTradeUpdate>>? onTradeUpdate = null,
             Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
             Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
@@ -404,7 +405,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
-            var subscription = new BinanceUsdFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate, onConditionalOrderTriggerRejectUpdate);
+            var subscription = new BinanceUsdFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onTradeUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate, onConditionalOrderTriggerRejectUpdate);
             return await SubscribeAsync(BaseAddress.AppendPath("stream"), subscription, ct).ConfigureAwait(false);
         }
 

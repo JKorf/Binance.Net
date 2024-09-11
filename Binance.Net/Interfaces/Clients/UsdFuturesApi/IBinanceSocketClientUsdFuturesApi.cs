@@ -324,6 +324,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
+        /// <param name="onTradeUpdate">The event handler for whenever an trade status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
         /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
@@ -336,6 +337,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamTradeUpdate>>? onTradeUpdate = null,
             Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
             Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
