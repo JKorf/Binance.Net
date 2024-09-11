@@ -16,6 +16,7 @@ namespace Binance.Net.Objects.Sockets
         public override HashSet<string> ListenerIdentifiers { get; set; }
 
         private readonly Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? _orderHandler;
+        private readonly Action<DataEvent<BinanceFuturesStreamTradeUpdate>>? _tradeHandler;
         private readonly Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? _configHandler;
         private readonly Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? _marginHandler;
         private readonly Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? _accountHandler;
@@ -36,6 +37,8 @@ namespace Binance.Net.Objects.Sockets
                 return typeof(BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>);
             if (string.Equals(identifier, "ORDER_TRADE_UPDATE", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>);
+            if (string.Equals(identifier, "TRADE_LITE", StringComparison.Ordinal))
+                return typeof(BinanceCombinedStream<BinanceFuturesStreamTradeUpdate>);
             if (string.Equals(identifier, "listenKeyExpired", StringComparison.Ordinal))
                 return typeof(BinanceCombinedStream<BinanceStreamEvent>);
             if (string.Equals(identifier, "STRATEGY_UPDATE", StringComparison.Ordinal))
@@ -54,6 +57,7 @@ namespace Binance.Net.Objects.Sockets
         /// <param name="logger"></param>
         /// <param name="topics"></param>
         /// <param name="orderHandler"></param>
+        /// <param name="tradeHandler"></param>
         /// <param name="configHandler"></param>
         /// <param name="marginHandler"></param>
         /// <param name="accountHandler"></param>
@@ -65,6 +69,7 @@ namespace Binance.Net.Objects.Sockets
             ILogger logger,
             List<string> topics,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? orderHandler,
+            Action<DataEvent<BinanceFuturesStreamTradeUpdate>>? tradeHandler,
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? configHandler,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? marginHandler,
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? accountHandler,
@@ -81,6 +86,7 @@ namespace Binance.Net.Objects.Sockets
             _strategyHandler = strategyHandler;
             _gridHandler = gridHandler;
             _condOrderHandler = condOrderHandler;
+            _tradeHandler = tradeHandler;
             ListenerIdentifiers = new HashSet<string>(topics);
         }
 
@@ -144,6 +150,10 @@ namespace Binance.Net.Objects.Sockets
             else if (message.Data is BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate> condUpdate)
             {
                 _condOrderHandler?.Invoke(message.As(condUpdate.Data, condUpdate.Stream, null, SocketUpdateType.Update));
+            }
+            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamTradeUpdate> tradeUpdate)
+            {
+                _tradeHandler?.Invoke(message.As(tradeUpdate.Data, tradeUpdate.Stream, tradeUpdate.Data.Symbol, SocketUpdateType.Update));
             }
 
             return new CallResult(null);
