@@ -33,7 +33,7 @@
         /// Unrealized profit of crossed positions
         /// </summary>
         [JsonPropertyName("crossUnPnl")]
-        public decimal CrossUnrealizedPnl { get; set; }
+        public decimal? CrossUnrealizedPnl { get; set; }
 
         /// <summary>
         /// Available balance
