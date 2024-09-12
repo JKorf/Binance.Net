@@ -99,23 +99,21 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion
 
         #region Balance client
-        SubscriptionOptions IBalanceSocketClient.SubscribeBalanceOptions { get; } = new SubscriptionOptions("SubscribeBalanceRequest", false)
+        SubscriptionOptions<SubscribeBalancesRequest> IBalanceSocketClient.SubscribeBalanceOptions { get; } = new SubscriptionOptions<SubscribeBalancesRequest>(false)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
+            RequiredOptionalParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("ListenKey", typeof(string), "The listenkey for starting the user stream", "123123123")
+                new ParameterDescription(nameof(SubscribeBalancesRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, request, exchangeParameters, apiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
-            var result = await SubscribeToUserDataUpdatesAsync(listenKey!,
-#warning correct?
-                onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance + x.CrossWalletBalance)).ToArray())),
+            var result = await SubscribeToUserDataUpdatesAsync(request.ListenKey!,
+                onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -125,21 +123,20 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Futures Order client
 
-        SubscriptionOptions IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; } = new SubscriptionOptions("SubscribeFuturesOrderRequest", false)
+        SubscriptionOptions<SubscribeFuturesOrderRequest> IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; } = new SubscriptionOptions<SubscribeFuturesOrderRequest>(false)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
+            RequiredOptionalParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("ListenKey", typeof(string), "The listenkey for starting the user stream", "123123123")
+                new ParameterDescription(nameof(SubscribeFuturesOrderRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedFuturesOrder>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedFuturesOrder>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IFuturesOrderSocketClient)this).SubscribeFuturesOrderOptions.ValidateRequest(Exchange, request, exchangeParameters, apiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
-            var result = await SubscribeToUserDataUpdatesAsync(listenKey,
+            var result = await SubscribeToUserDataUpdatesAsync(request.ListenKey!,
                 onOrderUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedFuturesOrder>>(Exchange, new[] {
                     new SharedFuturesOrder(
                         update.Data.UpdateData.Symbol,
@@ -207,21 +204,20 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion
 
         #region Position client
-        SubscriptionOptions IPositionSocketClient.SubscribePositionOptions { get; } = new SubscriptionOptions("SubscribePositionRequest", false)
+        SubscriptionOptions<SubscribePositionRequest> IPositionSocketClient.SubscribePositionOptions { get; } = new SubscriptionOptions<SubscribePositionRequest>(false)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
+            RequiredOptionalParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("ListenKey", typeof(string), "The listenkey for starting the user stream", "123123123")
+                new ParameterDescription(nameof(SubscribePositionRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, request, exchangeParameters, apiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
-            var result = await SubscribeToUserDataUpdatesAsync(listenKey!,
+            var result = await SubscribeToUserDataUpdatesAsync(request.ListenKey!,
                 onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.UpdateData.Positions.Select(x => new SharedPosition(x.Symbol, x.Quantity, update.Data.EventTime)
                 {
                     AverageEntryPrice = x.EntryPrice,

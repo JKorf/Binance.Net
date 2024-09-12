@@ -100,8 +100,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
                 QuantityStep = s.LotSizeFilter?.StepSize,
                 PriceStep = s.PriceFilter?.TickSize,
-                ContractSize = 1,
-                DeliveryTime = s.DeliveryDate
+                ContractSize = s.ContractSize,
+                DeliveryTime = s.DeliveryDate.Year == 2100 ? null: s.DeliveryDate
             }).ToArray());
         }
 
@@ -135,7 +135,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 IndexPrice = mark.IndexPrice,
                 MarkPrice = mark.MarkPrice,
                 FundingRate = mark.FundingRate,
-                NextFundingTime = mark.NextFundingTime
+                NextFundingTime = mark.NextFundingTime == default ? null: mark.NextFundingTime
             });
         }
 
@@ -205,10 +205,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 SharedTimeInForce.FillOrKill
             },
             new SharedQuantitySupport(
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity));
+                SharedQuantityType.Contracts,
+                SharedQuantityType.Contracts,
+                SharedQuantityType.Contracts,
+                SharedQuantityType.Contracts));
 
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
@@ -216,7 +216,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var result = await Trading.PlaceOrderAsync(
+            var result = await Trading.PlaceOrderAsync( 
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? Enums.FuturesOrderType.Limit : Enums.FuturesOrderType.Market,
@@ -224,7 +224,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 price: request.Price,
                 positionSide: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long: PositionSide.Short,
                 reduceOnly: request.ReduceOnly,
-                newClientOrderId: request.ClientOrderId, 
+                timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
+                newClientOrderId: request.ClientOrderId,
                 ct: ct).ConfigureAwait(false);
 
             if (!result)
@@ -256,8 +257,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 order.Data.CreateTime)
             {
                 ClientOrderId = order.Data.ClientOrderId,
-                AveragePrice = order.Data.AveragePrice,
-                Price = order.Data.Price,
+                AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
+                Price = order.Data.Price == 0 ? null : order.Data.Price,
                 Quantity = order.Data.Quantity,
                 QuantityFilled = order.Data.QuantityFilled,
                 QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
@@ -289,8 +290,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                AveragePrice = x.AveragePrice,
-                Price = x.Price,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
+                Price = x.Price == 0 ? null : x.Price,
                 Quantity = x.Quantity,
                 QuantityFilled = x.QuantityFilled,
                 QuoteQuantityFilled = x.QuoteQuantityFilled,
@@ -317,14 +318,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var orders = await Trading.GetOrdersAsync(request.Symbol.GetSymbol(FormatSymbol),
                 startTime: fromTimestamp ?? request.StartTime,
                 endTime: request.EndTime,
-                limit: request.Limit ?? 1000,
+                limit: request.Limit ?? 100,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (orders.Data.Count() == (request.Limit ?? 1000))
+            if (orders.Data.Count() == (request.Limit ?? 100))
                 nextToken = new DateTimeToken(orders.Data.Max(o => o.CreateTime));
 
             return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedFuturesOrder(
@@ -336,8 +337,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                AveragePrice = x.AveragePrice,
-                Price = x.Price,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
+                Price = x.Price == 0 ? null : x.Price,
                 Quantity = x.Quantity,
                 QuantityFilled = x.QuantityFilled,
                 QuoteQuantityFilled = x.QuoteQuantityFilled,
@@ -446,39 +447,62 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
 
-            var result = await Account.GetPositionInformationAsync(pair: request.Symbol?.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            var symbol = request.Symbol?.GetSymbol(FormatSymbol);
+            var result = await Account.GetPositionInformationAsync(pair: symbol?.Split('_')[0], ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
 
             return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.Select(x => new SharedPosition(x.Symbol, Math.Abs(x.Quantity), x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedPnl,
-                LiquidationPrice = x.LiquidationPrice,
+                LiquidationPrice = x.LiquidationPrice == 0 ? null : x.LiquidationPrice,
                 Leverage = x.Leverage,
                 AverageEntryPrice = x.EntryPrice,
-                PositionSide = x.PositionSide == PositionSide.Both ? (x.Quantity > 0 ? SharedPositionSide.Long : SharedPositionSide.Short) : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
+                PositionSide = x.PositionSide == PositionSide.Both ? (x.Quantity >= 0 ? SharedPositionSide.Long : SharedPositionSide.Short) : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToArray());
         }
 
-        EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true);
+        EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true)
+        {
+            RequiredOptionalParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(ClosePositionRequest.PositionSide), typeof(SharedPositionSide), "The position side to close", SharedPositionSide.Long),
+                new ParameterDescription(nameof(ClosePositionRequest.Quantity), typeof(decimal), "Quantity of the position is required", 0.1m)
+            }
+        };
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.ClosePositionAsync(ClosePositionRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
+            var symbol = request.Symbol.GetSymbol(FormatSymbol);
+            var positionMode = await Account.GetPositionModeAsync().ConfigureAwait(false);
+            if (!positionMode)
+                return positionMode.AsExchangeResult<SharedId>(Exchange, default);
+
             var result = await Trading.PlaceOrderAsync(
-                request.Symbol.GetSymbol(FormatSymbol),
+                symbol,
                 request.PositionSide == SharedPositionSide.Long ? OrderSide.Sell : OrderSide.Buy,
                 FuturesOrderType.Market,
                 request.Quantity,
-                positionSide: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
-                reduceOnly: true,
+                positionSide: !positionMode.Data.IsHedgeMode ? null : request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
+                reduceOnly: positionMode.Data.IsHedgeMode ? null : true,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, default);
 
             return result.AsExchangeResult(Exchange, new SharedId(result.Data.Id.ToString()));
+        }
+
+        private TimeInForce? GetTimeInForce(SharedOrderType type, SharedTimeInForce? tif)
+        {
+            if (tif == SharedTimeInForce.ImmediateOrCancel) return TimeInForce.ImmediateOrCancel;
+            if (tif == SharedTimeInForce.FillOrKill) return TimeInForce.FillOrKill;
+            if (tif == SharedTimeInForce.GoodTillCanceled) return TimeInForce.GoodTillCanceled;
+            if (type == SharedOrderType.Limit) return TimeInForce.GoodTillCanceled; // Limit order always needs tif
+
+            return null;
         }
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
@@ -516,25 +540,22 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedLeverage>(Exchange, validationError);
 
-            var result = await Account.GetPositionInformationAsync(pair: request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            var symbol = request.Symbol.GetSymbol(FormatSymbol);
+            var result = await Account.GetPositionInformationAsync(pair: symbol.Split('_')[0], ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, default);
 
             if (!result.Data.Any())
                 return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError("Not found"));
 
-            var sideData =
-                request.Side == SharedPositionSide.Short ? result.Data.SingleOrDefault(x => x.PositionSide == PositionSide.Short) :
-                request.Side == SharedPositionSide.Long ? result.Data.SingleOrDefault(x => x.PositionSide == PositionSide.Long) :
-                result.Data.SingleOrDefault(x => x.PositionSide == PositionSide.Both);
-
-            return result.AsExchangeResult(Exchange, new SharedLeverage(sideData.Leverage)
+            var data = result.Data.Where(x => x.Symbol == symbol).ToList();
+            return result.AsExchangeResult(Exchange, new SharedLeverage(data.First().Leverage)
             {
                 Side = request.Side
             });
         }
 
-        SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions(false);
+        SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions(true);
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.SetLeverageAsync(SetLeverageRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol.ApiType, SupportedApiTypes);
@@ -566,17 +587,29 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, validationError);
 
-            // Determine page token
-            DateTime? fromTimestamp = null;
+            // Determine pagination
+            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            DateTime? startTime = request.StartTime;
             if (pageToken is DateTimeToken dateTimeToken)
-                fromTimestamp = dateTimeToken.LastTime;
+                endTime = dateTimeToken.LastTime;
+
+            var limit = request.Limit ?? 1000;
+            if (startTime == null || startTime < endTime)
+            {
+                var offset = (int)interval * limit;
+                startTime = endTime.AddSeconds(-offset);
+            }
+
+            if (startTime < request.StartTime)
+                startTime = request.StartTime;
 
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
                 interval,
-                request.Limit ?? 1000,
-                fromTimestamp ?? request.StartTime,
-                request.EndTime,
+                limit,
+                startTime,
+                endTime,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -584,14 +617,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.StartTime != null && result.Data.Any())
+            if (result.Data.Count() == limit)
             {
-                var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
-                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+                var minOpenTime = result.Data.Min(x => x.OpenTime);
+                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -634,7 +667,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 startTime: fromId != null ? null : request.StartTime,
                 endTime: fromId != null ? null : request.EndTime,
-                limit: 1000,
+                limit: request.Limit ?? 1000,
                 fromId: fromId,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -666,17 +699,29 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedMarkKline>>(Exchange, validationError);
 
-            // Determine page token
-            DateTime? fromTimestamp = null;
+            // Determine pagination
+            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            DateTime? startTime = request.StartTime;
             if (pageToken is DateTimeToken dateTimeToken)
-                fromTimestamp = dateTimeToken.LastTime;
+                endTime = dateTimeToken.LastTime;
+
+            var limit = request.Limit ?? 1000;
+            if (startTime == null || startTime < endTime)
+            {
+                var offset = (int)interval * limit;
+                startTime = endTime.AddSeconds(-offset);
+            }
+
+            if (startTime < request.StartTime)
+                startTime = request.StartTime;
 
             var result = await ExchangeData.GetMarkPriceKlinesAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
                 interval,
-                request.Limit ?? 1000,
-                fromTimestamp ?? request.StartTime,
-                request.EndTime,
+                limit,
+                startTime,
+                endTime,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -684,21 +729,21 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.StartTime != null && result.Data.Any())
+            if (result.Data.Count() == limit)
             {
-                var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
-                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
+                var minOpenTime = result.Data.Min(x => x.OpenTime);
+                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
 
         #region Open Interest client
 
-        EndpointOptions<GetOpenInterestRequest> IOpenInterestRestClient.GetOpenInterestOptions { get; } = new EndpointOptions<GetOpenInterestRequest>(true);
+        EndpointOptions<GetOpenInterestRequest> IOpenInterestRestClient.GetOpenInterestOptions { get; } = new EndpointOptions<GetOpenInterestRequest>(false);
         async Task<ExchangeWebResult<SharedOpenInterest>> IOpenInterestRestClient.GetOpenInterestAsync(GetOpenInterestRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((IOpenInterestRestClient)this).GetOpenInterestOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol.ApiType, SupportedApiTypes);
@@ -732,13 +777,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 startTime: fromTime ?? request.StartTime,
                 endTime: request.EndTime,
-                limit: 1000,
+                limit: request.Limit ?? 1000,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, default);
 
             DateTimeToken? nextToken = null;
-            if (result.Data.Count() == 1000)
+            if (result.Data.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(result.Data.Max(x => x.FundingTime));
 
             // Return
@@ -769,7 +814,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         GetPositionModeOptions IPositionModeRestClient.GetPositionModeOptions { get; } = new GetPositionModeOptions(false);
         async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.GetPositionModeAsync(GetPositionModeRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IPositionModeRestClient)this).GetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol?.ApiType ?? request.ApiType!.Value, SupportedApiTypes);
+            var validationError = ((IPositionModeRestClient)this).GetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol?.ApiType ?? request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
@@ -783,7 +828,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, false);
         async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.SetPositionModeAsync(SetPositionModeRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IPositionModeRestClient)this).SetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol?.ApiType ?? request.ApiType!.Value, SupportedApiTypes);
+            var validationError = ((IPositionModeRestClient)this).SetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol?.ApiType ?? request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
@@ -795,5 +840,51 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
         #endregion
 
+        #region Listen Key client
+
+        EndpointOptions<StartListenKeyRequest> IListenKeyRestClient.StartOptions { get; } = new EndpointOptions<StartListenKeyRequest>(true);
+        async Task<ExchangeWebResult<string>> IListenKeyRestClient.StartListenKeyAsync(StartListenKeyRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IListenKeyRestClient)this).StartOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<string>(Exchange, validationError);
+
+            // Get data
+            var result = await Account.StartUserStreamAsync(ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<string>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, result.Data);
+        }
+        EndpointOptions<KeepAliveListenKeyRequest> IListenKeyRestClient.KeepAliveOptions { get; } = new EndpointOptions<KeepAliveListenKeyRequest>(true);
+        async Task<ExchangeWebResult<string>> IListenKeyRestClient.KeepAliveListenKeyAsync(KeepAliveListenKeyRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IListenKeyRestClient)this).KeepAliveOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<string>(Exchange, validationError);
+
+            // Get data
+            var result = await Account.KeepAliveUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<string>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, request.ListenKey);
+        }
+
+        EndpointOptions<StopListenKeyRequest> IListenKeyRestClient.StopOptions { get; } = new EndpointOptions<StopListenKeyRequest>(true);
+        async Task<ExchangeWebResult<string>> IListenKeyRestClient.StopListenKeyAsync(StopListenKeyRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IListenKeyRestClient)this).StopOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<string>(Exchange, validationError);
+
+            // Get data
+            var result = await Account.StopUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<string>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, request.ListenKey);
+        }
+        #endregion
     }
 }

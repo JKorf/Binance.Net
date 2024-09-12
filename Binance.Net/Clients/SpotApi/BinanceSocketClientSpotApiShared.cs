@@ -84,20 +84,20 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Balance client
-        SubscriptionOptions IBalanceSocketClient.SubscribeBalanceOptions { get; } = new SubscriptionOptions("SubscribeBalanceRequest", false)
+        SubscriptionOptions<SubscribeBalancesRequest> IBalanceSocketClient.SubscribeBalanceOptions { get; } = new SubscriptionOptions<SubscribeBalancesRequest>(false)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
+            RequiredOptionalParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("ListenKey", typeof(string), "Listenkey for the user stream", "123123123")
+                new ParameterDescription(nameof(SubscribeBalancesRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, request, exchangeParameters, apiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var result = await Account.SubscribeToUserDataUpdatesAsync(exchangeParameters.GetValue<string>(Exchange, "ListenKey"),
+            var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
                 onAccountPositionMessage: update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray())), 
                 ct: ct).ConfigureAwait(false);
 
@@ -108,20 +108,20 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Spot Order client
 
-        SubscriptionOptions ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } = new SubscriptionOptions("SubscribeSpotOrderRequest", false)
+        SubscriptionOptions<SubscribeSpotOrderRequest> ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } = new SubscriptionOptions<SubscribeSpotOrderRequest>(false)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
+            RequiredOptionalParameters = new List<ParameterDescription>
             {
-                new ParameterDescription("ListenKey", typeof(string), "Listenkey for the user stream", "123123123")
+                new ParameterDescription(nameof(SubscribeSpotOrderRequest.ListenKey), typeof(string), "Listenkey for the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedSpotOrder>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedSpotOrder>>> handler, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
             var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, exchangeParameters, ApiType.Spot, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var result = await Account.SubscribeToUserDataUpdatesAsync(exchangeParameters.GetValue<string>(Exchange, "ListenKey"),
+            var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
                 onOrderUpdateMessage: update => handler(update.AsExchangeEvent<IEnumerable<SharedSpotOrder>>(Exchange, new[] { 
                     new SharedSpotOrder(
                         update.Data.Symbol,
