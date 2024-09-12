@@ -56,7 +56,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 if (!data.Any())
                     return;
 
-                handler(update.AsExchangeEvent(Exchange, data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.LowPrice, x.HighPrice, x.Volume, x.PriceChangePercent))));
+                handler(update.AsExchangeEvent<IEnumerable<SharedSpotTicker>>(Exchange, data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.LowPrice, x.HighPrice, x.Volume, x.PriceChangePercent)).ToArray()));
             }, ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -149,7 +149,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
             var result = await SubscribeToUserDataUpdatesAsync(listenKey!,
 #warning correct?
-                onAccountUpdate: update => handler(update.AsExchangeEvent(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance + x.CrossWalletBalance)))),
+                onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance + x.CrossWalletBalance)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -173,12 +173,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var listenKey = exchangeParameters.GetValue<string>(Exchange, "ListenKey");
             var result = await SubscribeToUserDataUpdatesAsync(listenKey!,
-                onAccountUpdate: update => handler(update.AsExchangeEvent(Exchange, update.Data.UpdateData.Positions.Select(x => new SharedPosition(x.Symbol, x.Quantity, update.Data.EventTime)
+                onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.UpdateData.Positions.Select(x => new SharedPosition(x.Symbol, x.Quantity, update.Data.EventTime)
                 {
                     AverageEntryPrice = x.EntryPrice,
                     PositionSide = x.PositionSide == Enums.PositionSide.Both ? (x.Quantity > 0 ? SharedPositionSide.Long : SharedPositionSide.Short) : x.PositionSide == Enums.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                     UnrealizedPnl = x.UnrealizedPnl
-                }))),
+                }).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
