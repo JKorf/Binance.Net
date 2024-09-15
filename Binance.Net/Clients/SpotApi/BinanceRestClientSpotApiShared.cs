@@ -44,9 +44,6 @@ namespace Binance.Net.Clients.SpotApi
             if (startTime == null || startTime < endTime)
             {
                 var offset = (int)interval * limit;
-                if (request.EndTime == null && pageToken is null)
-                    offset = (int)interval * (limit - 1);
-
                 startTime = endTime.AddSeconds(-offset);
             }
 
@@ -71,7 +68,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 var minOpenTime = result.Data.Min(x => x.OpenTime);
                 if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)interval));
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
             return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
