@@ -8,6 +8,7 @@ using Binance.Net.Enums;
 using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
+using CryptoExchange.Net.SharedApis;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -15,6 +16,9 @@ namespace Binance.Net.Clients.SpotApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
         public ApiType[] SupportedApiTypes => new[] { ApiType.Spot };
+
+        public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
 
         #region Klines Client
 
@@ -247,7 +251,7 @@ namespace Binance.Net.Clients.SpotApi
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAndQuoteAsset));
 
-        SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromTrade;
+        SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
 
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)

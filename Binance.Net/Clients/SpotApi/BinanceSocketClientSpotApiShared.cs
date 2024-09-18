@@ -19,6 +19,9 @@ namespace Binance.Net.Clients.SpotApi
         public string Exchange => BinanceExchange.ExchangeName;
         public ApiType[] SupportedApiTypes => new[] { ApiType.Spot };
 
+        public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+
         #region Tickers client
         SubscriptionOptions<SubscribeAllTickersRequest> ITickersSocketClient.SubscribeAllTickersOptions { get; } = new SubscriptionOptions<SubscribeAllTickersRequest>(false);
         async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(SubscribeAllTickersRequest request, Action<ExchangeEvent<IEnumerable<SharedSpotTicker>>> handler, CancellationToken ct)

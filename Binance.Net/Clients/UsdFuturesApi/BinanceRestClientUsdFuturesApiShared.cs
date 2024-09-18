@@ -20,7 +20,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
 
-        public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryLinear, ApiType.PerpetualLinear }; 
+        public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryLinear, ApiType.PerpetualLinear };
+        public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
 
         #region Klines client
 

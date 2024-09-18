@@ -19,6 +19,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryInverse, ApiType.PerpetualInverse };
 
+        public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+
         #region Klines client
 
         GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Descending, false)
