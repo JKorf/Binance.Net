@@ -830,7 +830,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.IsHedgeMode ? SharedPositionMode.LongShort : SharedPositionMode.OneWay));
+            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.IsHedgeMode ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
         }
 
         SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, false);
@@ -840,7 +840,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
-            var result = await Account.ModifyPositionModeAsync(request.Mode == SharedPositionMode.LongShort, ct: ct).ConfigureAwait(false);
+            var result = await Account.ModifyPositionModeAsync(request.Mode == SharedPositionMode.HedgeMode, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
 
