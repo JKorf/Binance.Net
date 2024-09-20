@@ -17,7 +17,7 @@ namespace Binance.Net.Clients.SpotApi
     internal partial class BinanceSocketClientSpotApi : IBinanceSocketClientSpotApiShared
     {
         public string Exchange => BinanceExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes => new[] { ApiType.Spot };
+        public TradingMode[] SupportedApiTypes => new[] { TradingMode.Spot };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -120,7 +120,7 @@ namespace Binance.Net.Clients.SpotApi
         };
         async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
         {
-            var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, request, ApiType.Spot, SupportedApiTypes);
+            var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 

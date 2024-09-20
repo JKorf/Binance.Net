@@ -20,7 +20,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         public string Exchange => BinanceExchange.ExchangeName;
 
-        public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryLinear, ApiType.PerpetualLinear };
+        public TradingMode[] SupportedApiTypes => new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
 
@@ -67,7 +67,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -78,7 +78,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, request.Symbol.ApiType, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion
@@ -126,7 +126,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, request.Symbol.ApiType, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -153,12 +153,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult< IEnumerable<SharedFuturesSymbol>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, null, default);
 
             var data = result.Data.Symbols.Where(x => x.ContractType != null);
             if (request.ApiType != null)
-                data = data.Where(x => request.ApiType == ApiType.PerpetualLinear ? x.ContractType == ContractType.Perpetual : (x.ContractType != ContractType.Perpetual && x.ContractType != ContractType.PerpetualDelivering));
-            return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, data.Select(s => new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualLinear : SharedSymbolType.DeliveryLinear, s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
+                data = data.Where(x => request.ApiType == TradingMode.PerpetualLinear ? x.ContractType == ContractType.Perpetual : (x.ContractType != ContractType.Perpetual && x.ContractType != ContractType.PerpetualDelivering));
+            return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, request.ApiType == null ? SupportedApiTypes : new[] { request.ApiType.Value }, data.Select(s => new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualLinear : SharedSymbolType.DeliveryLinear, s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
@@ -185,11 +185,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             await Task.WhenAll(resultTicker, resultMarkPrice).ConfigureAwait(false);
 
             if (!resultTicker.Result)
-                return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+                return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
             if (!resultMarkPrice.Result)
-                return resultMarkPrice.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+                return resultMarkPrice.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
 
-            return resultTicker.Result.AsExchangeResult(Exchange, new SharedFuturesTicker(resultTicker.Result.Data.Symbol, resultTicker.Result.Data.LastPrice, resultTicker.Result.Data.HighPrice, resultTicker.Result.Data.LowPrice, resultTicker.Result.Data.Volume, resultTicker.Result.Data.PriceChangePercent)
+            return resultTicker.Result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedFuturesTicker(resultTicker.Result.Data.Symbol, resultTicker.Result.Data.LastPrice, resultTicker.Result.Data.HighPrice, resultTicker.Result.Data.LowPrice, resultTicker.Result.Data.Volume, resultTicker.Result.Data.PriceChangePercent)
             {
                 MarkPrice = resultMarkPrice.Result.Data.MarkPrice,
                 IndexPrice = resultMarkPrice.Result.Data.IndexPrice,
@@ -209,15 +209,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var resultMarkPrices = ExchangeData.GetMarkPricesAsync(ct: ct);
             await Task.WhenAll(resultTickers, resultMarkPrices).ConfigureAwait(false);
             if (!resultTickers.Result)
-                return resultTickers.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
+                return resultTickers.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, null, default);
             if (!resultMarkPrices.Result)
-                return resultMarkPrices.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
+                return resultMarkPrices.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, null, default);
 
             var data = resultTickers.Result.Data;
             if (request.ApiType.HasValue)
-                data = data.Where(x => (request.ApiType == ApiType.DeliveryLinear ? x.Symbol.Contains("_") : !x.Symbol.Contains("_")));
+                data = data.Where(x => (request.ApiType == TradingMode.DeliveryLinear ? x.Symbol.Contains("_") : !x.Symbol.Contains("_")));
 
-            return resultTickers.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, data.Select(x =>
+            return resultTickers.Result.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, request.ApiType == null ? SupportedApiTypes : new[] { request.ApiType.Value }, data.Select(x =>
             {
                 var markPrice = resultMarkPrices.Result.Data.Single(p => p.Symbol == x.Symbol);
                 return new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)
@@ -246,9 +246,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime)).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.ApiType, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime)).ToArray());
         }
 
         #endregion
@@ -295,9 +295,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct).ConfigureAwait(false);
 
             if (!result)
-                return result.AsExchangeResult<SharedId>(Exchange, default);
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedId(result.Data.Id.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.Id.ToString()));
         }
 
         EndpointOptions<GetOrderRequest> IFuturesOrderRestClient.GetFuturesOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
@@ -312,9 +312,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var order = await Trading.GetOrderAsync(request.Symbol.GetSymbol(FormatSymbol), orderId, ct: ct).ConfigureAwait(false);
             if (!order)
-                return order.AsExchangeResult<SharedFuturesOrder>(Exchange, default);
+                return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, new SharedFuturesOrder(
+            return order.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedFuturesOrder(
                 order.Data.Symbol,
                 order.Data.Id.ToString(),
                 ParseOrderType(order.Data.Type),
@@ -345,9 +345,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             var orders = await Trading.GetOpenOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, SupportedApiTypes, orders.Data.Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.Id.ToString(),
                 ParseOrderType(x.Type),
@@ -387,14 +387,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 limit: request.Limit ?? 1000,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
             if (orders.Data.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(orders.Data.Max(o => o.CreateTime));
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, request.Symbol.ApiType, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.Id.ToString(),
                 ParseOrderType(x.Type),
@@ -427,9 +427,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var orders = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol(FormatSymbol), orderId: orderId, ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, orders.Data.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.ApiType, orders.Data.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
@@ -466,14 +466,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
 
             // Get next token
             FromIdToken? nextToken = null;
             if (orders.Data.Count() == (request.Limit ?? 500))
                 nextToken = new FromIdToken(orders.Data.Max(o => o.Id).ToString());
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, orders.Data.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.ApiType, orders.Data.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
@@ -501,9 +501,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var order = await Trading.CancelOrderAsync(request.Symbol.GetSymbol(FormatSymbol), orderId, ct: ct).ConfigureAwait(false);
             if (!order)
-                return order.AsExchangeResult<SharedId>(Exchange, default);
+                return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, new SharedId(order.Data.Id.ToString()));
+            return order.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(order.Data.Id.ToString()));
         }
 
         EndpointOptions<GetPositionsRequest> IFuturesOrderRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true);
@@ -515,13 +515,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Account.GetPositionInformationAsync(symbol: request.Symbol?.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
 
             var data = result.Data;
             if (request.ApiType.HasValue)
-                data = data.Where(x => request.ApiType == ApiType.DeliveryLinear ? x.Symbol.Contains("_") : !x.Symbol.Contains("_"));
+                data = data.Where(x => request.ApiType == TradingMode.DeliveryLinear ? x.Symbol.Contains("_") : !x.Symbol.Contains("_"));
 
-            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, data.Select(x => new SharedPosition(x.Symbol, Math.Abs(x.Quantity), x.UpdateTime)
+            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, request.Symbol == null ? SupportedApiTypes : new[] { request.Symbol.ApiType }, data.Select(x => new SharedPosition(x.Symbol, Math.Abs(x.Quantity), x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedPnl,
                 LiquidationPrice = x.LiquidationPrice == 0 ? null: x.LiquidationPrice,
@@ -548,7 +548,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var positionMode = await Account.GetPositionModeAsync().ConfigureAwait(false);
             if (!positionMode)
-                return positionMode.AsExchangeResult<SharedId>(Exchange, default);
+                return positionMode.AsExchangeResult<SharedId>(Exchange, null, default);
 
             var result = await Trading.PlaceOrderAsync(
                 symbol,
@@ -559,9 +559,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 reduceOnly: positionMode.Data.IsHedgeMode ? null : true,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedId>(Exchange, default);
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedId(result.Data.Id.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.Id.ToString()));
         }
 
         private TimeInForce? GetTimeInForce(SharedOrderType type, SharedTimeInForce? tif)
@@ -611,12 +611,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Account.GetPositionInformationAsync(symbol: request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedLeverage>(Exchange, default);
+                return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
             if (!result.Data.Any())
                 return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError("Not found"));
 
-            return result.AsExchangeResult(Exchange, new SharedLeverage(result.Data.First().Leverage)
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedLeverage(result.Data.First().Leverage)
             {
                 Side = request.Side
             });
@@ -631,9 +631,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Account.ChangeInitialLeverageAsync(symbol: request.Symbol.GetSymbol(FormatSymbol), (int)request.Leverage, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedLeverage>(Exchange, default);
+                return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedLeverage(result.Data.Leverage));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedLeverage(result.Data.Leverage));
         }
         #endregion
 
@@ -650,9 +650,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedOrderBook>(Exchange, default);
+                return result.AsExchangeResult<SharedOrderBook>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -679,14 +679,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 fromId: fromId,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
 
             FromIdToken? nextToken = null;
             if (result.Data.Any() && result.Data.Last().TradeTime < request.EndTime)
                 nextToken = new FromIdToken(result.Data.Max(x => x.Id).ToString());
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, result.Data.Where(x => x.TradeTime < request.EndTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.ApiType, result.Data.Where(x => x.TradeTime < request.EndTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)).ToArray(), nextToken);
         }
         #endregion
 
@@ -733,7 +733,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -744,7 +744,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, request.Symbol.ApiType, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -760,9 +760,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await ExchangeData.GetOpenInterestAsync(request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedOpenInterest>(Exchange, default);
+                return result.AsExchangeResult<SharedOpenInterest>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedOpenInterest(result.Data.OpenInterest));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedOpenInterest(result.Data.OpenInterest));
         }
 
         #endregion
@@ -788,14 +788,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 limit: request.Limit ?? 1000,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, null, default);
 
             DateTimeToken? nextToken = null;
             if (result.Data.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(result.Data.Max(x => x.FundingTime));
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, result.Data.Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, request.Symbol.ApiType, result.Data.Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime)).ToArray(), nextToken);
         }
         #endregion
 
@@ -810,9 +810,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, result.Data.Select(x => new SharedBalance(x.Asset, x.AvailableBalance, x.WalletBalance)).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, SupportedApiTypes, result.Data.Select(x => new SharedBalance(x.Asset, x.AvailableBalance, x.WalletBalance)).ToArray());
         }
 
         #endregion
@@ -828,9 +828,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Account.GetPositionModeAsync(ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.IsHedgeMode ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
+            return result.AsExchangeResult(Exchange, SupportedApiTypes, new SharedPositionModeResult(result.Data.IsHedgeMode ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
         }
 
         SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, false);
@@ -842,9 +842,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Account.ModifyPositionModeAsync(request.Mode == SharedPositionMode.HedgeMode, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(request.Mode));
+            return result.AsExchangeResult(Exchange, SupportedApiTypes, new SharedPositionModeResult(request.Mode));
         }
         #endregion
 
@@ -860,9 +860,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             // Get data
             var result = await Account.StartUserStreamAsync(ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<string>(Exchange, default);
+                return result.AsExchangeResult<string>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, result.Data);
+            return result.AsExchangeResult(Exchange, SupportedApiTypes, result.Data);
         }
         EndpointOptions<KeepAliveListenKeyRequest> IListenKeyRestClient.KeepAliveOptions { get; } = new EndpointOptions<KeepAliveListenKeyRequest>(true);
         async Task<ExchangeWebResult<string>> IListenKeyRestClient.KeepAliveListenKeyAsync(KeepAliveListenKeyRequest request, CancellationToken ct)
@@ -874,9 +874,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             // Get data
             var result = await Account.KeepAliveUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<string>(Exchange, default);
+                return result.AsExchangeResult<string>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.ListenKey);
+            return result.AsExchangeResult(Exchange, SupportedApiTypes, request.ListenKey);
         }
 
         EndpointOptions<StopListenKeyRequest> IListenKeyRestClient.StopOptions { get; } = new EndpointOptions<StopListenKeyRequest>(true);
@@ -889,9 +889,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             // Get data
             var result = await Account.StopUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<string>(Exchange, default);
+                return result.AsExchangeResult<string>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, request.ListenKey);
+            return result.AsExchangeResult(Exchange, SupportedApiTypes, request.ListenKey);
         }
         #endregion
     }

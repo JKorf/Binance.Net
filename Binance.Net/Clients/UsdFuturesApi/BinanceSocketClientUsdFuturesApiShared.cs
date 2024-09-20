@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     internal partial class BinanceSocketClientUsdFuturesApi : IBinanceSocketClientUsdFuturesApiShared
     {
         public string Exchange => BinanceExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryLinear, ApiType.PerpetualLinear };
+        public TradingMode[] SupportedApiTypes => new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -54,7 +54,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 var data = update.Data;
                 if (request.ApiType != null)
-                    data = data.Where(x => request.ApiType == ApiType.PerpetualLinear ? !x.Symbol.Contains("_") : x.Symbol.Contains("_"));
+                    data = data.Where(x => request.ApiType == TradingMode.PerpetualLinear ? !x.Symbol.Contains("_") : x.Symbol.Contains("_"));
                 
                 if (!data.Any())
                     return;

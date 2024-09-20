@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
     internal partial class BinanceSocketClientCoinFuturesApi : IBinanceSocketClientCoinFuturesApiShared
     {
         public string Exchange => BinanceExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes => new[] { ApiType.DeliveryInverse, ApiType.PerpetualInverse };
+        public TradingMode[] SupportedApiTypes => new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -54,7 +54,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             {
                 var data = update.Data;
                 if (request.ApiType != null)
-                    data = update.Data.Where(x => request.ApiType == ApiType.PerpetualInverse ? x.Symbol.EndsWith("_PERP") : !x.Symbol.Contains("_PERP"));
+                    data = update.Data.Where(x => request.ApiType == TradingMode.PerpetualInverse ? x.Symbol.EndsWith("_PERP") : !x.Symbol.Contains("_PERP"));
                 
                 if (!data.Any())
                     return;
