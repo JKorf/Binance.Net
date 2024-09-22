@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
-using Binance.Net.Converters;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.RateLimiting.Guards;
+using System.Diagnostics;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -315,6 +314,27 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/klines", BinanceExchange.RateLimiter.FuturesRest, requestWeight);
             var result = await _baseClient.SendAsync<IEnumerable<BinanceFuturesUsdtKline>>(request, parameters, ct, requestWeight).ConfigureAwait(false);
             return result.As<IEnumerable<IBinanceKline>>(result.Data);
+        }
+
+        #endregion
+
+        #region Kline/Premium Index
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        {
+            limit?.ValidateIntBetween(nameof(limit), 1, 1500);
+            var parameters = new ParameterCollection {
+                { "symbol", symbol },
+            };
+            parameters.AddEnum("interval", interval);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+
+            var requestWeight = limit == null ? 5 : limit <= 100 ? 1 : limit <= 500 ? 2 : limit <= 1000 ? 5 : 10;
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/premiumIndexKlines", BinanceExchange.RateLimiter.FuturesRest, requestWeight);
+            return await _baseClient.SendAsync<IEnumerable<BinanceMarkIndexKline>>(request, parameters, ct, requestWeight).ConfigureAwait(false);
         }
 
         #endregion
