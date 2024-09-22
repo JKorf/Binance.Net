@@ -394,6 +394,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiExchangeData.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiExchangeData.GetContinuousContractKlinesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -2083,6 +2086,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetBookPriceAsync(System.String,System.Threading.CancellationToken)">
@@ -5753,6 +5759,19 @@
             <summary>
             Get candlestick data for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-data" /></para>
+            </summary>
+            <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
+            <param name="interval">The candlestick timespan</param>
+            <param name="startTime">Start time to get candlestick data</param>
+            <param name="endTime">End time to get candlestick data</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The candlestick data for the provided symbol</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get premium index kline data for the provided symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#premium-index-kline-data" /></para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
             <param name="interval">The candlestick timespan</param>
@@ -11570,6 +11589,19 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get premium index klines for a symbol
+            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#premium-index-kline-data" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="interval">The kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetFundingInfoAsync(System.Threading.CancellationToken)">
             <summary>
             Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
@@ -16768,7 +16800,7 @@
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceMarkIndexKline">
             <summary>
-            Kline for mark or index price
+            Kline for mark or index price or Premium index
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceMarkIndexKline.OpenTime">

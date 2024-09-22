@@ -83,6 +83,20 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get premium index kline data for the provided symbol
+        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#premium-index-kline-data" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
+        /// <param name="interval">The candlestick timespan</param>
+        /// <param name="startTime">Start time to get candlestick data</param>
+        /// <param name="endTime">End time to get candlestick data</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The candlestick data for the provided symbol</returns>
+        Task<WebCallResult<IEnumerable<BinanceMarkIndexKline>>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval,
+            DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#get-funding-rate-info" /></para>
         /// </summary>
