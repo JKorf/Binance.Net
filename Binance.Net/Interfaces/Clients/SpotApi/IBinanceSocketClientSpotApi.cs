@@ -20,6 +20,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         IBinanceSocketClientSpotApiTrading Trading { get; }
 
+        /// <summary>
+        /// Get the shared socket subscription client
+        /// </summary>
         IBinanceSocketClientSpotApiShared SharedClient { get; }
     }
 }

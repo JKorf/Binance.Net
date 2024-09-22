@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
+    /// <summary>
+    /// Shared interface for COIN-M Futures socket API usage
+    /// </summary>
     public interface IBinanceSocketClientCoinFuturesApiShared :
         ITickerSocketClient,
         ITickersSocketClient,

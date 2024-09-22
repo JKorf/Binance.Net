@@ -23,11 +23,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         public IBinanceRestClientSpotApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+        /// DEPRECATED, use SharedClient instead
         /// </summary>
-        /// <returns></returns>
         public ISpotClient CommonSpotClient { get; }
 
+        /// <summary>
+        /// Get the shared rest requests client
+        /// </summary>
         public IBinanceRestClientSpotApiShared SharedClient { get; }
     }
 }

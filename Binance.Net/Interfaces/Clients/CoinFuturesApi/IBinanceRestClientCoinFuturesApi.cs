@@ -24,10 +24,13 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         public IBinanceRestClientCoinFuturesApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the IFuturesClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+        /// DEPRECATED, use SharedClient instead
         /// </summary>
-        /// <returns></returns>
         public IFuturesClient CommonFuturesClient { get; }
+
+        /// <summary>
+        /// Get the shared rest requests client
+        /// </summary>
         public IBinanceRestClientCoinFuturesApiShared SharedClient { get; }
 
     }

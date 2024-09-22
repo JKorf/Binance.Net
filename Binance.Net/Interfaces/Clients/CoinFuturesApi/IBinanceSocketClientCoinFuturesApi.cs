@@ -11,6 +11,9 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     /// </summary>
     public interface IBinanceSocketClientCoinFuturesApi : ISocketApiClient, IDisposable
     {
+        /// <summary>
+        /// Get the shared socket subscription client
+        /// </summary>
         IBinanceSocketClientCoinFuturesApiShared SharedClient { get; }
 
         /// <summary>
