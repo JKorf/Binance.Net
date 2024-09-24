@@ -1,18 +1,6 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using CryptoExchange.Net.SharedApis.Enums;
-using CryptoExchange.Net.SharedApis.Interfaces;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
-using CryptoExchange.Net.SharedApis.Models;
-using CryptoExchange.Net.SharedApis.Models.Options;
-using CryptoExchange.Net.SharedApis.Models.Options.Endpoints;
-using CryptoExchange.Net.SharedApis.Models.Rest;
-using CryptoExchange.Net.SharedApis.ResponseModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using CryptoExchange.Net.SharedApis;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -431,6 +419,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
+                x.Buyer ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.Timestamp)
@@ -475,6 +464,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
+                x.Buyer ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.Timestamp)

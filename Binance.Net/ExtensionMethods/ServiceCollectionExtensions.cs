@@ -1,11 +1,9 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
-using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Options;
 using Binance.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.SharedApis.Interfaces;
 using System.Net;
 
 namespace Microsoft.Extensions.DependencyInjection

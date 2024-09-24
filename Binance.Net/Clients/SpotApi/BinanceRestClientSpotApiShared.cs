@@ -1,14 +1,6 @@
 ﻿using Binance.Net.Interfaces.Clients.SpotApi;
-using CryptoExchange.Net.SharedApis.Enums;
-using CryptoExchange.Net.SharedApis.Interfaces;
-using CryptoExchange.Net.SharedApis.Models.Rest;
-using CryptoExchange.Net.SharedApis.ResponseModels;
 using Binance.Net.Enums;
-using CryptoExchange.Net.SharedApis.Models;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
 using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.SharedApis.Models.Options.Endpoints;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -404,6 +396,7 @@ namespace Binance.Net.Clients.SpotApi
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
+                x.IsBuyer ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.Timestamp)
@@ -445,6 +438,7 @@ namespace Binance.Net.Clients.SpotApi
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
+                x.IsBuyer ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.Timestamp)
