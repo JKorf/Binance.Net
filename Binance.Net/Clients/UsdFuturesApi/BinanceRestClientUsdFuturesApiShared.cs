@@ -152,6 +152,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
                 QuantityStep = s.LotSizeFilter?.StepSize,
                 PriceStep = s.PriceFilter?.TickSize,
+                MinNotionalValue = s.MinNotionalFilter?.MinNotional,
                 ContractSize = 1,
                 DeliveryTime = s.DeliveryDate.Year == 2100 ? null : s.DeliveryDate
             }).ToArray());
@@ -249,10 +250,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
         IEnumerable<SharedOrderType> IFuturesOrderRestClient.FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
         IEnumerable<SharedTimeInForce> IFuturesOrderRestClient.FuturesSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
         SharedQuantitySupport IFuturesOrderRestClient.FuturesSupportedOrderQuantity { get; } = new SharedQuantitySupport(
-                SharedQuantityType.Contracts,
-                SharedQuantityType.Contracts,
-                SharedQuantityType.Contracts,
-                SharedQuantityType.Contracts);
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset);
 
         PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions();
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)

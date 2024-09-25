@@ -23,7 +23,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         public IBinanceRestClientSpotApiTrading Trading { get; }
 
         /// <summary>
-        /// DEPRECATED, use SharedClient instead
+        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
         /// </summary>
         public ISpotClient CommonSpotClient { get; }
 

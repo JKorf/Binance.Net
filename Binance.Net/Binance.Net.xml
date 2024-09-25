@@ -5488,7 +5488,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.CommonFuturesClient">
             <summary>
-            DEPRECATED, use SharedClient instead
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.SharedClient">
@@ -8479,7 +8479,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.CommonSpotClient">
             <summary>
-            DEPRECATED, use SharedClient instead
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.SharedClient">
@@ -11246,7 +11246,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.CommonFuturesClient">
             <summary>
-            DEPRECATED, use SharedClient instead
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.SharedClient">
