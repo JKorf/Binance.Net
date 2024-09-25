@@ -63,7 +63,7 @@
         /// </summary>
         [JsonPropertyName("notionalFloor")]
         public long Floor { get; set; }
-        [JsonPropertyName("qtylFloor")]
+        [JsonPropertyName("qtyFloor")]
         private long QuantityFloor
         {
             set => Floor = value;
