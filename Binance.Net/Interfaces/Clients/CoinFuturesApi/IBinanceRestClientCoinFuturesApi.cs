@@ -24,12 +24,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         public IBinanceRestClientCoinFuturesApiTrading Trading { get; }
 
         /// <summary>
-        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
+        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
         /// </summary>
         public IFuturesClient CommonFuturesClient { get; }
 
         /// <summary>
-        /// Get the shared rest requests client
+        /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
         /// </summary>
         public IBinanceRestClientCoinFuturesApiShared SharedClient { get; }
 

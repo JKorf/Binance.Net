@@ -5488,12 +5488,12 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.CommonFuturesClient">
             <summary>
-            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.SharedClient">
             <summary>
-            Get the shared rest requests client
+            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount">
@@ -6141,7 +6141,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SharedClient">
             <summary>
-            Get the shared socket subscription client
+            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
@@ -8479,12 +8479,12 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.CommonSpotClient">
             <summary>
-            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.SharedClient">
             <summary>
-            Get the shared rest requests client
+            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount">
@@ -10490,7 +10490,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApi.SharedClient">
             <summary>
-            Get the shared socket subscription client
+            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount">
@@ -11246,12 +11246,12 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.CommonFuturesClient">
             <summary>
-            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.SharedClient">
             <summary>
-            Get the shared rest requests client
+            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount">
@@ -12242,7 +12242,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SharedClient">
             <summary>
-            Get the shared socket subscription client
+            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
