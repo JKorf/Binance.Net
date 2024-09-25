@@ -203,6 +203,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetGlobalLongShortAccountRatioAsync("ETHUSDT", Enums.PeriodInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetMarkPriceKlinesAsync("ETHUSDT", Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.KlineInterval.OneHour, DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, 1, CancellationToken.None), false);
+            await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetPremiumIndexKlinesAsync("ETHUSDT", Enums.KlineInterval.OneHour, DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, 1, CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetTickerAsync("ETHUSDT", CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetTickersAsync(CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetPriceAsync("ETHUSDT", CancellationToken.None), false);
@@ -267,6 +268,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetIndexPriceKlinesAsync("ETHUSD", Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetContinuousContractKlinesAsync("ETHUSD", Enums.ContractType.Perpetual, Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetKlinesAsync("ETHUSD_PERP", Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
+            await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetPremiumIndexKlinesAsync("ETHUSD_PERP", Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetMarkPricesAsync(null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetMarkPriceKlinesAsync("ETHUSD_PERP", Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetGlobalLongShortAccountRatioAsync("ETHUSD", Enums.PeriodInterval.OneDay, null, null, null, CancellationToken.None), false);
