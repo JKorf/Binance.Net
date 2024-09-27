@@ -9,12 +9,13 @@ using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    internal class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
+    internal partial class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
     {
         #region fields
         /// <inheritdoc />
@@ -59,8 +60,10 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        public IBinanceSocketClientSpotApiShared SharedClient => this;
+
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)

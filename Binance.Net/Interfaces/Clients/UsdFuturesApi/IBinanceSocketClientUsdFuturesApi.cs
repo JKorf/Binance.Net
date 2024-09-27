@@ -12,6 +12,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     public interface IBinanceSocketClientUsdFuturesApi : ISocketApiClient, IDisposable
     {
         /// <summary>
+        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        IBinanceSocketClientUsdFuturesApiShared SharedClient { get; }
+
+        /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#aggregate-trade-streams" /></para>
         /// </summary>

@@ -11,6 +11,7 @@ using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Clients.UsdFuturesApi
@@ -18,7 +19,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     /// <summary>
     /// Client providing access to the Binance Usd futures websocket Api
     /// </summary>
-    internal class BinanceSocketClientUsdFuturesApi : SocketApiClient, IBinanceSocketClientUsdFuturesApi
+    internal partial class BinanceSocketClientUsdFuturesApi : SocketApiClient, IBinanceSocketClientUsdFuturesApi
     {
         #region fields
         private const string _klineStreamEndpoint = "@kline";
@@ -66,11 +67,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty: "_" + deliverTime.Value.ToString("yyMMdd"));
+        }
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
-
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
         #region Mark Price Stream
 

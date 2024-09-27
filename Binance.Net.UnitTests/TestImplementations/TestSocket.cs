@@ -20,6 +20,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public event Func<Task> OnReconnected;
         public event Func<Task> OnReconnecting;
         public event Func<int, Task> OnRequestRateLimited;
+        public event Func<Task> OnConnectRateLimited;
         public event Func<Exception, Task> OnError;
 #pragma warning restore 0067
         public event Func<int, Task> OnRequestSent;
