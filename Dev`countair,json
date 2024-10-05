@@ -1,0 +1,2869 @@
+7073c5b333fe5b46125a51ec91f3021cb5151deb Pazartesi 17 Eylül 00:00:00 2001
+Gönderen: Sarsılmazxx02 <Recocankaya@gmail.com>
+Tarih: Cum, 5 Ekim 2024 07:05:55 +0300
+Konu: [PATCH] devcontainer.json'u oluşturun
+MIME-Sürüm: 1.0
+İçerik Türü: text/plain; karakter kümesi=UTF-8
+İçerik Aktarım Kodlaması: 8bit
+
+# ![.Binance.Net](https://raw.githubusercontent.com/JKorf/Binance.Net/master/Binance.Net/Icon/icon.png) Binance.Net
+
+[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Binance.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![Lisans](https://img.shields.io/github/license/JKorf/Binance.Net?style=for-the-badge)
+
+Binance.Net, [Binance REST ve Websocket API'sine](https://binance-docs.github.io/apidocs/#change-log) erişmek için güçlü bir şekilde yazılmış istemci kütüphanesidir. ## Özellikler
+* Yanıt verileri tanımlayıcı modellere eşlenir
+* Giriş parametreleri ve yanıt değerleri mümkün olduğunca tanımlayıcı enum değerlerine eşlenir
+* Otomatik web soketi (yeniden) bağlantı yönetimi
+* İstemci tarafında oran sınırlaması
+* İstemci tarafı emir defteri uygulaması
+* Kapsamlı günlük kaydı
+* Farklı ortamlar için destek (binance.com, binance.us, testnet)
+* CryptoExchange.Net temel kütüphanesine dayalı diğer borsa istemcileriyle kolay entegrasyon
+
+## Desteklenen Çerçeveler
+Kütüphane, optimum uyumluluk için hem `.NET Standard 2.0` hem de `.NET Standard 2.1`'i hedefliyor
+
+|.NET uygulaması|Sürüm Desteği|
+|--|--|
+|.NET Core|`2.0` ve üzeri|
+|.NET Framework|`4.6.1` ve üzeri|
+|Mono|`5.4` ve üzeri|
+|Xamarin.iOS|`10.14` ve üzeri|
+|Xamarin.Android|`8.0` ve üzeri|
+|UWP|`10.0.16299` ve üzeri|
+|Unity|`2018.1` ve üzeri|
+
+## Kütüphaneyi yükleyin
+
+### NuGet
+[![NuGet sürümü](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net) [![Nuget indirmeleri](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
+
+	dotnet Binance.Net paketini ekle
+
+### GitHub paketleri
+Binance.Net [GitHub paketlerinde](https://github.com/JKorf/Binance.Net/pkgs/nuget/Binance.Net) mevcuttur. NuGet paket kaynağı olarak `https://nuget.pkg.github.com/JKorf/index.json` eklemeniz gerekecektir.
+
+### Sürümü indirin
+[![GitHub Sürümü](https://img.shields.io/github/v/release/JKorf/Binance.Net?style=for-the-badge&label=GitHub)](https://github.com/JKorf/Binance.Net/releases)
+
+NuGet paket dosyaları, [buradan](https://github.com/JKorf/Binance.Net/releases) bulunabilen en son GitHub sürümüyle birlikte kaynak koduna eklenmiştir.
+
+
+## Nasıl kullanılır
+*REST Uç Noktaları*
+
+```csharp
+// ETH/USDT fiyatını rest isteği yoluyla alın
+var restClient = yeni BinanceRestClient();
+var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+var lastPrice = tickerResult.Data.LastPrice;
+```
+
+*Websocket akışları*
+
+```csharp
+// ETH/USDT ticker güncellemelerine websocket API'si aracılığıyla abone olun
+var soketİstemcisi = yeni BinanceSocketİstemcisi();
+var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", (güncelleme) =>
+{
+  var sonFiyat = güncelleme.Veri.SonFiyat;
+});
+```
+
+*Başlayın ve 40 saniye içinde bir sembolün son fiyatını isteyin*
+
+<img src="https://github.com/JKorf/Binance.Net/blob/f74f262151f21b123deecd9b39a717458a18f6ff/docs/Binance.gif" width="600" />
+
+İstemciler, bağımlılık enjeksiyonu, yanıt işleme ve daha fazlası hakkında bilgi için [Binance.Net belgelerine](https://jkorf.github.io/Binance.Net), [CryptoExchange.Net belgelerine](https://jkorf.github.io/CryptoExchange.Net) bakın veya [buradaki](https://github.com/JKorf/Binance.Net/tree/master/Examples) veya [buradaki](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples) örneklere bakın. [Blockpit Örnek Raporu - 2024 (1).pdf](https://github.com/user-attachments/files/17265064/Blockpit.Example.Report.-.2024.1.pdf) [Binance api key.txt.json](https://github.com/user-attachments/files/17265060/Binance.api.key.txt.json) [blank.yml.txt](https://github.com/user-attachments/files/17265059/blank.yml.txt) [Binance-api-doc-768e93f96c002b53bb3d22595cd3a075148d1abc.zip](https://github.com/user-attachments/files/17265058/Binance-api-doc-768e93f96c002b53bb3d22595cd3a075148d1abc.zip)
+
+## Kripto Borsası.Net
+Binance.Net, [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) temel kütüphanesine dayanmaktadır. CryptoExchange.Net temel kütüphanesine dayanan diğer borsa API uygulamaları mevcuttur ve aynı mantığı takip eder.
+
+CryptoExchange.Net ayrıca [farklı borsa API'lerine kolay erişim](https://jkorf.github.io/CryptoExchange.Net#idocs_common) sağlar.
+
+|Değişim|Depo|Nuget|
+|--|--|--|
+|BingX|[JKorf/BingX.Net](https://github.com/JKorf/BingX.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.BingX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.BingX.Net)| |Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Bitfinex.net.svg?style=flat-square)](https://www.nuget.org/packages/Bitfinex.Net)| |Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.Bitget.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Bitget.Net)| |BitMart|[JKorf/BitMart.Net](https://github.com/JKorf/BitMart.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/BitMart.net.svg?style=flat-square)](https://www.nuget.org/packages/BitMart.Net)| |Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Bybit.net.svg?style=flat-square)](https://www.nuget.org/packages/Bybit.Net)| |CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/CoinEx.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinEx.Net)| |CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/CoinGecko.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinGecko.Net)| |Gate.io|[JKorf/GateIo.Net](https://github.com/JKorf/GateIo.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/GateIo.net.svg?style=flat-square)](https://www.nuget.org/packages/GateIo.Net)| |Huobi/HTX|[JKorf/Huobi.Net](https://github.com/JKorf/Huobi.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Huobi.net.svg?style=flat-square)](https://www.nuget.org/packages/Huobi.Net)| |Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/KrakenExchange.net.svg?style=flat-square)](https://www.nuget.org/packages/KrakenExchange.Net)| |Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Kucoin.net.svg?style=flat-square)](https://www.nuget.org/packages/Kucoin.Net)| |Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.Mexc.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Mexc.Net)| |OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.OKX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.OKX.Net)|
+
+## Uyuşmazlık
+[![Nuget sürümü](https://img.shields.io/discord/847020490588422145?style=for-the-badge)](https://discord.gg/MSpeEtSY8t) Bir Discord sunucusu [burada](https://discord.gg/MSpeEtSY8t) mevcuttur. CryptoExchange.Net ve uygulama kütüphaneleri hakkında tartışma ve/veya sorular için katılmaktan çekinmeyin.
+
+## Desteklenen işlevler
+
+### Spot/Marj/Tasarruf/Madencilik
+|API|Desteklenen|Konum|
+|--|--:|--|
+|Cüzdan uç noktaları|✓|`restClient.SpotApi.Account`|
+|AltHesap uç noktaları|✓|`restClient.GeneralApi.SubAccount`| |Piyasa veri uç noktaları|✓|`restClient.SpotApi.ExchangeData`| |Websocket Piyasa Akışları|✓|`socketClient.SpotApi.ExchangeData`| |Spot Ticaret Uç Noktaları|✓|`restClient.SpotApi.Trading`| |Spot Hesap Uç Noktaları|✓|`restClient.SpotApi.Account`| |Marj Hesabı/Ticaret|Kısmi|`restClient.SpotApi.Account` / `restClient.SpotApi.Trading`| |Kullanıcı Veri Akışları|✓|`socketClient.SpotApi.Account`| |Marj Kullanıcı Veri Akışları|X||
+|Basit Kazanç Uç Noktaları|✓|`restClient.GeneralApi.SimpleEarn`| |Otomatik Yatırım Uç Noktaları|✓|`restClient.GeneralApi.AutoInvest`| |Stake Uç Noktaları|✓|`restClient.GeneralApi.Staking`| |Madencilik Uç Noktaları|✓|`restClient.GeneralApi.Mining`| |Vadeli İşlemler|✓|`restClient.GeneralApi.Futures`|
+|Vadeli İşlem Algoritması Uç Noktaları|✓|`restClient.UsdFuturesApi.Trading`| |Spot Algoritması Uç Noktaları|✓|`restClient.SpotApi.Trading`| |Klasik Portföy Marj Uç Noktaları|Kısmi|`restClient.SpotApi.Hesabı`| |BLVT Uç Noktaları|Kısmi|`restClient.SpotApi.Hesabı` / `restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`| |Fiat Uç Noktaları|✓|`restClient.SpotApi.Hesabı`|
+|C2C Uç Noktaları|✓|`restClient.SpotApi.Trading`|
+|VIP Kredi Son Noktaları|X||
+|Kripto Kredileri Son Noktaları|Kısmi|`restClient.GeneralApi.Loans`| |Ödeme Son Noktaları|✓|`restClient.SpotApi.Trading`|
+|Uç Noktalarını Dönüştür|✓|`restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`| |İndirim Uç Noktaları|✓|`restClient.SpotApi.Account`|
+|NFT Uç Noktaları|X||
+|Binance Hediye Kartı Uç Noktaları|X||
+
+### USD-M Vadeli İşlemleri
+|API|Desteklenen|Konum|
+|--|--:|--|
+|Piyasa Verileri|✓|`restClient.UsdFuturesApi.ExchangeData`| |Ticaret|✓|`restClient.UsdFuturesApi.Hesap` [dışa aktar-https-vscode-dev-github-zxramozx-1722925865.json.gz](https://github.com/user-attachments/files/17265068/dışa aktar-https-vscode-dev-github-zxramozx-1722925865.json.gz) [çekme_isteği_şablonu.md](https://github.com/user-attachments/files/17265067/çekme_isteği_şablonu.md) / `restClient.UsdFuturesApi.Trading`[dışa-aktar-https-vscode-dev-github-zxramozx-1722740575.json](https://github.com/user-attachments/files/17265077/dışa-aktar-https-vscode-dev-github-zxramozx-1722740575.json) |
+|Websocket Piyasa Akışları|✓|`socketClient.UsdFuturesApi`[config.go.txt](https://github.com/user-attachments/files/17265080/config.go.txt) |
+|Kullanıcı Veri Akışları|✓|`socketClient.UsdFuturesApi`| |Hesap|✓|`restClient.UsdFuturesApi.Hesap` / `restClient.UsdFuturesApi.Trading`| |Dönüştür|[export-token-0x9cdc684179d200ddab42628f3500fadd60322121.csv](https://github.com/user-attachments/files/17265083/export-token-0x9cdc684179d200ddab42628f3500fadd60322121.csv) ✓|`restClient.UsdFuturesApi.ExchangeData` / `restClient.UsdFuturesApi.Trading`| |Klasik Portföy Marj Uç Noktaları|X||
+
+### COIN-M Vadeli İşlemleri
+|API|Desteklenen|Konum|
+|--|--:|--|
+|Piyasa Verileri|✓|`restClient.CoinFuturesApi.ExchangeData`| |Websocket Piyasa Akışları|✓|`socketClient.CoinFuturesApi`| |Ticaret|✓|`restClient.CoinFuturesApi.Hesap` / `restClient.CoinFuturesApi.Trading`| |Kullanıcı Veri Akışları|✓|`socketClient.CoinFuturesApi`| |Hesap|✓|`restClient.CoinFuturesApi.Hesap` / `restClient.CoinFuturesApi.Trading`| |Klasik Portföy Marj Uç Noktaları|X||
+
+### Avrupa Seçenekleri
+|API|Desteklenen|Konum|
+|--|--:|--|
+|*|X||
+
+### Websocket API
+|API|Desteklenen|Konum|
+|--|--:|--|
+|Piyasa verisi istekleri|✓|`socketClient.SpotApi.ExchangeData`| |Ticaret istekleri|✓|`socketClient.SpotApi.Trading`| |Hesap istekleri|✓|`socketClient.SpotApi.Account`|
+
+### Portföy Marjı
+|API|Desteklenen|Konum|
+|[dışa aktar-0xFa1dB6794de6e994b60741DecaE0567946992181.csv](https://github.com/user-attachments/files/17265085/dışa aktar-0xFa1dB6794de6e994b60741DecaE0567946992181.csv) --|--:|--|
+|*|X||
+
+## Projeyi destekleyin
+Bu paketi boş zamanlarımda kendim, ücretsiz olarak geliştiriyor ve sürdürüyorum, her türlü destek çok değerlidir.
+
+### Bağış yapmak
+Tercih ettiğiniz bir kripto para biriminde tek seferlik bağış yapın. Burada listelenmeyen bir para birimini bağışlamayı tercih ederseniz lütfen benimle iletişime geçin.
+
+**Btc**: 1DFqa7YG7aASAjRniQeYZstn1364LZbouf
+**Eth**: 0xd41a74d3713ce95c180bc9e91a8bff68ac34b58e**USDT (TRX)** TZEVpQwHxxbNiEXLXFjoswdQknrkKibbuc
+### Sponsor
+Alternatif olarak, [Github Sponsorları](https://github.com/sponsors/JKorf) kullanarak Github'da bana sponsor olabilirsiniz.
+
+## Sürüm notları
+* Sürüm 10.5.0 - 27 Eylül 2024
+    * CryptoExchange.Net 8.0.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.0
+    * Spot, USD-M Vadeli İşlemler, Coin-M Vadeli İşlemler Rest ve Socket istemcileri için Paylaşılan istemci arayüzleri uygulaması eklendi
+    * BinanceWithdrawalPlaced modelinde Id özelliği `string?`'den `string`'e güncellendi
+    * Sourcelink paket sürümü güncellendi
+    * ISpotClient ve IFuturesClient referansları kullanım dışı olarak işaretlendi
+
+* Sürüm 10.4.0 - 11 Eylül 2024
+    * UsdFuturesApi.SubscribeToUserDataUpdatesAsync için onTradeUpdate geri araması eklendi
+    * Vadeli bakiyelerdeki CrossUnrealizedPnl alanı, testnet yanıtını desteklemek için değiştirildi
+    * UsdFuturesApi.Trading.EditMultipleOrdersAsync sipariş kimliği serileştirmesi için düzeltme
+    * GeneralApi.AutoInvest.GetPlansAsync seri durumdan çıkarmayla ilgili düzeltme
+    * CoinFuturesApi.ExchangeData.GetFundingRatesAsync için hatalı API dokümanları referansı düzeltildi
+
+* Sürüm 10.3.0 - 28 Ağustos 2024
+    * CryptoExchange.Net 7.11.2 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.2
+    * GeneralApi.AutoInvest uç noktaları eklendi
+    * UsdFuturesApi dönüştürme uç noktaları eklendi
+    * Sabit SubAccountId özelliğinin mevduat geçmişinde seri hale getirilmesi
+    * Oran sınırlaması için bazı istek ağırlıkları güncellendi
+
+* Sürüm 10.2.1 - 18 Ağustos 2024
+    * SpotApi.Trading.ConvertQuoteRequestAsync uç noktasında walletType serileştirmesi düzeltildi
+
+* Sürüm 10.2.0 - 13 Ağustos 2024
+    * V3 uç noktasında veri eksik olduğundan UsdFuturesApi.Account.GetAccountInfoV2Async uç noktası yeniden eklendi
+    * UsdFuturesApi.Account.GetAccountInfoAsync'i GetAccountInfoV3Async olarak yeniden adlandırın
+    * SpotApi.ExchangeData.GetProductsAsync serileştirmesi düzeltildi
+	* GeneralApi.SimpleEarn.GetLockedRewardRecordsAsync serileştirmesi düzeltildi
+
+* Sürüm 10.1.1 - 08 Ağu 2024
+    * CoinFuturesApi.Account.GetPositionInformationAsync'de UnrealizedPnl serileştirmesini düzeltin
+
+* Sürüm 10.1.0 - 07 Ağu 2024
+    * CryptoExchange.Net 7.11.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.0
+    * XML kod yorumları güncellendi
+    * BinanceFuturesAccountAsset MaintMargin deserialization düzeltildi
+    * BinancePosition MaintMargin deserializasyonu düzeltildi
+    * Coin-M vadeli işlemleri için BinancePosition UnrealizedProfit deserializasyonu düzeltildi
+
+* Sürüm 10.0.1 - 05 Ağustos 2024
+    * UsdtFuturesApi.Account.GetIncomeHistoryAsync serileştirme sorunu düzeltildi
+
+* Sürüm 10.0.0 - 27 Temmuz 2024
+    * CryptoExchange.Net 7.10.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.10.0
+    * (De)serileştirme için Newtonsoft.Json uygulamasından System.Text.Json uygulamasına geçin
+    * Eski tip başına enum dönüştürücüsünden EnumConverter kullanımına yeniden düzenlendi
+    * SpotApi.Account.GetCommissionRatesAsync uç noktası eklendi
+    * UsdFuturesApi.Account.GetSymbolConfigurationAsync uç noktası eklendi
+    * UsdFuturesApi.Account.GetAccountConfigurationAsync uç noktası eklendi
+    * UsdFuturesApi.Trading.GetPositionsAsync uç noktası eklendi
+    * SpotApi.ExchangeData.GetExchangeInfoAsync sembol yanıtına PermissionSets özelliği eklendi
+    * UsdFuturesApi.Account.GetBalancesAsync V3'e güncellendi
+    * UsdFuturesApi.Account.GetAccountInfoAsync V3'e güncellendi
+
+* Sürüm 9.12.0 - 16 Temmuz 2024
+    * CryptoExchange.Net 7.9.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.9.0
+    * Dahili sınıflar dahili erişim değiştiricisine güncellendi
+    * Bağlantının kesilmesini önlemek için WebSocket hız sınırı kuralı güncellendi
+
+* Sürüm 9.11.1 - 02 Temmuz 2024
+    * CryptoExchange.Net V7.8.0'a güncellendi
+    * Uç nokta başına limitler için güncellenmiş hız sınırlaması
+
+* Sürüm 9.11.0 - 23 Haz 2024
+    * CryptoExchange.Net 7.7.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.0
+    * Özel bağlantı yapılandırması eklendi; artık ilk isteği yapmadan önce `binanceSocketClient.SpotApi.PrepareConnectionsAsync();` çağrılarak bir websocket bağlantısı kurulabilir
+    * Websocket isteklerine CancellationToken isteğe bağlı parametresi eklendi
+    * Sınıflardan kayıtlara güncellenmiş yanıt modelleri
+
+* Sürüm 9.10.0 - 11 Haz 2024
+    * Yeni SpotApi.Trading.PlaceOtoOrderListAsync ve SpotApi.Trading.PlaceOtocoOrderListAsync uç noktaları eklendi
+    * Otomatik sıkıştırmayı açmaya izin vererek GetProductsAsync uç noktalarını düzeltti
+    * CryptoExchange.Net v7.6.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+
+* Sürüm 9.9.8 - 02 Haziran 2024
+    * SpotApi.Account.GetAccountVipLevelAndStatusAsync uç noktası eklendi
+    * UsdFuturesApi.Account.GetBnbBurnStatusAsync ve UsdFuturesApi.Account.SetBnbBurnStatusAsync uç noktaları eklendi
+    * Eksik GoodTillDate TimeInForce dönüşümü eklendi
+
+* Sürüm 9.9.7 - 07 Mayıs 2024
+    * CryptoExchange.Net'i v7.5.2'ye güncelledik, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+
+* Sürüm 9.9.6 - 05 Mayıs 2024
+    * Çeşitli yanıt modelleri güncellendi
+    * CoinFuturesApi.Account.GetBracketsAsync V2 uç noktasına güncellendi
+    * CoinFuturesApi.Trading.PlaceMultipleOrdersAsync sipariş parametresi diziden IEnumerable'a güncellendi
+
+* Sürüm 9.9.5 - 01 Mayıs 2024
+    * Çoklu yanıt modelleri güncellendi
+    * Yeni, daha kapsamlı birim testi uygulamasından sonra birden fazla hata düzeltildi
+    * Yinelenen SpotApi.Trading.ConvertTransferAsync ve GetConvertTransferHistoryAsync uç noktaları kaldırıldı
+    * CryptoExchange.Net v7.5.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+
+* Sürüm 9.9.4 - 28 Nis 2024
+    * SpotApi.Account.GetWithdrawalAddressesAsync uç noktası eklendi
+    * BinanceExchange statik sınıfına Url ve ApiDocsUrl eklendi
+    * BinanceOrderBookFactory kitap oluşturma yöntemi eklendi
+    * BinanceOrderBookFactory enjeksiyon sorunu düzeltildi
+    * CryptoExchange.Net v7.4.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+
+* Sürüm 9.9.3 - 23 Nis 2024
+    * Eksik UniversalTransferType enum değerleri eklendi
+    * CoinFuturesApi.Account.GetIncomeHistoryAsync uç nokta URL'si düzeltildi
+    * CryptoExchange.Net 7.3.3'e güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+
+* Sürüm 9.9.2 - 19 Nis 2024
+    * CoinFuturesApi.Account.GetDownloadIdForTransactionHistoryAsync uç noktası eklendi
+    * CoinFuturesApi.Account.GetDownloadLinkForTransactionHistoryAsync uç noktası eklendi
+    * SpotApi.ExchangeData.GetTradingDayTickerAsync uç noktası eklendi
+    * SpotApi.ExchangeData.GetTradingDayTickersAsync uç noktası eklendi
+    * SpotApi.Trading.PlaceTestOrderAsync'e computeFeeRates parametresi eklendi
+    * SpotApi.Trading.PlaceTestOrderAsync yanıtı güncellendi
+    * Güncellenmiş broker referans ayarı
+    * CryptoExchange.Net, belirli oran limitlerine sahip bazı uç noktaların başarısız olmasına neden olan sorunu düzelterek 7.3.2'ye güncellendi
+
+* Sürüm 9.9.1 - 19 Nis 2024
+    * Başlat/Canlı Tut/Durdur UserStream işlemlerinin hata döndürmesi düzeltildi
+
+* Sürüm 9.9.0 - 18 Nis 2024
+    * CryptoExchange.Net 7.3.1'e güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+	* İstemci tarafı oran sınırlaması yeniden uygulandı
+    * Hem rest hem de soket API'si için RetryAfter yanıtının işlenmesi eklendi
+    * SpotApi.Account.GetAccountInfoAsync'e omitZeroBalances parametresi eklendi
+    * Kullanım dışı bırakılan PlaceOcoOrderAsync uç noktasının yerine yeni PlaceOcoOrderListAsync eklendi
+    * Spot websocket kullanıcı veri aboneliği için listenKeyExpired olay işleyicisi eklendi
+    * SpotApi.ExchangeData.GetExchangeInfoAsync sembol yanıt modeline OTOAllowed eklendi
+    * GetTradeFeeAsync, SpotApi.ExchangeData'dan SpotApi.Account'a taşındı
+    * WebCallResult<object> yanıtları WebCallResult'a değiştirildi
+    * Kullanım dışı bırakılan uç noktalar kaldırıldı
+
+* Sürüm 9.8.1 - 03 Nis 2024
+    * SpotApi.Account.GetWalletBalancesAsync uç noktası eklendi
+    * SpotApi.Account.GetMarginLoansAsync isolatedSymbol parametresinin gönderilememesi düzeltildi
+    * Ön gönderim sembol doğrulaması kaldırıldı
+
+* Sürüm 9.8.0 - 01 Nis 2024
+    * SpotApi.ExchangeData.GetDelistScheduleAsync uç noktası eklendi
+    * UsdFuturesApi.Account.GetOrderRateLimitAsync uç noktası eklendi
+    * UsdFuturesApi.ExchangeData.GetBasisAsync uç noktası eklendi
+    * Spot Marj uç noktaları güncellendi
+    * UsdFuturesApi.ExchangeData.GetPricesAsync uç noktası V2'ye güncellendi
+    * UsdFuturesApi.Trading.PlaceOrderAsync parametreleri güncellendi
+    * Kullanım dışı bırakılan BSwap uç noktaları kaldırıldı
+
+* Sürüm 9.7.1 - 24 Mar 2024
+	* CryptoExchange.Net 7.2.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+
+* Sürüm 9.7.0 - 16 Mart 2024
+    * CryptoExchange.Net 7.1.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
+    * Büyük istekler gönderilirken zaman aşımı ve garip davranışları önlemek için websocket maksimum mesaj boyutu eklendi
+    * WebCallResult<object> dönüş uç noktaları WebCallResult dönüşüne güncellendi
+    * Vadeli işlem akışında, işlem dışı güncellemelerin göz ardı edilmesi için parametre eklendi
+
+* Sürüm 9.6.1 - 29 Şubat 2024
+    * Kullanıcı veri web soketi akış abonelikleri için düzeltme
+
+* Sürüm 9.6.0 - 27 Şubat 2024
+    * Simple Earn için client.GeneralApi.SimpleEarn altında REST uç noktaları eklendi
+    * Sabit vadeli kullanıcı verisi web soketi aboneliği
+    * Bazı enum değerlerinde ve modellerde bazı küçük sabitler
+
+* Sürüm 9.5.0 - 25 Şubat 2024
+    * CryptoExchange.Net güncellendi ve yeniden çalışılmış websocket mesaj işleme uygulandı. CryptoExchange.Net temel kütüphanesi için sürüm notları için bkz: https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes
+    * DI kaydında http istemcisinin doğru şekilde enjekte edilmemesine neden olan sorun düzeltildi
+    * Gereksiz BinanceRestClient oluşturucu aşırı yükü kaldırıldı
+    * Bazı ad alanları güncellendi
+
+* Sürüm 9.4.0 - 05 Ocak 2024
+    * Vadeli İşlem Ticareti.GetFundingInfoAsync uç noktası eklendi
+    * SpotApi.Trading.PlaceMarginOCOOrderAsync'e autoRepayAtCancel ve selfTradePreventionMode parametreleri eklendi
+    * Vadeli işlem finansman oranı modellerine MarkPrice eklendi
+    * Güncellenmiş ve birleştirilmiş vadeli işlem emir modelleri
+    * Güncellenen para çekme geçmişi modeli
+
+* Sürüm 9.3.0 - 26 Aralık 2023
+    * SpotApi.Trading.PlaceMarginOrderAsync'e selfTradePreventionMode ve autoRepayAtCancel parametreleri eklendi
+    * SpotApi.ExchangeData.GetProductsAsync yanıt modeli güncellendi
+    * Usdt vadeli işlem pozisyon modeli güncellendi
+    * SpotApi.Trading.GetOrderAsync ve SpotApi.Trading.CancelOrderAsync soket istemcilerinde orderId parametresi uzun türe güncellendi
+
+* Sürüm 9.2.0 - 03 Aralık 2023
+    * Dönüştürme uç noktaları eklendi
+    * Varsayılan oran limitleri güncellendi
+    * Hız sınırı hatalarının işlenmesi düzeltildi
+    * Eksik ticaret grubu numaralandırma değerleri eklendi
+
+* Sürüm 9.1.7 - 24 Kasım 2023
+    * PositionInfo modelinde eksik olan BreakEvenPrice özelliği eklendi
+    * Ratelimiters soket istemcisi GetExchangeInfoAsync'deki serileştirme sorunu düzeltildi
+
+* Sürüm 9.1.6 - 29 Ekim 2023
+    * Broker referans seçeneği eklendi
+
+* Sürüm 9.1.5 - 24 Ekim 2023
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 9.1.4 - 09 Ekim 2023
+    * CryptoExchange.Net sürümü güncellendi
+
+* Sürüm 9.1.3 - 23 Eylül 2023
+    * GetExchangeInfoAsync'in eksik enum eşlemesi düzeltildi
+    * DI konteynerine Ortak istemciler eklendi
+
+* Sürüm 9.1.2 - 06 Eylül 2023
+    * GoodTillDate TimeInForce enum değeri eklendi, UsdFutures.ExchangeData.GetExchangeInfoAsync uç nokta serileştirme hatası düzeltildi
+
+* Sürüm 9.1.1 - 02 Eylül 2023
+    * Eksik hesap izinleri eklendi
+
+* Sürüm 9.1.0 - 25 Ağustos 2023
+    * Kullanım dışı bırakılan uç noktalar kaldırıldı
+    * Güncellenen modeller
+	* Soket istemcisinde hız sınırlaması desteği eklendi
+	* Websocket API için ağırlıklar ve hız sınırları güncellendi
+    * restClient.GeneralApi.Futures.GetAdjustCrossCollateralLoanToValueHistoryAsync eklendi
+    * restClient.GeneralApi.Futures.GetCrossCollateralLiquidationHistoryAsync eklendi
+    * restClient.GeneralApi.Futures.GetCrossCollateralInterestHistoryAsync eklendi
+    * restClient.GeneralApi.CryptoLoans.GetLoanableAssetsAsync eklendi
+    * restClient.GeneralApi.CryptoLoans.GetCollateralAssetsAsync eklendi
+    * restClient.GeneralApi.CryptoLoans.GetCollateralRepayRateAsync eklendi
+    * restClient.GeneralApi.CryptoLoans.CustomizeMarginCallAsync eklendi
+    * restClient.GeneralApi.Mining.GetMiningAccountEarningsAsync eklendi
+    * restClient.SpotApi.Account.CrossMarginAdjustMaxLeverageAsync eklendi
+    * restClient.SpotApi.Account.ConvertBusdAsync eklendi
+    * restClient.SpotApi.Account.GetBusdConvertHistoryAsync eklendi
+    * restClient.SpotApi.Account.GetCloudMiningHistoryAsync eklendi
+    * restClient.SpotApi.Account.GetIsolatedMarginFeeDataAsync eklendi
+    * restClient.SpotApi.Account.GetMarginAssetsBnbConvertableAsync eklendi
+    * restClient.SpotApi.Account.MarginDustTransferAsync eklendi
+    * restClient.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeAssetsAsync eklendi
+    * restClient.SpotApi.Account.CrossMarginSmallLiabilityExchangeAsync eklendi
+    * restClient.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeHistoryAsync eklendi
+    * restClient.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync eklendi
+    * restClient.SpotApi.ExchangeData.GetMarginDelistScheduleAsync eklendi
+    * restClient.SpotApi.Trading.GetUnclaimedLiquidityPoolsRewardsAsync eklendi
+    * restClient.SpotApi.Trading.ClaimLiquidityPoolsRewardsAsync eklendi
+    * restClient.SpotApi.Trading.GetLiquidityPoolsClaimHistoryAsync eklendi
+    * restClient.SpotApi.Trading.PlaceSpotTimeWeightedAveragePriceOrderAsync eklendi
+    * restClient.SpotApi.Trading.CancelSpotAlgoOrderAsync eklendi
+    * restClient.SpotApi.Trading.GetSpotOpenAlgoOrdersAsync eklendi
+    * restClient.SpotApi.Trading.GetSpotClosedAlgoOrdersAsync eklendi
+    * restClient.SpotApi.Trading.GetSpotAlgoSubOrdersAsync eklendi
+
+* Sürüm 9.0.5 - 06 Ağustos 2023
+    * Usd Futures EditOrder uç noktası eklendi
+    * CancelOrder ve ReplaceOrder uç noktalarını tespit etmek için cancelRestriction parametresi eklendi
+
+* Sürüm 9.0.4 - 11 Temmuz 2023
+    * GetUniversalTransferHistoryAsync serileştirmesi düzeltildi
+
+* Sürüm 9.0.3 - 11 Temmuz 2023
+    * GetUniversalTransferHistoryAsync serileştirmesi düzeltildi
+
+* Sürüm 9.0.2 - 06 Temmuz 2023
+    * Sabit soket istemci seçeneklerinin kopyalanması düzeltildi
+
+* Sürüm 9.0.1 - 25 Haziran 2023
+    * Geçersiz derleme için düzeltme
+
+* Sürüm 9.0.0 - 25 Haz 2023
+    * CryptoExchange.Net 6.0.0 sürümüne güncellendi
+    * BinanceClient'ın adı BinanceRestClient olarak değiştirildi
+    * BinanceSocketClient'ta UsdFuturesStreams ve CoinFuturesStreams'in adı UsdFuturesApi ve CoinFuturesApi olarak değiştirildi
+    * Uç noktalar, ortamları/temel URL'leri değiştirmeyi daha anlaşılır hale getirmek için herhangi bir yol olmaksızın temel URL'yi tutarlı bir şekilde kullanacak şekilde güncellendi
+    * BinanceApiCredentials kaldırıldı çünkü temel ApiCredentials artık RSA imzalamayı destekliyor
+    * IBinanceOrderBookFactory ve emir defterleri oluşturmak için uygulama eklendi
+    * Bağımlılık enjeksiyon kayıt yöntemi güncellendi (AddBinance)
+
+* Sürüm 8.6.3 - 19 Haziran 2023
+    * Sabit ticaret kuralları denetiminin soket istemcisiyle bir emir verirken gönderilen parametrelere aslında uygulanmaması sorunu giderildi
+
+* Sürüm 8.6.2 - 22 Mayıs 2023
+    * Futures GetUserTradesAsync uç noktalarına orderId filtresi eklendi
+    * BinanceSymbolFilter serileştirmesi için eksik yazarlar düzeltildi
+
+* Sürüm 8.6.1 - 14 Mayıs 2023
+    * TradeRules doğrulaması websocket PlaceOrder uç noktasına eklendi
+    * Düzeltilmiş vadeli işlemler tüm kitap işaretleri akışı tepki modeli
+    * Vadeli işlem sözleşmesi bilgi akışları eklendi
+
+* Sürüm 8.6.0 - 06 Mayıs 2023
+    * Websocket API uygulaması eklendi
+
+* Sürüm 8.5.1 - 20 Nisan 2023
+    * İşlem güncellemesindeki serileştirme hatası düzeltildi
+
+* Sürüm 8.5.0 - 17 Nis 2023
+    * Vadeli işlemlere bireysel ticaret akışları eklendi
+    * Tüm marka fiyat akışlarına coin vadeli işlemleri eklendi
+    * Spot AutoConvertStableCoin uç noktaları eklendi
+    * GetCrossMarginCollateralRatio uç noktası eklendi
+    * Yer siparişi parametrelerine eksik parametreler eklendi
+    * Kendi kendine ticaret önleme desteği eklendi
+    * Çeşitli modeller düzeltildi ve güncellendi
+
+* Sürüm 8.4.4 - 12 Nis 2023
+    * SpotApi.GetExchangeInfoAsync() serileştirme sorunu düzeltildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.4.3 - 18 Mar 2023
+    * Sondaki delta zaman damgası mevcut olduğunda sabit sıralı serileştirme düzeltildi
+    * Alt hesap IP kısıtlama uç noktaları güncellendi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.4.2 - 16 Şubat 2023
+    * Yüksek UID ağırlıklı isteklerde sabit oran sınırlama sorunu giderildi
+
+* Sürüm 8.4.1 - 14 Şubat 2023
+    * CryptoExchange.Net güncellendi
+    * SpotApi.Trading.GetConvertTransferHistoryAsync isteğindeki Http Yöntemi düzeltildi
+    * SpotApi.Account.GetFiatDepositWithdrawHistoryAsync üzerindeki istek ağırlığı düzeltildi
+
+* Sürüm 8.4.0 - 09 Şubat 2023
+    * RSA istek kimlik doğrulaması için destek eklendi
+
+* Sürüm 8.3.1 - 05 Şubat 2023
+    * Kullanım dışı kaldığı için tüm kitap ticker akışı abonelikleri kaldırıldı
+    * Kullanıcı akışı aboneliğine Strateji ve Grid güncelleme olayları eklendi
+    * UsdFutures.SubscribeToAllMarkPriceUpdatesAsync'de eksik IndexPrice düzeltildi
+    * AccountConfigUpdate olay modeli güncellendi
+
+* Sürüm 8.3.0 - 17 Kas 2022
+    * CryptoExchange.Net güncellendi
+    * BinanceConvertTransferRecord DeductedQuantity özelliği düzeltildi
+    * UsdFutures ContinuousContractKlines deserializasyonu düzeltildi
+
+* Sürüm 8.2.0 - 03 Ekim 2022
+    * CryptoLoans uç noktaları eklendi
+    * ConvertTransfer uç noktaları eklendi
+    * GetMarginLevelInformationAsync uç noktası eklendi
+    * GetExchangeInfoAsync spot hesap türü aşırı yüklemeleri eklendi
+    * Borç Verme uç noktalarının adı Tasarruf uç noktaları olarak değiştirildi
+    * Eksik OrderRejectReason eklendi
+    * SpotApi.ReplaceOrderAsync'de hatalı AllowFailure enum serileştirmesi düzeltildi
+    * Vadeli işlem akışları için sabit borsa arayüzü
+
+* Sürüm 8.1.10 - 04 Eylül 2022
+    * Eksik (ve gelecekteki) hesap türleri eklendi, SpotApi.Trading.GetExchangeInfoAsync'de oluşturulan uyarılar düzeltildi
+
+* Sürüm 8.1.9 - 24 Ağustos 2022
+    * SpotApi.ExchangeData.GetUiKlinesAsync uç noktası eklendi
+    * 1 saniyelik kline aralığı desteği eklendi
+    * BinanceSymbols için yeni Notional filtresi eklendi
+    * SpotApi.Account.GetAccountInfoAsync yanıt modeline Brokered eklendi
+
+* Sürüm 8.1.8 - 13 Ağu 2022
+    * Yeni uç noktalar eklendi: * SpotApi.Trading.ReplaceOrderAsync * SpotApi.ExchangeData.GetRollingWindowTickersAsync * SpotApi.Account.GetBalancesAsync * SpotApi.Account.GetMarginDustLogAsync * SpotApi.Acocunt.PortfolioMargin uç noktaları
+    * Kayan pencere ticker soket akışı eklendi
+    * Kullanıcı akışı güncellemelerine ListenKey özelliği eklendi
+    * BinanceRebate miktar deserializasyonu düzeltildi
+    * Bazı istek ağırlıkları güncellendi
+
+* Sürüm 8.1.7 - 18 Temmuz 2022
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.1.6 - 16 Temmuz 2022
+    * MarginToIsolatedMargin UniversalTransferType serileştirmesi düzeltildi
+    * Sabit maksimum pozisyon filtresi serileştirmesi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.1.5 - 12 Temmuz 2022
+    * GetExchangeInfoAsync'i seri hale getirirken hataya neden olan eksik AccountType enum değeri düzeltildi
+    * Bilinmeyen bir hesap türü olduğunda gelecekteki serileştirmenin başarısız olması düzeltildi
+
+* Sürüm 8.1.4 - 10 Temmuz 2022
+    * Vadeli işlem hesabı güncellemesinde BalanceChange özelliği eklendi
+    * Sembol parametresi kullanıldığında GetPositionAdlQuantileEstimationAsync serileştirmesi düzeltildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.1.3 - 12 Haziran 2022
+    * Birden fazla alt hesap uç noktasındaki `geçersiz imza` hatası düzeltildi
+    * GetKlinesAsync noktasındaki hatalı maksimum limit düzeltildi
+    * İndirim Güncelleme Zamanı özelliğinde eksik tarih/saat dönüştürücüsü düzeltildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.1.2 - 24 Mayıs 2022
+    * Ticaret kuralları kontrol edildikten sonra teklif miktarının iletilmemesi düzeltildi
+    * Blvt akış adresi düzeltildi ve Spot'a taşındı
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.1.1 - 23 Mayıs 2022
+    * PlaceOrderAsync'de parametre sırasının son deltası düzeltildi
+
+* Sürüm 8.1.0 - 22 Mayıs 2022
+    * LeveragedTokens kullanıcı sınırı uç noktası eklendi
+    * Staking uç noktaları eklendi
+    * USD vadeli işlem geçmişi indirme uç noktaları eklendi
+    * USD vadeli işlem algoritması emir uç noktaları eklendi
+    * Marj emri oranı limiti uç noktası eklendi
+    * Faiz marjı veri uç noktası eklendi
+    * GetPricesAsync, GetBookPricesAsync ve GetTickersAsync için sembol koleksiyonu aşırı yüklemeleri eklendi
+    * Alt hesap transferi için sembol parametresi eklendi
+    * Alt hesap transferi için marj hesap türleri eklendi
+    * TrailingDelta desteği eklendi
+    * QuoteQuantity minimum nominal değeri TradeRule doğrulaması eklendi
+    * GetAllBookPricesAsync, GetBookPricesAsync olarak yeniden adlandırıldı
+
+* Sürüm 8.0.13 - 08 Mayıs 2022
+    * BinanceFlexibleProductPosition'a TierAnnualInterestRate eklendi
+    * GetFlexibleProductPositionAsync varlık parametresi isteğe bağlı olacak şekilde değiştirildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.0.12 - 01 Mayıs 2022
+    * Websocket yeniden bağlanma mantığındaki zamanlamayla ilgili bir sorunu düzelten CryptoExchange.Net güncellendi
+    * TrailingDelta sembol filtresi serileştirmesi düzeltildi
+    * KlineInterval enum'ına saniye gösterimi eklendi
+
+* Sürüm 8.0.11 - 20 Nisan 2022
+    * Sondaki delta sembol filtresi ayrıştırması eklendi
+
+* Sürüm 8.0.10 - 14 Nis 2022
+    * Sipariş defteri istekleri için sabit istek ağırlığı
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.0.9 - 18 Mar 2022
+    * Sabit Spot MiniTicker aboneliğinin taban/teklif hacim özelliklerini değiştirmesi sorunu giderildi
+    * USD vadeli işlemlerinde CancelOrderAsync başarısız olduğunda oluşan istisna düzeltildi
+
+* Sürüm 8.0.8 - 10 Mart 2022
+    * MobileNumber türü uzundan dizeye değiştirildi, telefon numarası tanımlanmadığında GetSubAccountStatusAsync serileştirmesi düzeltildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.0.7 - 08 Mar 2022
+    * BinanceLendingAccount modelindeki tutarsız adlandırma düzeltildi
+    * BinanceSymbol'a AllowTrailingStop özelliği eklendi
+    * Yeni sembol filtresi PercentagePriceBySide eklendi
+    * GetOrderBookAsync noktası 5000'in altındaki herhangi bir limite izin verecek şekilde güncellendi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.0.6 - 01 Mar 2022
+    * CryptoExchange.Net güncellendi, web soketi yeniden bağlantı sağlamlığı iyileştirildi
+
+* Sürüm 8.0.5 - 01 Mar 2022
+    * Usd vadeli işlemlerinde Limit kontrolü güncellendi GetMarkPriceKlinesAsync
+    * Zaman damgası hatası alındığında zaman senkronizasyonunun sıfırlanması eklendi
+
+* Sürüm 8.0.4 - 27 Şubat 2022
+    * İstek oran sınırlayıcı olduğunda zaman damgası sorununu düzeltmek için CryptoExchange.Net güncellendi
+    * USD vadeli işlemler kline talepleri maksimum limit değer kontrolü güncellendi
+
+* Sürüm 8.0.3 - 25 Şubat 2022
+    * Eksik AccountType enum değerinin GetExchangeInfoAsync çağrısını bozması düzeltildi
+
+* Sürüm 8.0.2 - 24 Şubat 2022
+    * Sabit TradeRules'un uygulanmaması sorunu giderildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 8.0.1 - 21 Şubat 2022
+    * Sözleşme Türü'nün geçersiz olması düzeltildi
+    * OrderType dosya adı düzeltildi
+
+* Sürüm 8.0.0 - 18 Şubat 2022
+	* Belgeler için Github.io sayfası eklendi: https://jkorf.github.io/Binance.Net/
+	* Her uç nokta ve abonelik için döndürülen JSON'u ayrıştırmak için birim testleri eklendi
+	* Kolay bağımlılık enjeksiyonu için IServiceCollection'a AddBinance uzantı yöntemi eklendi
+	* Her uç nokta için API uç nokta belgelerine URL referansı eklendi
+	* Varsayılan hız sınırlayıcı eklendi
+
+	* Borsa uygulamaları arasında tutarlı olması için istemci yapısı yeniden düzenlendi
+	* Borsa uygulamaları arasında tutarlılık sağlamak için çeşitli özelliklerin adı değiştirildi
+
+	* Temizlenmiş proje yapısı
+	* Çeşitli modeller düzeltildi
+
+	* CryptoExchange.Net güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net#release-notes
+	* V7'den V8'e güncelleme için ek notlar için https://jkorf.github.io/Binance.Net/MigrationGuide.html adresine bakın
+
+* Sürüm 7.2.5 - 08 Ekim 2021
+    * Bazı soket sorunlarını gidermek için CryptoExchange.Net güncellendi
+
+* Sürüm 7.2.4 - 06 Ekim 2021
+    * CryptoExchange.Net güncellendi, .Net Framework'ten çağrılırken soket sorunu düzeltildi
+
+* Sürüm 7.2.3 - 05 Ekim 2021
+    * PriceProtect desteği eklendi
+
+* Sürüm 7.2.2 - 29 Eylül 2021
+    * BinanceSpotOrderBook için düzeltme
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 7.2.1 - 24 Eylül 2021
+    * GetEnabledIsolatedMarginAccountLimitAsync uç noktası eklendi
+    * EnableIsolatedMarginAccountAsync eklendi
+    * IsolatedMarginAccount modeline Etkinleştirilmiş özellik eklendi
+    * RemoveLiquidityPreviewAsync uç noktası eklendi
+    * AddLiquidityPreviewAsync uç noktası eklendi
+    * GetBSwapPoolConfigureAsync uç noktası eklendi
+
+* Sürüm 7.2.0 - 20 Eylül 2021
+    * Akış Konusu özellikleri mümkün olduğunca sembolü yansıtacak şekilde güncellendi
+    * DisableIsolatedMarginAccountAysnc uç noktası eklendi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 7.1.4 - 15 Eylül 2021
+    * CryptoExchange.Net güncellendi
+    * CoinFutures sistem alt istemcisindeki eksik arayüz düzeltildi
+
+* Sürüm 7.1.3 - 14 Eylül 2021
+    * CreateVirtualSubAccountAsync uç noktası düzeltildi
+    * Eksik FiatWithdrawDepositStatus girişi eklendi
+    * Testnet spot websocket url'si güncellendi
+
+* Sürüm 7.1.2 - 02 Eylül 2021
+    * Sabit alt hesap evrensel transfer sonucu seri dışı bırakma
+    * Diğer bağlantılar olsa bile sipariş defteri kapatma soketinin atılması için düzeltme
+
+* Sürüm 7.1.1 - 31 Ağu 2021
+    * GetDusLogAsync'e isteğe bağlı başlangıç/bitiş zamanı parametreleri eklendi
+    * Sabit vadeli işlem pozisyonlarının seri dışı hale getirilmesi
+
+* Sürüm 7.1.0 - 30 Ağustos 2021
+    * Margin OCO uç noktaları eklendi
+    * TransferSubAccountAsync parametreleri düzeltildi
+    * Çeşitli modeller güncellendi
+
+* Sürüm 7.0.5 - 26 Ağu 2021
+    * CryptoExchange.Net güncellendi, tek bir bağlantıda birden fazla aboneliği olan soketlerin yeniden bağlanması/yeniden abone olunması düzeltildi
+
+* Sürüm 7.0.4 - 24 Ağu 2021
+    * Aslında GetExchangeInfoAsync'deki çoklu semboller için düzeltme dahil edildi
+
+* Sürüm 7.0.3 - 24 Ağu 2021
+    * CryptoExchange.Net güncellendi, websocket ve SymbolOrderBook performansı iyileştirildi
+    * Birden fazla sembolle GetExchangeInfoAsync filtresi için düzeltme
+
+* Sürüm 7.0.2 - 16 Ağu 2021
+    * GetUserTradesAsync'e orderId parametresi eklendi
+    * Eksik TransferAsync istemci arayüzüne eklendi
+
+* Sürüm 7.0.1 - 13 Ağu 2021
+    * .net framework projesinden bir soket kapatılırken oluşan OperationCancelledException hatasının düzeltilmesi
+
+* Sürüm 7.0.0 - 12 Ağu 2021
+	* Yeni CryptoExchange.Net sürümü 4.0.0 ile sürüm yayınlandı
+		* Günlük kaydı ve soket bağlantısıyla ilgili birden fazla değişiklik için [CryptoExchange.Net sürüm notlarına](https://github.com/JKorf/CryptoExchange.Net#release-notes) bakın
+	* GetMiningStatisticsAsync'in seri dışı hale getirilmesi düzeltildi
+
+* Sürüm 7.0.0-beta4 - 09 Ağu 2021
+    * Fiat uç noktaları eklendi
+    * Get24HPriceAsync, GetTickerAsync olarak yeniden adlandırıldı
+    * GetMyTradesAsync, GetUserTradesAsync olarak yeniden adlandırıldı
+    * GetAllOrdersAsync, GetOrdersAsync olarak yeniden adlandırıldı
+    * GetSymbolTradesAsync, GetRecentTradeHistoryAsync olarak yeniden adlandırıldı
+    * GetHistoricalSymbolTradesAsync, GetTradeHistoryAsync olarak yeniden adlandırıldı
+    * GetAggregatedTradesAsync, GetAggregatedTradeHistoryAsync olarak yeniden adlandırıldı
+    * GetOpenMarginAccountOrdersAsync, GetMarginAccountOpenOrdersAsync olarak yeniden adlandırıldı
+    * GetAllMarginAccountOrdersAsync, GetMarginAccountOrdersAsync olarak yeniden adlandırıldı
+    * GetMyMarginAccountTradesAsync, GetMarginAccountUserTradesAsync olarak yeniden adlandırıldı
+    * Çeşitli PnL özelliklerinin adı Pnl olarak değiştirildi
+
+* Sürüm 7.0.0-beta3 - 26 Temmuz 2021
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 7.0.0-beta2 - 22 Temmuz 2021
+    * GetFundingWalletAsync uç noktası eklendi
+    * GetAPIKeyPermissionsAsync uç noktası eklendi
+    * Birleştirilmiş ana
+
+* Sürüm 7.0.0-beta1 - 09 Temmuz 2021
+    * GetExchangeInfoAsync için sembol filtresi eklendi
+    * Async yöntemler için Async son eki eklendi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 6.14.0-beta7 - 24 Haziran 2021
+    * Birden fazla model düzeltildi/güncellendi
+
+* Sürüm 6.14.0-beta6 - 19 Haziran 2021
+    * SubscribeToMarkPriceUpdatesAsync'de geçersiz sembol denetimi düzeltildi
+    * Yeni bir istemci oluştururken tekrar yapmayı önlemek için TimeSync statik hale getirildi
+
+* Sürüm 6.14.0-beta5 - 07 Haz 2021
+    * Daha kolay kullanım için farklı API kurulumlarını içeren BinanceApiAddresses sınıfı eklendi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 6.14.0-beta4 - 31 Mayıs 2021
+    * USDT vadeli işlemlerine GetTradingStatusAsync uç noktası eklendi
+    * Vadeli işlemlerde GetMarkPriceKlinesAsync uç noktası eklendi
+    * GetProductsAsync uç noktası eklendi
+    * USDT vadeli işlemlerinde GetContinuousContractKlinesAsync uç noktası eklendi
+    * PayToMain ve MainToPay transfer türleri eklendi
+    * MultiAssetMode uç noktaları ve alanları eklendi
+    * Artık desteklenmeyen GetLiquidationOrdersAsync vadeli işlem uç noktaları kaldırıldı
+    * USDT vadeli işlemleri GetExchangeInfoAsync modeline Varlıklar özelliği eklendi
+    * Vadeli hesap bakiye akışı güncellemesine BakiyeDeğişimi eklendi
+
+* Sürüm 6.14.0-beta3 - 26 Mayıs 2021
+    * Tüm asenkron olmayan çağrılar kaldırıldı
+    * CryptoExchange.Net değişikliklerine göre güncellendi
+
+* Sürüm 6.14.0-beta2 - 06 Mayıs 2021
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 6.14.0-beta1 - 30 nisan 2021
+    * CryptoExchange.Net 4.0.0-beta1'e güncellendi, yeni websocket uygulaması
+
+* Sürüm 6.13.6 - 01 Ağu 2021
+    * Eksik SubscribeToKlineUpdatesAsync aşırı yüklenmesi eklendi
+
+* Sürüm 6.13.5 - 22 Temmuz 2021
+    * Kline soket aboneliklerinde birden fazla KlineIntervals desteği eklendi
+    * Wapi'den sapi uç noktalarına güncellendi
+
+* Sürüm 6.13.4 - 24 Haziran 2021
+    * Birden fazla model düzeltildi/güncellendi
+
+* Sürüm 6.13.3 - 28 nisan 2021
+    * IExchangeClient arayüzündeki bazı sorunlar düzeltildi
+    * ExchangeClient.Net güncellendi
+    * QueryOCO sipariş kimliği parametresi düzeltildi
+
+* Sürüm 6.13.2 - 19 nisan 2021
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 6.13.1 - 02 nisan 2021
+    * Sabit madencilik uç noktaları
+    * AltHesaptan AltHesaba Transfer isteği düzenlendi
+    * Geçersiz sembol kontrolü kaldırıldı Usdt vadeli işlemler GetKlines
+
+* Sürüm 6.13.0 - 30 Mart 2021
+    * CancelOpenMarginOrders uç noktası eklendi
+    * Evrensel Transfer uç noktaları eklendi
+    * Yeni madencilik uç noktaları eklendi
+    * Vadeli işlemler/kredi uç noktaları V2'ye güncellendi
+    * Yeni alt hesap uç noktaları eklendi
+    * GetInterestRateHistory uç noktası marjı eklendi
+    * Birden fazla model güncellendi
+    * Sabit ticaret kuralları Oco emirlerine uygulanmadı
+    * İmzalanmamış sabit madencilik uç noktaları düzeltildi
+    * GetQuote sıvı takas uç noktasında quoteQuantity parametre serileştirmesi düzeltildi
+    * GetAssetDetails'in istisna atması düzeltildi
+
+* Sürüm 6.12.0 - 10 Mart 2021
+    * Birden fazla model düzeltildi
+
+* Sürüm 6.11.1 - 01 Mart 2021
+    * Nuget Sembol Paketi eklendi
+
+* Sürüm 6.11.0 - 01 Mart 2021
+    * Sabit pozisyonlu modeller
+    * PlaceMultipleOrder yönteminde reduceOnly parametresi düzeltildi
+    * Para Çekme yöntemine transactionFeeFlag eklendi
+    * Kesin yapı için yapılandırma eklendi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 6.10.0 - 22 Şubat 2021
+    * IndexPrice BinanceFurustMarkPrice'a eklendi
+    * userDataStream'den kullanım dışı bırakılmış accountInfo güncellemesi kaldırıldı
+    * Güncellenen Spot Sipariş modelleri
+
+* Sürüm 6.9.1 - 18 Şubat 2021
+    * GetPrices'ın tutarsız adlandırması düzeltildi
+
+* Sürüm 6.9.0 - 18 Şubat 2021
+    * Güncellenen çekme modelleri
+    * Aracılık API güncellemeleri
+    * Coin vadeli işlemleri için GetPrice güncellendi
+    * Sabit Takas miktarı parametresi
+    * GetDividendRecords'a limit parametresi eklendi
+
+* Sürüm 6.8.2 - 11 Şubat 2021
+    * Daha fazla HttpMethod düzeltildi
+
+* Sürüm 6.8.1 - 11 Şubat 2021
+    * Vadeli işlemlerde GetOpenOrder uç noktası düzeltildi
+    * Alt hesap çağrılarındaki HttpMethods düzeltildi
+
+* Sürüm 6.8.0 - 09 şubat 2021
+    * Sabit stopPrice AutoComply ticaret kuralları davranışı
+    * Sabit pozisyonlu modeller
+
+* Sürüm 6.7.0 - 05 şubat 2021
+    * Sabit Mark akışı güncelleme modeli
+    * Vadeli işlem kullanıcı akışı aboneliğine onLeverageUpdate eklendi
+    * Güncellenen vadeli işlem pozisyon bilgisi modelleri
+
+* Sürüm 6.6.4 - 22 Ocak 2021
+    * GetSubAccountsFuturesSummary http yöntemi düzeltildi
+    * FirstUpdateId sipariş defteri modeline taşındı
+    * ICommonKline için güncellendi
+
+* Sürüm 6.6.3 - 11 Ocak 2021
+    * Eksik enum değerleri eklendi
+
+* Sürüm 6.6.2 - 11 Ocak 2021
+    * GetExchangeInfo için vadeli işlem Sembol modelleri güncellendi
+    * CryptoExchange.Net güncellendi
+    * Serileştirme sorununu gidermek için Ön Ayarlama sembol durumu eklendi
+
+* Sürüm 6.6.1 - 05 Ocak 2021
+    * Sözleşme Türü serileştirmesi düzeltildi
+
+* Sürüm 6.6.0 - 05 Ocak 2021
+    * Güncellenmiş sipariş defteri modelleri
+    * Futures için GetExchangeInfo serileştirmesi düzeltildi
+
+* Sürüm 6.5.0 - 21 Aralık 2020
+    * Güncellenen Aracılık API'si
+    * SubAccountToSubAccount e-posta parametresi serileştirmesi için düzeltme
+    * GetSubAccountTransferHistoryForSubAccount'un yanlış Http yöntemini kullanması için düzeltme
+    * TradeRules kontrolünde düzeltme
+    * CryptoExchange.Net güncellendi, IExchangeClient güncellendi
+
+* Sürüm 6.4.1 - 11 Aralık 2020
+    * CryptoExchange.Net güncellendi
+    * IExchangeClient uygulaması eklendi
+    * Eksik özellikler Coin-M Sembol modeli eklendi
+    * AutoComply ticaret kuralları davranışında stopPrice kontrolü eklendi
+
+* Sürüm 6.4.0 - 25 Kasım 2020
+    * Sabit vadeli işlem defteri ticker akışı veri ayrıştırması
+
+* Sürüm 6.3.7 - 24 Kasım 2020
+    * GetBrackets'ta tek parantezin ayrıştırılması düzeltildi
+    * GetExchangeInfo'da MaxPosition filtresi eklendi
+
+* Sürüm 6.3.6 - 19 Kasım 2020
+    * Paket içindeki sabit referans
+
+* Sürüm 6.3.5 - 19 Kasım 2020
+    * Vadeli işlem sembolü durum eşlemesine Bekleyen İşlem durumu eklendi
+    * BNB yakma geçiş uç noktaları eklendi
+    * USDT vadeli işlemlerine Bileşik endeks uç noktası eklendi
+    * USDT vadeli işlemlerine Bileşik endeks akışı eklendi
+    * Marj kredisi/geri ödeme/faiz geçmişi sorguları için arşivlenmiş parametre eklendi
+
+* Sürüm 6.3.4 - 16 Kasım 2020
+    * Eksik TimeInForce eşlemesi eklendi
+    * Vadeli PlaceOrder'a eksik orderResponseType parametresi eklendi
+
+* Sürüm 6.3.3 - 09 Kasım 2020
+    * Geçerli Binance sembolü için güncellenmiş kontrol
+    * ModifyPositionMode sonuç sembolü düzeltildi
+
+* Sürüm 6.3.2 - 23 Ekim 2020
+    * Çoklu iş parçacığı kullanırken sorunları önlemek için mesajları imzalarken kilitleme yeniden eklendi
+
+* Sürüm 6.3.1 - 22 Ekim 2020
+    * Akış kline güncellemelerinde eksik Aralık özelliği eklendi
+
+* Sürüm 6.3.0 - 20 Ekim 2020
+    * BSwap uç noktaları eklendi
+    * BLVT uç noktaları eklendi
+    * GetIncomeHistory'deki incomeType parametresi düzeltildi
+    * GetMaxBorrowAmount'a BorrowLimit özelliği eklendi
+    * Alt hesap transferi için Coin-M vadeli işlem desteği eklendi
+    * Borç verme, ödünç alma/geri ödeme sonuçlarına kimlikler eklendi
+    * ChangeToDailyPosition uç noktası eklendi
+    * Tasarruf uç noktalarında Düzenli'den Etkinliğe güncellendi
+
+* Sürüm 6.2.0 - 08 Ekim 2020
+    * Gelecekteki kullanıcı akışlarında eksik işlem zaman damgası eklendi
+    * Güncellenen kitap fiyat modelleri
+    * CryptoExchange.Net'i güncelleyin
+
+* Sürüm 6.1.0 - 06 Ekim 2020
+    * Gelecekteki ticaret zaman damgaları düzeltildi
+    * Bazı ondalık serileştirme kültürü sorunları düzeltildi
+    * Gelecekteki kullanıcı akışları zaman damgalarını içerecek şekilde güncellendi
+    * Kullanılan ağırlık ayrıştırması düzeltildi
+    * Aracılık API güncellemesi
+
+* Sürüm 6.0.2 - 17 Eylül 2020
+    * Soket istemcisinin aralıklı bayt verisi alması sorunu düzeltildi
+    * Miras desteği sağlamak için güncellenmiş piyasa verisi arayüzleri
+
+* Sürüm 6.0.1 - 09 Eyl 2020
+    * Akış kline modellerinde eksik özellikler düzeltildi
+
+* Sürüm 6.0.0 - 09 Eyl 2020
+    * Gelecekteki transfer uç noktaları eklendi
+    * Çapraz teminat uç noktaları eklendi
+    * Birim özellikleri, base/quote olarak düzgün bir şekilde adlandırılacak şekilde yeniden düzenlendi
+    * Sabit izole kenar boşluğu tüm semboller uç noktası
+
+* Sürüm 6.0.0-beta.6 - 31 Ağu 2020
+    * Birleştirilmiş vadeli işlemler userstream Bakiye ve Pozisyon güncelleme işleyicileri, UpdateReason özelliği eklendi
+
+* Sürüm 6.0.0-beta.5 - 28 Ağu 2020
+    * Sabit vadeli işlem emri güncellemesi yanlış JsonConverter
+
+* Sürüm 6.0.0-beta.4 - 28 Ağu 2020
+    * Coin-M vadeli işlemleri için destek eklendi
+    * Bazı yeniden düzenlemeler
+
+* Sürüm 6.0.0-beta.3 - 17 Ağu 2020
+    * GetAccountInfo uç noktası düzeltildi
+
+* Sürüm 6.0.0-beta.2 - 13 Ağu 2020
+    * ModifyPositionMargin vadeli işlem çağrısı düzeltildi
+
+* Sürüm 6.0.0-beta.1 - 12 Ağu 2020
+    * BinanceClient ve BinanceSocketClient, vadeli işlemler ve aracılık API'sini içerecek şekilde yeniden yapılandırıldı. Müşteriler artık konuya göre bölünüyor
+    * İzole edilmiş kenar boşluğu uç noktaları eklendi
+    * Fiyat ayarlanırken ticaret kurallarında MinNotional kontrolü düzeltildi
+    * Vadeli İşlemler ve Spot piyasa verileri ve piyasa akışı abonelikleri için paylaşılan arayüzler eklendi
+
+* Sürüm 5.1.14 - 03 Ağu 2020
+    * AutoComply ticaret kuralları davranışı kullanılırken MinNotional filtresinin kontrolü eklendi
+    * Ayarlanmış bool parametre serileştirmesi
+
+* Sürüm 5.1.13 - 27 Temmuz 2020
+	* Vadeli işlemler bakiyesi, hesap bilgileri, pozisyon uç noktaları sürüm 2'ye güncellendi
+	* Eksik vadeli işlem piyasası veri uç noktaları eklendi
+
+* Sürüm 5.1.12 - 21 Temmuz 2020
+    * Güncellenmiş emir defteri modelleri
+
+* Sürüm 5.1.11 - 20 Temmuz 2020
+    * Gelecekteki istemci için düzeltmeler
+
+* Sürüm 5.1.10 - 07 Tem 2020
+    * Bazı nesneler için sabit tarih-saat dönüşümü
+
+* Sürüm 5.1.9 - 06 Temmuz 2020
+    * CancelMultipleOrders eklendi
+    * CancelAllOrders eklendi
+    * OrderBook akışına EventTime eklendi
+    * Satınalma kaydı dönüşümü düzeltildi
+
+* Sürüm 5.1.8 - 21 Haziran 2020
+    * CryptoExchange güncellendi
+
+* Sürüm 5.1.7 - 16 Haziran 2020
+    * IncomeType dizge olarak değiştirildi, CryptoExchange.Net güncellendi
+
+* Sürüm 5.1.6 - 11 Haz 2020
+	* Ayarlanmamış kültür bilgisi nedeniyle `I` içeren sembollerde oluşan abonelik hatası düzeltildi
+
+* Sürüm 5.1.5 - 07 Haz 2020
+	* Serileştirme/şifreleme hatası düzeltildi
+
+* Sürüm 5.1.4 - 02 Haz 2020
+	* Boş istek hatası düzeltildi
+
+* Sürüm 5.1.3 - 02 Haz 2020
+    * CancelAllOrders uç noktası eklendi
+    * Vadeli işlemler için PlaceMultipleOrders uç noktası eklendi
+    * BinanceFuturesSymbolOrderBook eklendi
+    * Eksik Süresi Dolmuş sipariş durum eşlemesi eklendi
+    * Futures istemcisine GetBrackets eklendi
+
+* Sürüm 5.1.2 - 26 Mayıs 2020
+    * CancelAllOrdersAfterTimeout vadeli işlem uç noktası eklendi
+    * Çeşitli modellere zaman damgası eklendi
+    * Gelecekteki siparişler için closePosition parametresi eklendi
+
+* Sürüm 5.1.1 - 20 Mayıs 2020
+    * ChangeInitialLeverage uç noktası düzeltildi
+    * ChangeMarginType uç noktası düzeltildi
+    * maxNotionalValue'daki serileştirme hatası düzeltildi
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 5.1.0 - 20 Mayıs 2020
+	* Sürüm yayınlanmak üzere yükseltildi
+	* Eksik cüzdan uç noktaları eklendi
+	* Alt hesap uç noktaları eklendi
+	* Tasarruf uç noktaları eklendi
+
+* Sürüm 5.1.0-alpha10 - 08 Mayıs 2020
+    * Brokerage istemcisi eklendi, çeşitli düzeltmeler yapıldı, bazı eksik parametreler eklendi
+
+* Sürüm 5.1.0-alpha9 - 01 Mayıs 2020
+    * GetExchangeInfo çağrısı düzeltildi, ana çağrı birleştirildi
+
+* Sürüm 5.1.0-alpha8 - 19 Mar 2020
+    * Vadeli işlemler güncellemesi
+
+* Sürüm 5.1.0-alpha7 - 16 Mar 2020
+    * sabit referans
+
+* Sürüm 5.1.0-alpha6 - 16 Mar 2020
+    * Sabit ticker akışı
+
+* Sürüm 5.1.0-alpha5 - 16 Mar 2020
+    * Vadeli işlemler güncellemesi
+
+* Sürüm 5.1.0-alpha4 - 06 Mar 2020
+    * Gerçek akış düzeltmeleri
+
+* Sürüm 5.1.0-alpha3 - 06 Mar 2020
+    * Vadeli akış düzeltmeleri
+
+* Sürüm 5.1.0-alpha2 - 03 Mar 2020
+    * CryptoExchange sürümü güncellendi
+
+* Sürüm 5.1.0-alfa - 03 Mar 2020
+    * İlk versiyon Futures Api uygulaması
+
+* Sürüm 5.0.10 - 01 Mayıs 2020
+    * GetExchangeInfo'da filtre ayrıştırma düzeltildi
+
+* Sürüm 5.0.9 - 03 Mar 2020
+    * DustTransfer varlıkları parametresindeki serileştirme sorunu düzeltildi
+
+* Sürüm 5.0.8 - 03 Mar 2020
+    * SideEffectType ve MarginBuyBorrow özellikleri eklendi
+    * Marj emirleri için ticaret kuralları kontrolü eklendi
+
+* Sürüm 5.0.7 - 05 Şubat 2020
+    * Hatalı Geçersiz sembol hatası düzeltildi
+
+* Sürüm 5.0.6 - 27 Ocak 2020
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 5.0.5 - 23 Ocak 2020
+    * Özel URL için seçenek eklendi
+
+* Sürüm 5.0.4 - 10 Aralık 2019
+    * BinanceSymbolOrderBook için düzeltme
+
+* Sürüm 5.0.3 - 13 Kas 2019
+    * Yeni API sürümü için güncellendi
+    * QuoteOrderQuantity parametresi/özelliği eklendi
+    * Akış bakiyesi güncellemesi eklendi
+    * ExchangeInfo sembollerine hassasiyetler eklendi
+
+* Sürüm 5.0.1 - 23 Ekim 2019
+	* 9 uzunluk sembolü için doğrulama düzeltildi
+
+* Sürüm 5.0.1 - 23 Ekim 2019
+	* 5 uzunluklu semboller için doğrulama düzeltildi
+
+* Sürüm 5.0.0 - 23 Ekim 2019
+	* CryptoExchange.Net 3.0 sürüm notlarına bakın
+	* Giriş doğrulaması eklendi
+	* Tüm isteklere CancellationToken desteği eklendi
+	* Artık koleksiyonlar için IEnumerable<> kullanılıyor
+	* Diğer borsalarla daha uyumlu olması için çeşitli yöntemlerin adları değiştirildi
+	* SubscribeToXXXStream'in adı SubscribeToXXXUpdates olarak değiştirildi
+
+* Sürüm 4.3.3 - 06 Ekim 2019
+    * BinanceSymbolFilter için serileştirme yöntemi eklendi
+
+* Sürüm 4.3.2 - 25 Eylül 2019
+    * Para çekme nesnesinde eksik AddressTag ve TransactionFee özellikleri eklendi
+
+* Sürüm 4.3.1 - 03 Eyl 2019
+    * Soket istemcisine kitap ticker akışı eklendi
+
+* Sürüm 4.3.0 - 02 Eylül 2019
+    * Yeni Margin uç noktaları eklendi
+    * Tutarlılık için Sorgu yöntemleri Get yöntemleri olarak yeniden adlandırıldı
+
+* Sürüm 4.2.3 - 29 Ağu 2019
+    * DustTransfer ve GetDividendRecords uç noktaları eklendi
+    * Derinlik akışlarına updateInterval parametresi eklendi
+
+* Sürüm 4.2.2 - 20 Ağustos 2019
+    * Eksik kenar boşluğu uç noktaları eklendi
+    * IndicatorType'ı enum'a dönüştür
+
+* Sürüm 4.2.1 - 19 Ağu 2019
+    * Mevcut ortalama fiyat uç noktası eklendi
+
+* Sürüm 4.2.0 - 15 Ağu 2019
+    * OCO emirleri uygulandı
+    * API güncellemesi için ayarlamalar
+
+* Sürüm 4.1.3 - 12 Ağu 2019
+    * Marj emri iptalini düzeltin
+
+* Sürüm 4.1.2 - 07 Ağu 2019
+    * CryptoExchange.Net güncellendi
+
+* Sürüm 4.1.1 - 05 Ağu 2019
+    * Kod belgeleri için xml dosyası eklendi
+
+* Sürüm 4.1.0 - 30 Temmuz 2019
+    * Marj API'si eklendi
+
+* Sürüm 4.0.17 - 09 haziran 2019
+	* TimestampOffset seçenekleri eklendi
+	* BinanceSymbolOrderBook'u güncelle
+
+* Sürüm 4.0.16 - 20 Mayıs 2019
+	* Sabit Otomatik Uyumluluk ticaret kuralları davranışı
+
+* Sürüm 4.0.15 - 16 Mayıs 2019
+	* Sabit emir defteri limiti uygulaması
+
+* Sürüm 4.0.14 - 14 mayıs 2019
+	* Güncel bir emir defterini kolayca tutmak için bir emir defteri uygulaması eklendi
+	* Dosyadan okuyabilmek için ApiCredentials'a ek bir oluşturucu eklendi
+
+* Sürüm 4.0.13 - 01 mayıs 2019
+	* En son CryptoExchange.Net'e güncellendi
+		* REST çağrı sonucuna yanıt başlığı ekler
+		* API anahtarı başına oran sınırlayıcı eklendi
+		* Birleşik soket istemcisi çalışmaları
+
+* Sürüm 4.0.12 - 09 nisan 2019
+	* FifteenMinutes kline aralık enum'unda sabit tip
+	* BinanceStreamAccountInfo'ya güncelleme zamanı eklendi
+	* BinanceSymbol'a IsSpotTradingAllowed ve IsMarginTradingAllowed alanları eklendi
+	* İstemci arayüzlerine IDisposable eklendi
+
+* Sürüm 4.0.11 - 02 nisan 2019
+	* BinanceTrade'de Sembol alanı eklendi
+	* Mevduat filtresine Tamamlandı mevduat durumu eklendi
+	* Ayarlanmamışsa İstisna işleyicisi boş referansı düzeltildi
+
+* Sürüm 4.0.10 - 18 Mart 2019
+	* Otomatik Yeniden Bağlanma seçeneği eklendi
+	* Kod/mesaj olmadan hata ayrıştırması için düzeltme
+	* MyTrades sonucuna QuoteQuantity eklendi
+
+* Sürüm 4.0.9 - 07 mar 2019
+	* GetAllOrders'a başlangıç/bitiş saati parametreleri eklendi
+	* CryptoExchange.Net güncellendi
+
+* Sürüm 4.0.8 - 27 Şubat 2019
+	* Alt hesap desteği eklendi
+	* İşlem durumu çağrısı eklendi
+	* REST istekleri için yanıt durumunu açığa çıkarmak amacıyla CallResult, WebCallResult olarak değiştirildi
+
+* Sürüm 4.0.7 - 01 şubat 2019
+	* Aboneliklere istisna olayı eklendi
+	* Genel düzeltmeler
+
+* Sürüm 4.0.6 - 10 Ocak 2019
+	* Zaman damgası hesaplaması için düzeltme
+
+* Sürüm 4.0.5 - 09 Ocak 2019
+	* Otomatik Zaman Damgası hesaplaması ayarlandı
+
+* Sürüm 4.0.4 - 28 Aralık 2018
+	* Yeniden bağlanmak için başka bir düzeltme
+
+* Sürüm 4.0.3 - 17 Aralık 2018
+	* Yeniden bağlanmanın bazen hata vermesi düzeltildi
+
+* Sürüm 4.0.2 - 10 Aralık 2018
+	* TradeRuleBehavior.AutoComply yuvarlama düzeltmesi
+
+* Sürüm 4.0.1 - 06 Aralık 2018
+	* UI iş parçacığından çağrıldığında oluşan donmalar düzeltildi
+	* Sabit Otomatik Uyumluluk ticaret kuralları davranışı
+	* Sabit IDisposable arayüzü
+
+* Sürüm 4.0.0 - 05 Aralık 2018
+	* CryptoExchange.Net sürüm 2'ye güncellendi
+		* Kütüphaneler artık aynı standart işlevleri kullanıyor
+		* Soket abonelikleri tarafından döndürülen nesneler kütüphaneler arasında standartlaştırıldı
+	* GetMyTrades'e başlangıç/bitiş zamanı parametreleri eklendi
+
+* Sürüm 3.3.0 - 15 Kasım 2018
+	* En son Binance API güncellemesini desteklemek için güncellendi:
+		* RawRequest oran sınırı eklendi
+		* Bir siparişi iptal etmek artık tam sipariş raporunu geri döndürüyor
+		* Birden fazla sembol filtresi eklendi
+		* Soket sipariş güncellemesine LastQuoteTransactedQuantity eklendi
+
+* Sürüm 3.2.12 - 15 Kasım 2018
+	* BinanceStreamTick'e etkinlik zamanı eklendi
+
+* Sürüm 3.2.11 - 01 Kasım 2018
+	* Hata yanıt ayrıştırmada istisna işleme
+
+* Sürüm 3.2.10 - 24 Ekim 2018
+	* Otomatik Zaman Damgası artık varsayılan olarak etkin
+	* BaseAssetPrecision ve QuoteAssetPrecision türü dizeden tam sayıya
+
+* Sürüm 3.2.9 - 18 Ekim 2018
+	* İstemci seçeneklerine varsayılan receiveWindow parametresi eklendi
+	* Sunucu/istemci arasındaki zaman hesaplaması güncellendi, yerel saatin sunucu saatinden ileride olduğunu söyleyen aralıklı hatalar alan ve dengesiz ping sorunu yaşayan kişilere yardımcı olmalı
+
+* Sürüm 3.2.8 - 04 Ekim 2018
+	* İlk aboneliğin başarısız olması durumunda yeniden bağlanmaya çalışan abonelikler düzeltildi
+	* Sembol filtreleri için erişim araçları eklendi
+	* Abonelik yeniden bağlantılarını düzeltin
+
+* Sürüm 3.2.7 - 21 eylül 2018
+	* CryptoExchange.Net güncellendi
+
+* Sürüm 3.2.6 - 17 eylül 2018
+	* PartialBookDepthStream veri nesnesi DepthStream veri nesnesiyle birleştirildi
+	* Yeniden bağlanma hatası düzeltildi
+
+* Sürüm 3.2.5 - 10 eylül 2018
+	* Başarısız otomatik zaman damgası senkronizasyonu için kontrol eklendi
+	* Otomatik zaman damgası için otomatik yeniden hesaplama aralığı eklendi
+
+* Sürüm 3.2.4 - 07 eylül 2018
+	* Soket istemcisindeki sabit proxy ayarı
+
+* Sürüm 3.2.3 - 21 ağustos 2018
+	* Önceki düzeltmenin düzeltilmesi..
+
+* Sürüm 3.2.2 - 21 ağustos 2018
+	* Varsayılan API kimlik bilgilerinin elden çıkarılmasıyla ilgili düzeltme
+
+* Sürüm 3.2.1 - 20 Ağustos 2018
+	* Hata düzeltmesi için CryptoExchange.Net'i güncelleyin
+
+* Sürüm 3.2.0 - 16 Ağustos 2018
+	* Soket istemci arayüzü eklendi
+	* Arayüz arayüz ad alanına taşındı
+	* Resharper'ın bazı küçük bulguları düzeltildi
+
+* Sürüm 3.1.18 - 13 Ağustos 2018
+	* Userstream'in bağlanmaması sorunu düzeltildi
+
+* Sürüm 3.1.17 - 13 ağustos 2018
+	* Hatayı düzeltmek için CryptoExchange.Net güncellendi
+
+* Sürüm 3.1.16 - 13 ağustos 2018
+	* CryptoExchange.Net güncellendi
+	* Sabit hata yanıt ayrıştırması
+
+* Sürüm 3.1.15 - 24 Temmuz 2018
+	* Eksik Sembol filtre türü düzeltildi
+
+* Sürüm 3.1.14 - 20 Temmuz 2018
+	* Kod/mesaj için hata ayrıştırma eklendi
+
+* Sürüm 3.1.13 - 19 temmuz 2018
+	* Çeşitli özellikler/filtreler eklenerek en son API güncellemesine güncellendi
+
+* Sürüm 3.1.12 - 17 Temmuz 2018
+	* GetAccountStatus uç noktası eklendi
+	* GetSystemStatus uç noktası eklendi
+	* GetDustLog uç noktası eklendi
+
+* Sürüm 3.1.11 - 16 Temmuz 2018
+	* Bir akışın aboneliği iptal edilirken kullanıcı arayüzü iş parçacığının donması sorunu düzeltildi
+
+* Sürüm 3.1.10 - 03 temmuz 2018
+	* Soket olay bağlaması için küçük bir düzeltme
+
+* Sürüm 3.1.9 - 25 haziran 2018
+	* Kullanıcı arayüzü iş parçacığından çağrıldığında Abonelikten çıkma işleminin donması sorunu düzeltildi
+
+* Sürüm 3.1.8 - 08 haziran 2018
+	* DateTime ayrıştırması için düzeltme
+
+* Sürüm 3.1.7 - 08 haziran 2018
+	* PlaceOrder yanıtına eksik TradeId alanı eklendi
+
+* Sürüm 3.1.6 - 04 haziran 2018
+	* OrderUpdate eşlemesi için düzeltme
+	* BinanceSymbol eşlemesi için düzeltme
+
+* Sürüm 3.1.5 - 07 mayıs 2018
+	* Sunucu zamanına resetAutoTimestamp parametresi eklendi
+
+* Sürüm 3.1.4 - 03 mayıs 2018
+	* Ek hata ayıklama günlüğü
+
+* Sürüm 3.1.3 - 30 nisan 2018
+	* Birleştirilmiş akışlar, kullanımı daha kolay olacak ve yinelenen kodları azaltacak şekilde yeniden düzenlendi
+	* Kimlik doğrulayıcıdaki sabit iş parçacığı güvenliği sorunu
+
+* Sürüm 3.1.2 - 19 nisan 2018
+	* Birleştirilmiş akışlar eklendi
+
+* Sürüm 3.1.1 - 16 nisan 2018
+	* PlaceOrder'a receiveWindow parametresi eklendi
+
+* Sürüm 3.1.0 - 27 Mart 2018
+	* GetWithdrawalFee çağrısı eklendi
+	* Akış ve geri kalan verilerin daha benzer olması için Klines'ın bir kısmı yeniden düzenlendi
+	* Eksik olan yerlere kod belgeleri eklendi
+
+* Sürüm 3.0.11 - 23 Mart 2018
+	* Soketler için kapalı/yeniden bağlanma işlemleri güncellendi
+	* Güncellenen taban
+
+* Sürüm 3.0.10 - 21 Mart 2018
+	* Artık birden fazla günlük yazıcısı eklemek mümkün
+	* İnternet kesintisi sonrasında otomatik yeniden bağlanma eklendi
+	* Null'u işleyici olarak geçirirken bir akışa abone olurken oluşan hata düzeltildi
+
+* Sürüm 3.0.9 - 13 Mart 2018
+	* Toplu ticaret akışının yanına ticaret akışı eklendi
+	* BuyerIsMaker alanının her zaman doğru olması sorunu düzeltildi
+
+* Sürüm 3.0.8 - 12 Mart 2018
+	* Tutarlı olmayan int/long türleri için düzeltme
+	* UI iş parçacığından çağrı yaparken donma sorunu düzeltildi
+	* Otomatik yeniden bağlanma işlevi eklendi
+
+* Sürüm 3.0.7 - 08 Mart 2018
+	* Güncellenen taban
+
+* Sürüm 3.0.6 - 08 Mart 2018
+	* Dotnet çekirdek dışı istemcilerde soket bağlantısı için düzeltme
+
+* Sürüm 3.0.5 - 07 mar 2018
+	* Serileştirme hatası işleme için düzeltme
+	* Soket açılışı asenkron, abone yöntemleri asenkron
+
+* Sürüm 3.0.4 - 05 mar 2018
+	* SetApiCredentials yöntemleri eklendi
+
+* Sürüm 3.0.2/3.0.3 - 05 mar 2018
+	* SetDefaultOptions statik hale getirildi
+
+* Sürüm 3.0.1 - 05 mar 2018
+	* Ek günlük kaydı
+	* Güncellenmiş temel sürümler
+
+* Sürüm 3.0.0 - 01 mar 2018
+	* Sözdiziminde bazı değişiklikler getiren ancak işlevselliği aynı bırakan temel bir paket kullanmak üzere güncellendi
+
+* Sürüm 2.3.4 - 12 Şubat 2018
+	* AutoComply işlem kurallarının çok fazla ardışık sıfır göndermesi sorununa yönelik düzeltme
+
+* Sürüm 2.3.3 - 10 Şubat 2018
+	* Akış sırası ayrıştırması için düzeltme
+
+* Sürüm 2.3.2 - 09 Şubat 2018
+	* Bağlantı hatalarını düzeltmek için temel adresi https://www.binance.com'dan https://api.binance.com'a değiştirdim
+
+* Sürüm 2.3.1 - 08 Şubat 2018
+	* Modeller en son sürüme güncellendi
+	* Temizlenmiş kod ve kod belgeleri
+
+* Sürüm 2.3.0 - 07 Şubat 2018
+	* 24 saatlik fiyatlara eksik alanlar eklendi
+	* Abonelik sonuçları bir kimlikten kapalı/hata olaylarına sahip bir nesneye değiştirildi
+	* Kullanıcı akışına abone olma şekli değiştirildi
+	* Güncellenen/düzeltilen birim test projesi
+	* Benioku güncellendi
+
+* Sürüm 2.2.5 - 24 Ocak 2018
+	* Emir verirken işlem kurallarının isteğe bağlı otomatik kontrolü eklendi
+	* Bazı temel yardımcı işlevleri içeren `BinanceHelpers` statik sınıfı eklendi
+	* Varsayılan günlükçünün yeni bir satıra yazmaması sorunu düzeltildi
+	* Basitleştirilmiş dahili varsayılanlar
+
+* Sürüm 2.2.4 - 23 Ocak 2018
+	* GetExchangeInfo'daki RateLimit türü için düzeltme
+	* BinanceSymbolFilter'ı 3 sınıfa bölün
+
+* Sürüm 2.2.3 - 15 Ocak 2018
+	* UI iş parçacığından yapıldığında çağrıların donması sorunu düzeltildi
+
+* Sürüm 2.2.2 - 15 Ocak 2018
+	* InvariantCulture kullanılarak PlaceOrder'da düzeltme
+	* FirstId özelliği için 24 saatlik fiyatta düzeltme
+	* 24 saatlik fiyata sembol özelliği eklendi
+
+* Sürüm 2.2.1 - 12 Ocak 2018
+	* StreamOrderUpdate'deki ayrıştırma hatası için düzeltme
+
+* Sürüm 2.2.0 - 08 Ocak 2018
+	* En son belgelere göre güncellendi, çeşitli uç noktalar eklendi
+
+* Sürüm 2.1.3 - 9 Kasım 2017
+	* Sunucu hatalarında otomatik yapılandırılabilir yeniden deneme eklendi
+	* Hata dönüşlerinde yeniden düzenleme
+	* ApiResult'un adı BinanceApiResult olarak değiştirildi
+
+* Sürüm 2.1.2 - 31 Ekim 2017
+	* Çok sayıda kod dokümantasyonu eklendi
+	* Küçük temizlikler ve düzeltmeler
+
+* Sürüm 2.1.1 - 30 Ekim 2017
+	* Soket kapanması için düzeltme
+
+* Sürüm 2.1.0 - 30 Ekim 2017
+	* Küçük yeniden adlandırma/yeniden düzenleme, BinanceSocketClient artık ApiResult'ı da kullanıyor
+
+* Sürüm 2.0.1 - 30 Ekim 2017
+	* BinanceClient'ta hata mesajları/işleme iyileştirildi
+	* Başarısız istekler için ekstra birim testleri
+
+* Sürüm 2.0.0 - 25 Ekim 2017
+	* Statik sınıftan nesne yönelimli sınıfa geçildi, `using` ifadelerini kullanabilmek için IDisposable arayüzü eklendi
+	* BinanceClient ve BinanceSocketClient'ta bölünmüş websocket ve restapi işlevselliği
+	* Günlük çıktı yazıcısını ayarlamak için yöntem eklendi
+	* Yeni istemciler için varsayılanları ayarlama yeteneği eklendi
+	* Yeni kurulum için sabit birim testleri
+	* Güncellenmiş dokümanlar
+
+* Sürüm 1.1.2 - 25 Ekim 2017
+	* `UnsubscribeAllStreams` yöntemi eklendi
+
+* Sürüm 1.1.1 - 20 Ekim 2017
+	* Para çekme/yatırma filtresi için düzeltme
+
+* Sürüm 1.1.0 - 20 Ekim 2017
+	* API değişikliklerine göre para çekme/para yatırma işlevi güncellendi
+	* BinanceClient'ı biraz temizledim
+
+* Sürüm 1.0.9 - 19 Ekim 2017
+	* Para çekme/yatırma işlevi eklendi
+---
+ .devcontainer/devcontainer.json | 1425 +++++++++++++++++++++++++++++++
+ 1 dosya değiştirildi, 1425 ekleme(+)
+ 100644 .devcontainer/devcontainer.json modunu oluştur
+
+diff --git a/.devcontainer/devcontainer.json b/.devcontainer/devcontainer.json
+yeni dosya modu 100644
+dizin 00000000..3e33358a
+--- /dev/null
++++ b/.devcontainer/devcontainer.json
+@@ -0,0 +1,1425 @@
++# ![.Binance.Net](https://raw.githubusercontent.com/JKorf/Binance.Net/master/Binance.Net/Icon/icon.png) Binance.Net  
++
++[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Binance.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![Lisans](https://img.shields.io/github/license/JKorf/Binance.Net?style=for-the-badge)
++
++Binance.Net, [Binance REST ve Websocket API'sine](https://binance-docs.github.io/apidocs/#change-log) erişmek için güçlü bir şekilde yazılmış istemci kütüphanesidir. ## Özellikler
++* Yanıt verileri tanımlayıcı modellere eşlenir
++* Giriş parametreleri ve yanıt değerleri mümkün olduğunca tanımlayıcı enum değerlerine eşlenir
++* Otomatik web soketi (yeniden) bağlantı yönetimi
++* İstemci tarafı hız sınırlaması
++* İstemci tarafı emir defteri uygulaması
++* Kapsamlı günlük kaydı
++* Farklı ortamlar için destek (binance.com, binance.us, testnet)
++* CryptoExchange.Net temel kütüphanesine dayalı diğer borsa istemcileriyle kolay entegrasyon
++
++## Desteklenen Çerçeveler
++Kütüphane, optimum uyumluluk için hem `.NET Standard 2.0` hem de `.NET Standard 2.1`'i hedefliyor
++
++|.NET uygulaması|Sürüm Desteği|
++|--|--|
++|.NET Core|`2.0` ve üzeri|
++|.NET Framework|`4.6.1` ve üzeri|
++|Mono|`5.4` ve üzeri|
++|Xamarin.iOS|`10.14` ve üzeri|
++|Xamarin.Android|`8.0` ve üzeri|
++|UWP|`10.0.16299` ve üzeri|
++|Unity|`2018.1` ve üzeri|
++
++## Kütüphaneyi yükleyin
++
++### NuGet
++[![NuGet sürümü](https://img.shields.io/nuget/v/binance.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net) [![Nuget indirmeleri](https://img.shields.io/nuget/dt/Binance.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Binance.Net)
++
++ dotnet Binance.Net paketini ekle
++	
++### GitHub paketleri
++Binance.Net [GitHub paketlerinde](https://github.com/JKorf/Binance.Net/pkgs/nuget/Binance.Net) mevcuttur. `https://nuget.pkg.github.com/JKorf/index.json` öğesini bir NuGet paket kaynağı olarak eklemeniz gerekecektir.
++
++### Sürümü indirin
++[![GitHub Sürümü](https://img.shields.io/github/v/release/JKorf/Binance.Net?style=for-the-badge&label=GitHub)](https://github.com/JKorf/Binance.Net/releases)
++
++NuGet paket dosyaları, [buradan](https://github.com/JKorf/Binance.Net/releases) bulunabilen en son GitHub sürümüyle birlikte kaynak koduna eklenmiştir.
++
++	
+++## Nasıl kullanılır
++*REST Uç Noktaları*  
++
++```csharp
++// ETH/USDT fiyatını rest talebiyle alın
++var restClient = new BinanceRestClient();
++var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
++var lastPrice = tickerResult.Data.LastPrice;
++```
++
++*Websocket akışları*  
++
++```csharp
++// ETH/USDT ticker güncellemelerine websocket API'si aracılığıyla abone olun
++var soketİstemcisi = yeni BinanceSocketİstemcisi();
++var tickerSubscriptionResult = socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", (güncelleme) =>
++{
++ var sonFiyat = güncelleme.Veri.SonFiyat;
++});
++```
++
++*Başlayın ve 40 saniye içinde bir sembolün son fiyatını isteyin*  
++
++<img src="https://github.com/JKorf/Binance.Net/blob/f74f262151f21b123deecd9b39a717458a18f6ff/docs/Binance.gif" width="600" />
++
++ İstemciler, bağımlılık enjeksiyonu, yanıt işleme ve daha fazlası hakkında bilgi için [Binance.Net belgelerine](https://jkorf.github.io/Binance.Net), [CryptoExchange.Net belgelerine](https://jkorf.github.io/CryptoExchange.Net) bakın veya [buradaki](https://github.com/JKorf/Binance.Net/tree/master/Examples) veya [buradaki](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples) örneklere bakın. [Blockpit Örnek Raporu - 2024 (1).pdf](https://github.com/user-attachments/files/17265064/Blockpit.Example.Report.-.2024.1.pdf) [Binance api key.txt.json](https://github.com/user-attachments/files/17265060/Binance.api.key.txt.json ) [blank.yml.txt](https://github.com/user-attachments/files/17265059/blank.yml.txt) [Binance-api-doc-768e93f96c002b53bb3d22595cd3a075148d1abc.zip](https://github.com/user-attachments/files/17265058/Binance-api-doc-768e93f96c002b53bb3d22595cd3a075148d1abc.zip)
++
++## Kripto Borsası.Net
++Binance.Net, [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) temel kütüphanesine dayanmaktadır. CryptoExchange.Net temel kütüphanesine dayanan diğer borsa API uygulamaları mevcuttur ve aynı mantığı takip eder.
++
++CryptoExchange.Net ayrıca [farklı borsa API'lerine kolay erişim](https://jkorf.github.io/CryptoExchange.Net#idocs_common) sağlar.
++
++|Değişim|Depo|Nuget|
++|--|--|--|
++|BingX|[JKorf/BingX.Net](https://github.com/JKorf/BingX.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.BingX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.BingX.Net)| |Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Bitfinex.net.svg?style=flat-square)](https://www.nuget.org/packages/Bitfinex.Net)| |Bitget|[JKorf/Bitget.Net](https://github.com/JKorf/Bitget.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.Bitget.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Bitget.Net)| |BitMart|[JKorf/BitMart.Net](https://github.com/JKorf/BitMart.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/BitMart.net.svg?style=flat-square)](https://www.nuget.org/packages/BitMart.Net)| |Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Bybit.net.svg?style=flat-square)](https://www.nuget.org/packages/Bybit.Net)| |CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/CoinEx.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinEx.Net)| |CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/CoinGecko.net.svg?style=flat-square)](https://www.nuget.org/packages/CoinGecko.Net)| |Gate.io|[JKorf/GateIo.Net](https://github.com/JKorf/GateIo.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/GateIo.net.svg?style=flat-square)](https://www.nuget.org/packages/GateIo.Net)| |Huobi/HTX|[JKorf/Huobi.Net](https://github.com/JKorf/Huobi.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Huobi.net.svg?style=flat-square)](https://www.nuget.org/packages/Huobi.Net)| |Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/KrakenExchange.net.svg?style=flat-square)](https://www.nuget.org/packages/KrakenExchange.Net)| |Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/Kucoin.net.svg?style=flat-square)](https://www.nuget.org/packages/Kucoin.Net)| |Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.Mexc.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Mexc.Net)| |OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget sürümü](https://img.shields.io/nuget/v/JK.OKX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.OKX.Net)|
++
++## Uyuşmazlık
++[![Nuget sürümü](https://img.shields.io/discord/847020490588422145?style=for-the-badge)](https://discord.gg/MSpeEtSY8t) Bir Discord sunucusu [burada](https://discord.gg/MSpeEtSY8t) mevcuttur. CryptoExchange.Net ve uygulama kütüphaneleri hakkında tartışma ve/veya sorular için katılmaktan çekinmeyin.
++
++## Desteklenen işlevler
++
++### Spot/Marj/Tasarruf/Madencilik
++|API|Desteklenen|Konum|
++|--|--:|--|
++|Cüzdan uç noktaları|✓|`restClient.SpotApi.Account`|
++|AltHesap uç noktaları|✓|`restClient.GeneralApi.SubAccount`| |Piyasa veri uç noktaları|✓|`restClient.SpotApi.ExchangeData`| |Websocket Piyasa Akışları|✓|`socketClient.SpotApi.ExchangeData`| |Spot Ticaret Uç Noktaları|✓|`restClient.SpotApi.Trading`| |Spot Hesap Uç Noktaları|✓|`restClient.SpotApi.Account`| |Marj Hesabı/Ticaret|Kısmi|`restClient.SpotApi.Account` / `restClient.SpotApi.Trading`| |Kullanıcı Veri Akışları|✓|`socketClient.SpotApi.Account`| |Marj Kullanıcı Veri Akışları|X||
++|Basit Kazanç Uç Noktaları|✓|`restClient.GeneralApi.SimpleEarn`| |Otomatik Yatırım Uç Noktaları|✓|`restClient.GeneralApi.AutoInvest`| |Stake Uç Noktaları|✓|`restClient.GeneralApi.Staking`| |Madencilik Uç Noktaları|✓|`restClient.GeneralApi.Mining`| |Vadeli İşlemler|✓|`restClient.GeneralApi.Futures`|
++|Vadeli İşlem Algoritması Uç Noktaları|✓|`restClient.UsdFuturesApi.Trading`| |Spot Algoritması Uç Noktaları|✓|`restClient.SpotApi.Trading`| |Klasik Portföy Marj Uç Noktaları|Kısmi|`restClient.SpotApi.Account`| |BLVT Uç Noktaları|Kısmi|`restClient.SpotApi.Account` / `restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`| |Fiat Uç Noktaları|✓|`restClient.SpotApi.Account`|
++|C2C Uç Noktaları|✓|`restClient.SpotApi.Trading`|
++|VIP Kredi Son Noktaları|X||
++|Kripto Kredi Uç Noktaları|Kısmi|`restClient.GeneralApi.Loans`| |Ödeme Uç Noktaları|✓|`restClient.SpotApi.Trading`|
++|Uç Noktalarını Dönüştür|✓|`restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`| |İndirim Uç Noktaları|✓|`restClient.SpotApi.Account`|
++|NFT Uç Noktaları|X||
++|Binance Hediye Kartı Uç Noktaları|X||
++
++### USD-M Vadeli İşlemleri
++|API|Desteklenen|Konum|
++|--|--:|--|
++|Piyasa Verileri|✓|`restClient.UsdFuturesApi.ExchangeData`| |Ticaret|✓|`restClient.UsdFuturesApi.Hesap` [dışa aktar-https-vscode-dev-github-zxramozx-1722925865.json.gz](https://github.com/user-attachments/files/17265068/dışa aktar-https-vscode-dev-github-zxramozx-1722925865.json.gz) [çekme_isteği_şablonu.md](https://github.com/user-attachments/files/17265067/çekme_isteği_şablonu.md) / `restClient.UsdFuturesApi.Trading`[dışa-aktar-https-vscode-dev-github-zxramozx-1722740575.json](https://github.com/user-attachments/files/17265077/dışa-aktar-https-vscode-dev-github-zxramozx-1722740575.json) |
++|Websocket Piyasa Akışları|✓|`socketClient.UsdFuturesApi`[config.go.txt](https://github.com/user-attachments/files/17265080/config.go.txt) |
++|Kullanıcı Veri Akışları|✓|`socketClient.UsdFuturesApi`| |Hesap|✓|`restClient.UsdFuturesApi.Hesap` / `restClient.UsdFuturesApi.Trading`| |Dönüştür|[export-token-0x9cdc684179d200ddab42628f3500fadd60322121.csv](https://github.com/user-attachments/files/17265083/export-token-0x9cdc684179d200ddab42628f3500fadd60322121.csv) ✓|`restClient.UsdFuturesApi.ExchangeData` / `restClient.UsdFuturesApi.Trading`| |Klasik Portföy Marj Uç Noktaları|X||
++
++### COIN-M Vadeli İşlemleri
++|API|Desteklenen|Konum|
++|--|--:|--|
++|Piyasa Verileri|✓|`restClient.CoinFuturesApi.ExchangeData`| |Websocket Piyasa Akışları|✓|`socketClient.CoinFuturesApi`| |Ticaret|✓|`restClient.CoinFuturesApi.Hesap` / `restClient.CoinFuturesApi.Trading`| |Kullanıcı Veri Akışları|✓|`socketClient.CoinFuturesApi`| |Hesap|✓|`restClient.CoinFuturesApi.Hesap` / `restClient.CoinFuturesApi.Trading`| |Klasik Portföy Marj Uç Noktaları|X||
++
++### Avrupa Seçenekleri
++|API|Desteklenen|Konum|
++|--|--:|--|
++|*|X||
++
++### Websocket API
++|API|Desteklenen|Konum|
++|--|--:|--|
++|Piyasa verisi istekleri|✓|`socketClient.SpotApi.ExchangeData`| |Ticaret istekleri|✓|`socketClient.SpotApi.Trading`| |Hesap istekleri|✓|`socketClient.SpotApi.Account`|
++
++### Portföy Marjı
++|API|Desteklenen|Konum|
++|[dışa aktar-0xFa1dB6794de6e994b60741DecaE0567946992181.csv](https://github.com/user-attachments/files/17265085/dışa aktar-0xFa1dB6794de6e994b60741DecaE0567946992181.csv) --|--:|--|
++|*|X||
++
++## Projeyi destekleyin
++Bu paketi boş zamanlarımda kendim, ücretsiz olarak geliştiriyor ve sürdürüyorum, her türlü destek çok değerlidir.
++
++### Bağış yapın
++ Tercih ettiğiniz kripto para biriminde tek seferlik bağış yapın. Burada listelenmeyen bir para birimi bağışlamayı tercih ederseniz lütfen benimle iletişime geçin.
++
++**Btc**: 1DFqa7YG7aASAjRniQeYZstn1364LZbouf
++**Eth**: 0xd41a74d3713ce95c180bc9e91a8bff68ac34b58e**USDT (TRX)** TZEVpQwHxxbNiEXLXFjoswdQknrkKibbuc
++### Sponsor
++Alternatif olarak, [Github Sponsors](https://github.com/sponsors/JKorf) kullanarak Github'da bana sponsor olabilirsiniz.
++
++## Sürüm notları
++* Sürüm 10.5.0 - 27 Eylül 2024
++ * CryptoExchange.Net 8.0.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.0
++ * Spot, USD-M Vadeli İşlemler, Coin-M Vadeli İşlemler Rest ve Socket istemcileri için Paylaşılan istemci arayüzleri uygulaması eklendi
++ * BinanceWithdrawalPlaced modelinde Id özelliği `string?`'den `string`'e güncellendi
++ * Sourcelink paket sürümü güncellendi
++ * ISpotClient ve IFuturesClient referansları kullanım dışı olarak işaretlendi
++
++* Sürüm 10.4.0 - 11 Eylül 2024
++ * UsdFuturesApi.SubscribeToUserDataUpdatesAsync için onTradeUpdate geri araması eklendi
++ * Vadeli bakiyelerdeki CrossUnrealizedPnl alanı, testnet yanıtını desteklemek için değiştirildi
++ * UsdFuturesApi.Trading.EditMultipleOrdersAsync sipariş kimliği serileştirmesi için düzeltme
++ * GeneralApi.AutoInvest.GetPlansAsync seri durumdan çıkarmayla ilgili düzeltme
++ * CoinFuturesApi.ExchangeData.GetFundingRatesAsync için hatalı API dokümanları referansı düzeltildi
++
++* Sürüm 10.3.0 - 28 Ağu 2024
++ * CryptoExchange.Net 7.11.2 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.2
++ * GeneralApi.AutoInvest uç noktaları eklendi
++ * UsdFuturesApi dönüştürme uç noktaları eklendi
++ * Sabit SubAccountId özelliğinin mevduat geçmişinde seri hale getirilmesi
++ * Oran sınırlaması için bazı istek ağırlıkları güncellendi
++
++* Sürüm 10.2.1 - 18 Ağu 2024
++ * SpotApi.Trading.ConvertQuoteRequestAsync uç noktasında walletType serileştirmesi düzeltildi
++
++* Sürüm 10.2.0 - 13 Ağu 2024
++ * V3 uç noktasında veri eksik olduğundan UsdFuturesApi.Account.GetAccountInfoV2Async uç noktası yeniden eklendi
++ * UsdFuturesApi.Account.GetAccountInfoAsync'i GetAccountInfoV3Async olarak yeniden adlandırın
++ * SpotApi.ExchangeData.GetProductsAsync serileştirmesi düzeltildi
++ * GeneralApi.SimpleEarn.GetLockedRewardRecordsAsync serileştirmesi düzeltildi
++
++* Sürüm 10.1.1 - 08 Ağu 2024
++ * CoinFuturesApi.Account.GetPositionInformationAsync'de UnrealizedPnl serileştirmesini düzeltin
++
++* Sürüm 10.1.0 - 07 Ağu 2024
++ * CryptoExchange.Net 7.11.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.0
++ * XML kod yorumları güncellendi
++ * BinanceFuturesAccountAsset MaintMargin serileştirmesi düzeltildi
++ * BinancePosition MaintMargin serileştirmesi düzeltildi
++ * Coin-M vadeli işlemleri için BinancePosition UnrealizedProfit deserializasyonu düzeltildi
++
++* Sürüm 10.0.1 - 05 Ağu 2024
++ * UsdtFuturesApi.Account.GetIncomeHistoryAsync serileştirme sorunu düzeltildi
++
++* Sürüm 10.0.0 - 27 Tem 2024
++ * CryptoExchange.Net 7.10.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.10.0
++ * (De)serileştirme için Newtonsoft.Json uygulamasından System.Text.Json'a geçin
++ * Eski tip başına enum dönüştürücüsünden EnumConverter kullanımına yeniden düzenlendi
++ * SpotApi.Account.GetCommissionRatesAsync uç noktası eklendi
++ * UsdFuturesApi.Account.GetSymbolConfigurationAsync uç noktası eklendi
++ * UsdFuturesApi.Account.GetAccountConfigurationAsync uç noktası eklendi
++ * UsdFuturesApi.Trading.GetPositionsAsync uç noktası eklendi
++ * SpotApi.ExchangeData.GetExchangeInfoAsync sembol yanıtına PermissionSets özelliği eklendi
++ * UsdFuturesApi.Account.GetBalancesAsync V3'e güncellendi
++ * UsdFuturesApi.Account.GetAccountInfoAsync V3'e güncellendi
++
++* Sürüm 9.12.0 - 16 Temmuz 2024
++ * CryptoExchange.Net 7.9.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.9.0
++ * Dahili sınıflar dahili erişim değiştiricisine güncellendi
++ * Bağlantının kesilmesini önlemek için WebSocket hız sınırı kuralı güncellendi
++
++* Sürüm 9.11.1 - 02 Temmuz 2024
++ * CryptoExchange.Net V7.8.0'a güncellendi
++ * Uç nokta başına limitler için güncellenmiş hız sınırlaması
++
++* Sürüm 9.11.0 - 23 Haz 2024
++ * CryptoExchange.Net 7.7.0 sürümüne güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.0
++ * Özel bağlantı yapılandırması eklendi; artık ilk isteği yapmadan önce `binanceSocketClient.SpotApi.PrepareConnectionsAsync();` çağrılarak bir websocket bağlantısı kurulabilir
++ * Websocket isteklerine CancellationToken isteğe bağlı parametresi eklendi
++ * Sınıflardan kayıtlara güncellenmiş yanıt modelleri
++
++* Sürüm 9.10.0 - 11 Haz 2024
++ * Yeni SpotApi.Trading.PlaceOtoOrderListAsync ve SpotApi.Trading.PlaceOtocoOrderListAsync uç noktaları eklendi
++ * Otomatik sıkıştırmayı açmaya izin vererek GetProductsAsync uç noktalarını düzeltti
++ * CryptoExchange.Net v7.6.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++
++* Sürüm 9.9.8 - 02 Haz 2024
++ * SpotApi.Account.GetAccountVipLevelAndStatusAsync uç noktası eklendi
++ * UsdFuturesApi.Account.GetBnbBurnStatusAsync ve UsdFuturesApi.Account.SetBnbBurnStatusAsync uç noktaları eklendi
++ * Eksik GoodTillDate TimeInForce dönüşümü eklendi
++
++* Sürüm 9.9.7 - 07 Mayıs 2024
++ * CryptoExchange.Net'i v7.5.2'ye güncelledik, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++
++* Sürüm 9.9.6 - 05 Mayıs 2024
++ * Çeşitli yanıt modelleri güncellendi
++ * CoinFuturesApi.Account.GetBracketsAsync V2 uç noktasına güncellendi
++ * CoinFuturesApi.Trading.PlaceMultipleOrdersAsync sipariş parametresi diziden IEnumerable'a güncellendi
++
++* Sürüm 9.9.5 - 01 Mayıs 2024
++ * Çoklu yanıt modelleri güncellendi
++ * Yeni, daha kapsamlı birim testi uygulamasından sonra birden fazla hata düzeltildi
++ * Yinelenen SpotApi.Trading.ConvertTransferAsync ve GetConvertTransferHistoryAsync uç noktaları kaldırıldı
++ * CryptoExchange.Net'i v7.5.0'a güncelledik, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++
++* Sürüm 9.9.4 - 28 Nis 2024
++ * SpotApi.Account.GetWithdrawalAddressesAsync uç noktası eklendi
++ * BinanceExchange statik sınıfına Url ve ApiDocsUrl eklendi
++ * BinanceOrderBookFactory kitap oluşturma yöntemi eklendi
++ * BinanceOrderBookFactory enjeksiyon sorunu düzeltildi
++ * CryptoExchange.Net'i v7.4.0'a güncelledik, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++
++* Sürüm 9.9.3 - 23 Nis 2024
++ * Eksik UniversalTransferType enum değerleri eklendi
++ * CoinFuturesApi.Account.GetIncomeHistoryAsync uç nokta URL'si düzeltildi
++ * CryptoExchange.Net 7.3.3'e güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++
++* Sürüm 9.9.2 - 19 Nis 2024
++ * CoinFuturesApi.Account.GetDownloadIdForTransactionHistoryAsync uç noktası eklendi
++ * CoinFuturesApi.Account.GetDownloadLinkForTransactionHistoryAsync uç noktası eklendi
++ * SpotApi.ExchangeData.GetTradingDayTickerAsync uç noktası eklendi
++ * SpotApi.ExchangeData.GetTradingDayTickersAsync uç noktası eklendi
++ * SpotApi.Trading.PlaceTestOrderAsync'e computeFeeRates parametresi eklendi
++ * SpotApi.Trading.PlaceTestOrderAsync yanıtı güncellendi
++ * Güncellenen broker referans ayarı
++ * CryptoExchange.Net, belirli oran limitlerine sahip bazı uç noktaların başarısız olmasına neden olan sorunu düzelterek 7.3.2'ye güncellendi
++
++* Sürüm 9.9.1 - 19 Nis 2024
++ * Başlat/Canlı Tut/Durdur UserStream işlemlerinin hata döndürmesi düzeltildi
++
++* Sürüm 9.9.0 - 18 Nis 2024
++ * CryptoExchange.Net 7.3.1'e güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++ * İstemci tarafı hız sınırlaması yeniden uygulandı
++ * Hem rest hem de soket API'si için RetryAfter yanıtının işlenmesi eklendi
++ * SpotApi.Account.GetAccountInfoAsync'e omitZeroBalances parametresi eklendi
++ * Kullanım dışı bırakılan PlaceOcoOrderAsync uç noktasının yerine yeni PlaceOcoOrderListAsync eklendi
++ * Spot websocket kullanıcı veri aboneliği için listenKeyExpired olay işleyicisi eklendi
++ * SpotApi.ExchangeData.GetExchangeInfoAsync sembol yanıt modeline OTOAllowed eklendi
++ * GetTradeFeeAsync, SpotApi.ExchangeData'dan SpotApi.Account'a taşındı
++ * WebCallResult<object> yanıtları WebCallResult olarak değiştirildi
++ * Kullanım dışı bırakılan uç noktalar kaldırıldı
++
++* Sürüm 9.8.1 - 03 Nis 2024
++ * SpotApi.Account.GetWalletBalancesAsync uç noktası eklendi
++ * SpotApi.Account.GetMarginLoansAsync isolatedSymbol parametresinin gönderilememesi düzeltildi
++ * Ön gönderim sembol doğrulaması kaldırıldı
++
++* Sürüm 9.8.0 - 01 Nis 2024
++ * SpotApi.ExchangeData.GetDelistScheduleAsync uç noktası eklendi
++ * UsdFuturesApi.Account.GetOrderRateLimitAsync uç noktası eklendi
++ * UsdFuturesApi.ExchangeData.GetBasisAsync uç noktası eklendi
++ * Güncellenen Spot Marj uç noktaları
++ * UsdFuturesApi.ExchangeData.GetPricesAsync uç noktası V2'ye güncellendi
++ * UsdFuturesApi.Trading.PlaceOrderAsync parametreleri güncellendi
++ * Kullanım dışı bırakılan BSwap uç noktaları kaldırıldı
++
++* Sürüm 9.7.1 - 24 Mar 2024
++ * CryptoExchange.Net 7.2.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++
++* Sürüm 9.7.0 - 16 Mar 2024
++ * CryptoExchange.Net 7.1.0'a güncellendi, sürüm notları için https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes adresine bakın
++ * Büyük istekler gönderilirken zaman aşımı ve garip davranışları önlemek için websocket maksimum mesaj boyutu eklendi
++ * WebCallResult<object> dönüş uç noktalarını WebCallResult dönüşüne güncellendi
++ * Vadeli işlem akışında, işlem dışı güncellemelerin göz ardı edilmesi için parametre eklendi
++
++* Sürüm 9.6.1 - 29 Şubat 2024
++ * Kullanıcı veri web soketi akışları abonelikleri için düzeltme
++
++* Sürüm 9.6.0 - 27 Şubat 2024
++ * Simple Earn için client.GeneralApi.SimpleEarn altında REST uç noktaları eklendi
++ * Sabit vadeli kullanıcı verisi web soketi aboneliği
++ * Bazı enum değerlerinde ve modellerde bazı küçük sabitler
++
++* Sürüm 9.5.0 - 25 Şubat 2024
++ * CryptoExchange.Net güncellendi ve yeniden çalışılmış websocket mesaj işleme uygulandı. CryptoExchange.Net temel kütüphanesi için sürüm notları için bkz: https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes
++ * DI kaydında http istemcisinin doğru şekilde enjekte edilmemesine neden olan sorun düzeltildi
++ * Gereksiz BinanceRestClient oluşturucu aşırı yüklenmesi kaldırıldı
++ * Bazı ad alanları güncellendi
++
++* Sürüm 9.4.0 - 05 Ocak 2024
++ * Vadeli İşlemler Trading.GetFundingInfoAsync uç noktası eklendi
++ * SpotApi.Trading.PlaceMarginOCOOrderAsync'e autoRepayAtCancel ve selfTradePreventionMode parametreleri eklendi
++ * Vadeli işlem finansman oranı modellerine MarkPrice eklendi
++ * Güncellenmiş ve birleştirilmiş vadeli işlem emir modelleri
++ * Güncellenen para çekme geçmişi modeli
++
++* Sürüm 9.3.0 - 26 Aralık 2023
++ * SpotApi.Trading.PlaceMarginOrderAsync'e selfTradePreventionMode ve autoRepayAtCancel parametreleri eklendi
++ * SpotApi.ExchangeData.GetProductsAsync yanıt modeli güncellendi
++ * Usdt vadeli işlem pozisyon modeli güncellendi
++ * SpotApi.Trading.GetOrderAsync ve SpotApi.Trading.CancelOrderAsync soket istemcilerinde orderId parametresi uzun türe güncellendi
++
++* Sürüm 9.2.0 - 03 Aralık 2023
++ * Dönüştürme uç noktaları eklendi
++ * Varsayılan oran limitleri güncellendi
++ * Hız sınırı hatalarının işlenmesi düzeltildi
++ * Eksik ticaret grubu numaralandırma değerleri eklendi
++
++* Sürüm 9.1.7 - 24 Kas 2023
++ * PositionInfo modelinde eksik olan BreakEvenPrice özelliği eklendi
++ * Ratelimiters soket istemcisi GetExchangeInfoAsync'deki serileştirme sorunu düzeltildi
++
++* Sürüm 9.1.6 - 29 Ekim 2023
++ * Broker referans seçeneği eklendi
++
++* Sürüm 9.1.5 - 24 Ekim 2023
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 9.1.4 - 09 Ekim 2023
++ * CryptoExchange.Net sürümü güncellendi
++
++* Sürüm 9.1.3 - 23 Eylül 2023
++ * GetExchangeInfoAsync eksik enum eşlemesi düzeltildi
++ * DI konteynerine Ortak istemciler eklendi
++
++* Sürüm 9.1.2 - 06 Eylül 2023
++ * GoodTillDate TimeInForce enum değeri eklendi, UsdFutures.ExchangeData.GetExchangeInfoAsync uç nokta serileştirme hatası düzeltildi
++
++* Sürüm 9.1.1 - 02 Eylül 2023
++ * Eksik hesap izinleri eklendi
++
++* Sürüm 9.1.0 - 25 Ağu 2023
++ * Kullanım dışı bırakılan uç noktalar kaldırıldı
++ * Güncellenen modeller
++ * Soket istemcisinde hız sınırlaması desteği eklendi
++ * Websocket API'si için ağırlıklar ve hız sınırları güncellendi
++ * restClient.GeneralApi.Futures.GetAdjustCrossCollateralLoanToValueHistoryAsync eklendi
++ * restClient.GeneralApi.Futures.GetCrossCollateralLiquidationHistoryAsync eklendi
++ * restClient.GeneralApi.Futures.GetCrossCollateralInterestHistoryAsync eklendi
++ * restClient.GeneralApi.CryptoLoans.GetLoanableAssetsAsync eklendi
++ * restClient.GeneralApi.CryptoLoans.GetCollateralAssetsAsync eklendi
++ * restClient.GeneralApi.CryptoLoans.GetCollateralRepayRateAsync eklendi
++ * restClient.GeneralApi.CryptoLoans.CustomizeMarginCallAsync eklendi
++ * restClient.GeneralApi.Mining.GetMiningAccountEarningsAsync eklendi
++ * restClient.SpotApi.Account.CrossMarginAdjustMaxLeverageAsync eklendi
++ * restClient.SpotApi.Account.ConvertBusdAsync eklendi
++ * restClient.SpotApi.Account.GetBusdConvertHistoryAsync eklendi
++ * restClient.SpotApi.Account.GetCloudMiningHistoryAsync eklendi
++ * restClient.SpotApi.Account.GetIsolatedMarginFeeDataAsync eklendi
++ * restClient.SpotApi.Account.GetMarginAssetsBnbConvertableAsync eklendi
++ * restClient.SpotApi.Account.MarginDustTransferAsync eklendi
++ * restClient.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeAssetsAsync eklendi
++ * restClient.SpotApi.Account.CrossMarginSmallLiabilityExchangeAsync eklendi
++ * restClient.SpotApi.Account.GetCrossMarginSmallLiabilityExchangeHistoryAsync eklendi
++ * restClient.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync eklendi
++ * restClient.SpotApi.ExchangeData.GetMarginDelistScheduleAsync eklendi
++ * restClient.SpotApi.Trading.GetUnclaimedLiquidityPoolsRewardsAsync eklendi
++ * restClient.SpotApi.Trading.ClaimLiquidityPoolsRewardsAsync eklendi
++ * restClient.SpotApi.Trading.GetLiquidityPoolsClaimHistoryAsync eklendi
++ * restClient.SpotApi.Trading.PlaceSpotTimeWeightedAveragePriceOrderAsync eklendi
++ * restClient.SpotApi.Trading.CancelSpotAlgoOrderAsync eklendi
++ * restClient.SpotApi.Trading.GetSpotOpenAlgoOrdersAsync eklendi
++ * restClient.SpotApi.Trading.GetSpotClosedAlgoOrdersAsync eklendi
++ * restClient.SpotApi.Trading.GetSpotAlgoSubOrdersAsync eklendi
++
++* Sürüm 9.0.5 - 06 Ağu 2023
++ * Usd Futures EditOrder uç noktası eklendi
++ * CancelOrder ve ReplaceOrder uç noktalarını tespit etmek için cancelRestriction parametresi eklendi
++
++* Sürüm 9.0.4 - 11 Tem 2023
++ * GetUniversalTransferHistoryAsync serileştirmesi düzeltildi
++
++* Sürüm 9.0.3 - 11 Tem 2023
++ * GetUniversalTransferHistoryAsync serileştirmesi düzeltildi
++
++* Sürüm 9.0.2 - 06 Tem 2023
++ * Sabit soket istemci seçeneklerinin kopyalanması düzeltildi
++
++* Sürüm 9.0.1 - 25 Haz 2023
++ * Geçersiz derleme için düzeltme
++
++* Sürüm 9.0.0 - 25 Haz 2023
++ * CryptoExchange.Net 6.0.0 sürümüne güncellendi
++ * BinanceClient, BinanceRestClient olarak yeniden adlandırıldı
++ * BinanceSocketClient'ta UsdFuturesStreams ve CoinFuturesStreams, UsdFuturesApi ve CoinFuturesApi olarak yeniden adlandırıldı
++ * Ortamları/temel URL'leri değiştirmeyi daha anlaşılır hale getirmek için, temel olarak herhangi bir yol kullanmadan temel URL'yi tutarlı bir şekilde kullanmak üzere güncellenen uç noktalar
++ * BinanceApiCredentials kaldırıldı çünkü temel ApiCredentials artık RSA imzalamayı destekliyor
++ * IBinanceOrderBookFactory ve emir defterleri oluşturmak için uygulama eklendi
++ * Bağımlılık enjeksiyon kayıt yöntemi güncellendi (AddBinance)
++
++* Sürüm 8.6.3 - 19 Haz 2023
++ * Sabit ticaret kuralları denetimi, soket istemcisiyle bir emir verirken gönderilen parametrelere aslında uygulanmıyor
++
++* Sürüm 8.6.2 - 22 Mayıs 2023
++ * Futures GetUserTradesAsync uç noktalarına orderId filtresi eklendi
++ * BinanceSymbolFilter serileştirmesi için eksik yazarlar düzeltildi
++
++* Sürüm 8.6.1 - 14 Mayıs 2023
++ * Websocket PlaceOrder uç noktasına TradeRules doğrulaması eklendi
++ * Düzeltilmiş vadeli işlemler tüm kitap işaretleri akış tepki modeli
++ * Vadeli işlem sözleşmesi bilgi akışları eklendi
++
++* Sürüm 8.6.0 - 06 Mayıs 2023
++ * Websocket API uygulaması eklendi
++
++* Sürüm 8.5.1 - 20 Nisan 2023
++ * Ticaret güncellemesindeki serileştirme hatası düzeltildi
++
++* Sürüm 8.5.0 - 17 Nis 2023
++ * Vadeli işlemlere ilişkin bireysel ticaret akışları eklendi
++ * Tüm mark fiyat akışlarına coin vadeli işlemleri eklendi
++ * Spot AutoConvertStableCoin uç noktaları eklendi
++ * GetCrossMarginCollateralRatio uç noktası eklendi
++ * Spot sipariş parametrelerine eksik parametreler eklendi
++ * Kendi kendine ticaret önleme desteği eklendi
++ * Çeşitli modeller düzeltildi ve güncellendi
++
++* Sürüm 8.4.4 - 12 Nis 2023
++ * SpotApi.GetExchangeInfoAsync() serileştirme sorunu düzeltildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.4.3 - 18 Mar 2023
++ * Sondaki delta zaman damgası mevcut olduğunda sabit sıralı serileştirme düzeltildi
++ * Alt hesap IP kısıtlama uç noktaları güncellendi
++ * CryptoExchange.Net güncellendi
++	
++* Sürüm 8.4.2 - 16 Şubat 2023
++ * Yüksek UID ağırlıklı isteklerde sabit oran sınırlama sorunu giderildi
++
++* Sürüm 8.4.1 - 14 Şubat 2023
++ * CryptoExchange.Net güncellendi
++ * SpotApi.Trading.GetConvertTransferHistoryAsync isteğindeki Http Yöntemi düzeltildi
++ * SpotApi.Account.GetFiatDepositWithdrawHistoryAsync üzerindeki istek ağırlığı düzeltildi
++
++* Sürüm 8.4.0 - 09 Şubat 2023
++ * RSA istek kimlik doğrulaması için destek eklendi
++
++* Sürüm 8.3.1 - 05 Şubat 2023
++ * Kullanım dışı kaldığı için tüm kitap ticker akışı abonelikleri kaldırıldı
++ * Kullanıcı akışı aboneliğine Strateji ve Grid güncelleme olayları eklendi
++ * UsdFutures.SubscribeToAllMarkPriceUpdatesAsync'de eksik olan IndexPrice düzeltildi
++ * AccountConfigUpdate olay modeli güncellendi
++
++* Sürüm 8.3.0 - 17 Kas 2022
++ * CryptoExchange.Net güncellendi
++ * BinanceConvertTransferRecord DeductedQuantity özelliği düzeltildi
++ * UsdFutures ContinuousContractKlines deserializasyonu düzeltildi
++
++* Sürüm 8.2.0 - 03 Ekim 2022
++ * CryptoLoans uç noktaları eklendi
++ * ConvertTransfer uç noktaları eklendi
++ * GetMarginLevelInformationAsync uç noktası eklendi
++ * GetExchangeInfoAsync spot hesap türü aşırı yüklemeleri eklendi
++ * Borç Verme uç noktalarının adı Tasarruf uç noktaları olarak değiştirildi
++ * Eksik OrderRejectReason eklendi
++ * SpotApi.ReplaceOrderAsync'de hatalı AllowFailure enum serileştirmesi düzeltildi
++ * Vadeli işlem akışları için sabit fiyat arayüzü
++
++* Sürüm 8.1.10 - 04 Eyl 2022
++ * Eksik (ve gelecekteki) hesap türleri eklendi, SpotApi.Trading.GetExchangeInfoAsync'de oluşturulan uyarılar düzeltildi
++
++* Sürüm 8.1.9 - 24 Ağu 2022
++ * SpotApi.ExchangeData.GetUiKlinesAsync uç noktası eklendi
++ * 1 saniyelik kline aralığı desteği eklendi
++ * BinanceSymbols için yeni Notional filtresi eklendi
++ * SpotApi.Account.GetAccountInfoAsync yanıt modeline Brokered eklendi
++
++* Sürüm 8.1.8 - 13 Ağu 2022
++ * Yeni uç noktalar eklendi: * SpotApi.Trading.ReplaceOrderAsync * SpotApi.ExchangeData.GetRollingWindowTickersAsync * SpotApi.Account.GetBalancesAsync * SpotApi.Account.GetMarginDustLogAsync * SpotApi.Acocunt.PortfolioMargin uç noktaları
++ * Kayan pencere ticker soket akışı eklendi
++ * Kullanıcı akışı güncellemelerine ListenKey özelliği eklendi
++ * BinanceRebate miktar seri dışı bırakma düzeltildi
++ * Bazı istek ağırlıkları güncellendi
++
++* Sürüm 8.1.7 - 18 Temmuz 2022
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.1.6 - 16 Temmuz 2022
++ * MarginToIsolatedMargin UniversalTransferType serileştirmesi düzeltildi
++ * Sabit maksimum pozisyon filtresi serileştirmesi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.1.5 - 12 Temmuz 2022
++ * GetExchangeInfoAsync'i seri hale getirirken hataya neden olan eksik AccountType enum değeri düzeltildi
++ * Bilinmeyen bir hesap türü olduğunda gelecekteki serileştirmenin başarısız olması düzeltildi
++
++* Sürüm 8.1.4 - 10 Temmuz 2022
++ * Vadeli işlem hesabı güncellemesinde BalanceChange özelliği eklendi
++ * Sembol parametresi kullanıldığında GetPositionAdlQuantileEstimationAsync serileştirmesi düzeltildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.1.3 - 12 Haz 2022
++ * Birden fazla alt hesap uç noktasındaki `geçersiz imza` hatası düzeltildi
++ * GetKlinesAsync noktasındaki hatalı maksimum limit düzeltildi
++ * İndirim Güncelleme Zamanı özelliğinde eksik tarih/saat dönüştürücüsü düzeltildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.1.2 - 24 Mayıs 2022
++ * Ticaret kuralları kontrol edildikten sonra teklif miktarının iletilmemesi düzeltildi
++ * Blvt akış adresi düzeltildi ve Spot'a taşındı
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.1.1 - 23 Mayıs 2022
++ * PlaceOrderAsync'de parametre sırasının son deltası düzeltildi
++
++* Sürüm 8.1.0 - 22 Mayıs 2022
++ * LeveragedTokens kullanıcı sınırı uç noktası eklendi
++ * Staking uç noktaları eklendi
++ * USD vadeli işlem geçmişi indirme uç noktaları eklendi
++ * USD vadeli işlem algoritması emir uç noktaları eklendi
++ * Marj emri oranı limiti uç noktası eklendi
++ * Faiz marjı veri uç noktası eklendi
++ * GetPricesAsync, GetBookPricesAsync ve GetTickersAsync için sembol koleksiyonu aşırı yüklemeleri eklendi
++ * Alt hesap transferi için sembol parametresi eklendi
++ * Alt hesap transferi için marj hesap türleri eklendi
++ * TrailingDelta desteği eklendi
++ * QuoteQuantity minimum nominal değeri TradeRule doğrulaması eklendi
++ * GetAllBookPricesAsync, GetBookPricesAsync olarak yeniden adlandırıldı
++
++* Sürüm 8.0.13 - 08 Mayıs 2022
++ * BinanceFlexibleProductPosition'a TierAnnualInterestRate eklendi
++ * GetFlexibleProductPositionAsync varlık parametresi isteğe bağlı olacak şekilde değiştirildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.0.12 - 01 Mayıs 2022
++ * Websocket yeniden bağlanma mantığındaki zamanlamayla ilgili bir sorunu düzelten CryptoExchange.Net güncellendi
++ * TrailingDelta sembol filtresi serileştirmesi düzeltildi
++ * KlineInterval enum'ına saniye gösterimi eklendi
++
++* Sürüm 8.0.11 - 20 Nisan 2022
++ * Sondaki delta sembol filtresi ayrıştırması eklendi
++
++* Sürüm 8.0.10 - 14 Nis 2022
++ * Sipariş defteri istekleri için sabit istek ağırlığı
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.0.9 - 18 Mar 2022
++ * Sabit Spot MiniTicker aboneliğinin taban/teklif hacim özelliklerini değiştirmesi sorunu giderildi
++ * USD vadeli işlemlerinde CancelOrderAsync başarısız olduğunda oluşan istisna düzeltildi
++
++* Sürüm 8.0.8 - 10 Mar 2022
++ * MobileNumber türü uzundan dizeye değiştirildi, telefon numarası tanımlanmadığında GetSubAccountStatusAsync serileştirmesi düzeltildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.0.7 - 08 Mar 2022
++ * BinanceLendingAccount modelindeki tutarsız adlandırma düzeltildi
++ * BinanceSymbol'a AllowTrailingStop özelliği eklendi
++ * Yeni sembol filtresi PercentagePriceBySide eklendi
++ * GetOrderBookAsync noktası 5000'in altındaki herhangi bir limite izin verecek şekilde güncellendi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.0.6 - 01 Mar 2022
++ * CryptoExchange.Net güncellendi, web soketi yeniden bağlantı sağlamlığı iyileştirildi
++
++* Sürüm 8.0.5 - 01 Mar 2022
++ * Usd vadeli işlemlerinde Limit kontrolü güncellendi GetMarkPriceKlinesAsync
++ * Zaman damgası hatası alındığında zaman senkronizasyonunun sıfırlanması eklendi
++
++* Sürüm 8.0.4 - 27 Şubat 2022
++ * İstek oran sınırlayıcı olduğunda zaman damgası sorununu düzeltmek için CryptoExchange.Net güncellendi
++ * USD vadeli işlemler kline talepleri maksimum limit değer kontrolü güncellendi
++
++* Sürüm 8.0.3 - 25 Şubat 2022
++ * Eksik AccountType enum değerinin GetExchangeInfoAsync çağrısını bozması düzeltildi
++
++* Sürüm 8.0.2 - 24 Şubat 2022
++ * Sabit TradeRules'un uygulanmaması sorunu giderildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 8.0.1 - 21 Şubat 2022
++ * Sözleşme Türü'nün geçersiz olması düzeltildi
++ * OrderType dosya adı düzeltildi
++
++* Sürüm 8.0.0 - 18 Şubat 2022
++ * Belgeler için Github.io sayfası eklendi: https://jkorf.github.io/Binance.Net/
++ * Her uç nokta ve abonelik için döndürülen JSON'u ayrıştırmak için birim testleri eklendi
++ * Kolay bağımlılık enjeksiyonu için IServiceCollection'a AddBinance uzantı yöntemi eklendi
++ * Her uç nokta için API uç nokta belgelerine URL referansı eklendi
++ * Varsayılan hız sınırlayıcısı eklendi
++
++ * Exchange uygulamaları arasında tutarlı olması için istemci yapısı yeniden düzenlendi
++ * Borsa uygulamaları arasında tutarlı olması için çeşitli özelliklerin adı değiştirildi
++
++ * Proje yapısı temizlendi
++ * Çeşitli modeller düzeltildi
++
++ * CryptoExchange.Net güncellendi, bkz. https://github.com/JKorf/CryptoExchange.Net#release-notes
++ * V7'den V8'e güncelleme için ek notlar için https://jkorf.github.io/Binance.Net/MigrationGuide.html adresine bakın
++
++* Sürüm 7.2.5 - 08 Ekim 2021
++ * Bazı soket sorunlarını düzeltmek için CryptoExchange.Net güncellendi
++
++* Sürüm 7.2.4 - 06 Ekim 2021
++ * CryptoExchange.Net güncellendi, .Net Framework'ten çağrılırken soket sorunu düzeltildi
++
++* Sürüm 7.2.3 - 05 Ekim 2021
++ * PriceProtect desteği eklendi
++
++* Sürüm 7.2.2 - 29 Eylül 2021
++ * BinanceSpotOrderBook için düzeltme
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 7.2.1 - 24 Eylül 2021
++ * GetEnabledIsolatedMarginAccountLimitAsync uç noktası eklendi
++ * EnableIsolatedMarginAccountAsync eklendi
++ * IsolatedMarginAccount modeline Etkinleştirilmiş özellik eklendi
++ * RemoveLiquidityPreviewAsync uç noktası eklendi
++ * AddLiquidityPreviewAsync uç noktası eklendi
++ * GetBSwapPoolConfigureAsync uç noktası eklendi
++
++* Sürüm 7.2.0 - 20 Eylül 2021
++ * Akış Konusu özellikleri mümkün olduğunca sembolü yansıtacak şekilde güncellendi
++ * DisableIsolatedMarginAccountAysnc uç noktası eklendi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 7.1.4 - 15 Eylül 2021
++ * CryptoExchange.Net güncellendi
++ * CoinFutures sistem alt istemcisindeki eksik arayüz düzeltildi
++
++* Sürüm 7.1.3 - 14 Eylül 2021
++ * CreateVirtualSubAccountAsync uç noktası düzeltildi
++ * Eksik FiatWithdrawDepositStatus girişi eklendi
++ * Testnet spot websocket url'si güncellendi
++
++* Sürüm 7.1.2 - 02 Eylül 2021
++ * Alt hesap evrensel transfer sonucu serileştirme düzeltildi
++ * Diğer bağlantılar olsa bile sipariş defteri kapatma soketinin elden çıkarılması için düzeltme
++
++* Sürüm 7.1.1 - 31 Ağu 2021
++ * GetDusLogAsync'e isteğe bağlı başlangıç/bitiş zamanı parametreleri eklendi
++ * Vadeli işlem pozisyonlarının seri dışı hale getirilmesi düzeltildi
++
++* Sürüm 7.1.0 - 30 Ağu 2021
++ * Margin OCO uç noktaları eklendi
++ * TransferSubAccountAsync parametreleri düzeltildi
++ * Çeşitli modeller güncellendi
++
++* Sürüm 7.0.5 - 26 Ağu 2021
++ * CryptoExchange.Net güncellendi, tek bir bağlantıda birden fazla aboneliği olan soketlerin yeniden bağlanması/yeniden abone olunması düzeltildi
++
++* Sürüm 7.0.4 - 24 Ağu 2021
++ * Aslında GetExchangeInfoAsync'deki birden fazla sembol için düzeltme dahil edildi
++
++* Sürüm 7.0.3 - 24 Ağu 2021
++ * CryptoExchange.Net güncellendi, websocket ve SymbolOrderBook performansı iyileştirildi
++ * Birden fazla sembolle GetExchangeInfoAsync filtresi için düzeltme
++
++* Sürüm 7.0.2 - 16 Ağu 2021
++ * GetUserTradesAsync'e orderId parametresi eklendi
++ * İstemci arayüzüne eksik TransferAsync eklendi
++
++* Sürüm 7.0.1 - 13 Ağu 2021
++ * .net framework projesinden bir soket kapatılırken oluşan OperationCancelledException hatasına yönelik düzeltme
++
++* Sürüm 7.0.0 - 12 Ağu 2021
++ * Yeni CryptoExchange.Net sürümü 4.0.0 ile sürüm yayınlandı
++ * Günlük kaydı ve soket bağlantısıyla ilgili birden fazla değişiklik için [CryptoExchange.Net sürüm notlarına](https://github.com/JKorf/CryptoExchange.Net#release-notes) bakın
++ * GetMiningStatisticsAsync'in seri dışı hale getirilmesi düzeltildi
++
++* Sürüm 7.0.0-beta4 - 09 Ağu 2021
++ * Fiat uç noktaları eklendi
++ * Get24HPriceAsync, GetTickerAsync olarak yeniden adlandırıldı
++ * GetMyTradesAsync, GetUserTradesAsync olarak yeniden adlandırıldı
++ * GetAllOrdersAsync, GetOrdersAsync olarak yeniden adlandırıldı
++ * GetSymbolTradesAsync, GetRecentTradeHistoryAsync olarak yeniden adlandırıldı
++ * GetHistoricalSymbolTradesAsync, GetTradeHistoryAsync olarak yeniden adlandırıldı
++ * GetAggregatedTradesAsync, GetAggregatedTradeHistoryAsync olarak yeniden adlandırıldı
++ * GetOpenMarginAccountOrdersAsync, GetMarginAccountOpenOrdersAsync olarak yeniden adlandırıldı
++ * GetAllMarginAccountOrdersAsync, GetMarginAccountOrdersAsync olarak yeniden adlandırıldı
++ * GetMyMarginAccountTradesAsync, GetMarginAccountUserTradesAsync olarak yeniden adlandırıldı
++ * Çeşitli PnL özelliklerinin adı Pnl olarak değiştirildi
++
+++ Sürüm 7.0.0-beta3 - 26 Temmuz 2021
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 7.0.0-beta2 - 22 Temmuz 2021
++ * GetFundingWalletAsync uç noktası eklendi
++ * GetAPIKeyPermissionsAsync uç noktası eklendi
++ * Birleştirilmiş ana
++
+++ Sürüm 7.0.0-beta1 - 09 Temmuz 2021
++ * GetExchangeInfoAsync için sembol filtresi eklendi
++ * Async yöntemler için Async son eki eklendi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 6.14.0-beta7 - 24 Haz 2021
++ * Birden fazla model düzeltildi/güncellendi
++
++* Sürüm 6.14.0-beta6 - 19 Haz 2021
++ * SubscribeToMarkPriceUpdatesAsync'de geçersiz sembol denetimi düzeltildi
++ * Yeni bir istemci oluştururken tekrar yapmayı önlemek için TimeSync statik hale getirildi
++
++* Sürüm 6.14.0-beta5 - 07 Haz 2021
++ * Daha kolay kullanım için farklı API kurulumlarını içeren BinanceApiAddresses sınıfı eklendi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 6.14.0-beta4 - 31 Mayıs 2021
++ * USDT vadeli işlemlerinde GetTradingStatusAsync uç noktası eklendi
++ * Vadeli işlemlerde GetMarkPriceKlinesAsync uç noktası eklendi
++ * GetProductsAsync uç noktası eklendi
++ * USDT vadeli işlemlerinde GetContinuousContractKlinesAsync uç noktası eklendi
++ * PayToMain ve MainToPay transfer türleri eklendi
++ * MultiAssetMode uç noktaları ve alanları eklendi
++ * Artık desteklenmeyen GetLiquidationOrdersAsync vadeli işlem uç noktaları kaldırıldı
++ * USDT vadeli işlemleri GetExchangeInfoAsync modeline Varlıklar özelliği eklendi
++ * Vadeli hesap bakiye akışı güncellemesine BakiyeDeğişikliği eklendi
++
++* Sürüm 6.14.0-beta3 - 26 Mayıs 2021
++ * Tüm asenkron olmayan çağrılar kaldırıldı
++ * CryptoExchange.Net değişikliklerine güncellendi
++
++* Sürüm 6.14.0-beta2 - 06 Mayıs 2021
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 6.14.0-beta1 - 30 nisan 2021
++ * CryptoExchange.Net 4.0.0-beta1'e güncellendi, yeni websocket uygulaması
++
++* Sürüm 6.13.6 - 01 Ağu 2021
++ * Eksik SubscribeToKlineUpdatesAsync aşırı yüklenmesi eklendi
++
++* Sürüm 6.13.5 - 22 Tem 2021
++ * Kline soket aboneliklerinde birden fazla KlineIntervals desteği eklendi
++ * Wapi'den sapi uç noktalarına güncellendi
++
++* Sürüm 6.13.4 - 24 Haz 2021
++ * Birden fazla model düzeltildi/güncellendi
++
++* Sürüm 6.13.3 - 28 nisan 2021
++ * IExchangeClient arayüzündeki bazı sorunlar düzeltildi
++ * ExchangeClient.Net güncellendi
++ * QueryOCO sipariş kimliği parametresi düzeltildi
++
++* Sürüm 6.13.2 - 19 nisan 2021
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 6.13.1 - 02 nisan 2021
++ * Sabit madencilik uç noktaları
++ * AltHesaptan AltHesaba Transfer isteği düzenlendi
++ * Geçersiz sembol kontrolü kaldırıldı Usdt vadeli işlemler GetKlines
++
++* Sürüm 6.13.0 - 30 Mart 2021
++ * CancelOpenMarginOrders uç noktası eklendi
++ * Evrensel Transfer uç noktaları eklendi
++ * Yeni madencilik uç noktaları eklendi
++ * Vadeli işlemler/kredi uç noktaları V2'ye güncellendi
++ * Yeni alt hesap uç noktaları eklendi
++ * GetInterestRateHistory uç noktası marjı eklendi
++ * Birden fazla model güncellendi
++ * Sabit ticaret kuralları Oco emirlerine uygulanmaz
++ * İmzalanmamış madencilik uç noktaları düzeltildi
++ * GetQuote sıvı takas uç noktasında quoteQuantity parametre serileştirmesi düzeltildi
++ * GetAssetDetails'in istisna atması düzeltildi
++
++* Sürüm 6.12.0 - 10 Mart 2021
++ * Birden fazla model düzeltildi
++
++* Sürüm 6.11.1 - 01 Mart 2021
++ * Nuget Sembol Paketi eklendi
++
++* Sürüm 6.11.0 - 01 Mart 2021
++ * Sabit pozisyonlu modeller
++ * PlaceMultipleOrder yönteminde reduceOnly parametresi düzeltildi
++ * Para Çekme yöntemine transactionFeeFlag eklendi
++ * Kesin yapı için yapılandırma eklendi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 6.10.0 - 22 Şubat 2021
++ * IndexPrice BinanceFurustMarkPrice'a eklendi
++ * userDataStream'den kullanım dışı bırakılmış accountInfo güncellemesi kaldırıldı
++ * Güncellenen spot Sipariş modelleri
++
++* Sürüm 6.9.1 - 18 Şubat 2021
++ * GetPrices'ın tutarsız adlandırması düzeltildi
++
++* Sürüm 6.9.0 - 18 Şubat 2021
++ * Güncellenen çekme modelleri
++ * Aracılık API güncellemeleri
++ * Coin vadeli işlemleri için GetPrice güncellendi
++ * Sabit Takas miktarı parametresi
++ * GetDividendRecords'a limit parametresi eklendi
++
++* Sürüm 6.8.2 - 11 Şubat 2021
++ * Daha fazla HttpMethod düzeltildi
++
++* Sürüm 6.8.1 - 11 Şubat 2021
++ * Vadeli işlemlerde GetOpenOrder uç noktası düzeltildi
++ * Alt hesap çağrılarındaki HttpMethods düzeltildi
++
++* Sürüm 6.8.0 - 09 şubat 2021
++ * Sabit stopPrice AutoComply ticaret kuralları davranışı
++ * Sabit pozisyonlu modeller
++
++* Sürüm 6.7.0 - 05 Şubat 2021
++ * Sabit Mark akışı güncelleme modeli
++ * Vadeli işlem kullanıcı akışı aboneliğine onLeverageUpdate eklendi
++ * Güncellenen vadeli işlem pozisyon bilgisi modelleri
++
++* Sürüm 6.6.4 - 22 Ocak 2021
++ * GetSubAccountsFuturesSummary http yöntemi düzeltildi
++ * FirstUpdateId sipariş defteri modeline taşındı
++ * ICommonKline için güncellendi
++
++* Sürüm 6.6.3 - 11 Ocak 2021
++ * Eksik enum değerleri eklendi
++
++* Sürüm 6.6.2 - 11 Ocak 2021
++ * GetExchangeInfo için güncellenmiş vadeli işlem Sembol modelleri
++ * CryptoExchange.Net güncellendi
++ * Serileştirme sorununu gidermek için Ön Ayar sembol durumu eklendi
++
++* Sürüm 6.6.1 - 05 Ocak 2021
++ * Sözleşme türü serileştirmesi düzeltildi
++
++* Sürüm 6.6.0 - 05 Ocak 2021
++ * Güncellenen sipariş defteri modelleri
++ * Futures için GetExchangeInfo serileştirmesi düzeltildi
++
++* Sürüm 6.5.0 - 21 Aralık 2020
++ * Güncellenen Aracılık API'si
++ * SubAccountToSubAccount e-posta parametresi serileştirmesi için düzeltme
++ * GetSubAccountTransferHistoryForSubAccount'un yanlış Http yöntemini kullanması için düzeltme
++ * TradeRules kontrolünde düzeltme
++ * CryptoExchange.Net güncellendi, IExchangeClient güncellendi
++
++* Sürüm 6.4.1 - 11 Aralık 2020
++ * CryptoExchange.Net güncellendi
++ * IExchangeClient uygulaması eklendi
++ * Eksik özellikler Coin-M Sembol modeli eklendi
++ * AutoComply ticaret kuralları davranışında stopPrice kontrolü eklendi
++
++* Sürüm 6.4.0 - 25 Kasım 2020
++ * Sabit vadeli işlem defteri ticker akış verisi ayrıştırması
++
++* Sürüm 6.3.7 - 24 Kasım 2020
++ * GetBrackets'ta tek parantezin ayrıştırılması düzeltildi
++ * GetExchangeInfo'da MaxPosition filtresi eklendi
++
++* Sürüm 6.3.6 - 19 Kasım 2020
++ * Paket içindeki sabit referans
++
++* Sürüm 6.3.5 - 19 Kasım 2020
++ * Vadeli işlem sembolü durum eşlemesine Bekleyen İşlem durumu eklendi
++ * BNB yakma geçiş uç noktaları eklendi
++ * USDT vadeli işlemlerine Bileşik endeks uç noktası eklendi
++ * USDT vadeli işlemlerine Bileşik endeks akışı eklendi
++ * Marj kredisi/geri ödeme/faiz geçmişi sorguları için arşivlenmiş parametre eklendi
++
++* Sürüm 6.3.4 - 16 Kasım 2020
++ * Eksik TimeInForce eşlemesi eklendi
++ * Futures PlaceOrder'a eksik orderResponseType parametresi eklendi
++
++* Sürüm 6.3.3 - 09 Kasım 2020
++ * Geçerli Binance sembolü için güncellenmiş kontrol
++ * ModifyPositionMode sonuç sembolü düzeltildi
++
+++ Sürüm 6.3.2 - 23 Ekim 2020
++ * Çoklu iş parçacığı kullanırken sorunları önlemek için mesajları imzalarken kilitleme yeniden eklendi
++
+++ Sürüm 6.3.1 - 22 Ekim 2020
++ * Akış kline güncellemelerinde eksik Aralık özelliği eklendi
++
++* Sürüm 6.3.0 - 20 Ekim 2020
++ * BSwap uç noktaları eklendi
++ * BLVT uç noktaları eklendi
++ * GetIncomeHistory'deki incomeType parametresi düzeltildi
++ * GetMaxBorrowAmount'a BorrowLimit özelliği eklendi
++ * Alt hesap transferi için Coin-M vadeli işlem desteği eklendi
++ * Borç verme, ödünç alma/geri ödeme sonuçlarına kimlikler eklendi
++ * ChangeToDailyPosition uç noktası eklendi
++ * Tasarruf uç noktalarında Düzenli'den Etkinliğe Güncellendi
++
++* Sürüm 6.2.0 - 08 Ekim 2020
++ * Gelecekteki kullanıcı akışlarında eksik işlem zaman damgası eklendi
++ * Güncellenen kitap fiyat modelleri
++ * CryptoExchange.Net'i güncelle
++
++* Sürüm 6.1.0 - 06 Ekim 2020
++ * Gelecekteki ticaret zaman damgaları düzeltildi
++ * Bazı ondalık serileştirme kültürü sorunları düzeltildi
++ * Gelecekteki kullanıcı akışları zaman damgalarını içerecek şekilde güncellendi
++ * Kullanılan ağırlık ayrıştırması düzeltildi
++ * Aracılık API güncellemesi
++
++* Sürüm 6.0.2 - 17 Eylül 2020
++ * Soket istemcisinin aralıklı bayt verisi alması sorunu düzeltildi
++ * Miras desteği için güncellenmiş piyasa verisi arayüzleri
++
++* Sürüm 6.0.1 - 09 Eyl 2020
++ * Akış kline modellerinde eksik özellikler düzeltildi
++
++* Sürüm 6.0.0 - 09 Eyl 2020
++ * Gelecekteki transfer uç noktaları eklendi
++ * Çapraz teminat uç noktaları eklendi
++ * Birim özellikleri, base/quote olarak düzgün bir şekilde adlandırılacak şekilde yeniden düzenlendi
++ * Sabit izole kenar boşluğu tüm semboller uç noktası
++
++* Sürüm 6.0.0-beta.6 - 31 Ağu 2020
++ * Birleştirilmiş vadeli işlemler userstream Bakiye ve Pozisyon güncelleme işleyicileri, UpdateReason özelliği eklendi
++
++* Sürüm 6.0.0-beta.5 - 28 Ağu 2020
++ * Sabit vadeli işlem emri güncellemesi yanlış JsonConverter
++
++* Sürüm 6.0.0-beta.4 - 28 Ağu 2020
++ * Coin-M vadeli işlemleri için destek eklendi
++ * Bazı yeniden düzenlemeler
++
++* Sürüm 6.0.0-beta.3 - 17 Ağu 2020
++ * GetAccountInfo uç noktası düzeltildi
++
++* Sürüm 6.0.0-beta.2 - 13 Ağu 2020
++ * ModifyPositionMargin vadeli işlem çağrısı düzeltildi
++
++* Sürüm 6.0.0-beta.1 - 12 Ağu 2020
++ * BinanceClient ve BinanceSocketClient, vadeli işlemler ve aracılık API'sini içerecek şekilde yeniden yapılandırıldı. Müşteriler artık konuya göre bölünüyor
++ * İzole edilmiş kenar boşluğu uç noktaları eklendi
++ * Fiyat ayarlanırken ticaret kurallarında MinNotional denetimi düzeltildi
++ * Vadeli İşlemler ve Spot piyasa verileri ve piyasa akışı abonelikleri için paylaşılan arayüzler eklendi
++
++* Sürüm 5.1.14 - 03 Ağu 2020
++ * AutoComply ticaret kuralları davranışı kullanılırken MinNotional filtresinin kontrolü eklendi
++ * Ayarlanmış bool parametre serileştirmesi
++
++* Sürüm 5.1.13 - 27 Tem 2020
++ * Vadeli işlemler bakiyesi, hesap bilgileri, pozisyon uç noktaları sürüm 2'ye güncellendi
++ * Eksik vadeli işlem piyasası veri uç noktaları eklendi
++
++* Sürüm 5.1.12 - 21 Temmuz 2020
++ * Güncellenen emir defteri modelleri
++
++* Sürüm 5.1.11 - 20 Temmuz 2020
++ * Gelecekteki istemci için düzeltmeler
++
++* Sürüm 5.1.10 - 07 Tem 2020
++ * Bazı nesneler için sabit tarih-saat dönüşümü
++
++* Sürüm 5.1.9 - 06 Tem 2020
++ * CancelMultipleOrders eklendi
++ * CancelAllOrders eklendi
++ * OrderBook akışına EventTime eklendi
++ * Satınalma kaydı dönüşümü düzeltildi
++
++* Sürüm 5.1.8 - 21 Haz 2020
++ * CryptoExchange güncellendi
++
++* Sürüm 5.1.7 - 16 Haz 2020
++ * IncomeType dizge olarak değiştirildi, CryptoExchange.Net güncellendi
++
++* Sürüm 5.1.6 - 11 Haz 2020
++ * Ayarlanmamış kültür bilgisi nedeniyle `I` içeren sembollerde abonelik hatası düzeltildi
++
++* Sürüm 5.1.5 - 07 Haz 2020
++ * Serileştirme/şifreleme hatası düzeltildi
++
++* Sürüm 5.1.4 - 02 Haz 2020
++ * Boş istek hatası düzeltildi
++
++* Sürüm 5.1.3 - 02 Haz 2020
++ * CancelAllOrders uç noktası eklendi
++ * Vadeli işlemler için PlaceMultipleOrders uç noktası eklendi
++ * BinanceFuturesSymbolOrderBook eklendi
++ * Eksik Süresi Dolmuş sipariş durum eşlemesi eklendi
++ * Futures istemcisine GetBrackets eklendi
++
++* Sürüm 5.1.2 - 26 Mayıs 2020
++ * CancelAllOrdersAfterTimeout vadeli işlem uç noktası eklendi
++ * Çeşitli modellere zaman damgası eklendi
++ * Gelecekteki siparişler için closePosition parametresi eklendi
++
++* Sürüm 5.1.1 - 20 Mayıs 2020
++ * ChangeInitialLeverage uç noktası düzeltildi
++ * ChangeMarginType uç noktası düzeltildi
++ * maxNotionalValue'daki serileştirme hatası düzeltildi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 5.1.0 - 20 Mayıs 2020
++ * Sürüm yayınlanmak üzere yükseltildi
++ * Eksik cüzdan uç noktaları eklendi
++ * Alt hesap uç noktaları eklendi
++ * Tasarruf uç noktaları eklendi
++
++* Sürüm 5.1.0-alpha10 - 08 Mayıs 2020
++ * Brokerage istemcisi eklendi, çeşitli düzeltmeler yapıldı, bazı eksik parametreler eklendi
++
++* Sürüm 5.1.0-alpha9 - 01 Mayıs 2020
++ * GetExchangeInfo çağrısı düzeltildi, ana çağrı birleştirildi
++
++* Sürüm 5.1.0-alpha8 - 19 Mar 2020
++ * Vadeli işlemler güncellemesi
++
++* Sürüm 5.1.0-alpha7 - 16 Mar 2020
++ * sabit referans
++
++* Sürüm 5.1.0-alpha6 - 16 Mar 2020
++ * Sabit ticker akışı
++
++* Sürüm 5.1.0-alpha5 - 16 Mar 2020
++ * Vadeli işlemler güncellemesi
++
++* Sürüm 5.1.0-alpha4 - 06 Mar 2020
++ * Gerçek akış düzeltmeleri
++
++* Sürüm 5.1.0-alpha3 - 06 Mar 2020
++ * Vadeli akış düzeltmeleri
++
++* Sürüm 5.1.0-alpha2 - 03 Mar 2020
++ * CryptoExchange sürümü güncellendi
++
++* Sürüm 5.1.0-alfa - 03 Mar 2020
++ * İlk versiyon Futures Api uygulaması
++
++* Sürüm 5.0.10 - 01 Mayıs 2020
++ * GetExchangeInfo'daki filtre ayrıştırma düzeltildi
++
++* Sürüm 5.0.9 - 03 Mar 2020
++ * DustTransfer varlıkları parametresindeki serileştirme sorunu düzeltildi
++
++* Sürüm 5.0.8 - 03 Mar 2020
++ * SideEffectType ve MarginBuyBorrow özellikleri eklendi
++ * Marj emirleri için ticaret kuralları kontrolü eklendi
++
++* Sürüm 5.0.7 - 05 Şubat 2020
++ * Hatalı Geçersiz sembol hatası düzeltildi
++
++* Sürüm 5.0.6 - 27 Ocak 2020
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 5.0.5 - 23 Ocak 2020
++ * Özel URL için seçenek eklendi
++
++* Sürüm 5.0.4 - 10 Aralık 2019
++ * BinanceSymbolOrderBook için düzeltme
++
++* Sürüm 5.0.3 - 13 Kas 2019
++ * Yeni API sürümü için güncellendi
++ * QuoteOrderQuantity parametresi/özelliği eklendi
++ * Akış dengesi güncellemesi ekle
++ * ExchangeInfo sembollerine hassasiyetler eklendi
++
++* Sürüm 5.0.1 - 23 Ekim 2019
++ * 9 uzunluk sembolü için doğrulama düzeltildi
++	
++* Sürüm 5.0.1 - 23 Ekim 2019
++ * 5 uzunluklu semboller için doğrulama düzeltildi
++
++* Sürüm 5.0.0 - 23 Ekim 2019
++ * CryptoExchange.Net 3.0 sürüm notlarına bakın
++ * Giriş doğrulaması eklendi
++ * Tüm isteklere CancellationToken desteği eklendi
++ * Artık koleksiyonlar için IEnumerable<> kullanılıyor
++ * Diğer borsalarla daha uyumlu olması için çeşitli yöntemlerin adları değiştirildi
++ * SubscribeToXXXStream'in adı SubscribeToXXXUpdates olarak değiştirildi
++
++* Sürüm 4.3.3 - 06 Ekim 2019
++ * BinanceSymbolFilter için serileştirme yöntemi eklendi
++
++* Sürüm 4.3.2 - 25 Eylül 2019
++ * Para çekme nesnesinde eksik AddressTag ve TransactionFee özellikleri eklendi
++
++* Sürüm 4.3.1 - 03 Eyl 2019
++ * Soket istemcisine kitap ticker akışı eklendi
++
++* Sürüm 4.3.0 - 02 Eylül 2019
++ * Yeni Margin uç noktaları eklendi
++ * Tutarlılık için Sorgu- yöntemleri Get- yöntemleri olarak yeniden adlandırıldı
++
++* Sürüm 4.2.3 - 29 Ağu 2019
++ * DustTransfer ve GetDividendRecords uç noktaları eklendi
++ * Derinlik akışlarına updateInterval parametresi eklendi
++
++* Sürüm 4.2.2 - 20 Ağustos 2019
++ * Eksik kenar boşluğu uç noktaları eklendi
++ * IndicatorType'ı enum'a dönüştür
++
++* Sürüm 4.2.1 - 19 Ağu 2019
++ * Mevcut ortalama fiyat uç noktası eklendi
++
++* Sürüm 4.2.0 - 15 Ağu 2019
++ * OCO emirleri uygulandı
++ * API güncellemesi için ayarlamalar
++
++* Sürüm 4.1.3 - 12 Ağu 2019
++ * Marj emri iptalini düzelt
++
++* Sürüm 4.1.2 - 07 Ağu 2019
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 4.1.1 - 05 Ağu 2019
++ * Kod belgeleri için xml dosyası eklendi
++
++* Sürüm 4.1.0 - 30 Temmuz 2019
++ * Marj API'si eklendi
++
++* Sürüm 4.0.17 - 09 haziran 2019
++ * TimestampOffset seçenekleri eklendi
++ * BinanceSymbolOrderBook'u güncelle
++
++* Sürüm 4.0.16 - 20 Mayıs 2019
++ * Sabit OtomatikUyumlu ticaret kuralları davranışı
++
++* Sürüm 4.0.15 - 16 Mayıs 2019
++ * Sabit emir defteri limiti uygulaması
++
++* Sürüm 4.0.14 - 14 mayıs 2019
++ * Güncel bir emir defterini kolayca tutmak için bir emir defteri uygulaması eklendi
++ * Dosyadan okuyabilmek için ApiCredentials'a ek oluşturucu eklendi
++
++* Sürüm 4.0.13 - 01 mayıs 2019
++ * En son CryptoExchange.Net'e güncellendi
++ * REST çağrı sonucuna yanıt başlığı ekler
++ * API anahtarı başına oran sınırlayıcı eklendi
++ * Birleşik soket istemcisi çalışmaları
++
++* Sürüm 4.0.12 - 09 nisan 2019
++ * FifteenMinutes kline aralığı enum'unda sabit tip
++ * BinanceStreamAccountInfo'ya güncelleme zamanı eklendi
++ * BinanceSymbol'a IsSpotTradingAllowed ve IsMarginTradingAllowed alanları eklendi
++ * İstemci arayüzlerine IDisposable eklendi
++
++* Sürüm 4.0.11 - 02 nisan 2019
++ * BinanceTrade'de Sembol alanı eklendi
++ * Mevduat filtresine Tamamlandı mevduat durumu eklendi
++ * Ayarlanmamışsa İstisna işleyicisi boş referansı düzeltildi
++
++* Sürüm 4.0.10 - 18 Mart 2019
++ * Otomatik Yeniden Bağlanma seçeneği eklendi
++ * Kod/mesaj olmadan hata ayrıştırması için düzeltme
++ * MyTrades sonucuna QuoteQuantity eklendi
++
++* Sürüm 4.0.9 - 07 mar 2019
++ * GetAllOrders'a başlangıç/bitiş saati parametreleri eklendi
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 4.0.8 - 27 Şubat 2019
++ * Alt hesap desteği eklendi
++ * Ticaret durumu çağrısı eklendi
++ * REST istekleri için yanıt durumunu açığa çıkarmak amacıyla CallResult, WebCallResult olarak değiştirildi
++
++* Sürüm 4.0.7 - 01 Şubat 2019
++ * Aboneliklere istisna olayı eklendi
++ * Genel düzeltmeler
++
++* Sürüm 4.0.6 - 10 Ocak 2019
++ * Zaman damgası hesaplaması için düzeltme
++
++* Sürüm 4.0.5 - 09 Ocak 2019
++ * Ayarlanmış Otomatik Zaman Damgası hesaplaması
++
++* Sürüm 4.0.4 - 28 Aralık 2018
++ * Yeniden bağlanmak için başka bir düzeltme
++
++* Sürüm 4.0.3 - 17 Aralık 2018
++ * Yeniden bağlanmanın bazen hata vermesi düzeltildi
++
++* Sürüm 4.0.2 - 10 Aralık 2018
++ * TradeRuleBehavior.AutoComply yuvarlama düzeltmesi
++
++* Sürüm 4.0.1 - 06 Aralık 2018
++ * UI iş parçacığından çağrıldığında oluşan donmalar için düzeltme
++ * Sabit OtomatikUyumlu ticaret kuralları davranışı
++ * Sabit IDisposable arayüzü
++
++* Sürüm 4.0.0 - 05 Aralık 2018
++ * CryptoExchange.Net sürüm 2'ye güncellendi
++ * Kütüphaneler artık aynı standart işlevleri kullanıyor
++ * Soket abonelikleri tarafından döndürülen nesneler kütüphaneler arasında standartlaştırıldı
++ * GetMyTrades'e başlangıç/bitiş zamanı parametreleri eklendi
++
++* Sürüm 3.3.0 - 15 Kasım 2018
++ * En son Binance API güncellemesini desteklemek için güncellendi, şunlar dahil:
++ * RawRequest oran sınırı eklendi
++ * Bir siparişi iptal etmek artık tam sipariş raporunu geri döndürüyor
++ * Birden fazla sembol filtresi eklendi
++ * Soket sipariş güncellemesine LastQuoteTransactedQuantity eklendi
++
++* Sürüm 3.2.12 - 15 Kasım 2018
++ * BinanceStreamTick'e etkinlik zamanı eklendi
++
++* Sürüm 3.2.11 - 01 Kasım 2018
++ * Hata yanıt ayrıştırmada istisna işleme
++
++* Sürüm 3.2.10 - 24 Ekim 2018
++ * Otomatik Zaman Damgası artık varsayılan olarak etkin
++ * BaseAssetPrecision ve QuoteAssetPrecision türü dizeden tam sayıya
++
++* Sürüm 3.2.9 - 18 Ekim 2018
++ * İstemci seçeneklerine varsayılan receiveWindow parametresi eklendi
++ * Sunucu/istemci arasındaki zaman hesaplaması güncellendi, yerel saatin sunucu saatinden ileride olduğunu söyleyen aralıklı hatalar alan ve dengesiz ping sorunu yaşayan kişilere yardımcı olmalı
++
++* Sürüm 3.2.8 - 04 Ekim 2018
++ * İlk abonelik başarısız olursa yeniden bağlanmaya çalışan abonelikler düzeltildi
++ * Sembol filtreleri için erişim araçları eklendi
++ * Abonelik yeniden bağlantılarını düzelt
++
++* Sürüm 3.2.7 - 21 eylül 2018
++ * CryptoExchange.Net güncellendi
++
++* Sürüm 3.2.6 - 17 eylül 2018
++ * PartialBookDepthStream veri nesnesi DepthStream veri nesnesiyle birleştirildi
++ * Yeniden bağlanma hatasını düzelt
++
++* Sürüm 3.2.5 - 10 eylül 2018
++ * Başarısız otomatik zaman damgası senkronizasyonu için kontrol eklendi
++ * Otomatik zaman damgası için otomatik yeniden hesaplama aralığı eklendi
++
++* Sürüm 3.2.4 - 07 eylül 2018
++ * Soket istemcisindeki sabit proxy ayarı
++
++* Sürüm 3.2.3 - 21 Ağustos 2018
++ * Önceki düzeltmenin düzeltilmesi..
++
++* Sürüm 3.2.2 - 21 Ağustos 2018
++ * Varsayılan API kimlik bilgilerinin elden çıkarılması için düzeltme
++
++* Sürüm 3.2.1 - 20 Ağustos 2018
++ * Hata düzeltmesi için CryptoExchange.Net'i güncelleyin
++
++* Sürüm 3.2.0 - 16 Ağustos 2018
++ * Soket istemci arayüzü eklendi
++ * Arayüz arayüz ad alanına taşındı
++ * Resharper'ın bazı küçük bulguları düzeltildi
++
++* Sürüm 3.1.18 - 13 Ağustos 2018
++ * Userstream'in bağlanmaması için düzeltme
++
++* Sürüm 3.1.17 - 13 Ağustos 2018
++ * Hatayı düzeltmek için CryptoExchange.Net güncellendi
++
++* Sürüm 3.1.16 - 13 Ağustos 2018
++ * CryptoExchange.Net güncellendi
++ * Sabit hata yanıt ayrıştırması
++
++* Sürüm 3.1.15 - 24 Temmuz 2018
++ * Eksik Sembol filtre türü düzeltildi
++
++* Sürüm 3.1.14 - 20 Temmuz 2018
++ * Kod/mesaj için hata ayrıştırma eklendi
++
++* Sürüm 3.1.13 - 19 temmuz 2018
++ * Çeşitli özellikler/filtreler eklenerek en son API güncellemesine güncellendi
++
++* Sürüm 3.1.12 - 17 temmuz 2018
++ * GetAccountStatus uç noktası eklendi
++ * GetSystemStatus uç noktası eklendi
++ * GetDustLog uç noktası eklendi
++
++* Sürüm 3.1.11 - 16 Temmuz 2018
++ * Bir akışın aboneliği iptal edilirken kullanıcı arayüzü iş parçacığının donması sorunu düzeltildi
++
++* Sürüm 3.1.10 - 03 temmuz 2018
++ * Soket olay bağlaması için küçük düzeltme
++
++* Sürüm 3.1.9 - 25 haziran 2018
++ * Kullanıcı arayüzü iş parçacığından çağrıldığında Abonelikten çıkma işleminin donması sorunu düzeltildi
++
++* Sürüm 3.1.8 - 08 haziran 2018
++ * DateTime ayrıştırması için düzeltme
++
++* Sürüm 3.1.7 - 08 haziran 2018
++ * PlaceOrder yanıtına eksik TradeId alanı eklendi
++
++* Sürüm 3.1.6 - 04 haziran 2018
++ * OrderUpdate eşlemesi için düzeltme
++ * BinanceSymbol eşlemesi için düzeltme
++
++* Sürüm 3.1.5 - 07 mayıs 2018
++ * Sunucu zamanına resetAutoTimestamp parametresi eklendi
++
++* Sürüm 3.1.4 - 03 mayıs 2018
++ * Ek hata ayıklama günlüğü
++
++* Sürüm 3.1.3 - 30 nisan 2018
++ * Birleştirilmiş akışlar, kullanımı daha kolay olacak ve yinelenen kod azaltılacak şekilde yeniden düzenlendi
++ * Kimlik doğrulayıcıdaki iş parçacığı güvenliği sorunu düzeltildi
++
++* Sürüm 3.1.2 - 19 nisan 2018
++ * Birleştirilmiş akışlar eklendi
++
++* Sürüm 3.1.1 - 16 nisan 2018
++ * PlaceOrder'a receiveWindow parametresi eklendi
++
++* Sürüm 3.1.0 - 27 Mart 2018
++ * GetWithdrawalFee çağrısı eklendi
++ * Akış ve geri kalan verilerin daha benzer olması için Klines'ın bir kısmı yeniden düzenlendi
++ * Eksik olan yerlere kod belgeleri eklendi
++
++* Sürüm 3.0.11 - 23 Mart 2018
++ * Soketler için kapalı/yeniden bağlanma işleme güncellendi
++ * Güncellenen taban
++
++* Sürüm 3.0.10 - 21 Mart 2018
++ * Artık birden fazla günlük yazıcısı eklemek mümkün
++ * İnternet kesintisi sonrasında otomatik yeniden bağlanma eklendi
++ * Null'u işleyici olarak geçirirken bir akışa abone olurken oluşan hata düzeltildi
++
++* Sürüm 3.0.9 - 13 Mart 2018
++ * Toplu ticaret akışının yanına ticaret akışı eklendi
++ * BuyerIsMaker alanının her zaman doğru olması için düzeltme
++
++* Sürüm 3.0.8 - 12 Mart 2018
++ * Tutarlı olmayan int/long türleri için düzeltme
++ * UI iş parçacığından çağrı yaparken donma sorunu düzeltildi
++ * Otomatik yeniden bağlanma işlevi eklendi
++
++* Sürüm 3.0.7 - 08 Mart 2018
++ * Güncellenen taban
++
++* Sürüm 3.0.6 - 08 Mart 2018
++ * Dotnet çekirdek dışı istemcilerde soket bağlantısı için düzeltme
++
++* Sürüm 3.0.5 - 07 mar 2018
++ * Serileştirme hatası işleme için düzeltme
++ * Soket açılışı asenkron, abone yöntemleri asenkron
++
++* Sürüm 3.0.4 - 05 Mart 2018
++ * SetApiCredentials yöntemleri eklendi
++
++* Sürüm 3.0.2/3.0.3 - 05 mar 2018
++ * SetDefaultOptions statik hale getirildi
++
++* Sürüm 3.0.1 - 05 mar 2018
++ * Ek günlük kaydı
++ * Güncellenen temel sürümler
++
++* Sürüm 3.0.0 - 01 mar 2018
++ * Sözdiziminde bazı değişiklikler getiren ancak işlevselliği aynı bırakan temel paketi kullanmak üzere güncellendi
++	
++* Sürüm 2.3.4 - 12 Şubat 2018
++ * AutoComply ticaret kurallarının çok fazla ardışık sıfır göndermesi için düzeltme
++
++* Sürüm 2.3.3 - 10 Şubat 2018
++ * Akış sırası ayrıştırması için düzeltme
++
++* Sürüm 2.3.2 - 09 Şubat 2018
++ * Bağlantı hatalarını düzeltmek için temel adres https://www.binance.com'dan https://api.binance.com'a değiştirildi
++
++* Sürüm 2.3.1 - 08 Şubat 2018
++ * Modeller en son sürüme güncellendi
++ * Temizlenmiş kod ve kod belgeleri
++
++* Sürüm 2.3.0 - 07 Şubat 2018
++ * 24 saatlik fiyatlara eksik alanlar eklendi
++ * Abonelik sonuçları bir kimlikten kapalı/hata olaylarına sahip bir nesneye değiştirildi
++ * Kullanıcı akışına abone olma şekli değiştirildi
++ * Güncellenen/düzeltilen birim test projesi
++ * Güncellenmiş readme
++
++* Sürüm 2.2.5 - 24 Ocak 2018
++ * Sipariş verirken işlem kurallarının isteğe bağlı otomatik kontrolü eklendi
++ * Bazı temel yardımcı fonksiyonları içeren `BinanceHelpers` statik sınıfı eklendi
++ * Varsayılan günlükçünün yeni bir satıra yazmaması için düzeltme
++ * Basitleştirilmiş dahili varsayılanlar
++
++* Sürüm 2.2.4 - 23 Ocak 2018
++ * GetExchangeInfo'daki RateLimit türü için düzeltme
++ * BinanceSymbolFilter'ı 3 sınıfa böl
++
++* Sürüm 2.2.3 - 15 Ocak 2018
++ * UI iş parçacığından yapıldığında çağrıların donması sorunu düzeltildi
++
++* Sürüm 2.2.2 - 15 Ocak 2018
++ * InvariantCulture kullanılarak PlaceOrder'da düzeltme
++ * FirstId özelliği için 24 saatlik fiyatta düzeltme
++ * 24 saatlik fiyata sembol özelliği eklendi
++
++* Sürüm 2.2.1 - 12 Ocak 2018
++ * StreamOrderUpdate'deki ayrıştırma hatası için düzeltme
++
++* Sürüm 2.2.0 - 08 Ocak 2018
++ * En son belgelere göre güncellendi, çeşitli uç noktalar eklendi
++
++* Sürüm 2.1.3 - 9 Kasım 2017
++ * Sunucu hatalarında otomatik yapılandırılabilir yeniden deneme eklendi
++ * Hata dönüşlerinde yeniden düzenleme
++ * ApiResult'un adı BinanceApiResult olarak değiştirildi
++	
+++ Sürüm 2.1.2 - 31 Ekim 2017
++ * Çok sayıda kod dokümantasyonu eklendi
++ * Küçük temizlikler ve düzeltmeler
++
+++ Sürüm 2.1.1 - 30 Ekim 2017
++ * Soket kapanması için düzeltme
++
+++ Sürüm 2.1.0 - 30 Ekim 2017
++ * Küçük yeniden adlandırma/yeniden düzenleme, BinanceSocketClient artık ApiResult'ı da kullanıyor
++
+++ Sürüm 2.0.1 - 30 Ekim 2017
++ * BinanceClient'ta hata mesajları/işleme iyileştirildi
++ * Başarısız istekler için ekstra birim testleri
++
+++ Sürüm 2.0.0 - 25 Ekim 2017
++ * Statik sınıftan nesne yönelimli sınıfa geçildi, `using` ifadelerini kullanabilmek için IDisposable arayüzü eklendi
++ * BinanceClient ve BinanceSocketClient'ta bölünmüş websocket ve restapi işlevselliği
++ * Günlük çıktı yazıcısını ayarlamak için yöntem eklendi
++ * Yeni istemciler için varsayılanları ayarlama yeteneği eklendi
++ * Yeni kurulum için sabit birim testleri
++ * Güncellenen belgeler
++
+++ Sürüm 1.1.2 - 25 Ekim 2017
++ * `UnsubscribeAllStreams` yöntemi eklendi
++
+++ Sürüm 1.1.1 - 20 Ekim 2017
++ * Para çekme/yatırma filtresi için düzeltme
++
+++ Sürüm 1.1.0 - 20 Ekim 2017
++ * API değişikliklerine göre para çekme/para yatırma işlevi güncellendi
++ * BinanceClient'ı biraz temizledim
++
+++ Sürüm 1.0.9 - 19 Ekim 2017
++ * Para çekme/yatırma işlevi eklendi
