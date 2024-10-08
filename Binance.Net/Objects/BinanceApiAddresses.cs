@@ -26,9 +26,13 @@
         /// </summary>
         public string? UsdFuturesRestClientAddress { get; set; }
         /// <summary>
-        /// The address used by the BinanceSocketClient for the USD futures API
+        /// The address used by the BinanceSocketClient for the USD futures streams
         /// </summary>
         public string? UsdFuturesSocketClientAddress { get; set; }
+        /// <summary>
+        /// The address used by the BinanceSocketClient for the USD futures API
+        /// </summary>
+        public string? UsdFuturesSocketApiClientAddress { get; set; }
 
         /// <summary>
         /// The address used by the BinanceClient for the COIN futures API
@@ -50,6 +54,7 @@
             BlvtSocketClientAddress = "wss://nbstream.binance.com/",
             UsdFuturesRestClientAddress = "https://fapi.binance.com",
             UsdFuturesSocketClientAddress = "wss://fstream.binance.com/",
+            UsdFuturesSocketApiClientAddress = "wss://ws-fapi.binance.com/",
             CoinFuturesRestClientAddress = "https://dapi.binance.com",
             CoinFuturesSocketClientAddress = "wss://dstream.binance.com/",
         };
@@ -65,6 +70,7 @@
             BlvtSocketClientAddress = "wss://fstream.binancefuture.com",
             UsdFuturesRestClientAddress = "https://testnet.binancefuture.com",
             UsdFuturesSocketClientAddress = "wss://fstream.binancefuture.com",
+            UsdFuturesSocketApiClientAddress = "wss://testnet.binancefuture.com",
             CoinFuturesRestClientAddress = "https://testnet.binancefuture.com",
             CoinFuturesSocketClientAddress = "wss://dstream.binancefuture.com",
         };
