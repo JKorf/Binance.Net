@@ -140,7 +140,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceFuturesAccountInfoV3>> GetAccountInfoV3Async(long? receiveWindow = null, CancellationToken ct = default);
 
-        /// <summary>.
+        /// <summary>
         /// Gets account balances
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#futures-account-balance-v2-user_data" /></para>
         /// </summary>
@@ -149,7 +149,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <returns>The account information</returns>
         Task<WebCallResult<IEnumerable<BinanceUsdFuturesAccountBalance>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
-        /// <summary>.
+        /// <summary>
         /// Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-current-multi-assets-mode-user_data" /></para>
         /// </summary>
@@ -158,7 +158,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <returns>Multi asset mode</returns>
         Task<WebCallResult<BinanceFuturesMultiAssetMode>> GetMultiAssetsModeAsync(long? receiveWindow = null, CancellationToken ct = default);
 
-        /// <summary>.
+        /// <summary>
         /// Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-multi-assets-mode-trade" /></para>
         /// </summary>

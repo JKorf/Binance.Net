@@ -79,7 +79,7 @@ namespace Binance.Net.UnitTests
             var client = TestHelpers.CreateSocketClient(socket);
 
             IBinanceStreamKlineData result = null;
-            var subTask = client.UsdFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync("ETHBTC", ContractType.Perpetual, KlineInterval.OneMinute, (test) => result = test.Data);
+            var subTask = client.UsdFuturesApi.ExchangeData.SubscribeToContinuousContractKlineUpdatesAsync("ETHBTC", ContractType.Perpetual, KlineInterval.OneMinute, (test) => result = test.Data);
             socket.InvokeMessage(new BinanceSocketQueryResponse { Id = ExchangeHelpers.LastId() - 1 });
             await subTask;
 
