@@ -52,27 +52,27 @@ namespace Binance.Net.UnitTests
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
             var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "https://fapi.binance.com", "data", stjCompare: true);
-            await tester.ValidateAsync<BinanceFuturesUsdtStreamMarkPrice>((client, handler) => client.UsdFuturesApi.SubscribeToMarkPriceUpdatesAsync("BTCUSDT", 1000, handler), "MarkPrice");
-            await tester.ValidateAsync<IBinanceStreamKlineData>((client, handler) => client.UsdFuturesApi.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "Klines", ignoreProperties: new List<string> { "B" });
-            await tester.ValidateAsync<BinanceStreamContinuousKlineData>((client, handler) => client.UsdFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync("BTCUSDT", Enums.ContractType.Perpetual, Enums.KlineInterval.OneMonth, handler), "ContKlines", ignoreProperties: new List<string> { "B" });
-            await tester.ValidateAsync<IBinanceMiniTick>((client, handler) => client.UsdFuturesApi.SubscribeToMiniTickerUpdatesAsync("BTCUSDT", handler), "MiniTicker");
-            await tester.ValidateAsync<IBinance24HPrice>((client, handler) => client.UsdFuturesApi.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
-            await tester.ValidateAsync<BinanceFuturesStreamCompositeIndex>((client, handler) => client.UsdFuturesApi.SubscribeToCompositeIndexUpdatesAsync("BTCUSDT", handler), "CompositIndex");
-            await tester.ValidateAsync<BinanceStreamAggregatedTrade>((client, handler) => client.UsdFuturesApi.SubscribeToAggregatedTradeUpdatesAsync("BTCUSDT", handler), "AggTrades");
-            await tester.ValidateAsync<BinanceFuturesStreamBookPrice>((client, handler) => client.UsdFuturesApi.SubscribeToBookTickerUpdatesAsync("BTCUSDT", handler), "BookTicker");
-            await tester.ValidateAsync<BinanceFuturesStreamLiquidation>((client, handler) => client.UsdFuturesApi.SubscribeToLiquidationUpdatesAsync("BTCUSDT", handler), "Liquidations", "data.o", ignoreProperties: new List<string> { "e", "E" });
-            await tester.ValidateAsync<IBinanceFuturesEventOrderBook>((client, handler) => client.UsdFuturesApi.SubscribeToPartialOrderBookUpdatesAsync("BTCUSDT", 5, 100, handler), "PartialBook");
-            await tester.ValidateAsync<IBinanceFuturesEventOrderBook>((client, handler) => client.UsdFuturesApi.SubscribeToOrderBookUpdatesAsync("BTCUSDT", 100, handler), "Book");
-            await tester.ValidateAsync<BinanceFuturesStreamSymbolUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToSymbolUpdatesAsync(handler), "SymbolUpdates");
-            await tester.ValidateAsync<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>((client, handler) => client.UsdFuturesApi.SubscribeToAssetIndexUpdatesAsync(handler), "AssetIndex");
-            await tester.ValidateAsync<BinanceFuturesStreamConfigUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onLeverageUpdate: handler), "Leverage");
-            await tester.ValidateAsync<BinanceFuturesStreamConfigUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onLeverageUpdate: handler), "MultiAssetMode");
-            await tester.ValidateAsync<BinanceFuturesStreamMarginUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onMarginUpdate: handler), "MarginUpdate");
-            await tester.ValidateAsync<BinanceFuturesStreamAccountUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onAccountUpdate: handler), "AccountUpdate");
-            await tester.ValidateAsync<BinanceFuturesStreamOrderUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onOrderUpdate : handler), "OrderUpdate", ignoreProperties: new List<string> { "si", "ss" });
-            await tester.ValidateAsync<BinanceFuturesStreamTradeUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onTradeUpdate: handler), "TradeUpdate");
-            await tester.ValidateAsync<BinanceStrategyUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onStrategyUpdate : handler), "StrategyUpdate");
-            await tester.ValidateAsync<BinanceConditionOrderTriggerRejectUpdate>((client, handler) => client.UsdFuturesApi.SubscribeToUserDataUpdatesAsync("123", onConditionalOrderTriggerRejectUpdate: handler), "ConditionalTrigger");
+            await tester.ValidateAsync<BinanceFuturesUsdtStreamMarkPrice>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToMarkPriceUpdatesAsync("BTCUSDT", 1000, handler), "MarkPrice");
+            await tester.ValidateAsync<IBinanceStreamKlineData>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "Klines", ignoreProperties: new List<string> { "B" });
+            await tester.ValidateAsync<BinanceStreamContinuousKlineData>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToContinuousContractKlineUpdatesAsync("BTCUSDT", Enums.ContractType.Perpetual, Enums.KlineInterval.OneMonth, handler), "ContKlines", ignoreProperties: new List<string> { "B" });
+            await tester.ValidateAsync<IBinanceMiniTick>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToMiniTickerUpdatesAsync("BTCUSDT", handler), "MiniTicker");
+            await tester.ValidateAsync<IBinance24HPrice>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToTickerUpdatesAsync("BTCUSDT", handler), "Ticker");
+            await tester.ValidateAsync<BinanceFuturesStreamCompositeIndex>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToCompositeIndexUpdatesAsync("BTCUSDT", handler), "CompositIndex");
+            await tester.ValidateAsync<BinanceStreamAggregatedTrade>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync("BTCUSDT", handler), "AggTrades");
+            await tester.ValidateAsync<BinanceFuturesStreamBookPrice>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToBookTickerUpdatesAsync("BTCUSDT", handler), "BookTicker");
+            await tester.ValidateAsync<BinanceFuturesStreamLiquidation>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToLiquidationUpdatesAsync("BTCUSDT", handler), "Liquidations", "data.o", ignoreProperties: new List<string> { "e", "E" });
+            await tester.ValidateAsync<IBinanceFuturesEventOrderBook>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync("BTCUSDT", 5, 100, handler), "PartialBook");
+            await tester.ValidateAsync<IBinanceFuturesEventOrderBook>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToOrderBookUpdatesAsync("BTCUSDT", 100, handler), "Book");
+            await tester.ValidateAsync<BinanceFuturesStreamSymbolUpdate>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToSymbolUpdatesAsync(handler), "SymbolUpdates");
+            await tester.ValidateAsync<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToAssetIndexUpdatesAsync(handler), "AssetIndex");
+            await tester.ValidateAsync<BinanceFuturesStreamConfigUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onLeverageUpdate: handler), "Leverage");
+            await tester.ValidateAsync<BinanceFuturesStreamConfigUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onLeverageUpdate: handler), "MultiAssetMode");
+            await tester.ValidateAsync<BinanceFuturesStreamMarginUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onMarginUpdate: handler), "MarginUpdate");
+            await tester.ValidateAsync<BinanceFuturesStreamAccountUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onAccountUpdate: handler), "AccountUpdate");
+            await tester.ValidateAsync<BinanceFuturesStreamOrderUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onOrderUpdate : handler), "OrderUpdate", ignoreProperties: new List<string> { "si", "ss" });
+            await tester.ValidateAsync<BinanceFuturesStreamTradeUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onTradeUpdate: handler), "TradeUpdate");
+            await tester.ValidateAsync<BinanceStrategyUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onStrategyUpdate : handler), "StrategyUpdate");
+            await tester.ValidateAsync<BinanceConditionOrderTriggerRejectUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onConditionalOrderTriggerRejectUpdate: handler), "ConditionalTrigger");
         }
     }
 }
