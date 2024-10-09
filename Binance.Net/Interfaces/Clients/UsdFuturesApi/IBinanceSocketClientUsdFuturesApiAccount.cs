@@ -1,5 +1,7 @@
 ﻿using Binance.Net.Enums;
+using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Objects.Sockets;
@@ -11,6 +13,23 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     /// </summary>
     public interface IBinanceSocketClientUsdFuturesApiAccount
     {
+        /// <summary>
+        /// Gets account balances
+        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#futures-account-balance-v2-user_data" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The account information</returns>
+        Task<CallResult<BinanceResponse<IEnumerable<BinanceUsdFuturesAccountBalance>>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get account information, including position and balances
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<CallResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-data-streams" /></para>

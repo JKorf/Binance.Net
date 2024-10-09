@@ -97,7 +97,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ## Supported functionality
 
-### Spot/Margin/Savings/Mining
+### Spot/Margin/Savings/Mining REST
 |API|Supported|Location|
 |--|--:|--|
 |Wallet endpoints|✓|`restClient.SpotApi.Account`|
@@ -128,7 +128,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |NFT Endpoints|X||
 |Binance Gift Card Endpoints|X||
 
-### USD-M Futures
+### USD-M Futures REST
 |API|Supported|Location|
 |--|--:|--|
 |Market Data|✓|`restClient.UsdFuturesApi.ExchangeData`|
@@ -139,7 +139,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |Convert|✓|`restClient.UsdFuturesApi.ExchangeData` / `restClient.UsdFuturesApi.Trading`|
 |Classic Portfolio Margin Endpoints|X||
 
-### COIN-M Futures
+### COIN-M Futures REST
 |API|Supported|Location|
 |--|--:|--|
 |Market Data|✓|`restClient.CoinFuturesApi.ExchangeData`|
@@ -149,17 +149,22 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |Account|✓|`restClient.CoinFuturesApi.Account` / `restClient.CoinFuturesApi.Trading`|
 |Classic Portfolio Margin Endpoints|X||
 
-### European Options
-|API|Supported|Location|
-|--|--:|--|
-|*|X||
-
-### Websocket API
+### Spot Websocket API
 |API|Supported|Location|
 |--|--:|--|
 |Market data requests|✓|`socketClient.SpotApi.ExchangeData`|
 |Trading requests|✓|`socketClient.SpotApi.Trading`|
 |Account requests|✓|`socketClient.SpotApi.Account`|
+
+### USD-M Futures Websocket API
+|API|Supported|Location|
+|--|--:|--|
+|*|✓|`socketClient.UsdFuturesApi.Account` / `socketClient.UsdFuturesApi.ExchangeData` / `socketClient.UsdFuturesApi.Trading`|
+
+### European Options
+|API|Supported|Location|
+|--|--:|--|
+|*|X||
 
 ### Portfolio Margin
 |API|Supported|Location|

@@ -6,6 +6,7 @@ using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
@@ -32,6 +33,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region fields
         private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
+
+        internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;
+        internal DateTime? _lastExchangeInfoUpdate;
+        internal readonly string _brokerId;
         #endregion
 
         /// <inheritdoc />
@@ -52,6 +57,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Account = new BinanceSocketClientUsdFuturesApiAccount(logger, this);
             ExchangeData = new BinanceSocketClientUsdFuturesApiExchangeData(logger, this);
             Trading = new BinanceSocketClientUsdFuturesApiTrading(logger, this);
+
+            _brokerId = !string.IsNullOrEmpty(options.UsdFuturesOptions.BrokerId) ? options.UsdFuturesOptions.BrokerId! : "x-d63tKbx3";
 
             // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval on framework level)
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
@@ -136,7 +143,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             return result;
         }
-
 
         /// <inheritdoc />
         protected override Query? GetAuthenticationRequest(SocketConnection connection) => null;
