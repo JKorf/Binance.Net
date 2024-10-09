@@ -76,7 +76,6 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Account.GetTradingStatusAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetOrderRateLimitStatusAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetRebateHistoryAsync(default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApi.Account.GetLeveragedTokensUserLimitAsync(default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetPortfolioMarginCollateralRateAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetPortfolioMarginBankruptcyLoanAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetAutoConvertStableCoinConfigAsync(default, default), true);
@@ -128,8 +127,6 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginSymbolsAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginPriceIndexAsync("ETHUSDT", CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetIsolatedMarginSymbolsAsync("ETHUSDT", 5000, CancellationToken.None), true);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetLeveragedTokenInfoAsync(5000, CancellationToken.None), true);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetLeveragedTokensHistoricalKlinesAsync("ETHUP", Enums.KlineInterval.OneHour, null, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(new[] { "ETH" }, false, null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), false);
@@ -148,8 +145,6 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Trading.GetOcoOrdersAsync(default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Trading.GetOpenOcoOrdersAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Trading.GetUserTradesAsync("ETHUSDT", default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApi.Trading.GetLeveragedTokensSubscriptionRecordsAsync(default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApi.Trading.GetLeveragedTokensRedemptionRecordsAsync(default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Trading.GetC2CTradeHistoryAsync(Enums.OrderSide.Buy, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Trading.GetPayTradeHistoryAsync(default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Trading.GetConvertTradeHistoryAsync(DateTime.UtcNow.AddHours(-1), DateTime.UtcNow, default, default, default), true);
