@@ -185,6 +185,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.6.0 - 09 Oct 2024
+    * Updated CryptoExchange.Net to version 8.0.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.2
+    * Added USD-M Futures web socket order API
+    * Fixed pagination for shared closed orders USD futures
+
 * Version 10.5.0 - 27 Sep 2024
     * Updated CryptoExchange.Net to version 8.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.0
     * Added Shared client interfaces implementation for Spot, USD-M Futures, Coin-M Futures Rest and Socket clients
