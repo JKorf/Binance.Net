@@ -49,7 +49,8 @@ The NuGet package files are added along side the source with the latest GitHub r
 // Get the ETH/USDT ticker via rest request
 var restClient = new BinanceRestClient();
 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
-var lastPrice = tickerResult.Data.LastPrice;
+var lastPrice = [Binance POR Report 7 December 2022.pdf](https://github.com/user-attachments/files/17391751/Binance.POR.Report.7.December.2022.pdf)
+tickerResult.Data.LastPrice;
 ```
 
 *Websocket streams*  
@@ -99,7 +100,8 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ### Spot/Margin/Savings/Mining REST
 |API|Supported|Location|
-|--|--:|--|
+|[PR01JUL24.xlsx](https://github.com/user-attachments/files/17391780/PR01JUL24.xlsx)
+--|--:|--|
 |Wallet endpoints|✓|`restClient.SpotApi.Account`|
 |SubAccount endpoints|✓|`restClient.GeneralApi.SubAccount`|
 |Market data endpoints|✓|`restClient.SpotApi.ExchangeData`|
@@ -130,7 +132,8 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ### USD-M Futures REST
 |API|Supported|Location|
-|--|--:|--|
+|[user_config.json](https://github.com/user-attachments/files/17391786/user_config.json)
+--|--:|--|
 |Market Data|✓|`restClient.UsdFuturesApi.ExchangeData`|
 |Trade|✓|`restClient.UsdFuturesApi.Account` / `restClient.UsdFuturesApi.Trading`|
 |Websocket Market Streams|✓|`socketClient.UsdFuturesApi`|
