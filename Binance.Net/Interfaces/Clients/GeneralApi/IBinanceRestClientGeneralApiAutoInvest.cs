@@ -122,7 +122,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BinanceAutoInvestPlanTransaction>>> GetSubscriptionTransactionHistoryAsync(long planId, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceAutoInvestPlanTransaction>>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get one time transaction status

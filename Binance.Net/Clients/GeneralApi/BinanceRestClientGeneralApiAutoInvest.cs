@@ -192,10 +192,10 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Subscription Transaction History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceAutoInvestPlanTransaction>>> GetSubscriptionTransactionHistoryAsync(long planId, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceAutoInvestPlanTransaction>>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.Add("planId", planId);
+            parameters.AddOptional("planId", planId);
             parameters.AddOptionalMillisecondsString("startTime", startTime);
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("targetAsset", targetAsset);

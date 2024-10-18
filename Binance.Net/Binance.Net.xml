@@ -674,7 +674,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.RedeemIndexLinkedPlanAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetSubscriptionTransactionHistoryAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Binance.Net.Enums.AutoInvestPlanType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetSubscriptionTransactionHistoryAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Binance.Net.Enums.AutoInvestPlanType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest.GetOneTimeTransactionStatusAsync(System.Int64,System.String,System.Threading.CancellationToken)">
@@ -6762,7 +6762,7 @@
             <param name="redemptionPercentage">Redemption percentage</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetSubscriptionTransactionHistoryAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Binance.Net.Enums.AutoInvestPlanType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest.GetSubscriptionTransactionHistoryAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Binance.Net.Enums.AutoInvestPlanType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get subscription transaction history
             <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-subscription-transaction-history" /></para>
