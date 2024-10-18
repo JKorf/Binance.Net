@@ -15409,6 +15409,21 @@
             Asset value in USD
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransactions">
+            <summary>
+            Transactions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransactions.Total">
+            <summary>
+            Total
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransactions.List">
+            <summary>
+            Results
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction">
             <summary>
             Plan transaction info

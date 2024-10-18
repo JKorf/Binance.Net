@@ -1,6 +1,9 @@
 GET
 /sapi/v1/lending/auto-invest/history/list
 true
+{
+  "total": 1,
+  "list":
 [
   {
     "id":1111,
@@ -23,3 +26,5 @@ true
     "subscriptionCycle": "WEEKLY"
   }
 ]
+
+}

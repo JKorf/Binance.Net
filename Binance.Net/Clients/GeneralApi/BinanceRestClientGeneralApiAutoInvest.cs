@@ -2,6 +2,7 @@
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.AutoInvest;
 using Binance.Net.Objects.Models.Spot.Loans;
 
@@ -192,7 +193,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Subscription Transaction History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceAutoInvestPlanTransaction>>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceAutoInvestPlanTransactions>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("planId", planId);
@@ -200,10 +201,10 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("targetAsset", targetAsset);
             parameters.AddOptionalEnum("planType", planType);
-            parameters.AddOptional("page", page);
-            parameters.AddOptional("pageSize", pageSize);
+            parameters.AddOptional("current", page);
+            parameters.AddOptional("size", pageSize);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/history/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            var result = await _baseClient.SendAsync<IEnumerable<BinanceAutoInvestPlanTransaction>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceAutoInvestPlanTransactions>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
