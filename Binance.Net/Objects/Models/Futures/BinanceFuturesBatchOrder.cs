@@ -63,5 +63,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
         /// </summary>
         public bool? PriceProtect { get; set; }
+        /// <summary>
+        /// Price match
+        /// </summary>
+        public PriceMatch? PriceMatch { get; set; }
+        /// <summary>
+        /// Self trade prevention mode
+        /// </summary>
+        public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
     }
 }

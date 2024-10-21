@@ -155,15 +155,9 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("priceProtect")]
         public bool PriceProtect { get; set; }
-    }
 
-    /// <summary>
-    /// Usdt futures order
-    /// </summary>
-    public record BinanceUsdFuturesOrder : BinanceFuturesOrder
-    {
         /// <summary>
-        /// 
+        /// Price match type
         /// </summary>
         [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter))]
         public PriceMatch PriceMatch { get; set; }
@@ -172,7 +166,14 @@ namespace Binance.Net.Objects.Models.Futures
         /// Self trade prevention mode
         /// </summary>
         [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
-        public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
+        public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
+    }
+
+    /// <summary>
+    /// Usdt futures order
+    /// </summary>
+    public record BinanceUsdFuturesOrder : BinanceFuturesOrder
+    {
 
         /// <summary>
         /// Auto cancel at this date

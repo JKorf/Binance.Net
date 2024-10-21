@@ -162,6 +162,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 orderParameters.AddOptionalEnum("workingType", order.WorkingType);
                 orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly?.ToString().ToLower());
                 orderParameters.AddOptionalParameter("priceProtect", order.PriceProtect?.ToString().ToUpper());
+                orderParameters.AddOptionalEnum("priceMatch", order.PriceMatch);
+                orderParameters.AddOptionalEnum("selfTradePreventionMode", order.SelfTradePreventionMode);
                 parameterOrders.Add(orderParameters);
                 i++;
             }

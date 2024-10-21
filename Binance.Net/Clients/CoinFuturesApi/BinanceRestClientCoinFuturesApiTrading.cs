@@ -42,6 +42,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             bool? closePosition = null,
             OrderResponseType? orderResponseType = null,
             bool? priceProtect = null,
+            PriceMatch? priceMatch = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -89,6 +91,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("closePosition", closePosition?.ToString().ToLower());
             parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalEnum("priceMatch", priceMatch);
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 0, true);
@@ -155,6 +159,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 orderParameters.AddOptionalEnum("workingType", order.WorkingType);
                 orderParameters.AddOptionalParameter("reduceOnly", order.ReduceOnly?.ToString().ToLower());
                 orderParameters.AddOptionalParameter("priceProtect", order.PriceProtect?.ToString().ToUpper());
+                orderParameters.AddOptionalEnum("selfTradePreventionMode", order.SelfTradePreventionMode);
+                orderParameters.AddOptionalEnum("priceMatch", order.PriceMatch);
                 parameterOrders[i] = orderParameters;
                 i++;
             }
