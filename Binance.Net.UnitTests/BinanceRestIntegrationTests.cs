@@ -105,7 +105,7 @@ namespace Binance.Net.UnitTests
         {
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.PingAsync(CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetServerTimeAsync(CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(CancellationToken.None), false);
+            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(false, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetSystemStatusAsync(CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetAssetDetailsAsync(5000, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetProductsAsync(CancellationToken.None), false);
