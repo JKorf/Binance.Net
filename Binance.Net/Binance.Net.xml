@@ -422,7 +422,7 @@
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading.PlaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -6041,7 +6041,7 @@
             Binance COIN-M futures trading endpoints, placing and mananging orders.
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#new-order-trade" /></para>
@@ -6062,6 +6062,8 @@
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+            <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -25995,6 +25997,16 @@
             Used with Stop/StopMarket or TakeProfit/TakeProfitMarket orders.
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder.PriceMatch">
+            <summary>
+            Price match
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder.SelfTradePreventionMode">
+            <summary>
+            Self trade prevention mode
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesBookPrice">
             <summary>
             Book price
@@ -26964,19 +26976,19 @@
             Price protect
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.PriceMatch">
+            <summary>
+            Price match type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.SelfTradePreventionMode">
+            <summary>
+            Self trade prevention mode
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder">
             <summary>
             Usdt futures order
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder.PriceMatch">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder.SelfTradePreventionMode">
-            <summary>
-            Self trade prevention mode
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceUsdFuturesOrder.GoodTillDate">
