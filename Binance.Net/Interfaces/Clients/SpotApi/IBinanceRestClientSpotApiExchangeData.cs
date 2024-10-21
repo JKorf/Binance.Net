@@ -49,45 +49,54 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Gets information about the exchange including rate limits and symbol list
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
+        /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+        /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get data for, for example `ETHUSDT`</param>
+        /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, bool? returnPermissionSets = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="symbols">Symbols to get data for, for example `ETHUSDT`</param>
+        /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+        /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbol based on an account permission
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="permission">account type</param>
+        /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+        /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbols based on account permissions
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
         /// </summary>
         /// <param name="permissions">account type</param>
+        /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+        /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the status of the Binance platform

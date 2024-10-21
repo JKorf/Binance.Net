@@ -1392,19 +1392,19 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetSystemStatusAsync(System.Threading.CancellationToken)">
@@ -9448,47 +9448,56 @@
             <param name="ct">Cancellation token</param>
             <returns>Server time</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <summary>
             Gets information about the exchange including rate limits and symbol list
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
+            <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+            <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
             <param name="symbol">Symbol to get data for, for example `ETHUSDT`</param>
+            <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
             <param name="symbols">Symbols to get data for, for example `ETHUSDT`</param>
+            <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+            <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbol based on an account permission
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
             <param name="permission">account type</param>
+            <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+            <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbols based on account permissions
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
             </summary>
             <param name="permissions">account type</param>
+            <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
+            <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>

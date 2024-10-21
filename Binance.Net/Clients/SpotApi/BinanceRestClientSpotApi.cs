@@ -169,7 +169,7 @@ namespace Binance.Net.Clients.SpotApi
                 return BinanceTradeRuleResult.CreatePassed(quantity, quoteQuantity, price, stopPrice);
 
             if (_exchangeInfo == null || _lastExchangeInfoUpdate == null || (DateTime.UtcNow - _lastExchangeInfoUpdate.Value).TotalMinutes > ApiOptions.TradeRulesUpdateInterval.TotalMinutes)
-                await ExchangeData.GetExchangeInfoAsync(ct).ConfigureAwait(false);
+                await ExchangeData.GetExchangeInfoAsync(ct: ct).ConfigureAwait(false);
 
             if (_exchangeInfo == null)
                 return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");

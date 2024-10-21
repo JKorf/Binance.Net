@@ -59,21 +59,23 @@ namespace Binance.Net.Clients.SpotApi
         #region Exchange Information
 
         /// <inheritdoc />
-        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
-             => GetExchangeInfoAsync(Array.Empty<string>(), ct);
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
+             => GetExchangeInfoAsync(Array.Empty<string>(), returnPermissionSets, symbolStatus, ct);
 
         /// <inheritdoc />
-        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, CancellationToken ct = default)
-             => GetExchangeInfoAsync(new string[] { symbol }, ct);
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, bool? returnPermissionSets = null, CancellationToken ct = default)
+             => GetExchangeInfoAsync(new string[] { symbol }, returnPermissionSets, null, ct);
 
         /// <inheritdoc />
-        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, CancellationToken ct = default)
-             => GetExchangeInfoAsync(new AccountType[] { permission }, ct);
+        public Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
+             => GetExchangeInfoAsync(new AccountType[] { permission }, returnPermissionSets, symbolStatus, ct);
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptional("showPermissionSets", returnPermissionSets?.ToString().ToLowerInvariant());
+            parameters.AddOptionalEnum("symbolStatus", symbolStatus);
 
             if (permissions.Length > 1)
             {
@@ -102,9 +104,11 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptional("showPermissionSets", returnPermissionSets?.ToString().ToLowerInvariant());
+            parameters.AddOptionalEnum("symbolStatus", symbolStatus);
 
             if (symbols.Count() > 1)
             {
