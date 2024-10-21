@@ -185,6 +185,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.7.0 - 21 Oct 2024
+    * Added SelfTradePreventionMode and PriceMatch parameters and responses for Coin-M Futures API
+    * Added returnPermissionSets and symbolStatus parameters to restClient.SpotApi.ExchangeData.GetExchangeInfoAsync endpoint
+    * Fixed issues with restClient.GeneralApi.AutoInvest.GetSubscriptionTransactionHistoryAsync
+    * Fixed deserialization issue subaccount transfer
+
 * Version 10.6.1 - 14 Oct 2024
     * Updated CryptoExchange.Net to version 8.0.3, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.3
     * Fixed TypeLoadException during initialization
