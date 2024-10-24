@@ -75,9 +75,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
-        {
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty: "_" + deliverTime.Value.ToString("yyMMdd"));
-        }
+                => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();

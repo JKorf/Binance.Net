@@ -94,6 +94,16 @@
             Urls to the API documentation
             </summary>
         </member>
+        <member name="M:Binance.Net.BinanceExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <summary>
+            Format a base and quote asset to a Binance recognized symbol 
+            </summary>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="tradingMode">Trading mode</param>
+            <param name="deliverTime">Delivery time for delivery futures</param>
+            <returns></returns>
+        </member>
         <member name="P:Binance.Net.BinanceExchange.RateLimiter">
             <summary>
             Rate limiter configuration for the Binance API

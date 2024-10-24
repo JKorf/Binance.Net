@@ -21,9 +21,15 @@ namespace Binance.Net.SymbolOrderBooks
         {
             _serviceProvider = serviceProvider;
 
-            Spot = new OrderBookFactory<BinanceOrderBookOptions>((symbol, options) => CreateSpot(symbol, options), (baseAsset, quoteAsset, options) => CreateSpot(baseAsset + quoteAsset, options));
-            UsdFutures = new OrderBookFactory<BinanceOrderBookOptions>((symbol, options) => CreateUsdtFutures(symbol, options), (baseAsset, quoteAsset, options) => CreateUsdtFutures(baseAsset + quoteAsset, options));
-            CoinFutures = new OrderBookFactory<BinanceOrderBookOptions>((symbol, options) => CreateCoinFutures(symbol, options), (baseAsset, quoteAsset, options) => CreateCoinFutures(baseAsset + quoteAsset, options));
+            Spot = new OrderBookFactory<BinanceOrderBookOptions>(
+                CreateSpot,
+                (sharedSymbol, options) => CreateSpot(BinanceExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+            UsdFutures = new OrderBookFactory<BinanceOrderBookOptions>(
+                CreateUsdtFutures,
+                (sharedSymbol, options) => CreateUsdtFutures(BinanceExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+            CoinFutures = new OrderBookFactory<BinanceOrderBookOptions>(
+                CreateCoinFutures,
+                (sharedSymbol, options) => CreateCoinFutures(BinanceExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
         }
 
         /// <inheritdoc />
