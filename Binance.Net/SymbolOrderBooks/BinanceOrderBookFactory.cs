@@ -2,6 +2,7 @@
 using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.OrderBook;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Binance.Net.SymbolOrderBooks
@@ -38,6 +39,18 @@ namespace Binance.Net.SymbolOrderBooks
         public IOrderBookFactory<BinanceOrderBookOptions> UsdFutures { get; }
         /// <inheritdoc />
         public IOrderBookFactory<BinanceOrderBookOptions> CoinFutures { get; }
+
+        /// <inheritdoc />
+        public ISymbolOrderBook Create(SharedSymbol symbol, Action<BinanceOrderBookOptions>? options = null)
+        {
+            var symbolName = BinanceExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            if (symbol.TradingMode == TradingMode.Spot)
+                return CreateSpot(symbolName, options);
+            if (symbol.TradingMode.IsLinear())
+                return CreateUsdtFutures(symbolName, options);
+            
+            return CreateCoinFutures(symbolName, options);
+        }
 
         /// <inheritdoc />
         public ISymbolOrderBook CreateSpot(string symbol, Action<BinanceOrderBookOptions>? options = null)
