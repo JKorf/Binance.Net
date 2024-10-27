@@ -161,6 +161,11 @@
         <member name="T:Binance.Net.BinanceTrackerFactory">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="M:Binance.Net.BinanceTrackerFactory.#ctor(System.IServiceProvider)">
             <summary>
             ctor

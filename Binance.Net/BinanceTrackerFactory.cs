@@ -1,4 +1,5 @@
-﻿using Binance.Net.Interfaces;
+﻿using Binance.Net.Clients;
+using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Trackers.Klines;
@@ -10,7 +11,14 @@ namespace Binance.Net
     /// <inheritdoc />
     public class BinanceTrackerFactory : IBinanceTrackerFactory
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceProvider? _serviceProvider;
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceTrackerFactory()
+        {
+        }
 
         /// <summary>
         /// ctor
@@ -24,28 +32,31 @@ namespace Binance.Net
         /// <inheritdoc />
         public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
         {
-            IKlineRestClient restClient;
-            IKlineSocketClient socketClient;
+            var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
+
+            IKlineRestClient sharedRestClient;
+            IKlineSocketClient sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                restClient = _serviceProvider.GetRequiredService<IBinanceRestClient>().SpotApi.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBinanceSocketClient>().SpotApi.SharedClient;
+                sharedRestClient = restClient.SpotApi.SharedClient;
+                sharedSocketClient = socketClient.SpotApi.SharedClient;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                restClient = _serviceProvider.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBinanceSocketClient>().UsdFuturesApi.SharedClient;
+                sharedRestClient = restClient.UsdFuturesApi.SharedClient;
+                sharedSocketClient = socketClient.UsdFuturesApi.SharedClient;
             }
             else
             {
-                restClient = _serviceProvider.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBinanceSocketClient>().CoinFuturesApi.SharedClient;
+                sharedRestClient = restClient.CoinFuturesApi.SharedClient;
+                sharedSocketClient = socketClient.CoinFuturesApi.SharedClient;
             }
 
             return new KlineTracker(
-                _serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
-                restClient,
-                socketClient,
+                _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
+                sharedRestClient,
+                sharedSocketClient,
                 symbol,
                 interval,
                 limit,
@@ -56,29 +67,32 @@ namespace Binance.Net
         /// <inheritdoc />
         public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null)
         {
-            ITradeHistoryRestClient restClient;
-            ITradeSocketClient socketClient;
+            var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
+
+            ITradeHistoryRestClient sharedRestClient;
+            ITradeSocketClient sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                restClient = _serviceProvider.GetRequiredService<IBinanceRestClient>().SpotApi.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBinanceSocketClient>().SpotApi.SharedClient;
+                sharedRestClient = restClient.SpotApi.SharedClient;
+                sharedSocketClient = socketClient.SpotApi.SharedClient;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                restClient = _serviceProvider.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBinanceSocketClient>().UsdFuturesApi.SharedClient;
+                sharedRestClient = restClient.UsdFuturesApi.SharedClient;
+                sharedSocketClient = socketClient.UsdFuturesApi.SharedClient;
             }
             else
             {
-                restClient = _serviceProvider.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.SharedClient;
-                socketClient = _serviceProvider.GetRequiredService<IBinanceSocketClient>().CoinFuturesApi.SharedClient;
+                sharedRestClient = restClient.CoinFuturesApi.SharedClient;
+                sharedSocketClient = socketClient.CoinFuturesApi.SharedClient;
             }
 
             return new TradeTracker(
-                _serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
+                _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
                 null,
-                restClient,
-                socketClient,
+                sharedRestClient,
+                sharedSocketClient,
                 symbol,
                 limit,
                 period
