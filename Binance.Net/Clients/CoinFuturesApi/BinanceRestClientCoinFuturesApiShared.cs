@@ -681,7 +681,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             FromIdToken? nextToken = null;
             if (result.Data.Any() && result.Data.Last().TradeTime < request.EndTime)
-                nextToken = new FromIdToken(result.Data.Max(x => x.Id).ToString());
+                nextToken = new FromIdToken((result.Data.Max(x => x.Id) + 1).ToString());
 
             // Return
             return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Where(x => x.TradeTime < request.EndTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)
