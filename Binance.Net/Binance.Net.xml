@@ -94,6 +94,16 @@
             Urls to the API documentation
             </summary>
         </member>
+        <member name="M:Binance.Net.BinanceExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <summary>
+            Format a base and quote asset to a Binance recognized symbol 
+            </summary>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="tradingMode">Trading mode</param>
+            <param name="deliverTime">Delivery time for delivery futures</param>
+            <returns></returns>
+        </member>
         <member name="P:Binance.Net.BinanceExchange.RateLimiter">
             <summary>
             Rate limiter configuration for the Binance API
@@ -147,6 +157,26 @@
             </summary>
             <param name="number"></param>
             <returns></returns>
+        </member>
+        <member name="T:Binance.Net.BinanceTrackerFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            ctor
+            </summary>
+            <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.BinanceRestClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient" />
@@ -13261,6 +13291,14 @@
             Coin Futures order book factory methods
             </summary>
         </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceOrderBookFactory.Create(CryptoExchange.Net.SharedApis.SharedSymbol,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
+            <summary>
+            Create a SymbolOrderBook for the symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="options">Book options</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.IBinanceOrderBookFactory.CreateSpot(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
             <summary>
             Create a Spot SymbolOrderBook
@@ -13394,6 +13432,30 @@
             <summary>
             The quantity of the best ask price in the order book
             </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.IBinanceTrackerFactory">
+            <summary>
+            Tracker factory
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <summary>
+            Create a new kline tracker
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="limit">The max amount of klines to retain</param>
+            <param name="period">The max period the data should be retained</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <summary>
+            Create a new trade tracker for a symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="limit">The max amount of klines to retain</param>
+            <param name="period">The max period the data should be retained</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.IBinanceTrade">
             <summary>
@@ -29540,6 +29602,9 @@
             <inheritdoc />
         </member>
         <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.CoinFutures">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.Create(CryptoExchange.Net.SharedApis.SharedSymbol,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.CreateSpot(System.String,System.Action{Binance.Net.Objects.Options.BinanceOrderBookOptions})">
