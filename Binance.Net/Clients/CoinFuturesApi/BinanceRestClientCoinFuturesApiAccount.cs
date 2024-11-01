@@ -316,5 +316,67 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return await _baseClient.SendAsync<BinanceFuturesDownloadLink>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
+
+        #region Get download id for transaction history
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForOrderHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection
+            {
+                { "startTime", DateTimeConverter.ConvertToMilliseconds(startTime) },
+                { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/order/asyn", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            return await _baseClient.SendAsync<BinanceFuturesDownloadIdInfo>(request, parameters, ct).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Download order history
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForOrderHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection
+            {
+                { "downloadId", downloadId }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/order/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            return await _baseClient.SendAsync<BinanceFuturesDownloadLink>(request, parameters, ct).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Get download id for trade history
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForTradeHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection
+            {
+                { "startTime", DateTimeConverter.ConvertToMilliseconds(startTime) },
+                { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/trade/asyn", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            return await _baseClient.SendAsync<BinanceFuturesDownloadIdInfo>(request, parameters, ct).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Download trade history
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForTradeHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection
+            {
+                { "downloadId", downloadId }
+            };
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/trade/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            return await _baseClient.SendAsync<BinanceFuturesDownloadLink>(request, parameters, ct).ConfigureAwait(false);
+        }
+        #endregion
     }
 }

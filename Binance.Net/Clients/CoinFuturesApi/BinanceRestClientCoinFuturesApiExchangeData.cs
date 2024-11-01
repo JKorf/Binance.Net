@@ -225,6 +225,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
+        #region Recent Trades
+
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
@@ -236,6 +238,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var result = await _baseClient.SendAsync<IEnumerable<BinanceRecentTradeBase>>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<IBinanceRecentTrade>>(result.Data);
         }
+
+        #endregion
+
+        #region Trade History
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
@@ -250,6 +256,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var result = await _baseClient.SendAsync<IEnumerable<BinanceRecentTradeBase>>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<IBinanceRecentTrade>>(result.Data);
         }
+
+        #endregion
 
         #region Mark Price
 
