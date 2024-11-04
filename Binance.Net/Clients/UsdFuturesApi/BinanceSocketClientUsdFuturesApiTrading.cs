@@ -89,7 +89,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Edit Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -102,8 +102,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "symbol", symbol },
                 { "side", EnumConverter.GetString(side) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "price", price.ToString(CultureInfo.InvariantCulture) },
             };
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalEnum("priceMatch", priceMatch);
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
