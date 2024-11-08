@@ -165,7 +165,7 @@ namespace Binance.Net.UnitTests
         {
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetPositionModeAsync(default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetMarginChangeHistoryAsync("ETHUSDT", default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetIncomeHistoryAsync(default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetIncomeHistoryAsync(default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetBracketsAsync(default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetPositionAdlQuantileEstimationAsync(default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Account.GetAccountInfoV2Async(default, default), true);

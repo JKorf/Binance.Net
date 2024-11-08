@@ -1993,7 +1993,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetBracketsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -11497,7 +11497,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of all margin changes for the symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-income-history-user_data" /></para>
@@ -11507,6 +11507,7 @@
             <param name="startTime">Time to start getting income history from</param>
             <param name="endTime">Time to stop getting income history from</param>
             <param name="limit">Max number of results</param>
+            <param name="page">Page number</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>The income history for the futures account</returns>
