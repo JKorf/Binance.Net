@@ -187,6 +187,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.9.2 - 08 Nov 2024
+    * Fixed mixed up page and limit parameter on restClient.UsdFuturesApi.Account.GetIncomeHistoryAsync endpoint
+
 * Version 10.9.1 - 08 Nov 2024
     * Added page parameter to restClient.UsdFuturesApi.Account.GetIncomeHistoryAsync endpoint
 
