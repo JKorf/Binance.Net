@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceRestOptions()
         {
-            Default?.Copy(this);
+            Default?.Set(this);
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceRestApiOptions CoinFuturesOptions { get; private set; } = new BinanceRestApiOptions();
 
-        internal BinanceRestOptions Copy() => Copy(Copy<BinanceRestOptions>());
+        internal BinanceRestOptions Copy() => Set(Copy<BinanceRestOptions>());
 
-        internal BinanceRestOptions Copy(BinanceRestOptions targetOptions)
+        internal BinanceRestOptions Set(BinanceRestOptions targetOptions)
         {
             targetOptions = base.Set<BinanceRestOptions>(targetOptions);
             targetOptions.ReceiveWindow = ReceiveWindow;

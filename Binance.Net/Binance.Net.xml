@@ -29343,6 +29343,26 @@
             Op code
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Options.BinanceOptions">
+            <summary>
+            Binance options
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.RestOptions">
+            <summary>
+            Rest client options
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.SocketOptions">
+            <summary>
+            Socket client options
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.SocketClientLifeTime">
+            <summary>
+            The DI service lifetime for the IBinanceSocketClient
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Options.BinanceOrderBookOptions">
             <summary>
             Options for the Binance SymbolOrderBook
@@ -29748,24 +29768,20 @@
             Extensions for DI
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Add services such as the IBinanceRestClient and IBinanceSocketClient. Configures the services based on the provided configuration.
             </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <param name="socketClientLifeTime"></param>
+            <param name="services">The service collection</param>
+            <param name="configuration">The configuration(section) containing the options</param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceRestOptions},System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceOptions})">
             <summary>
             Add services such as the IBinanceRestClient and IBinanceSocketClient. Services will be configured based on the provided options.
             </summary>
             <param name="services">The service collection</param>
-            <param name="restOptionsDelegate">Set options for the rest client</param>
-            <param name="socketOptionsDelegate">Set options for the socket client</param>
-            <param name="restClientLifeTime">The lifetime of the IBinanceRestClient for the service collection. Defaults to Transient.</param>
-            <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
+            <param name="optionsDelegate">Set options for the Binance services</param>
             <returns></returns>
         </member>
     </members>
