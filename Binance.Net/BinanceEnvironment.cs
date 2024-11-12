@@ -52,6 +52,14 @@ namespace Binance.Net
         /// </summary>
         public string? CoinFuturesSocketAddress { get; }
 
+        /// <summary>
+        /// ctor for DI, use <see cref="CreateCustom"/> for creating a custom environment
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        public BinanceEnvironment(): base(TradeEnvironmentNames.Live)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        { }
+
         internal BinanceEnvironment(
             string name, 
             string spotRestAddress, 
@@ -110,7 +118,7 @@ namespace Binance.Net
         /// Binance.us environment
         /// </summary>
         public static BinanceEnvironment Us { get; }
-            = new BinanceEnvironment("Us",
+            = new BinanceEnvironment("us",
                                      BinanceApiAddresses.Us.RestClientAddress,
                                      BinanceApiAddresses.Us.SocketClientStreamAddress,
                                      BinanceApiAddresses.Us.SocketClientApiAddress,

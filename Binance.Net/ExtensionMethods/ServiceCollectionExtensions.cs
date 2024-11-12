@@ -5,6 +5,9 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
 using Binance.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -15,34 +18,79 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Add the IBinanceClient and IBinanceSocketClient to the sevice collection so they can be injected
+        /// Add services such as the IBinanceRestClient and IBinanceSocketClient. Configures the services based on the provided configuration.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="socketClientLifeTime"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddBinance(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            ServiceLifetime? socketClientLifeTime = null)
+        {
+            services.Configure<BinanceRestOptions>(configuration);
+            services.PostConfigure<BinanceRestOptions>(x =>
+            {
+                if (x.Environment == null || x.Environment.Name == BinanceEnvironment.Live.Name)
+                    x.Environment = BinanceEnvironment.Live;
+                else if (x.Environment.Name == BinanceEnvironment.Testnet.Name)
+                    x.Environment = BinanceEnvironment.Testnet;
+                else if (x.Environment.Name == BinanceEnvironment.Us.Name)
+                    x.Environment = BinanceEnvironment.Us;
+            });
+            services.Configure<BinanceSocketOptions>(configuration);
+            services.PostConfigure<BinanceSocketOptions>(x =>
+            {
+                if (x.Environment == null || x.Environment.Name == BinanceEnvironment.Live.Name)
+                    x.Environment = BinanceEnvironment.Live;
+                else if (x.Environment.Name == BinanceEnvironment.Testnet.Name)
+                    x.Environment = BinanceEnvironment.Testnet;
+                else if (x.Environment.Name == BinanceEnvironment.Us.Name)
+                    x.Environment = BinanceEnvironment.Us;
+            });
+            return AddBinanceCore(services, socketClientLifeTime);
+        }
+
+        /// <summary>
+        /// Add services such as the IBinanceRestClient and IBinanceSocketClient. Services will be configured based on the provided options.
         /// </summary>
         /// <param name="services">The service collection</param>
-        /// <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
-        /// <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
+        /// <param name="restOptionsDelegate">Set options for the rest client</param>
+        /// <param name="socketOptionsDelegate">Set options for the socket client</param>
+        /// <param name="restClientLifeTime">The lifetime of the IBinanceRestClient for the service collection. Defaults to Transient.</param>
         /// <param name="socketClientLifeTime">The lifetime of the IBinanceSocketClient for the service collection. Defaults to Singleton.</param>
         /// <returns></returns>
         public static IServiceCollection AddBinance(
             this IServiceCollection services,
-            Action<BinanceRestOptions>? defaultRestOptionsDelegate = null,
-            Action<BinanceSocketOptions>? defaultSocketOptionsDelegate = null,
+            Action<BinanceRestOptions>? restOptionsDelegate = null,
+            Action<BinanceSocketOptions>? socketOptionsDelegate = null,
+            ServiceLifetime? restClientLifeTime = null,
             ServiceLifetime? socketClientLifeTime = null)
         {
-            var restOptions = BinanceRestOptions.Default.Copy();
-
-            if (defaultRestOptionsDelegate != null)
+            var restOptions = services.AddOptions<BinanceRestOptions>();
+            restOptions.Configure(x =>
             {
-                defaultRestOptionsDelegate(restOptions);
-                BinanceRestClient.SetDefaultOptions(defaultRestOptionsDelegate);
+                restOptionsDelegate?.Invoke(x);
+            });
+
+            var socketOptions = services.AddOptions<BinanceSocketOptions>();
+            if (socketOptionsDelegate != null)
+            {
+                socketOptions.Configure(socketOptionsDelegate);
+                BinanceSocketClient.SetDefaultOptions(socketOptionsDelegate);
             }
 
-            if (defaultSocketOptionsDelegate != null)
-                BinanceSocketClient.SetDefaultOptions(defaultSocketOptionsDelegate);
+            return AddBinanceCore(services, restClientLifeTime, socketClientLifeTime);
+        }
 
-            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>(options =>
+        private static IServiceCollection AddBinanceCore(IServiceCollection services, ServiceLifetime? restClientLifeTime = null, ServiceLifetime? socketClientLifeTime = null)
+        {
+            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>((serviceProvider, client) =>
             {
-                options.Timeout = restOptions.RequestTimeout;
-            }).ConfigurePrimaryHttpMessageHandler(() => {
+                var options = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>().Value;
+                client.Timeout = options.RequestTimeout;
+            }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
                 var handler = new HttpClientHandler();
                 try
                 {
@@ -51,12 +99,13 @@ namespace Microsoft.Extensions.DependencyInjection
                 catch (PlatformNotSupportedException)
                 { }
 
-                if (restOptions.Proxy != null)
+                var options = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>().Value;
+                if (options.Proxy != null)
                 {
                     handler.Proxy = new WebProxy
                     {
-                        Address = new Uri($"{restOptions.Proxy.Host}:{restOptions.Proxy.Port}"),
-                        Credentials = restOptions.Proxy.Password == null ? null : new NetworkCredential(restOptions.Proxy.Login, restOptions.Proxy.Password)
+                        Address = new Uri($"{options.Proxy.Host}:{options.Proxy.Port}"),
+                        Credentials = options.Proxy.Password == null ? null : new NetworkCredential(options.Proxy.Login, options.Proxy.Password)
                     };
                 }
                 return handler;
