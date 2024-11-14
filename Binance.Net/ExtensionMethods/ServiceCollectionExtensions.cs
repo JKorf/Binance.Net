@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -27,7 +28,15 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<BinanceRestOptions>(configuration.GetSection("Rest"));
+            var options = new BinanceOptions();
+            configuration.Bind(options);
+
+            services.Configure<BinanceRestOptions>(x =>
+            {
+                options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? x.Environment;
+                options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials ?? x.ApiCredentials;
+                options.Rest.Set(x);
+            });
             services.PostConfigure<BinanceRestOptions>(x =>
             {
                 x.Environment = x.Environment.Name switch
@@ -39,7 +48,12 @@ namespace Microsoft.Extensions.DependencyInjection
                     _ => x.Environment
                 };
             });
-            services.Configure<BinanceSocketOptions>(configuration.GetSection("Socket"));
+            services.Configure<BinanceSocketOptions>(x =>
+            {
+                options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? x.Environment;
+                options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials ?? x.ApiCredentials;
+                options.Socket.Set(x);
+            });
             services.PostConfigure<BinanceSocketOptions>(x =>
             {
                 x.Environment = x.Environment?.Name switch
@@ -52,9 +66,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 };
             });
 
-            var socketStr = configuration["SocketClientLifeTime"];
-            var lifeTimeSocket = socketStr == null ? (ServiceLifetime?)null : (ServiceLifetime)Enum.Parse(typeof(ServiceLifetime), socketStr);
-            return AddBinanceCore(services, lifeTimeSocket);
+            return AddBinanceCore(services, options.SocketClientLifeTime);
         }
 
         /// <summary>
@@ -69,11 +81,19 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var options = new BinanceOptions();
             optionsDelegate?.Invoke(options);
-            if (options.RestOptions == null || options.SocketOptions == null)
+            if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
 
-            var restOptions = services.AddOptions<BinanceRestOptions>().Configure(x => { options.RestOptions.Set(x); });
-            var socketOptions = services.AddOptions<BinanceSocketOptions>().Configure(x => { options.SocketOptions.Set(x); });
+            var restOptions = services.AddOptions<BinanceRestOptions>().Configure(x => {
+                options.Rest.Environment = options.Environment ?? x.Environment;
+                options.Rest.ApiCredentials = options.ApiCredentials ?? x.ApiCredentials;
+                options.Rest.Set(x);
+            });
+            var socketOptions = services.AddOptions<BinanceSocketOptions>().Configure(x => {
+                options.Socket.Environment = options.Environment ?? x.Environment;
+                options.Socket.ApiCredentials = options.ApiCredentials ?? x.ApiCredentials;
+                options.Socket.Set(x);
+            });
             return AddBinanceCore(services, options.SocketClientLifeTime);
         }
 
@@ -81,10 +101,11 @@ namespace Microsoft.Extensions.DependencyInjection
             IServiceCollection services,
             ServiceLifetime? socketClientLifeTime = null)
         {
-            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>((serviceProvider, client) =>
+            services.AddHttpClient<IBinanceRestClient, BinanceRestClient>((client, serviceProvider) =>
             {
                 var options = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>().Value;
                 client.Timeout = options.RequestTimeout;
+                return new BinanceRestClient(client, serviceProvider.GetRequiredService<ILoggerFactory>(), serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>());
             }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
                 var handler = new HttpClientHandler();
                 try
@@ -105,6 +126,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 return handler;
             });
+            services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), x => { return new BinanceSocketClient(x.GetRequiredService<IOptions<BinanceSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
@@ -120,8 +142,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBinanceSocketClient>().UsdFuturesApi.SharedClient);
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBinanceSocketClient>().CoinFuturesApi.SharedClient);
-
-            services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), typeof(BinanceSocketClient), socketClientLifeTime ?? ServiceLifetime.Singleton));
 
             return services;
         }

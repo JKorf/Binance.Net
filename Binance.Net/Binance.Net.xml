@@ -198,19 +198,11 @@
         <member name="P:Binance.Net.Clients.BinanceRestClient.CoinFuturesApi">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(Binance.Net.Objects.Options.BinanceRestOptions)">
+        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceRestOptions})">
             <summary>
             Create a new instance of the BinanceRestClient using provided options
             </summary>
-            <param name="options">Option configuration</param>
-        </member>
-        <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Binance.Net.Objects.Options.BinanceRestOptions)">
-            <summary>
-            Create a new instance of the BinanceRestClient
-            </summary>
-            <param name="httpClient"></param>
-            <param name="loggerFactory"></param>
-            <param name="options"></param>
+            <param name="optionsDelegate">Option configuration delegate</param>
         </member>
         <member name="M:Binance.Net.Clients.BinanceRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Binance.Net.Objects.Options.BinanceRestOptions})">
             <summary>
@@ -241,24 +233,18 @@
         <member name="P:Binance.Net.Clients.BinanceSocketClient.CoinFuturesApi">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
-            <summary>
-            Create a new instance of BinanceSocketClient
-            </summary>
-            <param name="loggerFactory">The logger factory</param>
-        </member>
         <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions})">
             <summary>
-            Create a new instance of BinanceSocketClient
+            Create a new instance of the BinanceRestClient using provided options
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:Binance.Net.Clients.BinanceSocketClient.#ctor(Microsoft.Extensions.Options.IOptions{Binance.Net.Objects.Options.BinanceSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Create a new instance of BinanceSocketClient
             </summary>
             <param name="loggerFactory">The logger factory</param>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="options">Option configuration</param>
         </member>
         <member name="M:Binance.Net.Clients.BinanceSocketClient.SetDefaultOptions(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions})">
             <summary>
@@ -29348,14 +29334,24 @@
             Binance options
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.RestOptions">
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.Rest">
             <summary>
             Rest client options
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.SocketOptions">
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.Socket">
             <summary>
             Socket client options
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.Environment">
+            <summary>
+            Trade environment. Contains info about URL's to use to connect to the API. Use `BinanceEnvironment` to swap environment, for example `Environment = BinanceEnvironment.Live`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceOptions.ApiCredentials">
+            <summary>
+            The api credentials used for signing requests to this API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceOptions.SocketClientLifeTime">

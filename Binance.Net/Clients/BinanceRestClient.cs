@@ -35,19 +35,9 @@ namespace Binance.Net.Clients
         /// <summary>
         /// Create a new instance of the BinanceRestClient using provided options
         /// </summary>
-        /// <param name="options">Option configuration</param>
-        public BinanceRestClient(BinanceRestOptions? options = null) 
-            : this(null, null, Options.Create(options ?? new BinanceRestOptions()))
-        {
-        }
-
-        /// <summary>
-        /// Create a new instance of the BinanceRestClient
-        /// </summary>
-        /// <param name="httpClient"></param>
-        /// <param name="loggerFactory"></param>
-        /// <param name="options"></param>
-        public BinanceRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, BinanceRestOptions? options) : this(httpClient, loggerFactory, Options.Create(options ?? new BinanceRestOptions()))
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public BinanceRestClient(Action<BinanceRestOptions>? optionsDelegate = null)
+            : this(null, null, Options.Create(ApplyOptionsDelegate(optionsDelegate)))
         {
         }
 
@@ -57,7 +47,6 @@ namespace Binance.Net.Clients
         /// <param name="options">Option configuration</param>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="httpClient">Http client for this client</param>
-        [ActivatorUtilitiesConstructor]
         public BinanceRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, IOptions<BinanceRestOptions> options) : base(loggerFactory, "Binance")
         {
             Initialize(options.Value);
