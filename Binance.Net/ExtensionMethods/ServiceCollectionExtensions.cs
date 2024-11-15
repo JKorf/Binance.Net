@@ -39,9 +39,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
             var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
-            options.Rest.Environment = new BinanceEnvironment().GetEnvironmentByName<BinanceEnvironment>(restEnvName) ?? options.Rest.Environment!;
+            options.Rest.Environment = BinanceEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
             options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
-            options.Socket.Environment = new BinanceEnvironment().GetEnvironmentByName<BinanceEnvironment>(socketEnvName) ?? options.Socket.Environment!;
+            options.Socket.Environment = BinanceEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
 

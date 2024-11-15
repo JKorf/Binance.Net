@@ -60,10 +60,13 @@ namespace Binance.Net
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         { }
 
-        /// <inheritdoc />
-        public override T GetEnvironmentByName<T>(string? name)
-        {
-            var result = name switch
+        /// <summary>
+        /// Get the Binance environment by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static BinanceEnvironment? GetEnvironmentByName(string? name)
+         => name switch
             {
                 TradeEnvironmentNames.Live => Live,
                 TradeEnvironmentNames.Testnet => Testnet,
@@ -72,8 +75,6 @@ namespace Binance.Net
                 null => Live,
                 _ => default
             };
-            return (T)(TradeEnvironment)result!;
-        }
 
         internal BinanceEnvironment(
             string name, 
