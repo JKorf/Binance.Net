@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Options
         public BinanceEnvironment? Environment { get; set; }
 
         /// <summary>
-        /// The api credentials used for signing requests to this API.
+        /// The api credentials used for signing requests.
         /// </summary>
         public ApiCredentials? ApiCredentials { get; set; }
 

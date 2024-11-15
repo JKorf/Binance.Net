@@ -33,29 +33,20 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             configuration.Bind(options);
+
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
 
-            services.Configure<BinanceRestOptions>(x =>
-            {
-                options.Rest.Environment = options.Rest.Environment ?? options.Environment!;
-                options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
-                options.Rest.Set(x);
-            });
-            services.PostConfigure<BinanceRestOptions>(x =>
-            {
-                x.Environment = new BinanceEnvironment().GetEnvironmentByName<BinanceEnvironment>(x.Environment?.Name) ?? x.Environment!;
-            });
-            services.Configure<BinanceSocketOptions>(x =>
-            {
-                options.Socket.Environment = options.Socket.Environment ?? options.Environment!;
-                options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
-                options.Socket.Set(x);
-            });
-            services.PostConfigure<BinanceSocketOptions>(x =>
-            {
-                x.Environment = new BinanceEnvironment().GetEnvironmentByName<BinanceEnvironment>(x.Environment?.Name) ?? x.Environment!;
-            });
+            var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
+            var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
+            options.Rest.Environment = new BinanceEnvironment().GetEnvironmentByName<BinanceEnvironment>(restEnvName) ?? options.Rest.Environment!;
+            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
+            options.Socket.Environment = new BinanceEnvironment().GetEnvironmentByName<BinanceEnvironment>(socketEnvName) ?? options.Socket.Environment!;
+            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
+
+
+            services.AddSingleton(x => Options.Options.Create(options.Rest));
+            services.AddSingleton(x => Options.Options.Create(options.Socket));
 
             return AddBinanceCore(services, options.SocketClientLifeTime);
         }
@@ -71,16 +62,21 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<BinanceOptions>? optionsDelegate = null)
         {
             var options = new BinanceOptions();
+            // Reset environment so we know if theyre overriden
+            options.Rest.Environment = null!;
+            options.Socket.Environment = null!;
             optionsDelegate?.Invoke(options);
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
 
-            var restOptions = services.AddOptions<BinanceRestOptions>().Configure(x => {
-                options.Rest.Set(x);
-            });
-            var socketOptions = services.AddOptions<BinanceSocketOptions>().Configure(x => {
-                options.Socket.Set(x);
-            });
+            options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? BinanceEnvironment.Live;
+            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
+            options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? BinanceEnvironment.Live;
+            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
+
+            services.AddSingleton(x => Options.Options.Create(options.Rest));
+            services.AddSingleton(x => Options.Options.Create(options.Socket));
+
             return AddBinanceCore(services, options.SocketClientLifeTime);
         }
 

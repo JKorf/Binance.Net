@@ -23,12 +23,12 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public string? BrokerId { get; set; }
 
-        internal BinanceSocketApiOptions Copy()
+        internal BinanceSocketApiOptions Set(BinanceSocketApiOptions targetOptions)
         {
-            var result = Copy<BinanceSocketApiOptions>();
-            result.TradeRulesBehaviour = TradeRulesBehaviour;
-            result.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
-            return result;
+            targetOptions = base.Set<BinanceSocketApiOptions>(targetOptions);
+            targetOptions.TradeRulesBehaviour = TradeRulesBehaviour;
+            targetOptions.TradeRulesUpdateInterval = TradeRulesUpdateInterval;
+            return targetOptions;
         }
     }
 }

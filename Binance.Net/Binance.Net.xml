@@ -29354,7 +29354,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceOptions.ApiCredentials">
             <summary>
-            The api credentials used for signing requests to this API.
+            The api credentials used for signing requests.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceOptions.SocketClientLifeTime">

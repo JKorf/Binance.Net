@@ -45,15 +45,13 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceRestApiOptions CoinFuturesOptions { get; private set; } = new BinanceRestApiOptions();
 
-        internal BinanceRestOptions Copy() => Set(Copy<BinanceRestOptions>());
-
         internal BinanceRestOptions Set(BinanceRestOptions targetOptions)
         {
             targetOptions = base.Set<BinanceRestOptions>(targetOptions);
             targetOptions.ReceiveWindow = ReceiveWindow;
-            targetOptions.SpotOptions = SpotOptions.Copy();
-            targetOptions.UsdFuturesOptions = UsdFuturesOptions.Copy();
-            targetOptions.CoinFuturesOptions = CoinFuturesOptions.Copy();
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.UsdFuturesOptions = UsdFuturesOptions.Set(targetOptions.UsdFuturesOptions);
+            targetOptions.CoinFuturesOptions = CoinFuturesOptions.Set(targetOptions.CoinFuturesOptions);
             return targetOptions;
         }
     }
