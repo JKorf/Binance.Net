@@ -63,8 +63,6 @@ namespace Binance.Net
         /// <summary>
         /// Get the Binance environment by name
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         public static BinanceEnvironment? GetEnvironmentByName(string? name)
          => name switch
             {
