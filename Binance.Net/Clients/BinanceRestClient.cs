@@ -65,9 +65,7 @@ namespace Binance.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<BinanceRestOptions> optionsDelegate)
         {
-            var options = new BinanceRestOptions();
-            optionsDelegate(options);
-            BinanceRestOptions.Default = options;
+            BinanceRestOptions.Default = ApplyOptionsDelegate(optionsDelegate);
         }
 
         /// <inheritdoc />

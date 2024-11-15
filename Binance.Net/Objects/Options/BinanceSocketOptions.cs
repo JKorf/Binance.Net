@@ -10,11 +10,19 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static BinanceSocketOptions Default { get; set; } = new BinanceSocketOptions()
+        internal static BinanceSocketOptions Default { get; set; } = new BinanceSocketOptions()
         {
             Environment = BinanceEnvironment.Live,
             SocketSubscriptionsCombineTarget = 10
         };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceSocketOptions()
+        {
+            Default?.Set(this);
+        }
 
         /// <summary>
         /// Options for the Spot API

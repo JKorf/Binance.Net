@@ -63,9 +63,7 @@ namespace Binance.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<BinanceSocketOptions> optionsDelegate)
         {
-            var options = BinanceSocketOptions.Default.Copy();
-            optionsDelegate(options);
-            BinanceSocketOptions.Default = options;
+            BinanceSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
         }
 
         /// <inheritdoc />

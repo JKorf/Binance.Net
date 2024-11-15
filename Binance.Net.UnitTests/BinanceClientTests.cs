@@ -17,6 +17,9 @@ using NUnit.Framework.Legacy;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Binance.Net.Interfaces.Clients;
 
 namespace Binance.Net.UnitTests
 {
@@ -240,6 +243,106 @@ namespace Binance.Net.UnitTests
         {
             CryptoExchange.Net.Testing.TestHelpers.CheckForMissingRestInterfaces<BinanceRestClient>();
             CryptoExchange.Net.Testing.TestHelpers.CheckForMissingSocketInterfaces<BinanceSocketClient>();
+        }
+
+        [Test]
+        [TestCase(TradeEnvironmentNames.Live, "https://api.binance.com")]
+        [TestCase(TradeEnvironmentNames.Testnet, "https://testnet.binance.vision")]
+        [TestCase("us", "https://api.binance.us")]
+        [TestCase("", "https://api.binance.com")]
+        public void TestConstructorEnvironments(string environmentName, string expected)
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    { "Binance:Environment:Name", environmentName },
+                }).Build();
+
+            var collection = new ServiceCollection();
+            collection.AddBinance(configuration.GetSection("Binance"));
+            var provider = collection.BuildServiceProvider();
+
+            var client = provider.GetRequiredService<IBinanceRestClient>();
+
+            var address = client.SpotApi.BaseAddress;
+
+            Assert.That(address, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TestConstructorNullEnvironment()
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    { "Binance", null },
+                }).Build();
+
+            var collection = new ServiceCollection();
+            collection.AddBinance(configuration.GetSection("Binance"));
+            var provider = collection.BuildServiceProvider();
+
+            var client = provider.GetRequiredService<IBinanceRestClient>();
+
+            var address = client.SpotApi.BaseAddress;
+
+            Assert.That(address, Is.EqualTo("https://api.binance.com"));
+        }
+
+        [Test]
+        public void TestConstructorApiOverwriteEnvironment()
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    { "Binance:Environment:Name", "testnet" },
+                    { "Binance:Rest:Environment:Name", "us" },
+                }).Build();
+
+            var collection = new ServiceCollection();
+            collection.AddBinance(configuration.GetSection("Binance"));
+            var provider = collection.BuildServiceProvider();
+
+            var client = provider.GetRequiredService<IBinanceRestClient>();
+
+            var address = client.SpotApi.BaseAddress;
+
+            Assert.That(address, Is.EqualTo("https://api.binance.us"));
+        }
+
+        [Test]
+        public void TestConstructorConfiguration()
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    { "ApiCredentials:Key", "123" },
+                    { "ApiCredentials:Secret", "456" },
+                    { "Socket:ApiCredentials:Key", "456" },
+                    { "Socket:ApiCredentials:Secret", "789" },
+                    { "Rest:OutputOriginalData", "true" },
+                    { "Socket:OutputOriginalData", "false" },
+                    { "Rest:Proxy:Host", "host" },
+                    { "Rest:Proxy:Port", "80" },
+                    { "Socket:Proxy:Host", "host2" },
+                    { "Socket:Proxy:Port", "81" },
+                }).Build();
+
+            var collection = new ServiceCollection();
+            collection.AddBinance(configuration);
+            var provider = collection.BuildServiceProvider();
+
+            var restClient = provider.GetRequiredService<IBinanceRestClient>();
+            var socketClient = provider.GetRequiredService<IBinanceSocketClient>();
+
+            Assert.That(((BaseApiClient)restClient.SpotApi).OutputOriginalData, Is.True);
+            Assert.That(((BaseApiClient)socketClient.SpotApi).OutputOriginalData, Is.False);
+            Assert.That(((BaseApiClient)restClient.SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
+            Assert.That(((BaseApiClient)socketClient.SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((BaseApiClient)restClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host"));
+            Assert.That(((BaseApiClient)restClient.SpotApi).ClientOptions.Proxy.Port, Is.EqualTo(80));
+            Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
+            Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Port, Is.EqualTo(81));
         }
     }
 }

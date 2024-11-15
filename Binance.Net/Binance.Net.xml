@@ -59,6 +59,9 @@
             ctor for DI, use <see cref="M:Binance.Net.BinanceEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)"/> for creating a custom environment
             </summary>
         </member>
+        <member name="M:Binance.Net.BinanceEnvironment.GetEnvironmentByName``1(System.String)">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.BinanceEnvironment.Live">
             <summary>
             Live environment
@@ -29472,6 +29475,11 @@
         <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.Default">
             <summary>
             Default options for new clients
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.Options.BinanceSocketOptions.#ctor">
+            <summary>
+            ctor
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.SpotOptions">
