@@ -80,6 +80,21 @@ namespace Microsoft.Extensions.DependencyInjection
             return AddBinanceCore(services, options.SocketClientLifeTime);
         }
 
+        /// <summary>
+        /// DEPRECATED; use <see cref="AddBinance(IServiceCollection, Action{BinanceOptions}?)" /> instead
+        /// </summary>
+        public static IServiceCollection AddBinance(
+            this IServiceCollection services,
+            Action<BinanceRestOptions> restDelegate,
+            Action<BinanceSocketOptions>? socketDelegate = null,
+            ServiceLifetime? socketClientLifeTime = null)
+        {
+            services.Configure<BinanceRestOptions>((x) => { restDelegate?.Invoke(x); });
+            services.Configure<BinanceSocketOptions>((x) => { socketDelegate?.Invoke(x); });
+
+            return AddBinanceCore(services, socketClientLifeTime);
+        }
+
         private static IServiceCollection AddBinanceCore(
             IServiceCollection services,
             ServiceLifetime? socketClientLifeTime = null)

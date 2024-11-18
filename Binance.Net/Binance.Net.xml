@@ -59,8 +59,10 @@
             ctor for DI, use <see cref="M:Binance.Net.BinanceEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)"/> for creating a custom environment
             </summary>
         </member>
-        <member name="M:Binance.Net.BinanceEnvironment.GetEnvironmentByName``1(System.String)">
-            <inheritdoc />
+        <member name="M:Binance.Net.BinanceEnvironment.GetEnvironmentByName(System.String)">
+            <summary>
+            Get the Binance environment by name
+            </summary>
         </member>
         <member name="P:Binance.Net.BinanceEnvironment.Live">
             <summary>
@@ -29787,6 +29789,11 @@
             <param name="services">The service collection</param>
             <param name="optionsDelegate">Set options for the Binance services</param>
             <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceRestOptions},System.Action{Binance.Net.Objects.Options.BinanceSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            DEPRECATED; use <see cref="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBinance(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Binance.Net.Objects.Options.BinanceOptions})" /> instead
+            </summary>
         </member>
     </members>
 </doc>
