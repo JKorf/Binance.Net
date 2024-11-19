@@ -10,11 +10,19 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static BinanceSocketOptions Default { get; set; } = new BinanceSocketOptions()
+        internal static BinanceSocketOptions Default { get; set; } = new BinanceSocketOptions()
         {
             Environment = BinanceEnvironment.Live,
             SocketSubscriptionsCombineTarget = 10
         };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceSocketOptions()
+        {
+            Default?.Set(this);
+        }
 
         /// <summary>
         /// Options for the Spot API
@@ -31,13 +39,13 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceSocketApiOptions CoinFuturesOptions { get; private set; } = new BinanceSocketApiOptions(); 
 
-        internal BinanceSocketOptions Copy()
+        internal BinanceSocketOptions Set(BinanceSocketOptions targetOptions)
         {
-            var options = Copy<BinanceSocketOptions>();
-            options.SpotOptions = SpotOptions.Copy();
-            options.UsdFuturesOptions = UsdFuturesOptions.Copy();
-            options.CoinFuturesOptions = CoinFuturesOptions.Copy();
-            return options;
+            targetOptions = base.Set<BinanceSocketOptions>(targetOptions);
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.UsdFuturesOptions = UsdFuturesOptions.Set(targetOptions.UsdFuturesOptions);
+            targetOptions.CoinFuturesOptions = CoinFuturesOptions.Set(targetOptions.CoinFuturesOptions);
+            return targetOptions;
         }
     }
 }

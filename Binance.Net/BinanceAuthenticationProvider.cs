@@ -22,7 +22,7 @@ namespace Binance.Net
             RequestBodyFormat requestBodyFormat)
         {
             headers ??= new Dictionary<string, string>();
-            headers.Add("X-MBX-APIKEY", _credentials.Key);
+            headers.Add("X-MBX-APIKEY", ApiKey);
 
             if (!auth)
                 return;
@@ -60,7 +60,7 @@ namespace Binance.Net
         {
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {
-                { "apiKey", _credentials.Key },
+                { "apiKey", ApiKey },
                 { "timestamp", DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow) }
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));

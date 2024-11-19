@@ -1,6 +1,8 @@
 ﻿using Binance.Net.Clients;
+using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
@@ -25,12 +27,12 @@ namespace Binance.Net.UnitTests
             var sec = Environment.GetEnvironmentVariable("APISECRET");
 
             Authenticated = key != null && sec != null;
-            return new BinanceRestClient(null, loggerFactory, opts =>
+            return new BinanceRestClient(null, loggerFactory, Options.Create(new BinanceRestOptions
             {
-                opts.AutoTimestamp = false;
-                opts.OutputOriginalData = true;
-                opts.ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null;
-            });
+                AutoTimestamp = false,
+                OutputOriginalData = true,
+                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
+            }));
         }
 
         [Test]

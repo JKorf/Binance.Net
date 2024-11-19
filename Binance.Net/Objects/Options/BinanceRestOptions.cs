@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Objects.Options;
+﻿using Binance.Net.Clients;
+using CryptoExchange.Net.Objects.Options;
 
 namespace Binance.Net.Objects.Options
 {
@@ -10,11 +11,19 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static BinanceRestOptions Default { get; set; } = new BinanceRestOptions()
+        internal static BinanceRestOptions Default { get; set; } = new BinanceRestOptions()
         {
             Environment = BinanceEnvironment.Live,
             AutoTimestamp = true
         };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceRestOptions()
+        {
+            Default?.Set(this);
+        }
 
         /// <summary>
         /// The default receive window for requests
@@ -36,14 +45,14 @@ namespace Binance.Net.Objects.Options
         /// </summary>
         public BinanceRestApiOptions CoinFuturesOptions { get; private set; } = new BinanceRestApiOptions();
 
-        internal BinanceRestOptions Copy()
+        internal BinanceRestOptions Set(BinanceRestOptions targetOptions)
         {
-            var options = Copy<BinanceRestOptions>();
-            options.ReceiveWindow = ReceiveWindow;
-            options.SpotOptions = SpotOptions.Copy();
-            options.UsdFuturesOptions = UsdFuturesOptions.Copy();
-            options.CoinFuturesOptions = CoinFuturesOptions.Copy();
-            return options;
+            targetOptions = base.Set<BinanceRestOptions>(targetOptions);
+            targetOptions.ReceiveWindow = ReceiveWindow;
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.UsdFuturesOptions = UsdFuturesOptions.Set(targetOptions.UsdFuturesOptions);
+            targetOptions.CoinFuturesOptions = CoinFuturesOptions.Set(targetOptions.CoinFuturesOptions);
+            return targetOptions;
         }
     }
 }
