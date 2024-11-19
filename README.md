@@ -187,6 +187,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.10.0 - 19 Nov 2024
+    * Updated CryptoExchange.Net to version 8.3.0
+    * Added support for loading client settings from IConfiguration
+    * Added DI registration method for configuring Rest and Socket options at the same time
+    * Added DisplayName and ImageUrl properties to BinanceExchange class
+    * Updated client constructors to accept IOptions from DI
+    * Removed redundant BinanceSocketClient constructor
+    * Fixed ListenKey property not set on spot websocket account data updates
+
 * Version 10.9.2 - 08 Nov 2024
     * Fixed mixed up page and limit parameter on restClient.UsdFuturesApi.Account.GetIncomeHistoryAsync endpoint
 
