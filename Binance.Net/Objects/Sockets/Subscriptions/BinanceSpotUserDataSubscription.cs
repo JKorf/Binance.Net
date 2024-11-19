@@ -84,15 +84,29 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             if (message.Data is BinanceCombinedStream<BinanceStreamPositionsUpdate> positionUpdate)
+            {
+                positionUpdate.Data.ListenKey = positionUpdate.Stream;
                 _positionHandler?.Invoke(message.As(positionUpdate.Data, positionUpdate.Stream, null, SocketUpdateType.Update));
+            }
             else if (message.Data is BinanceCombinedStream<BinanceStreamBalanceUpdate> balanceUpdate)
+            {
+                balanceUpdate.Data.ListenKey = balanceUpdate.Stream;
                 _balanceHandler?.Invoke(message.As(balanceUpdate.Data, balanceUpdate.Stream, null, SocketUpdateType.Update));
+            }
             else if (message.Data is BinanceCombinedStream<BinanceStreamOrderUpdate> orderUpdate)
+            {
+                orderUpdate.Data.ListenKey = orderUpdate.Stream;
                 _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, orderUpdate.Data.Symbol, SocketUpdateType.Update));
+            }
             else if (message.Data is BinanceCombinedStream<BinanceStreamOrderList> orderListUpdate)
+            {
+                orderListUpdate.Data.ListenKey = orderListUpdate.Stream;
                 _orderListHandler?.Invoke(message.As(orderListUpdate.Data, orderListUpdate.Stream, null, SocketUpdateType.Update));
+            }
             else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyExpired)
+            {
                 _listenKeyExpiredHandler?.Invoke(message.As(listenKeyExpired.Data, listenKeyExpired.Stream, null, SocketUpdateType.Update));
+            }
 
             return new CallResult(null);
         }
