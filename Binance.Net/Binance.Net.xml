@@ -94,6 +94,16 @@
             Exchange name
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceExchange.DisplayName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.BinanceExchange.ImageUrl">
+            <summary>
+            Url to exchange image
+            </summary>
+        </member>
         <member name="P:Binance.Net.BinanceExchange.Url">
             <summary>
             Url to the main website

@@ -191,8 +191,14 @@
           
 		  <p>Binance.Net can be configured using Dotnet dependency injection, after which the clients can be injected into your services. It also correctly configures logging and HttpClient usage.</p>
 		  
-		  <pre><code>builder.Services.AddBinance(options => {
-  // Options can be configured here, for example:
+		  <pre><code>// Configure options from config file
+// see https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples/example-config.json for an example
+builder.Services.AddBinance(builder.Configuration.GetSection("Binance"));
+		  
+// OR
+		  
+ builder.Services.AddBinance(options => {
+  // Configure options in code
   options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
 });</code></pre>
 		  
@@ -211,13 +217,9 @@ var socketClient = new BinanceSocketClient();</code></pre>
           
 		  <p>By default a rate limiter is enabled which makes sure the server rate limits aren't exceeded. For more info on what the rate limits for the Binance API are see the <a href="https://binance-docs.github.io/apidocs/futures/en/#limits" target="_blank">API docs</a>. Note that rate limiting is only implemented to prevent going over the request rate limit, it does not apply for order limits.</p>
 		  <p>Whether client ratelimiting is enabled in the library and what the behaviour should be when the limit is reached can be controlled with the <code>RatelimiterEnabled</code> and <code>RateLimitingBehaviour</code> client options</p>
-		  <pre><code>services.AddBinance(x =>
-    x.RatelimiterEnabled = true;
-    x.RateLimitingBehaviour = RateLimitingBehaviour.Wait;
-}, x =>
-{
-    x.RatelimiterEnabled = true;
-    x.RateLimitingBehaviour = RateLimitingBehaviour.Wait;
+		  <pre><code>services.AddBinance(x => {
+    x.Rest.RatelimiterEnabled = true;
+    x.Rest.RateLimitingBehaviour = RateLimitingBehaviour.Wait;
 });</code></pre>
 		  <p>To be notified of when a rate limit is hit the static <code>BinanceExchange.RateLimiter</code> exposes an event which triggers when a rate limit is reached</p>
 		  <pre><code>BinanceExchange.RateLimiter.RateLimitTriggered += (rateLimitEvent) => Console.WriteLine("Limit triggered: " + rateLimitEvent);

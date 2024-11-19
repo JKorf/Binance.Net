@@ -17,6 +17,16 @@ namespace Binance.Net
         public static string ExchangeName => "Binance";
 
         /// <summary>
+        /// Exchange name
+        /// </summary>
+        public static string DisplayName => "Binance";
+
+        /// <summary>
+        /// Url to exchange image
+        /// </summary>
+        public static string ImageUrl { get; } = "https://raw.githubusercontent.com/JKorf/Binance.Net/master/Binance.Net/Icon/icon.png";
+
+        /// <summary>
         /// Url to the main website
         /// </summary>
         public static string Url { get; } = "https://www.binance.com";
