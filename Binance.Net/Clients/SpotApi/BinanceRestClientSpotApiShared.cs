@@ -149,7 +149,7 @@ namespace Binance.Net.Clients.SpotApi
             // Return
             return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime) 
             {
-                Side = x.BuyerIsMaker ? SharedOrderSide.Buy : SharedOrderSide.Sell
+                Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
             }).ToArray());
         }
         #endregion
@@ -185,7 +185,7 @@ namespace Binance.Net.Clients.SpotApi
             // Return
             return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, TradingMode.Spot, result.Data.Where(x => x.TradeTime < request.EndTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)
             {
-                Side = x.BuyerIsMaker ? SharedOrderSide.Buy : SharedOrderSide.Sell
+                Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
             }).ToArray(), nextToken);
         }
         #endregion

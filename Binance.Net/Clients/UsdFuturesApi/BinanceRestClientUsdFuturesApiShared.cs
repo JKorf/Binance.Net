@@ -239,7 +239,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime)
             {
-                Side = x.BuyerIsMaker ? SharedOrderSide.Buy : SharedOrderSide.Sell
+                Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
             }).ToArray());
         }
 
@@ -682,7 +682,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             // Return
             return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Where(x => x.TradeTime < request.EndTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.TradeTime)
             {
-                Side = x.BuyerIsMaker ? SharedOrderSide.Buy : SharedOrderSide.Sell
+                Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
             }).ToArray(), nextToken);
         }
         #endregion
