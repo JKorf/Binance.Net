@@ -19086,6 +19086,16 @@
             Is futures enabled
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceVipLevelAndStatus.IsOptionsEnabled">
+            <summary>
+            Is options enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceVipLevelAndStatus.IsPortfolioMarginRetailEnabled">
+            <summary>
+            Is portfolio margin retail enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceWalletBalance">
             <summary>
             Wallet balance

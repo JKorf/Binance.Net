@@ -20,5 +20,15 @@
         /// </summary>
         [JsonPropertyName("isFutureEnabled")]
         public bool IsFuturesEnabled { get; set; }
+        /// <summary>
+        /// Is options enabled
+        /// </summary>
+        [JsonPropertyName("isOptionsEnabled")]
+        public bool IsOptionsEnabled { get; set; }
+        /// <summary>
+        /// Is portfolio margin retail enabled
+        /// </summary>
+        [JsonPropertyName("isPortfolioMarginRetailEnabled")]
+        public bool IsPortfolioMarginRetailEnabled { get; set; }
     }
 }
