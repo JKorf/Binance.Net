@@ -187,6 +187,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.11.0 - 25 Nov 2024
+    * Added WithdrawInternalMin to restClient.SpotApi.Account.GetUserAssetsAsync response model
+    * Added EnableFixApiTrade and EnableFixReadOnly to restClient.SpotApi.Account.GetAPIKeyPermissionsAsync response model
+    * Added IsOptionsEnabled and IsPortfolioMarginRetailEnabled to restClient.SpotApi.Account.GetAccountVipLevelAndStatusAsync response model
+    * Fixed inverted order side for Shared trades
+    * Removed restClient.SpotApi.Account.GetAutoConvertStableCoinConfigAsync, SetAutoConvertStableCoinConfigAsync and ConvertBusdAsync as theyre deprecated
+
 * Version 10.10.0 - 19 Nov 2024
     * Updated CryptoExchange.Net to version 8.3.0
     * Added support for loading client settings from IConfiguration
