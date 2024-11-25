@@ -67,5 +67,15 @@
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("tradingAuthorityExpirationTime")]
         public DateTime? TradingAuthorityExpirationTime { get; set; }
+        /// <summary>
+        /// Authorizes FIX api trading
+        /// </summary>
+        [JsonPropertyName("enableFixApiTrade")]
+        public bool EnableFixApiTrade { get; set; }
+        /// <summary>
+        /// Authorizes FIX data reading
+        /// </summary>
+        [JsonPropertyName("enableFixReadOnly")]
+        public bool EnableFixReadOnly { get; set; }
     }
 }

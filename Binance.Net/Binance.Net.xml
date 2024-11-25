@@ -16177,6 +16177,16 @@
             Expiration time for spot and margin trading permission
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.EnableFixApiTrade">
+            <summary>
+            Authorizes FIX api trading
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.EnableFixReadOnly">
+            <summary>
+            Authorizes FIX data reading
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings">
             <summary>
             User auto conversion settings
