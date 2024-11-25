@@ -729,39 +729,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get auto conversion settings
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data" /></para>
-        /// </summary>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceAutoConversionSettings>> GetAutoConvertStableCoinConfigAsync(long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Set auto conversion configuration
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-auto-converting-stable-coins-user_data" /></para>
-        /// </summary>
-        /// <param name="asset">Asset to configure (USDC, USDP or TUSD)</param>
-        /// <param name="enable">Enable or not</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> SetAutoConvertStableCoinConfigAsync(string asset, bool enable, long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Convert transfer, convert between BUSD and stablecoins.
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#busd-convert-trade" /></para>
-        /// </summary>
-        /// <param name="clientTransferId">The unique user-defined transaction id, min length 20</param>
-        /// <param name="asset">The current asset, for example `ETH`</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="targetAsset">	Target asset you want to convert</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceBusdConvertResult>> ConvertBusdAsync(string clientTransferId, string asset, decimal quantity, string targetAsset, long? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Get Busd convert history
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#busd-convert-history-user_data" /></para>
         /// </summary>

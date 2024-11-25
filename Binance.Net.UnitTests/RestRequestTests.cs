@@ -84,9 +84,6 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.GetPortfolioMarginAccountInfoAsync(), "GetPortfolioMarginAccountInfo");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetPortfolioMarginBankruptcyLoanAsync(), "GetPortfolioMarginBankruptcyLoan");
             await tester.ValidateAsync(client => client.SpotApi.Account.PortfolioMarginBankruptcyLoanRepayAsync(), "PortfolioMarginBankruptcyLoanRepay");
-            await tester.ValidateAsync(client => client.SpotApi.Account.GetAutoConvertStableCoinConfigAsync(), "GetAutoConvertStableCoinConfig");
-            await tester.ValidateAsync(client => client.SpotApi.Account.SetAutoConvertStableCoinConfigAsync("ETH", true), "SetAutoConvertStableCoinConfig");
-            await tester.ValidateAsync(client => client.SpotApi.Account.ConvertBusdAsync("1", "ETH", 1, "USDT"), "ConvertBusd");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetBusdConvertHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow), "GetBusdConvertHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetCloudMiningHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow), "GetCloudMiningHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetIsolatedMarginFeeDataAsync(), "GetIsolatedMarginFeeData");

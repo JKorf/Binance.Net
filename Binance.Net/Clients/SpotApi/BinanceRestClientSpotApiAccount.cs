@@ -1142,55 +1142,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Get Auto Conversion config
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoConversionSettings>> GetAutoConvertStableCoinConfigAsync(long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/contract/convertible-coins", BinanceExchange.RateLimiter.SpotRestUid, 600, true);
-            return await _baseClient.SendAsync<BinanceAutoConversionSettings>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Set Auto Conversion config
-
-        /// <inheritdoc />
-        public async Task<WebCallResult> SetAutoConvertStableCoinConfigAsync(string asset, bool enable, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                { "coin", asset },
-                { "enable", enable }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/capital/contract/convertible-coins", BinanceExchange.RateLimiter.SpotRestUid, 600, true);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Convert BUSD
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBusdConvertResult>> ConvertBusdAsync(string clientTransferId, string asset, decimal quantity, string targetAsset, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                { "clientTranId", clientTransferId },
-                { "asset", asset },
-                { "amount", quantity },
-                { "targetAsset", targetAsset }
-            };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/asset/convert-transfer", BinanceExchange.RateLimiter.SpotRestUid, 5, true);
-            return await _baseClient.SendAsync<BinanceBusdConvertResult>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Convert BUSD history
 
         /// <inheritdoc />

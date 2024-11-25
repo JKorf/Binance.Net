@@ -80,7 +80,6 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Account.GetRebateHistoryAsync(default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetPortfolioMarginCollateralRateAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetPortfolioMarginBankruptcyLoanAsync(default, default), true);
-            await RunAndCheckResult(client => client.SpotApi.Account.GetAutoConvertStableCoinConfigAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetBusdConvertHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetCloudMiningHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetIsolatedMarginFeeDataAsync(default, default, default, default), true);
