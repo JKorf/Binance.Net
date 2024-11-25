@@ -183,5 +183,10 @@
         /// </summary>
         [JsonPropertyName("busy")]
         public bool Busy { get; set; }
+        /// <summary>
+        /// Min withdraw quantity for internal withdrawals
+        /// </summary>
+        [JsonPropertyName("withdrawInternalMin")]
+        public decimal WithdrawInternalMin { get; set; }
     }
 }

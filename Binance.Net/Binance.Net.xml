@@ -19051,6 +19051,11 @@
             Whether the network is busy
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.WithdrawInternalMin">
+            <summary>
+            Min withdraw quantity for internal withdrawals
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserBalance">
             <summary>
             User balance
