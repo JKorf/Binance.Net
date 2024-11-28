@@ -29332,31 +29332,6 @@
             Binance options
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.Rest">
-            <summary>
-            Rest client options
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.Socket">
-            <summary>
-            Socket client options
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.Environment">
-            <summary>
-            Trade environment. Contains info about URL's to use to connect to the API. Use `BinanceEnvironment` to swap environment, for example `Environment = BinanceEnvironment.Live`
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.ApiCredentials">
-            <summary>
-            The api credentials used for signing requests.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceOptions.SocketClientLifeTime">
-            <summary>
-            The DI service lifetime for the IBinanceSocketClient
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Options.BinanceOrderBookOptions">
             <summary>
             Options for the Binance SymbolOrderBook
