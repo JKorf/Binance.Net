@@ -187,6 +187,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.12.0 - 28 Nov 2024
+    * Updated CryptoExchange.Net to version 8.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.4.0
+    * Added GetFeesAsync Shared REST client implementations
+    * Updated BinanceOptions to LibraryOptions implementation
+    * Updated test and analyzer package versions
+
 * Version 10.11.0 - 25 Nov 2024
     * Added WithdrawInternalMin to restClient.SpotApi.Account.GetUserAssetsAsync response model
     * Added EnableFixApiTrade and EnableFixReadOnly to restClient.SpotApi.Account.GetAPIKeyPermissionsAsync response model
