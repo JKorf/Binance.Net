@@ -22,15 +22,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             _serviceProvider = serviceProvider;
 
-            Spot = new OrderBookFactory<BinanceOrderBookOptions>(
-                CreateSpot,
-                (sharedSymbol, options) => CreateSpot(BinanceExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
-            UsdFutures = new OrderBookFactory<BinanceOrderBookOptions>(
-                CreateUsdtFutures,
-                (sharedSymbol, options) => CreateUsdtFutures(BinanceExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
-            CoinFutures = new OrderBookFactory<BinanceOrderBookOptions>(
-                CreateCoinFutures,
-                (sharedSymbol, options) => CreateCoinFutures(BinanceExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+            Spot = new OrderBookFactory<BinanceOrderBookOptions>(CreateSpot, Create);
+            UsdFutures = new OrderBookFactory<BinanceOrderBookOptions>(CreateUsdtFutures, Create);
+            CoinFutures = new OrderBookFactory<BinanceOrderBookOptions>(CreateCoinFutures, Create);
         }
 
         /// <inheritdoc />
@@ -43,7 +37,7 @@ namespace Binance.Net.SymbolOrderBooks
         /// <inheritdoc />
         public ISymbolOrderBook Create(SharedSymbol symbol, Action<BinanceOrderBookOptions>? options = null)
         {
-            var symbolName = BinanceExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            var symbolName = symbol.GetSymbol(BinanceExchange.FormatSymbol);
             if (symbol.TradingMode == TradingMode.Spot)
                 return CreateSpot(symbolName, options);
             if (symbol.TradingMode.IsLinear())
