@@ -9,6 +9,9 @@
         /// Order id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientAlgoId { get; set; } = string.Empty;
         /// <summary>
         /// Successful

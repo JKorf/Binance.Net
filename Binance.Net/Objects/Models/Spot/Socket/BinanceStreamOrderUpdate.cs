@@ -22,6 +22,9 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The new client order id
         /// </summary>
         [JsonPropertyName("c")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order
@@ -72,6 +75,9 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The original client order id
         /// </summary>
         [JsonPropertyName("C")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string? OriginalClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The execution type
