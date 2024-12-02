@@ -73,7 +73,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             price = rulesCheck.Price;
             stopPrice = rulesCheck.StopPrice;
 
-            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            var clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
 
             var parameters = new ParameterCollection()
             {
@@ -142,7 +142,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             int i = 0;
             foreach (var order in orders)
             {
-                string clientOrderId = order.NewClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+                var clientOrderId = BinanceHelpers.ApplyBrokerId(order.NewClientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
 
                 var orderParameters = new ParameterCollection()
                 {
@@ -537,7 +537,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
-            clientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            clientOrderId = BinanceHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
 
             var parameters = new ParameterCollection()
             {
@@ -571,7 +571,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
-            clientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            clientOrderId = BinanceHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
 
             var parameters = new ParameterCollection()
             {

@@ -57,7 +57,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (orderResponseType == OrderResponseType.Full)
                 throw new ArgumentException("OrderResponseType.Full is not supported in Futures");
 
-            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            string clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
 
             var parameters = new ParameterCollection();
             parameters.AddParameter("symbol", symbol);

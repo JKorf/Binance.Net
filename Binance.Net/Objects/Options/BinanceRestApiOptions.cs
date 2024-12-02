@@ -21,11 +21,10 @@ namespace Binance.Net.Objects.Options
         /// How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
         /// </summary>
         public TimeSpan TradeRulesUpdateInterval { get; set; } = TimeSpan.FromMinutes(60);
-
         /// <summary>
-        /// The broker reference id to use
+        /// Whether to allow the client to append/remove a broker reference to a clientOrderId parameter/property when user also set this value. Will not have any influence on the actual functionality.
         /// </summary>
-        public string? BrokerId { get; set; }
+        public bool AllowBrokerOverride { get; set; } = true;
 
         internal BinanceRestApiOptions Set(BinanceRestApiOptions targetOptions)
         {

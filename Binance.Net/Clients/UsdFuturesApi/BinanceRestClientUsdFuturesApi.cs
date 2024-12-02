@@ -24,7 +24,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
-        internal readonly string _brokerId;
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("USD Futures Api");
         #endregion
@@ -64,7 +63,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
             ArraySerialization = ArrayParametersSerialization.MultipleValues;
-            _brokerId = !string.IsNullOrEmpty(options.UsdFuturesOptions.BrokerId) ? options.UsdFuturesOptions.BrokerId! : "x-d63tKbx3";
         }
 
         event Action<CryptoExchange.Net.CommonObjects.OrderId> IBaseRestClient.OnOrderPlaced

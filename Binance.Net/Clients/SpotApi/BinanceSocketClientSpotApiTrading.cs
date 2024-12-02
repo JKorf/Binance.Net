@@ -51,7 +51,7 @@ namespace Binance.Net.Clients.SpotApi
                 return new CallResult<BinanceResponse<BinancePlacedOrder>>(new ArgumentError(rulesCheck.ErrorMessage!));
             }
 
-            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            string clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
 
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
@@ -164,7 +164,7 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyType = null,
             CancellationToken ct = default)
         {
-            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            string clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
 
             var parameters = new ParameterCollection
             {
@@ -242,8 +242,8 @@ namespace Binance.Net.Clients.SpotApi
             SelfTradePreventionMode? selfTradePreventionMode = null, 
             CancellationToken ct = default)
         {
-            limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
-            stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            limitClientOrderId = BinanceHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            stopClientOrderId = BinanceHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
 
             var parameters = new ParameterCollection
             {
@@ -308,8 +308,8 @@ namespace Binance.Net.Clients.SpotApi
             SelfTradePreventionMode? selfTradePreventionMode = null,
             CancellationToken ct = default)
         {
-            aboveClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
-            belowClientOrderId ??= ExchangeHelpers.AppendRandomString(_client._brokerId, 32);
+            aboveClientOrderId = BinanceHelpers.ApplyBrokerId(aboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            belowClientOrderId = BinanceHelpers.ApplyBrokerId(belowClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
 
             var parameters = new ParameterCollection
             {

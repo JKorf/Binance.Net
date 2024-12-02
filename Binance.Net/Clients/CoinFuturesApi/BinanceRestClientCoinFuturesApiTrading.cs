@@ -69,7 +69,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             price = rulesCheck.Price;
             stopPrice = rulesCheck.StopPrice;
 
-            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            var clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
 
             var parameters = new ParameterCollection()
             {
@@ -147,7 +147,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
                 orderParameters.AddEnum("side", order.Side);
                 orderParameters.AddEnum("type", order.Type);
-                var clientOrderId = order.NewClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+                var clientOrderId = BinanceHelpers.ApplyBrokerId(order.NewClientOrderId, BinanceExchange.ClientOrderIdFutures, 32);
                 orderParameters.AddOptionalParameter("quantity", order.Quantity?.ToString(CultureInfo.InvariantCulture));
                 orderParameters.AddOptionalParameter("newClientOrderId", clientOrderId);
                 orderParameters.AddOptionalParameter("price", order.Price?.ToString(CultureInfo.InvariantCulture));

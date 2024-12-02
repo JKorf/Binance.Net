@@ -36,7 +36,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
-        internal readonly string _brokerId;
         #endregion
 
         /// <inheritdoc />
@@ -57,8 +56,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Account = new BinanceSocketClientUsdFuturesApiAccount(logger, this);
             ExchangeData = new BinanceSocketClientUsdFuturesApiExchangeData(logger, this);
             Trading = new BinanceSocketClientUsdFuturesApiTrading(logger, this);
-
-            _brokerId = !string.IsNullOrEmpty(options.UsdFuturesOptions.BrokerId) ? options.UsdFuturesOptions.BrokerId! : "x-d63tKbx3";
 
             // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval on framework level)
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2

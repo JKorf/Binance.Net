@@ -38,6 +38,12 @@ namespace Binance.Net
             "https://binance-docs.github.io/apidocs/spot/en/#change-log"
             };
 
+        internal const string Seperator = "|JK|";
+        internal const string ClientOrderIdSpot = "x-VICEW9VV";
+        internal const string ClientOrderIdFutures = "x-d63tKbx3";
+        internal const string ClientOrderIdPrefixSpot = ClientOrderIdSpot + Seperator;
+        internal const string ClientOrderIdPrefixFutures = ClientOrderIdFutures + Seperator;
+
         /// <summary>
         /// Format a base and quote asset to a Binance recognized symbol 
         /// </summary>

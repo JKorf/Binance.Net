@@ -29,12 +29,14 @@ namespace Binance.Net.Objects.Models
         /// Original order id
         /// </summary>
         [JsonPropertyName("origClientOrderId")]
+        [JsonConverterCtor<ReplaceConverter>(BinanceExchange.ClientOrderIdPrefixSpot, "")]
         public string OriginalClientOrderId { get; set; } = string.Empty;
 
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("clientOrderId")]
+        [JsonConverterCtor<ReplaceConverter>(BinanceExchange.ClientOrderIdPrefixSpot, "")]
         public string ClientOrderId { get; set; } = string.Empty;
 
         private decimal _price;
