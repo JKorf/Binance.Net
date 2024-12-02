@@ -345,22 +345,5 @@ namespace Binance.Net.UnitTests
             Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
             Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Port, Is.EqualTo(81));
         }
-
-        [Test]
-        [TestCase("123", "BKR", 32)]
-        [TestCase("123123123123123123123123123123", "BKR", 32)] // 30
-        [TestCase("123123123123123123123123123", "BKR", 32)] // 27
-        [TestCase("123123123123123123123123", "BKR", 32)] // 24
-        [TestCase(null, "BKR", 32)]
-        public void Test(string clientOrderId, string brokerId, int maxLength)
-        {
-            var result = BinanceHelpers.ApplyBrokerId(clientOrderId, brokerId, maxLength);
-            Debug.WriteLine($"1: {result.Length} {result}");
-            var result2 = BinanceHelpers.RemoveBrokerId(result, brokerId);
-            Debug.WriteLine($"2: {result2.Length} {result2}");
-
-            if (clientOrderId != null)
-                Assert.That(clientOrderId, Is.EqualTo(result2));
-        }
     }
 }

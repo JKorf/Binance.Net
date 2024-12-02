@@ -57,7 +57,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (orderResponseType == OrderResponseType.Full)
                 throw new ArgumentException("OrderResponseType.Full is not supported in Futures");
 
-            string clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdFutures, 32, _client.ClientOptions.AllowBrokerOverride);
+            string clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _client.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection();
             parameters.AddParameter("symbol", symbol);
@@ -95,7 +95,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 32, _client.ClientOptions.AllowBrokerOverride);
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _client.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {
@@ -123,7 +123,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 32, _client.ClientOptions.AllowBrokerOverride);
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _client.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {
@@ -147,7 +147,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 32, _client.ClientOptions.AllowBrokerOverride);
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _client.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {

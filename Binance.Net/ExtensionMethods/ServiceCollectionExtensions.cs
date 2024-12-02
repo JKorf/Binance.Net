@@ -39,8 +39,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
             var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
+            options.Rest.AllowAppendingClientOrderId = options.Rest.AllowAppendingClientOrderId || options.AllowAppendingClientOrderId;
             options.Rest.Environment = BinanceEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
             options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
+            options.Socket.AllowAppendingClientOrderId = options.Socket.AllowAppendingClientOrderId || options.AllowAppendingClientOrderId;
             options.Socket.Environment = BinanceEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
@@ -71,8 +73,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? BinanceEnvironment.Live;
             options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
+            options.Rest.AllowAppendingClientOrderId = options.Rest.AllowAppendingClientOrderId || options.AllowAppendingClientOrderId;
             options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? BinanceEnvironment.Live;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
+            options.Socket.AllowAppendingClientOrderId = options.Socket.AllowAppendingClientOrderId || options.AllowAppendingClientOrderId;
 
             services.AddSingleton(x => Options.Options.Create(options.Rest));
             services.AddSingleton(x => Options.Options.Create(options.Socket));
