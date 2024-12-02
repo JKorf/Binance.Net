@@ -1895,7 +1895,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiTrading.GetOcoOrderAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
@@ -11256,7 +11256,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Order list info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
             <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#place-new-order-list-oco-trade" /></para>
@@ -11283,6 +11283,7 @@
             <param name="belowStrategyId">Strategy id for the below leg</param>
             <param name="belowStrategyType">Strategy type for the below leg</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="listClientOrderId">List client order id</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -29377,11 +29378,6 @@
             How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceRestApiOptions.BrokerId">
-            <summary>
-            The broker reference id to use
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Options.BinanceRestOptions">
             <summary>
             Options for the BinanceRestClient
@@ -29400,6 +29396,11 @@
         <member name="P:Binance.Net.Objects.Options.BinanceRestOptions.ReceiveWindow">
             <summary>
             The default receive window for requests
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceRestOptions.AllowBrokerOverride">
+            <summary>
+            Whether to allow the client to append/remove a broker reference to a clientOrderId parameter/property when user also set this value. Will not have any influence on the actual functionality.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceRestOptions.SpotOptions">
@@ -29432,11 +29433,6 @@
             How often the trade rules should be updated. Only used when TradeRulesBehaviour is not None
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Options.BinanceSocketApiOptions.BrokerId">
-            <summary>
-            The broker reference id to use
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Options.BinanceSocketOptions">
             <summary>
             Options for the BinanceSocketClient
@@ -29450,6 +29446,11 @@
         <member name="M:Binance.Net.Objects.Options.BinanceSocketOptions.#ctor">
             <summary>
             ctor
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.AllowBrokerOverride">
+            <summary>
+            Whether to allow the client to append/remove a broker reference to a clientOrderId parameter/property when user also set this value. Will not have any influence on the actual functionality.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.SpotOptions">

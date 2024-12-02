@@ -31,6 +31,11 @@ namespace Binance.Net.Objects.Options
         public TimeSpan ReceiveWindow { get; set; } = TimeSpan.FromSeconds(5);
 
         /// <summary>
+        /// Whether to allow the client to append/remove a broker reference to a clientOrderId parameter/property when user also set this value. Will not have any influence on the actual functionality.
+        /// </summary>
+        public bool AllowBrokerOverride { get; set; } = true;
+
+        /// <summary>
         /// Spot API options
         /// </summary>
         public BinanceRestApiOptions SpotOptions { get; private set; } = new BinanceRestApiOptions();
@@ -48,6 +53,7 @@ namespace Binance.Net.Objects.Options
         internal BinanceRestOptions Set(BinanceRestOptions targetOptions)
         {
             targetOptions = base.Set<BinanceRestOptions>(targetOptions);
+            targetOptions.AllowBrokerOverride = AllowBrokerOverride;
             targetOptions.ReceiveWindow = ReceiveWindow;
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.UsdFuturesOptions = UsdFuturesOptions.Set(targetOptions.UsdFuturesOptions);

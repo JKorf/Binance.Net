@@ -25,6 +25,11 @@ namespace Binance.Net.Objects.Options
         }
 
         /// <summary>
+        /// Whether to allow the client to append/remove a broker reference to a clientOrderId parameter/property when user also set this value. Will not have any influence on the actual functionality.
+        /// </summary>
+        public bool AllowBrokerOverride { get; set; } = true;
+
+        /// <summary>
         /// Options for the Spot API
         /// </summary>
         public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions();
@@ -42,6 +47,7 @@ namespace Binance.Net.Objects.Options
         internal BinanceSocketOptions Set(BinanceSocketOptions targetOptions)
         {
             targetOptions = base.Set<BinanceSocketOptions>(targetOptions);
+            targetOptions.AllowBrokerOverride = AllowBrokerOverride;
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.UsdFuturesOptions = UsdFuturesOptions.Set(targetOptions.UsdFuturesOptions);
             targetOptions.CoinFuturesOptions = CoinFuturesOptions.Set(targetOptions.CoinFuturesOptions);

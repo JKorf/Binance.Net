@@ -219,27 +219,5 @@ namespace Binance.Net
 
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
-
-        internal static string ApplyBrokerId(string? clientOrderId, string brokerId, int maxLength, bool allowValueAdjustement)
-        {
-            var reservedLength = brokerId.Length + BinanceExchange.Seperator.Length;
-
-            if ((clientOrderId?.Length + reservedLength) > maxLength)
-                return clientOrderId!;
-
-            if (!string.IsNullOrEmpty(clientOrderId))
-            {
-                if (allowValueAdjustement)
-                    clientOrderId = brokerId + BinanceExchange.Seperator + clientOrderId;
-
-                return clientOrderId!;
-            }
-            else
-            {
-                clientOrderId = ExchangeHelpers.AppendRandomString(brokerId + BinanceExchange.Seperator, maxLength);
-            }
-
-            return clientOrderId;
-        }
     }
 }

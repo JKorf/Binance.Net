@@ -120,7 +120,7 @@ namespace Binance.Net.Clients.SpotApi
             stopPrice = rulesCheck.StopPrice;
             quoteQuantity = rulesCheck.QuoteQuantity;
 
-            var clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, ApiOptions.AllowBrokerOverride);
+            var clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection()
             {

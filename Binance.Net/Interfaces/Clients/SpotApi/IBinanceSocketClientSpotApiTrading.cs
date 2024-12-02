@@ -176,6 +176,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="belowStrategyId">Strategy id for the below leg</param>
         /// <param name="belowStrategyType">Strategy type for the below leg</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="listClientOrderId">List client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderListAsync(
@@ -204,6 +205,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? belowStrategyType = null,
 
             SelfTradePreventionMode? selfTradePreventionMode = null,
+            string? listClientOrderId = null,
             CancellationToken ct = default);
 
         /// <summary>

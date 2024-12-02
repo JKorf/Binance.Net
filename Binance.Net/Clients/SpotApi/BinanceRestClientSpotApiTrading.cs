@@ -155,6 +155,11 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            if (newClientOrderId != null)
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+
             var parameters = new ParameterCollection()
             {
                 { "symbol", symbol }
@@ -237,7 +242,7 @@ namespace Binance.Net.Clients.SpotApi
             stopPrice = rulesCheck.StopPrice;
             quoteQuantity = rulesCheck.QuoteQuantity;
 
-            var clientOrderId = BinanceHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            var clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection
             {
@@ -279,6 +284,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection()
             {
@@ -366,8 +374,8 @@ namespace Binance.Net.Clients.SpotApi
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
 
-            limitClientOrderId = BinanceHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
-            stopClientOrderId = BinanceHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            limitClientOrderId = LibraryHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            stopClientOrderId = LibraryHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection
             {
@@ -431,8 +439,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            aboveClientOrderId = BinanceHelpers.ApplyBrokerId(aboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
-            belowClientOrderId = BinanceHelpers.ApplyBrokerId(belowClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            aboveClientOrderId = LibraryHelpers.ApplyBrokerId(aboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            belowClientOrderId = LibraryHelpers.ApplyBrokerId(belowClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection
             {
@@ -477,6 +485,9 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
 
+            if (listClientOrderId != null)
+                listClientOrderId = LibraryHelpers.ApplyBrokerId(listClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol }
@@ -499,6 +510,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderListId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("orderListId", orderListId?.ToString(CultureInfo.InvariantCulture));
@@ -584,8 +598,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            workingClientOrderId = BinanceHelpers.ApplyBrokerId(workingClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
-            pendingClientOrderId = BinanceHelpers.ApplyBrokerId(pendingClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            workingClientOrderId = LibraryHelpers.ApplyBrokerId(workingClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            pendingClientOrderId = LibraryHelpers.ApplyBrokerId(pendingClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
@@ -668,9 +682,9 @@ namespace Binance.Net.Clients.SpotApi
             CancellationToken ct = default)
         {
 
-            workingClientOrderId = BinanceHelpers.ApplyBrokerId(workingClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
-            pendingAboveClientOrderId = BinanceHelpers.ApplyBrokerId(pendingAboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
-            pendingBelowClientOrderId = BinanceHelpers.ApplyBrokerId(pendingBelowClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            workingClientOrderId = LibraryHelpers.ApplyBrokerId(workingClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            pendingAboveClientOrderId = LibraryHelpers.ApplyBrokerId(pendingAboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            pendingBelowClientOrderId = LibraryHelpers.ApplyBrokerId(pendingBelowClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
@@ -799,6 +813,12 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+
+            if (newClientOrderId != null)
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol }
@@ -843,6 +863,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId should be provided");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection
             {
@@ -959,8 +982,8 @@ namespace Binance.Net.Clients.SpotApi
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
 
-            limitClientOrderId = BinanceHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
-            stopClientOrderId = BinanceHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 32);;
+            limitClientOrderId = LibraryHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+            stopClientOrderId = LibraryHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);;
 
             var parameters = new ParameterCollection
             {
@@ -998,6 +1021,12 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
 
+            if (listClientOrderId != null)
+                listClientOrderId = LibraryHelpers.ApplyBrokerId(listClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+
+            if (newClientOrderId != null)
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol }
@@ -1021,6 +1050,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderListId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("symbol", symbol);
@@ -1320,7 +1352,7 @@ namespace Binance.Net.Clients.SpotApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
-            clientOrderId = BinanceHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdSpot, 32);
+            clientOrderId = LibraryHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdSpot, 32, _baseClient.ClientOptions.AllowBrokerOverride);
 
             var parameters = new ParameterCollection()
             {
