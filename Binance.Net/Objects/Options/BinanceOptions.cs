@@ -19,6 +19,6 @@ namespace Binance.Net.Objects.Options
         /// * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
         /// * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
         /// </summary>
-        public bool AllowAppendingClientOrderId { get; set; } = true;
+        public bool AllowAppendingClientOrderId { get; set; } = false;
     }
 }
