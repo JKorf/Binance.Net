@@ -13,7 +13,7 @@
         /// <summary>
         /// Position id
         /// </summary>
-        [JsonPropertyName("positionId")]
+        [JsonPropertyName("positionId"), JsonConverter(typeof(NumberStringConverter))]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
         /// Project id
