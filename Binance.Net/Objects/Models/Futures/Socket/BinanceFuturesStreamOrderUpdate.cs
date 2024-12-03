@@ -39,6 +39,9 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// The new client order id
         /// </summary>
         [JsonPropertyName("c")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order

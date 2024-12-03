@@ -42,6 +42,9 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         ///     "settlement_autoclose-": settlement order for delisting or delivery
         /// </remarks>
         [JsonPropertyName("c")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order

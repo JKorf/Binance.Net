@@ -37,6 +37,9 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The client id of the order list
         /// </summary>
         [JsonPropertyName("C")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ListClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The transaction time
@@ -79,6 +82,9 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The client order id
         /// </summary>
         [JsonPropertyName("c")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
     }
 }

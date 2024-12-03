@@ -20,6 +20,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Binance.Net.Interfaces.Clients;
+using System.Diagnostics;
 
 namespace Binance.Net.UnitTests
 {

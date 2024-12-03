@@ -29,6 +29,9 @@ namespace Binance.Net.Objects.Models.Futures
         /// The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("clientOrderId")]
+        [JsonConverterCtor<ReplaceConverter>(
+            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
+            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The price of the order

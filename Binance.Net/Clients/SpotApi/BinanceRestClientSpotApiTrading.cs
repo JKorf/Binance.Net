@@ -141,6 +141,7 @@ namespace Binance.Net.Clients.SpotApi
                 ct).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
+            
             return result;
         }
 
@@ -153,6 +154,11 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            if (newClientOrderId != null)
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection()
             {
@@ -168,6 +174,7 @@ namespace Binance.Net.Clients.SpotApi
             var result = await _baseClient.SendAsync<BinanceOrderBase>(request, parameters, ct).ConfigureAwait(false);
             if (result)
                     _baseClient.InvokeOrderCanceled(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
+
             return result;
         }
 
@@ -235,7 +242,7 @@ namespace Binance.Net.Clients.SpotApi
             stopPrice = rulesCheck.StopPrice;
             quoteQuantity = rulesCheck.QuoteQuantity;
 
-            string clientOrderId = newClientOrderId ?? ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            var clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {
@@ -277,6 +284,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection()
             {
@@ -364,8 +374,8 @@ namespace Binance.Net.Clients.SpotApi
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
 
-            limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            limitClientOrderId = LibraryHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            stopClientOrderId = LibraryHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {
@@ -429,8 +439,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            aboveClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            belowClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            aboveClientOrderId = LibraryHelpers.ApplyBrokerId(aboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            belowClientOrderId = LibraryHelpers.ApplyBrokerId(belowClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {
@@ -475,6 +485,9 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
 
+            if (listClientOrderId != null)
+                listClientOrderId = LibraryHelpers.ApplyBrokerId(listClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol }
@@ -497,6 +510,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderListId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("orderListId", orderListId?.ToString(CultureInfo.InvariantCulture));
@@ -582,8 +598,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            workingClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            pendingClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            workingClientOrderId = LibraryHelpers.ApplyBrokerId(workingClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            pendingClientOrderId = LibraryHelpers.ApplyBrokerId(pendingClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
@@ -665,9 +681,10 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            workingClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            pendingAboveClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            pendingBelowClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+
+            workingClientOrderId = LibraryHelpers.ApplyBrokerId(workingClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            pendingAboveClientOrderId = LibraryHelpers.ApplyBrokerId(pendingAboveClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            pendingBelowClientOrderId = LibraryHelpers.ApplyBrokerId(pendingBelowClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
@@ -796,6 +813,12 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+
+            if (newClientOrderId != null)
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol }
@@ -840,6 +863,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId should be provided");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection
             {
@@ -956,8 +982,8 @@ namespace Binance.Net.Clients.SpotApi
             price = rulesCheck.Price!.Value;
             stopPrice = rulesCheck.StopPrice!.Value;
 
-            limitClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
-            stopClientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            limitClientOrderId = LibraryHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            stopClientOrderId = LibraryHelpers.ApplyBrokerId(stopClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);;
 
             var parameters = new ParameterCollection
             {
@@ -995,6 +1021,12 @@ namespace Binance.Net.Clients.SpotApi
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
 
+            if (listClientOrderId != null)
+                listClientOrderId = LibraryHelpers.ApplyBrokerId(listClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+
+            if (newClientOrderId != null)
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol }
@@ -1018,6 +1050,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (orderListId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
+
+            if (origClientOrderId != null)
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("symbol", symbol);
@@ -1317,7 +1352,7 @@ namespace Binance.Net.Clients.SpotApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
-            clientOrderId ??= ExchangeHelpers.AppendRandomString(_baseClient._brokerId, 32);
+            clientOrderId = LibraryHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection()
             {
