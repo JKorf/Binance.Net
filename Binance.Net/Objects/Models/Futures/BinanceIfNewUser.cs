@@ -14,11 +14,11 @@
         /// If the apiAgentCode is working
         /// </summary>
         [JsonPropertyName("rebateWorking")]
-        public bool RebateWorking { get; set; } = false;
+        public bool RebateWorking { get; set; }
         /// <summary>
         /// If new user
         /// </summary>
         [JsonPropertyName("ifNewUser")]
-        public bool ifNewUser { get; set; } = false;
+        public bool IfNewUser { get; set; }
     }
 }

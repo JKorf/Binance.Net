@@ -1,10 +1,9 @@
-﻿using Binance.Net.Enums;
-using Binance.Net.Objects.Models.Futures;
+﻿using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
-    /// Binance USD-M futures account endpoints, query user data.
+    /// Binance Futures Api-Agent Endpoints.
     /// </summary>
     public interface IBinanceRestClientUsdFuturesApiAgent
     {

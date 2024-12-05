@@ -3,7 +3,7 @@
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     /// <summary>
-    /// Binance Coin futures account endpoints, query user data.
+    /// Binance Futures Api-Agent Endpoints.
     /// </summary>
     public interface IBinanceRestClientCoinFuturesApiAgent
     {

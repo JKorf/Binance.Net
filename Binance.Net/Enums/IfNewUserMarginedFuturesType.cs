@@ -11,11 +11,11 @@ namespace Binance.Net.Enums
         /// Processing
         /// </summary>
         [Map("1")]
-        USDT_margined_Futures = 1,
+        UsdtMarginedFutures = 1,
         /// <summary>
         /// Canceled
         /// </summary>
         [Map("2")]
-        Coin_margined_Futures = 2,
+        CoinMarginedFutures = 2,
     }
 }
