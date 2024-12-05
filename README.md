@@ -188,6 +188,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.13.1 - 05 Dec 2024
+    * Fixed null exception caused by invalid key for copy trading
+    * Fixed BinanceSubAccountTransferSubAccount model deserialization
+
 * Version 10.13.0 - 03 Dec 2024
     * Updated client order id logic
     * Added AllowAppendingClientOrderId option
