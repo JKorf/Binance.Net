@@ -31,5 +31,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
         /// </summary>
         public IBinanceRestClientSpotApiShared SharedClient { get; }
+
+        /// <summary>
+        ///Endpoints related to query user data.
+        /// </summary>
+        public IBinanceRestClientSpotApiAgent Agent { get; }
     }
 }

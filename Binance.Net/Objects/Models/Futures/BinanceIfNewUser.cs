@@ -1,0 +1,24 @@
+﻿namespace Binance.Net.Objects.Models.Futures
+{
+    /// <summary>
+    /// If the new user info
+    /// </summary>
+    public record BinanceIfNewUser
+    {
+        /// <summary>
+        /// Broker Id
+        /// </summary>
+        [JsonPropertyName("brokerId")]
+        public string BrokerId { get; set; } = string.Empty;
+        /// <summary>
+        /// If the apiAgentCode is working
+        /// </summary>
+        [JsonPropertyName("rebateWorking")]
+        public bool RebateWorking { get; set; } = false;
+        /// <summary>
+        /// If new user
+        /// </summary>
+        [JsonPropertyName("ifNewUser")]
+        public bool ifNewUser { get; set; } = false;
+    }
+}
