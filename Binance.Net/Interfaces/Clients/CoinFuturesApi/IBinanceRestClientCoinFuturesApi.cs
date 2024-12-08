@@ -1,5 +1,4 @@
-﻿using Binance.Net.Interfaces.Clients.UsdFuturesApi;
-using CryptoExchange.Net.Interfaces.CommonClients;
+﻿using CryptoExchange.Net.Interfaces.CommonClients;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
@@ -32,6 +31,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
         /// </summary>
         public IBinanceRestClientCoinFuturesApiShared SharedClient { get; }
+
+        /// <summary>
+        ///Endpoints related to query user data.
+        /// </summary>
+        public IBinanceRestClientCoinFuturesApiAgent Agent { get; }
 
     }
 }
