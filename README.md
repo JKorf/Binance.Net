@@ -188,6 +188,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.13.2 - 08 Dec 2024
+    * Updated CryptoExchange.Net to version 8.4.4 to fix deserialization error in .net framework
+
 * Version 10.13.1 - 05 Dec 2024
     * Fixed null exception caused by invalid key for copy trading
     * Fixed BinanceSubAccountTransferSubAccount model deserialization
