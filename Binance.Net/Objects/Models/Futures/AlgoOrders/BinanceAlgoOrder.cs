@@ -70,7 +70,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Client algo id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
-        [JsonConverterCtor<ReplaceConverter>(
+        [JsonConverterCtor(typeof(ReplaceConverter), 
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientAlgoId { get; set; } = string.Empty;
