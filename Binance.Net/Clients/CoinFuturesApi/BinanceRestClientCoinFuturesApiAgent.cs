@@ -22,8 +22,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             brokerId.ValidateNotNull(nameof(brokerId));
 
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("brokerId", brokerId);
+            var parameters = new ParameterCollection
+            {
+                { "brokerId", brokerId }
+            };
             parameters.AddEnum("type", IfNewUserMarginedFuturesType.CoinMarginedFutures);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 

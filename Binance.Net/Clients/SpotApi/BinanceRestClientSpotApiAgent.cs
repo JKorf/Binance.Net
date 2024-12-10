@@ -21,8 +21,10 @@ namespace Binance.Net.Clients.SpotApi
         {
             apiAgentCode.ValidateNotNull(nameof(apiAgentCode));
 
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("apiAgentCode", apiAgentCode.ToString(CultureInfo.InvariantCulture));
+            var parameters = new ParameterCollection
+            {
+                { "apiAgentCode", apiAgentCode }
+            };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.SpotRestIp, 100, true);

@@ -3649,12 +3649,12 @@
             Margined futures type
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.IfNewUserMarginedFuturesType.USDT_margined_Futures">
+        <member name="F:Binance.Net.Enums.IfNewUserMarginedFuturesType.UsdtMarginedFutures">
             <summary>
             Processing
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.IfNewUserMarginedFuturesType.Coin_margined_Futures">
+        <member name="F:Binance.Net.Enums.IfNewUserMarginedFuturesType.CoinMarginedFutures">
             <summary>
             Canceled
             </summary>
@@ -5870,7 +5870,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent">
             <summary>
-            Binance Coin futures account endpoints, query user data.
+            Binance Futures Api-Agent Endpoints.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -9529,14 +9529,14 @@
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent">
             <summary>
-            Binance Spot agent endpoints, query user data.
+            Binance Spot Api-Agent Endpoints.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Client If The New User.
-            <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_spot_EN/#_1" /></para>
-            <para><a href="https://binance-docs.github.io/apiAgent-API-CN/api_rebate_endpoints_spot_CN/#_1" /></para>
+            <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_spot_EN/" /></para>
+            <para><a href="https://binance-docs.github.io/apiAgent-API-CN/api_rebate_endpoints_spot_CN/" /></para>
             </summary>
             <param name="apiAgentCode">Api Agent Code</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -11785,7 +11785,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent">
             <summary>
-            Binance USD-M futures account endpoints, query user data.
+            Binance Futures Api-Agent Endpoints.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -17252,7 +17252,7 @@
             If the apiAgentCode is working
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.ifNewUser">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.IfNewUser">
             <summary>
             If new user
             </summary>
@@ -27875,7 +27875,7 @@
             If the apiAgentCode is working
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceIfNewUser.ifNewUser">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceIfNewUser.IfNewUser">
             <summary>
             If new user
             </summary>
