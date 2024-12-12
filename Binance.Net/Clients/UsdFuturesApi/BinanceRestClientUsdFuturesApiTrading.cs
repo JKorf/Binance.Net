@@ -102,11 +102,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 0, true);
             var result = await _baseClient.SendAsync<BinanceUsdFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
             if (result)
+            {
                 _baseClient.InvokeOrderPlaced(new OrderId
                 {
                     SourceObject = result.Data,
                     Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
                 });
+            }
             return result;
         }
 

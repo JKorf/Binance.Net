@@ -38,7 +38,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns></returns>
         Task<CallResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="SubscribeToUserDataUpdatesAsync(string, Action{DataEvent{BinanceStreamOrderUpdate}}?, Action{DataEvent{BinanceStreamOrderList}}?, Action{DataEvent{BinanceStreamPositionsUpdate}}?, Action{DataEvent{BinanceStreamBalanceUpdate}}?, Action{DataEvent{BinanceStreamEvent}}?, CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
+        /// Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="SubscribeToUserDataUpdatesAsync(string, Action{DataEvent{BinanceStreamOrderUpdate}}?, Action{DataEvent{BinanceStreamOrderList}}?, Action{DataEvent{BinanceStreamPositionsUpdate}}?, Action{DataEvent{BinanceStreamBalanceUpdate}}?, Action{DataEvent{BinanceStreamEvent}}?, Action{DataEvent{BinanceStreamEvent}}?, Action{DataEvent{BinanceStreamBalanceLockUpdate}}?, CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#start-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -63,6 +63,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
         /// <param name="onListenKeyExpired">The event handler for when the listen key has expired. No events will be send anymore after this</param>
+        /// <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped. For example, after you call <see cref="StopUserStreamAsync(string, CancellationToken)" /></param>
+        /// <param name="onBalanceLockUpdate">The event handler for when the part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral. </param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(string listenKey,
@@ -71,6 +73,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
                                                                              Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
                                                                              Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
                                                                              Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+                                                                             Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
+                                                                             Action<DataEvent<BinanceStreamBalanceLockUpdate>>? onBalanceLockUpdate = null,
                                                                              CancellationToken ct = default);
     }
 }
