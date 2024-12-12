@@ -486,7 +486,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
             var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("symbol", symbol?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));

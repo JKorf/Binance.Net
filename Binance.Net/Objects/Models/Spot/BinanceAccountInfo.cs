@@ -79,7 +79,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Permissions types
         /// </summary>
         [JsonPropertyName("permissions")]
-        public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
+        public IEnumerable<PermissionType> Permissions { get; set; } = Array.Empty<PermissionType>();
         /// <summary>
         /// List of assets with their current balances
         /// </summary>

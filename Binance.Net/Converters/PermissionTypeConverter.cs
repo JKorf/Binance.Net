@@ -5,13 +5,13 @@ using System.Text.Json;
 
 namespace Binance.Net.Converters
 {
-    internal class AccountTypeConverter : JsonConverterFactory
+    internal class PermissionTypeConverter : JsonConverterFactory
     {
         public override bool CanConvert(Type typeToConvert)
         {
-            return typeToConvert == typeof(AccountType) 
-                || typeToConvert == typeof(IEnumerable<AccountType>)
-                || typeToConvert == typeof(IEnumerable<IEnumerable<AccountType>>);
+            return typeToConvert == typeof(PermissionType) 
+                || typeToConvert == typeof(IEnumerable<PermissionType>)
+                || typeToConvert == typeof(IEnumerable<IEnumerable<PermissionType>>);
         }
 
         public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
@@ -24,13 +24,13 @@ namespace Binance.Net.Converters
         {
             public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
-                if (typeToConvert == typeof(AccountType))
+                if (typeToConvert == typeof(PermissionType))
                 {
-                    return (T)(object)(ParseAccountType(ref reader) ?? AccountType.TradeGroup002);
+                    return (T)(object)(ParseAccountType(ref reader) ?? PermissionType.TradeGroup002);
                 }
-                else if(typeToConvert == typeof(IEnumerable<AccountType>))
+                else if(typeToConvert == typeof(IEnumerable<PermissionType>))
                 {
-                    var  result = new List<AccountType>();
+                    var  result = new List<PermissionType>();
                     while(reader.Read())
                     {
                         if (reader.TokenType == JsonTokenType.EndArray)
@@ -45,16 +45,16 @@ namespace Binance.Net.Converters
                     }
                     return (T)(object)result;
                 }
-                else if (typeToConvert == typeof(IEnumerable<IEnumerable<AccountType>>))
+                else if (typeToConvert == typeof(IEnumerable<IEnumerable<PermissionType>>))
                 {
-                    var result = new List<IEnumerable<AccountType>>();
+                    var result = new List<IEnumerable<PermissionType>>();
                     reader.Read(); // Start array
                     do
                     {
                         if (reader.TokenType == JsonTokenType.EndArray)
                             break;
 
-                        var resultInner = new List<AccountType>();
+                        var resultInner = new List<PermissionType>();
                         reader.Read(); // Start array
                         do
                         {
@@ -78,18 +78,18 @@ namespace Binance.Net.Converters
 
             public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
             {
-                if (value is AccountType act)
+                if (value is PermissionType act)
                 {
                     WriteAccountType(writer, act);
                 }
-                else if (value is IEnumerable<AccountType> actList)
+                else if (value is IEnumerable<PermissionType> actList)
                 {
                     writer.WriteStartArray();
                     foreach(var val in actList)
                         WriteAccountType(writer, val);
                     writer.WriteEndArray();
                 }
-                else if (value is IEnumerable<IEnumerable<AccountType>> actListList)
+                else if (value is IEnumerable<IEnumerable<PermissionType>> actListList)
                 {
                     writer.WriteStartArray();
                     foreach (var valList in actListList)
@@ -103,30 +103,32 @@ namespace Binance.Net.Converters
                 }
             }
 
-            private void WriteAccountType(Utf8JsonWriter writer, AccountType value)
+            private void WriteAccountType(Utf8JsonWriter writer, PermissionType value)
             {
-                if (value == AccountType.Spot)
+                if (value == PermissionType.Spot)
                     writer.WriteStringValue("SPOT");
-                if (value == AccountType.Margin)
+                if (value == PermissionType.Margin)
                     writer.WriteStringValue("MARGIN");
-                if (value == AccountType.Leveraged)
+                if (value == PermissionType.Leveraged)
                     writer.WriteStringValue("LEVERAGED");
-                if (value == AccountType.Futures)
+                if (value == PermissionType.Futures)
                     writer.WriteStringValue("FUTURES");
+                if (value == PermissionType.PreMarket)
+                    writer.WriteStringValue("PRE_MARKET");
 
                 writer.WriteStringValue("TRD_GRP_002");
             }
 
-            private AccountType? ParseAccountType(ref Utf8JsonReader reader)
+            private PermissionType? ParseAccountType(ref Utf8JsonReader reader)
             {
                 var str = reader.GetString();
                 if (str == null)
-                    return AccountType.TradeGroup002;
+                    return PermissionType.TradeGroup002;
 
                 if (str.StartsWith("TRD_GRP_"))
                 {
                     var number = str.Substring(8);
-                    if (Enum.TryParse<AccountType>("TradeGroup" + number, out var value))
+                    if (Enum.TryParse<PermissionType>("TradeGroup" + number, out var value))
                         return value;
 
                     return null;
@@ -134,13 +136,15 @@ namespace Binance.Net.Converters
                 else
                 {
                     if (str.Equals("SPOT", StringComparison.Ordinal))
-                        return AccountType.Spot;
+                        return PermissionType.Spot;
                     if (str.Equals("MARGIN", StringComparison.Ordinal))
-                        return AccountType.Margin;
+                        return PermissionType.Margin;
                     if (str.Equals("LEVERAGED", StringComparison.Ordinal))
-                        return AccountType.Leveraged;
+                        return PermissionType.Leveraged;
                     if (str.Equals("FUTURES", StringComparison.Ordinal))
-                        return AccountType.Futures;
+                        return PermissionType.Futures;
+                    if (str.Equals("PRE_MARKET", StringComparison.Ordinal))
+                        return PermissionType.PreMarket;
                 }
 
                 return null;

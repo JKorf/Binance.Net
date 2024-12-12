@@ -1457,10 +1457,10 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.PermissionType,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.PermissionType[],System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
@@ -2492,201 +2492,6 @@
         <member name="F:Binance.Net.Enums.AccountType.Leveraged">
             <summary>
             Leveraged account type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup002">
-            <summary>
-            Trade group 2
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup003">
-            <summary>
-            Trade group 3
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup004">
-            <summary>
-            Trade group 4
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup005">
-            <summary>
-            Trade group 5
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup006">
-            <summary>
-            Trade group 6
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup007">
-            <summary>
-            Trade group 7
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup008">
-            <summary>
-            Trade group 8
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup009">
-            <summary>
-            Trade group 9
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup010">
-            <summary>
-            Trade group 10
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup011">
-            <summary>
-            Trade group 11
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup012">
-            <summary>
-            Trade group 12
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup013">
-            <summary>
-            Trade group 13
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup014">
-            <summary>
-            Trade group 14
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup015">
-            <summary>
-            Trade group 15
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup016">
-            <summary>
-            Trade group 16
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup017">
-            <summary>
-            Trade group 17
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup018">
-            <summary>
-            Trade group 18
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup019">
-            <summary>
-            Trade group 19
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup020">
-            <summary>
-            Trade group 20
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup021">
-            <summary>
-            Trade group 21
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup022">
-            <summary>
-            Trade group 22
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup023">
-            <summary>
-            Trade group 23
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup024">
-            <summary>
-            Trade group 24
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup025">
-            <summary>
-            Trade group 25
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup026">
-            <summary>
-            Trade group 26
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup027">
-            <summary>
-            Trade group 27
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup028">
-            <summary>
-            Trade group 28
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup029">
-            <summary>
-            Trade group 29
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup030">
-            <summary>
-            Trade group 30
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup031">
-            <summary>
-            Trade group 31
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup032">
-            <summary>
-            Trade group 32
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup033">
-            <summary>
-            Trade group 33
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup034">
-            <summary>
-            Trade group 34
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup035">
-            <summary>
-            Trade group 35
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup036">
-            <summary>
-            Trade group 36
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup037">
-            <summary>
-            Trade group 37
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup038">
-            <summary>
-            Trade group 38
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup039">
-            <summary>
-            Trade group 39
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.AccountType.TradeGroup040">
-            <summary>
-            Trade group 40
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.AccountUpdateReason">
@@ -4392,6 +4197,231 @@
         <member name="F:Binance.Net.Enums.PeriodInterval.OneDay">
             <summary>
             1d
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PermissionType">
+            <summary>
+            Type of permission
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.Spot">
+            <summary>
+            Spot trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.Margin">
+            <summary>
+            Margin trading
+            </summary>>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.Futures">
+            <summary>
+            Futures trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.Leveraged">
+            <summary>
+            Leveraged trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.PreMarket">
+            <summary>
+            Pre-market trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup002">
+            <summary>
+            Trade group 2
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup003">
+            <summary>
+            Trade group 3
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup004">
+            <summary>
+            Trade group 4
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup005">
+            <summary>
+            Trade group 5
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup006">
+            <summary>
+            Trade group 6
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup007">
+            <summary>
+            Trade group 7
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup008">
+            <summary>
+            Trade group 8
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup009">
+            <summary>
+            Trade group 9
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup010">
+            <summary>
+            Trade group 10
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup011">
+            <summary>
+            Trade group 11
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup012">
+            <summary>
+            Trade group 12
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup013">
+            <summary>
+            Trade group 13
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup014">
+            <summary>
+            Trade group 14
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup015">
+            <summary>
+            Trade group 15
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup016">
+            <summary>
+            Trade group 16
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup017">
+            <summary>
+            Trade group 17
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup018">
+            <summary>
+            Trade group 18
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup019">
+            <summary>
+            Trade group 19
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup020">
+            <summary>
+            Trade group 20
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup021">
+            <summary>
+            Trade group 21
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup022">
+            <summary>
+            Trade group 22
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup023">
+            <summary>
+            Trade group 23
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup024">
+            <summary>
+            Trade group 24
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup025">
+            <summary>
+            Trade group 25
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup026">
+            <summary>
+            Trade group 26
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup027">
+            <summary>
+            Trade group 27
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup028">
+            <summary>
+            Trade group 28
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup029">
+            <summary>
+            Trade group 29
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup030">
+            <summary>
+            Trade group 30
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup031">
+            <summary>
+            Trade group 31
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup032">
+            <summary>
+            Trade group 32
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup033">
+            <summary>
+            Trade group 33
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup034">
+            <summary>
+            Trade group 34
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup035">
+            <summary>
+            Trade group 35
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup036">
+            <summary>
+            Trade group 36
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup037">
+            <summary>
+            Trade group 37
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup038">
+            <summary>
+            Trade group 38
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup039">
+            <summary>
+            Trade group 39
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup040">
+            <summary>
+            Trade group 40
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PortfolioMarginAccountStatus">
@@ -9612,7 +9642,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.PermissionType,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbol based on an account permission
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>
@@ -9623,7 +9653,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.AccountType[],System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetExchangeInfoAsync(Binance.Net.Enums.PermissionType[],System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.SymbolStatus},System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and information on the provided symbols based on account permissions
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#exchange-information" /></para>

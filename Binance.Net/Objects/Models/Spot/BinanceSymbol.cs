@@ -98,12 +98,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// Permissions types
         /// </summary>
         [JsonPropertyName("permissions")]
-        public IEnumerable<AccountType> Permissions { get; set; } = Array.Empty<AccountType>();
+        public IEnumerable<PermissionType> Permissions { get; set; } = Array.Empty<PermissionType>();
         /// <summary>
         /// Permission sets
         /// </summary>
-        [JsonPropertyName("permissionSets"), JsonConverter(typeof(AccountTypeConverter))]
-        public IEnumerable<IEnumerable<AccountType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<AccountType>>();
+        [JsonPropertyName("permissionSets"), JsonConverter(typeof(PermissionTypeConverter))]
+        public IEnumerable<IEnumerable<PermissionType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<PermissionType>>();
 
         /// <summary>
         /// Filters for order on this symbol

@@ -85,7 +85,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType permission, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(PermissionType permission, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get's information about the exchange including rate limits and information on the provided symbols based on account permissions
@@ -96,7 +96,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(AccountType[] permissions, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(PermissionType[] permissions, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the status of the Binance platform
