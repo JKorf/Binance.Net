@@ -13,14 +13,14 @@ namespace Binance.Net.Enums
         [Map("EXECUTING")]
         Executing,
         /// <summary>
-        /// Executed
-        /// </summary>
-        [Map("REJECT")]
-        Done,
-        /// <summary>
         /// Rejected
         /// </summary>
+        [Map("REJECT")]
+        Rejected,
+        /// <summary>
+        /// Done
+        /// </summary>
         [Map("ALL_DONE")]
-        Rejected
+        Done
     }
 }

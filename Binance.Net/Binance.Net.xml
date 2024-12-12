@@ -3729,14 +3729,14 @@
             Executing
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.ListOrderStatus.Done">
-            <summary>
-            Executed
-            </summary>
-        </member>
         <member name="F:Binance.Net.Enums.ListOrderStatus.Rejected">
             <summary>
             Rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ListOrderStatus.Done">
+            <summary>
+            Done
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.ListStatusType">
