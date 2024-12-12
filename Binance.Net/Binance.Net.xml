@@ -5903,7 +5903,7 @@
             Binance Futures Api-Agent Endpoints.
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent.GetIfNewUserAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Client If The New User.
             <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_futures_EN/" /></para>
@@ -9562,7 +9562,7 @@
             Binance Spot Api-Agent Endpoints.
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent.GetIfNewUserAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Client If The New User.
             <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_spot_EN/" /></para>
@@ -11820,7 +11820,7 @@
             Binance Futures Api-Agent Endpoints.
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent.GetIfNewUserAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Query Client If The New User.
             <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_futures_EN/" /></para>

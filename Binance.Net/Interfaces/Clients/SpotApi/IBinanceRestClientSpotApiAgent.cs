@@ -16,7 +16,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>USER DATA</returns>
-        Task<WebCallResult<BinanceIfNewUser>> IfNewUser(string apiAgentCode,
+        Task<WebCallResult<BinanceIfNewUser>> GetIfNewUserAsync(string apiAgentCode,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
