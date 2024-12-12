@@ -188,6 +188,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.14.0 - 12 Dec 2024
+    * Added initial Agent endpoints
+    * Added onUserDataStreamTerminated and onBalanceLockUpdate updates to socketClient.SpotApi.SubscribeUserDataUpdatesAsync
+    * Added IsLiquidationOrder, IsAdlAutoCloseOrder and IsSettlementOrder helper properties to BinanceFuturesOrder model
+    * Added PreMarket handling to PermissionType enum
+    * Split AccountType enum into AccountType and PermissionType
+    * Changed restClient.UsdFuturesApi.Trading.GetOrdersAsync symbol parameter to be optional
+
 * Version 10.13.2 - 08 Dec 2024
     * Updated CryptoExchange.Net to version 8.4.4 to fix deserialization error in .net framework
 
