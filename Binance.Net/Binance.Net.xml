@@ -288,6 +288,9 @@
         <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.Trading">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.Agent">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ExchangeName">
             <inheritdoc />
         </member>
@@ -395,6 +398,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiAccount.GetDownloadLinkForTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiAgent">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiExchangeData">
@@ -1168,6 +1174,9 @@
         <member name="P:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.Trading">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.Agent">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ExchangeName">
             <inheritdoc />
         </member>
@@ -1428,6 +1437,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetCommissionRatesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAgent">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData">
@@ -1937,6 +1949,9 @@
         <member name="P:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.Trading">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.Agent">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ExchangeName">
             <inheritdoc />
         </member>
@@ -2071,6 +2086,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount.GetAccountConfigurationAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAgent">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData">
@@ -3624,6 +3642,21 @@
         <member name="F:Binance.Net.Enums.HashrateResaleStatus.Terminated">
             <summary>
             Terminated
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.IfNewUserMarginedFuturesType">
+            <summary>
+            Margined futures type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IfNewUserMarginedFuturesType.UsdtMarginedFutures">
+            <summary>
+            Processing
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.IfNewUserMarginedFuturesType.CoinMarginedFutures">
+            <summary>
+            Canceled
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.IncomeType">
@@ -5595,6 +5628,11 @@
             Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.Agent">
+             <summary>
+            Endpoints related to query user data.
+             </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount">
             <summary>
             Binance COIN-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
@@ -5829,6 +5867,22 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent">
+            <summary>
+            Binance Futures Api-Agent Endpoints.
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Client If The New User.
+            <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_futures_EN/" /></para>
+            <para><a href="https://binance-docs.github.io/apiAgent-API-CN/api_rebate_endpoints_futures_CN/" /></para>
+            </summary>
+            <param name="brokerId">Api Broker Id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>USER DATA</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiExchangeData">
             <summary>
@@ -8643,6 +8697,11 @@
             Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.Agent">
+             <summary>
+            Endpoints related to query user data.
+             </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount">
             <summary>
             Binance Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
@@ -9467,6 +9526,22 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent">
+            <summary>
+            Binance Spot Api-Agent Endpoints.
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Client If The New User.
+            <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_spot_EN/" /></para>
+            <para><a href="https://binance-docs.github.io/apiAgent-API-CN/api_rebate_endpoints_spot_CN/" /></para>
+            </summary>
+            <param name="apiAgentCode">Api Agent Code</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>USER DATA</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData">
             <summary>
@@ -11389,6 +11464,11 @@
             Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.Agent">
+             <summary>
+            Endpoints related to query user data.
+             </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount">
             <summary>
             Binance USD-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
@@ -11704,6 +11784,22 @@
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent">
+            <summary>
+            Binance Futures Api-Agent Endpoints.
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent.IfNewUser(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Query Client If The New User.
+            <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_futures_EN/" /></para>
+            <para><a href="https://binance-docs.github.io/apiAgent-API-CN/api_rebate_endpoints_futures_CN/" /></para>
+            </summary>
+            <param name="brokerId">Api Broker Id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>USER DATA</returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData">
             <summary>
@@ -17166,6 +17262,31 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesSnapshotPosition.UnrealizedProfit">
             <summary>
             Unrealized profit
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceIfNewUser">
+            <summary>
+            If the new user info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.ApiAgentCode">
+            <summary>
+            Api Agen tCode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.RebateWorking">
+            <summary>
+            If the apiAgentCode is working
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.IfNewUser">
+            <summary>
+            If new user
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.ReferrerId">
+            <summary>
+            Referrer Id
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceIpRestriction">
@@ -27765,6 +27886,26 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesUsdtKline.TakerBuyQuoteVolume">
             <inheritdoc/>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceIfNewUser">
+            <summary>
+            If the new user info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceIfNewUser.BrokerId">
+            <summary>
+            Broker Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceIfNewUser.RebateWorking">
+            <summary>
+            If the apiAgentCode is working
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceIfNewUser.IfNewUser">
+            <summary>
+            If new user
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionBase">
             <summary>

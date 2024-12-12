@@ -37,6 +37,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         /// <inheritdoc />
         public IBinanceRestClientCoinFuturesApiTrading Trading { get; }
         /// <inheritdoc />
+        public IBinanceRestClientCoinFuturesApiAgent Agent { get; }
+        /// <inheritdoc />
         public string ExchangeName => "Binance";
         #endregion
 
@@ -56,6 +58,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             Account = new BinanceRestClientCoinFuturesApiAccount(this);
             ExchangeData = new BinanceRestClientCoinFuturesApiExchangeData(logger, this);
             Trading = new BinanceRestClientCoinFuturesApiTrading(logger, this);
+            Agent = new BinanceRestClientCoinFuturesApiAgent(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
