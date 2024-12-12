@@ -27159,6 +27159,21 @@
             The order id as assigned by the client
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.IsLiquidationOrder">
+            <summary>
+            Whether or not this order is a liquidation order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.IsAdlAutoCloseOrder">
+            <summary>
+            Whether or not this order is an ADL auto close order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.IsSettlementOrder">
+            <summary>
+            Whether or not this order is a delisting/delivery settlement order
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.Price">
             <summary>
             The price of the order

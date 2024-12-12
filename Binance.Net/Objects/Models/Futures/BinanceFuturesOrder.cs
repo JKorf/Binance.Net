@@ -33,6 +33,23 @@ namespace Binance.Net.Objects.Models.Futures
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Whether or not this order is a liquidation order
+        /// </summary>
+        [JsonIgnore]
+        public bool IsLiquidationOrder => ClientOrderId?.StartsWith("autoclose-") == true;
+        /// <summary>
+        /// Whether or not this order is an ADL auto close order
+        /// </summary>
+        [JsonIgnore]
+        public bool IsAdlAutoCloseOrder => ClientOrderId?.StartsWith("adl_autoclose-") == true;
+        /// <summary>
+        /// Whether or not this order is a delisting/delivery settlement order
+        /// </summary>
+        [JsonIgnore]
+        public bool IsSettlementOrder => ClientOrderId?.StartsWith("delivery_autoclose-") == true;
+
         /// <summary>
         /// The price of the order
         /// </summary>
