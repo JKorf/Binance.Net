@@ -55,7 +55,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             int weight = limit <= 50 ? 2 : limit <= 100 ? 5 : limit <= 500 ? 10 : 20;
-            return await _client.QueryAsync<BinanceFuturesOrderBook>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"depth", parameters, weight: weight, ct: ct).ConfigureAwait(false);
+            var result = await _client.QueryAsync<BinanceFuturesOrderBook>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"depth", parameters, weight: weight, ct: ct).ConfigureAwait(false);
+            if (result)
+                result.Data.Result.Symbol = symbol;
+            return result;
         }
 
         #endregion

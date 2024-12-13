@@ -85,7 +85,10 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             int weight = limit <= 100 ? 5 : limit <= 500 ? 25 : limit <= 1000 ? 50 : 250;
-            return await _client.QueryAsync<BinanceOrderBook>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"depth", parameters, weight: weight, ct: ct).ConfigureAwait(false);
+            var result = await _client.QueryAsync<BinanceOrderBook>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"depth", parameters, weight: weight, ct: ct).ConfigureAwait(false);
+            if (result)
+                result.Data.Result.Symbol = symbol;
+            return result;
         }
 
         #endregion
