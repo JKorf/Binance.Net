@@ -283,7 +283,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetOrderEditHistoryAsync("ETHUSDT", 123), "GetOrderEditHistory");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.CancelOrderAsync("ETHUSDT", 123), "CancelOrder");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.CancelAllOrdersAsync("ETHUSDT"), "CancelAllOrders");
-            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.EditOrderAsync("ETHUSDT", Enums.OrderSide.Buy, 1, 1, 123), "EditOrder");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.EditOrderAsync("ETHUSDT", Enums.OrderSide.Buy, 1, 1, Enums.PriceMatch.None, 123), "EditOrder");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.EditMultipleOrdersAsync(new[] { new BinanceFuturesBatchEditOrder() }), "EditMultipleOrders", skipResponseValidation: true);
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.CancelAllOrdersAfterTimeoutAsync("ETHUSDT", TimeSpan.Zero), "CancelAllOrdersAfterTimeout");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.CancelMultipleOrdersAsync("ETHUSDT", new List<long> { 123 }), "CancelMultipleOrders", skipResponseValidation: true);
