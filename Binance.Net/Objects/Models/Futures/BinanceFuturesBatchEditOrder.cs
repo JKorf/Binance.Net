@@ -30,6 +30,10 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price
         /// </summary>
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
+        /// <summary>
+        /// PriceMatch
+        /// </summary>
+        public PriceMatch? PriceMatch { get; set; }
     }
 }
