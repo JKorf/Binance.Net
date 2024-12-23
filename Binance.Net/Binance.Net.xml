@@ -227,6 +227,9 @@
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
+        <member name="M:Binance.Net.Clients.BinanceRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.BinanceRestClient.SetDefaultOptions(System.Action{Binance.Net.Objects.Options.BinanceRestOptions})">
             <summary>
             Set the default options to be used when creating new clients
@@ -260,6 +263,9 @@
             </summary>
             <param name="loggerFactory">The logger factory</param>
             <param name="options">Option configuration</param>
+        </member>
+        <member name="M:Binance.Net.Clients.BinanceSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.BinanceSocketClient.SetDefaultOptions(System.Action{Binance.Net.Objects.Options.BinanceSocketOptions})">
             <summary>
@@ -8665,6 +8671,12 @@
             Usd futures API endpoints
             </summary>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.IBinanceRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
@@ -8690,6 +8702,12 @@
             <summary>
             Usd futures streams
             </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.IBinanceSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
