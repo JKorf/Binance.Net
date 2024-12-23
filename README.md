@@ -188,6 +188,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.15.0 - 23 Dec 2024
+    * Updated CryptoExchange.Net to version 8.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added SetOptions methods on Rest and Socket clients
+    * Added setting of DefaultProxyCredentials to CredentialCache.DefaultCredentials on the DI http client
+    * Improved websocket disconnect detection
+    * Set Symbol on Spot and UsdFutures socket ExchangeData.GetOrderBookAsync response
+
 * Version 10.14.0 - 12 Dec 2024
     * Added initial Agent endpoints
     * Added onUserDataStreamTerminated and onBalanceLockUpdate updates to socketClient.SpotApi.SubscribeUserDataUpdatesAsync
