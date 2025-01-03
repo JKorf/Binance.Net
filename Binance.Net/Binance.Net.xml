@@ -24233,6 +24233,21 @@
             Arrival timestamp
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.DistributedAsset">
+            <summary>
+            Distribute asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.DistributeQuantity">
+            <summary>
+            Quantity distributed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.ConversionRatio">
+            <summary>
+            Conversion ratio
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRewardsHistory">
             <summary>
             Rewards history
@@ -24306,6 +24321,21 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.Timestamp">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.DistributedAsset">
+            <summary>
+            Distribute asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.DistributeQuantity">
+            <summary>
+            Quantity distributed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.ConversionRatio">
+            <summary>
+            Conversion ratio
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingQuota">

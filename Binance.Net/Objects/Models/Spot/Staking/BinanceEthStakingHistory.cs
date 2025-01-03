@@ -26,5 +26,20 @@
         [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Distribute asset
+        /// </summary>
+        [JsonPropertyName("distributeAsset")]
+        public string DistributedAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// Quantity distributed
+        /// </summary>
+        [JsonPropertyName("distributeAmount")]
+        public decimal DistributeQuantity { get; set; }
+        /// <summary>
+        /// Conversion ratio
+        /// </summary>
+        [JsonPropertyName("conversionRatio")]
+        public decimal ConversionRatio { get; set; }
     }
 }

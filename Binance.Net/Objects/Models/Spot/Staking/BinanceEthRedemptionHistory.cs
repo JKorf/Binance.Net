@@ -32,5 +32,20 @@
         [JsonPropertyName("arrivalTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ArrivalTime { get; set; }
+        /// <summary>
+        /// Distribute asset
+        /// </summary>
+        [JsonPropertyName("distributeAsset")]
+        public string DistributedAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// Quantity distributed
+        /// </summary>
+        [JsonPropertyName("distributeAmount")]
+        public decimal DistributeQuantity { get; set; }
+        /// <summary>
+        /// Conversion ratio
+        /// </summary>
+        [JsonPropertyName("conversionRatio")]
+        public decimal ConversionRatio { get; set; }
     }
 }
