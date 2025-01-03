@@ -161,7 +161,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data => onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data).WithStreamId(data.Data.Stream).WithSymbol(data.Data.Data.Symbol)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => (premiumIndex ? "p" : "") + a.ToUpper(CultureInfo.InvariantCulture) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => (premiumIndex ? "p" + a.ToUpper(CultureInfo.InvariantCulture) : a.ToLower(CultureInfo.InvariantCulture)) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
