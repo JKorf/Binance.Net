@@ -1257,7 +1257,11 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/tradeFee", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var path = "sapi/v1/asset/tradeFee";
+            if (_baseClient.ClientOptions.Environment == BinanceEnvironment.Us)
+                path = "sapi/v1/asset/query/trading-fee";
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, path, BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<IEnumerable<BinanceTradeFee>>(request, parameters, ct).ConfigureAwait(false);
         }
 
