@@ -114,6 +114,11 @@
             Urls to the API documentation
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceExchange.Type">
+            <summary>
+            Type of exchange
+            </summary>
+        </member>
         <member name="M:Binance.Net.BinanceExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <summary>
             Format a base and quote asset to a Binance recognized symbol 

@@ -38,6 +38,11 @@ namespace Binance.Net
             "https://binance-docs.github.io/apidocs/spot/en/#change-log"
             };
 
+        /// <summary>
+        /// Type of exchange
+        /// </summary>
+        public static ExchangeType Type { get; } = ExchangeType.CEX;
+
         internal const string ClientOrderIdSpot = "x-VICEW9VV";
         internal const string ClientOrderIdFutures = "x-d63tKbx3";
         internal const string ClientOrderIdPrefixSpot = ClientOrderIdSpot + LibraryHelpers.ClientOrderIdSeperator;
