@@ -188,6 +188,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.16.1 - 07 Jan 2025
+    * Updated CryptoExchange.Net version
+    * Added Type property to BinanceExchange class
+
 * Version 10.16.0 - 03 Jan 2025
     * Added PriceMatch parameter to UsdFutures order editing
     * Added support for premium index klines in socketClient.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync
