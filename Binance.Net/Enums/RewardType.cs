@@ -21,6 +21,11 @@ namespace Binance.Net.Enums
         /// Historical rewards
         /// </summary>
         [Map("REWARDS")]
-        HistoricalRewards
+        HistoricalRewards,
+        /// <summary>
+        /// All reward types
+        /// </summary>
+        [Map("ALL")]
+        All
     }
 }

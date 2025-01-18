@@ -4725,6 +4725,11 @@
             Historical rewards
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.RewardType.All">
+            <summary>
+            All
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SelfTradePreventionMode">
             <summary>
             Self trade prevention mode
