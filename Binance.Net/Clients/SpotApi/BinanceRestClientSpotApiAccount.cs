@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalEnum("walletType", walletType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/capital/withdraw/apply", BinanceExchange.RateLimiter.SpotRestUid, 600, true, parameterPosition: HttpMethodParameterPosition.InUri);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/capital/withdraw/apply", BinanceExchange.RateLimiter.SpotRestUid, 900, true, parameterPosition: HttpMethodParameterPosition.InUri);
             return await _baseClient.SendAsync<BinanceWithdrawalPlaced>(request, parameters, ct).ConfigureAwait(false);
         }
 
