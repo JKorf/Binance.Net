@@ -189,6 +189,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.16.2 - 22 Jan 2025
+    * Updated RewardType Enum values
+    * Updated weight of restClient.SpotApi.Account.WithdrawAsync from 600 to 900
+    * Fixed restClient.SpotApi.Account.GetTradeFeeAsync for Us environment
+
 * Version 10.16.1 - 07 Jan 2025
     * Updated CryptoExchange.Net version
     * Added Type property to BinanceExchange class
