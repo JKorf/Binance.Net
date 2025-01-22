@@ -4727,7 +4727,7 @@
         </member>
         <member name="F:Binance.Net.Enums.RewardType.All">
             <summary>
-            All
+            All reward types
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SelfTradePreventionMode">
