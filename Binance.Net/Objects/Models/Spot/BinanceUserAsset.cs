@@ -123,6 +123,16 @@
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
+        /// Contract address
+        /// </summary>
+        [JsonPropertyName("contractAddress")]
+        public string ContractAddress { get; set; } = string.Empty;
+        /// <summary>
+        /// Contract address URL
+        /// </summary>
+        [JsonPropertyName("contractAddressUrl")]
+        public string ContractAddressUrl { get; set; } = string.Empty;
+        /// <summary>
         /// Network
         /// </summary>
         [JsonPropertyName("network")]

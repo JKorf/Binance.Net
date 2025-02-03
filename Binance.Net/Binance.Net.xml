@@ -19162,6 +19162,16 @@
             Name
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.ContractAddress">
+            <summary>
+            Contract address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.ContractAddressUrl">
+            <summary>
+            Contract address URL
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.Network">
             <summary>
             Network
