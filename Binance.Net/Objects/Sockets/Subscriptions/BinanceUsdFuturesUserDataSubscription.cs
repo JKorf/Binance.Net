@@ -118,42 +118,42 @@ namespace Binance.Net.Objects.Sockets
             if (message.Data is BinanceCombinedStream<BinanceFuturesStreamConfigUpdate> configUpdate)
             {
                 configUpdate.Data.ListenKey = configUpdate.Stream;
-                _configHandler?.Invoke(message.As(configUpdate.Data, configUpdate.Stream, null, SocketUpdateType.Update));
+                _configHandler?.Invoke(message.As(configUpdate.Data, configUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(configUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamMarginUpdate> marginUpdate)
             {
                 marginUpdate.Data.ListenKey = marginUpdate.Stream;
-                _marginHandler?.Invoke(message.As(marginUpdate.Data, marginUpdate.Stream, null, SocketUpdateType.Update));
+                _marginHandler?.Invoke(message.As(marginUpdate.Data, marginUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(marginUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamAccountUpdate> accountUpdate)
             {
                 accountUpdate.Data.ListenKey = accountUpdate.Stream;
-                _accountHandler?.Invoke(message.As(accountUpdate.Data, accountUpdate.Stream, null, SocketUpdateType.Update));
+                _accountHandler?.Invoke(message.As(accountUpdate.Data, accountUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(accountUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> orderUpdate)
             {
                 orderUpdate.Data.ListenKey = orderUpdate.Stream;
-                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, orderUpdate.Data.UpdateData.Symbol, SocketUpdateType.Update));
+                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, orderUpdate.Data.UpdateData.Symbol, SocketUpdateType.Update).WithDataTimestamp(orderUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyUpdate)
             {
-                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate.Data, listenKeyUpdate.Stream, null, SocketUpdateType.Update));
+                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate.Data, listenKeyUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(listenKeyUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceStrategyUpdate> strategyUpdate)
             {
-                _strategyHandler?.Invoke(message.As(strategyUpdate.Data, strategyUpdate.Stream, null, SocketUpdateType.Update));
+                _strategyHandler?.Invoke(message.As(strategyUpdate.Data, strategyUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(strategyUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceGridUpdate> gridUpdate)
             {
-                _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, null, SocketUpdateType.Update));
+                _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(gridUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate> condUpdate)
             {
-                _condOrderHandler?.Invoke(message.As(condUpdate.Data, condUpdate.Stream, null, SocketUpdateType.Update));
+                _condOrderHandler?.Invoke(message.As(condUpdate.Data, condUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(condUpdate.Data.EventTime));
             }
             else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamTradeUpdate> tradeUpdate)
             {
-                _tradeHandler?.Invoke(message.As(tradeUpdate.Data, tradeUpdate.Stream, tradeUpdate.Data.Symbol, SocketUpdateType.Update));
+                _tradeHandler?.Invoke(message.As(tradeUpdate.Data, tradeUpdate.Stream, tradeUpdate.Data.Symbol, SocketUpdateType.Update).WithDataTimestamp(tradeUpdate.Data.EventTime));
             }
 
             return new CallResult(null);

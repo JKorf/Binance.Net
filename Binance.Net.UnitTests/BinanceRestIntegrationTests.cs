@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Binance.Net.UnitTests
 {
     [NonParallelizable]
-    internal class BinanceRestIntegrationTests : RestIntergrationTest<BinanceRestClient>
+    internal class BinanceRestIntegrationTests : RestIntegrationTest<BinanceRestClient>
     {
         public override bool Run { get; set; } = false;
 
