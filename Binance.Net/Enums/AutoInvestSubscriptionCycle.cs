@@ -1,11 +1,15 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Subscription cycle
     /// </summary>
-    public enum AutoInvestSubscriptionCycle
+    [JsonConverter(typeof(PocAOTEnumConverter<AutoInvestSubscriptionCycle>))] public  enum AutoInvestSubscriptionCycle
     {
         /// <summary>
         /// One hour

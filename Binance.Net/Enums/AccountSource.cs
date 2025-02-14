@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Account source
     /// </summary>
-    public enum AccountSource
+    [JsonConverter(typeof(PocAOTEnumConverter<AccountSource>))] public  enum AccountSource
     {
         /// <summary>
         /// Spot

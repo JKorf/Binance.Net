@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Pay order type
     /// </summary>
-    public enum PayOrderType
+    [JsonConverter(typeof(PocAOTEnumConverter<PayOrderType>))] public  enum PayOrderType
     {
         /// <summary>
         /// C2B Merchant Acquiring Payment

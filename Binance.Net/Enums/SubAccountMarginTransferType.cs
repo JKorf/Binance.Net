@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Sub account margin transfer type
     /// </summary>
-    public enum SubAccountMarginTransferType
+    [JsonConverter(typeof(PocAOTEnumConverter<SubAccountMarginTransferType>))] public  enum SubAccountMarginTransferType
     {
         /// <summary>
         /// Sub account spot to sub account margin

@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -10,13 +11,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Cancel result
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<OrderOperationResult>))]
         [JsonPropertyName("cancelResult")]
         public OrderOperationResult CancelResult { get; set; }
         /// <summary>
         /// New order result
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<OrderOperationResult>))]
         [JsonPropertyName("newOrderResult")]
         public OrderOperationResult NewOrderResult { get; set; }
         /// <summary>

@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Price matching type
     /// </summary>
-    public enum PriceMatch
+    [JsonConverter(typeof(PocAOTEnumConverter<PriceMatch>))] public  enum PriceMatch
     {
         /// <summary>
         /// No price match

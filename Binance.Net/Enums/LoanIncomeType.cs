@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Income type
     /// </summary>
-    public enum LoanIncomeType
+    [JsonConverter(typeof(PocAOTEnumConverter<LoanIncomeType>))] public  enum LoanIncomeType
     {
         /// <summary>
         /// Borrow in

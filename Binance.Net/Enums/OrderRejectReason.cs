@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// The reason the order was rejected
     /// </summary>
-    public enum OrderRejectReason
+    [JsonConverter(typeof(PocAOTEnumConverter<OrderRejectReason>))] public  enum OrderRejectReason
     {
         /// <summary>
         /// Not rejected

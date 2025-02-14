@@ -52,9 +52,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IMessageSerializer CreateSerializer() => new PocAOTBinanceSystemTextJsonMessageSerializer();
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(PocAOTBinanceSerializerOptions.WithConverters);
         public IBinanceSocketClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />

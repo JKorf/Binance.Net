@@ -5,7 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Types of indicators
     /// </summary>
-    public enum IndicatorType
+    [JsonConverter(typeof(PocAOTEnumConverter<IndicatorType>))] public  enum IndicatorType
     {
         /// <summary>
         /// Unfilled ratio

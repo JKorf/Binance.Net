@@ -55,7 +55,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<C2COrderStatus>))]
         [JsonPropertyName("orderStatus")]
         public C2COrderStatus OrderStatus { get; set; }
         /// <summary>

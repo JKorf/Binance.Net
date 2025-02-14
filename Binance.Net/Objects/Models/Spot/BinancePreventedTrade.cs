@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -35,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
         [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
         /// <summary>

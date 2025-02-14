@@ -9,6 +9,7 @@ using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.SharedApis;
+using Binance.Net.Converters;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -69,9 +70,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(PocAOTBinanceSerializerOptions.WithConverters);
 
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IMessageSerializer CreateSerializer() => new PocAOTBinanceSystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

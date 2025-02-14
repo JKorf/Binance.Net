@@ -167,7 +167,7 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
     }
 }

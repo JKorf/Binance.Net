@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Self trade prevention mode
     /// </summary>
+    [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
     public enum SelfTradePreventionMode
     {
         /// <summary>

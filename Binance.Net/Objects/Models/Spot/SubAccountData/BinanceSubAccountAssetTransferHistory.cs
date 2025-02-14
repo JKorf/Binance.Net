@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
@@ -7,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         [JsonPropertyName("success")]
         public bool Success { get; set; }
         [JsonPropertyName("futuresType")]
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<FuturesAccountType>))]
         public FuturesAccountType AccountType { get; set; }
 
         /// <summary>

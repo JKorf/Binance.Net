@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Resale status
     /// </summary>
-    public enum HashrateResaleStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<HashrateResaleStatus>))] public  enum HashrateResaleStatus
     {
         /// <summary>
         /// Processing

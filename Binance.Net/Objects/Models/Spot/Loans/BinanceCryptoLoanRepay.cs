@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
@@ -30,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Repay status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<BorrowStatus>))]
         [JsonPropertyName("repayStatus")]
         public BorrowStatus RepayStatus { get; set; }
         /// <summary>

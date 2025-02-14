@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Simple earn subscription status
     /// </summary>
-    public enum SubscriptionStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<SubscriptionStatus>))] public  enum SubscriptionStatus
     {
         /// <summary>
         /// Purchasing

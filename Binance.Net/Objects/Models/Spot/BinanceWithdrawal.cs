@@ -86,7 +86,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The wallet type the withdrawal was from
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<WalletType>))]
         [JsonPropertyName("walletType")]
         public WalletType WalletType { get; set; }
 

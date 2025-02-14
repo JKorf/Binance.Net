@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -30,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<PayOrderType>))]
         [JsonPropertyName("orderType")]
         public PayOrderType OrderType { get; set; }
         /// <summary>
@@ -62,7 +63,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Main wallet type
         /// </summary>
-        [JsonPropertyName("walletType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("walletType"), JsonConverter(typeof(PocAOTEnumConverter<PayWalletType>))]
         public PayWalletType WalletType { get; set; }
         /// <summary>
         /// Fund details

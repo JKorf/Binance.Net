@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Brokerage transfer transaction status
     /// </summary>
-    public enum BrokerageTransferTransactionStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<BrokerageTransferTransactionStatus>))] public  enum BrokerageTransferTransactionStatus
     {
         /// <summary>
         /// Init

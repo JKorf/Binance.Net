@@ -5,7 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of account
     /// </summary>
-    public enum AccountType
+    [JsonConverter(typeof(PocAOTEnumConverter<AccountType>))] public  enum AccountType
     {
         /// <summary>
         /// Spot account type

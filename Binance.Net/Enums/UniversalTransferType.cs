@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Universal transfer type
     /// </summary>
-    public enum UniversalTransferType
+    [JsonConverter(typeof(PocAOTEnumConverter<UniversalTransferType>))] public  enum UniversalTransferType
     {
         /// <summary>
         /// Main (spot) to Funding

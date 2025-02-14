@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
@@ -35,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Destination account
         /// </summary>
-        [JsonPropertyName("destAccount"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("destAccount"), JsonConverter(typeof(PocAOTEnumConverter<AccountSource>))]
         public AccountSource DestinationAccount { get; set; }
         /// <summary>
         /// Status

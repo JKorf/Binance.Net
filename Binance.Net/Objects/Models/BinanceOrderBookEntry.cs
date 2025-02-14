@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// An entry in the order book
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(PocAOTArrayConverter<BinanceOrderBookEntry>))]
     public record BinanceOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>
