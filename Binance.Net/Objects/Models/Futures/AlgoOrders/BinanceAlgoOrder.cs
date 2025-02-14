@@ -99,7 +99,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Urgency
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<OrderUrgency?>))]
         [JsonPropertyName("urgency")]
         public OrderUrgency? Urgency { get; set; }
     }

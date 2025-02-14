@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of permission
     /// </summary>
-    public enum PermissionType
+    [JsonConverter(typeof(PocAOTEnumConverter<PermissionType>))] public  enum PermissionType
     {
         /// <summary>
         /// Spot trading

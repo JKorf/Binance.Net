@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Status of a symbol
     /// </summary>
-    public enum SymbolStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<SymbolStatus>))] public  enum SymbolStatus
     {
         /// <summary>
         /// Not trading yet

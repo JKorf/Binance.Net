@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Transfer type
     /// </summary>
-    public enum SubAccountTransferSubAccountType
+    [JsonConverter(typeof(PocAOTEnumConverter<SubAccountTransferSubAccountType>))] public  enum SubAccountTransferSubAccountType
     {
         /// <summary>
         /// From main spot account to sub account

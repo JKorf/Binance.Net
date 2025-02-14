@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Staking transaction type
     /// </summary>
-    public enum StakingTransactionType
+    [JsonConverter(typeof(PocAOTEnumConverter<StakingTransactionType>))] public  enum StakingTransactionType
     {
         /// <summary>
         /// Subscription

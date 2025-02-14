@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// List status type
     /// </summary>
-    public enum ListStatusType
+    [JsonConverter(typeof(PocAOTEnumConverter<ListStatusType>))] public  enum ListStatusType
     {
         /// <summary>
         /// Failed action

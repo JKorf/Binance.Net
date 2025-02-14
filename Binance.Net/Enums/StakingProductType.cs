@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Staking type
     /// </summary>
-    public enum StakingProductType
+    [JsonConverter(typeof(PocAOTEnumConverter<StakingProductType>))] public  enum StakingProductType
     {
         /// <summary>
         /// Locked staking

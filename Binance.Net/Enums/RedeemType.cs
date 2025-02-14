@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Redeem type
     /// </summary>
-    public enum RedeemType
+    [JsonConverter(typeof(PocAOTEnumConverter<RedeemType>))] public  enum RedeemType
     {
         /// <summary>
         /// Fast

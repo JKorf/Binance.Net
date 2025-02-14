@@ -1,9 +1,11 @@
-﻿namespace Binance.Net.Enums
+﻿using Binance.Net.Converters;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of rebate
     /// </summary>
-    public enum RebateType
+    [JsonConverter(typeof(PocAOTEnumConverter<RebateType>))] public  enum RebateType
     {
         /// <summary>
         /// Commission rebate

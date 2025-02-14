@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// C2C order status
     /// </summary>
-    public enum C2COrderStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<C2COrderStatus>))] public  enum C2COrderStatus
     {
         /// <summary>
         /// Pending

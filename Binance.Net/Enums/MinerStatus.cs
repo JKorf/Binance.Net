@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Miner status
     /// </summary>
-    public enum MinerStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<MinerStatus>))] public  enum MinerStatus
     {
         /// <summary>
         /// All miners

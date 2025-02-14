@@ -1,9 +1,11 @@
-﻿namespace Binance.Net.Enums
+﻿using Binance.Net.Converters;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// Withdrawal transfer type
     /// </summary>
-    public enum WithdrawalTransferType
+    [JsonConverter(typeof(PocAOTEnumConverter<WithdrawalTransferType>))] public  enum WithdrawalTransferType
     {
         /// <summary>
         /// Withdrawal to external wallets

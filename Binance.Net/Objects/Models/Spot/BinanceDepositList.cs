@@ -75,7 +75,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// The wallet type
         /// </summary>
         [JsonPropertyName("walletType")]
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<WalletType>))]
         public WalletType WalletType { get; set; }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
@@ -21,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Contract type
         /// </summary>
         [JsonPropertyName("ct")]
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<ContractType>))]
         public ContractType ContractType { get; set; }
         /// <summary>
         /// Delivery date
@@ -39,7 +40,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Symbol status
         /// </summary>
         [JsonPropertyName("cs")]
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<SymbolStatus>))]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// Brackets

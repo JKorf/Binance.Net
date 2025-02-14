@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -51,7 +52,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("priceMatch"), JsonConverter(typeof(PocAOTEnumConverter<PriceMatch>))]
         public PriceMatch PriceMatch { get; set; }
 
     }
