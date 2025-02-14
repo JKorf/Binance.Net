@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Account update reason type
         /// </summary>
-        [JsonPropertyName("m"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("m"), JsonConverter(typeof(PocAOTEnumConverter<AccountUpdateReason>))]
         public AccountUpdateReason Reason { get; set; }
 
         /// <summary>

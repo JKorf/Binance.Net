@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Margin
 {
@@ -15,7 +16,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<AccountType>))]
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>

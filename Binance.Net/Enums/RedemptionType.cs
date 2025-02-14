@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Simple earn redemption type
     /// </summary>
-    public enum RedemptionType
+    [JsonConverter(typeof(PocAOTEnumConverter<RedemptionType>))] public  enum RedemptionType
     {
         /// <summary>
         /// Redeem to spot account

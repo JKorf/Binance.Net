@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Wallet type
     /// </summary>
-    public enum WalletType
+    [JsonConverter(typeof(PocAOTEnumConverter<WalletType>))] public  enum WalletType
     {
         /// <summary>
         /// Spot wallet

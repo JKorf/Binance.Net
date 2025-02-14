@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Lending type
     /// </summary>
-    public enum LendingType
+    [JsonConverter(typeof(PocAOTEnumConverter<LendingType>))] public  enum LendingType
     {
         /// <summary>
         /// Flexible

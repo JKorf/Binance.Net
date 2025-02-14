@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Redemption status
     /// </summary>
-    public enum AutoInvestRedemptionStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<AutoInvestRedemptionStatus>))] public  enum AutoInvestRedemptionStatus
     {
         /// <summary>
         /// Success

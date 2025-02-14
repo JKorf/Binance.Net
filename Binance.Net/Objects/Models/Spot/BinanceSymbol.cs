@@ -114,7 +114,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Default self trade prevention
         /// </summary>
         [JsonPropertyName("defaultSelfTradePreventionMode")]
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode DefaultSelfTradePreventionMode { get; set; }
         /// <summary>
         /// Allowed self trade prevention modes

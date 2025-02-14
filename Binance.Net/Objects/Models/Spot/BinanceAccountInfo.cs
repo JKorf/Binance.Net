@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -72,7 +73,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The type of account
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<AccountType>))]
         [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>

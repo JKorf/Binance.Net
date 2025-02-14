@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Add/Remove liquidity type
     /// </summary>
-    public enum LiquidityType
+    [JsonConverter(typeof(PocAOTEnumConverter<LiquidityType>))] public  enum LiquidityType
     {
         /// <summary>
         /// Add/Remove single asset

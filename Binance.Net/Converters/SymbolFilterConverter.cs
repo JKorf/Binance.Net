@@ -24,7 +24,7 @@ namespace Binance.Net.Converters
             public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 var obj = JsonDocument.ParseValue(ref reader).RootElement;
-                var type = obj.GetProperty("filterType").Deserialize<SymbolFilterType>(SerializerOptions.WithConverters);
+                var type = obj.GetProperty("filterType").Deserialize<SymbolFilterType>(options);
                 BinanceSymbolFilter result;
                 switch (type)
                 {

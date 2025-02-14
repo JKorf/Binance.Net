@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of auto close
     /// </summary>
-    public enum AutoCloseType
+    [JsonConverter(typeof(PocAOTEnumConverter<AutoCloseType>))] public  enum AutoCloseType
     {
         /// <summary>
         /// ADL

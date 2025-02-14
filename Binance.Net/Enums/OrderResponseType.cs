@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Response type
     /// </summary>
-    public enum OrderResponseType
+    [JsonConverter(typeof(PocAOTEnumConverter<OrderResponseType>))] public  enum OrderResponseType
     {
         /// <summary>
         /// Ack only

@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
 {
@@ -30,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
         /// <summary>
         /// Account status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
+        [JsonConverter(typeof(PocAOTEnumConverter<PortfolioMarginAccountStatus>))]
         [JsonPropertyName("accountStatus")]
         public PortfolioMarginAccountStatus AccountStatus { get; set; }
         /// <summary>

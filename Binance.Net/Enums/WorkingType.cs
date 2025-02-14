@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of working
     /// </summary>
-    public enum WorkingType
+    [JsonConverter(typeof(PocAOTEnumConverter<WorkingType>))] public  enum WorkingType
     {
         /// <summary>
         /// Mark price type

@@ -1,4 +1,5 @@
 ﻿
+using Binance.Net.Converters;
 using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
@@ -6,7 +7,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Margin level status
     /// </summary>
-    public enum MarginLevelStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<MarginLevelStatus>))] public  enum MarginLevelStatus
     {
         /// <summary>
         /// Excessive

@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
@@ -25,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Reward type
         /// </summary>
-        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("type"), JsonConverter(typeof(PocAOTEnumConverter<RewardType>))]
         public RewardType Type { get; set; }
         /// <summary>
         /// Timestamp

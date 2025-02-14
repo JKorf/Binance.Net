@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Transfer direction
     /// </summary>
-    public enum TransferDirectionType
+    [JsonConverter(typeof(PocAOTEnumConverter<TransferDirectionType>))] public  enum TransferDirectionType
     {
         /// <summary>
         /// From main account to margin account

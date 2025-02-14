@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Restrictions for order cancelation
     /// </summary>
-    public enum CancelRestriction
+    [JsonConverter(typeof(PocAOTEnumConverter<CancelRestriction>))] public  enum CancelRestriction
     {
         /// <summary>
         /// Cancel will succeed if the order status is New

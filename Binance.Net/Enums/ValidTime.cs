@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Valid Time
     /// </summary>
-    public enum ValidTime
+    [JsonConverter(typeof(PocAOTEnumConverter<ValidTime>))] public  enum ValidTime
     {
         /// <summary>
         /// 10 seconds

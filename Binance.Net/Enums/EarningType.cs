@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Mining earnings type
     /// </summary>
-    public enum EarningType
+    [JsonConverter(typeof(PocAOTEnumConverter<EarningType>))] public  enum EarningType
     {
         /// <summary>
         /// Mining wallet

@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// The status of a deposit
     /// </summary>
-    public enum DepositStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<DepositStatus>))] public  enum DepositStatus
     {
         /// <summary>
         /// Pending

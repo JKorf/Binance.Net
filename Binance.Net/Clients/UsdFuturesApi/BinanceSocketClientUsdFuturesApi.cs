@@ -74,8 +74,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IMessageSerializer CreateSerializer() => new PocAOTBinanceSystemTextJsonMessageSerializer();
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(PocAOTBinanceSerializerOptions.WithConverters);
         public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
 

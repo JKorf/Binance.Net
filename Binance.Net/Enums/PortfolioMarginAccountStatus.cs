@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Account status
     /// </summary>
-    public enum PortfolioMarginAccountStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<PortfolioMarginAccountStatus>))] public  enum PortfolioMarginAccountStatus
     {
         /// <summary>
         /// Normal
