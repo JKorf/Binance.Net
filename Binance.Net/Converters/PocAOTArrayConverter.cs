@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace Binance.Net.Converters
 {
     // Based on ArrayConverterInner
-#if NET5_0
+#if NET5_0_OR_GREATER
     class PocAOTArrayConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]T> : JsonConverter<T> where T : new()
 # else
     class PocAOTArrayConverter<T> : JsonConverter<T> where T : new()
