@@ -610,15 +610,17 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-margin-account-39-s-trade-list-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="isIsolated">For isolated margin or not</param>
+        /// <param name="orderId">Trades associated with orderId</param>
         /// <param name="startTime">Orders newer than this date will be retrieved</param>
         /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="limit">The max number of results</param>
         /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="isIsolated">For isolated margin or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin account trades</returns>
-        Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMarginUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceTrade>>> GetMarginUserTradesAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null,
+            int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Places a new margin OCO(One cancels other) order
