@@ -116,7 +116,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            var result = await _baseClient.PlaceOrderInternal(_baseClient.GetUrl("order", "api", "3"),
+            var result = await _baseClient.PlaceOrderInternal("/api/v3/order",
+                BinanceExchange.RateLimiter.SpotRestUid,
                 symbol,
                 side,
                 type,
@@ -137,7 +138,6 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 receiveWindow,
                 1,
-                BinanceExchange.RateLimiter.SpotRestUid,
                 ct).ConfigureAwait(false);
             if (result)
                 _baseClient.InvokeOrderPlaced(new OrderId() { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
@@ -774,7 +774,8 @@ namespace Binance.Net.Clients.SpotApi
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            var result = await _baseClient.PlaceOrderInternal(_baseClient.GetUrl("margin/order", "sapi", "1"),
+            var result = await _baseClient.PlaceOrderInternal("/sapi/v1/margin/order",
+                BinanceExchange.RateLimiter.SpotRestUid,
                 symbol,
                 side,
                 type,
@@ -795,7 +796,6 @@ namespace Binance.Net.Clients.SpotApi
                 autoRepayAtCancel,
                 receiveWindow,
                 weight: 6,
-                BinanceExchange.RateLimiter.SpotRestUid,
                 ct).ConfigureAwait(false);
 
             if (result)

@@ -8,6 +8,7 @@ namespace Binance.Net.Clients.GeneralApi
     /// <inheritdoc />
     internal class BinanceRestClientGeneralApiBrokerage : IBinanceRestClientGeneralApiBrokerage
     {
+        private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
         private readonly BinanceRestClientGeneralApi _baseClient;
 
         internal BinanceRestClientGeneralApiBrokerage(BinanceRestClientGeneralApi baseClient)
@@ -20,22 +21,24 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageSubAccountCreateResult>> CreateSubAccountAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSubAccountCreateResult>(_baseClient.GetUrl("broker/subAccount", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSubAccountCreateResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceBrokerageSubAccount>>> GetSubAccountsAsync(string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageSubAccount>>(_baseClient.GetUrl("broker/subAccount", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccount", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageSubAccount>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -47,28 +50,30 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"margin", true},  // only true for now
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageEnableMarginResult>(_baseClient.GetUrl("broker/subAccount/margin", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount/margin", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageEnableMarginResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageEnableFuturesResult>> EnableFuturesForSubAccountAsync(string subAccountId, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"futures", true},  // only true for now
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageEnableFuturesResult>(_baseClient.GetUrl("broker/subAccount/futures", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount/futures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageEnableFuturesResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -76,14 +81,15 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"blvt", true},  // only true for now
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageEnableLeverageTokenResult>(_baseClient.GetUrl("broker/subAccount/blvt", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount/blvt", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageEnableLeverageTokenResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -96,7 +102,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"canTrade", isSpotTradingEnabled}
@@ -105,7 +111,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("futuresTrade", isFuturesTradingEnabled.ToString().ToLower());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageApiKeyCreateResult>(_baseClient.GetUrl("broker/subAccountApi", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageApiKeyCreateResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -114,14 +121,15 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal(_baseClient.GetUrl("broker/subAccountApi", "sapi", "1"), HttpMethod.Delete, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "/sapi/v1/broker/subAccountApi", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -129,7 +137,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                              };
@@ -138,7 +146,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", size);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSubAccountApiKey>(_baseClient.GetUrl("broker/subAccountApi", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccountApi", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSubAccountApiKey>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -148,7 +157,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -158,7 +167,8 @@ namespace Binance.Net.Clients.GeneralApi
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSubAccountApiKey>(_baseClient.GetUrl("broker/subAccountApi/permission", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi/permission", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSubAccountApiKey>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -169,7 +179,7 @@ namespace Binance.Net.Clients.GeneralApi
             apiKey.ValidateNotNull(nameof(apiKey));
             ipAddress.ValidateNotNull(nameof(ipAddress));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -177,7 +187,8 @@ namespace Binance.Net.Clients.GeneralApi
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageAddIpRestrictionResult>(_baseClient.GetUrl("broker/subAccountApi/ipRestriction/ipList", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi/ipRestriction", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageAddIpRestrictionResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -187,7 +198,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -195,7 +206,8 @@ namespace Binance.Net.Clients.GeneralApi
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageIpRestriction>(_baseClient.GetUrl("broker/subAccountApi/ipRestriction", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi/ipRestriction", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageIpRestriction>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -205,14 +217,15 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageIpRestriction>(_baseClient.GetUrl("broker/subAccountApi/ipRestriction", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccountApi/ipRestriction", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageIpRestriction>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -223,7 +236,7 @@ namespace Binance.Net.Clients.GeneralApi
             apiKey.ValidateNotNull(nameof(apiKey));
             ipAddress.ValidateNotNull(nameof(ipAddress));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -231,7 +244,8 @@ namespace Binance.Net.Clients.GeneralApi
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageIpRestrictionBase>(_baseClient.GetUrl("broker/subAccountApi/ipRestriction/ipList", "sapi", "1"), HttpMethod.Delete, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "/sapi/v1/broker/subAccountApi/ipRestriction/ipList", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageIpRestrictionBase>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -245,7 +259,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"makerCommission", makerCommission.ToString(CultureInfo.InvariantCulture)},
@@ -255,7 +269,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("marginTakerCommission", marginTakerCommission?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSubAccountCommission>(_baseClient.GetUrl("broker/subAccountApi/commission", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi/commission", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSubAccountCommission>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -265,7 +280,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             symbol.ValidateNotNull(nameof(symbol));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"symbol", symbol},
@@ -274,7 +289,8 @@ namespace Binance.Net.Clients.GeneralApi
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSubAccountFuturesCommission>(_baseClient.GetUrl("broker/subAccountApi/commission/futures", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi/commission/futures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSubAccountFuturesCommission>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -283,14 +299,15 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId}
                              };
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>(_baseClient.GetUrl("broker/subAccountApi/commission/futures", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccountApi/commission/futures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -300,7 +317,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             pair.ValidateNotNull(nameof(pair));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"pair", pair},
@@ -309,7 +326,8 @@ namespace Binance.Net.Clients.GeneralApi
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSubAccountCoinFuturesCommission>(_baseClient.GetUrl("broker/subAccountApi/commission/coinFutures", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi/commission/coinFutures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSubAccountCoinFuturesCommission>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -318,14 +336,15 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId}
                              };
             parameters.AddOptionalParameter("pair", pair);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>(_baseClient.GetUrl("broker/subAccountApi/commission/coinFutures", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccountApi/commission/coinFutures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageSubAccountFuturesCommission>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -336,26 +355,28 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceBrokerageSpotAssetInfo>> GetSubAccountSpotAssetInfoAsync(
             string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageSpotAssetInfo>(_baseClient.GetUrl("broker/subAccount/spotSummary", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccount/spotSummary", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageSpotAssetInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageMarginAssetInfo>> GetSubAccountMarginAssetInfoAsync(
             string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageMarginAssetInfo>(_baseClient.GetUrl("broker/subAccount/marginSummary", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccount/marginSummary", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageMarginAssetInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -369,7 +390,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageFuturesAssetInfo>(_baseClient.GetUrl("broker/subAccount/futuresSummary", "sapi", "2"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v2/broker/subAccount/futuresSummary", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageFuturesAssetInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -382,14 +404,15 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"spotBNBBurn", spotBnbBurn.ToString().ToLower()}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageChangeBnbBurnSpotAndMarginResult>(_baseClient.GetUrl("broker/subAccount/bnbBurn/spot", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount/bnbBurn/spot", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageChangeBnbBurnSpotAndMarginResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -398,14 +421,15 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                                  {"interestBNBBurn", interestBnbBurn.ToString().ToLower()}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageChangeBnbBurnMarginInterestResult>(_baseClient.GetUrl("broker/subAccount/bnbBurn/marginInterest", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount/bnbBurn/marginInterest", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageChangeBnbBurnMarginInterestResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -413,13 +437,14 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId}
                              };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageBnbBurnStatus>(_baseClient.GetUrl("broker/subAccount/bnbBurn/status", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccount/bnbBurn/status", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageBnbBurnStatus>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -445,7 +470,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageTransferResult>(_baseClient.GetUrl("broker/universalTransfer", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/universalTransfer", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageTransferResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -453,7 +479,7 @@ namespace Binance.Net.Clients.GeneralApi
             string? fromId = null, string? toId = null, string? clientTransferId = null, DateTime? startDate = null, DateTime? endDate = null,
             int? page = null, int? limit = null, bool showAllStatus = false, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"showAllStatus", showAllStatus.ToString().ToLower()},
                              };
@@ -466,7 +492,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageTransferTransactionUniversal>>(_baseClient.GetUrl("broker/universalTransfer", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/universalTransfer", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageTransferTransactionUniversal>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -475,7 +502,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             asset.ValidateNotNull(nameof(asset));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"asset", asset},
                                  {"amount", quantity.ToString(CultureInfo.InvariantCulture)},
@@ -485,7 +512,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageTransferResult>(_baseClient.GetUrl("broker/transfer", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/transfer", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageTransferResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -505,7 +533,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageTransferFuturesResult>(_baseClient.GetUrl("broker/transfer/futures", "sapi", "1"), HttpMethod.Post, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/transfer/futures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageTransferFuturesResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -513,7 +542,7 @@ namespace Binance.Net.Clients.GeneralApi
             string? clientTransferId = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, bool showAllStatus = false,
             int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"showAllStatus", showAllStatus.ToString().ToLower()},
                              };
@@ -526,7 +555,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageTransferTransaction>>(_baseClient.GetUrl("broker/transfer", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/transfer", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageTransferTransaction>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -548,7 +578,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageTransferFuturesTransactions>(_baseClient.GetUrl("broker/transfer/futures", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/transfer/futures", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageTransferFuturesTransactions>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -566,7 +597,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("offset", offset?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageSubAccountDepositTransaction>>(_baseClient.GetUrl("broker/subAccount/depositHist", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/subAccount/depositHist", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageSubAccountDepositTransaction>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -576,10 +608,11 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageAccountInfo>> GetBrokerAccountInfoAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<BinanceBrokerageAccountInfo>(_baseClient.GetUrl("broker/info", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/info", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<BinanceBrokerageAccountInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -592,7 +625,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new Dictionary<string, object>
+            var parameters = new ParameterCollection
                              {
                                  {"subAccountId", subAccountId},
                              };
@@ -602,7 +635,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageRebate>>(_baseClient.GetUrl("broker/rebate/recentRecord", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/rebate/recentRecord", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageRebate>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -619,7 +653,8 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendRequestInternal<IEnumerable<BinanceBrokerageFuturesRebate>>(_baseClient.GetUrl("broker/rebate/futures/recentRecord", "sapi", "1"), HttpMethod.Get, ct, parameters, true, weight: 0).ConfigureAwait(false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/rebate/futures/recentRecord", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceBrokerageFuturesRebate>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

@@ -78,18 +78,6 @@ namespace Binance.Net.Clients.GeneralApi
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
-        internal Uri GetUrl(string endpoint) => new Uri(BaseAddress.AppendPath(endpoint));
-
-        internal Uri GetUrl(string endpoint, string api, string? version = null)
-        {
-            var result = BaseAddress.AppendPath(api);
-
-            if (!string.IsNullOrEmpty(version))
-                result = result.AppendPath($"v{version}");
-
-            return new Uri(result.AppendPath(endpoint));
-        }
-
         internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
             => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight);
 
@@ -104,11 +92,12 @@ namespace Binance.Net.Clients.GeneralApi
             return result;
         }
 
-        internal async Task<WebCallResult<T>> SendRequestInternal<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null) where T : class
+        internal Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+            => SendToAddressAsync(BaseAddress, definition, parameters, cancellationToken, weight);
+
+        internal async Task<WebCallResult> SendToAddressAsync(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            var result = await SendRequestAsync<T>(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate).ConfigureAwait(false);
+            var result = await base.SendAsync(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -116,20 +105,6 @@ namespace Binance.Net.Clients.GeneralApi
             }
             return result;
         }
-
-        internal async Task<WebCallResult> SendRequestInternal(Uri uri, HttpMethod method, CancellationToken cancellationToken,
-            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null,
-            ArrayParametersSerialization? arraySerialization = null, int weight = 1, IRateLimitGate? gate = null)
-        {
-            var result = await SendRequestAsync(uri, method, cancellationToken, parameters, signed, null, postPosition, arraySerialization, weight, gate: gate).ConfigureAwait(false);
-            if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
-            {
-                _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
-                BinanceRestClientSpotApi._timeSyncState.LastSyncTime = DateTime.MinValue;
-            }
-            return result;
-        }
-
 
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
