@@ -3,7 +3,7 @@
     /// <summary>
     /// Staking history
     /// </summary>
-    public record BinanceEthStakingHistory
+    public record BinanceStakingHistory
     {
         /// <summary>
         /// Asset
@@ -41,5 +41,7 @@
         /// </summary>
         [JsonPropertyName("conversionRatio")]
         public decimal ConversionRatio { get; set; }
+        [JsonInclude, JsonPropertyName("exchangeRate")]
+        internal decimal ConversionRatioInt { get => ConversionRatio; set => ConversionRatio = value; }
     }
 }

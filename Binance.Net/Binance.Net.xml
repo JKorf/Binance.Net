@@ -1112,6 +1112,39 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetBethUnwrapHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetSolStakingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetSolStakingQuotaAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.SubscribeSolStakingAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.RedeemSolStakingAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.ClaimSolBoostRewardsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetSolStakingHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetSolRedemptionHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetBnSolRewardsHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetBnSolRateHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetSolBoostRewardsHistoryAsync(Binance.Net.Enums.SolRewardType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiStaking.GetSolUnclaimedRewardsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSubAccount">
             <inheritdoc />
         </member>
@@ -4723,6 +4756,21 @@
             Automatic borrowing and repayment, simultaneously
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.SolRewardType">
+            <summary>
+            Reward type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SolRewardType.Claim">
+            <summary>
+            Claim
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SolRewardType.Distribute">
+            <summary>
+            Distribute
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SpotOrderType">
             <summary>
             Order type for a spot order
@@ -8285,6 +8333,128 @@
             <param name="endTime">Filter by end time</param>
             <param name="page">Page</param>
             <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetSolStakingAccountAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get SOL staking account info
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/account" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetSolStakingQuotaAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get SOL staking quotas
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.SubscribeSolStakingAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to SOL staking
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/staking" /></para>
+            </summary>
+            <param name="quantity">Amount</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.RedeemSolStakingAsync(System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Redeem from SOL staking
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL" /></para>
+            </summary>
+            <param name="quantity">Amount</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.ClaimSolBoostRewardsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Claim Boost APR Airdrop rewards
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/staking/Claim-Boost-rewards" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetSolStakingHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get SOL staking history
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/history" /></para>
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetSolRedemptionHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get SOL redemption history
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history" /></para>
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetBnSolRewardsHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get BN SOL rewards history
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history" /></para>
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetBnSolRateHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get BN SOL rate history
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History" /></para>
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetSolBoostRewardsHistoryAsync(Binance.Net.Enums.SolRewardType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get SOL boost reward history
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-rewards-History" /></para>
+            </summary>
+            <param name="type">Filter by type</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page</param>
+            <param name="pageSize">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking.GetSolUnclaimedRewardsAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get SOL unclaimed rewards
+            <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-rewards" /></para>
+            </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -24090,49 +24260,74 @@
             Status
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory">
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRateHistory">
             <summary>
-            Redemption history
+            Rate history
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.Asset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRateHistory.ExchangeRate">
             <summary>
-            Asset
+            Exchange rate
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.Quantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRateHistory.AnnualPercentageRate">
             <summary>
-            Amount
+            Annual percentage rate
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.Status">
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRateHistory.BoostRewards">
             <summary>
-            Status
+            Boost rewards
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.Timestamp">
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRateHistory.Timestamp">
             <summary>
             Timestamp
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.ArrivalTime">
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolReward">
             <summary>
-            Arrival timestamp
+            Reward info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.DistributedAsset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolReward.BoostApr">
             <summary>
-            Distribute asset
+            Boost APR
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.DistributeQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolReward.RewardAsset">
             <summary>
-            Quantity distributed
+            Reward asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRedemptionHistory.ConversionRatio">
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory">
             <summary>
-            Conversion ratio
+            SOL rewards history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.BnSolHolding">
+            <summary>
+            BN SOL holding
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.Status">
+            <summary>
+            Status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRewardsHistory">
@@ -24185,46 +24380,6 @@
             Last day profit in Beth
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory">
-            <summary>
-            Staking history
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.Asset">
-            <summary>
-            Asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.Quantity">
-            <summary>
-            Amount
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.DistributedAsset">
-            <summary>
-            Distribute asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.DistributeQuantity">
-            <summary>
-            Quantity distributed
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingHistory.ConversionRatio">
-            <summary>
-            Conversion ratio
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingQuota">
             <summary>
             Eth staking quota
@@ -24238,6 +24393,251 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingQuota.LeftRedemptionPersonalQuota">
             <summary>
             Redemption quota left
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory">
+            <summary>
+            Redemption history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Quantity">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.ArrivalTime">
+            <summary>
+            Arrival timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.DistributedAsset">
+            <summary>
+            Distribute asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.DistributeQuantity">
+            <summary>
+            Quantity distributed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.ConversionRatio">
+            <summary>
+            Conversion ratio
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolRewards">
+            <summary>
+            SOL rewards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolRewards.EstimatedRewardsInSol">
+            <summary>
+            Estimated rewards in SOL
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward">
+            <summary>
+            SOL reward
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.AmountInSol">
+            <summary>
+            Amount in SOL
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.Holding">
+            <summary>
+            Holding
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.HoldingInSol">
+            <summary>
+            Holding in SOL
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.AnnualPercentageRate">
+            <summary>
+            Annual percetage ratge
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount">
+            <summary>
+            SOL staking account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount.BnSolAmount">
+            <summary>
+            BN SOL amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount.HoldingInSOL">
+            <summary>
+            Holding in SOL
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount.ThirtyDaysProfitInSOL">
+            <summary>
+            Thirty days profit in SOL
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota">
+            <summary>
+            SOL staking quota
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.LeftStakingPersonalQuota">
+            <summary>
+            Staking quota left
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.LeftRedemptionPersonalQuota">
+            <summary>
+            Redemption quota left
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.MinStakeAmount">
+            <summary>
+            Min staking amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.MinRedeemAmount">
+            <summary>
+            Min redeem amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.RedeemPeriod">
+            <summary>
+            Redeem period
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.Stakeable">
+            <summary>
+            Is stakeable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.Redeemable">
+            <summary>
+            Is redeemable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.SoldOut">
+            <summary>
+            Sold out
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.CommissionFee">
+            <summary>
+            Commission fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.NextEpochTime">
+            <summary>
+            Next time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.Calculating">
+            <summary>
+            Calculating
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult">
+            <summary>
+            Staking result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult.Success">
+            <summary>
+            Successful
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult.BnSolAmount">
+            <summary>
+            BN SOL amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult.ExchangeRate">
+            <summary>
+            Exchange rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult.ArrivalTime">
+            <summary>
+            Arrival time for redeeming
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolUnclaimedReward">
+            <summary>
+            Unclaimed rewards info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolUnclaimedReward.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolUnclaimedReward.RewardsAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory">
+            <summary>
+            Staking history
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Quantity">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.DistributedAsset">
+            <summary>
+            Distribute asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.DistributeQuantity">
+            <summary>
+            Quantity distributed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.ConversionRatio">
+            <summary>
+            Conversion ratio
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingResult">
