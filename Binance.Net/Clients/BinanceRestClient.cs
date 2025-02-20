@@ -10,7 +10,6 @@ using Binance.Net.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
 using CryptoExchange.Net.Objects.Options;
 
 namespace Binance.Net.Clients

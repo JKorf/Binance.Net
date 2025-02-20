@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
-using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

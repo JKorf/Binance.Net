@@ -8,7 +8,6 @@ using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects.Options;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace Binance.Net.Clients

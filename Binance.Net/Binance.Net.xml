@@ -2903,7 +2903,7 @@
             Accruing interest
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.BorrowStatus.Overdeu">
+        <member name="F:Binance.Net.Enums.BorrowStatus.Overdue">
             <summary>
             Overdue
             </summary>
@@ -3253,9 +3253,9 @@
             Pool savings
             </summary>
         </member>
-        <member name="F:Binance.Net.Enums.EarningType.Transfered">
+        <member name="F:Binance.Net.Enums.EarningType.Transferred">
             <summary>
-            Transfered
+            Transferred
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.EarningType.IncomeTransfer">
@@ -3733,41 +3733,6 @@
             1M
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.LendingType">
-            <summary>
-            Lending type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.LendingType.Daily">
-            <summary>
-            Flexible
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.LendingType.Activity">
-            <summary>
-            Activity
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.LendingType.CustomizedFixed">
-            <summary>
-            Customized fixed
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.LiquidityType">
-            <summary>
-            Add/Remove liquidity type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.LiquidityType.Single">
-            <summary>
-            Add/Remove single asset
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.LiquidityType.Combined">
-            <summary>
-            Add/Remove combination of all coins
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.ListOrderStatus">
             <summary>
             List order status
@@ -3895,7 +3860,7 @@
         </member>
         <member name="F:Binance.Net.Enums.MarginStatus.Confirmed">
             <summary>
-            Successfully loaned/repayed
+            Successfully loaned/repaid
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.MarginStatus.Failed">
@@ -3985,7 +3950,7 @@
         </member>
         <member name="F:Binance.Net.Enums.OrderRejectReason.UnknownAccount">
             <summary>
-            Unkown account
+            Unknown account
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.OrderRejectReason.InsufficientBalance">
@@ -4045,7 +4010,7 @@
         </member>
         <member name="T:Binance.Net.Enums.OrderStatus">
             <summary>
-            The status of an orderн
+            The status of an order
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.OrderStatus.PendingNew">
@@ -4510,22 +4475,7 @@
         </member>
         <member name="F:Binance.Net.Enums.PortfolioMarginAccountStatus.Bankrupted">
             <summary>
-            Bankruped
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.PositionMode">
-            <summary>
-            User position mode
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.PositionMode.Hedge">
-            <summary>
-            In the Hedge Mode, one contract can hold positions in both long and short directions at the same time, and hedge positions in different directions under the same contract.
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.PositionMode.OneWay">
-            <summary>
-            In the One-way Mode, one contract can only hold positions in one direction.
+            Bankrupted
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.PositionSide">
@@ -4618,36 +4568,6 @@
             Products which are unsubscribable
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.ProjectStatus">
-            <summary>
-            Project status
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.ProjectStatus.Holding">
-            <summary>
-            Holding
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.ProjectStatus.Redeemed">
-            <summary>
-            Redeemed
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.ProjectType">
-            <summary>
-            The type of project
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.ProjectType.Activity">
-            <summary>
-            Regular
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.ProjectType.CustomizedFixed">
-            <summary>
-            Customized fixed
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.RateLimitInterval">
             <summary>
             Rate limit on what unit
@@ -4708,21 +4628,6 @@
             Referral kickback
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.RedeemType">
-            <summary>
-            Redeem type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.RedeemType.Fast">
-            <summary>
-            Fast
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.RedeemType.Normal">
-            <summary>
-            Normal
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.RedemptionType">
             <summary>
             Simple earn redemption type
@@ -4780,12 +4685,12 @@
         </member>
         <member name="F:Binance.Net.Enums.SelfTradePreventionMode.ExpireMaker">
             <summary>
-            Exire maker
+            Expire maker
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.SelfTradePreventionMode.ExpireBoth">
             <summary>
-            Exire both
+            Expire both
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.SelfTradePreventionMode.None">
@@ -4901,46 +4806,6 @@
         <member name="F:Binance.Net.Enums.FuturesOrderType.Liquidation">
             <summary>
             A liquidation order
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.StakingProductType">
-            <summary>
-            Staking type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.StakingProductType.Staking">
-            <summary>
-            Locked staking
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.StakingProductType.FlexibleDeFi">
-            <summary>
-            Flexible DeFi staking
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.StakingProductType.LockedDeFi">
-            <summary>
-            Locked DeFi staking
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Enums.StakingTransactionType">
-            <summary>
-            Staking transaction type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.StakingTransactionType.Subscription">
-            <summary>
-            Subscription
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.StakingTransactionType.Redemption">
-            <summary>
-            Redemption
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.StakingTransactionType.Interest">
-            <summary>
-            Interest
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SubAccountDepositStatus">
@@ -5323,21 +5188,6 @@
             Roll-out
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.TransferDirectionType">
-            <summary>
-            Transfer direction
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.TransferDirectionType.MainToMargin">
-            <summary>
-            From main account to margin account
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.TransferDirectionType.MarginToMain">
-            <summary>
-            From margin account to main account
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.UnderlyingType">
             <summary>
             Underlying Type
@@ -5618,21 +5468,6 @@
             Withdrawal has been processed
             </summary>
         </member>
-        <member name="T:Binance.Net.Enums.WithdrawalTransferType">
-            <summary>
-            Withdrawal transfer type
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.WithdrawalTransferType.ExternalTransfer">
-            <summary>
-            Withdrawal to external wallets
-            </summary>
-        </member>
-        <member name="F:Binance.Net.Enums.WithdrawalTransferType.InternalTransfer">
-            <summary>
-            Withdrawal from one binance account to another one
-            </summary>
-        </member>
         <member name="T:Binance.Net.Enums.WithdrawDepositTransferType">
             <summary>
             Transfer type
@@ -5709,7 +5544,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.SharedClient">
             <summary>
-            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.Agent">
@@ -6265,7 +6100,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading">
             <summary>
-            Binance COIN-M futures trading endpoints, placing and mananging orders.
+            Binance COIN-M futures trading endpoints, placing and managing orders.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -6289,7 +6124,7 @@
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-            <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -6353,7 +6188,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Cancels muliple orders
+            Cancels multiple orders
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
@@ -7773,7 +7608,7 @@
             <param name="orderId">Order id to repay</param>
             <param name="quantity">Quantity to repay</param>
             <param name="repayWithBorrowedAsset">True to repay with the borrowed asset, false to repay with collateral asset</param>
-            <param name="collateralReturn">Return extra colalteral to spot account</param>
+            <param name="collateralReturn">Return extra collateral to spot account</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -7801,7 +7636,7 @@
             </summary>
             <param name="orderId">Order id</param>
             <param name="quantity">Adjustment quantity</param>
-            <param name="addOrRmove">True for add, false to reduce</param>
+            <param name="addOrRemove">True for add, false to reduce</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -8468,7 +8303,7 @@
             <param name="page">The page of the results</param>
             <param name="limit">The max amount of results to return</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="isFreeze">Is freezed</param>
+            <param name="isFreeze">Is frozen</param>
             <param name="ct">Cancellation token</param>
             <returns>List of sub accounts</returns>
         </member>
@@ -8497,7 +8332,7 @@
             <param name="toEmail">To which account to transfer</param>
             <param name="toAccountType">Account type to transfer to</param>
             <param name="asset">The asset to transfer</param>
-            <param name="symbol">The sybol to transfer, only for isolated margin</param>
+            <param name="symbol">The symbol to transfer, only for isolated margin</param>
             <param name="quantity">The quantity to transfer</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -8845,7 +8680,7 @@
             <summary>
             Update specific options
             </summary>
-            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+            <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
@@ -8877,7 +8712,7 @@
             <summary>
             Update specific options
             </summary>
-            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+            <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
@@ -8912,7 +8747,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.SharedClient">
             <summary>
-            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.Agent">
@@ -10181,7 +10016,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading">
             <summary>
-            Binance Spot trading endpoints, placing and mananging orders.
+            Binance Spot trading endpoints, placing and managing orders.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -10874,7 +10709,7 @@
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="side">Filter by side</param>
-            <param name="startTime">Fitler by start time</param>
+            <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="page">Page</param>
             <param name="limit">Max results</param>
@@ -10916,7 +10751,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApi.SharedClient">
             <summary>
-            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount">
@@ -11680,7 +11515,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.SharedClient">
             <summary>
-            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.Agent">
@@ -11849,7 +11684,7 @@
             <param name="enabled">Enabled or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
-            <returns>Succes</returns>
+            <returns>Success</returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
@@ -12320,7 +12155,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetAssetIndexesAsync(System.Threading.CancellationToken)">
             <summary>
-            Get asset indexex for Multi-Assets mode for all symbols
+            Get asset indexes for Multi-Assets mode for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
@@ -12378,7 +12213,7 @@
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading">
             <summary>
-            Binance USD-M futures trading endpoints, placing and mananging orders.
+            Binance USD-M futures trading endpoints, placing and managing orders.
             </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -12402,7 +12237,7 @@
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-            <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -12467,7 +12302,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Cancels muliple orders
+            Cancels multiple orders
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#cancel-multiple-orders-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
@@ -12486,7 +12321,7 @@
             <param name="side">Order side</param>
             <param name="quantity">New quantity</param>
             <param name="price">New price</param>
-            <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
             <param name="orderId">Order id of the order to edit</param>
             <param name="origClientOrderId">Client order id of the order to edit</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -12642,7 +12477,7 @@
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="side">Filter by side</param>
-            <param name="startTime">Fitler by start time</param>
+            <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="page">Page</param>
             <param name="limit">Max results</param>
@@ -13187,7 +13022,7 @@
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-            <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
             <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -13202,7 +13037,7 @@
             <param name="side">Order side</param>
             <param name="quantity">New quantity</param>
             <param name="price">New price</param>
-            <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
             <param name="orderId">Order id of the order to edit</param>
             <param name="origClientOrderId">Client order id of the order to edit</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -14920,7 +14755,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.Fee">
             <summary>
-            The fee payed
+            The fee paid
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.FeeAsset">
@@ -14955,7 +14790,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.QuoteQuantityFilled">
             <summary>
-            Cummulative quantity
+            Cumulative quantity
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.QuoteQuantity">
@@ -15010,7 +14845,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.LastPreventedQuantity">
             <summary>
-            Last prevented quantiy
+            Last prevented quantity
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.SelfTradePreventionMode">
@@ -15848,14 +15683,14 @@
             Available quantity unit
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.RedeemedAmout">
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.RedeemedAmount">
             <summary>
-            Redeemed amout
+            Redeemed amount
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.RedeemedAmoutAsset">
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.RedeemedAmountAsset">
             <summary>
-            Redeemed amout asset
+            Redeemed amount asset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.AssetValueInUsd">
@@ -16499,26 +16334,6 @@
             Authorizes FIX data reading
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings">
-            <summary>
-            User auto conversion settings
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings.ConvertEnabled">
-            <summary>
-            Is auto convert enabled
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings.Assets">
-            <summary>
-            Assets
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceAutoConversionSettings.ExchangeRates">
-            <summary>
-            Exchange rates
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAveragePrice">
             <summary>
             Current average price details for a symbol.
@@ -16592,21 +16407,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBookPrice.Timestamp">
             <summary>
             Timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceBusdConvertResult">
-            <summary>
-            Convert result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdConvertResult.TransactionId">
-            <summary>
-            Transaction id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdConvertResult.Status">
-            <summary>
-            Status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceBusdHistory">
@@ -17129,67 +16929,67 @@
             BNB result quantity
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceElligableDusts">
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceEligibleDusts">
             <summary>
             Asset dusts that can be converted to BNB
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDusts.TotalTransferBTC">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDusts.TotalTransferBTC">
             <summary>
             Total BTC value
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDusts.TotalTransferBNB">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDusts.TotalTransferBNB">
             <summary>
             Total BNB value
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDusts.FeePercentage">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDusts.FeePercentage">
             <summary>
             Commission fee
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDusts.Details">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDusts.Details">
             <summary>
             Assets
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.BinanceElligableDust">
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceEligibleDust">
             <summary>
             Asset which can be converted
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.Asset">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.Asset">
             <summary>
             Asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.AssetFullName">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.AssetFullName">
             <summary>
             Full name of the asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.QuantityFree">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.QuantityFree">
             <summary>
             Amount free
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.ToBTC">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.ToBTC">
             <summary>
             BTC value
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.ToBNB">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.ToBNB">
             <summary>
             BNB value without fee
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.ToBNBOffExchange">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.ToBNBOffExchange">
             <summary>
             BNB value with fee
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.BinanceElligableDust.Fee">
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDust.Fee">
             <summary>
             Fee
             </summary>
@@ -17501,7 +17301,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.ApiAgentCode">
             <summary>
-            Api Agen tCode
+            Api Agent Code
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.RebateWorking">
@@ -18212,7 +18012,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRebate.UpdateTime">
             <summary>
-            Last udpate time
+            Last update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceRecentTrade">
@@ -18500,7 +18300,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.AllowTrailingStop">
             <summary>
-            Trailling stop orders are allowed
+            Trailing stop orders are allowed
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IsMarginTradingAllowed">
@@ -19180,12 +18980,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTransfer.Asset">
             <summary>
-            The asset which was transfered
+            The asset which was transferred
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTransfer.Quantity">
             <summary>
-            Quantity transfered
+            Quantity transferred
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTransfer.Type">
@@ -20900,71 +20700,6 @@
             Status
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord">
-            <summary>
-            Result of a convert transfer operation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.TransferId">
-            <summary>
-            Transfer id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.Status">
-            <summary>
-            Status of the transfer (definitions currently unknown)
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.Time">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.Type">
-            <summary>
-            Type
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.DeductedAsset">
-            <summary>
-            Deducted asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.DeductedQuantity">
-            <summary>
-            Deducted quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.TargetAsset">
-            <summary>
-            Target asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.TargetQuantity">
-            <summary>
-            Target quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferRecord.AccountType">
-            <summary>
-            Account type
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult">
-            <summary>
-            Result of a convert transfer operation
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult.TransferId">
-            <summary>
-            Transfer id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.ConvertTransfer.BinanceConvertTransferResult.Status">
-            <summary>
-            Status of the transfer (definitions currently unknown)
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Convert.BinanceConvertAssetPair">
             <summary>
             Convert Pairs
@@ -21248,46 +20983,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginSymbol.DelistTime">
             <summary>
             Time at which the symbol gets delisted
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer">
-            <summary>
-            Isolated margin transfer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.Quantity">
-            <summary>
-            Quantity of the transfer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.Asset">
-            <summary>
-            Transfer asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.Status">
-            <summary>
-            Status of the transfer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.Timestamp">
-            <summary>
-            Timestamp of the transfer
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.TransactionId">
-            <summary>
-            Transaction id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.From">
-            <summary>
-            From
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginTransfer.To">
-            <summary>
-            To
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.IsolatedMargin.CreateIsolatedMarginAccountResult">
@@ -21630,7 +21325,7 @@
             Collateral asset info
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanCollateralAsset.ColleteralAsset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanCollateralAsset.CollateralAsset">
             <summary>
             Collateral asset
             </summary>
@@ -22470,7 +22165,7 @@
             Minimal quantity which can be borrowed
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAsset.MinimalRepayQuanitty">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAsset.MinimalRepayQuantity">
             <summary>
             Minimal quantity which can be repaid
             </summary>
@@ -22575,9 +22270,9 @@
             Total service charge
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer.TotalTransfered">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer.TotalTransferred">
             <summary>
-            Total transfered
+            Total transferred
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransfer.TransferResults">
@@ -22585,39 +22280,39 @@
             Transfer results
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult">
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult">
             <summary>
             Transfer results
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.Quantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult.Quantity">
             <summary>
             Quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.FromAsset">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult.FromAsset">
             <summary>
             Source asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.OperateTime">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult.OperateTime">
             <summary>
             Timestamp
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.ServiceChargeQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult.ServiceChargeQuantity">
             <summary>
             Service charge quantity
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.TransactionId">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult.TransactionId">
             <summary>
             Transaction id
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMargingDustTransferResult.TransferedQuantity">
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDustTransferResult.TransferredQuantity">
             <summary>
-            Transfered quantity
+            Transferred quantity
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginLevel">
@@ -22897,7 +22592,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceTransferHistory.Quantity">
             <summary>
-            Quanity of the transfer
+            Quantity of the transfer
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceTransferHistory.Asset">
@@ -24347,7 +24042,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBethRateHistory.AnnualPercentageRate">
             <summary>
-            Anual percentage rate
+            Annual percentage rate
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBethRateHistory.Timestamp">
@@ -25440,21 +25135,6 @@
             Transaction Id
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferResult">
-            <summary>
-            Sub account transfer result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferResult.Success">
-            <summary>
-            Whether the transfer was successful
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferResult.TransactionId">
-            <summary>
-            The transaction id of the transfer
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount">
             <summary>
             Sub account historic transfer
@@ -25632,7 +25312,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.ExecutedAmount">
             <summary>
-            exceuted amount
+            Executed amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrder.AveragePrice">
@@ -25752,7 +25432,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.ExecutedAmount">
             <summary>
-            Exceuted amount
+            Executed amount
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.FeeAmount">
@@ -25827,7 +25507,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountAsset.MaintMargin">
             <summary>
-            Maint Margin
+            Maintenance Margin
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountAsset.MarginBalance">
@@ -26052,7 +25732,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfo.TotalMaintMargin">
             <summary>
-            Total maint margin
+            Total maintenance margin
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountInfo.TotalMarginBalance">
@@ -27434,7 +27114,7 @@
             Quantity that has been filled
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.CummulativeQuantity">
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder.CumulativeQuantity">
             <summary>
             Cumulative quantity
             </summary>
@@ -27952,7 +27632,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbolBracket.NotionalCoef">
             <summary>
-            //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted 
+            user symbol bracket multiplier, only appears when user's symbol bracket is adjusted 
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesSymbolBracket.Brackets">
@@ -28239,7 +27919,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoBase.MaintMargin">
             <summary>
-            Maint margin
+            Maintenance margin
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoBase.PositionInitialMargin">
@@ -29427,7 +29107,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.Fee">
             <summary>
-            The fee payed
+            The fee paid
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.FeeAsset">
@@ -29698,7 +29378,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceGridInfo.StrategyStatus">
             <summary>
-            Stategy status
+            Strategy status
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceGridInfo.Symbol">
@@ -29768,7 +29448,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyInfo.StrategyStatus">
             <summary>
-            Stategy status
+            Strategy status
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyInfo.Symbol">
@@ -29798,7 +29478,7 @@
             * It does not impact the amount of fees a user pays in any way<br />
             * It does not impact functionality. The reference is added just before sending the request and removed again during data deserialization<br />
             * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
-            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
+            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's advised to toggle when there are no open orders
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Options.BinanceOrderBookOptions">
@@ -29873,7 +29553,7 @@
             * It does not impact the amount of fees a user pays in any way<br />
             * It does not impact functionality. The reference is added just before sending the request and removed again during data deserialization<br />
             * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
-            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
+            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's advised to toggle when there are no open orders
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceRestOptions.SpotOptions">
@@ -29928,7 +29608,7 @@
             * It does not impact the amount of fees a user pays in any way<br />
             * It does not impact functionality. The reference is added just before sending the request and removed again during data deserialization<br />
             * It does respect client order id field limitations. For example if the user provided client order id parameter is too long to fit the reference it will not be added<br />
-            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's adviced to toggle when there are no open orders
+            * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's advised to toggle when there are no open orders
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Options.BinanceSocketOptions.SpotOptions">

@@ -2,9 +2,6 @@
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Models.Futures;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {

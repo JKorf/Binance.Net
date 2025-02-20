@@ -1,6 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.AlgoOrders
 {

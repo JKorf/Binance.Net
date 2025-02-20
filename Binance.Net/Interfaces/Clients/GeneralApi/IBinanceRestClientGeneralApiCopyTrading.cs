@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects.Internal;
-using Binance.Net.Objects.Models.Spot.CopyTrading;
+﻿using Binance.Net.Objects.Models.Spot.CopyTrading;
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {

@@ -1,7 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
-
-namespace Binance.Net.Objects.Models.Futures
+﻿namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// User's position mode

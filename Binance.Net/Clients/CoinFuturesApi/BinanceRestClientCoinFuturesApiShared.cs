@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Enums;
 using CryptoExchange.Net.SharedApis;
-using System.Linq.Expressions;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {

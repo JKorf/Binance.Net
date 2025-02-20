@@ -1,7 +1,5 @@
 ﻿using Binance.Net.Enums;
-using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.AutoInvest;
-using Binance.Net.Objects.Models.Spot.Loans;
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {

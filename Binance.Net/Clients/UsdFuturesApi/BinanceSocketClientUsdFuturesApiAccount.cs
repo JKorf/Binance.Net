@@ -1,14 +1,10 @@
-﻿using Binance.Net.Clients.SpotApi;
-using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+﻿using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net.Objects.Sockets;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {

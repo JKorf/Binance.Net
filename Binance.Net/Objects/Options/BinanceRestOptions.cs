@@ -1,5 +1,4 @@
-﻿using Binance.Net.Clients;
-using CryptoExchange.Net.Objects.Options;
+﻿using CryptoExchange.Net.Objects.Options;
 
 namespace Binance.Net.Objects.Options
 {

@@ -1,5 +1,4 @@
-﻿using Binance.Net.Interfaces.Clients.SpotApi;
-using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+﻿using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 

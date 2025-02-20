@@ -1,7 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using System.Text.Json.Serialization;
+﻿using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Models.Spot.AutoInvest
+﻿namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
     /// <summary>
     /// Trade result

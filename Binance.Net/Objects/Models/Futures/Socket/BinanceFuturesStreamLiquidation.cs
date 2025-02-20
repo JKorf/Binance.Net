@@ -1,4 +1,3 @@
-using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 

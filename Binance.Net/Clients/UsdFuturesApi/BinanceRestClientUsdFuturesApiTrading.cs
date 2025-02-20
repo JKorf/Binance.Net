@@ -1,10 +1,8 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Enums;
+﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using CryptoExchange.Net.CommonObjects;
-using System.Drawing;
 using System.Text.Json;
 
 namespace Binance.Net.Clients.UsdFuturesApi

@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Objects.Internal;
-using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 
