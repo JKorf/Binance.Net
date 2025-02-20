@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceTransfer
     {
         /// <summary>
-        /// The asset which was transfered
+        /// The asset which was transferred
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Quantity transfered
+        /// Quantity transferred
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }

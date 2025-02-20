@@ -50,7 +50,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Last udpate time
+        /// Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updateTime")]

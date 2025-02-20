@@ -74,7 +74,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="orderId">Order id to repay</param>
         /// <param name="quantity">Quantity to repay</param>
         /// <param name="repayWithBorrowedAsset">True to repay with the borrowed asset, false to repay with collateral asset</param>
-        /// <param name="collateralReturn">Return extra colalteral to spot account</param>
+        /// <param name="collateralReturn">Return extra collateral to spot account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -102,11 +102,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="quantity">Adjustment quantity</param>
-        /// <param name="addOrRmove">True for add, false to reduce</param>
+        /// <param name="addOrRemove">True for add, false to reduce</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceCryptoLoanLtvAdjust>> AdjustLTVAsync(long orderId, decimal quantity, bool addOrRmove, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceCryptoLoanLtvAdjust>> AdjustLTVAsync(long orderId, decimal quantity, bool addOrRemove, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get LTV adjustment history

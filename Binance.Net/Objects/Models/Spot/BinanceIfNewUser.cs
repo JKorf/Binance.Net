@@ -6,7 +6,7 @@
     public record BinanceIfNewUser
     {
         /// <summary>
-        /// Api Agen tCode
+        /// Api Agent Code
         /// </summary>
         [JsonPropertyName("apiAgentCode")]
         public string ApiAgentCode { get; set; } = string.Empty;

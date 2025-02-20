@@ -11,7 +11,7 @@
         [JsonPropertyName("exchangeRate")]
         public decimal ExchangeRate { get; set; }
         /// <summary>
-        /// Anual percentage rate
+        /// Annual percentage rate
         /// </summary>
         [JsonPropertyName("annualPercentageRate")]
         public decimal AnnualPercentageRate { get; set; }

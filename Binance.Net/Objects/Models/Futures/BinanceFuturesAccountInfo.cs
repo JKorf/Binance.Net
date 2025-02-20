@@ -66,7 +66,7 @@
         public decimal TotalInitialMargin { get; set; }
 
         /// <summary>
-        /// Total maint margin
+        /// Total maintenance margin
         /// </summary>
         [JsonPropertyName("totalMaintMargin")]
         public decimal TotalMaintMargin { get; set; }

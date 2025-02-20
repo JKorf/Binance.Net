@@ -148,15 +148,15 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("availableAmountUnit")]
         public string? AvailableQuantityUnit { get; set; }
         /// <summary>
-        /// Redeemed amout
+        /// Redeemed amount
         /// </summary>
         [JsonPropertyName("redeemedAmout")]
-        public decimal? RedeemedAmout { get; set; }
+        public decimal? RedeemedAmount { get; set; }
         /// <summary>
-        /// Redeemed amout asset
+        /// Redeemed amount asset
         /// </summary>
         [JsonPropertyName("redeemedAmoutUnit")]
-        public string? RedeemedAmoutAsset { get; set; }
+        public string? RedeemedAmountAsset { get; set; }
         /// <summary>
         /// Asset value in USD
         /// </summary>

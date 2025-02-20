@@ -166,7 +166,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="enabled">Enabled or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Succes</returns>
+        /// <returns>Success</returns>
         Task<WebCallResult<BinanceResult>> SetMultiAssetsModeAsync(bool enabled, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>

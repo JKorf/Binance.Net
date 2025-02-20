@@ -305,7 +305,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<IEnumerable<IBinanceKline>>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get asset indexex for Multi-Assets mode for all symbols
+        /// Get asset indexes for Multi-Assets mode for all symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>

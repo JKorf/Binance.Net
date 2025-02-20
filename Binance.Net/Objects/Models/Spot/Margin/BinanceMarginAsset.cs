@@ -34,7 +34,7 @@
         /// Minimal quantity which can be repaid
         /// </summary>
         [JsonPropertyName("userMinRepay")]
-        public decimal MinimalRepayQuanitty { get; set; }
+        public decimal MinimalRepayQuantity { get; set; }
         /// <summary>
         /// Time at which the asset gets delisted
         /// </summary>

@@ -54,9 +54,14 @@
             Coin futures Socket address
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceEnvironment.CoinFuturesSocketApiAddress">
+            <summary>
+            Coin futures Socket address for the request API
+            </summary>
+        </member>
         <member name="M:Binance.Net.BinanceEnvironment.#ctor">
             <summary>
-            ctor for DI, use <see cref="M:Binance.Net.BinanceEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)"/> for creating a custom environment
+            ctor for DI, use <see cref="M:Binance.Net.BinanceEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)"/> for creating a custom environment
             </summary>
         </member>
         <member name="M:Binance.Net.BinanceEnvironment.GetEnvironmentByName(System.String)">
@@ -79,7 +84,7 @@
             Binance.us environment
             </summary>
         </member>
-        <member name="M:Binance.Net.BinanceEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:Binance.Net.BinanceEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Create a custom environment
             </summary>
@@ -534,6 +539,18 @@
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi" />
         </member>
+        <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.ClientOptions">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.Account">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.Trading">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -543,118 +560,139 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToIndexPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToIndexPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToIndexKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToIndexKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAllBookTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToLiquidationUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToLiquidationUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToAllLiquidationUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(System.String,System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiAccount.GetBalancesAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllBookTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToLiquidationUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToLiquidationUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllLiquidationUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToPartialOrderBookUpdatesAsync(System.String,System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToPartialOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiTrading.EditOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiTrading.GetPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi">
@@ -5976,7 +6014,7 @@
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#old-trades-lookup-market_data" /></para>
             </summary>
             <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
-            <param name="limit">Result limit</param>
+            <param name="limit">Max amount of results, max 500</param>
             <param name="fromId">From which trade id on results should be retrieved</param>
             <param name="ct">Cancellation token</param>
             <returns>List of recent trades</returns>
@@ -6397,254 +6435,47 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SharedClient">
             <summary>
-            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
+        <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.Account">
             <summary>
-            Subscribes to the aggregated trades update stream for the provided symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>
+            Account streams and queries
             </summary>
-            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
+        <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.ExchangeData">
             <summary>
-            Subscribes to the aggregated trades update stream for the provided symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>
+            Exchange data streams and queries
             </summary>
-            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+        <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.Trading">
             <summary>
-            Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+            Trading data and queries
             </summary>
-            <param name="symbol">Symbol to subscribe, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+        <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiAccount">
             <summary>
-            Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+            Binance Coin futures account websocket API
             </summary>
-            <param name="symbols">Symbols to subscribe, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiAccount.GetBalancesAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
+            Gets account balances
+            <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api" /></para>
             </summary>
-            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-            <param name="interval">The interval of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The account information</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
-            Subscribes to the candlestick update stream for the provided symbol and intervals
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
+            Get account information, including position and balances
+            <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information" /></para>
             </summary>
-            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-            <param name="intervals">The intervals of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the candlestick update stream for the provided symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
-            <param name="interval">The interval of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the candlestick update stream for the provided symbols and intervals
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
-            <param name="intervals">The intervals of the candlesticks</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to mini ticker updates stream for a specific symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-mini-ticker-stream" /></para>
-            </summary>
-            <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to mini ticker updates stream for a list of symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-mini-ticker-stream" /></para>
-            </summary>
-            <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to mini ticker updates stream for all symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-mini-tickers-stream" /></para>
-            </summary>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to ticker updates stream for a specific symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-ticker-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to ticker updates stream for a specific symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-ticker-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to ticker updates stream for all symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-tickers-streams" /></para>
-            </summary>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAllBookTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to all book ticker update streams
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-book-tickers-stream" /></para>
-            </summary>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the book ticker update stream for the provided symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the book ticker update stream for the provided symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToLiquidationUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to specific symbol forced liquidations stream
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToLiquidationUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to list of symbol forced liquidations stream
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAllLiquidationUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to all forced liquidations stream
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-liquidation-order-streams" /></para>
-            </summary>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(System.String,System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the depth updates for the provided symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#partial-book-depth-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol to subscribe on, for example `BTCUSD_PERP`</param>
-            <param name="levels">The amount of entries to be returned in the update</param>
-            <param name="updateInterval">Update interval in milliseconds</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the depth updates for the provided symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#partial-book-depth-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols to subscribe on, for example `BTCUSD_PERP`</param>
-            <param name="levels">The amount of entries to be returned in the update of each symbol</param>
-            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the order book updates for the provided symbol
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-            <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the depth update stream for the provided symbols
-            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
-            <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-data-streams" /></para>
@@ -6660,7 +6491,256 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToIndexPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
+        <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData">
+            <summary>
+            Binance Coin futures exchange data websocket API
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the aggregated trades update stream for the provided symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the aggregated trades update stream for the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#aggregate-trade-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+            </summary>
+            <param name="symbol">Symbol to subscribe, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to individual trade update. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+            </summary>
+            <param name="symbols">Symbols to subscribe, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
+            <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbol and intervals
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
+            <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
+            <param name="interval">The interval of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the candlestick update stream for the provided symbols and intervals
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#kline-candlestick-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
+            <param name="intervals">The intervals of the candlesticks</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to mini ticker updates stream for a specific symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-mini-ticker-stream" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to mini ticker updates stream for a list of symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-mini-ticker-stream" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to mini ticker updates stream for all symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-mini-tickers-stream" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-ticker-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to ticker updates stream for a specific symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-ticker-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to ticker updates stream for all symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-tickers-streams" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllBookTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to all book ticker update streams
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-book-tickers-stream" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the book ticker update stream for the provided symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the book ticker update stream for the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#individual-symbol-book-ticker-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToLiquidationUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to specific symbol forced liquidations stream
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToLiquidationUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to list of symbol forced liquidations stream
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#liquidation-order-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllLiquidationUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to all forced liquidations stream
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-liquidation-order-streams" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToPartialOrderBookUpdatesAsync(System.String,System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the depth updates for the provided symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#partial-book-depth-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol to subscribe on, for example `BTCUSD_PERP`</param>
+            <param name="levels">The amount of entries to be returned in the update</param>
+            <param name="updateInterval">Update interval in milliseconds</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToPartialOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the depth updates for the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#partial-book-depth-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols to subscribe on, for example `BTCUSD_PERP`</param>
+            <param name="levels">The amount of entries to be returned in the update of each symbol</param>
+            <param name="updateInterval">Update interval in milliseconds, either 100 or 500. Defaults to 250</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the order book updates for the provided symbol
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceFuturesEventOrderBook}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the depth update stream for the provided symbols
+            <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#diff-book-depth-streams" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
+            <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the Index price update stream for a single pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-stream" /></para>
@@ -6671,7 +6751,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToIndexPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the Index price update stream for a list of pairs
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-price-stream" /></para>
@@ -6682,7 +6762,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the Mark price update stream for a single symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream" /></para>
@@ -6693,7 +6773,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
              <summary>
             Subscribe to the Mark price update stream for all symbols
              <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair" /></para>
@@ -6703,7 +6783,7 @@
              <param name="ct">Cancellation token for closing this subscription</param>
              <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the Mark price update stream for a list of symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-stream" /></para>
@@ -6714,7 +6794,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the continuous contract candlestick update stream for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-streams" /></para>
@@ -6726,7 +6806,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToContinuousContractKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the continuous contract candlestick update stream for the provided pairs
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#continuous-contract-kline-candlestick-streams" /></para>
@@ -6738,7 +6818,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToIndexKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the index candlestick update stream for the provided pair
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-kline-candlestick-streams" /></para>
@@ -6749,7 +6829,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToIndexKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToIndexKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the index candlestick update stream for the provided pairs
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#index-kline-candlestick-streams" /></para>
@@ -6760,7 +6840,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the mark price candlestick update stream for the provided symbol
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-streams" /></para>
@@ -6771,7 +6851,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToMarkPriceKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMarkPriceKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamIndexKlineData}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the mark price candlestick update stream for the provided symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-kline-candlestick-streams" /></para>
@@ -6782,7 +6862,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to contract/symbol updates
             </summary>
@@ -6794,6 +6874,86 @@
             <summary>
             Shared interface for COIN-M Futures socket API usage
             </summary>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading">
+            <summary>
+            Binance Coin futures trading websocket API
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place a new order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="type">The order type</param>
+            <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The quantity of the base symbol</param>
+            <param name="positionSide">The position side</param>
+            <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
+            <param name="price">The price to use</param>
+            <param name="newClientOrderId">Unique id for order</param>
+            <param name="stopPrice">Used for stop orders</param>
+            <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
+            <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+            <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+            <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+            <param name="orderResponseType">The response type. Default Acknowledge</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading.EditOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Edit an existing order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="side">Order side</param>
+            <param name="quantity">New quantity</param>
+            <param name="price">New price</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
+            <param name="orderId">Order id of the order to edit</param>
+            <param name="origClientOrderId">Client order id of the order to edit</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancels a pending order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Id's for canceled order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+            <param name="orderId">The order id of the order</param>
+            <param name="origClientOrderId">The client order id of the order</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>The specific order</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading.GetPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get position information
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Info-V2" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi">
             <summary>
@@ -12014,8 +12174,8 @@
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#old-trades-lookup-market_data" /></para>
             </summary>
             <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
-            <param name="limit">The max amount of results</param>
-            <param name="fromId">Retrun trades after this trade id</param>
+            <param name="limit">The max amount of results, max 500</param>
+            <param name="fromId">Return trades after this trade id</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -12547,7 +12707,7 @@
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.SharedClient">
             <summary>
-            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.Account">
@@ -13729,6 +13889,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceApiAddresses.CoinFuturesSocketClientAddress">
+            <summary>
+            The address used by the BinanceSocketClient for the Coin futures streams
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceApiAddresses.CoinFuturesSocketApiClientAddress">
             <summary>
             The address used by the BinanceSocketClient for the Coin futures API
             </summary>

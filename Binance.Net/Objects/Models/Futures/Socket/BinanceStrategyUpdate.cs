@@ -34,7 +34,7 @@
         [JsonPropertyName("st")]
         public string StrategyType { get; set; } = string.Empty;
         /// <summary>
-        /// Stategy status
+        /// Strategy status
         /// </summary>
         [JsonPropertyName("ss")]
         public string StrategyStatus { get; set; } = string.Empty;

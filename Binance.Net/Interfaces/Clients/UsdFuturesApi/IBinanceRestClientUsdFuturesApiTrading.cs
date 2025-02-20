@@ -5,7 +5,7 @@ using Binance.Net.Objects.Models.Futures.AlgoOrders;
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
-    /// Binance USD-M futures trading endpoints, placing and mananging orders.
+    /// Binance USD-M futures trading endpoints, placing and managing orders.
     /// </summary>
     public interface IBinanceRestClientUsdFuturesApiTrading
     {
@@ -29,7 +29,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The response type. Default Acknowledge</param>
         /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-        /// <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -118,7 +118,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesCountDownResult>> CancelAllOrdersAfterTimeoutAsync(string symbol, TimeSpan countDownTime, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Cancels muliple orders
+        /// Cancels multiple orders
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#cancel-multiple-orders-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
@@ -137,7 +137,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="side">Order side</param>
         /// <param name="quantity">New quantity</param>
         /// <param name="price">New price</param>
-        /// <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
         /// <param name="orderId">Order id of the order to edit</param>
         /// <param name="origClientOrderId">Client order id of the order to edit</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -318,7 +318,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="side">Filter by side</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Page</param>
         /// <param name="limit">Max results</param>

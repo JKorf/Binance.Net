@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         [JsonPropertyName("executedQty")]
         public decimal ExecutedQuantity { get; set; }
         /// <summary>
-        /// Exceuted amount
+        /// Executed amount
         /// </summary>
         [JsonPropertyName("executedAmt")]
         public decimal ExecutedAmount { get; set; }

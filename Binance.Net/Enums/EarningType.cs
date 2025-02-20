@@ -43,10 +43,10 @@ namespace Binance.Net.Enums
         [Map("7")]
         PoolSavings,
         /// <summary>
-        /// Transfered
+        /// Transferred
         /// </summary>
         [Map("8")]
-        Transfered,
+        Transferred,
         /// <summary>
         /// Income transfer
         /// </summary>

@@ -10,7 +10,7 @@ using Binance.Net.Objects.Models.Spot.Margin;
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
-    /// Binance Spot trading endpoints, placing and mananging orders.
+    /// Binance Spot trading endpoints, placing and managing orders.
     /// </summary>
     public interface IBinanceRestClientSpotApiTrading
     {
@@ -905,7 +905,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="side">Filter by side</param>
-        /// <param name="startTime">Fitler by start time</param>
+        /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Page</param>
         /// <param name="limit">Max results</param>

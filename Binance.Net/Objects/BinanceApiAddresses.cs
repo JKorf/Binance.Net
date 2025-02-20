@@ -39,9 +39,13 @@
         /// </summary>
         public string? CoinFuturesRestClientAddress { get; set; }
         /// <summary>
-        /// The address used by the BinanceSocketClient for the Coin futures API
+        /// The address used by the BinanceSocketClient for the Coin futures streams
         /// </summary>
         public string? CoinFuturesSocketClientAddress { get; set; }
+        /// <summary>
+        /// The address used by the BinanceSocketClient for the Coin futures API
+        /// </summary>
+        public string? CoinFuturesSocketApiClientAddress { get; set; }
 
         /// <summary>
         /// The default addresses to connect to the binance.com API
@@ -57,6 +61,7 @@
             UsdFuturesSocketApiClientAddress = "wss://ws-fapi.binance.com/",
             CoinFuturesRestClientAddress = "https://dapi.binance.com",
             CoinFuturesSocketClientAddress = "wss://dstream.binance.com/",
+            CoinFuturesSocketApiClientAddress = "wss://ws-dapi.binance.com/",
         };
 
         /// <summary>
@@ -73,6 +78,7 @@
             UsdFuturesSocketApiClientAddress = "wss://testnet.binancefuture.com",
             CoinFuturesRestClientAddress = "https://testnet.binancefuture.com",
             CoinFuturesSocketClientAddress = "wss://dstream.binancefuture.com",
+            CoinFuturesSocketApiClientAddress = "wss://testnet.binancefuture.com",
         };
 
         /// <summary>

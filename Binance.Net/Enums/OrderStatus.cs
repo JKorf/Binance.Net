@@ -3,7 +3,7 @@
 namespace Binance.Net.Enums
 {
     /// <summary>
-    /// The status of an orderн
+    /// The status of an order
     /// </summary>
     public enum OrderStatus
     {

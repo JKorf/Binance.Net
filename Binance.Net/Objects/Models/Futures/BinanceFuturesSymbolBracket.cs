@@ -12,7 +12,7 @@
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// //user symbol bracket multiplier, only appears when user's symbol bracket is adjusted 
+        /// user symbol bracket multiplier, only appears when user's symbol bracket is adjusted 
         /// </summary>
         [JsonPropertyName("notionalCoef")]
         public decimal? NotionalCoef { get; set; }

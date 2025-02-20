@@ -60,7 +60,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("isSpotTradingAllowed")]
         public bool IsSpotTradingAllowed { get; set; }
         /// <summary>
-        /// Trailling stop orders are allowed
+        /// Trailing stop orders are allowed
         /// </summary>
         [JsonPropertyName("allowTrailingStop")]
         public bool AllowTrailingStop { get; set; }

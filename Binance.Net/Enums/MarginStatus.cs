@@ -18,7 +18,7 @@ namespace Binance.Net.Enums
         [Map("COMPLETED")]
         Completed,
         /// <summary>
-        /// Successfully loaned/repayed
+        /// Successfully loaned/repaid
         /// </summary>
         [Map("CONFIRMED")]
         Confirmed,

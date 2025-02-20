@@ -4,7 +4,7 @@ using Binance.Net.Objects.Models.Futures;
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     /// <summary>
-    /// Binance COIN-M futures trading endpoints, placing and mananging orders.
+    /// Binance COIN-M futures trading endpoints, placing and managing orders.
     /// </summary>
     public interface IBinanceRestClientCoinFuturesApiTrading
     {
@@ -28,7 +28,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The response type. Default Acknowledge</param>
         /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-        /// <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -115,7 +115,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceFuturesCountDownResult>> CancelAllOrdersAfterTimeoutAsync(string symbol, TimeSpan countDownTime, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Cancels muliple orders
+        /// Cancels multiple orders
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#cancel-multiple-orders-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>

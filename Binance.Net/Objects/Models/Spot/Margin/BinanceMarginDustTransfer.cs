@@ -11,21 +11,21 @@
         [JsonPropertyName("totalServiceCharge")]
         public decimal TotalServiceCharge { get; set; }
         /// <summary>
-        /// Total transfered
+        /// Total transferred
         /// </summary>
         [JsonPropertyName("totalTransfered")]
-        public decimal TotalTransfered { get; set; }
+        public decimal TotalTransferred { get; set; }
         /// <summary>
         /// Transfer results
         /// </summary>
         [JsonPropertyName("transferResult")]
-        public IEnumerable<BinanceMargingDustTransferResult> TransferResults { get; set; } = Array.Empty<BinanceMargingDustTransferResult>();
+        public IEnumerable<BinanceMarginDustTransferResult> TransferResults { get; set; } = Array.Empty<BinanceMarginDustTransferResult>();
     }
 
     /// <summary>
     /// Transfer results
     /// </summary>
-    public record BinanceMargingDustTransferResult
+    public record BinanceMarginDustTransferResult
     {
         /// <summary>
         /// Quantity
@@ -54,9 +54,9 @@
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Transfered quantity
+        /// Transferred quantity
         /// </summary>
         [JsonPropertyName("transferedAmount")]
-        public decimal TransferedQuantity { get; set; }
+        public decimal TransferredQuantity { get; set; }
     }
 }

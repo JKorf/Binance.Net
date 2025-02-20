@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     public record BinanceTransferHistory
     {
         /// <summary>
-        /// Quanity of the transfer
+        /// Quantity of the transfer
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }

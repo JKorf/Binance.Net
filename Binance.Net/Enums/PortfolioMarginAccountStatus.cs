@@ -38,7 +38,7 @@ namespace Binance.Net.Enums
         [Map("FORCE_LIQUIDATION")]
         ForceLiquidation,
         /// <summary>
-        /// Bankruped
+        /// Bankrupted
         /// </summary>
         [Map("BANKRUPTED")]
         Bankrupted

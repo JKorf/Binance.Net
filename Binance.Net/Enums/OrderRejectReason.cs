@@ -38,7 +38,7 @@ namespace Binance.Net.Enums
         [Map("DUPLICATE_ORDER")]
         DuplicateOrder,
         /// <summary>
-        /// Unkown account
+        /// Unknown account
         /// </summary>
         [Map("UNKNOWN_ACCOUNT")]
         UnknownAccount,

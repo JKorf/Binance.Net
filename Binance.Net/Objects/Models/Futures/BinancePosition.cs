@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Models.Futures
         public decimal InitialMargin { get; set; }
 
         /// <summary>
-        /// Maint margin
+        /// Maintenance margin
         /// </summary>
         [JsonPropertyName("maintMargin")]
         public decimal MaintMargin { get; set; }

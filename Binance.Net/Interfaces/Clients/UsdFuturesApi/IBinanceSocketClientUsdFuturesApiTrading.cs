@@ -29,7 +29,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
         /// <param name="orderResponseType">The response type. Default Acknowledge</param>
         /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-        /// <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -64,7 +64,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="side">Order side</param>
         /// <param name="quantity">New quantity</param>
         /// <param name="price">New price</param>
-        /// <param name="priceMatch">Only avaliable for Limit/Stop/TakeProfit order</param>
+        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
         /// <param name="orderId">Order id of the order to edit</param>
         /// <param name="origClientOrderId">Client order id of the order to edit</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

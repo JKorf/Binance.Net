@@ -9,7 +9,7 @@
         /// Collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
-        public string ColleteralAsset { get; set; } = string.Empty;
+        public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
         /// Initial ltv
         /// </summary>

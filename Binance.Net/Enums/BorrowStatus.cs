@@ -16,7 +16,7 @@ namespace Binance.Net.Enums
         /// Overdue
         /// </summary>
         [Map("Overdue")]
-        Overdeu,
+        Overdue,
         /// <summary>
         /// Currently liquidating
         /// </summary>

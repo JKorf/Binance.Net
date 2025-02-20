@@ -28,7 +28,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         public IFuturesClient CommonFuturesClient { get; }
 
         /// <summary>
-        /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
         /// </summary>
         public IBinanceRestClientCoinFuturesApiShared SharedClient { get; }
 

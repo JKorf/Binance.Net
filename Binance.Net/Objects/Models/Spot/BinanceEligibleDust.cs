@@ -3,7 +3,7 @@
     /// <summary>
     /// Asset dusts that can be converted to BNB
     /// </summary>
-    public record BinanceElligableDusts
+    public record BinanceEligibleDusts
     {
         /// <summary>
         /// Total BTC value
@@ -24,13 +24,13 @@
         /// Assets
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<BinanceElligableDust> Details { get; set; } = Array.Empty<BinanceElligableDust>();
+        public IEnumerable<BinanceEligibleDust> Details { get; set; } = Array.Empty<BinanceEligibleDust>();
     }
 
     /// <summary>
     /// Asset which can be converted
     /// </summary>
-    public record BinanceElligableDust
+    public record BinanceEligibleDust
     {
         /// <summary>
         /// Asset
