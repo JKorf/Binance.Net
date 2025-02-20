@@ -53,6 +53,11 @@ namespace Binance.Net
         public string? CoinFuturesSocketAddress { get; }
 
         /// <summary>
+        /// Coin futures Socket address for the request API
+        /// </summary>
+        public string? CoinFuturesSocketApiAddress { get; }
+
+        /// <summary>
         /// ctor for DI, use <see cref="CreateCustom"/> for creating a custom environment
         /// </summary>
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -84,7 +89,8 @@ namespace Binance.Net
             string? usdFuturesSocketAddress,
             string? usdFuturesSocketApiAddress,
             string? coinFuturesRestAddress,
-            string? coinFuturesSocketAddress) :
+            string? coinFuturesSocketAddress,
+            string? coinFuturesSocketApiAddress) :
             base(name)
         {
             SpotRestAddress = spotRestAddress;
@@ -96,6 +102,7 @@ namespace Binance.Net
             UsdFuturesSocketApiAddress = usdFuturesSocketApiAddress;
             CoinFuturesRestAddress = coinFuturesRestAddress;
             CoinFuturesSocketAddress = coinFuturesSocketAddress;
+            CoinFuturesSocketApiAddress = coinFuturesSocketApiAddress;
         }
 
         /// <summary>
@@ -111,7 +118,8 @@ namespace Binance.Net
                                      BinanceApiAddresses.Default.UsdFuturesSocketClientAddress,
                                      BinanceApiAddresses.Default.UsdFuturesSocketApiClientAddress,
                                      BinanceApiAddresses.Default.CoinFuturesRestClientAddress,
-                                     BinanceApiAddresses.Default.CoinFuturesSocketClientAddress);
+                                     BinanceApiAddresses.Default.CoinFuturesSocketClientAddress,
+                                     BinanceApiAddresses.Default.CoinFuturesSocketApiClientAddress);
 
         /// <summary>
         /// Testnet environment
@@ -126,7 +134,8 @@ namespace Binance.Net
                                      BinanceApiAddresses.TestNet.UsdFuturesSocketClientAddress,
                                      BinanceApiAddresses.TestNet.UsdFuturesSocketApiClientAddress,
                                      BinanceApiAddresses.TestNet.CoinFuturesRestClientAddress,
-                                     BinanceApiAddresses.TestNet.CoinFuturesSocketClientAddress);
+                                     BinanceApiAddresses.TestNet.CoinFuturesSocketClientAddress,
+                                     BinanceApiAddresses.TestNet.CoinFuturesSocketApiClientAddress);
 
         /// <summary>
         /// Binance.us environment
@@ -136,6 +145,7 @@ namespace Binance.Net
                                      BinanceApiAddresses.Us.RestClientAddress,
                                      BinanceApiAddresses.Us.SocketClientStreamAddress,
                                      BinanceApiAddresses.Us.SocketClientApiAddress,
+                                     null,
                                      null,
                                      null,
                                      null,
@@ -156,7 +166,8 @@ namespace Binance.Net
                         string? usdFuturesSocketAddress,
                         string? usdFuturesSocketApiAddress,
                         string? coinFuturesRestAddress,
-                        string? coinFuturesSocketAddress)
-            => new BinanceEnvironment(name, spotRestAddress, spotSocketStreamsAddress, spotSocketApiAddress, blvtSocketAddress, usdFuturesRestAddress, usdFuturesSocketAddress, usdFuturesSocketApiAddress, coinFuturesRestAddress, coinFuturesSocketAddress);
+                        string? coinFuturesSocketAddress,
+                        string? coinFuturesSocketApiAddress)
+            => new BinanceEnvironment(name, spotRestAddress, spotSocketStreamsAddress, spotSocketApiAddress, blvtSocketAddress, usdFuturesRestAddress, usdFuturesSocketAddress, usdFuturesSocketApiAddress, coinFuturesRestAddress, coinFuturesSocketAddress, coinFuturesSocketApiAddress);
     }
 }

@@ -71,9 +71,9 @@ namespace Binance.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> subResult;
             if (_limit == null)
-                subResult = await _socketClient.CoinFuturesApi.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await _socketClient.CoinFuturesApi.ExchangeData.SubscribeToOrderBookUpdatesAsync(Symbol, _updateInterval, HandleUpdate).ConfigureAwait(false);
             else
-                subResult = await _socketClient.CoinFuturesApi.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
+                subResult = await _socketClient.CoinFuturesApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(Symbol, _limit.Value, _updateInterval, HandleUpdate).ConfigureAwait(false);
 
             if (!subResult)
                 return new CallResult<UpdateSubscription>(subResult.Error!);
