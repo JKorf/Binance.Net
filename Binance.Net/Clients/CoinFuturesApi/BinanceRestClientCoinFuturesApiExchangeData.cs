@@ -247,7 +247,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public async Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
             CancellationToken ct = default)
         {
-            limit?.ValidateIntBetween(nameof(limit), 1, 1000);
+            limit?.ValidateIntBetween(nameof(limit), 1, 500);
             var parameters = new ParameterCollection { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));

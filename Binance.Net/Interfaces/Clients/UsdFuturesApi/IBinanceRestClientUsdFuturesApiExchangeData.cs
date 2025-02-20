@@ -157,8 +157,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#old-trades-lookup-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
-        /// <param name="limit">The max amount of results</param>
-        /// <param name="fromId">Retrun trades after this trade id</param>
+        /// <param name="limit">The max amount of results, max 500</param>
+        /// <param name="fromId">Return trades after this trade id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<IBinanceRecentTrade>>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,

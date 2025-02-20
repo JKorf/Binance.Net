@@ -49,7 +49,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#old-trades-lookup-market_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
-        /// <param name="limit">Result limit</param>
+        /// <param name="limit">Max amount of results, max 500</param>
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
