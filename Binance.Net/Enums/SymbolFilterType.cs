@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Filter type
     /// </summary>
-    public enum SymbolFilterType
+    [JsonConverter(typeof(PocAOTEnumConverter<SymbolFilterType>))] public  enum SymbolFilterType
     {
         /// <summary>
         /// Unknown filter type

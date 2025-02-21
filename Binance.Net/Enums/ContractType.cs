@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of contract
     /// </summary>
-    public enum ContractType
+    [JsonConverter(typeof(PocAOTEnumConverter<ContractType>))] public  enum ContractType
     {
         /// <summary>
         /// Perpetual

@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Direction of a transfer
     /// </summary>
-    public enum TransferDirection
+    [JsonConverter(typeof(PocAOTEnumConverter<TransferDirection>))] public  enum TransferDirection
     {
         /// <summary>
         /// Roll-in

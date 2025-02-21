@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of Margin
     /// </summary>
-    public enum FuturesMarginType
+    [JsonConverter(typeof(PocAOTEnumConverter<FuturesMarginType>))] public  enum FuturesMarginType
     {
         /// <summary>
         /// Isolated margin

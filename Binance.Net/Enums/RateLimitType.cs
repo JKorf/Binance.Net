@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of rate limit
     /// </summary>
-    public enum RateLimitType
+    [JsonConverter(typeof(PocAOTEnumConverter<RateLimitType>))] public  enum RateLimitType
     {
         /// <summary>
         /// Request weight

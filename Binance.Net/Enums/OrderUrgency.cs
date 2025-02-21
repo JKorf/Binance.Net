@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Order urgency
     /// </summary>
-    public enum OrderUrgency
+    [JsonConverter(typeof(PocAOTEnumConverter<OrderUrgency>))] public  enum OrderUrgency
     {
         /// <summary>
         /// Low urgency

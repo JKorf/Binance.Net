@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Cancel replace mode
     /// </summary>
-    public enum CancelReplaceMode
+    [JsonConverter(typeof(PocAOTEnumConverter<CancelReplaceMode>))] public  enum CancelReplaceMode
     {
         /// <summary>
         /// If the cancel request fails, the new order placement will not be attempted.

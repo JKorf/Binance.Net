@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Status of a margin action
     /// </summary>
-    public enum MarginStatus
+    [JsonConverter(typeof(PocAOTEnumConverter<MarginStatus>))] public  enum MarginStatus
     {
         /// <summary>
         /// Pending to execution

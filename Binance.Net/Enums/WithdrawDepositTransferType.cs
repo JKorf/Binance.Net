@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Transfer type
     /// </summary>
-    public enum WithdrawDepositTransferType
+    [JsonConverter(typeof(PocAOTEnumConverter<WithdrawDepositTransferType>))] public  enum WithdrawDepositTransferType
     {
         /// <summary>
         /// Internal transfer
