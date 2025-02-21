@@ -293,9 +293,10 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Wallet Balances
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceWalletBalance>>> GetWalletBalancesAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceWalletBalance>>> GetWalletBalancesAsync(string quoteAsset = "BTC", int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddParameter("quoteAsset", quoteAsset);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/asset/wallet/balance", BinanceExchange.RateLimiter.SpotRestIp, 60, true);
