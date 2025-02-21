@@ -7,7 +7,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Futures account type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<FuturesAccountType>))] public  enum FuturesAccountType
+    [JsonConverter(typeof(EnumConverter<FuturesAccountType>))] public  enum FuturesAccountType
     {
         /// <summary>
         /// USDT Margined Futures

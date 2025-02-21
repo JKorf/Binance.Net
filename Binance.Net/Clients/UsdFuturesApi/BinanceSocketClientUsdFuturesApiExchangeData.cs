@@ -169,7 +169,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 .WithStreamId(data.Data.Stream)
                 .WithSymbol(data.Data.Data.Symbol)
                 .WithDataTimestamp(data.Data.Data.EventTime)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => (premiumIndex ? "p" + a.ToUpper(CultureInfo.InvariantCulture) : a.ToLower(CultureInfo.InvariantCulture)) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => (premiumIndex ? "p" + a.ToUpper(CultureInfo.InvariantCulture) : a.ToLower(CultureInfo.InvariantCulture)) + _klineStreamEndpoint + "_" + EnumConverter<KlineInterval>.GetString(i))).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -191,10 +191,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 .WithDataTimestamp(data.Data.Data.EventTime)));
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       "_" +
-                                      EnumConverter.GetString(contractType).ToLower() +
+                                      EnumConverter<ContractType>.GetString(contractType).ToLower() +
                                       _continuousContractKlineStreamEndpoint +
                                       "_" +
-                                      EnumConverter.GetString(interval)).ToArray();
+                                      EnumConverter<KlineInterval>.GetString(interval)).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, pairs, handler, ct).ConfigureAwait(false);
         }
 

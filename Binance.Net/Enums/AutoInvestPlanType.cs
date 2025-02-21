@@ -9,7 +9,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Plan type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<AutoInvestPlanType>))] public  enum AutoInvestPlanType
+    [JsonConverter(typeof(EnumConverter<AutoInvestPlanType>))] public  enum AutoInvestPlanType
     {
         /// <summary>
         /// Single

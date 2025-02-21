@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Side effect for a margin order
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SideEffectType>))]
+    [JsonConverter(typeof(EnumConverter<SideEffectType>))]
     public enum SideEffectType
     {
         /// <summary>

@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<ConvertOrderStatus>))]
+        [JsonConverter(typeof(EnumConverter<ConvertOrderStatus>))]
         [JsonPropertyName("orderStatus")]
         public ConvertOrderStatus Status { get; set; }
     }

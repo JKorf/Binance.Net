@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Status of the Binance system
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SystemStatus>))] public  enum SystemStatus
+    [JsonConverter(typeof(EnumConverter<SystemStatus>))] public  enum SystemStatus
     {
         /// <summary>
         /// Operational

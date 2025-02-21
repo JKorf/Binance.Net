@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Account status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<PortfolioMarginAccountStatus>))] public  enum PortfolioMarginAccountStatus
+    [JsonConverter(typeof(EnumConverter<PortfolioMarginAccountStatus>))] public  enum PortfolioMarginAccountStatus
     {
         /// <summary>
         /// Normal

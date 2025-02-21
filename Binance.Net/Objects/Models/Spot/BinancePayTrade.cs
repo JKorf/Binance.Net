@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<PayOrderType>))]
+        [JsonConverter(typeof(EnumConverter<PayOrderType>))]
         [JsonPropertyName("orderType")]
         public PayOrderType OrderType { get; set; }
         /// <summary>
@@ -63,7 +63,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Main wallet type
         /// </summary>
-        [JsonPropertyName("walletType"), JsonConverter(typeof(PocAOTEnumConverter<PayWalletType>))]
+        [JsonPropertyName("walletType"), JsonConverter(typeof(EnumConverter<PayWalletType>))]
         public PayWalletType WalletType { get; set; }
         /// <summary>
         /// Fund details

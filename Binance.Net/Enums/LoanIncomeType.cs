@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Income type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<LoanIncomeType>))] public  enum LoanIncomeType
+    [JsonConverter(typeof(EnumConverter<LoanIncomeType>))] public  enum LoanIncomeType
     {
         /// <summary>
         /// Borrow in

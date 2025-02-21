@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of auto close
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<AutoCloseType>))] public  enum AutoCloseType
+    [JsonConverter(typeof(EnumConverter<AutoCloseType>))] public  enum AutoCloseType
     {
         /// <summary>
         /// ADL

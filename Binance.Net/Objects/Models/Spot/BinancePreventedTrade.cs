@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
+        [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
         /// <summary>

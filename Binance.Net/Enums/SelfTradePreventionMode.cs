@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Self trade prevention mode
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
+    [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
     public enum SelfTradePreventionMode
     {
         /// <summary>

@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Order type for a spot order
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SpotOrderType>))]
+    [JsonConverter(typeof(EnumConverter<SpotOrderType>))]
     public enum SpotOrderType
     {
         /// <summary>
@@ -49,7 +49,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Order type for a futures order
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<FuturesOrderType>))] public  enum FuturesOrderType
+    [JsonConverter(typeof(EnumConverter<FuturesOrderType>))] public  enum FuturesOrderType
     {
         /// <summary>
         /// Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.

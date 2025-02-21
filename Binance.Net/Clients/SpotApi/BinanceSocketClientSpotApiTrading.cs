@@ -54,9 +54,9 @@ namespace Binance.Net.Clients.SpotApi
 
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("side", EnumConverter.GetString(side));
-            parameters.AddParameter("type", EnumConverter.GetString(type));
-            parameters.AddOptionalParameter("timeInForce", EnumConverter.GetString(timeInForce));
+            parameters.AddParameter("side", EnumConverter<OrderSide>.GetString(side));
+            parameters.AddParameter("type", EnumConverter<SpotOrderType>.GetString(type));
+            parameters.AddOptionalParameter("timeInForce", EnumConverter<TimeInForce?>.GetString(timeInForce));
             parameters.AddOptionalParameter("price", rulesCheck.Price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", rulesCheck.Quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", rulesCheck.QuoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -66,7 +66,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
             return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.place", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
@@ -93,9 +93,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("side", EnumConverter.GetString(side));
-            parameters.AddParameter("type", EnumConverter.GetString(type));
-            parameters.AddOptionalParameter("timeInForce", EnumConverter.GetString(timeInForce));
+            parameters.AddParameter("side", EnumConverter<OrderSide>.GetString(side));
+            parameters.AddParameter("type", EnumConverter<SpotOrderType>.GetString(type));
+            parameters.AddOptionalParameter("timeInForce", EnumConverter<TimeInForce?>.GetString(timeInForce));
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -105,7 +105,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
             return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
@@ -183,7 +183,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
+                { "cancelReplaceMode", EnumConverter<CancelReplaceMode>.GetString(cancelReplaceMode) }
             };
             parameters.AddEnum("side", side);
             parameters.AddEnum("type", type);
@@ -276,7 +276,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
 
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
 
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
@@ -332,8 +332,8 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "aboveType", EnumConverter.GetString(aboveOrderType) },
-                { "belowType", EnumConverter.GetString(belowOrderType) },
+                { "aboveType", EnumConverter<SpotOrderType>.GetString(aboveOrderType) },
+                { "belowType", EnumConverter<SpotOrderType>.GetString(belowOrderType) },
             };
             parameters.AddEnum("side", side);
             parameters.AddOptional("listClientOrderId", listClientOrderId);

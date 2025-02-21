@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(PocAOTEnumConverter<PriceMatch>))]
+        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter<PriceMatch>))]
         public PriceMatch PriceMatch { get; set; }
 
     }

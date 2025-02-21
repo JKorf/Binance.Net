@@ -5,7 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Transaction type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<TransactionType>))] public  enum TransactionType
+    [JsonConverter(typeof(EnumConverter<TransactionType>))] public  enum TransactionType
     {
         /// <summary>
         /// Deposit

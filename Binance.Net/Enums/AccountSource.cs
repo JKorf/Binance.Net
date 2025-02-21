@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Account source
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<AccountSource>))] public  enum AccountSource
+    [JsonConverter(typeof(EnumConverter<AccountSource>))] public  enum AccountSource
     {
         /// <summary>
         /// Spot

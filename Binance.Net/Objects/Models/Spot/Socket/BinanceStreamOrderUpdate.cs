@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
@@ -208,7 +209,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// Prevented match id
         /// </summary>
         [JsonPropertyName("V")]
-        [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
+        [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
         /// <summary>
         /// Working time; when it entered the order book

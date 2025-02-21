@@ -9,7 +9,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Redemption status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<AutoInvestRedemptionStatus>))] public  enum AutoInvestRedemptionStatus
+    [JsonConverter(typeof(EnumConverter<AutoInvestRedemptionStatus>))] public  enum AutoInvestRedemptionStatus
     {
         /// <summary>
         /// Success

@@ -82,7 +82,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("strategyId", strategyId);
             parameters.AddOptionalParameter("strategyType", strategyType);
             parameters.AddOptional("computeCommissionRates", computeFeeRates?.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var weight = computeFeeRates == true ? 20 : 1;
@@ -164,7 +164,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("cancelRestrictions", EnumConverter.GetString(cancelRestriction));
+            parameters.AddOptionalParameter("cancelRestrictions", EnumConverter<CancelRestriction?>.GetString(cancelRestriction));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Delete, "api/v3/order", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
@@ -244,7 +244,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
+                { "cancelReplaceMode", EnumConverter<CancelReplaceMode>.GetString(cancelReplaceMode) }
             };
             parameters.AddEnum("side", side);
             parameters.AddEnum("type", type);
@@ -262,7 +262,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
-            parameters.AddOptionalParameter("cancelRestrictions", EnumConverter.GetString(cancelRestriction));
+            parameters.AddOptionalParameter("cancelRestrictions", EnumConverter<CancelRestriction?>.GetString(cancelRestriction));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true);
@@ -388,7 +388,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("stopStrategyId", stopStrategyId);
             parameters.AddOptionalParameter("stopStrategyType", stopStrategyType);
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
@@ -443,8 +443,8 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "aboveType", EnumConverter.GetString(aboveOrderType) },
-                { "belowType", EnumConverter.GetString(belowOrderType) },
+                { "aboveType", EnumConverter<SpotOrderType>.GetString(aboveOrderType) },
+                { "belowType", EnumConverter<SpotOrderType>.GetString(belowOrderType) },
             };
             parameters.AddEnum("side", side);
 
@@ -1003,7 +1003,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("stopLimitTimeInForce", stopLimitTimeInForce);
             parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/margin/order/oco", BinanceExchange.RateLimiter.SpotRestUid, 6, true);
@@ -1255,7 +1255,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("fromAmount", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("toAmount", baseQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptional("walletType", walletType == null ? null : walletType == WalletType.Spot ? "SPOT" : "FUNDING");
-            parameters.AddOptionalParameter("validTime", EnumConverter.GetString(validTime));
+            parameters.AddOptionalParameter("validTime", EnumConverter<ValidTime?>.GetString(validTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/convert/getQuote", BinanceExchange.RateLimiter.SpotRestUid, 200, true);

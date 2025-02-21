@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot.Blvt
 {
     /// <summary>
     /// Blvt kline
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BinanceBlvtKline, PocAOTBinanceSourceGenerationContext>))]
     public record BinanceBlvtKline
     {
         /// <summary>

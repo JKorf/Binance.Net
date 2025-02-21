@@ -11,13 +11,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Cancel result
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<OrderOperationResult>))]
+        [JsonConverter(typeof(EnumConverter<OrderOperationResult>))]
         [JsonPropertyName("cancelResult")]
         public OrderOperationResult CancelResult { get; set; }
         /// <summary>
         /// New order result
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<OrderOperationResult>))]
+        [JsonConverter(typeof(EnumConverter<OrderOperationResult>))]
         [JsonPropertyName("newOrderResult")]
         public OrderOperationResult NewOrderResult { get; set; }
         /// <summary>

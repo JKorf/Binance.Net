@@ -207,7 +207,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var parameters = new ParameterCollection
             {
-                { "type", EnumConverter.GetString(accountType) }
+                { "type", EnumConverter<AccountType>.GetString(accountType) }
             };
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));

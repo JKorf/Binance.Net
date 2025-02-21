@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Rate direction
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<AdjustRateDirection>))] public  enum AdjustRateDirection
+    [JsonConverter(typeof(EnumConverter<AdjustRateDirection>))] public  enum AdjustRateDirection
     {
         /// <summary>
         /// Additional

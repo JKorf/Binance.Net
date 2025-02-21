@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Destination account
         /// </summary>
-        [JsonPropertyName("destAccount"), JsonConverter(typeof(PocAOTEnumConverter<AccountSource>))]
+        [JsonPropertyName("destAccount"), JsonConverter(typeof(EnumConverter<AccountSource>))]
         public AccountSource DestinationAccount { get; set; }
         /// <summary>
         /// Status

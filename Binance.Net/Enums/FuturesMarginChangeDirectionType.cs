@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The direction to change futures margin
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<FuturesMarginChangeDirectionType>))] public  enum FuturesMarginChangeDirectionType
+    [JsonConverter(typeof(EnumConverter<FuturesMarginChangeDirectionType>))] public  enum FuturesMarginChangeDirectionType
     {
         /// <summary>
         /// Add margin

@@ -1,4 +1,5 @@
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
@@ -32,7 +33,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Account update reason type
         /// </summary>
-        [JsonPropertyName("m"), JsonConverter(typeof(PocAOTEnumConverter<AccountUpdateReason>))]
+        [JsonPropertyName("m"), JsonConverter(typeof(EnumConverter<AccountUpdateReason>))]
         public AccountUpdateReason Reason { get; set; }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The type of execution
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<ExecutionType>))] public  enum ExecutionType
+    [JsonConverter(typeof(EnumConverter<ExecutionType>))] public  enum ExecutionType
     {
         /// <summary>
         /// New

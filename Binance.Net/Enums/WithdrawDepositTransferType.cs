@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Transfer type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<WithdrawDepositTransferType>))] public  enum WithdrawDepositTransferType
+    [JsonConverter(typeof(EnumConverter<WithdrawDepositTransferType>))] public  enum WithdrawDepositTransferType
     {
         /// <summary>
         /// Internal transfer

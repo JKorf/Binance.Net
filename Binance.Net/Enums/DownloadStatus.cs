@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Download status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<DownloadStatus>))] public  enum DownloadStatus
+    [JsonConverter(typeof(EnumConverter<DownloadStatus>))] public  enum DownloadStatus
     {
         /// <summary>
         /// Processing

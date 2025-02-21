@@ -106,8 +106,8 @@ namespace Binance.Net.Clients.GeneralApi
                                  {"subAccountId", subAccountId},
                                  {"canTrade", isSpotTradingEnabled}
                              };
-            parameters.AddOptionalParameter("marginTrade", isMarginTradingEnabled.ToString().ToLower());
-            parameters.AddOptionalParameter("futuresTrade", isFuturesTradingEnabled.ToString().ToLower());
+            parameters.AddOptionalParameter("marginTrade", isMarginTradingEnabled?.ToString().ToLower());
+            parameters.AddOptionalParameter("futuresTrade", isFuturesTradingEnabled?.ToString().ToLower());
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccountApi", BinanceExchange.RateLimiter.SpotRestIp, 0, true);

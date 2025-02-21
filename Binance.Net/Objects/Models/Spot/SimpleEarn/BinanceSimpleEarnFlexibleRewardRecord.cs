@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Reward type
         /// </summary>
-        [JsonPropertyName("type"), JsonConverter(typeof(PocAOTEnumConverter<RewardType>))]
+        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter<RewardType>))]
         public RewardType Type { get; set; }
         /// <summary>
         /// Timestamp

@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -118,7 +119,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// For what time the order lasts
         /// </summary>
-        [JsonPropertyName("timeInForce"), JsonConverter(typeof(PocAOTEnumConverter<TimeInForce>))]
+        [JsonPropertyName("timeInForce"), JsonConverter(typeof(EnumConverter<TimeInForce>))]
         public TimeInForce TimeInForce { get; set; }
 
         /// <summary>
@@ -178,13 +179,13 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match type
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(PocAOTEnumConverter<PriceMatch>))]
+        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter<PriceMatch>))]
         public PriceMatch PriceMatch { get; set; }
 
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode?>))]
+        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter<SelfTradePreventionMode?>))]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
     }
 

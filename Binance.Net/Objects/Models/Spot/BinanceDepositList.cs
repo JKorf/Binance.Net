@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -74,7 +75,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// The wallet type
         /// </summary>
         [JsonPropertyName("walletType")]
-        [JsonConverter(typeof(PocAOTEnumConverter<WalletType>))]
+        [JsonConverter(typeof(EnumConverter<WalletType>))]
         public WalletType WalletType { get; set; }
 
         /// <summary>

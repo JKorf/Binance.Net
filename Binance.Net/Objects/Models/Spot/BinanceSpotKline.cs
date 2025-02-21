@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Candlestick information for symbol
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BinanceSpotKline, PocAOTBinanceSourceGenerationContext>))]
     public record BinanceSpotKline: BinanceKlineBase
     {
         /// <summary>

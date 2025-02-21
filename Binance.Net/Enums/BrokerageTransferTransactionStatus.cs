@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Brokerage transfer transaction status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<BrokerageTransferTransactionStatus>))] public  enum BrokerageTransferTransactionStatus
+    [JsonConverter(typeof(EnumConverter<BrokerageTransferTransactionStatus>))] public  enum BrokerageTransferTransactionStatus
     {
         /// <summary>
         /// Init

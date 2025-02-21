@@ -9,7 +9,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Auto invest ROI type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<AutoInvestRoiType>))] public  enum AutoInvestRoiType
+    [JsonConverter(typeof(EnumConverter<AutoInvestRoiType>))] public  enum AutoInvestRoiType
     {
         /// <summary>
         /// Seven days

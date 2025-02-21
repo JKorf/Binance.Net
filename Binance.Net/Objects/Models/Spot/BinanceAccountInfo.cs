@@ -73,7 +73,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The type of account
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<AccountType>))]
+        [JsonConverter(typeof(EnumConverter<AccountType>))]
         [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>

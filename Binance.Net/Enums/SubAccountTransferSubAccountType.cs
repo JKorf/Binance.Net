@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Transfer type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SubAccountTransferSubAccountType>))] public  enum SubAccountTransferSubAccountType
+    [JsonConverter(typeof(EnumConverter<SubAccountTransferSubAccountType>))] public  enum SubAccountTransferSubAccountType
     {
         /// <summary>
         /// From main spot account to sub account

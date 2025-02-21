@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of contract
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<ContractType>))] public  enum ContractType
+    [JsonConverter(typeof(EnumConverter<ContractType>))] public  enum ContractType
     {
         /// <summary>
         /// Perpetual

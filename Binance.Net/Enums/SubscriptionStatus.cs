@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Simple earn subscription status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SubscriptionStatus>))] public  enum SubscriptionStatus
+    [JsonConverter(typeof(EnumConverter<SubscriptionStatus>))] public  enum SubscriptionStatus
     {
         /// <summary>
         /// Purchasing

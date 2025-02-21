@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Position side
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<PositionSide>))] public  enum PositionSide
+    [JsonConverter(typeof(EnumConverter<PositionSide>))] public  enum PositionSide
     {
         /// <summary>
         /// Short

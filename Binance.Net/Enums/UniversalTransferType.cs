@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Universal transfer type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<UniversalTransferType>))] public  enum UniversalTransferType
+    [JsonConverter(typeof(EnumConverter<UniversalTransferType>))] public  enum UniversalTransferType
     {
         /// <summary>
         /// Main (spot) to Funding

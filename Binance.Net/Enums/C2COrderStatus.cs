@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// C2C order status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<C2COrderStatus>))] public  enum C2COrderStatus
+    [JsonConverter(typeof(EnumConverter<C2COrderStatus>))] public  enum C2COrderStatus
     {
         /// <summary>
         /// Pending

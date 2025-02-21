@@ -68,10 +68,8 @@ namespace Binance.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IMessageSerializer CreateSerializer() => new PocAOTBinanceSystemTextJsonMessageSerializer();
-
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(PocAOTBinanceSerializerOptions.WithConverters);
-
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(BinanceExchange.SerializerContext);
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {

@@ -16,7 +16,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<AccountType>))]
+        [JsonConverter(typeof(EnumConverter<AccountType>))]
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>

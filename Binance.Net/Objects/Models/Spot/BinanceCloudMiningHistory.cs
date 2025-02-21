@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Type
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<CloudMiningPaymentStatus>))]
+        [JsonConverter(typeof(EnumConverter<CloudMiningPaymentStatus>))]
         [JsonPropertyName("type")]
         public CloudMiningPaymentStatus Type { get; set; }
 

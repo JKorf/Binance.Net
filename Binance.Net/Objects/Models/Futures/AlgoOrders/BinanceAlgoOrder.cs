@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures.AlgoOrders
 {
@@ -97,7 +98,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Urgency
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<OrderUrgency?>))]
+        [JsonConverter(typeof(EnumConverter<OrderUrgency?>))]
         [JsonPropertyName("urgency")]
         public OrderUrgency? Urgency { get; set; }
     }

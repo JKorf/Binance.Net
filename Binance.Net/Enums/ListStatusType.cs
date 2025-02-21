@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// List status type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<ListStatusType>))] public  enum ListStatusType
+    [JsonConverter(typeof(EnumConverter<ListStatusType>))] public  enum ListStatusType
     {
         /// <summary>
         /// Failed action

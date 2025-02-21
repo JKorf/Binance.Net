@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Busd convert type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<BusdConvertType>))] public  enum BusdConvertType
+    [JsonConverter(typeof(EnumConverter<BusdConvertType>))] public  enum BusdConvertType
     {
         /// <summary>
         /// Auto convert when deposit

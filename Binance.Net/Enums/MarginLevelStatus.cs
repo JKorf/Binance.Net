@@ -7,7 +7,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Margin level status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<MarginLevelStatus>))] public  enum MarginLevelStatus
+    [JsonConverter(typeof(EnumConverter<MarginLevelStatus>))] public  enum MarginLevelStatus
     {
         /// <summary>
         /// Excessive

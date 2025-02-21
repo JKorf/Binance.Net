@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of Margin
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<FuturesMarginType>))] public  enum FuturesMarginType
+    [JsonConverter(typeof(EnumConverter<FuturesMarginType>))] public  enum FuturesMarginType
     {
         /// <summary>
         /// Isolated margin

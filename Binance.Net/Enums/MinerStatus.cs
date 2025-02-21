@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Miner status
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<MinerStatus>))] public  enum MinerStatus
+    [JsonConverter(typeof(EnumConverter<MinerStatus>))] public  enum MinerStatus
     {
         /// <summary>
         /// All miners

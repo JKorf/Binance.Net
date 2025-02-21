@@ -142,7 +142,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("interval", EnumConverter.GetString(interval));
+            parameters.AddParameter("interval", EnumConverter<KlineInterval>.GetString(interval));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -158,7 +158,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("interval", EnumConverter.GetString(interval));
+            parameters.AddParameter("interval", EnumConverter<KlineInterval>.GetString(interval));
             parameters.AddOptionalParameter("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -303,7 +303,7 @@ namespace Binance.Net.Clients.SpotApi
             symbols = symbols.SelectMany(a =>
                 intervals.Select(i =>
                     a.ToLower(CultureInfo.InvariantCulture) + "@kline" + "_" +
-                    EnumConverter.GetString(i))).ToArray();
+                    EnumConverter<KlineInterval>.GetString(i))).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 
@@ -534,7 +534,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var address = _client.ClientOptions.Environment.BlvtSocketAddress ?? throw new Exception("No url found for Blvt stream, check the `BlvtSocketAddress` in the client environment");
 
-            tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + "@nav_kline" + "_" + EnumConverter.GetString(interval)).ToArray();
+            tokens = tokens.Select(a => a.ToUpper(CultureInfo.InvariantCulture) + "@nav_kline" + "_" + EnumConverter<KlineInterval>.GetString(interval)).ToArray();
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data =>
                 onMessage(data.As(data.Data.Data)
                 .WithStreamId(data.Data.Stream)

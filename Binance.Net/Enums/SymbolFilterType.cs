@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Filter type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SymbolFilterType>))] public  enum SymbolFilterType
+    [JsonConverter(typeof(EnumConverter<SymbolFilterType>))] public  enum SymbolFilterType
     {
         /// <summary>
         /// Unknown filter type

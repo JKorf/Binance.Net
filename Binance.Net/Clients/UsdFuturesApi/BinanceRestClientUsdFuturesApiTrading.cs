@@ -304,7 +304,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "side", EnumConverter.GetString(side) },
+                { "side", EnumConverter<OrderSide>.GetString(side) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
             };
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
@@ -414,7 +414,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 parameters.AddOptionalParameter("orderIdList", $"[{string.Join(",", orderIdList)}]");
 
             if (origClientOrderIdList != null)
-                parameters.AddOptionalParameter("origClientOrderIdList", $"[{string.Join(",", convertClientOrderIdList.Select(id => $"\"{id}\""))}]");
+                parameters.AddOptionalParameter("origClientOrderIdList", $"[{string.Join(",", convertClientOrderIdList!.Select(id => $"\"{id}\""))}]");
 
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -564,7 +564,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "urgency", EnumConverter.GetString(urgency) },
+                { "urgency", EnumConverter<OrderUrgency>.GetString(urgency) },
             };
             parameters.AddEnum("side", side);
             parameters.AddOptionalEnum("positionSide", positionSide);

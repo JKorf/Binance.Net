@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models
     /// <summary>
     /// An entry in the order book
     /// </summary>
-    [JsonConverter(typeof(PocAOTArrayConverter<BinanceOrderBookEntry>))]
+    [JsonConverter(typeof(ArrayConverter<BinanceOrderBookEntry, PocAOTBinanceSourceGenerationContext>))]
     public record BinanceOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>

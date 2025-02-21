@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The interval for the kline, the int value represents the time in seconds
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<KlineInterval>))] public  enum KlineInterval
+    [JsonConverter(typeof(EnumConverter<KlineInterval>))] public  enum KlineInterval
     {
         /// <summary>
         /// 1s

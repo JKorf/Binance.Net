@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models
 {
@@ -167,7 +168,7 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
+        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
     }
 }

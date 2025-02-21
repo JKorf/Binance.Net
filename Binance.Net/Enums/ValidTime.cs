@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Valid Time
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<ValidTime>))] public  enum ValidTime
+    [JsonConverter(typeof(EnumConverter<ValidTime>))] public  enum ValidTime
     {
         /// <summary>
         /// 10 seconds

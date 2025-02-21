@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
         /// <summary>
         /// Account status
         /// </summary>
-        [JsonConverter(typeof(PocAOTEnumConverter<PortfolioMarginAccountStatus>))]
+        [JsonConverter(typeof(EnumConverter<PortfolioMarginAccountStatus>))]
         [JsonPropertyName("accountStatus")]
         public PortfolioMarginAccountStatus AccountStatus { get; set; }
         /// <summary>

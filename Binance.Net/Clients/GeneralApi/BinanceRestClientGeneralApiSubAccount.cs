@@ -568,7 +568,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection()
             {
                 { "email", email },
-                { "futuresType", EnumConverter.GetString(accountType) },
+                { "futuresType", EnumConverter<FuturesAccountType>.GetString(accountType) },
             };
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -594,7 +594,7 @@ namespace Binance.Net.Clients.GeneralApi
             {
                 { "fromEmail", fromEmail },
                 { "toEmail", toEmail },
-                { "futuresType", EnumConverter.GetString(accountType) },
+                { "futuresType", EnumConverter<FuturesAccountType>.GetString(accountType) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };

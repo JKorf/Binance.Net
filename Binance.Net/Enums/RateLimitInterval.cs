@@ -5,7 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Rate limit on what unit
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<RateLimitInterval>))] public  enum RateLimitInterval
+    [JsonConverter(typeof(EnumConverter<RateLimitInterval>))] public  enum RateLimitInterval
     {
         /// <summary>
         /// Seconds

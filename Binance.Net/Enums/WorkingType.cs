@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of working
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<WorkingType>))] public  enum WorkingType
+    [JsonConverter(typeof(EnumConverter<WorkingType>))] public  enum WorkingType
     {
         /// <summary>
         /// Mark price type

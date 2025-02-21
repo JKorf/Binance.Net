@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         [JsonPropertyName("success")]
         public bool Success { get; set; }
         [JsonPropertyName("futuresType")]
-        [JsonConverter(typeof(PocAOTEnumConverter<FuturesAccountType>))]
+        [JsonConverter(typeof(EnumConverter<FuturesAccountType>))]
         public FuturesAccountType AccountType { get; set; }
 
         /// <summary>

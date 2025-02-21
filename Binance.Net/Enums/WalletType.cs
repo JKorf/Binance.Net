@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Wallet type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<WalletType>))] public  enum WalletType
+    [JsonConverter(typeof(EnumConverter<WalletType>))] public  enum WalletType
     {
         /// <summary>
         /// Spot wallet

@@ -31,12 +31,12 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Subscription type
         /// </summary>
-        [JsonPropertyName("type"), JsonConverter(typeof(PocAOTEnumConverter<SubscriptionType>))]
+        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter<SubscriptionType>))]
         public SubscriptionType Type { get; set; }
         /// <summary>
         /// Source account
         /// </summary>
-        [JsonPropertyName("sourceAccount"), JsonConverter(typeof(PocAOTEnumConverter<AccountSource>))]
+        [JsonPropertyName("sourceAccount"), JsonConverter(typeof(EnumConverter<AccountSource>))]
         public AccountSource SourceAccount { get; set; }
         /// <summary>
         /// Quantity from spot
@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Status
         /// </summary>
-        [JsonPropertyName("status"), JsonConverter(typeof(PocAOTEnumConverter<SubscriptionStatus>))]
+        [JsonPropertyName("status"), JsonConverter(typeof(EnumConverter<SubscriptionStatus>))]
         public SubscriptionStatus Status { get; set; }
     }
 }

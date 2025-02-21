@@ -6,7 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Simple earn subscription type
     /// </summary>
-    [JsonConverter(typeof(PocAOTEnumConverter<SubscriptionType>))] public  enum SubscriptionType
+    [JsonConverter(typeof(EnumConverter<SubscriptionType>))] public  enum SubscriptionType
     {
         /// <summary>
         /// Auto subscribe

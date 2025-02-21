@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Kline for mark or index price or Premium index
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BinanceMarkIndexKline, PocAOTBinanceSourceGenerationContext>))]
     public record BinanceMarkIndexKline
     {
         /// <summary>

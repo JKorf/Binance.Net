@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The interval of this candlestick
         /// </summary>
-        [JsonPropertyName("i"), JsonConverter(typeof(PocAOTEnumConverter<KlineInterval>))]
+        [JsonPropertyName("i"), JsonConverter(typeof(EnumConverter<KlineInterval>))]
         public KlineInterval Interval { get; set; }
         /// <summary>
         /// The first trade id in this candlestick

@@ -102,7 +102,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Permission sets
         /// </summary>
-        [JsonPropertyName("permissionSets"), JsonConverter(typeof(PermissionTypeConverter))]
+        [JsonPropertyName("permissionSets"), JsonConverter(typeof(AccountTypeConverterImp<IEnumerable<IEnumerable<PermissionType>>>))]
         public IEnumerable<IEnumerable<PermissionType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<PermissionType>>();
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Default self trade prevention
         /// </summary>
         [JsonPropertyName("defaultSelfTradePreventionMode")]
-        [JsonConverter(typeof(PocAOTEnumConverter<SelfTradePreventionMode>))]
+        [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode DefaultSelfTradePreventionMode { get; set; }
         /// <summary>
         /// Allowed self trade prevention modes
