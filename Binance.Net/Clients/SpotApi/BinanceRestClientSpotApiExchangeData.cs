@@ -80,17 +80,17 @@ namespace Binance.Net.Clients.SpotApi
                 List<string> list = new List<string>();
                 foreach (var permission in permissions)
                 {
-                    list.Add(permission.ToString().ToUpper());
+                    list.Add($"\"{permission.ToString().ToUpper()}\"");
                 }
 
-                parameters.Add("permissions", $"[{string.Join(",", list)}]");
+                parameters.Add("permissions", list.ToArray());
             }
             else if (permissions.Any())
             {
                 parameters.Add("permissions", permissions.First().ToString().ToUpper());
             }
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/exchangeInfo", BinanceExchange.RateLimiter.SpotRestIp, 20, false, arraySerialization: ArrayParametersSerialization.Array);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/exchangeInfo", BinanceExchange.RateLimiter.SpotRestIp, 20, false, arraySerialization: ArrayParametersSerialization.JsonArray);
             var exchangeInfoResult = await _baseClient.SendAsync<BinanceExchangeInfo>(request, parameters, ct).ConfigureAwait(false);
             if (!exchangeInfoResult)
                 return exchangeInfoResult;

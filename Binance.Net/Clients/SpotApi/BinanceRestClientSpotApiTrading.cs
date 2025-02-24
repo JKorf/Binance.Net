@@ -82,7 +82,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("strategyId", strategyId);
             parameters.AddOptionalParameter("strategyType", strategyType);
             parameters.AddOptional("computeCommissionRates", computeFeeRates?.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var weight = computeFeeRates == true ? 20 : 1;
@@ -164,7 +164,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
-            parameters.AddOptionalParameter("cancelRestrictions", EnumConverter<CancelRestriction?>.GetString(cancelRestriction));
+            parameters.AddOptionalEnum("cancelRestrictions", cancelRestriction);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Delete, "api/v3/order", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
@@ -262,7 +262,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
-            parameters.AddOptionalParameter("cancelRestrictions", EnumConverter<CancelRestriction?>.GetString(cancelRestriction));
+            parameters.AddOptionalEnum("cancelRestrictions", cancelRestriction);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true);
@@ -388,7 +388,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("trailingDelta", trailingDelta);
             parameters.AddOptionalParameter("stopStrategyId", stopStrategyId);
             parameters.AddOptionalParameter("stopStrategyType", stopStrategyType);
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode?>.GetString(selfTradePreventionMode));
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
             parameters.AddOptionalParameter("limitClientOrderId", limitClientOrderId);
@@ -1195,7 +1195,7 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<WebCallResult<IEnumerable<BinanceC2CUserTrade>>> GetC2CTradeHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("tradeType", side);
+            parameters.AddEnum("tradeType", side);
             parameters.AddOptionalParameter("startTimestamp", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTimestamp", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page);
@@ -1255,7 +1255,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("fromAmount", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("toAmount", baseQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptional("walletType", walletType == null ? null : walletType == WalletType.Spot ? "SPOT" : "FUNDING");
-            parameters.AddOptionalParameter("validTime", EnumConverter<ValidTime?>.GetString(validTime));
+            parameters.AddOptionalEnum("validTime", validTime);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/convert/getQuote", BinanceExchange.RateLimiter.SpotRestUid, 200, true);
