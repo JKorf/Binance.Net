@@ -49,7 +49,7 @@ namespace Binance.Net
         internal const string ClientOrderIdPrefixSpot = ClientOrderIdSpot + LibraryHelpers.ClientOrderIdSeparator;
         internal const string ClientOrderIdPrefixFutures = ClientOrderIdFutures + LibraryHelpers.ClientOrderIdSeparator;
 
-        internal static JsonSerializerContext SerializerContext = new PocAOTBinanceSourceGenerationContext();
+        internal static JsonSerializerContext SerializerContext = new BinanceSourceGenerationContext();
 
         /// <summary>
         /// Format a base and quote asset to a Binance recognized symbol 

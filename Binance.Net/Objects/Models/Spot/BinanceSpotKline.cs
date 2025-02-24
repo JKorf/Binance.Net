@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Candlestick information for symbol
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BinanceSpotKline, PocAOTBinanceSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BinanceSpotKline, BinanceSourceGenerationContext>))]
     public record BinanceSpotKline: BinanceKlineBase
     {
         /// <summary>

@@ -1,4 +1,5 @@
-﻿namespace Binance.Net.Objects.Sockets
+﻿
+namespace Binance.Net.Objects.Sockets
 {
     internal class BinanceSocketQueryResponse
     {

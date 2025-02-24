@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using Binance.Net.Objects.Models.Spot;
 using System.Text.Json;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization.Metadata;
 
 namespace Binance.Net.Converters
 {
@@ -10,7 +12,7 @@ namespace Binance.Net.Converters
         public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var obj = JsonDocument.ParseValue(ref reader).RootElement;
-            var type = obj.GetProperty("filterType").Deserialize<SymbolFilterType>(options);
+            var type = obj.GetProperty("filterType").Deserialize((JsonTypeInfo<SymbolFilterType>)options.GetTypeInfo(typeof(SymbolFilterType)));
             BinanceSymbolFilter result;
             switch (type)
             {
@@ -81,7 +83,7 @@ namespace Binance.Net.Converters
                         MultiplierUp = decimal.Parse(obj.GetProperty("multiplierUp").GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture),
                         MultiplierDown = decimal.Parse(obj.GetProperty("multiplierDown").GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture),
                         AveragePriceMinutes = obj.TryGetProperty("avgPriceMins", out var avgPriceMins) ? avgPriceMins.GetInt32() : null,
-                        MultiplierDecimal = obj.TryGetProperty("multiplierDecimal", out var mulDec) ? JsonSerializer.Deserialize<int>(mulDec, options) : null
+                        MultiplierDecimal = obj.TryGetProperty("multiplierDecimal", out var mulDec) ? int.Parse(mulDec.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture) : null
                     };
                     break;
                 case SymbolFilterType.MaxPosition:
@@ -125,6 +127,10 @@ namespace Binance.Net.Converters
             return (T)(object)result;
         }
 
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL3050:RequiresUnreferencedCode", Justification = "JsonSerializerOptions provided here has TypeInfoResolver set")]
+        [UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL2026:RequiresUnreferencedCode", Justification = "JsonSerializerOptions provided here has TypeInfoResolver set")]
+#endif
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
         {
             JsonSerializer.Serialize<T>(writer, value, SerializerOptions.WithConverters(BinanceExchange.SerializerContext));

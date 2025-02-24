@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.SpotApi;
@@ -82,7 +83,7 @@ namespace Binance.Net.Clients.SpotApi
                     list.Add(permission.ToString().ToUpper());
                 }
 
-                parameters.Add("permissions", JsonSerializer.Serialize(list));
+                parameters.Add("permissions", $"[{string.Join(",", list)}]");
             }
             else if (permissions.Any())
             {
