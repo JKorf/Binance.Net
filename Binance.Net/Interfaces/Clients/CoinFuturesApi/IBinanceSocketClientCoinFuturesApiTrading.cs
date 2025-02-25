@@ -11,7 +11,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     {
         /// <summary>
         /// Place a new order
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -56,7 +56,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Edit an existing order
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Modify-Order" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>

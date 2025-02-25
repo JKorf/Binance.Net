@@ -13,7 +13,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     {
         /// <summary>
         /// Gets account balances
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#futures-account-balance-v2-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -22,7 +22,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get account information, including position and balances
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -30,7 +30,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-data-streams" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method</param>
         /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>

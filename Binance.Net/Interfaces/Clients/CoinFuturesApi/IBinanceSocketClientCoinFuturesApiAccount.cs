@@ -30,7 +30,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
-        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#user-data-streams" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method</param>
         /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>
