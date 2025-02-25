@@ -1,5 +1,12 @@
 ﻿using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Spot;
+namespace Binance.Net
+{
+    internal partial class BinanceSourceGenerationAggregator
+    {
+        public Binance.Net.Objects.Models.Spot.BinanceOrderBook? BinanceOrderBook;
+    }
+}
 
 
 namespace Binance.Net.Objects.Models.Spot

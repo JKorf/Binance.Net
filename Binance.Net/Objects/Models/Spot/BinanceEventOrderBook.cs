@@ -1,4 +1,11 @@
 ﻿using Binance.Net.Interfaces;
+namespace Binance.Net
+{
+    internal partial class BinanceSourceGenerationAggregator
+    {
+        public Binance.Net.Objects.Models.Spot.BinanceEventOrderBook? BinanceEventOrderBook;
+    }
+}
 
 namespace Binance.Net.Objects.Models.Spot
 {

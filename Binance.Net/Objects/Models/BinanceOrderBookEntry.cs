@@ -1,6 +1,13 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
+namespace Binance.Net
+{
+    internal partial class BinanceSourceGenerationAggregator
+    {
+        public Binance.Net.Objects.Models.BinanceOrderBookEntry? BinanceOrderBookEntry;
+    }
+}
 
 namespace Binance.Net.Objects.Models
 {
