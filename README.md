@@ -190,6 +190,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.18.0 - 25 Feb 2025
+    * Added Coin-M websocket Trade API implementation
+    * Added SOL staking endpoints to restClient.GeneralApi.Staking
+    * Added orderId parameter to Spot.GetMarginUserTradesAsync
+    * Updated futures GetTradeHistoryAsync max limit value from 1000 to 500
+    * Fixed API doc references for endpoints and subscriptions
+    * Fixed various spelling mistakes
+
 * Version 10.17.0 - 11 Feb 2025
     * Updated CryptoExchange.Net to version 8.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added support for more SharedKlineInterval values
