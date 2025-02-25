@@ -13,7 +13,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Place a new order
         /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSD_PERP`</param>
         /// <param name="side">The order side (buy/sell)</param>
         /// <param name="type">The order type</param>
         /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
@@ -58,7 +58,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Edit an existing order
         /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/websocket-api/Modify-Order" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">The symbol, for example `ETHUSD_PERP`</param>
         /// <param name="side">Order side</param>
         /// <param name="quantity">New quantity</param>
         /// <param name="price">New price</param>
@@ -74,7 +74,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Cancels a pending order
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Order" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSD_PERP`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -86,7 +86,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Query-Order" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSD_PERP`</param>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -98,7 +98,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Get position information
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Info-V2" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         Task<CallResult<BinanceResponse<IEnumerable<BinancePositionDetailsCoin>>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
