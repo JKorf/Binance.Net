@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	  <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
 	  <LangVersion>12.0</LangVersion>
@@ -21,6 +21,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>.\GeneratedFiles</CompilerGeneratedFilesOutputPath>
     <PackageReleaseNotes>https://github.com/JKorf/Binance.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
 	<PropertyGroup Label="AOT" Condition=" '$(TargetFramework)' == 'NET8_0' Or '$(TargetFramework)' == 'NET9_0' ">
@@ -45,6 +47,10 @@
   <PropertyGroup>
     <DocumentationFile>Binance.Net.xml</DocumentationFile>
   </PropertyGroup>
+	<ItemGroup>
+		<!-- Exclude the output of source generators from the compilation -->
+		<Compile Remove="./GeneratedFiles/System.Text.Json.SourceGeneration/**/*.cs" />
+	</ItemGroup>
   <ItemGroup>
     <None Include="Icon\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\README.md" Pack="true" PackagePath="\" />
@@ -61,5 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
+    <ProjectReference Include="..\Binance.Net.SourceGenerator\Binance.Net.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
 </Project>

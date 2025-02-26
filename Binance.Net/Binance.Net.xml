@@ -2528,308 +2528,223 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiTrading.GetPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.Boolean">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Boolean">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.Decimal">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Decimal">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.NullableDecimal">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullableDecimal">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceSourceGenerationAggregator">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSourceGenerationAggregator">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.ContractType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.ContractType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.NullableContractType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullableContractType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.FuturesOrderType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.FuturesOrderType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.PermissionType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PermissionType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.RateLimitInterval">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.RateLimitInterval">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.RateLimitType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.RateLimitType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.SelfTradePreventionMode">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SelfTradePreventionMode">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.SpotOrderType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SpotOrderType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.SymbolFilterType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SymbolFilterType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.NullableSymbolFilterType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SymbolStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.SymbolStatus">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.TimeInForce">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.TimeInForce">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.UnderlyingType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.UnderlyingType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceRateLimit">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceSocketQuery">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtAsset">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceSocketRequest">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtExchangeInfo">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceCombinedStreamBinanceEventOrderBook">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtSymbol">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceOrderBookEntry">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceExchangeInfo">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceRateLimit">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbol">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceFuturesCoinExchangeInfo">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolFilter">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceFuturesCoinSymbol">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableFuturesOrderType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceFuturesUsdtAsset">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerablePermissionType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceFuturesUsdtExchangeInfo">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableSelfTradePreventionMode">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceFuturesUsdtSymbol">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableSpotOrderType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceEventOrderBook">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableTimeInForce">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceExchangeInfo">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceRateLimit">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceOrderBook">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceFuturesUsdtAsset">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceSymbol">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceFuturesUsdtSymbol">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceSymbolFilter">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceSymbol">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.BinanceSocketQueryResponse">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceSymbolFilter">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.DictionaryStringObject">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableIEnumerablePermissionType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableFuturesOrderType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableObject">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerablePermissionType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableString">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableSelfTradePreventionMode">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.DateTime">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableSpotOrderType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Int32">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableTimeInForce">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Object">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceOrderBookEntry">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.String">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceRateLimit">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceFuturesCoinSymbol">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceFuturesUsdtAsset">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceFuturesUsdtSymbol">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceSymbol">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableBinanceSymbolFilter">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableIEnumerablePermissionType">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableObject">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.IEnumerableString">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.DateTime">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.Int32">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.NullableInt32">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.Int64">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.NullableInt64">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.Object">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.String">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.StringArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.Default">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Default">
             <summary>
             The default <see cref="T:System.Text.Json.Serialization.JsonSerializerContext"/> associated with a default <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance.
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceSourceGenerationContext.GeneratedSerializerOptions">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.GeneratedSerializerOptions">
             <summary>
             The source-generated options associated with this context.
             </summary>
         </member>
-        <member name="M:Binance.Net.BinanceSourceGenerationContext.#ctor">
+        <member name="M:Binance.Net.Converters.BinanceSourceGenerationContext.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:Binance.Net.BinanceSourceGenerationContext.#ctor(System.Text.Json.JsonSerializerOptions)">
+        <member name="M:Binance.Net.Converters.BinanceSourceGenerationContext.#ctor(System.Text.Json.JsonSerializerOptions)">
             <inheritdoc/>
         </member>
-        <member name="M:Binance.Net.BinanceSourceGenerationContext.GetTypeInfo(System.Type)">
+        <member name="M:Binance.Net.Converters.BinanceSourceGenerationContext.GetTypeInfo(System.Type)">
             <inheritdoc/>
         </member>
         <member name="T:Binance.Net.Enums.AccountSource">

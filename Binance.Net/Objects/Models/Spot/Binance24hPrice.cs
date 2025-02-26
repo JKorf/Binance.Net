@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Interfaces;
+using Binance.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {

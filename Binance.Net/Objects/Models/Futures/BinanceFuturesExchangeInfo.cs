@@ -40,6 +40,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Exchange info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesUsdtExchangeInfo: BinanceFuturesExchangeInfo
     {
         /// <summary>
