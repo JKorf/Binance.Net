@@ -1,5 +1,14 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+﻿namespace Binance.Net
 {
+    internal partial class BinanceSourceGenerationAggregator
+    {
+        public Binance.Net.Objects.Models.Spot.BinanceExchangeInfo? BinanceExchangeInfo;
+    }
+}
+
+namespace Binance.Net.Objects.Models.Spot
+{
+
     /// <summary>
     /// Exchange info
     /// </summary>

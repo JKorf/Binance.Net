@@ -1,4 +1,13 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+﻿namespace Binance.Net
+{
+    internal partial class BinanceSourceGenerationAggregator
+    {
+        public Binance.Net.Objects.Models.Futures.BinanceFuturesUsdtExchangeInfo? BinanceFuturesUsdtExchangeInfo;
+        public Binance.Net.Objects.Models.Futures.BinanceFuturesCoinExchangeInfo? BinanceFuturesCoinExchangeInfo;
+    }
+}
+
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Exchange info
