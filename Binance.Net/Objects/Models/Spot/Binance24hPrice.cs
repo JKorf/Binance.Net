@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
+    [SerializationModel]
     public record Binance24HPrice : Binance24HPriceBase, IBinanceTick
     {
         /// <summary>

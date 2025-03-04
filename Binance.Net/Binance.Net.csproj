@@ -66,7 +66,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Users\janko\source\repos\CryptoTest\TestAnalyzer.CodeFixes\TestAnalyzer.CodeFixes.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="All" />
     <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
-    <ProjectReference Include="..\Binance.Net.SourceGenerator\Binance.Net.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Users\janko\source\repos\CryptoTest\TestAnalyzer\TestAnalyzer.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="All" />
+	</ItemGroup>
 </Project>

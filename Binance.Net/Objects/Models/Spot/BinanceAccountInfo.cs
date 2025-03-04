@@ -7,6 +7,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about an account
     /// </summary>
+    [SerializationModel]
     public record BinanceAccountInfo
     {
         /// <summary>
