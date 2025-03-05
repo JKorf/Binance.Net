@@ -8,6 +8,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceFuturesUsdtExchangeInfo))]
     [JsonSerializable(typeof(BinanceExchangeInfo))]
     [JsonSerializable(typeof(Binance24HPrice))]
+    [JsonSerializable(typeof(BinanceAccountInfo))]
     internal partial class BinanceSourceGenerationContext : JsonSerializerContext
     {
     }
