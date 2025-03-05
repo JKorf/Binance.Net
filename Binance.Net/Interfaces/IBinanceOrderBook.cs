@@ -20,12 +20,12 @@ namespace Binance.Net.Interfaces
         /// <summary>
         /// The list of bids
         /// </summary>
-        IEnumerable<BinanceOrderBookEntry> Bids { get; set; }
+        BinanceOrderBookEntry[] Bids { get; set; }
 
         /// <summary>
         /// The list of asks
         /// </summary>
-        IEnumerable<BinanceOrderBookEntry> Asks { get; set; }
+        BinanceOrderBookEntry[] Asks { get; set; }
     }
 
     /// <summary>

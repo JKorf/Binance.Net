@@ -48,11 +48,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// The list of bids
         /// </summary>
         [JsonPropertyName("b")]
-        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
         /// <summary>
         /// The list of asks
         /// </summary>
         [JsonPropertyName("a")]
-        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }

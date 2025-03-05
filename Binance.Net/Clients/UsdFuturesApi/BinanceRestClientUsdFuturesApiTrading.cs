@@ -2,7 +2,6 @@
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.AlgoOrders;
-using CryptoExchange.Net.CommonObjects;
 using System.Text.Json;
 
 namespace Binance.Net.Clients.UsdFuturesApi
@@ -98,15 +97,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalMilliseconds("goodTillDate", goodTillDate);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 0, true);
-            var result = await _baseClient.SendAsync<BinanceUsdFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-            {
-                _baseClient.InvokeOrderPlaced(new OrderId
-                {
-                    SourceObject = result.Data,
-                    Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
-                });
-            }
+            var result = await _baseClient.SendAsync<BinanceUsdFuturesOrder>(request, parameters, ct).ConfigureAwait(false);            
             return result;
         }
 
@@ -259,15 +250,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Delete, "fapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            var result = await _baseClient.SendAsync<BinanceUsdFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-            {
-                _baseClient.InvokeOrderCanceled(new OrderId
-                {
-                    SourceObject = result.Data,
-                    Id = result.Data.Id.ToString(CultureInfo.InvariantCulture)
-                });
-            }
+            var result = await _baseClient.SendAsync<BinanceUsdFuturesOrder>(request, parameters, ct).ConfigureAwait(false);            
             return result;
         }
 

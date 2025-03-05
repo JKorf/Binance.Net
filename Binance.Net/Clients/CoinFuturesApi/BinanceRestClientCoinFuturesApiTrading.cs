@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Models.Futures;
-using CryptoExchange.Net.CommonObjects;
 using System.Text.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
@@ -95,8 +94,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 0, true);
             var result = await _baseClient.SendAsync<BinanceFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-                _baseClient.InvokeOrderPlaced(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -231,8 +228,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/order", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             var result = await _baseClient.SendAsync<BinanceFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
-            if (result)
-                _baseClient.InvokeOrderCanceled(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 

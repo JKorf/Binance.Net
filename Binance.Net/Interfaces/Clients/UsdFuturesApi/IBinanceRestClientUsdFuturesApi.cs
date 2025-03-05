@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces.CommonClients;
-
-namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
+﻿namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
     /// Binance USD futures API endpoints
@@ -21,11 +19,6 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// Endpoints related to orders and trades
         /// </summary>
         public IBinanceRestClientUsdFuturesApiTrading Trading { get; }
-
-        /// <summary>
-        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
-        /// </summary>
-        public IFuturesClient CommonFuturesClient { get; }
 
         /// <summary>
         /// Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
