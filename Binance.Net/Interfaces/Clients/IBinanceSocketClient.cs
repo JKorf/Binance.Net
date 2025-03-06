@@ -8,7 +8,7 @@ namespace Binance.Net.Interfaces.Clients
     /// <summary>
     /// Client for accessing the Binance websocket API
     /// </summary>
-    public interface IBinanceSocketClient: ISocketClient
+    public interface IBinanceSocketClient : ISocketClient
     {
         /// <summary>
         /// Coin futures streams

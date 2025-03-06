@@ -9,7 +9,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Transaction status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<AutoInvestOneTimeTransactionStatus>))] public  enum AutoInvestOneTimeTransactionStatus
+    [JsonConverter(typeof(EnumConverter<AutoInvestOneTimeTransactionStatus>))]
+    public enum AutoInvestOneTimeTransactionStatus
     {
         /// <summary>
         /// Success

@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Price matching type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<PriceMatch>))] public  enum PriceMatch
+    [JsonConverter(typeof(EnumConverter<PriceMatch>))]
+    public enum PriceMatch
     {
         /// <summary>
         /// No price match

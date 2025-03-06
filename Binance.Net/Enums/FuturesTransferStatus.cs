@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Status of a transfer between spot and futures account
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<FuturesTransferStatus>))] public  enum FuturesTransferStatus
+    [JsonConverter(typeof(EnumConverter<FuturesTransferStatus>))]
+    public enum FuturesTransferStatus
     {
         /// <summary>
         /// Pending to execute

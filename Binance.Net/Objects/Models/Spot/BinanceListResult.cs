@@ -32,6 +32,6 @@
         /// The data
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<T> Data { get; set; } = Array.Empty<T>();
+        public T[] Data { get; set; } = Array.Empty<T>();
     }
 }

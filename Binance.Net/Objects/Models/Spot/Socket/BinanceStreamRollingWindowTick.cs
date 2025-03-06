@@ -3,7 +3,7 @@
     /// <summary>
     /// Rolling window tick info
     /// </summary>
-    public record BinanceStreamRollingWindowTick: BinanceStreamEvent
+    public record BinanceStreamRollingWindowTick : BinanceStreamEvent
     {
         /// <summary>
         /// The symbol this data is for

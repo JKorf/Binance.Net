@@ -22,13 +22,13 @@
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Trade Id
         /// </summary>

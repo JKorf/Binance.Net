@@ -34,7 +34,7 @@
         /// </summary>
         [JsonPropertyName("subAccountQty")]
         public int SubAccountQuantity { get; set; }
-        
+
         /// <summary>
         /// Max Sub Account Quantity
         /// </summary>

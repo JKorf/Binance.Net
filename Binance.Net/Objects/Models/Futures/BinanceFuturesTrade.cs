@@ -79,7 +79,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade details
     /// </summary>
-    public record BinanceFuturesUsdtTrade: BinanceFuturesTrade
+    public record BinanceFuturesUsdtTrade : BinanceFuturesTrade
     {
         /// <summary>
         /// Quote quantity

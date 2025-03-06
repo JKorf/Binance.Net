@@ -3,14 +3,14 @@
     /// <summary>
     /// The result of placing a new order
     /// </summary>
-    public record BinancePlacedOrder: BinanceOrderBase
+    public record BinancePlacedOrder : BinanceOrderBase
     {
-        
+
         /// <summary>
         /// Trades for the order
         /// </summary>
         [JsonPropertyName("fills")]
-        public IEnumerable<BinanceOrderTrade>? Trades { get; set; }
+        public BinanceOrderTrade[]? Trades { get; set; }
 
         /// <summary>
         /// Only present if a margin trade happened

@@ -3,7 +3,7 @@
     internal record BinanceSubAccountWrapper
     {
         [JsonPropertyName("subAccounts")]
-        public IEnumerable<BinanceSubAccount>? SubAccounts { get; set; }
+        public BinanceSubAccount[]? SubAccounts { get; set; }
     }
 
     /// <summary>

@@ -6,16 +6,12 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceSocketClientSpotApi : IBinanceSocketClientSpotApiShared
     {
+        private const string _topicId = "BinanceSocketSpot";
         public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
-        public string GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
-        public SharedSymbol ParseSymbol(string symbol)
-        {
-            return null;
-        }
 
         #region Tickers client
         EndpointOptions<SubscribeAllTickersRequest> ITickersSocketClient.SubscribeAllTickersOptions { get; } = new EndpointOptions<SubscribeAllTickersRequest>(false);
@@ -25,7 +21,7 @@ namespace Binance.Net.Clients.SpotApi
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
-            var result = await ExchangeData.SubscribeToAllTickerUpdatesAsync(update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)).ToArray())), ct).ConfigureAwait(false);
+            var result = await ExchangeData.SubscribeToAllTickerUpdatesAsync(update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)).ToArray())), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -41,7 +37,7 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await ExchangeData.SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.PriceChangePercent))), ct).ConfigureAwait(false);
+            var result = await ExchangeData.SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.PriceChangePercent))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -77,7 +73,7 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
+            var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -99,7 +95,7 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
-                onAccountPositionMessage: update => handler(update.AsExchangeEvent(Exchange, update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray())), 
+                onAccountPositionMessage: update => handler(update.AsExchangeEvent(Exchange, update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -123,8 +119,9 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
-                onOrderUpdateMessage: update => handler(update.AsExchangeEvent(Exchange, new[] { 
+                onOrderUpdateMessage: update => handler(update.AsExchangeEvent(Exchange, new[] {
                     new SharedSpotOrder(
+                        ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol),
                         update.Data.Symbol,
                         update.Data.Id.ToString(),
                         update.Data.Type == Enums.SpotOrderType.Limit ? SharedOrderType.Limit : update.Data.Type == Enums.SpotOrderType.Market ? SharedOrderType.Market : update.Data.Type == Enums.SpotOrderType.LimitMaker ? SharedOrderType.LimitMaker : SharedOrderType.Other,
@@ -142,7 +139,7 @@ namespace Binance.Net.Clients.SpotApi
                         Fee = update.Data.Fee,
                         FeeAsset = update.Data.FeeAsset,
                         TimeInForce = update.Data.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
-                        LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(update.Data.Symbol, update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
+                        LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
                         {
                             Role = update.Data.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
                         }

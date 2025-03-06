@@ -16,7 +16,7 @@
         /// </summary>
         [JsonPropertyName("spotBNBBurn")]
         public bool IsSpotBnbBurn { get; set; }
-        
+
         /// <summary>
         /// Is Interest BNB Burn
         /// </summary>

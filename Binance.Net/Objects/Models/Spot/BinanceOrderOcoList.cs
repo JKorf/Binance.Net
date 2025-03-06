@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// The client id of the order list
         /// </summary>
         [JsonPropertyName("listClientOrderId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ListClientOrderId { get; set; } = string.Empty;
@@ -50,12 +50,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// The order in this list
         /// </summary>
         [JsonPropertyName("orders")]
-        public IEnumerable<BinanceOrderId> Orders { get; set; } = Array.Empty<BinanceOrderId>();
+        public BinanceOrderId[] Orders { get; set; } = Array.Empty<BinanceOrderId>();
         /// <summary>
         /// The order details
         /// </summary>
         [JsonPropertyName("orderReports")]
-        public IEnumerable<BinancePlacedOcoOrder> OrderReports { get; set; } = Array.Empty<BinancePlacedOcoOrder>();
+        public BinancePlacedOcoOrder[] OrderReports { get; set; } = Array.Empty<BinancePlacedOcoOrder>();
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// The client order id
         /// </summary>
         [JsonPropertyName("clientOrderId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;
@@ -86,7 +86,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The result of placing a new order
     /// </summary>
-    public record BinancePlacedOcoOrder: BinanceOrderBase
+    public record BinancePlacedOcoOrder : BinanceOrderBase
     {
     }
 }

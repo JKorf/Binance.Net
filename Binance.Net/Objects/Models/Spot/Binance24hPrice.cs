@@ -34,7 +34,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("askQty")]
         public decimal BestAskQuantity { get; set; }
-        
+
         /// <inheritdoc />
         [JsonPropertyName("volume")]
         public override decimal Volume { get; set; }

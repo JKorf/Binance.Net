@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Account update reason
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<AccountUpdateReason>))] public  enum AccountUpdateReason
+    [JsonConverter(typeof(EnumConverter<AccountUpdateReason>))]
+    public enum AccountUpdateReason
     {
         /// <summary>
         /// Deposit

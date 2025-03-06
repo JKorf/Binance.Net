@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Recent trade info
     /// </summary>
-    public abstract record BinanceRecentTrade: IBinanceRecentTrade
+    public abstract record BinanceRecentTrade : IBinanceRecentTrade
     {
         /// <summary>
         /// The id of the trade

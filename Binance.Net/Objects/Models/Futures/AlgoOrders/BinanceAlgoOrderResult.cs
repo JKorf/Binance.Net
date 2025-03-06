@@ -3,13 +3,13 @@
     /// <summary>
     /// Algo order result
     /// </summary>
-    public record BinanceAlgoOrderResult: BinanceResult
+    public record BinanceAlgoOrderResult : BinanceResult
     {
         /// <summary>
         /// Order id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientAlgoId { get; set; } = string.Empty;

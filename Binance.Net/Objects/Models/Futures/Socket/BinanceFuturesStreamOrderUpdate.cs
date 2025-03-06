@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Order update
     /// </summary>
-    public record BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
+    public record BinanceFuturesStreamOrderUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Update data
@@ -38,7 +38,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// The new client order id
         /// </summary>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;

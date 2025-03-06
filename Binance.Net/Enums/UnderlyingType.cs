@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Underlying Type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<UnderlyingType>))] public  enum UnderlyingType
+    [JsonConverter(typeof(EnumConverter<UnderlyingType>))]
+    public enum UnderlyingType
     {
         /// <summary>
         /// Coin

@@ -1,18 +1,12 @@
 ﻿using Binance.Net.Interfaces;
-namespace Binance.Net
-{
-    internal partial class BinanceSourceGenerationAggregator
-    {
-        public Binance.Net.Objects.Models.Spot.BinanceEventOrderBook? BinanceEventOrderBook;
-    }
-}
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Stream order book
     /// </summary>
-    public record BinanceEventOrderBook: IBinanceEventOrderBook
+    [SerializationModel]
+    public record BinanceEventOrderBook : IBinanceEventOrderBook
     {
         /// <summary>
         /// The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book

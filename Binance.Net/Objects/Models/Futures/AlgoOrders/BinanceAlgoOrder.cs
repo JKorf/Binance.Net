@@ -17,7 +17,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Orders
         /// </summary>
         [JsonPropertyName("orders")]
-        public IEnumerable<BinanceAlgoOrder> Orders { get; set; } = Array.Empty<BinanceAlgoOrder>();
+        public BinanceAlgoOrder[] Orders { get; set; } = Array.Empty<BinanceAlgoOrder>();
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Client algo id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientAlgoId { get; set; } = string.Empty;

@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Sub account margin transfer type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<SubAccountMarginTransferType>))] public  enum SubAccountMarginTransferType
+    [JsonConverter(typeof(EnumConverter<SubAccountMarginTransferType>))]
+    public enum SubAccountMarginTransferType
     {
         /// <summary>
         /// Sub account spot to sub account margin

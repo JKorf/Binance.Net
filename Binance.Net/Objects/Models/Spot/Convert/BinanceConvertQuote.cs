@@ -35,6 +35,6 @@
         /// </summary>
         [JsonPropertyName("fromAmount")]
         public decimal QuoteQuantity { get; set; }
-       
+
     }
 }

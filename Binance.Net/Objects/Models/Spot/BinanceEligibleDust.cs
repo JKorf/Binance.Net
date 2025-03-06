@@ -24,7 +24,7 @@
         /// Assets
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<BinanceEligibleDust> Details { get; set; } = Array.Empty<BinanceEligibleDust>();
+        public BinanceEligibleDust[] Details { get; set; } = Array.Empty<BinanceEligibleDust>();
     }
 
     /// <summary>

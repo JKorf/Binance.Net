@@ -21,7 +21,7 @@
     /// Query result
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal record BinanceResult<T>: BinanceResult
+    internal record BinanceResult<T> : BinanceResult
     {
         /// <summary>
         /// The data

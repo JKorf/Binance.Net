@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Operation result
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<OrderOperationResult>))] public  enum OrderOperationResult
+    [JsonConverter(typeof(EnumConverter<OrderOperationResult>))]
+    public enum OrderOperationResult
     {
         /// <summary>
         /// Successful

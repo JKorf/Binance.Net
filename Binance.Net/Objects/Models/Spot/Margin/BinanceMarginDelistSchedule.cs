@@ -15,11 +15,11 @@
         /// Cross margin assets
         /// </summary>
         [JsonPropertyName("crossMarginAssets")]
-        public IEnumerable<string> CrossMarginAssets { get; set; } = Array.Empty<string>();
+        public string[] CrossMarginAssets { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Isolated margin symbols
         /// </summary>
         [JsonPropertyName("isolatedMarginSymbols")]
-        public IEnumerable<string> IsolatedMarginSymbols { get; set; } = Array.Empty<string>();
+        public string[] IsolatedMarginSymbols { get; set; } = Array.Empty<string>();
     }
 }

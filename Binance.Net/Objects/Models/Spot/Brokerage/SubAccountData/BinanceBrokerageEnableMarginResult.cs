@@ -16,7 +16,7 @@
         /// </summary>
         [JsonPropertyName("enableMargin")]
         public bool IsMarginEnabled { get; set; }
-        
+
         /// <summary>
         /// Update Date
         /// </summary>

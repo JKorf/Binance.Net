@@ -9,7 +9,7 @@ namespace Binance.Net.Interfaces.Clients
     /// <summary>
     /// Client for accessing the Binance Rest API. 
     /// </summary>
-    public interface IBinanceRestClient: IRestClient
+    public interface IBinanceRestClient : IRestClient
     {
         /// <summary>
         /// General API endpoints

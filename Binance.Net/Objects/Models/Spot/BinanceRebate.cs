@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Rebate data for this page
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceRebate> Data { get; set; } = Array.Empty<BinanceRebate>();
+        public BinanceRebate[] Data { get; set; } = Array.Empty<BinanceRebate>();
     }
 
     /// <summary>

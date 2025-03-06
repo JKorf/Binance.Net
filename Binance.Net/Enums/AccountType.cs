@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of account
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<AccountType>))] public  enum AccountType
+    [JsonConverter(typeof(EnumConverter<AccountType>))]
+    public enum AccountType
     {
         /// <summary>
         /// Spot account type
@@ -27,6 +28,6 @@ namespace Binance.Net.Enums
         /// Leveraged account type
         /// </summary>
         [Map("LEVERAGED")]
-        Leveraged       
+        Leveraged
     }
 }

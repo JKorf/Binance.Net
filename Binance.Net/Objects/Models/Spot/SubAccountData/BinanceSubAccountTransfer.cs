@@ -7,7 +7,7 @@
         [JsonPropertyName("success")]
         public bool Success { get; set; }
         [JsonPropertyName("transfers")]
-        public IEnumerable<BinanceSubAccountTransfer>? Transfers { get; set; }
+        public BinanceSubAccountTransfer[]? Transfers { get; set; }
     }
 
     /// <summary>

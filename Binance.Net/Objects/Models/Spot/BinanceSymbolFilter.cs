@@ -254,7 +254,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public int MaxTrailingBelowDelta { get; set; }
     }
-    
+
     /// <summary>
     /// Max Iceberg Orders Filter
     /// </summary>

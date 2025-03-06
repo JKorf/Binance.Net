@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Transfer account type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<TransferAccountType>))] public  enum TransferAccountType
+    [JsonConverter(typeof(EnumConverter<TransferAccountType>))]
+    public enum TransferAccountType
     {
         /// <summary>
         /// Spot

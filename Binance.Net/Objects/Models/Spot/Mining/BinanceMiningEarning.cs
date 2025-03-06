@@ -21,7 +21,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// Profit items
         /// </summary>
         [JsonPropertyName("accountProfits")]
-        public IEnumerable<BinanceMiningAccountEarning> AccountProfits { get; set; } = Array.Empty<BinanceMiningAccountEarning>();
+        public BinanceMiningAccountEarning[] AccountProfits { get; set; } = Array.Empty<BinanceMiningAccountEarning>();
     }
 
     /// <summary>

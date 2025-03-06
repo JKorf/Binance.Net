@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Transfer direction for isolated margin transfer
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<IsolatedMarginTransferDirection>))] public  enum IsolatedMarginTransferDirection
+    [JsonConverter(typeof(EnumConverter<IsolatedMarginTransferDirection>))]
+    public enum IsolatedMarginTransferDirection
     {
         /// <summary>
         /// Spot

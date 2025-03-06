@@ -66,12 +66,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// Assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceFuturesAccountInfoAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAccountInfoAsset>();
+        public BinanceFuturesAccountInfoAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesAccountInfoAsset>();
         /// <summary>
         /// Positions
         /// </summary>
         [JsonPropertyName("positions")]
-        public IEnumerable<BinanceFuturesAccountInfoPosition> Positions { get; set; } = Array.Empty<BinanceFuturesAccountInfoPosition>();
+        public BinanceFuturesAccountInfoPosition[] Positions { get; set; } = Array.Empty<BinanceFuturesAccountInfoPosition>();
     }
 
     /// <summary>

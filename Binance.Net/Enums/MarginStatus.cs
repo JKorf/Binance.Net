@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Status of a margin action
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<MarginStatus>))] public  enum MarginStatus
+    [JsonConverter(typeof(EnumConverter<MarginStatus>))]
+    public enum MarginStatus
     {
         /// <summary>
         /// Pending to execution

@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Position info
     /// </summary>
-    public record BinancePositionInfoBase: BinancePositionBase
+    public record BinancePositionInfoBase : BinancePositionBase
     {
         /// <summary>
         /// Initial margin
@@ -120,7 +120,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Base position details
     /// </summary>
-    public record BinancePositionDetailsBase: BinancePositionBase
+    public record BinancePositionDetailsBase : BinancePositionBase
     {
         /// <summary>
         /// Margin type

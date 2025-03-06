@@ -8,8 +8,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// Transactions
         /// </summary>
         [JsonPropertyName("result")]
-        public IEnumerable<BinanceSubAccountUniversalTransferTransaction> Transactions { get; set; } =
-            new List<BinanceSubAccountUniversalTransferTransaction>();
+        public BinanceSubAccountUniversalTransferTransaction[] Transactions { get; set; } = [];
 
     }
 

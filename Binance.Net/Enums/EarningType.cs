@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Mining earnings type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<EarningType>))] public  enum EarningType
+    [JsonConverter(typeof(EnumConverter<EarningType>))]
+    public enum EarningType
     {
         /// <summary>
         /// Mining wallet

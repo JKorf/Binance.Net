@@ -9,7 +9,7 @@
         /// The trading rule indicators
         /// </summary>
         [JsonPropertyName("indicators")]
-        public Dictionary<string, IEnumerable<BinanceFuturesTradingStatusIndicator>> Indicators { get; set; } = new Dictionary<string, IEnumerable<BinanceFuturesTradingStatusIndicator>>();
+        public Dictionary<string, BinanceFuturesTradingStatusIndicator[]> Indicators { get; set; } = new Dictionary<string, BinanceFuturesTradingStatusIndicator[]>();
         /// <summary>
         /// Last update time
         /// </summary>

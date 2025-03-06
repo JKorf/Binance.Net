@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Sub Account Deposit Status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<SubAccountDepositStatus>))] public  enum SubAccountDepositStatus
+    [JsonConverter(typeof(EnumConverter<SubAccountDepositStatus>))]
+    public enum SubAccountDepositStatus
     {
         /// <summary>
         /// Pending

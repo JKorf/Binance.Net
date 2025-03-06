@@ -1,16 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Objects.Internal;
-namespace Binance.Net
-{
-    internal partial class BinanceSourceGenerationAggregator
-    {
-        public Binance.Net.Objects.Internal.BinanceSocketQuery? BinanceSocketQuery;
-        public Binance.Net.Objects.Internal.BinanceSocketRequest? BinanceSocketRequest;
-    }
-}
-
-
-namespace Binance.Net.Objects.Internal
+﻿namespace Binance.Net.Objects.Internal
 {
     internal class BinanceSocketMessage
     {
@@ -21,12 +9,14 @@ namespace Binance.Net.Objects.Internal
         public int Id { get; set; }
     }
 
+    [SerializationModel]
     internal class BinanceSocketRequest : BinanceSocketMessage
     {
         [JsonPropertyName("params")]
         public string[] Params { get; set; } = Array.Empty<string>();
     }
 
+    [SerializationModel]
     internal class BinanceSocketQuery : BinanceSocketMessage
     {
         [JsonPropertyName("params")]

@@ -37,7 +37,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Price of symbol</returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinancePrice>>>> GetPricesAsync(CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinancePrice[]>>> GetPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
@@ -54,7 +54,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookPricesAsync(CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceBookPrice[]>>> GetBookPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
@@ -219,7 +219,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IBinanceMiniTick[]>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
@@ -248,7 +248,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinance24HPrice>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IBinance24HPrice[]>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to all book ticker update streams
@@ -361,7 +361,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<BinanceFuturesStreamSymbolUpdate>> onMessage, CancellationToken ct = default);
-                
+
         /// <summary>
         /// Subscribes to the Mark price update stream for a all symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream-for-all-market" /></para>
@@ -370,7 +370,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<DataEvent<IEnumerable<BinanceFuturesUsdtStreamMarkPrice>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(int? updateInterval, Action<DataEvent<BinanceFuturesUsdtStreamMarkPrice[]>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to composite index updates stream for a symbol
@@ -390,7 +390,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate[]>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to asset index updates for a single

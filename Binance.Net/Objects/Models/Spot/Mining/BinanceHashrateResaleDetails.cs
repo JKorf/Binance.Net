@@ -19,7 +19,7 @@
         /// Transfer details
         /// </summary>
         [JsonPropertyName("profitTransferDetails")]
-        public IEnumerable<BinanceHashrateResaleDetailsItem> ProfitTransferDetails { get; set; } = Array.Empty<BinanceHashrateResaleDetailsItem>();
+        public BinanceHashrateResaleDetailsItem[] ProfitTransferDetails { get; set; } = Array.Empty<BinanceHashrateResaleDetailsItem>();
     }
 
     /// <summary>

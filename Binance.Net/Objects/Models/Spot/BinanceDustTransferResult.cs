@@ -19,7 +19,7 @@
         /// Transfer entries
         /// </summary>
         [JsonPropertyName("transferResult")]
-        public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
+        public BinanceDustTransferResultEntry[] TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
     }
 
     /// <summary>

@@ -3,7 +3,7 @@
     /// <summary>
     /// Strategy update
     /// </summary>
-    public record BinanceStrategyUpdate: BinanceStreamEvent
+    public record BinanceStrategyUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Update info

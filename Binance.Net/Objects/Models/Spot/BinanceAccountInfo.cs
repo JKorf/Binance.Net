@@ -81,12 +81,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// Permissions types
         /// </summary>
         [JsonPropertyName("permissions")]
-        public IEnumerable<PermissionType> Permissions { get; set; } = Array.Empty<PermissionType>();
+        public PermissionType[] Permissions { get; set; } = Array.Empty<PermissionType>();
         /// <summary>
         /// List of assets with their current balances
         /// </summary>
         [JsonPropertyName("balances")]
-        public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
+        public BinanceBalance[] Balances { get; set; } = Array.Empty<BinanceBalance>();
     }
 
     /// <summary>

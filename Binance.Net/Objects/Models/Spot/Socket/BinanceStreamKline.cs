@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
-    public record BinanceStreamKlineData: BinanceStreamEvent, IBinanceStreamKlineData
+    public record BinanceStreamKlineData : BinanceStreamEvent, IBinanceStreamKlineData
     {
         /// <summary>
         /// The symbol the data is for
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// The kline data
     /// </summary>
-    public record BinanceStreamKline: IBinanceStreamKline
+    public record BinanceStreamKline : IBinanceStreamKline
     {
         /// <summary>
         /// The open time of this candlestick

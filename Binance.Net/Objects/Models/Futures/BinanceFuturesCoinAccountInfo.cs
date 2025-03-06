@@ -35,12 +35,12 @@
         /// Account assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAccountAsset>();
+        public BinanceFuturesAccountAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesAccountAsset>();
         /// <summary>
         /// Account positions
         /// </summary>
         [JsonPropertyName("positions")]
-        public IEnumerable<BinancePositionInfoCoin> Positions { get; set; } = Array.Empty<BinancePositionInfoCoin>();
+        public BinancePositionInfoCoin[] Positions { get; set; } = Array.Empty<BinancePositionInfoCoin>();
         /// <summary>
         /// Update time
         /// </summary>

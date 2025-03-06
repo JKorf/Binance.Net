@@ -9,7 +9,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Index status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<AutoInvestIndexStatus>))] public  enum AutoInvestIndexStatus
+    [JsonConverter(typeof(EnumConverter<AutoInvestIndexStatus>))]
+    public enum AutoInvestIndexStatus
     {
         /// <summary>
         /// Running

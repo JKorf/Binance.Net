@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The time the order will be active for
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<TimeInForce>))] public  enum TimeInForce
+    [JsonConverter(typeof(EnumConverter<TimeInForce>))]
+    public enum TimeInForce
     {
         /// <summary>
         /// GoodTillCanceled orders will stay active until they are filled or canceled

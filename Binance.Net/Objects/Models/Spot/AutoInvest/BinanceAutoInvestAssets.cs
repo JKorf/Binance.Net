@@ -9,12 +9,12 @@
         /// Target assets
         /// </summary>
         [JsonPropertyName("targetAssets")]
-        public IEnumerable<string> TargetAssets { get; set; } = Array.Empty<string>();
+        public string[] TargetAssets { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Source assets
         /// </summary>
         [JsonPropertyName("sourceAssets")]
-        public IEnumerable<string> SourceAssets { get; set; } = Array.Empty<string>();
+        public string[] SourceAssets { get; set; } = Array.Empty<string>();
     }
 
 }

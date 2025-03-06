@@ -10,7 +10,7 @@
         /// </summary>
         [JsonPropertyName("txnId")]
         public string Id { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Success
         /// </summary>

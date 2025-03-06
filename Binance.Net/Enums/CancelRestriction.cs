@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Restrictions for order cancelation
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<CancelRestriction>))] public  enum CancelRestriction
+    [JsonConverter(typeof(EnumConverter<CancelRestriction>))]
+    public enum CancelRestriction
     {
         /// <summary>
         /// Cancel will succeed if the order status is New

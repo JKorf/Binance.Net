@@ -16,7 +16,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrder[]>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default);
         /// <summary>
         /// Cancel an Oco order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#cancel-oco-trade" /></para>
@@ -58,14 +58,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get open Oco orders
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-open-ocos-user_data" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOpenOcoOrdersAsync(CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOpenOcoOrdersAsync(CancellationToken ct = default);
         /// <summary>
         /// Get open orders
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-open-orders-user_data" /></para>
@@ -73,7 +73,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default);
         /// <summary>
         /// Get order by either orderId or clientOrderId
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#query-order-user_data" /></para>
@@ -95,7 +95,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get prevented trades because of self trade prevention
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-prevented-matches-user_data" /></para>
@@ -107,7 +107,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinancePreventedTrade>>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinancePreventedTrade[]>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets user trades for provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-trade-history-user_data" /></para>
@@ -120,7 +120,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceTrade>>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceTrade[]>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD

@@ -295,13 +295,13 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSolUnclaimedReward>>> GetSolUnclaimedRewardsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSolUnclaimedReward[]>> GetSolUnclaimedRewardsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/unclaimedRewards", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSolUnclaimedReward>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSolUnclaimedReward[]>(request, parameters, ct).ConfigureAwait(false);
         }
     }
 }

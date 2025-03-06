@@ -26,7 +26,7 @@
         /// Brackets
         /// </summary>
         [JsonPropertyName("brackets")]
-        public IEnumerable<BinanceFuturesBracket> Brackets { get; set; } = Array.Empty<BinanceFuturesBracket>();
+        public BinanceFuturesBracket[] Brackets { get; set; } = Array.Empty<BinanceFuturesBracket>();
 
     }
 

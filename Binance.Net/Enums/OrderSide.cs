@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The side of an order
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<OrderSide>))] public  enum OrderSide
+    [JsonConverter(typeof(EnumConverter<OrderSide>))]
+    public enum OrderSide
     {
         /// <summary>
         /// Buy

@@ -34,12 +34,12 @@
         /// Asset allocation
         /// </summary>
         [JsonPropertyName("assetAllocation")]
-        public IEnumerable<BinanceAutoInvestIndexPlanPositionAllocation> AssetAllocation { get; set; } = Array.Empty<BinanceAutoInvestIndexPlanPositionAllocation>();
+        public BinanceAutoInvestIndexPlanPositionAllocation[] AssetAllocation { get; set; } = Array.Empty<BinanceAutoInvestIndexPlanPositionAllocation>();
         /// <summary>
         /// Details
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<BinanceAutoInvestIndexPlanPositionDetails> Details { get; set; } = Array.Empty<BinanceAutoInvestIndexPlanPositionDetails>();
+        public BinanceAutoInvestIndexPlanPositionDetails[] Details { get; set; } = Array.Empty<BinanceAutoInvestIndexPlanPositionDetails>();
     }
 
     /// <summary>

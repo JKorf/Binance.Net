@@ -39,12 +39,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// List of assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceFuturesAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
+        public BinanceFuturesAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
         /// <summary>
         /// List of positions
         /// </summary>
         [JsonPropertyName("position")]
-        public IEnumerable<BinanceFuturesSnapshotPosition> Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
+        public BinanceFuturesSnapshotPosition[] Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
     }
 
     /// <summary>

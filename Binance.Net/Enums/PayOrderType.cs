@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Pay order type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<PayOrderType>))] public  enum PayOrderType
+    [JsonConverter(typeof(EnumConverter<PayOrderType>))]
+    public enum PayOrderType
     {
         /// <summary>
         /// C2B Merchant Acquiring Payment

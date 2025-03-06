@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Simple earn redemption type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<RedemptionType>))] public  enum RedemptionType
+    [JsonConverter(typeof(EnumConverter<RedemptionType>))]
+    public enum RedemptionType
     {
         /// <summary>
         /// Redeem to spot account

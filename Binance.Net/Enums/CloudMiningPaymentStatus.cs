@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Cloud mining payment status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<CloudMiningPaymentStatus>))] public  enum CloudMiningPaymentStatus
+    [JsonConverter(typeof(EnumConverter<CloudMiningPaymentStatus>))]
+    public enum CloudMiningPaymentStatus
     {
         /// <summary>
         /// Payment

@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Response type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<OrderResponseType>))] public  enum OrderResponseType
+    [JsonConverter(typeof(EnumConverter<OrderResponseType>))]
+    public enum OrderResponseType
     {
         /// <summary>
         /// Ack only

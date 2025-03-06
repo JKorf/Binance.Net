@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of futures income
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<IncomeType>))] public  enum IncomeType
+    [JsonConverter(typeof(EnumConverter<IncomeType>))]
+    public enum IncomeType
     {
         /// <summary>
         /// Transfer into account

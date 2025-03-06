@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Sub orders
         /// </summary>
         [JsonPropertyName("subOrders")]
-        public IEnumerable<BinanceAlgoSubOrder> SubOrders { get; set; } = Array.Empty<BinanceAlgoSubOrder>();
+        public BinanceAlgoSubOrder[] SubOrders { get; set; } = Array.Empty<BinanceAlgoSubOrder>();
     }
 
     /// <summary>

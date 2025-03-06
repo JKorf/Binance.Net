@@ -124,15 +124,15 @@ namespace Binance.Net
 
         internal IRateLimitGate EndpointLimit { get; private set; }
 
-        internal IRateLimitGate SpotRestIp { get; private set; } 
+        internal IRateLimitGate SpotRestIp { get; private set; }
 
-        internal IRateLimitGate SpotRestUid { get; private set; } 
+        internal IRateLimitGate SpotRestUid { get; private set; }
 
-        internal IRateLimitGate SpotSocket { get; private set; } 
+        internal IRateLimitGate SpotSocket { get; private set; }
 
-        internal IRateLimitGate FuturesRest { get; private set; } 
+        internal IRateLimitGate FuturesRest { get; private set; }
 
-        internal IRateLimitGate FuturesSocket { get; private set; } 
+        internal IRateLimitGate FuturesSocket { get; private set; }
 
     }
 }

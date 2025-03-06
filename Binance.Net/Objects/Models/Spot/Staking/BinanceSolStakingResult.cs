@@ -3,7 +3,7 @@
     /// <summary>
     /// Staking result
     /// </summary>
-    public record BinanceSolStakingResult 
+    public record BinanceSolStakingResult
     {
         /// <summary>
         /// Successful

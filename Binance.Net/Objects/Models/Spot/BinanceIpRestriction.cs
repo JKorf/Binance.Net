@@ -14,7 +14,7 @@
         /// Ip whitelist
         /// </summary>
         [JsonPropertyName("ipList")]
-        public IEnumerable<string> IpList { get; set; } = Array.Empty<string>();
+        public string[] IpList { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Update Time
         /// </summary>

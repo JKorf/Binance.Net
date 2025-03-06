@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Order urgency
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<OrderUrgency>))] public  enum OrderUrgency
+    [JsonConverter(typeof(EnumConverter<OrderUrgency>))]
+    public enum OrderUrgency
     {
         /// <summary>
         /// Low urgency

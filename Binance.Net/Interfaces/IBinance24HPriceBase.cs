@@ -3,7 +3,7 @@
     /// <summary>
     /// 24 hour price stats
     /// </summary>
-    public interface IBinance24HPrice: IBinanceMiniTick
+    public interface IBinance24HPrice : IBinanceMiniTick
     {
         /// <summary>
         /// The actual price change in the last 24 hours
@@ -19,12 +19,12 @@
         /// The weighted average price in the last 24 hours
         /// </summary>
         decimal WeightedAveragePrice { get; set; }
-        
+
         /// <summary>
         /// The most recent trade quantity
         /// </summary>
         decimal LastQuantity { get; set; }
-        
+
         /// <summary>
         /// Time at which this 24 hours opened
         /// </summary>

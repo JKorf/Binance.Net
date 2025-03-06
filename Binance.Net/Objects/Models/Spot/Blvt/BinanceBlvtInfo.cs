@@ -56,7 +56,7 @@
         /// Current baskets
         /// </summary>
         [JsonPropertyName("currentBaskets")]
-        public IEnumerable<BlvtCurrentBasket> CurrentBaskets { get; set; } = Array.Empty<BlvtCurrentBasket>();
+        public BlvtCurrentBasket[] CurrentBaskets { get; set; } = Array.Empty<BlvtCurrentBasket>();
         /// <summary>
         /// Redeem fee percentage
         /// </summary>

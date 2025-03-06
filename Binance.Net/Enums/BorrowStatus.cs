@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Borrow status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<BorrowStatus>))] public  enum BorrowStatus
+    [JsonConverter(typeof(EnumConverter<BorrowStatus>))]
+    public enum BorrowStatus
     {
         /// <summary>
         /// Accruing interest

@@ -30,16 +30,16 @@ namespace Binance.Net.Objects.Models.Spot
         /// The rate limits used
         /// </summary>
         [JsonPropertyName("rateLimits")]
-        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = Array.Empty<BinanceRateLimit>();
+        public BinanceRateLimit[] RateLimits { get; set; } = Array.Empty<BinanceRateLimit>();
         /// <summary>
         /// All symbols supported
         /// </summary>
         [JsonPropertyName("symbols")]
-        public IEnumerable<BinanceSymbol> Symbols { get; set; } = Array.Empty<BinanceSymbol>();
+        public BinanceSymbol[] Symbols { get; set; } = Array.Empty<BinanceSymbol>();
         /// <summary>
         /// Filters
         /// </summary>
         [JsonPropertyName("exchangeFilters")]
-        public IEnumerable<object> ExchangeFilters { get; set; } = Array.Empty<object>();
+        public object[] ExchangeFilters { get; set; } = Array.Empty<object>();
     }
 }

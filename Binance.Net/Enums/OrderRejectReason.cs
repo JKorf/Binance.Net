@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The reason the order was rejected
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<OrderRejectReason>))] public  enum OrderRejectReason
+    [JsonConverter(typeof(EnumConverter<OrderRejectReason>))]
+    public enum OrderRejectReason
     {
         /// <summary>
         /// Not rejected

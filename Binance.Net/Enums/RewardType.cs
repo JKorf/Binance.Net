@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Simple Earn Reward type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<RewardType>))] public  enum RewardType
+    [JsonConverter(typeof(EnumConverter<RewardType>))]
+    public enum RewardType
     {
         /// <summary>
         /// Bonus tiered APR

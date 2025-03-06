@@ -103,7 +103,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Multiple New Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> PlaceMultipleOrdersAsync(
+        public async Task<WebCallResult<CallResult<BinanceFuturesOrder>[]>> PlaceMultipleOrdersAsync(
             IEnumerable<BinanceFuturesBatchOrder> orders,
             int? receiveWindow = null,
             CancellationToken ct = default)
@@ -119,7 +119,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     if (!rulesCheck.Passed)
                     {
                         _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                        return new WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>(new ArgumentError(rulesCheck.ErrorMessage!));
+                        return new WebCallResult<CallResult<BinanceFuturesOrder>[]>(new ArgumentError(rulesCheck.ErrorMessage!));
                     }
 
                     order.Quantity = rulesCheck.Quantity;
@@ -164,9 +164,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
-            var response = await _baseClient.SendAsync<IEnumerable<BinanceFuturesMultipleOrderPlaceResult>>(request, parameters, ct).ConfigureAwait(false);
+            var response = await _baseClient.SendAsync<BinanceFuturesMultipleOrderPlaceResult[]>(request, parameters, ct).ConfigureAwait(false);
             if (!response.Success)
-                return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(default);
+                return response.As<CallResult<BinanceFuturesOrder>[]>(default);
 
             var result = new List<CallResult<BinanceFuturesOrder>>();
             foreach (var item in response.Data)
@@ -176,7 +176,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     : new CallResult<BinanceFuturesOrder>(item));
             }
 
-            return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(result);
+            return response.As(result.ToArray());
         }
 
         #endregion
@@ -271,7 +271,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Cancel Multiple Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CallResult<BinanceFuturesOrder>>>> CancelMultipleOrdersAsync(string symbol, IEnumerable<long>? orderIdList = null, IEnumerable<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CallResult<BinanceFuturesOrder>[]>> CancelMultipleOrdersAsync(string symbol, IEnumerable<long>? orderIdList = null, IEnumerable<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderIdList == null && origClientOrderIdList == null)
                 throw new ArgumentException("Either orderIdList or origClientOrderIdList must be sent");
@@ -298,10 +298,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Delete, "dapi/v1/batchOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            var response = await _baseClient.SendAsync<IEnumerable<BinanceFuturesMultipleOrderCancelResult>>(request, parameters, ct).ConfigureAwait(false);
+            var response = await _baseClient.SendAsync<BinanceFuturesMultipleOrderCancelResult[]>(request, parameters, ct).ConfigureAwait(false);
 
             if (!response.Success)
-                return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(default);
+                return response.As<CallResult<BinanceFuturesOrder>[]>(default);
 
             var result = new List<CallResult<BinanceFuturesOrder>>();
             foreach (var item in response.Data)
@@ -311,7 +311,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     : new CallResult<BinanceFuturesOrder>(item));
             }
 
-            return response.As<IEnumerable<CallResult<BinanceFuturesOrder>>>(result);
+            return response.As(result.ToArray());
         }
 
         #endregion
@@ -344,7 +344,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Current All Open Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesOrder[]>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -352,7 +352,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var weight = symbol == null ? 40 : 1;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/openOrders", BinanceExchange.RateLimiter.FuturesRest, weight, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesOrder>>(request, parameters, ct, weight).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesOrder[]>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -360,7 +360,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region All Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetOrdersAsync(string? symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesOrder[]>> GetOrdersAsync(string? symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -374,7 +374,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var weight = symbol == null ? 40 : 20;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/allOrders", BinanceExchange.RateLimiter.FuturesRest, weight, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesOrder>>(request, parameters, ct, weight).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesOrder[]>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -382,7 +382,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region User's Force Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesOrder>>> GetForcedOrdersAsync(string? symbol = null, AutoCloseType? closeType = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesOrder[]>> GetForcedOrdersAsync(string? symbol = null, AutoCloseType? closeType = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -393,7 +393,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var weight = symbol == null ? 50 : 20;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/forceOrders", BinanceExchange.RateLimiter.FuturesRest, weight, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesOrder>>(request, parameters, ct, weight).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesOrder[]>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
         #endregion
@@ -401,7 +401,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Account Trade List
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesCoinTrade>>> GetUserTradesAsync(string? symbol = null, string? pair = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? orderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesCoinTrade[]>> GetUserTradesAsync(string? symbol = null, string? pair = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? orderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -417,7 +417,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var weight = symbol == null ? 40 : 20;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/userTrades", BinanceExchange.RateLimiter.FuturesRest, weight, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesCoinTrade>>(request, parameters, ct, weight).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesCoinTrade[]>(request, parameters, ct, weight).ConfigureAwait(false);
         }
 
         #endregion

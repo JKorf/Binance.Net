@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         /// Asset list
         /// </summary>
         [JsonPropertyName("marginUserAssetVoList")]
-        public IEnumerable<BinanceMarginBalance> MarginUserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
+        public BinanceMarginBalance[] MarginUserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 
     /// <summary>

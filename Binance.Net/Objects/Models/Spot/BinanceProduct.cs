@@ -90,7 +90,7 @@
         /// Tags
         /// </summary>
         [JsonPropertyName("tags")]
-        public IEnumerable<string> Tags { get; set; } = Array.Empty<string>();
+        public string[] Tags { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Is Etf enabled
         /// </summary>

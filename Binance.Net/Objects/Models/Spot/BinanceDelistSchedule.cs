@@ -15,6 +15,6 @@
         /// Symbols being delisted
         /// </summary>
         [JsonPropertyName("symbols")]
-        public IEnumerable<string> Symbols { get; set; } = new List<string>();
+        public string[] Symbols { get; set; } = [];
     }
 }

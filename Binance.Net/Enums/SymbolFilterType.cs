@@ -1,12 +1,5 @@
 ﻿using Binance.Net.Converters;
 using CryptoExchange.Net.Attributes;
-namespace Binance.Net
-{
-    internal partial class BinanceSourceGenerationAggregator
-    {
-        public Binance.Net.Enums.SymbolFilterType? SymbolFilterType;
-    }
-}
 
 namespace Binance.Net.Enums
 {

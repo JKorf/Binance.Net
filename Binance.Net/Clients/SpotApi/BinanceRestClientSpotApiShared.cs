@@ -6,13 +6,9 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotApi : IBinanceRestClientSpotApiShared
     {
+        private const string _topicId = "BinanceRestSpot";
         public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
-        public string GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
-        public SharedSymbol ParseSymbol(string symbol)
-        {
-            return null;
-        }
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -87,7 +83,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Symbols.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading && s.IsSpotTradingAllowed)
+            var resultData = result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Symbols.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading && s.IsSpotTradingAllowed)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
@@ -95,6 +91,9 @@ namespace Binance.Net.Clients.SpotApi
                 QuantityStep = s.LotSizeFilter?.StepSize,
                 PriceStep = s.PriceFilter?.TickSize
             }).ToArray());
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, resultData.Data);
+            return resultData;
         }
 
         #endregion
@@ -112,7 +111,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(result.Data.Symbol, result.Data.LastPrice, result.Data.HighPrice, result.Data.LowPrice, result.Data.Volume, result.Data.PriceChangePercent));
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, result.Data.Symbol), result.Data.Symbol, result.Data.LastPrice, result.Data.HighPrice, result.Data.LowPrice, result.Data.Volume, result.Data.PriceChangePercent));
         }
 
         EndpointOptions<GetTickersRequest> ISpotTickerRestClient.GetSpotTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false);
@@ -126,7 +125,8 @@ namespace Binance.Net.Clients.SpotApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)).ToArray());
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Select(x =>
+                new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)).ToArray());
         }
 
         #endregion
@@ -149,7 +149,7 @@ namespace Binance.Net.Clients.SpotApi
                 return result.AsExchangeResult<SharedTrade[]>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime) 
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedTrade(x.BaseQuantity, x.Price, x.TradeTime)
             {
                 Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
             }).ToArray());
@@ -174,7 +174,7 @@ namespace Binance.Net.Clients.SpotApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 startTime: fromId != null ? null : request.StartTime,
                 endTime: fromId != null ? null : request.EndTime,
-                limit:  request.Limit ?? 1000,
+                limit: request.Limit ?? 1000,
                 fromId: fromId,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -243,12 +243,14 @@ namespace Binance.Net.Clients.SpotApi
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAndQuoteAsset);
 
+        string ISpotOrderRestClient.GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
+
         PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions();
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).PlaceSpotOrderOptions.ValidateRequest(
-                Exchange, 
-                request, 
+                Exchange,
+                request,
                 request.Symbol.TradingMode,
                 SupportedTradingModes,
                 ((ISpotOrderRestClient)this).SpotSupportedOrderTypes,
@@ -260,7 +262,7 @@ namespace Binance.Net.Clients.SpotApi
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
-                request.OrderType == SharedOrderType.Limit ? Enums.SpotOrderType.Limit : request.OrderType == SharedOrderType.Market ? Enums.SpotOrderType.Market: Enums.SpotOrderType.LimitMaker,
+                request.OrderType == SharedOrderType.Limit ? Enums.SpotOrderType.Limit : request.OrderType == SharedOrderType.Market ? Enums.SpotOrderType.Market : Enums.SpotOrderType.LimitMaker,
                 quantity: request.Quantity,
                 quoteQuantity: request.QuoteQuantity,
                 price: request.Price,
@@ -289,6 +291,7 @@ namespace Binance.Net.Clients.SpotApi
                 return order.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicId, order.Data.Symbol),
                 order.Data.Symbol,
                 order.Data.Id.ToString(),
                 ParseOrderType(order.Data.Type),
@@ -321,6 +324,7 @@ namespace Binance.Net.Clients.SpotApi
                 return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, null, default);
 
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                 x.Symbol,
                 x.Id.ToString(),
                 ParseOrderType(x.Type),
@@ -367,6 +371,7 @@ namespace Binance.Net.Clients.SpotApi
                 nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
 
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                 x.Symbol,
                 x.Id.ToString(),
                 ParseOrderType(x.Type),
@@ -401,6 +406,7 @@ namespace Binance.Net.Clients.SpotApi
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
@@ -443,6 +449,7 @@ namespace Binance.Net.Clients.SpotApi
                 nextToken = new DateTimeToken(orders.Data.Min(o => o.Timestamp).AddMilliseconds(-1));
 
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
@@ -586,10 +593,10 @@ namespace Binance.Net.Clients.SpotApi
             if (!depositAddresses)
                 return depositAddresses.AsExchangeResult<SharedDepositAddress[]>(Exchange, null, default);
 
-            return depositAddresses.AsExchangeResult(Exchange, TradingMode.Spot, new[] { new SharedDepositAddress(depositAddresses.Data.Asset, depositAddresses.Data.Address) 
-            { 
+            return depositAddresses.AsExchangeResult(Exchange, TradingMode.Spot, new[] { new SharedDepositAddress(depositAddresses.Data.Asset, depositAddresses.Data.Address)
+            {
                 TagOrMemo = depositAddresses.Data.Tag
-            } 
+            }
             });
         }
 
@@ -679,7 +686,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Withdraw client
 
         WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions();
-        async Task <ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
         {
             var validationError = ((IWithdrawRestClient)this).WithdrawOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)

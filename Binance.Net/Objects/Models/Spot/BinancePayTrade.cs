@@ -69,7 +69,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Fund details
         /// </summary>
         [JsonPropertyName("fundsDetail")]
-        public IEnumerable<BinancePayTradeDetails> Details { get; set; } = Array.Empty<BinancePayTradeDetails>();
+        public BinancePayTradeDetails[] Details { get; set; } = Array.Empty<BinancePayTradeDetails>();
         /// <summary>
         /// Payer info
         /// </summary>

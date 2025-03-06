@@ -48,7 +48,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceStreamAggregatedTrade>>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceStreamAggregatedTrade[]>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-order-book-ticker" /></para>
@@ -56,7 +56,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceBookPrice>>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceBookPrice[]>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
         /// <summary>
         /// Gets current average price for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#current-average-price" /></para>
@@ -76,7 +76,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceSpotKline[]>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the order book for the provided symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#order-book" /></para>
@@ -94,7 +94,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#rolling-window-price-change-statistics" /></para>
@@ -102,7 +102,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceRollingWindowTick>>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceRollingWindowTick[]>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
         /// <summary>
         /// Get data regarding the last 24 hours
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#symbol-price-ticker" /></para>
@@ -110,7 +110,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<Binance24HPrice>>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<Binance24HPrice[]>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the historical trades for a symbol
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#historical-trades" /></para>
@@ -120,7 +120,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceRecentTradeQuote>>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
         /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#ui-klines" /></para>
@@ -132,7 +132,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceSpotKline>>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceSpotKline[]>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
@@ -160,8 +160,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default);
-        
+        Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IBinanceMiniTick[]>> onMessage, CancellationToken ct = default);
+
         /// <summary>
         /// Subscribe to rolling window ticker updates stream for all symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams" /></para>
@@ -170,8 +170,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize, Action<DataEvent<IEnumerable<BinanceStreamRollingWindowTick>>> onMessage, CancellationToken ct = default);
-        
+        Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize, Action<DataEvent<BinanceStreamRollingWindowTick[]>> onMessage, CancellationToken ct = default);
+
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
         /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-tickers-stream" /></para>
@@ -179,7 +179,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceTick>>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IBinanceTick[]>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribes to leveraged token info updates
         /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#blvt-info-streams" /></para>

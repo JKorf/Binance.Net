@@ -24,7 +24,7 @@
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceIsolatedMarginFeeInfo> FeeInfo { get; set; } = Array.Empty<BinanceIsolatedMarginFeeInfo>();
+        public BinanceIsolatedMarginFeeInfo[] FeeInfo { get; set; } = Array.Empty<BinanceIsolatedMarginFeeInfo>();
     }
 
     /// <summary>

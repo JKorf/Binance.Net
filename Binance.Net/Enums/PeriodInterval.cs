@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The interval for the period
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<PeriodInterval>))] public  enum PeriodInterval
+    [JsonConverter(typeof(EnumConverter<PeriodInterval>))]
+    public enum PeriodInterval
     {
         /// <summary>
         /// 5m

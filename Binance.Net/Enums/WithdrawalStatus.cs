@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// The status of a withdrawal
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<WithdrawalStatus>))] public  enum WithdrawalStatus
+    [JsonConverter(typeof(EnumConverter<WithdrawalStatus>))]
+    public enum WithdrawalStatus
     {
         /// <summary>
         /// Email has been send

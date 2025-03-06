@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Futures account transfer type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<FuturesTransferType>))] public  enum FuturesTransferType
+    [JsonConverter(typeof(EnumConverter<FuturesTransferType>))]
+    public enum FuturesTransferType
     {
         /// <summary>
         /// From spot to USDT-M futures account

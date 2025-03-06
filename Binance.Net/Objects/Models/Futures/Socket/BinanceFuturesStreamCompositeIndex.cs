@@ -26,7 +26,7 @@
         /// Composition
         /// </summary>
         [JsonPropertyName("c")]
-        public IEnumerable<BinanceFuturesStreamCompositeIndexAsset> Composition { get; set; } = Array.Empty<BinanceFuturesStreamCompositeIndexAsset>();
+        public BinanceFuturesStreamCompositeIndexAsset[] Composition { get; set; } = Array.Empty<BinanceFuturesStreamCompositeIndexAsset>();
     }
 
     /// <summary>

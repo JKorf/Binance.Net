@@ -17,7 +17,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of Positions</returns>
-        Task<WebCallResult<IEnumerable<BinancePositionDetailsUsdt>>> GetPositionInformationAsync(string? symbol = null,
+        Task<WebCallResult<BinancePositionDetailsUsdt[]>> GetPositionInformationAsync(string? symbol = null,
             long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of all margin changes for the symbol</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesMarginChangeHistoryResult>>> GetMarginChangeHistoryAsync(string symbol, FuturesMarginChangeDirectionType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesMarginChangeHistoryResult[]>> GetMarginChangeHistoryAsync(string symbol, FuturesMarginChangeDirectionType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the income history for the futures account
@@ -101,7 +101,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The income history for the futures account</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesIncomeHistory[]>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
@@ -111,7 +111,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets</returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesSymbolBracket[]>> GetBracketsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get position ADL quantile estimations
@@ -121,7 +121,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceFuturesQuantileEstimation>>> GetPositionAdlQuantileEstimationAsync(
+        Task<WebCallResult<BinanceFuturesQuantileEstimation[]>> GetPositionAdlQuantileEstimationAsync(
             string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        Task<WebCallResult<IEnumerable<BinanceUsdFuturesAccountBalance>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceUsdFuturesAccountBalance[]>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
@@ -284,7 +284,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceRateLimit>>> GetOrderRateLimitAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceRateLimit[]>> GetOrderRateLimitAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get BNB burn for fee discount status
@@ -312,7 +312,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BinanceSymbolConfiguration>>> GetSymbolConfigurationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceSymbolConfiguration[]>> GetSymbolConfigurationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get user account configuration

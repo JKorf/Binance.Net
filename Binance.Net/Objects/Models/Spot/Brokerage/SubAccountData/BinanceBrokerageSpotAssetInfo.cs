@@ -9,7 +9,7 @@
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceBrokerageSubAccountSpotAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountSpotAssetInfo>();
+        public BinanceBrokerageSubAccountSpotAssetInfo[] Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountSpotAssetInfo>();
 
         /// <summary>
         /// Timestamp
@@ -29,7 +29,7 @@
         /// </summary>
         [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Total Balance Of Btc
         /// </summary>

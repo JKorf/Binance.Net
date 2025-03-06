@@ -1,22 +1,20 @@
 ﻿using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+using Binance.Net.Objects.Models.Futures;
 using CryptoExchange.Net.SharedApis;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceRestClientUsdFuturesApi : IBinanceRestClientUsdFuturesApiShared
     {
+        private const string _topicId = "BinanceRestUsdFutures";
         public string Exchange => BinanceExchange.ExchangeName;
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
 
-        public string GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
-        public SharedSymbol ParseSymbol(string symbol)
-        {
-            return null;
-        }
         #region Klines client
 
         GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 1000, false);
@@ -145,7 +143,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var data = result.Data.Symbols.Where(x => x.ContractType != null);
             if (request.TradingMode != null)
                 data = data.Where(x => request.TradingMode == TradingMode.PerpetualLinear ? x.ContractType == ContractType.Perpetual : (x.ContractType != ContractType.Perpetual && x.ContractType != ContractType.PerpetualDelivering));
-            return result.AsExchangeResult(Exchange, request.TradingMode == null ? SupportedTradingModes : new[] { request.TradingMode.Value }, data.Select(s => new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualLinear : SharedSymbolType.DeliveryLinear, s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading)
+            var resultData = result.AsExchangeResult(Exchange, request.TradingMode == null ? SupportedTradingModes : new[] { request.TradingMode.Value }, data.Select(s =>
+            new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualLinear : TradingMode.DeliveryLinear,
+            s.BaseAsset,
+            s.QuoteAsset,
+            s.Name,
+            s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
@@ -155,6 +158,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ContractSize = 1,
                 DeliveryTime = s.DeliveryDate.Year == 2100 ? null : s.DeliveryDate
             }).ToArray());
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, resultData.Data);
+            return resultData;
         }
 
         #endregion
@@ -177,7 +183,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!resultMarkPrice.Result)
                 return resultMarkPrice.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
 
-            return resultTicker.Result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesTicker(resultTicker.Result.Data.Symbol, resultTicker.Result.Data.LastPrice, resultTicker.Result.Data.HighPrice, resultTicker.Result.Data.LowPrice, resultTicker.Result.Data.Volume, resultTicker.Result.Data.PriceChangePercent)
+            return resultTicker.Result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesTicker(
+                ExchangeSymbolCache.ParseSymbol(_topicId, resultTicker.Result.Data.Symbol), resultTicker.Result.Data.Symbol, resultTicker.Result.Data.LastPrice, resultTicker.Result.Data.HighPrice, resultTicker.Result.Data.LowPrice, resultTicker.Result.Data.Volume, resultTicker.Result.Data.PriceChangePercent)
             {
                 MarkPrice = resultMarkPrice.Result.Data.MarkPrice,
                 IndexPrice = resultMarkPrice.Result.Data.IndexPrice,
@@ -201,14 +208,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!resultMarkPrices.Result)
                 return resultMarkPrices.Result.AsExchangeResult<SharedFuturesTicker[]>(Exchange, null, default);
 
-            var data = resultTickers.Result.Data;
+            IEnumerable<IBinance24HPrice> data = resultTickers.Result.Data;
             if (request.TradingMode.HasValue)
                 data = data.Where(x => (request.TradingMode == TradingMode.DeliveryLinear ? x.Symbol.Contains("_") : !x.Symbol.Contains("_")));
 
             return resultTickers.Result.AsExchangeResult(Exchange, request.TradingMode == null ? SupportedTradingModes : new[] { request.TradingMode.Value }, data.Select(x =>
             {
                 var markPrice = resultMarkPrices.Result.Data.Single(p => p.Symbol == x.Symbol);
-                return new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)
+                return new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)
                 {
                     IndexPrice = markPrice.IndexPrice,
                     MarkPrice = markPrice.MarkPrice,
@@ -257,6 +264,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAsset);
 
+        string IFuturesOrderRestClient.GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
+
         PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions();
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
@@ -271,7 +280,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var result = await Trading.PlaceOrderAsync( 
+            var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? Enums.FuturesOrderType.Limit : Enums.FuturesOrderType.Market,
@@ -304,7 +313,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
             return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesOrder(
-                order.Data.Symbol,
+                ExchangeSymbolCache.ParseSymbol(_topicId, order.Data.Symbol), order.Data.Symbol,
                 order.Data.Id.ToString(),
                 ParseOrderType(order.Data.Type),
                 order.Data.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
@@ -337,7 +346,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
             return orders.AsExchangeResult(Exchange, request.Symbol == null ? SupportedTradingModes : new[] { request.Symbol.TradingMode }, orders.Data.Select(x => new SharedFuturesOrder(
-                x.Symbol,
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol,
                 x.Id.ToString(),
                 ParseOrderType(x.Type),
                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
@@ -384,7 +393,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 nextToken = new DateTimeToken(orders.Data.Max(o => o.CreateTime));
 
             return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedFuturesOrder(
-                x.Symbol,
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol,
                 x.Id.ToString(),
                 ParseOrderType(x.Type),
                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
@@ -419,7 +428,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, orders.Data.Select(x => new SharedUserTrade(
-                x.Symbol,
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
                 x.Buyer ? SharedOrderSide.Buy : SharedOrderSide.Sell,
@@ -464,7 +473,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 nextToken = new FromIdToken(orders.Data.Max(o => o.Id).ToString());
 
             return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, orders.Data.Select(x => new SharedUserTrade(
-                x.Symbol,
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol,
                 x.OrderId.ToString(),
                 x.Id.ToString(),
                 x.Buyer ? SharedOrderSide.Buy : SharedOrderSide.Sell,
@@ -508,15 +517,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!result)
                 return result.AsExchangeResult<SharedPosition[]>(Exchange, null, default);
 
-            var data = result.Data;
+            IEnumerable<BinancePositionDetailsUsdt> data = result.Data;
             if (request.TradingMode.HasValue)
                 data = data.Where(x => request.TradingMode == TradingMode.DeliveryLinear ? x.Symbol.Contains("_") : !x.Symbol.Contains("_"));
 
             var resultTypes = request.Symbol == null && request.TradingMode == null ? SupportedTradingModes : request.Symbol != null ? new[] { request.Symbol.TradingMode } : new[] { request.TradingMode!.Value };
-            return result.AsExchangeResult(Exchange, resultTypes, data.Select(x => new SharedPosition(x.Symbol, Math.Abs(x.Quantity), x.UpdateTime)
+            return result.AsExchangeResult(Exchange, resultTypes, data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, Math.Abs(x.Quantity), x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedPnl,
-                LiquidationPrice = x.LiquidationPrice == 0 ? null: x.LiquidationPrice,
+                LiquidationPrice = x.LiquidationPrice == 0 ? null : x.LiquidationPrice,
                 Leverage = x.Leverage,
                 AverageOpenPrice = x.EntryPrice,
                 PositionSide = x.PositionSide == PositionSide.Both ? (x.Quantity >= 0 ? SharedPositionSide.Long : SharedPositionSide.Short) : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long

@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of rate limit
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<RateLimitType>))] public  enum RateLimitType
+    [JsonConverter(typeof(EnumConverter<RateLimitType>))]
+    public enum RateLimitType
     {
         /// <summary>
         /// Request weight

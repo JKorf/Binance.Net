@@ -3,7 +3,7 @@
     /// <summary>
     /// Blvt info update
     /// </summary>
-    public record BinanceBlvtInfoUpdate: BinanceStreamEvent
+    public record BinanceBlvtInfoUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Token name
@@ -25,7 +25,7 @@
         /// Baskets
         /// </summary>
         [JsonPropertyName("b")]
-        public IEnumerable<BlvtBasket> Baskets { get; set; } = Array.Empty<BlvtBasket>();
+        public BlvtBasket[] Baskets { get; set; } = Array.Empty<BlvtBasket>();
         /// <summary>
         /// Token issued
         /// </summary>

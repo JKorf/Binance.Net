@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Status of a fiat payment
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<FiatPaymentStatus>))] public  enum FiatPaymentStatus
+    [JsonConverter(typeof(EnumConverter<FiatPaymentStatus>))]
+    public enum FiatPaymentStatus
     {
         /// <summary>
         /// Still processing

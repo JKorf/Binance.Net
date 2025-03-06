@@ -1,13 +1,6 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
-namespace Binance.Net
-{
-    internal partial class BinanceSourceGenerationAggregator
-    {
-        public Binance.Net.Objects.Models.BinanceOrderBookEntry? BinanceOrderBookEntry;
-    }
-}
 
 namespace Binance.Net.Objects.Models
 {
@@ -15,6 +8,7 @@ namespace Binance.Net.Objects.Models
     /// An entry in the order book
     /// </summary>
     [JsonConverter(typeof(ArrayConverter<BinanceOrderBookEntry, BinanceSourceGenerationContext>))]
+    [SerializationModel]
     public record BinanceOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>

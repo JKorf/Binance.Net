@@ -26,13 +26,13 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         /// Asset allocation
         /// </summary>
         [JsonPropertyName("assetAllocation")]
-        public IEnumerable<BinanceAutoInvestIndexSUB> AssetAllocation { get; set; } = Array.Empty<BinanceAutoInvestIndexSUB>();
+        public BinanceAutoInvestAssetIndex[] AssetAllocation { get; set; } = Array.Empty<BinanceAutoInvestAssetIndex>();
     }
 
     /// <summary>
-    /// 
+    /// Allocation
     /// </summary>
-    public record BinanceAutoInvestIndexSUB
+    public record BinanceAutoInvestAssetIndex
     {
         /// <summary>
         /// Target asset

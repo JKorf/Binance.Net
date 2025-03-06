@@ -20,13 +20,13 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// Balances
         /// </summary>
         [JsonPropertyName("B")]
-        public IEnumerable<BinanceStreamBalance> Balances { get; set; } = Array.Empty<BinanceStreamBalance>();
+        public BinanceStreamBalance[] Balances { get; set; } = Array.Empty<BinanceStreamBalance>();
     }
 
     /// <summary>
     /// Information about an asset balance
     /// </summary>
-    public record BinanceStreamBalance: IBinanceBalance
+    public record BinanceStreamBalance : IBinanceBalance
     {
         /// <summary>
         /// The asset this balance is for

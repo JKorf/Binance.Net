@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Direction of a transfer
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<TransferDirection>))] public  enum TransferDirection
+    [JsonConverter(typeof(EnumConverter<TransferDirection>))]
+    public enum TransferDirection
     {
         /// <summary>
         /// Roll-in

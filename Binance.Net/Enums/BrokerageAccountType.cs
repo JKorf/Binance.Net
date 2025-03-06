@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Brokerage account type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<BrokerageAccountType>))] public  enum BrokerageAccountType
+    [JsonConverter(typeof(EnumConverter<BrokerageAccountType>))]
+    public enum BrokerageAccountType
     {
         /// <summary> 
         /// Spot 

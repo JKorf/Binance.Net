@@ -107,7 +107,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 var options = serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>().Value;
                 client.Timeout = options.RequestTimeout;
                 return new BinanceRestClient(client, serviceProvider.GetRequiredService<ILoggerFactory>(), serviceProvider.GetRequiredService<IOptions<BinanceRestOptions>>());
-            }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
+            }).ConfigurePrimaryHttpMessageHandler((serviceProvider) =>
+            {
                 var handler = new HttpClientHandler();
                 try
                 {

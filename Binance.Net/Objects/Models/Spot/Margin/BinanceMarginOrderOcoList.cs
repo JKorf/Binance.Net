@@ -3,7 +3,7 @@
     /// <summary>
     /// Oco info
     /// </summary>
-    public record BinanceMarginOrderOcoList: BinanceOrderOcoList
+    public record BinanceMarginOrderOcoList : BinanceOrderOcoList
     {
         /// <summary>
         /// Margin buy borrow quantity

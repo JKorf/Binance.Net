@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Income History
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceCryptoLoanIncome>>> GetIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceCryptoLoanIncome[]>> GetIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection
             {
@@ -32,7 +32,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/loan/income", BinanceExchange.RateLimiter.SpotRestUid, 6000, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceCryptoLoanIncome>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceCryptoLoanIncome[]>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -186,7 +186,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("vipLevel", vipLevel);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            
+
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/loan/collateral/data", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>(request, parameters, ct).ConfigureAwait(false);
         }

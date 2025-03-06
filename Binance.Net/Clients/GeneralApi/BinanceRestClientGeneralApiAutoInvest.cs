@@ -65,13 +65,13 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Target Asset Rois
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceAutoInvestRoi>>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("targetAsset", asset);
             parameters.AddEnum("hisRoiType", roiType);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/target-asset/roi/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            var result = await _baseClient.SendAsync<IEnumerable<BinanceAutoInvestRoi>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceAutoInvestRoi[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -252,7 +252,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Index Linked Plan Redemption History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceAutoInvestRedemption>>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceAutoInvestRedemption[]>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("requestId", requestId);
@@ -262,7 +262,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("size", pageSize);
             parameters.AddOptional("asset", asset);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/redeem/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            var result = await _baseClient.SendAsync<IEnumerable<BinanceAutoInvestRedemption>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceAutoInvestRedemption[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -300,7 +300,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Index Linked Plan Rebalance History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceAutoInvestRebalanceInfo>>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceAutoInvestRebalanceInfo[]>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalMillisecondsString("startTime", startTime);
@@ -308,7 +308,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("current", page);
             parameters.AddOptional("size", pageSize);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/rebalance/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            var result = await _baseClient.SendAsync<IEnumerable<BinanceAutoInvestRebalanceInfo>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceAutoInvestRebalanceInfo[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 

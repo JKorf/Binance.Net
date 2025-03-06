@@ -163,13 +163,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Positions
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinancePositionV3>>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
-            
-            return await _client.QueryAsync<IEnumerable<BinancePositionV3>>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"v2/account.position", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
+
+            return await _client.QueryAsync<BinancePositionV3[]>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"v2/account.position", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
         }
 
         #endregion

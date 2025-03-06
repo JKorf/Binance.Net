@@ -48,4 +48,3 @@ namespace Binance.Net.Objects.Models.Spot.Staking
         public decimal AnnualPercentageRate { get; set; }
     }
 }
- 

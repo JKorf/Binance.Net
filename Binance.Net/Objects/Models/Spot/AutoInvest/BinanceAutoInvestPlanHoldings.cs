@@ -81,7 +81,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         /// Details
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<BinanceAutoInvestPlanHoldingDetails> Details { get; set; } = Array.Empty<BinanceAutoInvestPlanHoldingDetails>();
+        public BinanceAutoInvestPlanHoldingDetails[] Details { get; set; } = Array.Empty<BinanceAutoInvestPlanHoldingDetails>();
     }
 
     /// <summary>

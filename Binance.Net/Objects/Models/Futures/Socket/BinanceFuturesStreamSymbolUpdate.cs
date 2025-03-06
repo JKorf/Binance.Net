@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Brackets
         /// </summary>
         [JsonPropertyName("bks")]
-        public IEnumerable<BinanceBracketUpdate>? Brackets { get; set; }
+        public BinanceBracketUpdate[]? Brackets { get; set; }
     }
 
     /// <summary>

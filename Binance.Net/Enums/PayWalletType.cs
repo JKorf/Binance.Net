@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Wallet type
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<PayWalletType>))] public  enum PayWalletType
+    [JsonConverter(typeof(EnumConverter<PayWalletType>))]
+    public enum PayWalletType
     {
         /// <summary>
         /// Funding wallet

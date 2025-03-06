@@ -2,7 +2,7 @@
 
 namespace Binance.Net.Converters
 {
-    internal class InterfaceConverter<TImp, TInterface> : JsonConverter<TInterface> where TImp: TInterface
+    internal class InterfaceConverter<TImp, TInterface> : JsonConverter<TInterface> where TImp : TInterface
     {
         public override bool CanConvert(Type objectType) => objectType == typeof(TInterface);
 

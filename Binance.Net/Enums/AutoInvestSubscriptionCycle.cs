@@ -9,7 +9,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Subscription cycle
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<AutoInvestSubscriptionCycle>))] public  enum AutoInvestSubscriptionCycle
+    [JsonConverter(typeof(EnumConverter<AutoInvestSubscriptionCycle>))]
+    public enum AutoInvestSubscriptionCycle
     {
         /// <summary>
         /// One hour

@@ -25,7 +25,7 @@
     /// <summary>
     /// Futures-Coin price
     /// </summary>
-    public record BinanceFuturesCoinPrice: BinancePrice
+    public record BinanceFuturesCoinPrice : BinancePrice
     {
         /// <summary>
         /// Name of the pair

@@ -10,7 +10,7 @@
         /// </summary>
         [JsonPropertyName("txnId")]
         public long Id { get; set; }
-        
+
         /// <summary>
         /// Client Transfer Id
         /// </summary>

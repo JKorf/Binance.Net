@@ -16,7 +16,7 @@
         /// </summary>
         [JsonPropertyName("enableFutures")]
         public bool IsFuturesEnabled { get; set; }
-        
+
         /// <summary>
         /// Update Date
         /// </summary>

@@ -25,12 +25,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceUsdFuturesAccountBalance>>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
 
-            return await _client.QueryAsync<IEnumerable<BinanceUsdFuturesAccountBalance>>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"v2/account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceUsdFuturesAccountBalance[]>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"v2/account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -42,7 +42,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
-            return await _client.QueryAsync<BinanceFuturesAccountInfoV3>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"v2/account.status", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);            
+            return await _client.QueryAsync<BinanceFuturesAccountInfoV3>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"v2/account.status", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
         }
 
         #endregion

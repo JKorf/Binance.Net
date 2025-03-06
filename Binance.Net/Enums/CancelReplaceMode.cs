@@ -6,7 +6,8 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Cancel replace mode
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<CancelReplaceMode>))] public  enum CancelReplaceMode
+    [JsonConverter(typeof(EnumConverter<CancelReplaceMode>))]
+    public enum CancelReplaceMode
     {
         /// <summary>
         /// If the cancel request fails, the new order placement will not be attempted.

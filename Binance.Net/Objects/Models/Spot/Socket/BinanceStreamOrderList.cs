@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Order list info
     /// </summary>
-    public record BinanceStreamOrderList: BinanceStreamEvent
+    public record BinanceStreamOrderList : BinanceStreamEvent
     {
         /// <summary>
         /// The id of the order list
@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The client id of the order list
         /// </summary>
         [JsonPropertyName("C")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ListClientOrderId { get; set; } = string.Empty;
@@ -55,7 +55,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The order in this list
         /// </summary>
         [JsonPropertyName("O")]
-        public IEnumerable<BinanceStreamOrderId> Orders { get; set; } = Array.Empty<BinanceStreamOrderId>();
+        public BinanceStreamOrderId[] Orders { get; set; } = Array.Empty<BinanceStreamOrderId>();
         /// <summary>
         /// The listen key the update was for
         /// </summary>
@@ -81,7 +81,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The client order id
         /// </summary>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
+        [JsonConverterCtor(typeof(ReplaceConverter),
             $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
             $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
         public string ClientOrderId { get; set; } = string.Empty;

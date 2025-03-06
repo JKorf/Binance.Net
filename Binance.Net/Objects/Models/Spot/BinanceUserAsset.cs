@@ -74,7 +74,7 @@
         /// Networks
         /// </summary>
         [JsonPropertyName("networkList")]
-        public IEnumerable<BinanceNetwork> NetworkList { get; set; } = Array.Empty<BinanceNetwork>();
+        public BinanceNetwork[] NetworkList { get; set; } = Array.Empty<BinanceNetwork>();
     }
 
     /// <summary>

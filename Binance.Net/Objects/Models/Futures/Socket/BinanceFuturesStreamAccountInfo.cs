@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Account update
     /// </summary>
-    public record BinanceFuturesStreamAccountUpdate: BinanceStreamEvent
+    public record BinanceFuturesStreamAccountUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// The update data
@@ -40,13 +40,13 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Balances
         /// </summary>
         [JsonPropertyName("B")]
-        public IEnumerable<BinanceFuturesStreamBalance> Balances { get; set; } = Array.Empty<BinanceFuturesStreamBalance>();
+        public BinanceFuturesStreamBalance[] Balances { get; set; } = Array.Empty<BinanceFuturesStreamBalance>();
 
         /// <summary>
         /// Positions
         /// </summary>
         [JsonPropertyName("P")]
-        public IEnumerable<BinanceFuturesStreamPosition> Positions { get; set; } = Array.Empty<BinanceFuturesStreamPosition>();
+        public BinanceFuturesStreamPosition[] Positions { get; set; } = Array.Empty<BinanceFuturesStreamPosition>();
     }
 
     /// <summary>

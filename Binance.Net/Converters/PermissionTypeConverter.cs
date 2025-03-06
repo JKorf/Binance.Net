@@ -11,10 +11,10 @@ namespace Binance.Net.Converters
             {
                 return (T)(object)(ParseAccountType(ref reader) ?? PermissionType.TradeGroup002);
             }
-            else if(typeToConvert == typeof(IEnumerable<PermissionType>))
+            else if (typeToConvert == typeof(IEnumerable<PermissionType>))
             {
-                var  result = new List<PermissionType>();
-                while(reader.Read())
+                var result = new List<PermissionType>();
+                while (reader.Read())
                 {
                     if (reader.TokenType == JsonTokenType.EndArray)
                         break;
@@ -68,7 +68,7 @@ namespace Binance.Net.Converters
             else if (value is IEnumerable<PermissionType> actList)
             {
                 writer.WriteStartArray();
-                foreach(var val in actList)
+                foreach (var val in actList)
                     WriteAccountType(writer, val);
                 writer.WriteEndArray();
             }

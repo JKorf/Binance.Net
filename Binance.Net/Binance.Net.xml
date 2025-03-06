@@ -604,7 +604,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
@@ -613,7 +613,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
@@ -628,7 +628,7 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice[]}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceSocketClientCoinFuturesApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice}},System.Threading.CancellationToken)">
@@ -1882,13 +1882,13 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToRollingWindowTickerUpdatesAsync(System.String,System.TimeSpan,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBookPrice}},System.Threading.CancellationToken)">
@@ -1915,7 +1915,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceTick[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToBlvtInfoUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate}},System.Threading.CancellationToken)">
@@ -2372,7 +2372,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToMarkPriceUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
@@ -2399,7 +2399,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToMiniTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice}},System.Threading.CancellationToken)">
@@ -2411,7 +2411,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToCompositeIndexUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCompositeIndex}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
@@ -2459,7 +2459,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAssetIndexUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAssetIndexUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAssetIndexUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate}},System.Threading.CancellationToken)">
@@ -2495,11 +2495,6 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSourceGenerationAggregator">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.AccountType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -2520,7 +2515,17 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.FuturesOrderTypeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PermissionType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PermissionTypeArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2540,17 +2545,17 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SelfTradePreventionModeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SpotOrderType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SymbolFilterType">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullableSymbolFilterType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SpotOrderTypeArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2565,27 +2570,12 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.TimeInForceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.UnderlyingType">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSocketQuery">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSocketRequest">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceOrderBookEntry">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceOrderBookEntryArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2595,17 +2585,67 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesCoinExchangeInfo">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceRateLimitArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesCoinSymbol">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesBracket">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesBracketArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesCoin24HPrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesCoin24HPriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesCoinMarkPrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesCoinMarkPriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesMarkPrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesMarkPriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesSymbolBracket">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesSymbolBracketArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtAssetArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2620,7 +2660,17 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtSymbolArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Binance24HPrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Binance24HPriceArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2635,7 +2685,12 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceEventOrderBook">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCheckTime">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2645,12 +2700,12 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceOrderBook">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbol">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbol">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2660,72 +2715,12 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSocketQueryResponse">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.DictionaryStringObject">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableFuturesOrderType">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolFilterArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerablePermissionType">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableSelfTradePreventionMode">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableSpotOrderType">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableTimeInForce">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceRateLimit">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceFuturesCoinSymbol">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceFuturesUsdtAsset">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceFuturesUsdtSymbol">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceBalance">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceSymbol">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.IEnumerableBinanceSymbolFilter">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2750,7 +2745,17 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullableDateTime">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Int32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullableInt32">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2770,12 +2775,12 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.String">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.ObjectArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.StringArray">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.String">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -5819,14 +5824,14 @@
             Extension methods specific to using the Binance API
             </summary>
         </member>
-        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.UsedWeight(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
+        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.UsedWeight(System.Collections.Generic.KeyValuePair{System.String,System.String[]}[])">
             <summary>
             Get the used weight from the response headers
             </summary>
             <param name="headers"></param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.UsedOrderCount(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}})">
+        <member name="M:Binance.Net.ExtensionMethods.BinanceExtensionMethods.UsedOrderCount(System.Collections.Generic.KeyValuePair{System.String,System.String[]}[])">
             <summary>
             Get the used weight from the response headers
             </summary>
@@ -6744,7 +6749,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to mini ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-mini-tickers-stream" /></para>
@@ -6773,7 +6778,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-tickers-streams" /></para>
@@ -6919,7 +6924,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice}}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesCoinStreamMarkPrice[]}},System.Nullable{System.Int32},System.Threading.CancellationToken)">
              <summary>
             Subscribe to the Mark price update stream for all symbols
              <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#mark-price-of-all-symbols-of-a-pair" /></para>
@@ -11403,7 +11408,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to mini ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-mini-tickers-stream" /></para>
@@ -11412,7 +11417,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to rolling window ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-rolling-window-statistics-streams" /></para>
@@ -11422,7 +11427,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#all-market-tickers-stream" /></para>
@@ -13225,7 +13230,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceMiniTick}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to mini ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#all-market-mini-tickers-stream" /></para>
@@ -13254,7 +13259,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinance24HPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinance24HPrice[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to ticker updates stream for all symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#all-market-tickers-streams" /></para>
@@ -13375,7 +13380,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the Mark price update stream for a all symbols
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#mark-price-stream-for-all-market" /></para>
@@ -13395,7 +13400,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAssetIndexUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAssetIndexUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to asset index updates stream
             <para><a href="https://binance-docs.github.io/apidocs/futures/en/#multi-assets-mode-asset-index-2" /></para>
@@ -15676,17 +15681,17 @@
             Asset allocation
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexSUB">
+        <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssetIndex">
             <summary>
-            
+            Allocation
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexSUB.TargetAsset">
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssetIndex.TargetAsset">
             <summary>
             Target asset
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexSUB.Allocation">
+        <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssetIndex.Allocation">
             <summary>
             Allocation
             </summary>

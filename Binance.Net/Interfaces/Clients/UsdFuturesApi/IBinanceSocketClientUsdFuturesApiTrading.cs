@@ -103,7 +103,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        Task<CallResult<BinanceResponse<IEnumerable<BinancePositionV3>>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
     }
 }
