@@ -63,7 +63,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Account.GetAPIKeyPermissionsAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetUserAssetsAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetBalancesAsync(default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApi.Account.GetWalletBalancesAsync(default, default), true);
+            await RunAndCheckResult(client => client.SpotApi.Account.GetWalletBalancesAsync("BTC", default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetAssetDividendRecordsAsync(default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetDustLogAsync(default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetBnbBurnStatusAsync(default, default), true);

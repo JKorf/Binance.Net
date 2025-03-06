@@ -11,7 +11,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     {
         /// <summary>
         /// DEPRECATED; USE Trading.GetPositionsAsync INSTEAD
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2" /></para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22,7 +22,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-position-mode-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode" /></para>
         /// </summary>
         /// <param name="dualPositionSide">User position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -32,7 +32,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-current-position-mode-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -41,7 +41,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Requests to change the initial leverage of the given symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-initial-leverage-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for, for example `ETHUSDT`</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>
@@ -52,7 +52,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Change the margin type for an open position
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-margin-type-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to change the position type for, for example `ETHUSDT`</param>
         /// <param name="marginType">The type of margin to use</param>
@@ -63,7 +63,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Change the margin on an open position
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#modify-isolated-position-margin-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to adjust the position margin for, for example `ETHUSDT`</param>
         /// <param name="amount">The amount of margin to be used</param>
@@ -76,7 +76,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Requests the margin change history for a specific symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-position-margin-change-history-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get margin history for, for example `ETHUSDT`</param>
         /// <param name="type">Filter the history by the direction of margin change</param>
@@ -90,7 +90,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the income history for the futures account
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-income-history-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get income history from, for example `ETHUSDT`</param>
         /// <param name="incomeType">The income type filter to apply to the request</param>
@@ -105,7 +105,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#notional-and-leverage-brackets-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -115,7 +115,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get position ADL quantile estimations
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#position-adl-quantile-estimation-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation" /></para>
         /// </summary>
         /// <param name="symbol">Only get for this symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -143,7 +143,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets account balances
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#futures-account-balance-v2-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -152,7 +152,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-current-multi-assets-mode-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -161,7 +161,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#change-multi-assets-mode-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode" /></para>
         /// </summary>
         /// <param name="enabled">Enabled or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -171,7 +171,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the current status of the trading rules for the account
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#futures-trading-quantitative-rules-indicators-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -180,7 +180,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets account commission rates
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#user-commission-rate-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate" /></para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -190,7 +190,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client. The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#start-user-data-stream-user_stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -198,7 +198,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#keepalive-user-data-stream-user_stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream" /></para>
         /// </summary>
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
@@ -207,7 +207,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Stop the user stream, no updates will be send anymore
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#close-user-data-stream-user_stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream" /></para>
         /// </summary>
         /// <param name="listenKey">The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
@@ -216,7 +216,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get download id for downloading transaction history
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-transaction-history-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History" /></para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -227,7 +227,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get the download link for transaction history by download id
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-transaction-history-download-link-by-id-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id" /></para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTransactionHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -237,7 +237,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get download id for downloading order history
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-order-history-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History" /></para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -248,7 +248,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get the download link for order history by download id
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-order-history-download-link-by-id-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id" /></para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForOrderHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -258,7 +258,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get download id for downloading trade history
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-download-id-for-futures-trade-history-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History" /></para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -269,7 +269,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get the download link for order history by download id
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-futures-trade-download-link-by-id-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id" /></para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTradeHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -279,7 +279,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get the order rate limits
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#query-user-rate-limit-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -288,7 +288,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get BNB burn for fee discount status
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#get-bnb-burn-status-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -297,7 +297,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Set BNB burn for fee discount status
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#toggle-bnb-burn-on-futures-trade-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade" /></para>
         /// </summary>
         /// <param name="feeBurn">Fee burn status</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

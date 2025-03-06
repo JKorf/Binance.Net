@@ -13,7 +13,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Gets account information, including balances
-        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-information-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests" /></para>
         /// </summary>
         /// <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
         /// <param name="ct">Cancellation token</param>
@@ -22,7 +22,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get order rate limit status
-        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#account-order-rate-limits-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#unfilled-order-count-user_data" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -31,7 +31,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#ping-user-data-stream-user_stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#ping-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key</param>
         /// <param name="ct">Cancellation token</param>
@@ -39,14 +39,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
         /// <summary>
         /// Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="SubscribeToUserDataUpdatesAsync(string, Action{DataEvent{BinanceStreamOrderUpdate}}?, Action{DataEvent{BinanceStreamOrderList}}?, Action{DataEvent{BinanceStreamPositionsUpdate}}?, Action{DataEvent{BinanceStreamBalanceUpdate}}?, Action{DataEvent{BinanceStreamEvent}}?, Action{DataEvent{BinanceStreamEvent}}?, Action{DataEvent{BinanceStreamBalanceLockUpdate}}?, CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
-        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#start-user-data-stream-user_stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#start-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<CallResult<BinanceResponse<string>>> StartUserStreamAsync(CancellationToken ct = default);
         /// <summary>
         /// Stops the current user stream
-        /// <para><a href="https://binance-docs.github.io/apidocs/websocket_api/en/#stop-user-data-stream-user_stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#stop-user-data-stream-user_stream" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key</param>
         /// <param name="ct">Cancellation token</param>
@@ -55,7 +55,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="StartUserStreamAsync(CancellationToken)">StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#user-data-streams" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#web-socket-payloads" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the <see cref="StartUserStreamAsync(CancellationToken)">StartUserStreamAsync</see> method</param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
