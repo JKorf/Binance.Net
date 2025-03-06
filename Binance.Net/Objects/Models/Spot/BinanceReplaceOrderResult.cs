@@ -6,18 +6,17 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The result of replacing an order
     /// </summary>
+    [SerializationModel]
     public record BinanceReplaceOrderResult : BinanceReplaceResult
     {
         /// <summary>
         /// Cancel result
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<OrderOperationResult>))]
         [JsonPropertyName("cancelResult")]
         public OrderOperationResult CancelResult { get; set; }
         /// <summary>
         /// New order result
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<OrderOperationResult>))]
         [JsonPropertyName("newOrderResult")]
         public OrderOperationResult NewOrderResult { get; set; }
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Leveraged tokens user limits
     /// </summary>
+    [SerializationModel]
     public record BinanceBlvtUserLimit
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Simple Earn flexible product subscription preview
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnFlexiblePreview
     {
         /// <summary>

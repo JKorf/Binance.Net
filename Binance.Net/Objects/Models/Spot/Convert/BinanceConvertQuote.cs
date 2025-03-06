@@ -3,6 +3,7 @@
     /// <summary>
     /// Convert Quote
     /// </summary>
+    [SerializationModel]
     public record BinanceConvertQuote
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Symbol configuration
     /// </summary>
+    [SerializationModel]
     public record BinanceSymbolConfiguration
     {
         /// <summary>

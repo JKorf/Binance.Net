@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Futures book price
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamBookPrice : BinanceStreamBookPrice
     {
         /// <summary>

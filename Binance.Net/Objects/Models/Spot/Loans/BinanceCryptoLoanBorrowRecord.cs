@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     /// <summary>
     /// Borrow record
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanBorrowRecord
     {
         /// <summary>
@@ -52,7 +53,6 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Status of the order
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<BorrowStatus>))]
         [JsonPropertyName("status")]
         public BorrowStatus Status { get; set; }
     }

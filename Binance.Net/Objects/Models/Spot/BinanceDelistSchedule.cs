@@ -3,6 +3,7 @@
     /// <summary>
     /// Spot symbol delist info
     /// </summary>
+    [SerializationModel]
     public record BinanceDelistSchedule
     {
         /// <summary>

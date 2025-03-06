@@ -3,6 +3,7 @@
     /// <summary>
     /// Auto invest source asset info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestSourceAssets
     {
         /// <summary>

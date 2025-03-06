@@ -287,9 +287,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "side", EnumConverter<OrderSide>.GetString(side) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
             };
+            parameters.AddEnum("side", side);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("priceMatch", priceMatch);
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
@@ -547,8 +547,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "urgency", EnumConverter<OrderUrgency>.GetString(urgency) },
             };
+            parameters.AddEnum("urgency", urgency);
             parameters.AddEnum("side", side);
             parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("clientAlgoId", clientOrderId);

@@ -8,6 +8,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamCoinKlineData : BinanceStreamEvent, IBinanceStreamKlineData
     {
         /// <summary>
@@ -27,6 +28,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// The kline data
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamCoinKline : BinanceKlineBase, IBinanceStreamKline
     {
         /// <summary>

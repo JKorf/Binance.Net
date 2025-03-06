@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Mark price update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamMarkPrice : BinanceStreamEvent, IBinanceFuturesMarkPrice
     {
         /// <summary>
@@ -41,6 +42,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Mark price update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesUsdtStreamMarkPrice : BinanceFuturesStreamMarkPrice
     {
         /// <summary>
@@ -53,6 +55,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Mark price update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinStreamMarkPrice : BinanceFuturesStreamMarkPrice
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Parameters for editing an order
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesBatchEditOrder
     {
         /// <summary>

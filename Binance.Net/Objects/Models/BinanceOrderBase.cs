@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models
     /// <summary>
     /// Order info
     /// </summary>
+    [SerializationModel]
     public record BinanceOrderBase
     {
         /// <summary>
@@ -168,7 +169,7 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
+        [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
     }
 }

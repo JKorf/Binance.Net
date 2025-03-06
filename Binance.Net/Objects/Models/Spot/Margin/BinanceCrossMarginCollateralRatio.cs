@@ -3,6 +3,7 @@
     /// <summary>
     /// Cross margin collateral info
     /// </summary>
+    [SerializationModel]
     public record BinanceCrossMarginCollateralRatio
     {
         /// <summary>

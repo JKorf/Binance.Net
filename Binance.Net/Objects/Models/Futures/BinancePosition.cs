@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Base position info
     /// </summary>
+    [SerializationModel]
     public record BinancePositionBase
     {
         /// <summary>
@@ -41,6 +42,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Position info
     /// </summary>
+    [SerializationModel]
     public record BinancePositionInfoBase : BinancePositionBase
     {
         /// <summary>
@@ -90,6 +92,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Usdt position info
     /// </summary>
+    [SerializationModel]
     public record BinancePositionInfoUsdt : BinancePositionInfoBase
     {
         /// <summary>
@@ -102,6 +105,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Coin position info
     /// </summary>
+    [SerializationModel]
     public record BinancePositionInfoCoin : BinancePositionInfoBase
     {
 
@@ -120,6 +124,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Base position details
     /// </summary>
+    [SerializationModel]
     public record BinancePositionDetailsBase : BinancePositionBase
     {
         /// <summary>
@@ -175,6 +180,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Usdt position details
     /// </summary>
+    [SerializationModel]
     public record BinancePositionDetailsUsdt : BinancePositionDetailsBase
     {
         /// <summary>
@@ -197,6 +203,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Coin position info
     /// </summary>
+    [SerializationModel]
     public record BinancePositionDetailsCoin : BinancePositionDetailsBase
     {
         /// <summary>

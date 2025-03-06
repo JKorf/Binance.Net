@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Transfer info
     /// </summary>
+    [SerializationModel]
     public record BinanceTransfer
     {
         /// <summary>

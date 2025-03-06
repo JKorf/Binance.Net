@@ -3,6 +3,7 @@
     /// <summary>
     /// Locked product position info
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnLockedPosition
     {
         /// <summary>

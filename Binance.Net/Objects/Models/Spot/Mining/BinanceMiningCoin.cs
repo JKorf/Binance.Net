@@ -3,6 +3,7 @@
     /// <summary>
     /// Mining coin info
     /// </summary>
+    [SerializationModel]
     public record BinanceMiningCoin
     {
         /// <summary>

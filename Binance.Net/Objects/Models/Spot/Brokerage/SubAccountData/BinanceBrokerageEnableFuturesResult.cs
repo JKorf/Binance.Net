@@ -3,6 +3,7 @@
     /// <summary>
     /// Enable Futures Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageEnableFuturesResult
     {
         /// <summary>

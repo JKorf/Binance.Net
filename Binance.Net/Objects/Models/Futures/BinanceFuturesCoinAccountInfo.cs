@@ -3,6 +3,7 @@
     /// <summary>
     /// Account info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinAccountInfo
     {
         /// <summary>

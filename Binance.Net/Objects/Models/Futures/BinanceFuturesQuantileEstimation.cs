@@ -3,6 +3,7 @@
     /// <summary>
     /// Quantile estimation
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesQuantileEstimation
     {
         /// <summary>

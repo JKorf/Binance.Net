@@ -1,11 +1,11 @@
 ﻿using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Information about a withdrawal
     /// </summary>
+    [SerializationModel]
     public record BinanceWithdrawal
     {
         /// <summary>
@@ -87,7 +87,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The wallet type the withdrawal was from
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<WalletType>))]
         [JsonPropertyName("walletType")]
         public WalletType WalletType { get; set; }
 

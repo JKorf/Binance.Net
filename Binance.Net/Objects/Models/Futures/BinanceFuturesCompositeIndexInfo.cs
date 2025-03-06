@@ -3,6 +3,7 @@
     /// <summary>
     /// Index info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCompositeIndexInfo
     {
         /// <summary>

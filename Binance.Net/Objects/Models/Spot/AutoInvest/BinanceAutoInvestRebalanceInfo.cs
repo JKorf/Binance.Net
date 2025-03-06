@@ -3,6 +3,7 @@
     /// <summary>
     /// Rebalance info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestRebalanceInfo
     {
         /// <summary>

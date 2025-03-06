@@ -3,6 +3,7 @@
     /// <summary>
     /// Add IP Restriction Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageAddIpRestrictionResult
     {
         /// <summary>

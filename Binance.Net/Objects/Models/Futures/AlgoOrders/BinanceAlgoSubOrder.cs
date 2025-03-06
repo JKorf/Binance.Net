@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     /// <summary>
     /// Sub order list
     /// </summary>
+    [SerializationModel]
     public record BinanceAlgoSubOrderList
     {
         /// <summary>

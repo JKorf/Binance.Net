@@ -3,6 +3,7 @@
     /// <summary>
     /// Multi asset mode info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesMultiAssetMode
     {
         /// <summary>

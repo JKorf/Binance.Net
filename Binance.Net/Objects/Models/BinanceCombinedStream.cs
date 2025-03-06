@@ -9,6 +9,7 @@ namespace Binance.Net.Objects.Models
     /// Combined streams
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    //[SerializationModel]
     public record BinanceCombinedStream<T>
     {
         /// <summary>

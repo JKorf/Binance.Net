@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Binance pay trade
     /// </summary>
+    [SerializationModel]
     public record BinancePayTrade
     {
         /// <summary>
@@ -31,7 +32,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<PayOrderType>))]
         [JsonPropertyName("orderType")]
         public PayOrderType OrderType { get; set; }
         /// <summary>
@@ -63,7 +63,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Main wallet type
         /// </summary>
-        [JsonPropertyName("walletType"), JsonConverter(typeof(EnumConverter<PayWalletType>))]
+        [JsonPropertyName("walletType")]
         public PayWalletType WalletType { get; set; }
         /// <summary>
         /// Fund details

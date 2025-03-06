@@ -3,6 +3,7 @@
     /// <summary>
     /// Blvt info update
     /// </summary>
+    [SerializationModel]
     public record BinanceBlvtInfoUpdate : BinanceStreamEvent
     {
         /// <summary>

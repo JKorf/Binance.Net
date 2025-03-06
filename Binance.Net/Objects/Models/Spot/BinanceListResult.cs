@@ -4,6 +4,7 @@
     /// List result
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    //[SerializationModel]
     public record BinanceListResult<T>
     {
         /// <summary>

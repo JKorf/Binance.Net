@@ -3,6 +3,7 @@
     /// <summary>
     /// Rolling window tick info
     /// </summary>
+    [SerializationModel]
     public record BinanceRollingWindowTick
     {
         /// <summary>

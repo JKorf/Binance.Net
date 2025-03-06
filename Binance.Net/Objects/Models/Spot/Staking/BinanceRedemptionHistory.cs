@@ -3,6 +3,7 @@
     /// <summary>
     /// Redemption history
     /// </summary>
+    [SerializationModel]
     public record BinanceRedemptionHistory
     {
         /// <summary>

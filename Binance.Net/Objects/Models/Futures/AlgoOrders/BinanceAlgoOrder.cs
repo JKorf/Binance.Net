@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     /// <summary>
     /// Algo orders
     /// </summary>
+    [SerializationModel]
     public record BinanceAlgoOrders
     {
         /// <summary>

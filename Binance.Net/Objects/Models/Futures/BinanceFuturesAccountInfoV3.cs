@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Account info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAccountInfoV3
     {
         /// <summary>

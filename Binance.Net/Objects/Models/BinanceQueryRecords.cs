@@ -4,6 +4,7 @@
     /// Query results
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    //[SerializationModel]
     public record BinanceQueryRecords<T>
     {
         /// <summary>

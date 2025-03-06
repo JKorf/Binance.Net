@@ -3,6 +3,7 @@
     /// <summary>
     /// IP Restriction
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageIpRestrictionBase
     {
         /// <summary>
@@ -33,6 +34,7 @@
     /// <summary>
     /// IP Restriction
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageIpRestriction : BinanceBrokerageIpRestrictionBase
     {
         /// <summary>

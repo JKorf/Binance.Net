@@ -25,7 +25,7 @@
         /// Filters
         /// </summary>
         [JsonPropertyName("exchangeFilters")]
-        public IEnumerable<object> ExchangeFilters { get; set; } = Array.Empty<object>();
+        public object[] ExchangeFilters { get; set; } = Array.Empty<object>();
     }
 
     /// <summary>
@@ -50,6 +50,7 @@
     /// <summary>
     /// Exchange info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinExchangeInfo : BinanceFuturesExchangeInfo
     {
         /// <summary>

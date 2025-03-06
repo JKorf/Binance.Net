@@ -3,6 +3,7 @@
     /// <summary>
     /// Mining account
     /// </summary>
+    [SerializationModel]
     public record BinanceMiningAccount
     {
         /// <summary>

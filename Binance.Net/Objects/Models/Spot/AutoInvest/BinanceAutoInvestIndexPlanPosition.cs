@@ -3,6 +3,7 @@
     /// <summary>
     /// Plan position info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestIndexPlanPosition
     {
         /// <summary>

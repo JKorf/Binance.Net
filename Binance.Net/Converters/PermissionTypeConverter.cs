@@ -11,7 +11,7 @@ namespace Binance.Net.Converters
             {
                 return (T)(object)(ParseAccountType(ref reader) ?? PermissionType.TradeGroup002);
             }
-            else if (typeToConvert == typeof(IEnumerable<PermissionType>))
+            else if (typeToConvert == typeof(PermissionType[]))
             {
                 var result = new List<PermissionType>();
                 while (reader.Read())
@@ -26,11 +26,11 @@ namespace Binance.Net.Converters
                     if (parseResult != null)
                         result.Add(parseResult.Value);
                 }
-                return (T)(object)result;
+                return (T)(object)result.ToArray();
             }
-            else if (typeToConvert == typeof(IEnumerable<IEnumerable<PermissionType>>))
+            else if (typeToConvert == typeof(PermissionType[][]))
             {
-                var result = new List<IEnumerable<PermissionType>>();
+                var result = new List<PermissionType[]>();
                 reader.Read(); // Start array
                 do
                 {
@@ -50,10 +50,10 @@ namespace Binance.Net.Converters
                             resultInner.Add(parseResult.Value);
                     }
                     while (reader.Read());
-                    result.Add(resultInner);
+                    result.Add(resultInner.ToArray());
                 }
                 while (reader.Read());
-                return (T)(object)result;
+                return (T)(object)result.ToArray();
             }
 
             throw new InvalidOperationException("Invalid type");
@@ -65,14 +65,14 @@ namespace Binance.Net.Converters
             {
                 WriteAccountType(writer, act);
             }
-            else if (value is IEnumerable<PermissionType> actList)
+            else if (value is PermissionType[] actList)
             {
                 writer.WriteStartArray();
                 foreach (var val in actList)
                     WriteAccountType(writer, val);
                 writer.WriteEndArray();
             }
-            else if (value is IEnumerable<IEnumerable<PermissionType>> actListList)
+            else if (value is PermissionType[][] actListList)
             {
                 writer.WriteStartArray();
                 foreach (var valList in actListList)

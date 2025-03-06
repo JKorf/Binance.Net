@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamIndexKlineData : BinanceStreamEvent
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// If the new user info
     /// </summary>
+    [SerializationModel]
     public record BinanceIfNewUser
     {
         /// <summary>

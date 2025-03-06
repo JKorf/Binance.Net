@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
     /// <summary>
     /// Portfolio margin account info
     /// </summary>
+    [SerializationModel]
     public record BinancePortfolioMarginInfo
     {
         /// <summary>
@@ -31,7 +32,6 @@ namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
         /// <summary>
         /// Account status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<PortfolioMarginAccountStatus>))]
         [JsonPropertyName("accountStatus")]
         public PortfolioMarginAccountStatus AccountStatus { get; set; }
         /// <summary>

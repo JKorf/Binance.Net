@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Order update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamOrderUpdate : BinanceStreamEvent
     {
         /// <summary>

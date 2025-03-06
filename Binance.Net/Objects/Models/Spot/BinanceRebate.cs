@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Rebates page wrapper
     /// </summary>
+    [SerializationModel]
     public record BinanceRebateWrapper
     {
         /// <summary>

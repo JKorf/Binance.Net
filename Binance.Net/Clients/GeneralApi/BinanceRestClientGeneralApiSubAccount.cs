@@ -568,8 +568,8 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection()
             {
                 { "email", email },
-                { "futuresType", EnumConverter<FuturesAccountType>.GetString(accountType) },
             };
+            parameters.AddEnum("futuresType", accountType);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -594,11 +594,10 @@ namespace Binance.Net.Clients.GeneralApi
             {
                 { "fromEmail", fromEmail },
                 { "toEmail", toEmail },
-                { "futuresType", EnumConverter<FuturesAccountType>.GetString(accountType) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
-
+            parameters.AddEnum("futuresType", accountType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sub-account/futures/internalTransfer", BinanceExchange.RateLimiter.SpotRestIp, 1, true);

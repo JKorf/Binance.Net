@@ -3,6 +3,7 @@
     /// <summary>
     /// Deposit address info for a sub-account
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountDepositAddress
     {
         /// <summary>

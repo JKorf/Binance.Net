@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account margin trade details
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountMarginDetails
     {
         /// <summary>

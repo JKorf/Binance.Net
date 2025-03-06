@@ -3,6 +3,7 @@
     /// <summary>
     /// Enable Margin Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageEnableMarginResult
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open interest
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesOpenInterest
     {
         /// <summary>
@@ -29,6 +30,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open interest
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinOpenInterest : BinanceFuturesOpenInterest
     {
         /// <summary>

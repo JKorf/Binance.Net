@@ -3,6 +3,7 @@
     /// <summary>
     /// Api Key Create Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageApiKeyCreateResult
     {
         /// <summary>

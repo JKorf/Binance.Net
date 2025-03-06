@@ -3,6 +3,7 @@
     /// <summary>
     /// Future hourly interest rate
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesInterestRate
     {
         /// <summary>

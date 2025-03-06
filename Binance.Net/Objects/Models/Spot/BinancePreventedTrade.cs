@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Prevented order info
     /// </summary>
+    [SerializationModel]
     public record BinancePreventedTrade
     {
         /// <summary>
@@ -36,7 +37,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
         /// <summary>

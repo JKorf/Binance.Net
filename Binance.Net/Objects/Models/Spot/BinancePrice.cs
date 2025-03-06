@@ -3,6 +3,7 @@
     /// <summary>
     /// The price of a symbol
     /// </summary>
+    [SerializationModel]
     public record BinancePrice
     {
         /// <summary>
@@ -25,6 +26,7 @@
     /// <summary>
     /// Futures-Coin price
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinPrice : BinancePrice
     {
         /// <summary>

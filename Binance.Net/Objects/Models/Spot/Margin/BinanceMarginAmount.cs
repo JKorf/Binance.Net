@@ -3,6 +3,7 @@
     /// <summary>
     /// The result quantity of getting maxBorrowable or maxTransferable 
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginAmount
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Wrap history
     /// </summary>
+    [SerializationModel]
     public record BinanceBethWrapHistory
     {
         /// <summary>

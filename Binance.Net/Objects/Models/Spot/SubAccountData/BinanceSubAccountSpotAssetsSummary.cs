@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub accounts btc value summary
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountSpotAssetsSummary
     {
         /// <summary>

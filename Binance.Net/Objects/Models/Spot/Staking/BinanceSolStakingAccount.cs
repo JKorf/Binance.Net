@@ -3,6 +3,7 @@
     /// <summary>
     /// SOL staking account
     /// </summary>
+    [SerializationModel]
     public record BinanceSolStakingAccount
     {
         /// <summary>

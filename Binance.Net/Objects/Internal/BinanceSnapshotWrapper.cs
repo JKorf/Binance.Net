@@ -1,5 +1,6 @@
 ﻿namespace Binance.Net.Objects.Internal
 {
+    [SerializationModel]
     internal class BinanceSnapshotWrapper<T>
     {
         [JsonPropertyName("code")]

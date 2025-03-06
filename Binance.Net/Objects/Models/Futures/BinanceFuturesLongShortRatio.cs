@@ -3,6 +3,7 @@
     /// <summary>
     /// Long Short Ratio Info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesLongShortRatio
     {
         /// <summary>
@@ -28,9 +29,10 @@
         /// </summary>
         [JsonPropertyName("longAccount")]
         public decimal LongAccount { get; set; }
-        [JsonPropertyName("longPosition")]
-        private decimal LongPosition
+        [JsonInclude, JsonPropertyName("longPosition")]
+        internal decimal LongPosition
         {
+            get => LongAccount;
             set => LongAccount = value;
         }
 
@@ -39,9 +41,10 @@
         /// </summary>
         [JsonPropertyName("shortAccount")]
         public decimal ShortAccount { get; set; }
-        [JsonPropertyName("shortPosition")]
-        private decimal ShortPosition
+        [JsonInclude, JsonPropertyName("shortPosition")]
+        internal decimal ShortPosition
         {
+            get => ShortAccount;
             set => ShortAccount = value;
         }
         /// <summary>

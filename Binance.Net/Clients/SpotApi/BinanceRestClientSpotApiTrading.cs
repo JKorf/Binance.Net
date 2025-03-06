@@ -237,9 +237,9 @@ namespace Binance.Net.Clients.SpotApi
 
             var parameters = new ParameterCollection
             {
-                { "symbol", symbol },
-                { "cancelReplaceMode", EnumConverter<CancelReplaceMode>.GetString(cancelReplaceMode) }
+                { "symbol", symbol }
             };
+            parameters.AddEnum("cancelReplaceMode", cancelReplaceMode);
             parameters.AddEnum("side", side);
             parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
@@ -434,9 +434,9 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "aboveType", EnumConverter<SpotOrderType>.GetString(aboveOrderType) },
-                { "belowType", EnumConverter<SpotOrderType>.GetString(belowOrderType) },
             };
+            parameters.AddEnum("aboveType", aboveOrderType);
+            parameters.AddEnum("belowType", belowOrderType);
             parameters.AddEnum("side", side);
 
             parameters.AddOptional("aboveClientOrderId", aboveClientOrderId);
@@ -990,7 +990,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("stopLimitTimeInForce", stopLimitTimeInForce);
             parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter<SelfTradePreventionMode>.GetString(selfTradePreventionMode));
+            parameters.AddOptionalEnum("selfTradePreventionMode",selfTradePreventionMode);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/margin/order/oco", BinanceExchange.RateLimiter.SpotRestUid, 6, true);

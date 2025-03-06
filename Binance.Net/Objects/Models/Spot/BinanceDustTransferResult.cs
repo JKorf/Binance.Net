@@ -3,6 +3,7 @@
     /// <summary>
     /// Result of dust transfer
     /// </summary>
+    [SerializationModel]
     public record BinanceDustTransferResult
     {
         /// <summary>

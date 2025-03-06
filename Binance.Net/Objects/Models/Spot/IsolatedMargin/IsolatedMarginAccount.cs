@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Isolated margin account info
     /// </summary>
+    [SerializationModel]
     public record BinanceIsolatedMarginAccount
     {
         /// <summary>

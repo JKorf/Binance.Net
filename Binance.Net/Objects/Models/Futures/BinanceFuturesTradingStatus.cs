@@ -3,6 +3,7 @@
     /// <summary>
     /// Trading rules status
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesTradingStatus
     {
         /// <summary>

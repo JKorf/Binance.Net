@@ -3,6 +3,7 @@
     /// <summary>
     /// Spot Asset Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSpotAssetInfo
     {
         /// <summary>

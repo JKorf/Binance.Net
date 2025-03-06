@@ -205,10 +205,8 @@ namespace Binance.Net.Clients.SpotApi
         {
             limit?.ValidateIntBetween(nameof(limit), 7, 30);
 
-            var parameters = new ParameterCollection
-            {
-                { "type", EnumConverter<AccountType>.GetString(accountType) }
-            };
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("type", accountType);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));

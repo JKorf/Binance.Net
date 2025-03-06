@@ -3,6 +3,7 @@
     /// <summary>
     /// Margin dust transfer info
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginDustTransfer
     {
         /// <summary>

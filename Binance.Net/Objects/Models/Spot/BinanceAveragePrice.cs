@@ -3,6 +3,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Current average price details for a symbol.
     /// </summary>
+    [SerializationModel]
     public record BinanceAveragePrice
     {
         /// <summary>

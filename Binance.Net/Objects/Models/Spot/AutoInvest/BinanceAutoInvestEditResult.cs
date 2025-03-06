@@ -3,6 +3,7 @@
     /// <summary>
     /// Edit result
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestEditResult
     {
         /// <summary>

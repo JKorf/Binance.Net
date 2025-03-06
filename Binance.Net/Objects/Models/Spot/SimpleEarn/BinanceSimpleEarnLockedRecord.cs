@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     /// <summary>
     /// Locked product subscription record
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnLockedRecord
     {
         /// <summary>
@@ -36,12 +37,12 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Subscription type
         /// </summary>
-        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter<SubscriptionType>))]
+        [JsonPropertyName("type")]
         public SubscriptionType Type { get; set; }
         /// <summary>
         /// Source account
         /// </summary>
-        [JsonPropertyName("sourceAccount"), JsonConverter(typeof(EnumConverter<AccountSource>))]
+        [JsonPropertyName("sourceAccount")]
         public AccountSource SourceAccount { get; set; }
         /// <summary>
         /// Quantity from spot
@@ -56,7 +57,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Status
         /// </summary>
-        [JsonPropertyName("status"), JsonConverter(typeof(EnumConverter<SubscriptionStatus>))]
+        [JsonPropertyName("status")]
         public SubscriptionStatus Status { get; set; }
         /// <summary>
         /// Lock period

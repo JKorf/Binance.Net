@@ -3,6 +3,7 @@
     /// <summary>
     /// Dust log response details
     /// </summary>
+    [SerializationModel]
     public record BinanceDustLogList
     {
         /// <summary>

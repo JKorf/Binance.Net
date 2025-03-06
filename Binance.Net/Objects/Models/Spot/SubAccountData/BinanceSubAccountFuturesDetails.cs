@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub account futures details
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountFuturesDetails
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Futures stream symbol update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamSymbolUpdate : BinanceStreamEvent
     {
         /// <summary>
@@ -22,7 +23,6 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Contract type
         /// </summary>
         [JsonPropertyName("ct")]
-        [JsonConverter(typeof(EnumConverter<ContractType>))]
         public ContractType ContractType { get; set; }
         /// <summary>
         /// Delivery date
@@ -40,7 +40,6 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Symbol status
         /// </summary>
         [JsonPropertyName("cs")]
-        [JsonConverter(typeof(EnumConverter<SymbolStatus>))]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// Brackets

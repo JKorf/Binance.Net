@@ -3,6 +3,7 @@
     /// <summary>
     /// Account Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageAccountInfo
     {
         /// <summary>

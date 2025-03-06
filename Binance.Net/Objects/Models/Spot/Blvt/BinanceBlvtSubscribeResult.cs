@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// <summary>
     /// Subscribe result
     /// </summary>
+    [SerializationModel]
     public record BinanceBlvtSubscribeResult
     {
         /// <summary>

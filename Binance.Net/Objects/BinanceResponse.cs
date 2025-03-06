@@ -5,6 +5,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Binance response
     /// </summary>
+    [SerializationModel]
     public class BinanceResponse
     {
         /// <summary>

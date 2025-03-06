@@ -3,6 +3,7 @@
     /// <summary>
     /// Isolated margin symbol info
     /// </summary>
+    [SerializationModel]
     public record BinanceIsolatedMarginSymbol
     {
         /// <summary>

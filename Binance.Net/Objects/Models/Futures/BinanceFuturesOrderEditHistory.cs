@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The history of order edits
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesOrderEditHistory
     {
         /// <summary>
@@ -52,7 +53,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter<PriceMatch>))]
+        [JsonPropertyName("priceMatch")]
         public PriceMatch PriceMatch { get; set; }
 
     }

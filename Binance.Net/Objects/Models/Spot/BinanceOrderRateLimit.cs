@@ -3,6 +3,7 @@
     /// <summary>
     /// Rate limit info
     /// </summary>
+    [SerializationModel]
     public record BinanceCurrentRateLimit : BinanceRateLimit
     {
         /// <summary>

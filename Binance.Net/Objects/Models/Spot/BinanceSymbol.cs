@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Symbol info
     /// </summary>
+    [SerializationModel]
     public record BinanceSymbol
     {
         /// <summary>
@@ -98,12 +99,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// Permissions types
         /// </summary>
         [JsonPropertyName("permissions")]
-        public IEnumerable<PermissionType> Permissions { get; set; } = Array.Empty<PermissionType>();
+        public PermissionType[] Permissions { get; set; } = Array.Empty<PermissionType>();
         /// <summary>
         /// Permission sets
         /// </summary>
-        [JsonPropertyName("permissionSets"), JsonConverter(typeof(AccountTypeConverterImp<IEnumerable<IEnumerable<PermissionType>>>))]
-        public IEnumerable<IEnumerable<PermissionType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<PermissionType>>();
+        [JsonPropertyName("permissionSets"), JsonConverter(typeof(AccountTypeConverterImp<PermissionType[][]>))]
+        public PermissionType[][] PermissionSets { get; set; } = Array.Empty<PermissionType[]>();
 
         /// <summary>
         /// Filters for order on this symbol
@@ -114,7 +115,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// Default self trade prevention
         /// </summary>
         [JsonPropertyName("defaultSelfTradePreventionMode")]
-        [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode DefaultSelfTradePreventionMode { get; set; }
         /// <summary>
         /// Allowed self trade prevention modes

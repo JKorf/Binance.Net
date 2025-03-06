@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Book tick
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamBookPrice : IBinanceBookPrice
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Info on a product
     /// </summary>
+    [SerializationModel]
     public record BinanceProduct
     {
         /// <summary>

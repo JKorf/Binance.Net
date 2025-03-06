@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Resale list
     /// </summary>
+    [SerializationModel]
     public record BinanceHashrateResaleList
     {
         /// <summary>

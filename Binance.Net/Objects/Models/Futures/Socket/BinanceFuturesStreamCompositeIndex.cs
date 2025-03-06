@@ -3,6 +3,7 @@
     /// <summary>
     /// Composite index info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamCompositeIndex : BinanceStreamEvent
     {
         /// <summary>

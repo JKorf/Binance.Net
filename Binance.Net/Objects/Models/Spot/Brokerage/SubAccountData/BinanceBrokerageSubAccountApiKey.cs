@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub Account Api Key
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccountApiKey
     {
         /// <summary>

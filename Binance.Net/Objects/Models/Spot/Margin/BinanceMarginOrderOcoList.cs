@@ -3,6 +3,7 @@
     /// <summary>
     /// Oco info
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginOrderOcoList : BinanceOrderOcoList
     {
         /// <summary>

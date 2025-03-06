@@ -3,6 +3,7 @@
     /// <summary>
     /// Information about an asset for a user
     /// </summary>
+    [SerializationModel]
     public record BinanceUserAsset
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Position information
     /// </summary>
+    [SerializationModel]
     public record BinancePositionV3
     {
         /// <summary>

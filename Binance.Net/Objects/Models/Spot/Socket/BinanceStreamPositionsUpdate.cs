@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Positions update
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamPositionsUpdate : BinanceStreamEvent
     {
         /// <summary>

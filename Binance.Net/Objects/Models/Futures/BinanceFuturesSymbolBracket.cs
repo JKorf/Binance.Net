@@ -3,6 +3,7 @@
     /// <summary>
     /// Notional and Leverage Brackets
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesSymbolBracket
     {
         /// <summary>
@@ -16,8 +17,8 @@
         /// </summary>
         [JsonPropertyName("notionalCoef")]
         public decimal? NotionalCoef { get; set; }
-        [JsonPropertyName("pair")]
-        private string Pair
+        [JsonInclude, JsonPropertyName("pair")]
+        internal string Pair
         {
             set => Symbol = value;
         }
@@ -52,8 +53,8 @@
         /// </summary>
         [JsonPropertyName("notionalCap")]
         public long Cap { get; set; }
-        [JsonPropertyName("qtyCap")]
-        private long QuantityCap
+        [JsonInclude, JsonPropertyName("qtyCap")]
+        internal long QuantityCap
         {
             set => Cap = value;
         }
@@ -63,8 +64,8 @@
         /// </summary>
         [JsonPropertyName("notionalFloor")]
         public long Floor { get; set; }
-        [JsonPropertyName("qtyFloor")]
-        private long QuantityFloor
+        [JsonInclude, JsonPropertyName("qtyFloor")]
+        internal long QuantityFloor
         {
             set => Floor = value;
         }

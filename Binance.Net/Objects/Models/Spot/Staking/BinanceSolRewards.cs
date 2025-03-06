@@ -7,6 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Staking
     /// <summary>
     /// SOL rewards
     /// </summary>
+    [SerializationModel]
     public record BinanceSolRewards : BinanceQueryRecords<BinanceSolReward>
     {
         /// <summary>
@@ -19,6 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Staking
     /// <summary>
     /// SOL reward
     /// </summary>
+    [SerializationModel]
     public record BinanceSolReward
     {
         /// <summary>

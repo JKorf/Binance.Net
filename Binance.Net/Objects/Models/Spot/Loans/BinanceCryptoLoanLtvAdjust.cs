@@ -3,6 +3,7 @@
     /// <summary>
     /// Adjust info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanLtvAdjust
     {
         /// <summary>

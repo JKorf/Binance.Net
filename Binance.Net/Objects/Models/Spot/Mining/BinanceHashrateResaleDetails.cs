@@ -3,6 +3,7 @@
     /// <summary>
     /// Resale list
     /// </summary>
+    [SerializationModel]
     public record BinanceHashrateResaleDetails
     {
         /// <summary>

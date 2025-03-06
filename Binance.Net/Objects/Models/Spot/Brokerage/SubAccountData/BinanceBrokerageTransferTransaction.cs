@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     /// <summary>
     /// Transfer Transaction
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageTransferTransaction
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Precision per asset
     /// </summary>
+    [SerializationModel]
     public record BinanceConvertQuantityPrecisionAsset
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     /// <summary>
     /// Simple Earn flexible product redemption record
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnFlexibleRedemptionRecord
     {
         /// <summary>
@@ -36,7 +37,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Destination account
         /// </summary>
-        [JsonPropertyName("destAccount"), JsonConverter(typeof(EnumConverter<AccountSource>))]
+        [JsonPropertyName("destAccount")]
         public AccountSource DestinationAccount { get; set; }
         /// <summary>
         /// Status

@@ -3,6 +3,7 @@
     /// <summary>
     /// Miner details
     /// </summary>
+    [SerializationModel]
     public record BinanceMinerDetails
     {
         /// <summary>

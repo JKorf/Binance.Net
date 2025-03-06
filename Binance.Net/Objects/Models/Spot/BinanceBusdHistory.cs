@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Busd convert history
     /// </summary>
+    [SerializationModel]
     public record BinanceBusdHistory
     {
         /// <summary>
@@ -17,7 +18,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// Type
         /// </summary>
         [JsonPropertyName("type")]
-        [JsonConverter(typeof(EnumConverter<BusdConvertType>))]
         public BusdConvertType Type { get; set; }
         /// <summary>
         /// Timestamp

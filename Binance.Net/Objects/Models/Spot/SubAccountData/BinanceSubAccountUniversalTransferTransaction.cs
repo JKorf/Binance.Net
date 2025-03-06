@@ -2,6 +2,7 @@
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
+    [SerializationModel]
     internal record BinanceSubAccountUniversalTransfersList
     {
         /// <summary>

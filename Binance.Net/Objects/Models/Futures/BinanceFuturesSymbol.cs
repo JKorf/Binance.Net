@@ -102,7 +102,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Sub types
         /// </summary>
         [JsonPropertyName("underlyingSubType")]
-        public IEnumerable<string> UnderlyingSubType { get; set; } = Array.Empty<string>();
+        public string[] UnderlyingSubType { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Liquidation fee
@@ -165,6 +165,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesUsdtSymbol : BinanceFuturesSymbol
     {
         /// <summary>
@@ -183,6 +184,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinSymbol : BinanceFuturesSymbol
     {
 

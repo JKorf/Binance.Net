@@ -83,7 +83,7 @@ namespace Binance.Net.Converters
                         MultiplierUp = decimal.Parse(obj.GetProperty("multiplierUp").GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture),
                         MultiplierDown = decimal.Parse(obj.GetProperty("multiplierDown").GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture),
                         AveragePriceMinutes = obj.TryGetProperty("avgPriceMins", out var avgPriceMins) ? avgPriceMins.GetInt32() : null,
-                        MultiplierDecimal = obj.TryGetProperty("multiplierDecimal", out var mulDec) ? int.Parse(mulDec.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture) : null
+                        MultiplierDecimal = obj.TryGetProperty("multiplierDecimal", out var mulDec) ? mulDec.GetInt32() : null
                     };
                     break;
                 case SymbolFilterType.MaxPosition:

@@ -3,6 +3,7 @@
     /// <summary>
     /// Brokerage Rebate
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageRebate
     {
         /// <summary>

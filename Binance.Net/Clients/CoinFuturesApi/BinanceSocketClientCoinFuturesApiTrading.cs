@@ -95,9 +95,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "side", EnumConverter<OrderSide>.GetString(side) },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
             };
+            parameters.AddEnum("side", side);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("priceMatch", priceMatch);
             parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));

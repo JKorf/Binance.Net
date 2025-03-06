@@ -3,6 +3,7 @@
     /// <summary>
     /// IP restriction info
     /// </summary>
+    [SerializationModel]
     public record BinanceIpRestriction
     {
         /// <summary>

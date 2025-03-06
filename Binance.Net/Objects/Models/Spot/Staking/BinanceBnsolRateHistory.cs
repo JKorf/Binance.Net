@@ -3,6 +3,7 @@
     /// <summary>
     /// Rate history
     /// </summary>
+    [SerializationModel]
     public record BinanceBnsolRateHistory
     {
         /// <summary>

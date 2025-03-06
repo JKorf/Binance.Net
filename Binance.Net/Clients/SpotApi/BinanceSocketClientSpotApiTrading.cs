@@ -54,8 +54,8 @@ namespace Binance.Net.Clients.SpotApi
 
             var parameters = new ParameterCollection();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("side", EnumConverter<OrderSide>.GetString(side));
-            parameters.AddParameter("type", EnumConverter<SpotOrderType>.GetString(type));
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
             parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalParameter("price", rulesCheck.Price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", rulesCheck.Quantity?.ToString(CultureInfo.InvariantCulture));
@@ -93,8 +93,8 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new ParameterCollection();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("side", EnumConverter<OrderSide>.GetString(side));
-            parameters.AddParameter("type", EnumConverter<SpotOrderType>.GetString(type));
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
             parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
@@ -183,8 +183,8 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "cancelReplaceMode", EnumConverter<CancelReplaceMode>.GetString(cancelReplaceMode) }
             };
+            parameters.AddEnum("cancelReplaceMode", cancelReplaceMode);
             parameters.AddEnum("side", side);
             parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
@@ -332,9 +332,9 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "aboveType", EnumConverter<SpotOrderType>.GetString(aboveOrderType) },
-                { "belowType", EnumConverter<SpotOrderType>.GetString(belowOrderType) },
             };
+            parameters.AddEnum("aboveType", aboveOrderType);
+            parameters.AddEnum("belowType", belowOrderType);
             parameters.AddEnum("side", side);
             parameters.AddOptional("listClientOrderId", listClientOrderId);
 

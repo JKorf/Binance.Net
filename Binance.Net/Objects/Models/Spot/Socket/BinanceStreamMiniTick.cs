@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// MiniTick info
     /// </summary>
+    [SerializationModel]
     public abstract record BinanceStreamMiniTickBase : BinanceStreamEvent, IBinanceMiniTick
     {
         /// <summary>
@@ -51,6 +52,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream mini tick
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamMiniTick : BinanceStreamMiniTickBase
     {
         /// <inheritdoc/>
@@ -64,6 +66,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream mini tick
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamCoinMiniTick : BinanceStreamMiniTickBase
     {
         /// <inheritdoc/>

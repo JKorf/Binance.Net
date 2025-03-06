@@ -3,6 +3,7 @@
     /// <summary>
     /// Strategy update
     /// </summary>
+    [SerializationModel]
     public record BinanceGridUpdate : BinanceStreamEvent
     {
         /// <summary>

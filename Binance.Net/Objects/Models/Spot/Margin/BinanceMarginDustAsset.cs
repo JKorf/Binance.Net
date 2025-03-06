@@ -3,6 +3,7 @@
     /// <summary>
     /// Asset info for dust conversion
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginDustAsset
     {
         /// <summary>

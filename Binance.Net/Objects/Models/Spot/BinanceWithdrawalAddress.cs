@@ -3,6 +3,7 @@
     /// <summary>
     /// Withdrawal address info
     /// </summary>
+    [SerializationModel]
     public record BinanceWithdrawalAddress
     {
         /// <summary>

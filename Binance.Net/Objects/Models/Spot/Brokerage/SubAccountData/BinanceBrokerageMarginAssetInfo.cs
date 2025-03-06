@@ -3,6 +3,7 @@
     /// <summary>
     /// Margin Asset Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageMarginAssetInfo
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Margin account snapshot
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginAccountSnapshot
     {
         /// <summary>
@@ -16,7 +17,6 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(EnumConverter<AccountType>))]
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>

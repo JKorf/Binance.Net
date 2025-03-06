@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     /// <summary>
     /// Simple Earn locked product redemption record
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnLockedRedemptionRecord
     {
         /// <summary>
@@ -51,7 +52,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Type
         /// </summary>
-        [JsonPropertyName("type"), JsonConverter(typeof(EnumConverter<RedemptionType>))]
+        [JsonPropertyName("type")]
         public RedemptionType Type { get; set; }
     }
 }

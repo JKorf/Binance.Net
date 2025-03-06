@@ -3,6 +3,7 @@
     /// <summary>
     /// User's position mode
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesPositionMode
     {
         /// <summary>

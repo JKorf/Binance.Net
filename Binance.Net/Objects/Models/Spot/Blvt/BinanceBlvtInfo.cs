@@ -3,6 +3,7 @@
     /// <summary>
     /// Leveraged token info
     /// </summary>
+    [SerializationModel]
     public record BinanceBlvtInfo
     {
         /// <summary>

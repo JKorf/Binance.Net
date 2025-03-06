@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Recent trade info
     /// </summary>
+    [SerializationModel]
     public abstract record BinanceRecentTrade : IBinanceRecentTrade
     {
         /// <summary>

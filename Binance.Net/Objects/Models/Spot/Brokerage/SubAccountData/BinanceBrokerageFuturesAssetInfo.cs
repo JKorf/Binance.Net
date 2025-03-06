@@ -3,6 +3,7 @@
     /// <summary>
     /// Futures Asset Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageFuturesAssetInfo
     {
         /// <summary>

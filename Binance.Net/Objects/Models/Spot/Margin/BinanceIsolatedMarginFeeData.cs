@@ -3,6 +3,7 @@
     /// <summary>
     /// Fee data
     /// </summary>
+    [SerializationModel]
     public record BinanceIsolatedMarginFeeData
     {
         /// <summary>

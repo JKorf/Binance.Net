@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Open Interest History info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinOpenInterestHistory
     {
         /// <summary>

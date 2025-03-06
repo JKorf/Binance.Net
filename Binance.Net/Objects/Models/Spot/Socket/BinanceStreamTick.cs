@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Tick info
     /// </summary>
+    [SerializationModel]
     public abstract record BinanceStreamTickBase : BinanceStreamEvent, IBinanceTick
     {
         /// <summary>
@@ -115,6 +116,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream tick
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamTick : BinanceStreamTickBase
     {
         /// <summary>
@@ -132,6 +134,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream tick
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamCoinTick : BinanceStreamTickBase
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Binance commissions
     /// </summary>
+    [SerializationModel]
     public record BinanceCommissions
     {
         /// <summary>

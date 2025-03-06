@@ -3,6 +3,7 @@
     /// <summary>
     /// Information about margin account
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginAccount
     {
         /// <summary>

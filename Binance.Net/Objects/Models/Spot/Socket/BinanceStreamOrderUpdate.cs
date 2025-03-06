@@ -209,7 +209,6 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// Prevented match id
         /// </summary>
         [JsonPropertyName("V")]
-        [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
         /// <summary>
         /// Working time; when it entered the order book

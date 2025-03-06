@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Order list info
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamOrderList : BinanceStreamEvent
     {
         /// <summary>

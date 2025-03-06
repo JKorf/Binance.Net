@@ -3,6 +3,7 @@
     /// <summary>
     /// Delist margin schedule
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginDelistSchedule
     {
         /// <summary>

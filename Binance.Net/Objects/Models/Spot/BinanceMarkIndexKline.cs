@@ -7,6 +7,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// Kline for mark or index price or Premium index
     /// </summary>
     [JsonConverter(typeof(ArrayConverter<BinanceMarkIndexKline, BinanceSourceGenerationContext>))]
+    [SerializationModel]
     public record BinanceMarkIndexKline
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Transaction download info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesDownloadIdInfo
     {
         /// <summary>

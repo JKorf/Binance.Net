@@ -3,6 +3,7 @@
     /// <summary>
     /// The result of placing a new order
     /// </summary>
+    [SerializationModel]
     public record BinancePlacedOrder : BinanceOrderBase
     {
 

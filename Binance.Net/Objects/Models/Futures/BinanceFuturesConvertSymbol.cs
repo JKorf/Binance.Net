@@ -3,6 +3,7 @@
     /// <summary>
     /// Convert symbol info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesConvertSymbol
     {
         /// <summary>

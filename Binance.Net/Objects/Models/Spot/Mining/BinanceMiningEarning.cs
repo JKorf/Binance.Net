@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Earning info
     /// </summary>
+    [SerializationModel]
     public record BinanceMiningEarnings
     {
         /// <summary>

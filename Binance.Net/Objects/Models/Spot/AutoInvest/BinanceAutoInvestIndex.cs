@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     /// <summary>
     /// Auto invest index info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestIndex
     {
         /// <summary>

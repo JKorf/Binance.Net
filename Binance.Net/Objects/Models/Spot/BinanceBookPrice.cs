@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about the best price/quantity available for a symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceBookPrice : IBinanceBookPrice
     {
         /// <summary>

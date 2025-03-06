@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Trade status
     /// </summary>
+    [SerializationModel]
     public record BinanceTradingStatus
     {
         /// <summary>

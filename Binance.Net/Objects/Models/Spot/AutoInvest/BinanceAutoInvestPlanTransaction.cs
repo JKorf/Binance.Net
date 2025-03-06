@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     /// <summary>
     /// Transactions
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestPlanTransactions
     {
         /// <summary>

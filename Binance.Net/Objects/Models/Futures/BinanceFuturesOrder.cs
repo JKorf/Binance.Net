@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// The result of query order
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesOrder
     {
         /// <summary>
@@ -119,7 +120,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// For what time the order lasts
         /// </summary>
-        [JsonPropertyName("timeInForce"), JsonConverter(typeof(EnumConverter<TimeInForce>))]
+        [JsonPropertyName("timeInForce")]
         public TimeInForce TimeInForce { get; set; }
 
         /// <summary>
@@ -179,7 +180,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match type
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter<PriceMatch>))]
+        [JsonPropertyName("priceMatch")]
         public PriceMatch PriceMatch { get; set; }
 
         /// <summary>
@@ -192,6 +193,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Usdt futures order
     /// </summary>
+    [SerializationModel]
     public record BinanceUsdFuturesOrder : BinanceFuturesOrder
     {
 

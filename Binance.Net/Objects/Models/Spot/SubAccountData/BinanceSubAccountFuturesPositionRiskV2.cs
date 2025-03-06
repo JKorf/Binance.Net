@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account position risk
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountFuturesPositionRiskV2
     {
         /// <summary>

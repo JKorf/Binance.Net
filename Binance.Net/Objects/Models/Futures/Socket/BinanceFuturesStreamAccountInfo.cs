@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Account update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamAccountUpdate : BinanceStreamEvent
     {
         /// <summary>
@@ -33,7 +34,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Account update reason type
         /// </summary>
-        [JsonPropertyName("m"), JsonConverter(typeof(EnumConverter<AccountUpdateReason>))]
+        [JsonPropertyName("m")]
         public AccountUpdateReason Reason { get; set; }
 
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Asset dusts that can be converted to BNB
     /// </summary>
+    [SerializationModel]
     public record BinanceEligibleDusts
     {
         /// <summary>

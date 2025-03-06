@@ -3,6 +3,7 @@
     /// <summary>
     /// Futures asset index
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAssetIndex
     {
         /// <summary>

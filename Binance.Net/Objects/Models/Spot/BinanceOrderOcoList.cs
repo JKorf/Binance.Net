@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// The result of placing a new OCO order
     /// </summary>
+    [SerializationModel]
     public record BinanceOrderOcoList
     {
         /// <summary>

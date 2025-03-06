@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Margin update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamMarginUpdate : BinanceStreamEvent
     {
         /// <summary>
