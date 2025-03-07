@@ -1,3 +1,4 @@
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
@@ -39,9 +40,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// The new client order id
         /// </summary>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order

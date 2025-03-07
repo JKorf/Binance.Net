@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Models.Futures.AlgoOrders
+﻿using Binance.Net.Converters;
+
+namespace Binance.Net.Objects.Models.Futures.AlgoOrders
 {
     /// <summary>
     /// Algo order result
@@ -10,9 +12,7 @@
         /// Order id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientAlgoId { get; set; } = string.Empty;
         /// <summary>
         /// Successful

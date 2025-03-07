@@ -183,22 +183,39 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceSpotAccountSnapshot[]>> GetDailySpotAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
-            CancellationToken ct = default) =>
-            await GetDailyAccountSnapshot<BinanceSpotAccountSnapshot[]>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            CancellationToken ct = default)
+        {
+            var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceSpotAccountSnapshot[]>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            if (result.Data.Code != 200)
+                return result.AsError<BinanceSpotAccountSnapshot[]>(new ServerError(result.Data.Code, result.Data.Message));
+
+            return result.As(result.Data.SnapshotData);
+        }
 
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceMarginAccountSnapshot[]>> GetDailyMarginAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
-            CancellationToken ct = default) =>
-            await GetDailyAccountSnapshot<BinanceMarginAccountSnapshot[]>(AccountType.Margin, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            CancellationToken ct = default)
+        {
+            var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceMarginAccountSnapshot[]>>(AccountType.Margin, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            if (result.Data.Code != 200)
+                return result.AsError<BinanceMarginAccountSnapshot[]>(new ServerError(result.Data.Code, result.Data.Message));
+
+            return result.As(result.Data.SnapshotData);
+        }
 
         // TODO Should be moved
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesAccountSnapshot[]>> GetDailyFutureAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
-            CancellationToken ct = default) =>
-            await GetDailyAccountSnapshot<BinanceFuturesAccountSnapshot[]>(AccountType.Futures, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            CancellationToken ct = default)
+        {
+            var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceFuturesAccountSnapshot[]>>(AccountType.Futures, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
+            if (result.Data.Code != 200)
+                return result.AsError<BinanceFuturesAccountSnapshot[]>(new ServerError(result.Data.Code, result.Data.Message));
 
+            return result.As(result.Data.SnapshotData);
+        }
 
         private async Task<WebCallResult<T>> GetDailyAccountSnapshot<T>(AccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default) where T : class
@@ -213,14 +230,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/accountSnapshot", BinanceExchange.RateLimiter.SpotRestIp, 2400, true);
-            var result = await _baseClient.SendAsync<BinanceSnapshotWrapper<T>>(request, parameters, ct).ConfigureAwait(false);
-            if (!result.Success)
-                return result.As<T>(default);
-
-            if (result.Data.Code != 200)
-                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message));
-
-            return result.As(result.Data.SnapshotData);
+            var result = await _baseClient.SendAsync<T>(request, parameters, ct).ConfigureAwait(false);
+            return result;
         }
         #endregion
 

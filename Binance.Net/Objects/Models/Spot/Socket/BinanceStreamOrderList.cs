@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
@@ -37,9 +38,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The client id of the order list
         /// </summary>
         [JsonPropertyName("C")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ListClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The transaction time
@@ -82,9 +81,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The client order id
         /// </summary>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
     }
 }

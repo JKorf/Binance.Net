@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures.AlgoOrders
@@ -70,9 +71,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Client algo id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientAlgoId { get; set; } = string.Empty;
         /// <summary>
         /// Book time
