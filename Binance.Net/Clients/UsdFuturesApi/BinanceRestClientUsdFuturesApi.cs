@@ -64,7 +64,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(BinanceExchange.SerializerContext);
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
 
         internal Uri GetUrl(string endpoint, string api, string? version = null)
         {

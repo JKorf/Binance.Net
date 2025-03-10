@@ -6,7 +6,7 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotApi : IBinanceRestClientSpotApiShared
     {
-        private const string _topicId = "BinanceRestSpot";
+        private const string _topicId = "BinanceSpot";
         public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
 

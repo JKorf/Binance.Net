@@ -71,7 +71,7 @@ namespace Binance.Net.Clients.GeneralApi
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(BinanceExchange.SerializerContext);
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

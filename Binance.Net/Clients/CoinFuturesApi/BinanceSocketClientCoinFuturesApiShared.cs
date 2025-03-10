@@ -7,7 +7,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceSocketClientCoinFuturesApi : IBinanceSocketClientCoinFuturesApiShared
     {
-        private const string _topicId = "BinanceSocketCoinFutures";
+        private const string _topicId = "BinanceCoinFutures";
         public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse };
 

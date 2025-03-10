@@ -70,7 +70,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
 
         protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(BinanceExchange.SerializerContext);
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
         public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
 

@@ -7,7 +7,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceSocketClientUsdFuturesApi : IBinanceSocketClientUsdFuturesApiShared
     {
-        private const string _topicId = "BinanceSocketUsdFutures";
+        private const string _topicId = "BinanceUsdFutures";
         public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
 
