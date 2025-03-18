@@ -224,7 +224,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAsset);
 
-        string IFuturesOrderRestClient.GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
+        string IFuturesOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(20);
 
         PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions();
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
@@ -244,7 +244,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? Enums.FuturesOrderType.Limit : Enums.FuturesOrderType.Market,
-                quantity: request.Quantity,
+                quantity: request.Quantity?.QuantityInBaseAsset,
                 price: request.Price,
                 positionSide: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
                 reduceOnly: request.ReduceOnly,
@@ -284,9 +284,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price == 0 ? null : order.Data.Price,
-                Quantity = order.Data.Quantity,
-                QuantityFilled = order.Data.QuantityFilled,
-                QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Data.Quantity),
+                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
@@ -318,9 +317,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 OrderPrice = x.Price == 0 ? null : x.Price,
-                Quantity = x.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.Quantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionSide == PositionSide.Both ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
@@ -366,9 +364,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 OrderPrice = x.Price == 0 ? null : x.Price,
-                Quantity = x.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.Quantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionSide == PositionSide.Both ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
@@ -586,9 +583,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price == 0 ? null : order.Data.Price,
-                Quantity = order.Data.Quantity,
-                QuantityFilled = order.Data.QuantityFilled,
-                QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: order.Data.Quantity),
+                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled, order.Data.QuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,

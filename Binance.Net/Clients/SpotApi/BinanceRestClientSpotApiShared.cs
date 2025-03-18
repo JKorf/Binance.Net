@@ -243,7 +243,7 @@ namespace Binance.Net.Clients.SpotApi
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAndQuoteAsset);
 
-        string ISpotOrderRestClient.GenerateClientOrderId() => LibraryHelpers.ApplyBrokerId(string.Empty, BinanceExchange.ClientOrderIdSpot, 36, ClientOptions.AllowAppendingClientOrderId);
+        string ISpotOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(20);
 
         PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions();
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
@@ -263,8 +263,8 @@ namespace Binance.Net.Clients.SpotApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? Enums.SpotOrderType.Limit : request.OrderType == SharedOrderType.Market ? Enums.SpotOrderType.Market : Enums.SpotOrderType.LimitMaker,
-                quantity: request.Quantity,
-                quoteQuantity: request.QuoteQuantity,
+                quantity: request.Quantity?.QuantityInBaseAsset,
+                quoteQuantity: request.Quantity?.QuantityInQuoteAsset,
                 price: request.Price,
                 timeInForce: GetTimeInForce(request.TimeInForce, request.OrderType),
                 newClientOrderId: request.ClientOrderId,
@@ -302,10 +302,8 @@ namespace Binance.Net.Clients.SpotApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AverageFillPrice,
                 OrderPrice = order.Data.Price,
-                Quantity = order.Data.Quantity,
-                QuantityFilled = order.Data.QuantityFilled,
-                QuoteQuantity = order.Data.QuoteQuantity,
-                QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, order.Data.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime
             });
@@ -335,10 +333,8 @@ namespace Binance.Net.Clients.SpotApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AverageFillPrice,
                 OrderPrice = x.Price,
-                Quantity = x.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantity = x.QuoteQuantity,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime
             }).ToArray());
@@ -382,10 +378,8 @@ namespace Binance.Net.Clients.SpotApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AverageFillPrice,
                 OrderPrice = x.Price,
-                Quantity = x.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantity = x.QuoteQuantity,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime
             }).ToArray(), nextToken);
@@ -543,10 +537,8 @@ namespace Binance.Net.Clients.SpotApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AverageFillPrice,
                 OrderPrice = order.Data.Price,
-                Quantity = order.Data.Quantity,
-                QuantityFilled = order.Data.QuantityFilled,
-                QuoteQuantity = order.Data.QuoteQuantity,
-                QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, order.Data.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime
             });

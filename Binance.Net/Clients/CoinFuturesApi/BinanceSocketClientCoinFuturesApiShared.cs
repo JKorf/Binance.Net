@@ -205,8 +205,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     {
                         ClientOrderId = update.Data.UpdateData.ClientOrderId,
                         OrderPrice = update.Data.UpdateData.Price,
-                        Quantity = update.Data.UpdateData.Quantity,
-                        QuantityFilled = update.Data.UpdateData.AccumulatedQuantityOfFilledTrades,
+                        OrderQuantity = new SharedOrderQuantity(update.Data.UpdateData.Quantity, contractQuantity: update.Data.UpdateData.Quantity),
+                        QuantityFilled = new SharedOrderQuantity(update.Data.UpdateData.AccumulatedQuantityOfFilledTrades, contractQuantity : update.Data.UpdateData.AccumulatedQuantityOfFilledTrades),
                         UpdateTime = update.Data.UpdateData.UpdateTime,
                         Fee = update.Data.UpdateData.Fee,
                         FeeAsset = update.Data.UpdateData.FeeAsset,

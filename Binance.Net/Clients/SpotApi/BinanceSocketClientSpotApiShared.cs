@@ -131,10 +131,8 @@ namespace Binance.Net.Clients.SpotApi
                     {
                         ClientOrderId = update.Data.ClientOrderId,
                         OrderPrice = update.Data.Price,
-                        Quantity = update.Data.Quantity,
-                        QuantityFilled = update.Data.QuantityFilled,
-                        QuoteQuantity = update.Data.QuoteQuantity,
-                        QuoteQuantityFilled = update.Data.QuoteQuantityFilled,
+                        OrderQuantity = new SharedOrderQuantity(update.Data.Quantity, update.Data.QuoteQuantity),
+                        QuantityFilled = new SharedOrderQuantity(update.Data.QuantityFilled, update.Data.QuoteQuantityFilled),
                         UpdateTime = update.Data.UpdateTime,
                         Fee = update.Data.Fee,
                         FeeAsset = update.Data.FeeAsset,
