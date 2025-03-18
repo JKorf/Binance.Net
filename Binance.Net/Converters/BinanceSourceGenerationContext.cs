@@ -14,6 +14,7 @@ using Binance.Net.Objects.Models.Spot.Staking;
 namespace Binance.Net.Converters
 {
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
+    [JsonSerializable(typeof(string[]))]
 
     // End manual defined attributes
 

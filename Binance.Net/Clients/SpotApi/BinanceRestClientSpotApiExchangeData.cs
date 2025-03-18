@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
@@ -110,7 +111,7 @@ namespace Binance.Net.Clients.SpotApi
 
             if (symbols.Count() > 1)
             {
-                parameters.Add("symbols", JsonSerializer.Serialize(symbols));
+                parameters.Add("symbols", JsonSerializer.Serialize(symbols.ToArray(), (JsonTypeInfo<string[]>)BinanceExchange.SerializerContext.GetTypeInfo(typeof(string[]))!));
             }
             else if (symbols.Any())
             {
