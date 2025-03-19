@@ -11,7 +11,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     {
         /// <summary>
         /// Places a new order
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /></para>
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>

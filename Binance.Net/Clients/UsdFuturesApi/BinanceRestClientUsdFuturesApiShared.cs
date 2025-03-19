@@ -622,7 +622,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price == 0 ? null : order.Data.Price,
-                OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: x.Quantity),
+                OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: order.Data.Quantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled, order.Data.QuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,

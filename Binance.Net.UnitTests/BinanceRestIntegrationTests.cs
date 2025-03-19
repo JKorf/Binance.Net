@@ -1,5 +1,7 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Objects.Options;
+using Binance.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -281,6 +283,14 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.CoinFuturesApi.Trading.GetOrdersAsync("ETHUSD_PERP", default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.CoinFuturesApi.Trading.GetForcedOrdersAsync(default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.CoinFuturesApi.Trading.GetUserTradesAsync("ETHUSD_PERP", default, default, default, default, default, default, default, default), true);
+        }
+
+        [Test]
+        public async Task TestOrderBooks()
+        {
+            await TestOrderBook(new BinanceSpotSymbolOrderBook("ETHUSDT"));
+            await TestOrderBook(new BinanceFuturesUsdtSymbolOrderBook("ETHUSDT"));
+            await TestOrderBook(new BinanceFuturesCoinSymbolOrderBook("ETHUSD_PERP"));
         }
     }
 }
