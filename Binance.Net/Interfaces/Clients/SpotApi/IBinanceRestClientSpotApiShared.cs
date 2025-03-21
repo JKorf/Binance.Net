@@ -20,7 +20,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         IWithdrawRestClient,
         IListenKeyRestClient,
         IFeeRestClient,
-        ISpotOrderClientIdClient
+        ISpotOrderClientIdClient,
+        ISpotTriggerOrderRestClient
     {
     }
 }
