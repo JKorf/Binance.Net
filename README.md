@@ -191,6 +191,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.19.0 - 24 Mar 2025
+    * Added quoteAsset parameter to restClient.SpotApi.Account.GetWalletBalancesAsync endpoint
+    * Added Denomination property to restClient.SpotApi.Account.GetUserAssetsAsync response model
+    * Updated SimpleEarn locked response models
+    * Updated request weight of restClient.SpotApi.ExchangeData.GetAggregatedTradeHistoryAsync to 4
+
 * Version 10.18.0 - 25 Feb 2025
     * Added Coin-M websocket Trade API implementation
     * Added SOL staking endpoints to restClient.GeneralApi.Staking
