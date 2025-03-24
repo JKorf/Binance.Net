@@ -30,5 +30,10 @@
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
+        /// <summary>
+        /// Rewards type
+        /// </summary>
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
     }
 }
