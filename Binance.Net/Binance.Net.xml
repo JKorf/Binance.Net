@@ -19377,6 +19377,11 @@
             Min withdraw quantity for internal withdrawals
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.Denomination">
+            <summary>
+            The denomination of the asset. For example if 100000 it means that 1 of this asset means 100000 of the underlying asset
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserBalance">
             <summary>
             User balance
