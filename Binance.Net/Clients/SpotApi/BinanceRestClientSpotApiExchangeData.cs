@@ -237,7 +237,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/aggTrades", BinanceExchange.RateLimiter.SpotRestIp, 2);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/aggTrades", BinanceExchange.RateLimiter.SpotRestIp, 4);
             return await _baseClient.SendAsync<BinanceAggregatedTrade[]>(request, parameters, ct).ConfigureAwait(false);
         }
 

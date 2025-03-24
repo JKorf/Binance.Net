@@ -78,6 +78,22 @@
         /// </summary>
         [JsonPropertyName("extraRewardAPR")]
         public decimal ExtraRewardApr { get; set; }
+
+        /// <summary>
+        /// Asset the boost reward is in
+        /// </summary>
+        [JsonPropertyName("boostRewardAsset")]
+        public string? BoostRewardAsset { get; set; }
+        /// <summary>
+        /// Boost apr
+        /// </summary>
+        [JsonPropertyName("boostApr")]
+        public decimal? BoostApr { get; set; }
+        /// <summary>
+        /// Boost end time
+        /// </summary>
+        [JsonPropertyName("boostEndTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? BoostEndTime { get; set; }
     }
 
     /// <summary>

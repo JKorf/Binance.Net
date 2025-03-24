@@ -56,5 +56,15 @@
         /// </summary>
         [JsonPropertyName("nextSubscriptionDate"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime NextSubscriptionDate { get; set; }
+        /// <summary>
+        /// Asset the boost reward is in
+        /// </summary>
+        [JsonPropertyName("boostRewardAsset")]
+        public string? BoostRewardAsset { get; set; }
+        /// <summary>
+        /// Estimated daily reward
+        /// </summary>
+        [JsonPropertyName("estDailyRewardAmt")]
+        public decimal? EstimatedDailyRewardQuantity { get; set; }
     }
 }

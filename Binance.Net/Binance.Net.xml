@@ -24895,6 +24895,11 @@
             Min withdraw quantity for internal withdrawals
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.Denomination">
+            <summary>
+            The denomination of the asset. For example if 100000 it means that 1 of this asset means 100000 of the underlying asset
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserBalance">
             <summary>
             User balance
@@ -29357,6 +29362,121 @@
             Redeem date
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RewardQuantity">
+            <summary>
+            Reward quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ExtraRewardAsset">
+            <summary>
+            Extra reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ExtraRewardApr">
+            <summary>
+            Extra reward APR
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.EstimatedExtraRewardQuantity">
+            <summary>
+            Estimated extra reward quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.BoostRewardAsset">
+            <summary>
+            Asset the boost reward is in
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.BoostApr">
+            <summary>
+            Boost apr
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.TotalBoostRewardQuantity">
+            <summary>
+            Total boost reward quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.EstimatedNextPayQuantity">
+            <summary>
+            Estimated quantity of next payment
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.NextPayTime">
+            <summary>
+            Next pay time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.PaymentPeriod">
+            <summary>
+            Payment cycle
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.EarlyRedemptionQuantity">
+            <summary>
+            Early redemption quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RewardsEndTime">
+            <summary>
+            Rewards accrual end time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.DeliverTime">
+            <summary>
+            Redemption arrival time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RedeemPeriod">
+            <summary>
+            Redeem period
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RedemptionQuantity">
+            <summary>
+            Quantity under redemption
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.RedeemTo">
+            <summary>
+            Redeem target account
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.PartialRedemptionDeliverTime">
+            <summary>
+            Arrival time of partial redemption amount of order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.CanRedeemEarly">
+            <summary>
+            Can redeem early
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.CanFastRedeem">
+            <summary>
+            Can fast redeem
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.AutoSubscribe">
+            <summary>
+            Auto subscribe is enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.OrderType">
+            <summary>
+            Auto subscribe or normal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.CanRestake">
+            <summary>
+            Can restake
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview">
             <summary>
             Simple Earn locked product preview
@@ -29410,6 +29530,16 @@
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.NextSubscriptionDate">
             <summary>
             Next subscription date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.BoostRewardAsset">
+            <summary>
+            Asset the boost reward is in
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.EstimatedDailyRewardQuantity">
+            <summary>
+            Estimated daily reward
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct">
@@ -29485,6 +29615,21 @@
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.ExtraRewardApr">
             <summary>
             Extra reward apr
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.BoostRewardAsset">
+            <summary>
+            Asset the boost reward is in
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.BoostApr">
+            <summary>
+            Boost apr
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.BoostEndTime">
+            <summary>
+            Boost end time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectQuota">
@@ -29640,6 +29785,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Timestamp">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Type">
+            <summary>
+            Rewards type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPersonalQuotaLeft">
