@@ -1019,12 +1019,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 order.Data.Id.ToString(),
                 orderType,
                 orderDirection,
-                ParseOrderStatus(order.Data.Status),
+                ParseTriggerStatus(order.Data),
                 order.Data.StopPrice ?? 0,
                 order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 order.Data.CreateTime
                 )
             {
+                OrderStatus = ParseOrderStatus(order.Data.Status),
                 AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price == 0 ? null : order.Data.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: order.Data.Quantity),
@@ -1033,6 +1034,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
             });
+        }
+
+        private SharedTriggerStatus ParseTriggerStatus(BinanceUsdFuturesOrder data)
+        {
+            if (data.Status == OrderStatus.New)
+                return SharedTriggerStatus.Pending;
+#warning TODO check
+            return SharedTriggerStatus.Canceled;
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);

@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Enums;
 using CryptoExchange.Net.SharedApis;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -822,18 +823,18 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Trigger Order Client
-        //EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(true);
-
+        PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(false);
+#warning check holds
         async Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
-            //var validationError = ((ITriggerOrderRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedFee>(Exchange, validationError);
+            var validationError = ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var (type, side) = GetTriggerOrderParameters(request.PriceDirection, request.OrderPrice, request.OrderDirection);
+            var type = GetTriggerOrderParameters(request.PriceDirection, request.OrderPrice, request.OrderSide);
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
-                side,
+                request.OrderSide == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 type,
                 request.Quantity.QuantityInBaseAsset,
                 timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
@@ -872,18 +873,32 @@ namespace Binance.Net.Clients.SpotApi
                 result.Data.Id.ToString(),
                 orderType,
                 orderDirection,
-                ParseOrderStatus(result.Data.Status),
+                ParseTriggerOrderStatus(result.Data),
                 result.Data.StopPrice ?? 0,
                 result.Data.CreateTime
                 )
             {
+                PlacedOrderId = result.Data.Id.ToString(),
                 AveragePrice = result.Data.AverageFillPrice,
                 OrderPrice = result.Data.Price,
+                OrderStatus = ParseOrderStatus(result.Data.Status),
                 OrderQuantity = new SharedOrderQuantity(result.Data.Quantity, result.Data.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(result.Data.QuantityFilled, result.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(result.Data.TimeInForce),
                 UpdateTime = result.Data.UpdateTime
             });
+        }
+
+        private SharedTriggerStatus ParseTriggerOrderStatus(BinanceOrder data)
+        {
+#warning check
+            if (data.IsWorking == true)
+                return SharedTriggerStatus.Triggered;
+
+            if (data.Status == OrderStatus.Canceled || data.Status == OrderStatus.Rejected || data.Status == OrderStatus.Expired)
+                return SharedTriggerStatus.Canceled;
+
+            return SharedTriggerStatus.Pending;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -904,24 +919,24 @@ namespace Binance.Net.Clients.SpotApi
         }
 
 
-        private (SpotOrderType, OrderSide) GetTriggerOrderParameters(SharedTriggerPriceDirection orderType, decimal? orderPrice, SharedTriggerOrderDirection direction)
+        private SpotOrderType GetTriggerOrderParameters(SharedTriggerPriceDirection orderType, decimal? orderPrice, SharedOrderSide side)
         {
             if (orderType == SharedTriggerPriceDirection.PriceBelow)
             {
-                if (direction == SharedTriggerOrderDirection.Enter)
+                if (side == SharedOrderSide.Buy)
                     // PriceBelow + Enter = TakeProfit Buy order
-                    return (orderPrice == null ? SpotOrderType.TakeProfit : SpotOrderType.TakeProfitLimit, OrderSide.Buy);
+                    return orderPrice == null ? SpotOrderType.TakeProfit : SpotOrderType.TakeProfitLimit;
                 else
                     // PriceBelow + Exit = StopLoss Sell order
-                    return (orderPrice == null ? SpotOrderType.StopLoss : SpotOrderType.StopLossLimit, OrderSide.Sell);
+                    return orderPrice == null ? SpotOrderType.StopLoss : SpotOrderType.StopLossLimit;
             }
 
-            if (direction == SharedTriggerOrderDirection.Enter)
+            if (side == SharedOrderSide.Buy)
                 // PriceAbove + Enter = StopLoss Buy order
-                return (orderPrice == null ? SpotOrderType.StopLoss : SpotOrderType.StopLossLimit, OrderSide.Buy);
+                return orderPrice == null ? SpotOrderType.StopLoss : SpotOrderType.StopLossLimit;
             else
                 // PriceAbove + Exit = TakeProfit Sell order
-                return (orderPrice == null ? SpotOrderType.TakeProfit : SpotOrderType.TakeProfitLimit, OrderSide.Sell);
+                return orderPrice == null ? SpotOrderType.TakeProfit : SpotOrderType.TakeProfitLimit;
         }
 
         private (SharedOrderType, SharedTriggerOrderDirection) ParseTriggerDirections(SpotOrderType orderType, OrderSide side)
