@@ -965,33 +965,51 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion
 
         #region Trigger Order Client
-        //EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(true);
-        //{
-        //PositionMode
-        //}
-
+        PlaceFuturesTriggerOrderOptions IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(false)
+        {
+            RequiredOptionalParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(PlaceFuturesTriggerOrderRequest.PositionMode), typeof(SharedPositionMode), "PositionMode the account is in", SharedPositionMode.OneWay)
+            }
+        };
         async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
         {
-            //var validationError = ((IFuturesTriggerOrderRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedFee>(Exchange, validationError);
-
             var (type, side) = GetTriggerOrderParameters(request.PriceDirection, request.OrderPrice, request.OrderDirection);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).PlaceFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, ((IFuturesOrderRestClient)this).FuturesSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
                 side,
                 type,
-                request.Quantity.QuantityInBaseAsset,
+                request.Quantity.QuantityInBaseAsset ?? request.Quantity.QuantityInContracts,
                 timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
                 price: request.OrderPrice,
                 stopPrice: request.TriggerPrice,
+                newClientOrderId: request.ClientOrderId,
                 positionSide: request.PositionMode == SharedPositionMode.OneWay ? null : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
+                workingType: GetWorkingType(request),
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(result.Data.Id.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.Id.ToString()));
+        }
+
+        private WorkingType? GetWorkingType(PlaceFuturesTriggerOrderRequest request)
+        {
+            if (request.TriggerPriceType == null)
+                return null;
+
+            if (request.TriggerPriceType == SharedTriggerPriceType.LastPrice)
+                return WorkingType.Contract;
+
+            if (request.TriggerPriceType == SharedTriggerPriceType.MarkPrice)
+                return WorkingType.Mark;
+
+            return WorkingType.Contract;
         }
 
         EndpointOptions<GetOrderRequest> IFuturesTriggerOrderRestClient.GetFuturesTriggerOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
@@ -1013,7 +1031,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var (orderType, orderDirection) = ParseTriggerDirections(order.Data.Type, order.Data.Side);
             // Return
-            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFuturesTriggerOrder(
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesTriggerOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicId, order.Data.Symbol),
                 order.Data.Symbol,
                 order.Data.Id.ToString(),
@@ -1025,7 +1043,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 order.Data.CreateTime
                 )
             {
-                OrderStatus = ParseOrderStatus(order.Data.Status),
                 AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price == 0 ? null : order.Data.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: order.Data.Quantity),
@@ -1033,15 +1050,20 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PlacedOrderId = order.Data.Id.ToString(),
+                ClientOrderId = order.Data.ClientOrderId
             });
         }
 
-        private SharedTriggerStatus ParseTriggerStatus(BinanceUsdFuturesOrder data)
+        private SharedTriggerOrderStatus ParseTriggerStatus(BinanceUsdFuturesOrder data)
         {
-            if (data.Status == OrderStatus.New)
-                return SharedTriggerStatus.Pending;
-#warning TODO check
-            return SharedTriggerStatus.Canceled;
+            if (data.Status == OrderStatus.Filled)
+                return SharedTriggerOrderStatus.Filled;
+
+            if (data.Status == OrderStatus.Canceled || data.Status == OrderStatus.Rejected || data.Status == OrderStatus.Expired)
+                return SharedTriggerOrderStatus.CanceledOrRejected;
+
+            return SharedTriggerOrderStatus.Active;
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -1058,7 +1080,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(order.Data.Id.ToString()));
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(order.Data.Id.ToString()));
         }
 
 
@@ -1084,7 +1106,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         private (SharedOrderType, SharedTriggerOrderDirection) ParseTriggerDirections(FuturesOrderType orderType, OrderSide side)
         {
-#warning is this correct for short positions?
             if (orderType == FuturesOrderType.TakeProfit || orderType == FuturesOrderType.TakeProfitMarket)
             {
                 if (side == OrderSide.Buy)

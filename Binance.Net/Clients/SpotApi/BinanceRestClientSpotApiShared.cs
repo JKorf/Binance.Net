@@ -823,11 +823,10 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Trigger Order Client
-        PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(false);
-#warning check holds
+        PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(true);
         async Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, ((ISpotOrderRestClient)this).SpotSupportedOrderQuantity);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
@@ -839,6 +838,7 @@ namespace Binance.Net.Clients.SpotApi
                 request.Quantity.QuantityInBaseAsset,
                 timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
                 price: request.OrderPrice,
+                newClientOrderId: request.ClientOrderId,
                 stopPrice: request.TriggerPrice,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -881,24 +881,23 @@ namespace Binance.Net.Clients.SpotApi
                 PlacedOrderId = result.Data.Id.ToString(),
                 AveragePrice = result.Data.AverageFillPrice,
                 OrderPrice = result.Data.Price,
-                OrderStatus = ParseOrderStatus(result.Data.Status),
                 OrderQuantity = new SharedOrderQuantity(result.Data.Quantity, result.Data.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(result.Data.QuantityFilled, result.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(result.Data.TimeInForce),
-                UpdateTime = result.Data.UpdateTime
+                UpdateTime = result.Data.UpdateTime,
+                ClientOrderId = result.Data.ClientOrderId
             });
         }
 
-        private SharedTriggerStatus ParseTriggerOrderStatus(BinanceOrder data)
+        private SharedTriggerOrderStatus ParseTriggerOrderStatus(BinanceOrder data)
         {
-#warning check
-            if (data.IsWorking == true)
-                return SharedTriggerStatus.Triggered;
+            if (data.Status == OrderStatus.Filled)
+                return SharedTriggerOrderStatus.Filled;
 
             if (data.Status == OrderStatus.Canceled || data.Status == OrderStatus.Rejected || data.Status == OrderStatus.Expired)
-                return SharedTriggerStatus.Canceled;
+                return SharedTriggerOrderStatus.CanceledOrRejected;
 
-            return SharedTriggerStatus.Pending;
+            return SharedTriggerOrderStatus.Active;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
