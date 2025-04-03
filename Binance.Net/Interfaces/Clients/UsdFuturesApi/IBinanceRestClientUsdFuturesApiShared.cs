@@ -24,7 +24,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         IFeeRestClient,
         IFuturesOrderClientIdClient,
         IFuturesTriggerOrderRestClient,
-        IFuturesTpSlRestClient
+        IFuturesTpSlRestClient,
+        IBookTickerRestClient
     {
     }
 }

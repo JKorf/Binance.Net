@@ -121,6 +121,34 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
+        #region Book Ticker client
+
+        EndpointOptions<GetBookTickerRequest> IBookTickerRestClient.GetBookTickerOptions { get; } = new EndpointOptions<GetBookTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+        {
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
+
+            var resultTicker = await ExchangeData.GetBookPricesAsync(request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            if (!resultTicker)
+                return resultTicker.AsExchangeResult<SharedBookTicker>(Exchange, null, default);
+
+            var ticker = resultTicker.Data.SingleOrDefault();
+            if (ticker == null)
+                return resultTicker.AsExchangeError<SharedBookTicker>(Exchange, new ServerError("Not found"));
+
+            return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedBookTicker(
+                ExchangeSymbolCache.ParseSymbol(_topicId, ticker.Symbol),
+                ticker.Symbol,
+                ticker.BestAskPrice,
+                ticker.BestAskQuantity,
+                ticker.BestBidPrice,
+                ticker.BestBidQuantity));
+        }
+
+        #endregion
+
         #region Ticker client
 
         EndpointOptions<GetTickerRequest> IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
@@ -214,7 +242,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region Futures Order Client
 
-
         SharedFeeDeductionType IFuturesOrderRestClient.FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         SharedFeeAssetType IFuturesOrderRestClient.FuturesFeeAssetType => SharedFeeAssetType.BaseAsset;
         SharedOrderType[] IFuturesOrderRestClient.FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
@@ -290,7 +317,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
-                ReduceOnly = order.Data.ReduceOnly
+                ReduceOnly = order.Data.ReduceOnly,
+                TriggerPrice = order.Data.StopPrice,
+                IsTriggerOrder = order.Data.StopPrice > 0
             });
         }
 
@@ -323,7 +352,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionSide == PositionSide.Both ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
-                ReduceOnly = x.ReduceOnly
+                ReduceOnly = x.ReduceOnly,
+                TriggerPrice = x.StopPrice,
+                IsTriggerOrder = x.StopPrice > 0
             }).ToArray());
         }
 
@@ -370,7 +401,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionSide == PositionSide.Both ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
-                ReduceOnly = x.ReduceOnly
+                ReduceOnly = x.ReduceOnly,
+                TriggerPrice = x.StopPrice,
+                IsTriggerOrder = x.StopPrice > 0
             }).ToArray());
         }
 
@@ -589,7 +622,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Both ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
-                ReduceOnly = order.Data.ReduceOnly
+                ReduceOnly = order.Data.ReduceOnly,
+                TriggerPrice = order.Data.StopPrice,
+                IsTriggerOrder = order.Data.StopPrice > 0
             });
         }
 
@@ -1005,7 +1040,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 side,
                 type,
                 request.Quantity.QuantityInBaseAsset ?? request.Quantity.QuantityInContracts,
-                timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
+                timeInForce: request.OrderPrice == null ? null: TimeInForce.GoodTillCanceled,
                 price: request.OrderPrice,
                 stopPrice: request.TriggerPrice,
                 workingType: GetWorkingType(request),

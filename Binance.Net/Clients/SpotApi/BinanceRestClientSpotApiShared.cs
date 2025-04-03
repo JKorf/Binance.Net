@@ -132,6 +132,30 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Book Ticker client
+
+        EndpointOptions<GetBookTickerRequest> IBookTickerRestClient.GetBookTickerOptions { get; } = new EndpointOptions<GetBookTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+        {
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
+
+            var resultTicker = await ExchangeData.GetBookPriceAsync(request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            if (!resultTicker)
+                return resultTicker.AsExchangeResult<SharedBookTicker>(Exchange, null, default);
+
+            return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedBookTicker(
+                ExchangeSymbolCache.ParseSymbol(_topicId, resultTicker.Data.Symbol),
+                resultTicker.Data.Symbol,
+                resultTicker.Data.BestAskPrice,
+                resultTicker.Data.BestAskQuantity,
+                resultTicker.Data.BestBidPrice,
+                resultTicker.Data.BestBidQuantity));
+        }
+
+        #endregion
+
         #region Recent Trades client
         GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000, false);
 
@@ -233,7 +257,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Spot Order Client
 
-
         SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
         SharedOrderType[] ISpotOrderRestClient.SpotSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market, SharedOrderType.LimitMaker };
@@ -306,7 +329,9 @@ namespace Binance.Net.Clients.SpotApi
                 OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, order.Data.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                UpdateTime = order.Data.UpdateTime
+                UpdateTime = order.Data.UpdateTime,
+                TriggerPrice = order.Data.StopPrice,
+                IsTriggerOrder = order.Data.StopPrice != null
             });
         }
 
@@ -337,7 +362,9 @@ namespace Binance.Net.Clients.SpotApi
                 OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
-                UpdateTime = x.UpdateTime
+                UpdateTime = x.UpdateTime,
+                TriggerPrice = x.StopPrice,
+                IsTriggerOrder = x.StopPrice != null
             }).ToArray());
         }
 
@@ -382,7 +409,9 @@ namespace Binance.Net.Clients.SpotApi
                 OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
-                UpdateTime = x.UpdateTime
+                UpdateTime = x.UpdateTime,
+                TriggerPrice = x.StopPrice,
+                IsTriggerOrder = x.StopPrice != null
             }).ToArray(), nextToken);
         }
 
@@ -541,7 +570,9 @@ namespace Binance.Net.Clients.SpotApi
                 OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, order.Data.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                UpdateTime = order.Data.UpdateTime
+                UpdateTime = order.Data.UpdateTime,
+                TriggerPrice = order.Data.StopPrice,
+                IsTriggerOrder = order.Data.StopPrice != null
             });
         }
 
@@ -836,7 +867,7 @@ namespace Binance.Net.Clients.SpotApi
                 request.OrderSide == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 type,
                 request.Quantity.QuantityInBaseAsset,
-                timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
+                //timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
                 price: request.OrderPrice,
                 newClientOrderId: request.ClientOrderId,
                 stopPrice: request.TriggerPrice,

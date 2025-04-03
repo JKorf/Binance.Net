@@ -1,4 +1,5 @@
-﻿using Binance.Net.Interfaces.Clients.SpotApi;
+﻿using Binance.Net.Enums;
+using Binance.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 
@@ -124,7 +125,7 @@ namespace Binance.Net.Clients.SpotApi
                         ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol),
                         update.Data.Symbol,
                         update.Data.Id.ToString(),
-                        update.Data.Type == Enums.SpotOrderType.Limit ? SharedOrderType.Limit : update.Data.Type == Enums.SpotOrderType.Market ? SharedOrderType.Market : update.Data.Type == Enums.SpotOrderType.LimitMaker ? SharedOrderType.LimitMaker : SharedOrderType.Other,
+                        ParseOrderType(update.Data.Type),
                         update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                         update.Data.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.Status == Enums.OrderStatus.New || update.Data.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                         update.Data.CreateTime)
@@ -137,6 +138,8 @@ namespace Binance.Net.Clients.SpotApi
                         Fee = update.Data.Fee,
                         FeeAsset = update.Data.FeeAsset,
                         TimeInForce = update.Data.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
+                        TriggerPrice = update.Data.StopPrice == 0 ? null : update.Data.StopPrice,
+                        IsTriggerOrder = update.Data.StopPrice > 0,
                         LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
                         {
                             Role = update.Data.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
@@ -146,6 +149,17 @@ namespace Binance.Net.Clients.SpotApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderType ParseOrderType(SpotOrderType type)
+        {
+            if (type == SpotOrderType.Market || type == SpotOrderType.TakeProfit || type == SpotOrderType.StopLoss)
+                return SharedOrderType.Market;
+
+            if (type == SpotOrderType.Limit || type == SpotOrderType.LimitMaker || type == SpotOrderType.TakeProfitLimit || type == SpotOrderType.StopLossLimit)
+                return SharedOrderType.Limit;
+
+            return SharedOrderType.Other;
         }
         #endregion
 

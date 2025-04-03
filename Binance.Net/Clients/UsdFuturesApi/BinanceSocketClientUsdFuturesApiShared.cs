@@ -1,4 +1,5 @@
-﻿using Binance.Net.Interfaces;
+﻿using Binance.Net.Enums;
+using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
@@ -137,22 +138,24 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     new SharedFuturesOrder(
                         ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.UpdateData.Symbol), update.Data.UpdateData.Symbol,
                         update.Data.UpdateData.OrderId.ToString(),
-                        update.Data.UpdateData.Type == Enums.FuturesOrderType.Limit ? SharedOrderType.Limit : update.Data.UpdateData.Type == Enums.FuturesOrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
+                        ParseOrderType(update.Data.UpdateData.Type),
                         update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                         update.Data.UpdateData.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.UpdateData.Status == Enums.OrderStatus.New || update.Data.UpdateData.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                         update.Data.UpdateData.UpdateTime)
                     {
                         ClientOrderId = update.Data.UpdateData.ClientOrderId,
-                        OrderPrice = update.Data.UpdateData.Price,
+                        OrderPrice = update.Data.UpdateData.Price == 0 ? null : update.Data.UpdateData.Price,
                         OrderQuantity = new SharedOrderQuantity(update.Data.UpdateData.Quantity, contractQuantity: update.Data.UpdateData.Quantity),
                         QuantityFilled = new SharedOrderQuantity(update.Data.UpdateData.AccumulatedQuantityOfFilledTrades, contractQuantity : update.Data.UpdateData.AccumulatedQuantityOfFilledTrades),
                         UpdateTime = update.Data.UpdateData.UpdateTime,
                         Fee = update.Data.UpdateData.Fee,
                         FeeAsset = update.Data.UpdateData.FeeAsset,
-                        AveragePrice = update.Data.UpdateData.AveragePrice,
+                        AveragePrice = update.Data.UpdateData.AveragePrice == 0 ? null : update.Data.UpdateData.AveragePrice,
                         PositionSide = update.Data.UpdateData.PositionSide == Enums.PositionSide.Long ? SharedPositionSide.Long : update.Data.UpdateData.PositionSide == Enums.PositionSide.Short ? SharedPositionSide.Short : null,
                         ReduceOnly = update.Data.UpdateData.IsReduce,
                         TimeInForce = update.Data.UpdateData.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.UpdateData.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
+                        TriggerPrice = update.Data.UpdateData.StopPrice == 0 ? null : update.Data.UpdateData.StopPrice,
+                        IsTriggerOrder = update.Data.UpdateData.StopPrice > 0,
                         LastTrade = update.Data.UpdateData.QuantityOfLastFilledTrade == 0 ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.UpdateData.Symbol), update.Data.UpdateData.Symbol, update.Data.UpdateData.OrderId.ToString(), update.Data.UpdateData.TradeId.ToString(), update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.UpdateData.QuantityOfLastFilledTrade, update.Data.UpdateData.PriceLastFilledTrade, update.Data.UpdateData.UpdateTime)
                         {
                             Role = update.Data.UpdateData.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
@@ -162,6 +165,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderType ParseOrderType(FuturesOrderType type)
+        {
+            if (type == FuturesOrderType.Market || type == FuturesOrderType.StopMarket || type == FuturesOrderType.TakeProfitMarket || type == FuturesOrderType.TrailingStopMarket)
+                return SharedOrderType.Market;
+
+            if (type == FuturesOrderType.Limit || type == FuturesOrderType.Stop || type == FuturesOrderType.TakeProfit)
+                return SharedOrderType.Limit;
+
+            return SharedOrderType.Other;
         }
         #endregion
 
