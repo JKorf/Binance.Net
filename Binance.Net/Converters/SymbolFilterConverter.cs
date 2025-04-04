@@ -117,6 +117,9 @@ namespace Binance.Net.Converters
                         MaxNumIcebergOrders = obj.TryGetProperty("maxNumIcebergOrders", out var ele) ? ele.GetInt32() : 0
                     };
                     break;
+                case SymbolFilterType.PositionRiskControl:
+                    result = new BinanceSymbolFilter();
+                    break;
                 default:
                     Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj.GetProperty("filterType").GetString());
                     result = new BinanceSymbolFilter();

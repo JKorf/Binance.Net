@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration)
         {
             var options = new BinanceOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             configuration.Bind(options);
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<BinanceOptions>? optionsDelegate = null)
         {
             var options = new BinanceOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             optionsDelegate?.Invoke(options);
@@ -81,21 +81,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(x => Options.Options.Create(options.Socket));
 
             return AddBinanceCore(services, options.SocketClientLifeTime);
-        }
-
-        /// <summary>
-        /// DEPRECATED; use <see cref="AddBinance(IServiceCollection, Action{BinanceOptions}?)" /> instead
-        /// </summary>
-        public static IServiceCollection AddBinance(
-            this IServiceCollection services,
-            Action<BinanceRestOptions> restDelegate,
-            Action<BinanceSocketOptions>? socketDelegate = null,
-            ServiceLifetime? socketClientLifeTime = null)
-        {
-            services.Configure<BinanceRestOptions>((x) => { restDelegate?.Invoke(x); });
-            services.Configure<BinanceSocketOptions>((x) => { socketDelegate?.Invoke(x); });
-
-            return AddBinanceCore(services, socketClientLifeTime);
         }
 
         private static IServiceCollection AddBinanceCore(

@@ -1190,7 +1190,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
-                request.PositionSide == SharedPositionSide.Long ? OrderSide.Buy : OrderSide.Sell,
+                request.PositionSide == SharedPositionSide.Long ? OrderSide.Sell : OrderSide.Buy,
                 request.TpSlSide == SharedTpSlSide.TakeProfit ? FuturesOrderType.TakeProfitMarket : FuturesOrderType.StopMarket,
                 null,
                 stopPrice: request.TriggerPrice,

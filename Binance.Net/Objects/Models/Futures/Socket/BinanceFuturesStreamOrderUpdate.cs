@@ -166,7 +166,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// If Close-All, only pushed with conditional order
         /// </summary>
         [JsonPropertyName("cp")]
-        public bool PushedConditionalOrder { get; set; }
+        public bool IsClosePositionOrder { get; set; }
         /// <summary>
         /// Activation Price, only pushed with TRAILING_STOP_MARKET order
         /// </summary>
