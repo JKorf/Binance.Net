@@ -13,14 +13,17 @@ namespace Binance.Net.Interfaces.Clients
         /// <summary>
         /// Coin futures streams
         /// </summary>
+        /// <see cref="IBinanceSocketClientCoinFuturesApi"/>
         IBinanceSocketClientCoinFuturesApi CoinFuturesApi { get; }
         /// <summary>
         /// Spot streams and requests
         /// </summary>
+        /// <see cref="IBinanceSocketClientSpotApi"/>
         IBinanceSocketClientSpotApi SpotApi { get; }
         /// <summary>
         /// Usd futures streams
         /// </summary>
+        /// <see cref="IBinanceSocketClientUsdFuturesApi"/>
         IBinanceSocketClientUsdFuturesApi UsdFuturesApi { get; }
 
         /// <summary>

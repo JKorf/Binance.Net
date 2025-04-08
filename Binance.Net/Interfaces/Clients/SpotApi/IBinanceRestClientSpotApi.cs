@@ -8,16 +8,19 @@
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiAccount"/>
         public IBinanceRestClientSpotApiAccount Account { get; }
 
         /// <summary>
         /// Endpoints related to retrieving market and system data
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiExchangeData"/>
         public IBinanceRestClientSpotApiExchangeData ExchangeData { get; }
 
         /// <summary>
         /// Endpoints related to orders and trades
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiTrading"/>
         public IBinanceRestClientSpotApiTrading Trading { get; }
 
         /// <summary>
@@ -28,6 +31,7 @@
         /// <summary>
         ///Endpoints related to query user data.
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiAgent"/>
         public IBinanceRestClientSpotApiAgent Agent { get; }
     }
 }

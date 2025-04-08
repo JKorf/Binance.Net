@@ -11112,16 +11112,19 @@
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market data
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiExchangeData"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.Trading">
             <summary>
             Endpoints related to orders and trades
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiTrading"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi.SharedClient">
             <summary>
@@ -11132,6 +11135,7 @@
              <summary>
             Endpoints related to query user data.
              </summary>
+             <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAgent"/>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiAccount">
             <summary>
@@ -11858,16 +11862,19 @@
             <summary>
             Account streams and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.ExchangeData">
             <summary>
             Exchange data streams and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiExchangeData"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi.Trading">
             <summary>
             Trading data and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiTrading"/>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApiAccount">
             <summary>
@@ -12381,46 +12388,55 @@
             <summary>
             Endpoints related to brokerage
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiBrokerage"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Futures">
             <summary>
             Endpoints related to futures account interactions
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiFutures"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.CryptoLoans">
             <summary>
             Endpoints related to crypto loans
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.AutoInvest">
             <summary>
             Endpoints related to auto invest
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Mining">
             <summary>
             Endpoints related to mining
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiMining"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.SubAccount">
             <summary>
             Endpoints related to requesting data for and controlling sub accounts
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSubAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Staking">
             <summary>
             Endpoints related to staking
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiStaking"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.SimpleEarn">
             <summary>
             Endpoints related to Binance Simple Earn
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.CopyTrading">
             <summary>
             Endpoints related to Binance Copy Trading
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiCopyTrading"/>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest">
             <summary>
@@ -14364,21 +14380,25 @@
             <summary>
             General API endpoints
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.IBinanceRestClient.CoinFuturesApi">
             <summary>
             Coin futures API endpoints
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApi"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.IBinanceRestClient.SpotApi">
             <summary>
             Spot API endpoints
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.IBinanceRestClient.UsdFuturesApi">
             <summary>
             Usd futures API endpoints
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi"/>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
@@ -14401,16 +14421,19 @@
             <summary>
             Coin futures streams
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceSocketClientCoinFuturesApi"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.IBinanceSocketClient.SpotApi">
             <summary>
             Spot streams and requests
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApi"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.IBinanceSocketClient.UsdFuturesApi">
             <summary>
             Usd futures streams
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi"/>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
@@ -14433,16 +14456,19 @@
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.Trading">
             <summary>
             Endpoints related to orders and trades
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi.SharedClient">
             <summary>
@@ -14453,6 +14479,7 @@
              <summary>
             Endpoints related to query user data.
              </summary>
+             <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent"/>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount">
             <summary>
@@ -16439,16 +16466,19 @@
             <summary>
             Account streams and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApi.ExchangeData">
             <summary>
             Exchange data streams and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApi.Trading">
             <summary>
             Trading data and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApi.SharedClient">
             <summary>
@@ -17198,16 +17228,19 @@
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market data
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.Trading">
             <summary>
             Endpoints related to orders and trades
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApi.SharedClient">
             <summary>
@@ -17218,6 +17251,7 @@
              <summary>
             Endpoints related to query user data.
              </summary>
+             <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAgent"/>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount">
             <summary>
@@ -18245,16 +18279,19 @@
             <summary>
             Account streams and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiAccount"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.ExchangeData">
             <summary>
             Exchange data streams and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData"/>
         </member>
         <member name="P:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi.Trading">
             <summary>
             Trading data and queries
             </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiTrading"/>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiAccount">
             <summary>
