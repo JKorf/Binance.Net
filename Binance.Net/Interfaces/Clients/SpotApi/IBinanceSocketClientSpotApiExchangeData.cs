@@ -14,7 +14,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Ping to test connection
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#test-connectivity" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -22,7 +22,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get the server time
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#check-server-time" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -30,7 +30,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets information about the exchange including rate limits and symbol list
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#exchange-information" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -39,7 +39,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#aggregate-trades" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="fromId">Filter by from trade id</param>
@@ -51,7 +51,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceStreamAggregatedTrade[]>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#symbol-order-book-ticker" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -59,7 +59,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceBookPrice[]>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
         /// <summary>
         /// Gets current average price for a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#current-average-price" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -67,7 +67,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default);
         /// <summary>
         /// Get candlestick data for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#klines" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
@@ -79,7 +79,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceSpotKline[]>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the order book for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#order-book" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Number of entries</param>
@@ -88,7 +88,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the recent trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#recent-trades" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Max results</param>
@@ -97,7 +97,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#rolling-window-price-change-statistics" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -105,7 +105,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceRollingWindowTick[]>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default);
         /// <summary>
         /// Get data regarding the last 24 hours
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#24hr-ticker-price-change-statistics" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -113,7 +113,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<Binance24HPrice[]>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
         /// <summary>
         /// Gets the historical trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#historical-trades" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="fromId">Filter by from trade id</param>
@@ -123,7 +123,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#ui-klines" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
@@ -136,7 +136,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#aggregate-trade-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -146,7 +146,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#aggregate-trade-streams" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -155,7 +155,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribes to mini ticker updates stream for all symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-mini-tickers-stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-mini-tickers-stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -164,7 +164,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribe to rolling window ticker updates stream for all symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-rolling-window-statistics-streams" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-rolling-window-statistics-streams" /></para>
         /// </summary>
         /// <param name="windowSize">Window size, either 1 hour or 4 hours</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -174,7 +174,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-tickers-stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

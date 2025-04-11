@@ -1,4 +1,6 @@
+using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
@@ -15,6 +17,44 @@ namespace Binance.Net.Converters
 {
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
     [JsonSerializable(typeof(string[]))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceAccountInfo>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceCurrentRateLimit[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceListenKey>))]
+    [JsonSerializable(typeof(BinanceResponse<object>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceExchangeInfo>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceOrderBook>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceRecentTradeQuote[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceStreamAggregatedTrade[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceSpotKline[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceAveragePrice>))]
+    [JsonSerializable(typeof(BinanceResponse<Binance24HPrice[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceRollingWindowTick[]>))]
+    [JsonSerializable(typeof(BinanceBookPrice[]))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceBookPrice[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinancePlacedOrder>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceTestOrderCommission>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceOrder>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceOrder[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceReplaceOrderResult>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceOrderOcoList>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceOrderOcoList[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceTrade[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinancePreventedTrade[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceFuturesAccountInfoV3>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceUsdFuturesAccountBalance[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrderBook>))]
+    [JsonSerializable(typeof(BinanceResponse<BinancePrice>))]
+    [JsonSerializable(typeof(BinanceResponse<BinancePrice[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceBookPrice>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceBookPrice[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceUsdFuturesOrder>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceUsdFuturesOrder[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinancePositionV3[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceFuturesCoinAccountInfo>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceCoinFuturesAccountBalance[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinancePositionDetailsCoin[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrder>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrder[]>))]
 
     // End manual defined attributes
 

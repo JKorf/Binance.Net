@@ -1,0 +1,31 @@
+> { "id": "|1|", "method": "order.test", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "standardCommissionForOrder": {   
+      "maker": "0.00000112",
+      "taker": "0.00000114"
+    },
+    "taxCommissionForOrder": {          
+      "maker": "0.00000112",
+      "taker": "0.00000114"
+    },
+    "discount": {            
+      "enabledForAccount": true,
+      "enabledForSymbol": true,
+      "discountAsset": "BNB",
+      "discount": "0.25000000"           
+    }
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 20
+    }
+  ]
+}

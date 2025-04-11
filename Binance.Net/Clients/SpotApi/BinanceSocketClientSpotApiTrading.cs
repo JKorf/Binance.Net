@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Place Test Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinancePlacedOrder>>> PlaceTestOrderAsync(string symbol,
+        public async Task<CallResult<BinanceResponse<BinanceTestOrderCommission>>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -106,7 +106,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
-            return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceTestOrderCommission>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
         #endregion

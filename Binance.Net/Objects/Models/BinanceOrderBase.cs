@@ -105,7 +105,27 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("stopPrice")]
         public decimal? StopPrice { get; set; }
+        /// <summary>
+        /// Trailing delta
+        /// </summary>
+        [JsonPropertyName("trailingDelta")]
+        public int? TrailingDelta { get; set; }
+        /// <summary>
+        /// Trailing delta time
+        /// </summary>
+        [JsonPropertyName("trailingTime")]
+        public int? TrailingTime { get; set; }
 
+        /// <summary>
+        /// Strategy id
+        /// </summary>
+        [JsonPropertyName("strategyId")]
+        public long? StrategyId { get; set; }
+        /// <summary>
+        /// Strategy type
+        /// </summary>
+        [JsonPropertyName("strategyType")]
+        public long? StrategyType { get; set; }
         /// <summary>
         /// The iceberg quantity
         /// </summary>
@@ -168,5 +188,16 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
+
+        /// <summary>
+        /// Prevented self trade match id
+        /// </summary>
+        [JsonPropertyName("preventedMatchId")]
+        public long? PreventedMatchId { get; set; }
+        /// <summary>
+        /// Prevented self trade quantity
+        /// </summary>
+        [JsonPropertyName("preventedQuantity")]
+        public decimal? PreventedMatchQuantity { get; set; }
     }
 }

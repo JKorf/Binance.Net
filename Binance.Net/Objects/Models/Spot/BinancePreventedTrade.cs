@@ -25,6 +25,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("takerOrderId")]
         public long TakerOrderId { get; set; }
         /// <summary>
+        /// Maker symbol
+        /// </summary>
+        [JsonPropertyName("makerSymbol")]
+        public string MakerSymbol { get; set; } = string.Empty;
+        /// <summary>
         /// Maker order id
         /// </summary>
         [JsonPropertyName("makerOrderId")]

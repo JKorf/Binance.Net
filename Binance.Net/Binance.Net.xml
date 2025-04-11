@@ -2990,6 +2990,186 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceCoinFuturesAccountBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesAccountInfoV3">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesCoinAccountInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesOrderArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesOrderBook">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePositionDetailsCoinArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePositionV3Array">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceUsdFuturesAccountBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceUsdFuturesOrderArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceUsdFuturesOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinance24HPriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceAccountInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceAveragePrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceBookPriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceBookPrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceCurrentRateLimitArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceExchangeInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceListenKey">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceOrderArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceOrderBook">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceOrderOcoListArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceOrderOcoList">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePlacedOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePreventedTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceRecentTradeQuoteArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceReplaceOrderResult">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceSpotKlineArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceTestOrderCommission">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceRollingWindowTickArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceStreamAggregatedTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseObject">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseError">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -5696,6 +5876,16 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceReplaceOrderResultArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSor">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSorArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -16493,7 +16683,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.GetAccountInfoAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Gets account information, including balances
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests" /></para>
             </summary>
             <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
             <param name="ct">Cancellation token</param>
@@ -16502,7 +16692,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.GetOrderRateLimitsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get order rate limit status
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#unfilled-order-count-user_data" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#unfilled-order-count-user_data" /></para>
             </summary>
             <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16511,7 +16701,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#ping-user-data-stream-user_stream" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#ping-user-data-stream-user_stream" /></para>
             </summary>
             <param name="listenKey">Listen key</param>
             <param name="ct">Cancellation token</param>
@@ -16520,7 +16710,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
             Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">KeepAliveUserStreamAsync</see> is called.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#start-user-data-stream-user_stream" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#start-user-data-stream-user_stream" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -16528,7 +16718,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Stops the current user stream
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/user-data-stream-requests#stop-user-data-stream-user_stream" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#stop-user-data-stream-user_stream" /></para>
             </summary>
             <param name="listenKey">Listen key</param>
             <param name="ct">Cancellation token</param>
@@ -16558,7 +16748,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.PingAsync(System.Threading.CancellationToken)">
             <summary>
             Ping to test connection
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#test-connectivity" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#test-connectivity" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -16566,7 +16756,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <summary>
             Get the server time
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#check-server-time" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#check-server-time" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -16574,7 +16764,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetExchangeInfoAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Gets information about the exchange including rate limits and symbol list
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/general-requests#exchange-information" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#exchange-information" /></para>
             </summary>
             <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16583,7 +16773,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetAggregatedTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#aggregate-trades" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#aggregate-trades" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="fromId">Filter by from trade id</param>
@@ -16596,7 +16786,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetBookTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for a symbol.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#symbol-order-book-ticker" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#symbol-order-book-ticker" /></para>
             </summary>
             <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16605,7 +16795,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetCurrentAvgPriceAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets current average price for a symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#current-average-price" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#current-average-price" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16614,7 +16804,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#klines" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#klines" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
@@ -16627,7 +16817,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the order book for the provided symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#order-book" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#order-book" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="limit">Number of entries</param>
@@ -16637,7 +16827,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the recent trades for a symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#recent-trades" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#recent-trades" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="limit">Max results</param>
@@ -16647,7 +16837,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get data based on the last x time, specified as windowSize
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#rolling-window-price-change-statistics" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#rolling-window-price-change-statistics" /></para>
             </summary>
             <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16656,7 +16846,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#24hr-ticker-price-change-statistics" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#24hr-ticker-price-change-statistics" /></para>
             </summary>
             <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16665,7 +16855,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the historical trades for a symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#historical-trades" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#historical-trades" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="fromId">Filter by from trade id</param>
@@ -16676,7 +16866,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.GetUIKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/market-data-requests#ui-klines" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#ui-klines" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
@@ -16689,7 +16879,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the aggregated trades update stream for the provided symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#aggregate-trade-streams" /></para>
             </summary>
             <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -16699,7 +16889,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAggregatedTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the aggregated trades update stream for the provided symbols
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#aggregate-trade-streams" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#aggregate-trade-streams" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -16709,7 +16899,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllMiniTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceMiniTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to mini ticker updates stream for all symbols
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-mini-tickers-stream" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-mini-tickers-stream" /></para>
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -16718,7 +16908,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(System.TimeSpan,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to rolling window ticker updates stream for all symbols
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-rolling-window-statistics-streams" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-rolling-window-statistics-streams" /></para>
             </summary>
             <param name="windowSize">Window size, either 1 hour or 4 hours</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -16728,7 +16918,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceTick[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to ticker updates stream for all symbols
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#all-market-tickers-stream" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-tickers-stream" /></para>
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -16970,7 +17160,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.CancelAllOrdersAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Cancel all open orders for the symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-open-orders-trade" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-open-orders-trade" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -16979,7 +17169,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.CancelOcoOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Cancel an Oco order by either orderId or clientOrderId
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
@@ -16991,7 +17181,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Cancel an order by either orderId or clientOrderId
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-order-trade" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-trade" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
@@ -17003,7 +17193,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOcoOrderAsync(System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
             <summary>
             Get an oco order by either orderId or clientOrderId
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
             </summary>
             <param name="orderId">Order id, for example `ETHUSDT`</param>
             <param name="clientOrderId">Client order id</param>
@@ -17013,7 +17203,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOcoOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Oco order history
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
             </summary>
             <param name="fromOrderId">Filter from order id</param>
             <param name="startTime">Filter by start time</param>
@@ -17025,7 +17215,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOpenOcoOrdersAsync(System.Threading.CancellationToken)">
             <summary>
             Get open Oco orders
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -17033,7 +17223,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOpenOrdersAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get open orders
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#current-open-orders-user_data" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-orders-user_data" /></para>
             </summary>
             <param name="symbol">Filter by symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -17042,7 +17232,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Threading.CancellationToken)">
             <summary>
             Get order by either orderId or clientOrderId
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#query-order-user_data" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
@@ -17053,7 +17243,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get order history
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-order-history-user_data" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-history-user_data" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="fromOrderId">Filter from order id</param>
@@ -17066,7 +17256,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetPreventedTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get prevented trades because of self trade prevention
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-prevented-matches-user_data" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-prevented-matches-user_data" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="preventedTradeId">Filter by prevented trade id</param>
@@ -17079,7 +17269,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets user trades for provided symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-trade-history-user_data" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-trade-history-user_data" /></para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
@@ -17093,7 +17283,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOcoOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Threading.CancellationToken)">
             <summary>
             DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -17121,7 +17311,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOcoOrderListAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.SpotOrderType,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -17152,7 +17342,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Threading.CancellationToken)">
             <summary>
             Places a new order
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-trade" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -17174,7 +17364,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Threading.CancellationToken)">
             <summary>
             Places a new test order. Test orders are not actually being executed and just test the functionality.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#test-new-order-trade" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -17196,7 +17386,7 @@
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiTrading.ReplaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,Binance.Net.Enums.CancelReplaceMode,System.Nullable{System.Int64},System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Cancel an existing order and place a new order on the same symbol
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-and-replace-order-trade" /></para>
+            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-and-replace-order-trade" /></para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -19815,6 +20005,26 @@
             The stop price
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.TrailingDelta">
+            <summary>
+            Trailing delta
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.TrailingTime">
+            <summary>
+            Trailing delta time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.StrategyId">
+            <summary>
+            Strategy id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.StrategyType">
+            <summary>
+            Strategy type
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.IcebergQuantity">
             <summary>
             The iceberg quantity
@@ -19863,6 +20073,16 @@
         <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.SelfTradePreventionMode">
             <summary>
             Self trade prevention mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PreventedMatchId">
+            <summary>
+            Prevented self trade match id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PreventedMatchQuantity">
+            <summary>
+            Prevented self trade quantity
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.BinanceOrderBookEntry">
@@ -20010,6 +20230,21 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceRollingWindowTick.QuoteVolume">
             <summary>
             Quote volume
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceRollingWindowTick.PriceChange">
+            <summary>
+            Price change
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceRollingWindowTick.PriceChangePercentage">
+            <summary>
+            Price change percentage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceRollingWindowTick.WeightedAveragePrice">
+            <summary>
+            Weighted average price
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade">
@@ -22798,6 +23033,26 @@
             Filters
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceExchangeInfo.SmartOrderRoutings">
+            <summary>
+            Smart order routing
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceSor">
+            <summary>
+            Smart order routing configuration
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSor.BaseAsset">
+            <summary>
+            The base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSor.Symbols">
+            <summary>
+            The symbols used for SOR
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceFiatPayment">
             <summary>
             Fiat payment info
@@ -23474,6 +23729,11 @@
             Taker order id
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinancePreventedTrade.MakerSymbol">
+            <summary>
+            Maker symbol
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePreventedTrade.MakerOrderId">
             <summary>
             Maker order id
@@ -24025,6 +24285,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.CancelReplaceAllowed">
             <summary>
             Cancel replace allowed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.AllowAmend">
+            <summary>
+            Allow amend
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IsSpotTradingAllowed">
@@ -34076,6 +34341,16 @@
             Coin position info
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoCoin.NotionalValue">
+            <summary>
+            Notional value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoCoin.IsolatedWallet">
+            <summary>
+            Isolated wallet
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionInfoCoin.BreakEvenPrice">
             <summary>
             Break even price
@@ -34164,6 +34439,11 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin.MaxQuantity">
             <summary>
             Max quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsCoin.IsolatedWallet">
+            <summary>
+            Isolated wallet
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionV3">

@@ -66,5 +66,20 @@
         /// </summary>
         [JsonPropertyName("quoteVolume")]
         public decimal QuoteVolume { get; set; }
+        /// <summary>
+        /// Price change
+        /// </summary>
+        [JsonPropertyName("priceChange")]
+        public decimal PriceChange { get; set; }
+        /// <summary>
+        /// Price change percentage
+        /// </summary>
+        [JsonPropertyName("priceChangePercent")]
+        public decimal PriceChangePercentage { get; set; }
+        /// <summary>
+        /// Weighted average price
+        /// </summary>
+        [JsonPropertyName("weightedAvgPrice")]
+        public decimal WeightedAveragePrice { get; set; }
     }
 }

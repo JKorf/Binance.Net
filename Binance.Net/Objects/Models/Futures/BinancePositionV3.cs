@@ -43,6 +43,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("unRealizedProfit")]
         public decimal UnrealizedProfit { get; set; }
+        [JsonInclude, JsonPropertyName("unrealizedProfit")]
+        internal decimal UnrealizedProfitInt
+        {
+            get => UnrealizedProfit;
+            set => UnrealizedProfit = value;
+        }
         /// <summary>
         /// Liquidation price
         /// </summary>

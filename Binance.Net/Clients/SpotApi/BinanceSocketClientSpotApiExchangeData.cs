@@ -185,7 +185,7 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<CallResult<BinanceResponse<Binance24HPrice[]>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("symbols", symbols);
+            parameters.AddOptionalParameter("symbols", symbols?.ToArray());
             var symbolCount = symbols?.Count();
             int weight = symbolCount == null || symbolCount > 100 ? 80 : symbolCount <= 20 ? 2 : 40;
             return await _client.QueryAsync<Binance24HPrice[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker.24hr", parameters, false, weight: weight, ct: ct).ConfigureAwait(false);
@@ -199,7 +199,7 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<CallResult<BinanceResponse<BinanceRollingWindowTick[]>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("symbols", symbols);
+            parameters.AddOptionalParameter("symbols", symbols.ToArray());
             var symbolCount = symbols.Count();
             int weight = Math.Min(symbolCount * 4, 200);
             return await _client.QueryAsync<BinanceRollingWindowTick[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker", parameters, false, weight: weight, ct: ct).ConfigureAwait(false);
@@ -213,7 +213,7 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<CallResult<BinanceResponse<BinanceBookPrice[]>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("symbols", symbols);
+            parameters.AddOptionalParameter("symbols", symbols?.ToArray());
             return await _client.QueryAsync<BinanceBookPrice[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ticker.book", parameters, false, weight: 4, ct: ct).ConfigureAwait(false);
         }
 

@@ -33,5 +33,27 @@
         /// </summary>
         [JsonPropertyName("exchangeFilters")]
         public object[] ExchangeFilters { get; set; } = Array.Empty<object>();
+        /// <summary>
+        /// Smart order routing
+        /// </summary>
+        [JsonPropertyName("sors")]
+        public BinanceSor[]? SmartOrderRoutings { get; set; }
+    }
+
+    /// <summary>
+    /// Smart order routing configuration
+    /// </summary>
+    public record BinanceSor
+    {
+        /// <summary>
+        /// The base asset
+        /// </summary>
+        [JsonPropertyName("baseAsset")]
+        public string BaseAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// The symbols used for SOR
+        /// </summary>
+        [JsonPropertyName("symbols")]
+        public string[] Symbols { get; set; } = [];
     }
 }

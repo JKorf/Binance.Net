@@ -1,0 +1,62 @@
+> { "id": "|1|", "method": "order.place", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "symbol": "BTCUSDT",
+    "orderId": 12569099453,
+    "orderListId": -1,
+    "clientOrderId": "4d96324ff9d44481926157ec08158a40",
+    "transactTime": 1660801715793,
+    "price": "23416.10000000",
+    "origQty": "0.00847000",
+    "executedQty": "0.00847000",
+    "origQuoteOrderQty": "0.000000",
+    "cummulativeQuoteQty": "198.33521500",
+    "status": "FILLED",
+    "timeInForce": "GTC",
+    "type": "LIMIT",
+    "side": "SELL",
+    "workingTime": 1660801715793,
+    "fills": [
+      {
+        "price": "23416.10000000",
+        "qty": "0.00635000",
+        "commission": "0.000000",
+        "commissionAsset": "BNB",
+        "tradeId": 1650422481
+      },
+      {
+        "price": "23416.50000000",
+        "qty": "0.00212000",
+        "commission": "0.000000",
+        "commissionAsset": "BNB",
+        "tradeId": 1650422482
+      }
+    ]
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 1
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 1
+    },
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+> { "id": "|1|", "method": "openOrders.cancelAll", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BTCUSDT",
+      "orderId": 12569099453,
+      "orderListId": -1,
+      "clientOrderId": "4d96324ff9d44481926157",
+      "price": "23416.10000000",
+      "origQty": "0.00847000",
+      "executedQty": "0.00720000",
+      "origQuoteOrderQty": "0.000000",
+      "cummulativeQuoteQty": "172.43931000",
+      "status": "PARTIALLY_FILLED",
+      "timeInForce": "GTC",
+      "type": "LIMIT",
+      "side": "SELL",
+      "stopPrice": "0.00000000",
+      "icebergQty": "0.00000000",
+      "time": 1660801715639,
+      "updateTime": 1660801717945,
+      "isWorking": true,
+      "workingTime": 1660801715639,
+      "origQuoteOrderQty": "0.00000000",
+      "selfTradePreventionMode": "NONE"
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 6
+    }
+  ]
+}

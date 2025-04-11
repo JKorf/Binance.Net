@@ -108,7 +108,16 @@ namespace Binance.Net.Objects.Models.Futures
     [SerializationModel]
     public record BinancePositionInfoCoin : BinancePositionInfoBase
     {
-
+        /// <summary>
+        /// Notional value
+        /// </summary>
+        [JsonPropertyName("notionalValue")]
+        public decimal NotionalValue { get; set; }
+        /// <summary>
+        /// Isolated wallet
+        /// </summary>
+        [JsonPropertyName("isolatedWallet")]
+        public decimal IsolatedWallet { get; set; }
         /// <summary>
         /// Break even price
         /// </summary>
@@ -216,5 +225,10 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("maxQty")]
         public decimal MaxQuantity { get; set; }
+        /// <summary>
+        /// Isolated wallet
+        /// </summary>
+        [JsonPropertyName("isolatedWallet")]
+        public decimal IsolatedWallet { get; set; }
     }
 }

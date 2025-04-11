@@ -56,6 +56,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("cancelReplaceAllowed")]
         public bool CancelReplaceAllowed { get; set; }
         /// <summary>
+        /// Allow amend
+        /// </summary>
+        [JsonPropertyName("allowAmend")]
+        public bool AllowAmend { get; set; }
+        /// <summary>
         /// Spot trading orders allowed
         /// </summary>
         [JsonPropertyName("isSpotTradingAllowed")]
@@ -121,6 +126,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("allowedSelfTradePreventionModes")]
         public SelfTradePreventionMode[] AllowedSelfTradePreventionModes { get; set; } = Array.Empty<SelfTradePreventionMode>();
+
         /// <summary>
         /// Filter for max amount of iceberg parts for this symbol
         /// </summary>

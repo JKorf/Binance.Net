@@ -72,7 +72,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
-        #region Get Price
+        #region Get Prices
 
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinancePrice[]>>> GetPricesAsync(CancellationToken ct = default)

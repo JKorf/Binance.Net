@@ -176,6 +176,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     : new CallResult<BinanceFuturesOrder>(item));
             }
 
+            if (result.All(x => !x.Success))
+                return response.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+
             return response.As(result.ToArray());
         }
 

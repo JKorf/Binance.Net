@@ -175,6 +175,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     : new CallResult<BinanceUsdFuturesOrder>(item));
             }
 
+            if (result.All(x => !x.Success))
+                return response.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+
             return response.As(result.ToArray());
         }
 
