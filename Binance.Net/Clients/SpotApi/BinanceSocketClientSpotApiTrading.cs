@@ -452,7 +452,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<BinanceTrade[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myTrades", parameters, true, true, weight: 20, ct: ct).ConfigureAwait(false);
+            var weight = orderId == null ? 20 : 5;
+            return await _client.QueryAsync<BinanceTrade[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myTrades", parameters, true, true, weight: weight, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
