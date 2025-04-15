@@ -28,7 +28,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("page", page);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/nft/history/deposit", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/history/deposit", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftDeposit>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -46,7 +46,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("page", page);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/nft/history/withdraw", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/history/withdraw", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftWithdraw>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -65,7 +65,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("page", page);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/nft/history/transactions", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/history/transactions", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftTransaction>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -81,7 +81,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("page", page);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/nft/user/getAsset", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/user/getAsset", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftAsset>>(request, parameters, ct).ConfigureAwait(false);
         }
 
