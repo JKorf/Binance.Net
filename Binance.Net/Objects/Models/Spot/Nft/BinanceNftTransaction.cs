@@ -1,5 +1,8 @@
 ﻿namespace Binance.Net.Objects.Models.Spot.NFT
 {
+    /// <summary>
+    /// NFT transaction
+    /// </summary>
     public record BinanceNftTransaction
     {
         /// <summary>

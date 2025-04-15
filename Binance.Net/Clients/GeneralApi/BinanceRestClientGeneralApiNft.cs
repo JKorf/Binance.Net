@@ -58,7 +58,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceListRecords<BinanceNftTransaction>>> GetNftTransactionHistoryAsync(NftOrderType orderType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("orderType", orderType);
+            parameters.AddEnum("orderType", orderType);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("limit", limit);
