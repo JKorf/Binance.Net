@@ -397,6 +397,34 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceMarginDelistSchedule>>> GetMarginDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Query Isolated Margin Tier Data
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Isolated-Margin-Tier-Data" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to get, for example `ETHUSDT`</param>
+        /// <param name="tier">Tier level</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTier>>> QueryIsolatedMarginTierData(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Query Margin Available Inventory
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory" /></para>
+        /// </summary>
+        /// <param name="type">The margin type to query for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceMarginAvailableInventory>> QueryMarginAvaliableInventory(MarginInventoryType type, CancellationToken ct = default);
+
+        /// <summary>
+        /// Query Liability Coin Leverage Bracket in Cross Margin Pro Mode
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Liability-Coin-Leverage-Bracket-in-Cross-Margin-Pro-Mode" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>> QueryLiabilityCoinLeverageBracketInCrossMarginProMode(CancellationToken ct = default);
+
+        /// <summary>
         /// Get list all convert pairs
         /// <para><a href="https://developers.binance.com/docs/convert/market-data" /></para>
         /// </summary>
