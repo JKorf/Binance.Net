@@ -404,6 +404,7 @@ namespace Binance.Net.Clients.SpotApi
             decimal quantity,
             SpotOrderType aboveOrderType,
             SpotOrderType belowOrderType,
+            string? listClientOrderId = null,
 
             string? aboveClientOrderId = null,
             decimal? aboveIcebergQuantity = null,
@@ -439,6 +440,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddEnum("belowType", belowOrderType);
             parameters.AddEnum("side", side);
 
+            parameters.AddOptional("listClientOrderId", listClientOrderId);
             parameters.AddOptional("aboveClientOrderId", aboveClientOrderId);
             parameters.AddOptional("aboveIcebergQty", aboveIcebergQuantity);
             parameters.AddOptional("abovePrice", abovePrice);

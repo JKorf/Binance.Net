@@ -191,6 +191,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.19.1 - 15 Apr 2025
+    * Added listClientOrderId to restClient.SpotApi.Trading.PlaceOcoOrderListAsync endpoint
+    * Fixed warning for unknown symbol filter type
+
 * Version 10.19.0 - 26 Mar 2025
     * Added quoteAsset parameter to restClient.SpotApi.Account.GetWalletBalancesAsync endpoint
     * Added Denomination property to restClient.SpotApi.Account.GetUserAssetsAsync response model

@@ -258,6 +258,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="quantity">The quantity of the symbol</param>
         /// <param name="aboveOrderType">The above leg order type</param>
         /// <param name="belowOrderType">The below leg order type</param>
+        /// <param name="listClientOrderId">Client order id for the list</param>
         /// <param name="aboveClientOrderId">Client order id for the above leg</param>
         /// <param name="aboveIcebergQuantity">Ice berg quantity for the above leg</param>
         /// <param name="abovePrice">Limit price for the above leg</param>
@@ -284,6 +285,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             decimal quantity,
             SpotOrderType aboveOrderType,
             SpotOrderType belowOrderType,
+            string? listClientOrderId = null,
 
             string? aboveClientOrderId = null,
             decimal? aboveIcebergQuantity = null,
