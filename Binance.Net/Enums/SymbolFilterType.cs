@@ -76,6 +76,11 @@ namespace Binance.Net.Enums
         /// Max Iceberg Orders filter
         /// </summary>
         [Map("EXCHANGE_MAX_NUM_ICEBERG_ORDERS")]
-        IcebergOrders
+        IcebergOrders,
+        /// <summary>
+        /// Position Risk Control Filter
+        /// </summary>
+        [Map("POSITION_RISK_CONTROL")]
+        PositionRiskControl
     }
 }
