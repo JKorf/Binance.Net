@@ -24,7 +24,7 @@
         /// Trade amount
         /// </summary>
         [JsonPropertyName("tradeAmount")]
-        public string TradeAmount { get; set; } = string.Empty;
+        public decimal? TradeAmount { get; set; } = null;
         /// <summary>
         /// Trade currency
         /// </summary>

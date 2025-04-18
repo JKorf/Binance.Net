@@ -14,7 +14,7 @@
         /// Transaction id
         /// </summary>
         [JsonPropertyName("txID")]
-        public string? TxID { get; set; }
+        public string? TransactionId { get; set; }
         /// <summary>
         /// NFT contract address
         /// </summary>
