@@ -19,26 +19,26 @@
         /// Effective multiple
         /// </summary>
         [JsonPropertyName("effectiveMultiple")]
-        public string EffectiveMultiple { get; set; } = string.Empty;
+        public decimal? EffectiveMultiple { get; set; } = null;
         /// <summary>
         /// Initial risk ratio
         /// </summary>
         [JsonPropertyName("initialRiskRatio")]
-        public string InitialRiskRatio { get; set; } = string.Empty;
+        public decimal? InitialRiskRatio { get; set; } = null;
         /// <summary>
         /// Liquidation risk ratio
         /// </summary>
         [JsonPropertyName("liquidationRiskRatio")]
-        public string LiquidationRiskRatio { get; set; } = string.Empty;
+        public decimal? LiquidationRiskRatio { get; set; } = null;
         /// <summary>
         /// Base asset max borrowable
         /// </summary>
         [JsonPropertyName("baseAssetMaxBorrowable")]
-        public string BaseAssetMaxBorrowable { get; set; } = string.Empty;
+        public decimal? BaseAssetMaxBorrowable { get; set; } = null;
         /// <summary>
         /// Quote asset max borrowable
         /// </summary>
         [JsonPropertyName("quoteAssetMaxBorrowable")]
-        public string QuoteAssetMaxBorrowable { get; set; } = string.Empty;
+        public decimal? QuoteAssetMaxBorrowable { get; set; } = null;
     }
 }
