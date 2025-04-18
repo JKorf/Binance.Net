@@ -111,7 +111,7 @@ namespace Binance.Net.Clients.SpotApi
 
             if (symbols.Count() > 1)
             {
-                parameters.Add("symbols", JsonSerializer.Serialize(symbols.ToArray(), (JsonTypeInfo<string[]>)BinanceExchange.SerializerContext.GetTypeInfo(typeof(string[]))!));
+                parameters.Add("symbols", JsonSerializer.Serialize(symbols.ToArray(), (JsonTypeInfo<string[]>)BinanceExchange._serializerContext.GetTypeInfo(typeof(string[]))!));
             }
             else if (symbols.Any())
             {

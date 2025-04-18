@@ -136,7 +136,7 @@ namespace Binance.Net.Converters
 #endif
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize<T>(writer, value, SerializerOptions.WithConverters(BinanceExchange.SerializerContext));
+            JsonSerializer.Serialize<T>(writer, value, SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         }
     }
 }
