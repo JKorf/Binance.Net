@@ -3,6 +3,7 @@
     /// <summary>
     /// Flexible product position info
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnFlexiblePosition
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub Account Coin Futures Commission
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccountCoinFuturesCommission
     {
         /// <summary>

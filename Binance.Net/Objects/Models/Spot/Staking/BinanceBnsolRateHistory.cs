@@ -3,6 +3,7 @@
     /// <summary>
     /// Rate history
     /// </summary>
+    [SerializationModel]
     public record BinanceBnsolRateHistory
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// Boost rewards
         /// </summary>
         [JsonPropertyName("boostRewards")]
-        public IEnumerable<BinanceBnsolReward> BoostRewards { get; set; } = [];
+        public BinanceBnsolReward[] BoostRewards { get; set; } = [];
         /// <summary>
         /// Timestamp
         /// </summary>

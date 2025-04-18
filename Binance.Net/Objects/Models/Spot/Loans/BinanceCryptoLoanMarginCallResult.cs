@@ -3,6 +3,7 @@
     /// <summary>
     /// Customize margin call result
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanMarginCallResult
     {
         /// <summary>

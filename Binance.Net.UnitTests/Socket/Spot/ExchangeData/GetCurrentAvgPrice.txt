@@ -1,0 +1,20 @@
+> { "id": "|1|", "method": "avgPrice", "params": { "symbol": "ETHUSDT" } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "mins": 5,                   
+    "price": "9.35751834",       
+    "closeTime": 1694061154503  
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}

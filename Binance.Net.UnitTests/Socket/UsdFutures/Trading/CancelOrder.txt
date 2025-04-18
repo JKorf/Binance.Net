@@ -1,0 +1,42 @@
+> { "id": "|1|", "method": "order.cancel", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "clientOrderId": "myOrder1",
+    "cumQty": "0",
+    "cumQuote": "0",
+    "executedQty": "0",
+    "orderId": 283194212,
+    "origQty": "11",
+    "origType": "TRAILING_STOP_MARKET",
+    "price": "0",
+    "reduceOnly": false,
+    "side": "BUY",
+    "positionSide": "SHORT",
+    "status": "CANCELED",
+    "stopPrice": "9300",                
+    "closePosition": false,  
+    "symbol": "BTCUSDT",
+    "timeInForce": "GTC",
+    "type": "TRAILING_STOP_MARKET",
+    "activatePrice": "9020",            
+    "priceRate": "0.3",                
+    "updateTime": 1571110484038,
+    "workingType": "CONTRACT_PRICE",
+    "priceProtect": false,           
+    "priceMatch": "NONE",              
+    "selfTradePreventionMode": "NONE",
+    "goodTillDate": 0                 
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 2400,
+      "count": 1
+    }
+  ]
+}

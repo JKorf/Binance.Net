@@ -3,6 +3,7 @@
     /// <summary>
     /// Leveraged token subscription info
     /// </summary>
+    [SerializationModel]
     public record BinanceBlvtSubscription
     {
         /// <summary>

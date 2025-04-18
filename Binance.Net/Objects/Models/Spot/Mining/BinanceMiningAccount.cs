@@ -3,6 +3,7 @@
     /// <summary>
     /// Mining account
     /// </summary>
+    [SerializationModel]
     public record BinanceMiningAccount
     {
         /// <summary>
@@ -19,6 +20,6 @@
         /// Hash rates
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BinanceHashRate> Hashrates { get; set; } = Array.Empty<BinanceHashRate>();
+        public BinanceHashRate[] Hashrates { get; set; } = Array.Empty<BinanceHashRate>();
     }
 }

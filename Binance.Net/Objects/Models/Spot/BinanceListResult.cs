@@ -4,6 +4,7 @@
     /// List result
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    //[SerializationModel]
     public record BinanceListResult<T>
     {
         /// <summary>
@@ -32,6 +33,6 @@
         /// The data
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<T> Data { get; set; } = Array.Empty<T>();
+        public T[] Data { get; set; } = Array.Empty<T>();
     }
 }

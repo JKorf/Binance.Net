@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     /// <summary>
     /// Transfer Futures Transactions
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageTransferFuturesTransactions
     {
         /// <summary>
@@ -18,14 +19,14 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// </summary>
         [JsonPropertyName("futuresType")]
         public FuturesAccountType FuturesType { get; set; }
-        
+
         /// <summary>
         /// Transfer
         /// </summary>
         [JsonPropertyName("transfer")]
-        public IEnumerable<BinanceBrokerageTransferFuturesTransaction> Transactions { get; set; } = Array.Empty<BinanceBrokerageTransferFuturesTransaction>();
+        public BinanceBrokerageTransferFuturesTransaction[] Transactions { get; set; } = Array.Empty<BinanceBrokerageTransferFuturesTransaction>();
     }
-    
+
     /// <summary>
     /// Transfer Futures Transaction
     /// </summary>
@@ -54,19 +55,19 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// </summary>
         [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
-        
+
         /// <summary>
         /// Transaction Id
         /// </summary>
         [JsonPropertyName("tranId")]
         public string Id { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Client Transfer Id
         /// </summary>
         [JsonPropertyName("clientTranId")]
         public string ClientTransferId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Date
         /// </summary>

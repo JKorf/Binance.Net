@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces.CommonClients;
-
-namespace Binance.Net.Interfaces.Clients.SpotApi
+﻿namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Binance Spot API endpoints
@@ -10,22 +8,20 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiAccount"/>
         public IBinanceRestClientSpotApiAccount Account { get; }
 
         /// <summary>
         /// Endpoints related to retrieving market and system data
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiExchangeData"/>
         public IBinanceRestClientSpotApiExchangeData ExchangeData { get; }
 
         /// <summary>
         /// Endpoints related to orders and trades
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiTrading"/>
         public IBinanceRestClientSpotApiTrading Trading { get; }
-
-        /// <summary>
-        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
-        /// </summary>
-        public ISpotClient CommonSpotClient { get; }
 
         /// <summary>
         /// Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
@@ -35,6 +31,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <summary>
         ///Endpoints related to query user data.
         /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiAgent"/>
         public IBinanceRestClientSpotApiAgent Agent { get; }
     }
 }

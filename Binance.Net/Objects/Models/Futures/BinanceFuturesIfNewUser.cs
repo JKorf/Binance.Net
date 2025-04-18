@@ -3,7 +3,8 @@
     /// <summary>
     /// If the new user info
     /// </summary>
-    public record BinanceIfNewUser
+    [SerializationModel]
+    public record BinanceFuturesIfNewUser
     {
         /// <summary>
         /// Broker Id

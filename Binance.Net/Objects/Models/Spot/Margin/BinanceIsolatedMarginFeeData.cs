@@ -3,6 +3,7 @@
     /// <summary>
     /// Fee data
     /// </summary>
+    [SerializationModel]
     public record BinanceIsolatedMarginFeeData
     {
         /// <summary>
@@ -24,7 +25,7 @@
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceIsolatedMarginFeeInfo> FeeInfo { get; set; } = Array.Empty<BinanceIsolatedMarginFeeInfo>();
+        public BinanceIsolatedMarginFeeInfo[] FeeInfo { get; set; } = Array.Empty<BinanceIsolatedMarginFeeInfo>();
     }
 
     /// <summary>

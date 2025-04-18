@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// The interval for the period
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<PeriodInterval>))]
     public enum PeriodInterval
     {
         /// <summary>

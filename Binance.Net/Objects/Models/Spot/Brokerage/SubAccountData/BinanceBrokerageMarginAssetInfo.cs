@@ -3,13 +3,14 @@
     /// <summary>
     /// Margin Asset Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageMarginAssetInfo
     {
         /// <summary>
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceBrokerageSubAccountMarginAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountMarginAssetInfo>();
+        public BinanceBrokerageSubAccountMarginAssetInfo[] Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountMarginAssetInfo>();
 
         /// <summary>
         /// Timestamp
@@ -35,7 +36,7 @@
         /// </summary>
         [JsonPropertyName("marginEnable")]
         public bool IsMarginEnable { get; set; }
-        
+
         /// <summary>
         /// Total Asset Of Btc
         /// </summary>

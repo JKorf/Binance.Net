@@ -7,7 +7,8 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
-    public record BinanceStreamKlineData: BinanceStreamEvent, IBinanceStreamKlineData
+    [SerializationModel]
+    public record BinanceStreamKlineData : BinanceStreamEvent, IBinanceStreamKlineData
     {
         /// <summary>
         /// The symbol the data is for
@@ -26,7 +27,8 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// The kline data
     /// </summary>
-    public record BinanceStreamKline: IBinanceStreamKline
+    [SerializationModel]
+    public record BinanceStreamKline : IBinanceStreamKline
     {
         /// <summary>
         /// The open time of this candlestick
@@ -56,7 +58,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// <summary>
         /// The interval of this candlestick
         /// </summary>
-        [JsonPropertyName("i"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("i")]
         public KlineInterval Interval { get; set; }
         /// <summary>
         /// The first trade id in this candlestick

@@ -3,6 +3,7 @@
     /// <summary>
     /// Trade fee info
     /// </summary>
+    [SerializationModel]
     public record BinanceTradeFee
     {
         /// <summary>

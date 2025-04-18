@@ -3,6 +3,7 @@
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoin24HPrice : Binance24HPriceBase
     {
         /// <summary>

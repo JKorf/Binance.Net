@@ -3,6 +3,7 @@
     /// <summary>
     /// Information about leverage of symbol changed
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {
         /// <summary>

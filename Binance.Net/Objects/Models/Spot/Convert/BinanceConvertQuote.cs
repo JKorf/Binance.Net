@@ -3,6 +3,7 @@
     /// <summary>
     /// Convert Quote
     /// </summary>
+    [SerializationModel]
     public record BinanceConvertQuote
     {
         /// <summary>
@@ -35,6 +36,6 @@
         /// </summary>
         [JsonPropertyName("fromAmount")]
         public decimal QuoteQuantity { get; set; }
-       
+
     }
 }

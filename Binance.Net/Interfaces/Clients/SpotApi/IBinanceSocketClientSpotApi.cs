@@ -8,14 +8,17 @@
         /// <summary>
         /// Account streams and queries
         /// </summary>
+        /// <see cref="IBinanceSocketClientSpotApiAccount"/>
         IBinanceSocketClientSpotApiAccount Account { get; }
         /// <summary>
         /// Exchange data streams and queries
         /// </summary>
+        /// <see cref="IBinanceSocketClientSpotApiExchangeData"/>
         IBinanceSocketClientSpotApiExchangeData ExchangeData { get; }
         /// <summary>
         /// Trading data and queries
         /// </summary>
+        /// <see cref="IBinanceSocketClientSpotApiTrading"/>
         IBinanceSocketClientSpotApiTrading Trading { get; }
 
         /// <summary>

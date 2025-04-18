@@ -47,7 +47,7 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Options for the Coin Futures API
         /// </summary>
-        public BinanceSocketApiOptions CoinFuturesOptions { get; private set; } = new BinanceSocketApiOptions(); 
+        public BinanceSocketApiOptions CoinFuturesOptions { get; private set; } = new BinanceSocketApiOptions();
 
         internal BinanceSocketOptions Set(BinanceSocketOptions targetOptions)
         {

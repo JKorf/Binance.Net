@@ -3,6 +3,7 @@
     /// <summary>
     /// The result of transferring
     /// </summary>
+    [SerializationModel]
     public record BinanceTransaction
     {
         /// <summary>

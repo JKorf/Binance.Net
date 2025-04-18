@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Convert quote result
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesQuoteResult
     {
         /// <summary>

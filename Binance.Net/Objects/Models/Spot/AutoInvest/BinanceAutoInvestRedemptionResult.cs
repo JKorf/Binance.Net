@@ -3,6 +3,7 @@
     /// <summary>
     /// Redemption result
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestRedemptionResult
     {
         /// <summary>

@@ -1,0 +1,36 @@
+> { "id": "|1|", "method": "orderList.status", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "orderListId": 1274512,
+    "contingencyType": "OCO",
+    "listStatusType": "EXEC_STARTED",
+    "listOrderStatus": "EXECUTING",
+    "listClientOrderId": "08985fedd9ea2cf6b28996",
+    "transactionTime": 1660801713793,
+    "symbol": "BTCUSDT",
+    "orders": [
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138901,
+        "clientOrderId": "BqtFCj5odMoWtSqGk2X9tU"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138902,
+        "clientOrderId": "jLnZpj5enfMXTuhKB1d0us"
+      }
+    ]
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}

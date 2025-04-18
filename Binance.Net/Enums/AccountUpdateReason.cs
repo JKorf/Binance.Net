@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Account update reason
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AccountUpdateReason>))]
     public enum AccountUpdateReason
     {
         /// <summary>

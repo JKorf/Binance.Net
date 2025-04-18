@@ -3,6 +3,7 @@
     /// <summary>
     /// Simple Earn locked product preview
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnLockedPreview
     {
         /// <summary>

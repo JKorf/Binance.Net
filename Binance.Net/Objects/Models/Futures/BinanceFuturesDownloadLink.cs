@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Transaction download info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesDownloadLink
     {
         /// <summary>

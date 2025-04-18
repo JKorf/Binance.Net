@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Busd convert type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BusdConvertType>))]
     public enum BusdConvertType
     {
         /// <summary>

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Margined futures type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<IfNewUserMarginedFuturesType>))]
     public enum IfNewUserMarginedFuturesType
     {
         /// <summary>

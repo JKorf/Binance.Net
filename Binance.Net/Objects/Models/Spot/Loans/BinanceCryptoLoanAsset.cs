@@ -3,6 +3,7 @@
     /// <summary>
     /// Loanable asset info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanAsset
     {
         /// <summary>

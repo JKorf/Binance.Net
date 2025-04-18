@@ -1,10 +1,15 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Auto invest ROI type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AutoInvestRoiType>))]
     public enum AutoInvestRoiType
     {
         /// <summary>

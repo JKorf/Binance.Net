@@ -3,6 +3,7 @@
     /// <summary>
     /// Information about an account
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAccountBalance
     {
         /// <summary>
@@ -51,6 +52,7 @@
     /// <summary>
     /// Usd futures account balance
     /// </summary>
+    [SerializationModel]
     public record BinanceUsdFuturesAccountBalance : BinanceFuturesAccountBalance
     {
         /// <summary>
@@ -69,6 +71,7 @@
     /// <summary>
     /// Coin futures account balance
     /// </summary>
+    [SerializationModel]
     public record BinanceCoinFuturesAccountBalance : BinanceFuturesAccountBalance
     {
         /// <summary>

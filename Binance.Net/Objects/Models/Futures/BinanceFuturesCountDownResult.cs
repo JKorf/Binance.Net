@@ -3,6 +3,7 @@
     /// <summary>
     /// Result of setting a countdown timer
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCountDownResult
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Result of creating isolated margin account
     /// </summary>
+    [SerializationModel]
     public record CreateIsolatedMarginAccountResult
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Mining statistics
     /// </summary>
+    [SerializationModel]
     public record BinanceMiningStatistic
     {
         /// <summary>

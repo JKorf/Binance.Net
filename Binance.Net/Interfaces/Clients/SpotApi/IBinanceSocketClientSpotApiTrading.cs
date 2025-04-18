@@ -11,15 +11,15 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Cancel all open orders for the symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-open-orders-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-open-orders-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrder[]>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default);
         /// <summary>
         /// Cancel an Oco order by either orderId or clientOrderId
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id</param>
@@ -30,7 +30,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> CancelOcoOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default);
         /// <summary>
         /// Cancel an order by either orderId or clientOrderId
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-order-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-order-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id</param>
@@ -41,7 +41,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default);
         /// <summary>
         /// Get an oco order by either orderId or clientOrderId
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
         /// </summary>
         /// <param name="orderId">Order id, for example `ETHUSDT`</param>
         /// <param name="clientOrderId">Client order id</param>
@@ -50,7 +50,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceOrderOcoList>>> GetOcoOrderAsync(long? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
         /// <summary>
         /// Get Oco order history
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
         /// </summary>
         /// <param name="fromOrderId">Filter from order id</param>
         /// <param name="startTime">Filter by start time</param>
@@ -58,25 +58,25 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get open Oco orders
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOpenOcoOrdersAsync(CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOpenOcoOrdersAsync(CancellationToken ct = default);
         /// <summary>
         /// Get open orders
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#current-open-orders-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#current-open-orders-user_data" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default);
         /// <summary>
         /// Get order by either orderId or clientOrderId
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#query-order-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#query-order-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id</param>
@@ -86,7 +86,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
         /// <summary>
         /// Get order history
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-order-history-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-order-history-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="fromOrderId">Filter from order id</param>
@@ -95,10 +95,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Get prevented trades because of self trade prevention
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-prevented-matches-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-prevented-matches-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="preventedTradeId">Filter by prevented trade id</param>
@@ -107,10 +107,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinancePreventedTrade>>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinancePreventedTrade[]>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default);
         /// <summary>
         /// Gets user trades for provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/account-requests#account-trade-history-user_data" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#account-trade-history-user_data" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -120,11 +120,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<CallResult<BinanceResponse<IEnumerable<BinanceTrade>>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceTrade[]>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -152,7 +152,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#order-lists" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-lists" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -210,7 +210,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Places a new order
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#place-new-order-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#place-new-order-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -232,7 +232,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#test-new-order-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#test-new-order-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -250,11 +250,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed test order</returns>
-        Task<CallResult<BinanceResponse<BinancePlacedOrder>>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = null, decimal? quoteQuantity = null, string? newClientOrderId = null, decimal? price = null, TimeInForce? timeInForce = null, decimal? stopPrice = null, decimal? icebergQty = null, int? trailingDelta = null, int? strategyId = null, int? strategyType = null, SelfTradePreventionMode? selfTradePreventionMode = null, CancellationToken ct = default);
+        Task<CallResult<BinanceResponse<BinanceTestOrderCommission>>> PlaceTestOrderAsync(string symbol, OrderSide side, SpotOrderType type, decimal? quantity = null, decimal? quoteQuantity = null, string? newClientOrderId = null, decimal? price = null, TimeInForce? timeInForce = null, decimal? stopPrice = null, decimal? icebergQty = null, int? trailingDelta = null, int? strategyId = null, int? strategyType = null, SelfTradePreventionMode? selfTradePreventionMode = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an existing order and place a new order on the same symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-api/trading-requests#cancel-and-replace-order-trade" /></para>
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#cancel-and-replace-order-trade" /></para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>

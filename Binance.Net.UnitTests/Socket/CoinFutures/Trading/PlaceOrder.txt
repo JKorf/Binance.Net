@@ -1,0 +1,46 @@
+> { "id": "|1|", "method": "order.place", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+      "orderId": 333245211,
+      "symbol": "BTCUSD_PERP",
+      "pair": "BTCUSD",
+      "status": "NEW",
+      "clientOrderId": "5SztZiGFAxgAqw4J9EN9fA",
+      "price": "50000",
+      "avgPrice": "0.00",
+      "origQty": "1",
+      "executedQty": "0",
+      "cumQty": "0",
+      "cumBase": "0",
+      "timeInForce": "GTC",
+      "type": "LIMIT",
+      "reduceOnly": false,
+      "closePosition": false,
+      "side": "BUY",
+      "positionSide": "BOTH",
+      "stopPrice": "0",
+      "workingType": "CONTRACT_PRICE",
+      "priceProtect": false,
+      "origType": "LIMIT",
+      "updateTime": 1728413795125
+  },
+  "rateLimits": [
+      {
+          "rateLimitType": "REQUEST_WEIGHT",
+          "interval": "MINUTE",
+          "intervalNum": 1,
+          "limit": 2400,
+          "count": 6
+      },
+      {
+          "rateLimitType": "ORDERS",
+          "interval": "MINUTE",
+          "intervalNum": 1,
+          "limit": 1200,
+          "count": 1
+      }
+  ]
+}

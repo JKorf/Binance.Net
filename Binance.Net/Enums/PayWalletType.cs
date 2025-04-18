@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Wallet type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<PayWalletType>))]
     public enum PayWalletType
     {
         /// <summary>

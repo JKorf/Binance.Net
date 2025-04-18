@@ -4,7 +4,7 @@
     /// Balance data
     /// </summary>
     public interface IBinanceBalance
-	{
+    {
         /// <summary>
         /// The asset this balance is for
         /// </summary>
@@ -21,5 +21,5 @@
         /// The total balance of this asset (Free + Locked)
         /// </summary>
         decimal Total { get; }
-	}
+    }
 }

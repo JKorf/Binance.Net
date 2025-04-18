@@ -1,10 +1,12 @@
 ﻿using Binance.Net.Interfaces;
+using Binance.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
+    [SerializationModel]
     public record Binance24HPrice : Binance24HPriceBase, IBinanceTick
     {
         /// <summary>
@@ -32,7 +34,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("askQty")]
         public decimal BestAskQuantity { get; set; }
-        
+
         /// <inheritdoc />
         [JsonPropertyName("volume")]
         public override decimal Volume { get; set; }

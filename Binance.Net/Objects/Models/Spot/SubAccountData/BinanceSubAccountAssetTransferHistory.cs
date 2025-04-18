@@ -1,22 +1,22 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
+    [SerializationModel]
     internal record BinanceSubAccountAssetTransferHistoryList
     {
         [JsonPropertyName("success")]
         public bool Success { get; set; }
+
         [JsonPropertyName("futuresType")]
-        [JsonConverter(typeof(EnumConverter))]
         public FuturesAccountType AccountType { get; set; }
 
         /// <summary>
         /// Transfers
         /// </summary>
         [JsonPropertyName("transfers")]
-        public IEnumerable<BinanceSubAccountAssetTransferHistory> Transfers { get; set; } =
-            new List<BinanceSubAccountAssetTransferHistory>();
-
+        public BinanceSubAccountAssetTransferHistory[] Transfers { get; set; } = [];
     }
 
     /// <summary>

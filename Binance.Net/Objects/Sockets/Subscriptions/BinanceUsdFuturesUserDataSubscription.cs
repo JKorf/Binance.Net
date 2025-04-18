@@ -156,7 +156,7 @@ namespace Binance.Net.Objects.Sockets
                 _tradeHandler?.Invoke(message.As(tradeUpdate.Data, tradeUpdate.Stream, tradeUpdate.Data.Symbol, SocketUpdateType.Update).WithDataTimestamp(tradeUpdate.Data.EventTime));
             }
 
-            return new CallResult(null);
+            return CallResult.SuccessResult;
         }
     }
 }

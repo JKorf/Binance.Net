@@ -3,6 +3,7 @@
     /// <summary>
     /// Repay rate info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanRepayRate
     {
         /// <summary>

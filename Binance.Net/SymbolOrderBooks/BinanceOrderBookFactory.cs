@@ -42,7 +42,7 @@ namespace Binance.Net.SymbolOrderBooks
                 return CreateSpot(symbolName, options);
             if (symbol.TradingMode.IsLinear())
                 return CreateUsdtFutures(symbolName, options);
-            
+
             return CreateCoinFutures(symbolName, options);
         }
 
@@ -54,7 +54,7 @@ namespace Binance.Net.SymbolOrderBooks
                                              _serviceProvider.GetRequiredService<IBinanceRestClient>(),
                                              _serviceProvider.GetRequiredService<IBinanceSocketClient>());
 
-        
+
         /// <inheritdoc />
         public ISymbolOrderBook CreateUsdtFutures(string symbol, Action<BinanceOrderBookOptions>? options = null)
             => new BinanceFuturesUsdtSymbolOrderBook(symbol,
@@ -63,7 +63,7 @@ namespace Binance.Net.SymbolOrderBooks
                                              _serviceProvider.GetRequiredService<IBinanceRestClient>(),
                                              _serviceProvider.GetRequiredService<IBinanceSocketClient>());
 
-        
+
         /// <inheritdoc />
         public ISymbolOrderBook CreateCoinFutures(string symbol, Action<BinanceOrderBookOptions>? options = null)
             => new BinanceFuturesCoinSymbolOrderBook(symbol,

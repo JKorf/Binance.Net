@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Status of a margin action
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<MarginStatus>))]
     public enum MarginStatus
     {
         /// <summary>

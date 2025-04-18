@@ -3,6 +3,7 @@
     /// <summary>
     /// Funding wallet asset
     /// </summary>
+    [SerializationModel]
     public record BinanceFundingAsset
     {
         /// <summary>

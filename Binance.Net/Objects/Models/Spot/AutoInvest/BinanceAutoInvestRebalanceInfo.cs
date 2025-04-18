@@ -3,6 +3,7 @@
     /// <summary>
     /// Rebalance info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestRebalanceInfo
     {
         /// <summary>
@@ -39,7 +40,7 @@
         /// Transaction details
         /// </summary>
         [JsonPropertyName("transactionDetails")]
-        public IEnumerable<BinanceAutoInvestRebalanceDetails> TransactionDetails { get; set; } = Array.Empty<BinanceAutoInvestRebalanceDetails>();
+        public BinanceAutoInvestRebalanceDetails[] TransactionDetails { get; set; } = Array.Empty<BinanceAutoInvestRebalanceDetails>();
     }
 
     /// <summary>

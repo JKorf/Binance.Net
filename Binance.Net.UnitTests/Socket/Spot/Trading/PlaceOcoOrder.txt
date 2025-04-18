@@ -1,0 +1,93 @@
+> { "id": "|1|", "method": "orderList.place.oco", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result":
+  {
+    "orderListId": 2,
+    "contingencyType": "OCO",
+    "listStatusType": "EXEC_STARTED",
+    "listOrderStatus": "EXECUTING",
+    "listClientOrderId": "cKPMnDCbcLQILtDYM4f4fX",
+    "transactionTime": 1711062760648,
+    "symbol": "LTCBNB",
+    "orders":
+    [
+      {
+        "symbol": "LTCBNB",
+        "orderId": 2,
+        "clientOrderId": "0m6I4wfxvTUrOBSMUl0OPU"
+      },
+      {
+        "symbol": "LTCBNB",
+        "orderId": 3,
+        "clientOrderId": "Z2IMlR79XNY5LU0tOxrWyW"
+      }
+    ],
+    "orderReports":
+    [
+      {
+        "symbol": "LTCBNB",
+        "orderId": 2,
+        "orderListId": 2,
+        "clientOrderId": "0m6I4wfxvTUrOBSMUl0OPU",
+        "transactTime": 1711062760648,
+        "price": "1.50000000",
+        "origQty": "1.000000",
+        "executedQty": "0.000000",
+        "origQuoteOrderQty": "0.000000",
+        "cummulativeQuoteQty": "0.00000000",
+        "status": "NEW",
+        "timeInForce": "GTC",
+        "type": "STOP_LOSS_LIMIT",
+        "side": "BUY",
+        "stopPrice": "1.50000001",
+        "workingTime": -1,
+        "selfTradePreventionMode": "NONE"
+      },
+      {
+        "symbol": "LTCBNB",
+        "orderId": 3,
+        "orderListId": 2,
+        "clientOrderId": "Z2IMlR79XNY5LU0tOxrWyW",
+        "transactTime": 1711062760648,
+        "price": "1.49999999",
+        "origQty": "1.000000",
+        "executedQty": "0.000000",
+        "origQuoteOrderQty": "0.000000",
+        "cummulativeQuoteQty": "0.00000000",
+        "status": "NEW",
+        "timeInForce": "GTC",
+        "type": "LIMIT_MAKER",
+        "side": "BUY",
+        "workingTime": 1711062760648,
+        "selfTradePreventionMode": "NONE"
+      }
+    ]
+  },
+  "rateLimits":
+  [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 2
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 2
+    },
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 1
+    }
+  ]
+}

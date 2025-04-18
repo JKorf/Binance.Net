@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// The history of order edits
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesOrderEditHistory
     {
         /// <summary>
@@ -33,9 +35,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("clientOrderId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Edit time
@@ -51,7 +51,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("priceMatch")]
         public PriceMatch PriceMatch { get; set; }
 
     }
@@ -78,7 +78,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("count")]
         public int EditCount { get; set; }
     }
-    
+
     /// <summary>
     /// Change info
     /// </summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Enable Leverage Token Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageEnableLeverageTokenResult
     {
         /// <summary>

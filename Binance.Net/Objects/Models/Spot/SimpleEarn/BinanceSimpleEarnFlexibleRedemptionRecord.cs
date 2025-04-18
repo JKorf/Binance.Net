@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Simple Earn flexible product redemption record
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnFlexibleRedemptionRecord
     {
         /// <summary>
@@ -35,7 +37,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Destination account
         /// </summary>
-        [JsonPropertyName("destAccount"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("destAccount")]
         public AccountSource DestinationAccount { get; set; }
         /// <summary>
         /// Status

@@ -3,6 +3,7 @@
     /// <summary>
     /// Transaction
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountTransaction
     {
         /// <summary>

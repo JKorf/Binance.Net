@@ -3,6 +3,7 @@
     /// <summary>
     /// Wallet balance
     /// </summary>
+    [SerializationModel]
     public record BinanceWalletBalance
     {
         /// <summary>

@@ -1,0 +1,51 @@
+> { "id": "|1|", "method": "ticker", "params": { "symbol": "ETHUSDT" } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BNBBTC",
+      "priceChange": "0.00061500",
+      "priceChangePercent": "4.735",
+      "weightedAvgPrice": "0.01368242",
+      "openPrice": "0.01298900",
+      "highPrice": "0.01418800",
+      "lowPrice": "0.01296000",
+      "lastPrice": "0.01360400",
+      "volume": "587169.48600000",
+      "quoteVolume": "8033.90114517",
+      "openTime": 1659580020000,
+      "closeTime": 1660184820927,
+      "firstId": 192977765,
+      "lastId": 195365700,
+      "count": 2387936
+    },
+    {
+      "symbol": "BTCUSDT",
+      "priceChange": "1182.92000000",
+      "priceChangePercent": "5.113",
+      "weightedAvgPrice": "23349.27074846",
+      "openPrice": "23135.33000000",
+      "highPrice": "24491.22000000",
+      "lowPrice": "22400.00000000",
+      "lastPrice": "24318.25000000",
+      "volume": "1039498.10978000",
+      "quoteVolume": "24271522807.76838630",
+      "openTime": 1659580020000,
+      "closeTime": 1660184820927,
+      "firstId": 1568787779,
+      "lastId": 1604337406,
+      "count": 35549628
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 8
+    }
+  ]
+}

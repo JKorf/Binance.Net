@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub account futures details
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountFuturesDetails
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// List of asset details
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceSubAccountFuturesAsset> Assets { get; set; } = Array.Empty<BinanceSubAccountFuturesAsset>();
+        public BinanceSubAccountFuturesAsset[] Assets { get; set; } = Array.Empty<BinanceSubAccountFuturesAsset>();
         /// <summary>
         /// Can deposit
         /// </summary>
@@ -44,7 +45,7 @@
         /// Max quantity which can be withdrawn
         /// </summary>
         [JsonPropertyName("maxWithdrawAmount")]
-        public decimal MaxWithdrawQuantity{ get; set; }
+        public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
         /// Total initial margin
         /// </summary>
@@ -87,7 +88,7 @@
         [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
-    
+
     /// <summary>
     /// Sub account future asset details
     /// </summary>

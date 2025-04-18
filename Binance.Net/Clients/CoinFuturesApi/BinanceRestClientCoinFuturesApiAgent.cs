@@ -18,7 +18,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region If New User
 
-        public async Task<WebCallResult<BinanceIfNewUser>> GetIfNewUserAsync(string brokerId, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesIfNewUser>> GetIfNewUserAsync(string brokerId, int? receiveWindow = null, CancellationToken ct = default)
         {
             brokerId.ValidateNotNull(nameof(brokerId));
 
@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
-            return await _baseClient.SendAsync<BinanceIfNewUser>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesIfNewUser>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

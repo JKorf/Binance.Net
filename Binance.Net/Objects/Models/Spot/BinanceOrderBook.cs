@@ -1,10 +1,12 @@
 ﻿using Binance.Net.Interfaces;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// The order book for a asset
     /// </summary>
+    [SerializationModel]
     public record BinanceOrderBook : IBinanceOrderBook
     {
         /// <summary>
@@ -18,17 +20,17 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("lastUpdateId")]
         public long LastUpdateId { get; set; }
-        
+
         /// <summary>
         /// The list of bids
         /// </summary>
         [JsonPropertyName("bids")]
-        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
         /// <summary>
         /// The list of asks
         /// </summary>
         [JsonPropertyName("asks")]
-        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }

@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Futures book price
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamBookPrice : BinanceStreamBookPrice
     {
         /// <summary>
@@ -21,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// The type of the event
         /// </summary>
-        [JsonPropertyName("e")] 
+        [JsonPropertyName("e")]
         public string Event { get; set; } = string.Empty;
     }
 }

@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub Account Commission
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccountCommission
     {
         /// <summary>

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of futures income
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<IncomeType>))]
     public enum IncomeType
     {
         /// <summary>

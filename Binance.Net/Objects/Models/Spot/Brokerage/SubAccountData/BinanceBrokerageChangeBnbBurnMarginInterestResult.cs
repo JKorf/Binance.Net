@@ -3,6 +3,7 @@
     /// <summary>
     /// Enable Or Disable BNB Burn Margin Interest Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageChangeBnbBurnMarginInterestResult
     {
         /// <summary>

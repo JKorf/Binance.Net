@@ -3,18 +3,19 @@
     /// <summary>
     /// Auto invest source asset info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestTargetAssets
     {
         /// <summary>
         /// Target assets
         /// </summary>
         [JsonPropertyName("targetAssets")]
-        public IEnumerable<string> TargetAssets { get; set; } = Array.Empty<string>();
+        public string[] TargetAssets { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Target asset list
         /// </summary>
         [JsonPropertyName("autoInvestAssetList")]
-        public IEnumerable<BinanceAutoInvestTargetAsset> Assets { get; set; } = Array.Empty<BinanceAutoInvestTargetAsset>();
+        public BinanceAutoInvestTargetAsset[] Assets { get; set; } = Array.Empty<BinanceAutoInvestTargetAsset>();
     }
 
     /// <summary>
@@ -31,7 +32,7 @@
         /// Target asset list
         /// </summary>
         [JsonPropertyName("roiAndDimensionTypeList")]
-        public IEnumerable<BinanceAutoInvestTargetAssetRoi> Assets { get; set; } = Array.Empty<BinanceAutoInvestTargetAssetRoi>();
+        public BinanceAutoInvestTargetAssetRoi[] Assets { get; set; } = Array.Empty<BinanceAutoInvestTargetAssetRoi>();
     }
 
     /// <summary>

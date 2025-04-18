@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub-account Status on Margin/Futures
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountStatus
     {
         /// <summary>

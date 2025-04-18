@@ -5,7 +5,8 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Book price
     /// </summary>
-    public record BinanceFuturesBookPrice: BinanceBookPrice
+    [SerializationModel]
+    public record BinanceFuturesBookPrice : BinanceBookPrice
     {
         /// <summary>
         /// Pair
