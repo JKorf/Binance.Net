@@ -16,9 +16,7 @@ namespace Blazor.ClientSide
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddBinance(restOptions =>
-            {
-            }, socketOptions =>
+            builder.Services.AddBinance(options =>
             {
             });
 
