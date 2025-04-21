@@ -49,5 +49,10 @@
         /// Endpoints related to Binance Copy Trading
         /// </summary>
         IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
+
+        /// <summary>
+        /// Endpoints related to Binance Gift Cards
+        /// </summary>
+        public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
     }
 }

@@ -23,7 +23,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Create a single token gift card
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateSingleTokenGiftCard(string token, double amount, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateSingleTokenGiftCardAsync(string token, double amount, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("token", token);
@@ -39,7 +39,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Create a dual token gift card
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateDualTokenGiftCard(string baseToken, string faceToken, double baseTokenAmount, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateDualTokenGiftCardAsync(string baseToken, string faceToken, double baseTokenAmount, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("token", baseToken);
@@ -56,15 +56,18 @@ namespace Binance.Net.Clients.GeneralApi
         #region Redeem a Binance Gift card
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>> RedeemGiftCard(string code, string? externalUid = null, bool useEncryption = true, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>> RedeemGiftCardAsync(string code, string? externalUid = null, bool useEncryption = true, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             #if NETSTANDARD2_0
-            parameters.Add("code", code);
+            if (useEncryption)
+                return new WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>(new WebError("Encryption is not supported when targeting NETSTANDARD2_0. Please disable `useEncryption` or upgrade your target framework."));
+            else
+                parameters.Add("code", code);
             #else
             if (useEncryption)
             {
-                var keyResult = await GetRsaPublicKey(receiveWindow, ct).ConfigureAwait(false);
+                var keyResult = await GetRsaPublicKeyAsync(receiveWindow, ct).ConfigureAwait(false);
 
                 if (!keyResult.Success || string.IsNullOrEmpty(keyResult.Data?.Data))
                     return new WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>(keyResult.Error!);
@@ -95,7 +98,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Verify Binance Gift Card by Gift Card Number
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardValidity>>> VerifyGiftCardByNumber(string referenceNumber, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardValidity>>> VerifyGiftCardByNumberAsync(string referenceNumber, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("referenceNo", referenceNumber);
@@ -110,7 +113,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Fetch Token Limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit>>> GetTokenLimit(string baseToken, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("baseToken", baseToken);
@@ -125,7 +128,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Fetch RSA Public Key
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<string>>> GetRsaPublicKey(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<string>>> GetRsaPublicKeyAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);

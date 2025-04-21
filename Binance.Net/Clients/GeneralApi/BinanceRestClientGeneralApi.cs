@@ -39,6 +39,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
         #endregion
 
         #region constructor/destructor
