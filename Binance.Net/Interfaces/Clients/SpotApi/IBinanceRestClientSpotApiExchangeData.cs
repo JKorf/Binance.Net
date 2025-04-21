@@ -405,7 +405,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTier>>> GetIsolatedMarginTierData(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTier>>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get Margin Available Inventory
@@ -414,7 +414,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="type">The margin type to query for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceMarginAvailableInventory>> GetMarginAvaliableInventory(MarginInventoryType type, CancellationToken ct = default);
+        Task<WebCallResult<BinanceMarginAvailableInventory>> GetMarginAvaliableInventoryAsync(MarginInventoryType type, CancellationToken ct = default);
 
         /// <summary>
         /// Get Liability Coin Leverage Bracket in Cross Margin Pro Mode
@@ -422,7 +422,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>> GetLiabilityCoinLeverageBracketInCrossMarginProMode(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>> GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get list all convert pairs

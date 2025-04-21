@@ -603,7 +603,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Isolated Margin Tier Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTier>>> GetIsolatedMarginTierData(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTier>>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
@@ -619,7 +619,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Margin Available Inventory
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginAvailableInventory>> GetMarginAvaliableInventory(MarginInventoryType type, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMarginAvailableInventory>> GetMarginAvaliableInventoryAsync(MarginInventoryType type, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("type", type);
@@ -633,7 +633,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Liability Coin Leverage Bracket in Cross Margin Pro Mode
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>> GetLiabilityCoinLeverageBracketInCrossMarginProMode(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>> GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/leverageBracket", BinanceExchange.RateLimiter.SpotRestIp, 1);
             return await _baseClient.SendAsync<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>(request, null, ct).ConfigureAwait(false);
