@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	  <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
-	  <LangVersion>12.0</LangVersion>
+    <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
@@ -9,7 +9,7 @@
     <Authors>JKorf</Authors>
     <PackageVersion>11.0.0-beta1</PackageVersion>
     <AssemblyVersion>11.0.0</AssemblyVersion>
-    <FileVersion>11.0.0-beta1</FileVersion>
+    <FileVersion>11.0.0</FileVersion>
     <Description>Binance.Net is a client library for accessing the Binance REST and Websocket API. All data is mapped to readable models and enum values. Additional features include automatic websocket (re)connection management, client side rate limiting, an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance;Binance.Net;Binance.com;Binance Client;Binance API;CryptoCurrency;CryptoCurrency Exchange</PackageTags>
@@ -24,9 +24,9 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <PackageReleaseNotes>https://github.com/JKorf/Binance.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
-	<PropertyGroup Label="AOT" Condition=" '$(TargetFramework)' == 'NET8_0' Or '$(TargetFramework)' == 'NET9_0' ">
-		<IsAotCompatible>true</IsAotCompatible>
-	</PropertyGroup>
+  <PropertyGroup Label="AOT" Condition=" '$(TargetFramework)' == 'NET8_0' Or '$(TargetFramework)' == 'NET9_0' ">
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
   <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
