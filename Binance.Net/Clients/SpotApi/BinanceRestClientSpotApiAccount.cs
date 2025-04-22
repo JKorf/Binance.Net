@@ -1085,21 +1085,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Blvt
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBlvtUserLimit>>> GetLeveragedTokensUserLimitAsync(string? tokenName = null, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("tokenName", tokenName);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/blvt/userLimit", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceBlvtUserLimit>>(request, parameters, ct).ConfigureAwait(false);       
-        }
-
-        #endregion
-
         #region Portfolio margin
 
         /// <inheritdoc />
