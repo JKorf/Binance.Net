@@ -68,7 +68,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             listenKey.ValidateNotNull(nameof(listenKey));
 
             var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
-            return await _client.SubscribeInternalAsync(_client.BaseAddress.AppendPath("stream"), subscription, ct).ConfigureAwait(false);
+            return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
 
         #endregion
