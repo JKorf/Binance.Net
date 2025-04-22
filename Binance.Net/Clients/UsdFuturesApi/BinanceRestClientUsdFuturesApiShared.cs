@@ -992,7 +992,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return result.AsExchangeResult<SharedFee>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFee(result.Data.MakerCommissionRate * 100, result.Data.TakerCommissionRate * 100));
+            return result.AsExchangeResult(Exchange, SupportedTradingModes, new SharedFee(result.Data.MakerCommissionRate * 100, result.Data.TakerCommissionRate * 100));
         }
         #endregion
 
@@ -1202,7 +1202,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(result.Data.Id.ToString()));
+            return result.AsExchangeResult(Exchange, SupportedTradingModes, new SharedId(result.Data.Id.ToString()));
         }
 
         EndpointOptions<CancelTpSlRequest> IFuturesTpSlRestClient.CancelFuturesTpSlOptions { get; } = new EndpointOptions<CancelTpSlRequest>(true)
