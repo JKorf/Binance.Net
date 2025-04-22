@@ -121,10 +121,12 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateCoinFuturesExchangeDataCalls()
+        public Task ValidateCoinFuturesExchangeDataCalls()
         {
             var tester = new SocketRequestValidator<BinanceSocketClient>("Socket/CoinFutures/ExchangeData");
             // No queries
+
+            return Task.CompletedTask;
         }
 
         [Test]
