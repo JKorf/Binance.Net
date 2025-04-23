@@ -22,7 +22,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         IPositionModeRestClient,
         IListenKeyRestClient,
         IFeeRestClient,
-        IFuturesOrderClientIdClient,
+        IFuturesOrderClientIdRestClient,
         IFuturesTriggerOrderRestClient,
         IFuturesTpSlRestClient,
         IBookTickerRestClient
