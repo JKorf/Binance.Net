@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Borrow info
@@ -30,6 +32,6 @@
         /// Status
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; } = string.Empty;
+        public FlexibleBorrowStatus Status { get; set; }
     }
 }

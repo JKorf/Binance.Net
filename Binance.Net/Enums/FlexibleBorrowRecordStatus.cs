@@ -5,22 +5,22 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Flexible Borrow Status
     /// </summary>
-    public enum FlexibleBorrowStatus
+    public enum FlexibleBorrowRecordStatus
     {
         /// <summary>
         /// Successful execution
         /// </summary>
-        [Map("Succeeds")]
-        Succeeds,
+        [Map("SUCCESS")]
+        Success,
         /// <summary>
         /// Execution failed
         /// </summary>
-        [Map("Failed")]
+        [Map("FAILED")]
         Failed,
         /// <summary>
-        /// Processing
+        /// Pending to execute
         /// </summary>
-        [Map("Processing")]
-        Processing
+        [Map("PENDING")]
+        Pending
     }
 }

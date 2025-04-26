@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Adjust info
@@ -35,6 +37,6 @@
         /// Status
         /// </summary>
         [JsonPropertyName("status")]
-        public decimal Status { get; set; }
+        public FlexibleBorrowStatus Status { get; set; }
     }
 }
