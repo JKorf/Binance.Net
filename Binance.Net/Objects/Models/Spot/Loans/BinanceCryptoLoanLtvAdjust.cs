@@ -22,14 +22,19 @@
         [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
-        /// Amount
+        /// Adjustment amount
         /// </summary>
-        [JsonPropertyName("amount")]
+        [JsonPropertyName("adjustmentAmount")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Current ltv
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal CurrentLtv { get; set; }
+        /// <summary>
+        /// Status
+        /// </summary>
+        [JsonPropertyName("status")]
+        public decimal Status { get; set; }
     }
 }
