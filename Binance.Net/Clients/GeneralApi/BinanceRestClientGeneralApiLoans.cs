@@ -264,8 +264,8 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("orderId", orderId);
-            parameters.AddOptionalParameter("loanAsset", loanAsset);
-            parameters.AddOptionalParameter("collateralAsset", collateralAsset);
+            parameters.AddOptionalParameter("loanCoin", loanAsset);
+            parameters.AddOptionalParameter("collateralCoin", collateralAsset);
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -283,8 +283,8 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("orderId", orderId);
-            parameters.AddOptionalParameter("loanAsset", loanAsset);
-            parameters.AddOptionalParameter("collateralAsset", collateralAsset);
+            parameters.AddOptionalParameter("loanCoin", loanAsset);
+            parameters.AddOptionalParameter("collateralCoin", collateralAsset);
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -302,8 +302,8 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("orderId", orderId);
-            parameters.AddOptionalParameter("loanAsset", loanAsset);
-            parameters.AddOptionalParameter("collateralAsset", collateralAsset);
+            parameters.AddOptionalParameter("loanCoin", loanAsset);
+            parameters.AddOptionalParameter("collateralCoin", collateralAsset);
             parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
