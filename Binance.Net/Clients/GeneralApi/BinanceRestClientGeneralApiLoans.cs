@@ -27,7 +27,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/collateral/data", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>(request, parameters, ct).ConfigureAwait(false);
@@ -40,7 +40,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("loanCoin", loanAsset);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/loanable/data", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanAsset>>(request, parameters, ct).ConfigureAwait(false);
@@ -60,9 +60,9 @@ namespace Binance.Net.Clients.GeneralApi
                 { "loanCoin", loanAsset },
                 { "collateralCoin", collateralAsset },
             };
-            parameters.AddOptionalParameter("loanAmount", loanQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("collateralAmount", collateralQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("loanAmount", loanQuantity);
+            parameters.AddOptionalString("collateralAmount", collateralQuantity);
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v2/loan/flexible/borrow", BinanceExchange.RateLimiter.SpotRestUid, 6000, true);
             return await _baseClient.SendAsync<BinanceCryptoLoanBorrow>(request, parameters, ct).ConfigureAwait(false);
@@ -81,7 +81,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("collateralReturn", collateralReturn);
             parameters.AddOptionalParameter("fullRepayment", fullRepayment);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v2/loan/flexible/repay", BinanceExchange.RateLimiter.SpotRestUid, 6000, true);
             return await _baseClient.SendAsync<BinanceCryptoLoanRepay>(request, parameters, ct).ConfigureAwait(false);
@@ -100,8 +100,8 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("collateralReturn", collateralReturn);
             parameters.AddOptionalParameter("fullRepayment", fullRepayment);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v2/loan/flexible/repay/collateral", BinanceExchange.RateLimiter.SpotRestUid, 6000, true);
             return await _baseClient.SendAsync<BinanceCryptoLoanRepay>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -118,7 +118,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "adjustmentAmount", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "direction", addOrRemove ? "ADDITIONAL" : "REDUCED" }
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v2/loan/flexible/adjust/ltv", BinanceExchange.RateLimiter.SpotRestUid, 6000, true);
             return await _baseClient.SendAsync<BinanceCryptoLoanLtvAdjust>(request, parameters, ct).ConfigureAwait(false);
@@ -136,11 +136,11 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("loanCoin", loanAsset);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/ltv/adjustment/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanFlexibleLtvAdjustRecord>>(request, parameters, ct).ConfigureAwait(false);
@@ -156,7 +156,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "loanCoin", loanAsset },
                 { "collateralCoin", collateralAsset },
             };
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/repay/rate", BinanceExchange.RateLimiter.SpotRestIp, 6000, true);
             return await _baseClient.SendAsync<BinanceCryptoLoanRepayRate>(request, parameters, ct).ConfigureAwait(false);
@@ -170,11 +170,11 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("loanAsset", loanAsset);
             parameters.AddOptionalParameter("collateralAsset", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/borrow/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanFlexibleBorrowRecord>>(request, parameters, ct).ConfigureAwait(false);
@@ -188,9 +188,9 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("loanAsset", loanAsset);
             parameters.AddOptionalParameter("collateralAsset", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/ongoing/orders", BinanceExchange.RateLimiter.SpotRestIp, 300, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanOpenBorrowOrder>>(request, parameters, ct).ConfigureAwait(false);
@@ -204,11 +204,11 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("loanAsset", loanAsset);
             parameters.AddOptionalParameter("collateralAsset", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/liquidation/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanLiquidationRecord>>(request, parameters, ct).ConfigureAwait(false);
@@ -222,11 +222,11 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("loanCoin", loanAsset);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/loan/flexible/repay/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanFlexibleRepayRecord>>(request, parameters, ct).ConfigureAwait(false);
@@ -248,10 +248,10 @@ namespace Binance.Net.Clients.GeneralApi
                 { "asset", asset }
             };
             parameters.AddOptionalEnum("type", type);
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/loan/income", BinanceExchange.RateLimiter.SpotRestUid, 6000, true);
             return await _baseClient.SendAsync<BinanceCryptoLoanIncome[]>(request, parameters, ct).ConfigureAwait(false);
@@ -266,11 +266,11 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("loanCoin", loanAsset);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/loan/borrow/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanBorrowRecord>>(request, parameters, ct).ConfigureAwait(false);
@@ -285,11 +285,11 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("loanCoin", loanAsset);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/loan/ltv/adjustment/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanLtvAdjustRecord>>(request, parameters, ct).ConfigureAwait(false);
@@ -304,11 +304,11 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("loanCoin", loanAsset);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
-            parameters.AddOptionalParameter("current", page?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("current", page);
+            parameters.AddOptionalString("limit", limit);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/loan/repay/history", BinanceExchange.RateLimiter.SpotRestIp, 400, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceCryptoLoanRepayRecord>>(request, parameters, ct).ConfigureAwait(false);
