@@ -722,56 +722,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<IEnumerable<BinanceMarginOrderOcoList>>> GetMarginOpenOcoOrdersAsync(string? symbol = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to a token
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-blvt-user_data" /></para>
-        /// </summary>
-        /// <param name="tokenName">Name of the token to subscribe to</param>
-        /// <param name="cost">Cost of the subscription</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceBlvtSubscribeResult>> SubscribeLeveragedTokenAsync(string tokenName, decimal cost, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get subscription records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-subscription-record-user_data" /></para>
-        /// </summary>
-        /// <param name="tokenName">Filter by token</param>
-        /// <param name="id">Filter by id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceBlvtSubscription>>> GetLeveragedTokensSubscriptionRecordsAsync(string? tokenName = null, long? id = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Redeem a token
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-blvt-user_data" /></para>
-        /// </summary>
-        /// <param name="tokenName">Name of the token to redeem</param>
-        /// <param name="quantity">Quantity to redeem</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<BinanceBlvtRedeemResult>> RedeemLeveragedTokenAsync(string tokenName, decimal quantity, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get redemption records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-redemption-record-user_data" /></para>
-        /// </summary>
-        /// <param name="tokenName">Filter by token</param>
-        /// <param name="id">Filter by id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BinanceBlvtRedemption>>> GetLeveragedTokensRedemptionRecordsAsync(string? tokenName = null, long? id = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Get Customer to Customer trade history
         /// <para><a href="https://developers.binance.com/docs/c2c/rest-api" /></para>
         /// </summary>

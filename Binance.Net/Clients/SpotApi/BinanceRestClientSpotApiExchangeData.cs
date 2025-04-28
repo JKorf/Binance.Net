@@ -516,20 +516,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Leveraged tokens
 
-        #region Get Leveraged Token info
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBlvtInfo>>> GetLeveragedTokenInfoAsync(int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/blvt/tokenInfo", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync<IEnumerable<BinanceBlvtInfo>>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Get historical klines
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BinanceBlvtKline>>> GetLeveragedTokensHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
