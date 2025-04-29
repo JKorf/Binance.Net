@@ -59,6 +59,7 @@ namespace Binance.Net.Clients.GeneralApi
             Staking = new BinanceRestClientGeneralApiStaking(this);
             SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
             CopyTrading = new BinanceRestClientGeneralApiCopyTrading(this);
+            GiftCard = new BinanceRestClientGeneralApiGiftCard(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
