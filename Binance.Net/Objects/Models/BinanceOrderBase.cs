@@ -114,8 +114,7 @@ namespace Binance.Net.Objects.Models
         /// Trailing delta time
         /// </summary>
         [JsonPropertyName("trailingTime")]
-        public int? TrailingTime { get; set; }
-
+        public DateTime? TrailingTime { get; set; }
         /// <summary>
         /// Strategy id
         /// </summary>
