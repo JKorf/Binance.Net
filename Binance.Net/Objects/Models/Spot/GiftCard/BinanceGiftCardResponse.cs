@@ -19,7 +19,7 @@
         /// Response data
         /// </summary>
         [JsonPropertyName("data")]
-        public T Data { get; set; }
+        public T Data { get; set; } = default!;
         /// <summary>
         /// Whether the call was successful
         /// </summary>
