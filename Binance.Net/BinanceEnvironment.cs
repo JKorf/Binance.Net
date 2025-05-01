@@ -106,6 +106,12 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Available environment names
+        /// </summary>
+        /// <returns></returns>
+        public static string[] All => [Live.Name, Testnet.Name];
+
+        /// <summary>
         /// Live environment
         /// </summary>
         public static BinanceEnvironment Live { get; }

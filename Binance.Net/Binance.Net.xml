@@ -69,6 +69,12 @@
             Get the Binance environment by name
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceEnvironment.All">
+            <summary>
+            Available environment names
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Binance.Net.BinanceEnvironment.Live">
             <summary>
             Live environment
