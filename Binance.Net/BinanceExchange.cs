@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
@@ -49,7 +50,7 @@ namespace Binance.Net
         internal const string ClientOrderIdPrefixSpot = ClientOrderIdSpot + LibraryHelpers.ClientOrderIdSeparator;
         internal const string ClientOrderIdPrefixFutures = ClientOrderIdFutures + LibraryHelpers.ClientOrderIdSeparator;
 
-        internal static JsonSerializerContext _serializerContext = new BinanceSourceGenerationContext();
+        internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BinanceSourceGenerationContext>();
 
         /// <summary>
         /// Format a base and quote asset to a Binance recognized symbol 
