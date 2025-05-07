@@ -1007,6 +1007,18 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiMining.GetMiningAccountEarningsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiNFT.GetNftDepositHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiNFT.GetNftWithdrawHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiNFT.GetNftTransactionHistoryAsync(Binance.Net.Enums.NftOrderType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiNFT.GetNftAssetAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetFlexibleProductsAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1479,9 +1491,6 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetRebateHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetLeveragedTokensUserLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetPortfolioMarginAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1629,9 +1638,6 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetIsolatedMarginSymbolsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLeveragedTokenInfoAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLeveragedTokensHistoricalKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1642,6 +1648,15 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetMarginDelistScheduleAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetIsolatedMarginTierDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetMarginAvaliableInventoryAsync(Binance.Net.Enums.MarginInventoryType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetConvertListAllPairsAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -1741,18 +1756,6 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetMarginOpenOcoOrdersAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.SubscribeLeveragedTokenAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLeveragedTokensSubscriptionRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.RedeemLeveragedTokenAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetLeveragedTokensRedemptionRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.GetC2CTradeHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -3846,6 +3849,21 @@
             Collateral return after liquidation
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.MarginInventoryType">
+            <summary>
+            Type of margin inventory.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginInventoryType.Margin">
+            <summary>
+            Represents a regular margin account.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.MarginInventoryType.Isolated">
+            <summary>
+            Represents an isolated margin account.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.MarginLevelStatus">
             <summary>
             Margin level status
@@ -3924,6 +3942,36 @@
         <member name="F:Binance.Net.Enums.MinerStatus.Failure">
             <summary>
             Failure
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.NftOrderType">
+            <summary>
+            Order type for a NFT order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.NftOrderType.PurchaseOrder">
+            <summary>
+            Purchase order made by the user to buy assets.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.NftOrderType.SellOrder">
+            <summary>
+            Sell order made by the user to sell assets.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.NftOrderType.RoyaltyIncome">
+            <summary>
+            Income received as royalty from assets.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.NftOrderType.PrimaryMarketOrder">
+            <summary>
+            Order placed during the primary market sale.
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.NftOrderType.MintFee">
+            <summary>
+            Fee paid for minting assets.
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.OrderOperationResult">
@@ -4724,6 +4772,11 @@
         <member name="F:Binance.Net.Enums.SelfTradePreventionMode.ExpireBoth">
             <summary>
             Expire both
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SelfTradePreventionMode.Decrement">
+            <summary>
+            Decrement
             </summary>
         </member>
         <member name="F:Binance.Net.Enums.SelfTradePreventionMode.None">
@@ -7911,6 +7964,62 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiNft">
+            <summary>
+            Binance NFT endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiNft.GetNftDepositHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT deposit history
+            <para><a href="https://developers.binance.com/docs/nft/rest-api" /></para>
+            </summary>
+            <param name="startTime">Time to start getting deposit records from</param>
+            <param name="endTime">Time to stop getting deposit records from</param>
+            <param name="limit">Max number of results</param>
+            <param name="page">Page number of the results to fetch</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiNft.GetNftWithdrawHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT withdraw history
+            <para><a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Withdraw-History" /></para>
+            </summary>
+            <param name="startTime">Time to start getting withdraw records from</param>
+            <param name="endTime">Time to stop getting withdraw records from</param>
+            <param name="limit">Max number of results</param>
+            <param name="page">Page number of the results to fetch</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiNft.GetNftTransactionHistoryAsync(Binance.Net.Enums.NftOrderType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT transaction history
+            <para><a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Transaction-History" /></para>
+            </summary>
+            <param name="orderType">Order type</param>
+            <param name="startTime">Time to start getting transaction from</param>
+            <param name="endTime">Time to stop getting transaction from</param>
+            <param name="limit">Max number of results</param>
+            <param name="page">Page number of the results to fetch</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiNft.GetNftAssetAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT Asset
+            <para><a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Asset" /></para>
+            </summary>
+            <param name="limit">Max number of results</param>
+            <param name="page">Page number of the results to fetch</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn">
             <summary>
             Binance simple earn endpoints
@@ -9598,15 +9707,6 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetLeveragedTokensUserLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
-            <summary>
-            Get leveraged tokens user limits
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-blvt-user-limit-info-user_data" /></para>
-            </summary>
-            <param name="tokenName">Filter by token name</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetPortfolioMarginAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Portfolio margin account info
@@ -10106,15 +10206,6 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetLeveragedTokenInfoAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get blvt info
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-blvt-info-market_data" /></para>
-            </summary>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetLeveragedTokensHistoricalKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get's historical klines
@@ -10155,6 +10246,34 @@
             <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Get-Delist-Schedule" /></para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetIsolatedMarginTierDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Isolated Margin Tier Data
+            <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Isolated-Margin-Tier-Data" /></para>
+            </summary>
+            <param name="symbol">The symbol to get, for example `ETHUSDT`</param>
+            <param name="tier">Tier level</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetMarginAvaliableInventoryAsync(Binance.Net.Enums.MarginInventoryType,System.Threading.CancellationToken)">
+            <summary>
+            Get Margin Available Inventory
+            <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory" /></para>
+            </summary>
+            <param name="type">The margin type to query for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get Liability Coin Leverage Bracket in Cross Margin Pro Mode
+            <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Liability-Coin-Leverage-Bracket-in-Cross-Margin-Pro-Mode" /></para>
+            </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -10708,56 +10827,6 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Open order lists</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.SubscribeLeveragedTokenAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to a token
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-blvt-user_data" /></para>
-            </summary>
-            <param name="tokenName">Name of the token to subscribe to</param>
-            <param name="cost">Cost of the subscription</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLeveragedTokensSubscriptionRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get subscription records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-subscription-record-user_data" /></para>
-            </summary>
-            <param name="tokenName">Filter by token</param>
-            <param name="id">Filter by id</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.RedeemLeveragedTokenAsync(System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Redeem a token
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-blvt-user_data" /></para>
-            </summary>
-            <param name="tokenName">Name of the token to redeem</param>
-            <param name="quantity">Quantity to redeem</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetLeveragedTokensRedemptionRecordsAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get redemption records
-            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#query-redemption-record-user_data" /></para>
-            </summary>
-            <param name="tokenName">Filter by token</param>
-            <param name="id">Filter by id</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.GetC2CTradeHistoryAsync(Binance.Net.Enums.OrderSide,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
@@ -14179,6 +14248,22 @@
         <member name="P:Binance.Net.Objects.Models.BinanceKlineBase.TakerBuyQuoteVolume">
             <summary>
             Taker buy quote asset volume
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.BinanceListRecords`1">
+            <summary>
+            Query results
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceListRecords`1.Total">
+            <summary>
+            The total count of the records
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceListRecords`1.List">
+            <summary>
+            The list records
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.BinanceOrderBase">
@@ -19638,106 +19723,6 @@
             The id
             </summary>
         </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo">
-            <summary>
-            Leveraged token info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.TokenName">
-            <summary>
-            Name of the token
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.Description">
-            <summary>
-            Description of the token
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.Underlying">
-            <summary>
-            Underlying asset
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.TokenIssued">
-            <summary>
-            Token issued
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.Basket">
-            <summary>
-            Basket
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.Nav">
-            <summary>
-            Nav
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.RealLeverage">
-            <summary>
-            Real leverage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.FundingRate">
-            <summary>
-            Funding rate
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.DailyManagementFee">
-            <summary>
-            Daily management fee
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.CurrentBaskets">
-            <summary>
-            Current baskets
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.RedeemFeePercentage">
-            <summary>
-            Redeem fee percentage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.DailyRedeemLimit">
-            <summary>
-            Daily redeem limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.PurchaseFeePercentage">
-            <summary>
-            Purchase fee percentage
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.DailyPurchaseLimit">
-            <summary>
-            Daily purchase limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfo.Timestamp">
-            <summary>
-            Data timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BlvtCurrentBasket">
-            <summary>
-            Basket
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BlvtCurrentBasket.Symbol">
-            <summary>
-            Symbol
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BlvtCurrentBasket.Quantity">
-            <summary>
-            Quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BlvtCurrentBasket.NotionalValue">
-            <summary>
-            Notional value
-            </summary>
-        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate">
             <summary>
             Blvt info update
@@ -19836,176 +19821,6 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtKline.NavUpdates">
             <summary>
             Number of updates
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult">
-            <summary>
-            Redeem result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult.TokenName">
-            <summary>
-            Name of the token
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult.Quantity">
-            <summary>
-            Redemption value in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult.RedeemQuantity">
-            <summary>
-            Redemption token quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption">
-            <summary>
-            Redemption info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.TokenName">
-            <summary>
-            Token name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.Quantity">
-            <summary>
-            Redemption quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.Nav">
-            <summary>
-            NAV price of redemption
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.Fee">
-            <summary>
-            Redemption fee in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.NetProceed">
-            <summary>
-            Net redemption value in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtRedemption.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult">
-            <summary>
-            Subscribe result
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult.Status">
-            <summary>
-            Status
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult.TokenName">
-            <summary>
-            Name of the token
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult.Quantity">
-            <summary>
-            Subscribed token quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult.Cost">
-            <summary>
-            Subscription cost in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription">
-            <summary>
-            Leveraged token subscription info
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.TokenName">
-            <summary>
-            Token name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Quantity">
-            <summary>
-            Subscription quantity
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Nav">
-            <summary>
-            NAV price of subscription
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Fee">
-            <summary>
-            Subscription fee in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.TotalCharge">
-            <summary>
-            Subscription cost in usdt
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtSubscription.Timestamp">
-            <summary>
-            Timestamp
-            </summary>
-        </member>
-        <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit">
-            <summary>
-            Leveraged tokens user limits
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit.TokenName">
-            <summary>
-            Token name
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit.UserDailyTotalPurchaseLimit">
-            <summary>
-            Daily purchase limit
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtUserLimit.UserDailyTotalRedeemLimit">
-            <summary>
-            Daily redeem limit
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageAccountInfo">
@@ -21880,6 +21695,56 @@
             Success
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProLiabilityCoinLeverageBracket">
+            <summary>
+            Cross margin pro liability coin leverage bracket data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProLiabilityCoinLeverageBracket.AssetNames">
+            <summary>
+            Asset names
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProLiabilityCoinLeverageBracket.Rank">
+            <summary>
+            Rank
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProLiabilityCoinLeverageBracket.Brackets">
+            <summary>
+            Brackets
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProBracket">
+            <summary>
+            Cross margin pro bracket data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProBracket.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProBracket.MaxDebt">
+            <summary>
+            Max debt
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProBracket.MaintenanceMarginRate">
+            <summary>
+            Maintenance margin rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProBracket.InitialMarginRate">
+            <summary>
+            Initial margin rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceCrossMarginProBracket.FastNum">
+            <summary>
+            Fast num
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceForcedLiquidation">
             <summary>
             Forced liquidation info
@@ -22113,6 +21978,46 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginFeeInfo.BorrowLimit">
             <summary>
             Borrow limit
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier">
+            <summary>
+            Binance isolated margin tier data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.Tier">
+            <summary>
+            Tier
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.EffectiveMultiple">
+            <summary>
+            Effective multiple
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.InitialRiskRatio">
+            <summary>
+            Initial risk ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.LiquidationRiskRatio">
+            <summary>
+            Liquidation risk ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.BaseAssetMaxBorrowable">
+            <summary>
+            Base asset max borrowable
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTier.QuoteAssetMaxBorrowable">
+            <summary>
+            Quote asset max borrowable
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceIsolatedMarginTierData">
@@ -22358,6 +22263,21 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAsset.DelistTime">
             <summary>
             Time at which the asset gets delisted
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAvailableInventory">
+            <summary>
+            Margin available inventory data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAvailableInventory.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAvailableInventory.UpdateTime">
+            <summary>
+            Update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDelistSchedule">
@@ -23348,6 +23268,126 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Mining.BinanceRevenueItem.Status">
             <summary>
             Status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.NFT.BinanceNftAsset">
+            <summary>
+            NFT asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftAsset.Network">
+            <summary>
+            NFT network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftAsset.ContractAddress">
+            <summary>
+            NFT contract address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftAsset.TokenId">
+            <summary>
+            NFT token id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.NFT.BinanceNftDeposit">
+            <summary>
+            NFT deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftDeposit.Network">
+            <summary>
+            NFT network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftDeposit.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftDeposit.ContractAddress">
+            <summary>
+            NFT contract address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftDeposit.TokenId">
+            <summary>
+            NFT token id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftDeposit.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.NFT.BinanceNftTransaction">
+            <summary>
+            NFT transaction
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftTransaction.OrderNo">
+            <summary>
+            Order number, 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftTransaction.Tokens">
+            <summary>
+            Tokens
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftTransaction.TradeTime">
+            <summary>
+            Trade time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftTransaction.TradeAmount">
+            <summary>
+            Trade amount
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftTransaction.TradeCurrency">
+            <summary>
+            Trade currency
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw">
+            <summary>
+            NFT withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.Network">
+            <summary>
+            NFT network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.ContractAddress">
+            <summary>
+            NFT contract address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.TokenId">
+            <summary>
+            NFT token id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.Fee">
+            <summary>
+            Withdraw fee
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.NFT.BinanceNftWithdraw.FeeAsset">
+            <summary>
+            Fee asset
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.PortfolioMargin.BinancePortfolioMarginCollateralRate">
