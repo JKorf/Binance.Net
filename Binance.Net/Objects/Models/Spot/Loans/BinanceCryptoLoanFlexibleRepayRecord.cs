@@ -3,9 +3,9 @@
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
-    /// Repay info
+    /// Flexible repay record
     /// </summary>
-    public record BinanceCryptoLoanRepay
+    public record BinanceCryptoLoanFlexibleRepayRecord
     {
         /// <summary>
         /// The loaning asset
@@ -13,35 +13,31 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
+        /// Repay quantity
+        /// </summary>
+        [JsonPropertyName("repayAmount")]
+        public decimal RepayQuantity { get; set; }
+        /// <summary>
         /// The collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Remaining debt
+        /// Collateral return
         /// </summary>
-        [JsonPropertyName("remainingDebt")]
-        public decimal? RemainingDebt { get; set; }
+        [JsonPropertyName("collateralReturn")]
+        public decimal CollateralReturn { get; set; }
         /// <summary>
-        /// Remaining collateral
-        /// </summary>
-        [JsonPropertyName("remainingCollateral")]
-        public decimal? RemainingCollateral { get; set; }
-        /// <summary>
-        /// Fully repaid
-        /// </summary>
-        [JsonPropertyName("fullRepayment")]
-        public bool FullRepayment{ get; set; }
-        /// <summary>
-        /// Current LTV
-        /// </summary>
-        [JsonPropertyName("currentLTV")]
-        public decimal? CurrentLTV { get; set; }
-        /// <summary>
-        /// Repay status
+        /// Status of the repay
         /// </summary>
         [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("repayStatus")]
         public RepayStatus RepayStatus { get; set; }
+        /// <summary>
+        /// Repay timestamp
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("repayTime")]
+        public DateTime RepayTime { get; set; }
     }
 }
