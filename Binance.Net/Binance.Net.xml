@@ -1632,7 +1632,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetIsolatedMarginTierDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetMarginAvaliableInventoryAsync(Binance.Net.Enums.MarginInventoryType,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetMarginAvailableInventoryAsync(Binance.Net.Enums.MarginInventoryType,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(System.Threading.CancellationToken)">
@@ -2580,11 +2580,6 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.AutoInvestTransactionStatus">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BlvtStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -6099,16 +6094,6 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtInfo">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtInfoArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtInfoUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -6129,72 +6114,12 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtRedeemResult">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtRedeemResultArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtRedemption">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtRedemptionArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtSubscribeResult">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtSubscribeResultArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtSubscription">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtSubscriptionArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtUserLimit">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceBlvtUserLimitArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BlvtBasket">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BlvtBasketArray">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BlvtCurrentBasket">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BlvtCurrentBasketArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -16011,7 +15936,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetMarginAvaliableInventoryAsync(Binance.Net.Enums.MarginInventoryType,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetMarginAvailableInventoryAsync(Binance.Net.Enums.MarginInventoryType,System.Threading.CancellationToken)">
             <summary>
             Get Margin Available Inventory
             <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory" /></para>

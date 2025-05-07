@@ -381,14 +381,8 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssets[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.AutoInvest.BinanceAutoInvestTradeResult[]))]
     
-    [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtInfo[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtKline[]))]
-    [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtRedeemResult[]))]
-    [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtRedemption[]))]
-    [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtSubscribeResult[]))]
-    [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtSubscription[]))]
-    [JsonSerializable(typeof(Objects.Models.Spot.Blvt.BinanceBlvtUserLimit[]))]
     
     [JsonSerializable(typeof(Objects.Models.Spot.Convert.BinanceConvertAssetPair[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Convert.BinanceConvertOrderStatus[]))]
