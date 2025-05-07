@@ -5,13 +5,14 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Isolated margin account info
     /// </summary>
+    [SerializationModel]
     public record BinanceIsolatedMarginAccount
     {
         /// <summary>
         /// Account assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceIsolatedMarginAccountSymbol> Assets { get; set; } = Array.Empty<BinanceIsolatedMarginAccountSymbol>();
+        public BinanceIsolatedMarginAccountSymbol[] Assets { get; set; } = Array.Empty<BinanceIsolatedMarginAccountSymbol>();
         /// <summary>
         /// Total btc asset
         /// </summary>

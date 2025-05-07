@@ -3,6 +3,7 @@
     /// <summary>
     /// Dividend record
     /// </summary>
+    [SerializationModel]
     public record BinanceDividendRecord
     {
         /// <summary>

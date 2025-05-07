@@ -3,6 +3,7 @@
     /// <summary>
     /// Margin dust transfer info
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginDustTransfer
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// Transfer results
         /// </summary>
         [JsonPropertyName("transferResult")]
-        public IEnumerable<BinanceMarginDustTransferResult> TransferResults { get; set; } = Array.Empty<BinanceMarginDustTransferResult>();
+        public BinanceMarginDustTransferResult[] TransferResults { get; set; } = Array.Empty<BinanceMarginDustTransferResult>();
     }
 
     /// <summary>

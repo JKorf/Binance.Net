@@ -1,0 +1,28 @@
+> { "id": "|1|", "method": "v2/account.balance", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+    "status": 200,
+    "result": [
+      {
+        "accountAlias": "SgsR",             
+        "asset": "USDT",  	            
+        "balance": "122607.35137903",     
+        "crossWalletBalance": "23.72469206", 
+        "crossUnPnl": "0.00000000",           
+        "availableBalance": "23.72469206",   
+        "maxWithdrawAmount": "23.72469206",  
+        "marginAvailable": true,    
+        "updateTime": 1617939110373
+      }
+    ],
+    "rateLimits": [
+      {
+        "rateLimitType": "REQUEST_WEIGHT",
+        "interval": "MINUTE",
+        "intervalNum": 1,
+        "limit": 2400,
+        "count": 20
+      }
+    ]
+}

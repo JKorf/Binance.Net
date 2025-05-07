@@ -3,6 +3,7 @@
     /// <summary>
     /// Simple earn product info
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnFlexibleProduct
     {
         /// <summary>

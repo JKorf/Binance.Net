@@ -2,14 +2,14 @@
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
+    [SerializationModel]
     internal record BinanceSubAccountUniversalTransfersList
     {
         /// <summary>
         /// Transactions
         /// </summary>
         [JsonPropertyName("result")]
-        public IEnumerable<BinanceSubAccountUniversalTransferTransaction> Transactions { get; set; } =
-            new List<BinanceSubAccountUniversalTransferTransaction>();
+        public BinanceSubAccountUniversalTransferTransaction[] Transactions { get; set; } = [];
 
     }
 

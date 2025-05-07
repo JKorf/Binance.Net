@@ -3,7 +3,7 @@ using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Objects.Sockets
 {
-    internal class BinanceSystemQuery<T> : Query<T> where T: BinanceSocketQueryResponse
+    internal class BinanceSystemQuery<T> : Query<T> where T : BinanceSocketQueryResponse
     {
         public override HashSet<string> ListenerIdentifiers { get; set; }
 

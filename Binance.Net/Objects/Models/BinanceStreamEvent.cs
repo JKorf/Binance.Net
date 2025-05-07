@@ -3,6 +3,7 @@
     /// <summary>
     /// A event received by a Binance websocket
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamEvent
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Result of placing a withdrawal
     /// </summary>
+    [SerializationModel]
     public record BinanceWithdrawalPlaced
     {
         /// <summary>

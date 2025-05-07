@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub account margin trading enabled
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountMarginEnabled
     {
         /// <summary>

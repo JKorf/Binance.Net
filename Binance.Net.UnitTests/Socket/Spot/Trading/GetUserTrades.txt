@@ -1,0 +1,47 @@
+> { "id": "|1|", "method": "myTrades", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BTCUSDT",
+      "id": 1650422481,
+      "orderId": 12569099453,
+      "orderListId": -1,
+      "price": "23416.10000000",
+      "qty": "0.00635000",
+      "quoteQty": "148.69223500",
+      "commission": "0.00000000",
+      "commissionAsset": "BNB",
+      "time": 1660801715793,
+      "isBuyer": false,
+      "isMaker": true,
+      "isBestMatch": true
+    },
+    {
+      "symbol": "BTCUSDT",
+      "id": 1650422482,
+      "orderId": 12569099453,
+      "orderListId": -1,
+      "price": "23416.50000000",
+      "qty": "0.00212000",
+      "quoteQty": "49.64298000",
+      "commission": "0.00000000",
+      "commissionAsset": "BNB",
+      "time": 1660801715793,
+      "isBuyer": false,
+      "isMaker": true,
+      "isBestMatch": true
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 20
+    }
+  ]
+}

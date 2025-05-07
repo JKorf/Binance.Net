@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// MiniTick info
     /// </summary>
+    [SerializationModel]
     public abstract record BinanceStreamMiniTickBase : BinanceStreamEvent, IBinanceMiniTick
     {
         /// <summary>
@@ -36,7 +37,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonPropertyName("l")]
         public decimal LowPrice { get; set; }
-        
+
         /// <summary>
         /// Total traded volume
         /// </summary>
@@ -51,7 +52,8 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream mini tick
     /// </summary>
-    public record BinanceStreamMiniTick: BinanceStreamMiniTickBase
+    [SerializationModel]
+    public record BinanceStreamMiniTick : BinanceStreamMiniTickBase
     {
         /// <inheritdoc/>
         [JsonPropertyName("v")]
@@ -64,6 +66,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     /// <summary>
     /// Stream mini tick
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamCoinMiniTick : BinanceStreamMiniTickBase
     {
         /// <inheritdoc/>

@@ -1,0 +1,55 @@
+> { "id": "|1|", "method": "order.place", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+    "status": 200,
+    "result": {
+        "orderId": 325078477,
+        "symbol": "BTCUSDT",
+        "status": "NEW",
+        "clientOrderId": "iCXL1BywlBaf2sesNUrVl3",
+        "price": "43187.00",
+        "avgPrice": "0.00",
+        "origQty": "0.100",
+        "executedQty": "0.000",
+        "cumQty": "0.000",
+        "cumQuote": "0.00000",
+        "timeInForce": "GTC",
+        "type": "LIMIT",
+        "reduceOnly": false,
+        "closePosition": false,
+        "side": "BUY",
+        "positionSide": "BOTH",
+        "stopPrice": "0.00",
+        "workingType": "CONTRACT_PRICE",
+        "priceProtect": false,
+        "origType": "LIMIT",
+        "priceMatch": "NONE",
+        "selfTradePreventionMode": "NONE",
+        "goodTillDate": 0,
+        "updateTime": 1702555534435
+    },
+    "rateLimits": [
+        {
+            "rateLimitType": "ORDERS",
+            "interval": "SECOND",
+            "intervalNum": 10,
+            "limit": 300,
+            "count": 1
+        },
+        {
+            "rateLimitType": "ORDERS",
+            "interval": "MINUTE",
+            "intervalNum": 1,
+            "limit": 1200,
+            "count": 1
+        },
+        {
+            "rateLimitType": "REQUEST_WEIGHT",
+            "interval": "MINUTE",
+            "intervalNum": 1,
+            "limit": 2400,
+            "count": 1
+        }
+    ]
+}

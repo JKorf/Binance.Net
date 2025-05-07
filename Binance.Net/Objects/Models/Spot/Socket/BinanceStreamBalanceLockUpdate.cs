@@ -3,6 +3,7 @@
     /// <summary>
     /// Update when asset lock is applied/removed
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamBalanceLockUpdate : BinanceStreamEvent
     {
         /// <summary>

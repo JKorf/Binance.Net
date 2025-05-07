@@ -3,6 +3,7 @@
     /// <summary>
     /// Permissions of the current API key
     /// </summary>
+    [SerializationModel]
     public record BinanceAPIKeyPermissions
     {
         /// <summary>

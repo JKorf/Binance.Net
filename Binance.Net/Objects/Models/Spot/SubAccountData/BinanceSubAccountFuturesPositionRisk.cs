@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub account position risk
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountFuturesPositionRisk
     {
         /// <summary>

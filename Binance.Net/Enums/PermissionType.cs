@@ -1,10 +1,12 @@
 ﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of permission
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<PermissionType>))]
     public enum PermissionType
     {
         /// <summary>

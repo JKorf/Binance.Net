@@ -9,12 +9,14 @@
         public int Id { get; set; }
     }
 
+    [SerializationModel]
     internal class BinanceSocketRequest : BinanceSocketMessage
     {
         [JsonPropertyName("params")]
         public string[] Params { get; set; } = Array.Empty<string>();
     }
 
+    [SerializationModel]
     internal class BinanceSocketQuery : BinanceSocketMessage
     {
         [JsonPropertyName("params")]

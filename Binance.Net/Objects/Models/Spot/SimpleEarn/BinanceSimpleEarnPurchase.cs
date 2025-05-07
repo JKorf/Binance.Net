@@ -3,6 +3,7 @@
     /// <summary>
     /// Purchase id
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnPurchase
     {
         /// <summary>

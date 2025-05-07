@@ -5,7 +5,8 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Stream order book
     /// </summary>
-    public record BinanceEventOrderBook: IBinanceEventOrderBook
+    [SerializationModel]
+    public record BinanceEventOrderBook : IBinanceEventOrderBook
     {
         /// <summary>
         /// The id of this update, can be synced with BinanceClient.Spot.GetOrderBook to update the order book
@@ -41,11 +42,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// The list of bids
         /// </summary>
         [JsonPropertyName("b")]
-        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
         /// <summary>
         /// The list of asks
         /// </summary>
         [JsonPropertyName("a")]
-        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }

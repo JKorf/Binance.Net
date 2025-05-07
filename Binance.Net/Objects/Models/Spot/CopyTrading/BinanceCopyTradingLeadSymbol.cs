@@ -3,6 +3,7 @@
     /// <summary>
     /// Copy trading lead symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceCopyTradingLeadSymbol
     {
         /// <summary>

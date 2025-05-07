@@ -1,11 +1,13 @@
 using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Account update
     /// </summary>
-    public record BinanceFuturesStreamAccountUpdate: BinanceStreamEvent
+    [SerializationModel]
+    public record BinanceFuturesStreamAccountUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// The update data
@@ -32,20 +34,20 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// <summary>
         /// Account update reason type
         /// </summary>
-        [JsonPropertyName("m"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("m")]
         public AccountUpdateReason Reason { get; set; }
 
         /// <summary>
         /// Balances
         /// </summary>
         [JsonPropertyName("B")]
-        public IEnumerable<BinanceFuturesStreamBalance> Balances { get; set; } = Array.Empty<BinanceFuturesStreamBalance>();
+        public BinanceFuturesStreamBalance[] Balances { get; set; } = Array.Empty<BinanceFuturesStreamBalance>();
 
         /// <summary>
         /// Positions
         /// </summary>
         [JsonPropertyName("P")]
-        public IEnumerable<BinanceFuturesStreamPosition> Positions { get; set; } = Array.Empty<BinanceFuturesStreamPosition>();
+        public BinanceFuturesStreamPosition[] Positions { get; set; } = Array.Empty<BinanceFuturesStreamPosition>();
     }
 
     /// <summary>

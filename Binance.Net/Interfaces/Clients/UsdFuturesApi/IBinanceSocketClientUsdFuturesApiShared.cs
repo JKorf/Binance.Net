@@ -5,7 +5,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     /// <summary>
     /// Shared interface for USD-M Futures socket API usage
     /// </summary>
-    public interface IBinanceSocketClientUsdFuturesApiShared:
+    public interface IBinanceSocketClientUsdFuturesApiShared :
         ITickerSocketClient,
         ITickersSocketClient,
         ITradeSocketClient,

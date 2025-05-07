@@ -3,6 +3,7 @@
     /// <summary>
     /// Result from a change margin type request
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesChangeMarginTypeResult
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Personal margin level information
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginLevel
     {
         /// <summary>

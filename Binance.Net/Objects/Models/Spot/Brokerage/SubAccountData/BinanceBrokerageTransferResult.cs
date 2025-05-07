@@ -3,6 +3,7 @@
     /// <summary>
     /// Transfer Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageTransferResult
     {
         /// <summary>
@@ -10,7 +11,7 @@
         /// </summary>
         [JsonPropertyName("txnId")]
         public long Id { get; set; }
-        
+
         /// <summary>
         /// Client Transfer Id
         /// </summary>

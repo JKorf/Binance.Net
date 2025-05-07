@@ -3,6 +3,7 @@
     /// <summary>
     /// Account configuration
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAccountConfiguration
     {
         /// <summary>

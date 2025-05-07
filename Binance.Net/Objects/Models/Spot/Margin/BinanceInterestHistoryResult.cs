@@ -3,6 +3,7 @@
     /// <summary>
     /// Interest history entry info
     /// </summary>
+    [SerializationModel]
     public record BinanceInterestHistory
     {
         /// <summary>

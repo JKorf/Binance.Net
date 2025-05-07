@@ -9,7 +9,7 @@
         /// Asset names
         /// </summary>
         [JsonPropertyName("assetNames")]
-        public IEnumerable<string> AssetNames { get; set; } = Array.Empty<string>();
+        public string[] AssetNames { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Rank
         /// </summary>
@@ -19,7 +19,7 @@
         /// Brackets
         /// </summary>
         [JsonPropertyName("brackets")]
-        public IEnumerable<BinanceCrossMarginProBracket> Brackets { get; set; } = Array.Empty<BinanceCrossMarginProBracket>();
+        public BinanceCrossMarginProBracket[] Brackets { get; set; } = Array.Empty<BinanceCrossMarginProBracket>();
     }
 
     /// <summary>

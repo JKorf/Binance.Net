@@ -3,6 +3,7 @@
     /// <summary>
     /// Margin pair info
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginPair
     {
         /// <summary>

@@ -23,6 +23,7 @@
     <Folder Include="Endpoints\General\SubAccount\" />
     <Folder Include="Endpoints\General\Mining\" />
     <Folder Include="Endpoints\General\Futures\" />
+    <Folder Include="Socket\CoinFutures\ExchangeData\" />
   </ItemGroup>
 
 </Project>

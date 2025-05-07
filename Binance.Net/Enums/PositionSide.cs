@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Position side
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<PositionSide>))]
     public enum PositionSide
     {
         /// <summary>

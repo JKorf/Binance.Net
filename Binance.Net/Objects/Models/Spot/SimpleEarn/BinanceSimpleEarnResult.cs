@@ -3,6 +3,7 @@
     /// <summary>
     /// Simple Earn result
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnResult
     {
         /// <summary>

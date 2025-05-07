@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces
     /// <summary>
     /// Stream kline data
     /// </summary>
-    public interface IBinanceStreamKline: IBinanceKline
+    public interface IBinanceStreamKline : IBinanceKline
     {
         /// <summary>
         /// Interval

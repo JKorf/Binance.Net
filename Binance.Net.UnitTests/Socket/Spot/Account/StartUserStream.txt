@@ -1,0 +1,18 @@
+> { "id": "|1|", "method": "userDataStream.start", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "listenKey": "xs0mRXdAKlIPDRFrlPcw0qI41Eh3ixNntmymGyhrhgqo7L6FuLaWArTD7RLP"
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 20
+    }
+  ]
+}

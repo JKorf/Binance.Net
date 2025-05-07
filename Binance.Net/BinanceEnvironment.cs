@@ -61,7 +61,7 @@ namespace Binance.Net
         /// ctor for DI, use <see cref="CreateCustom"/> for creating a custom environment
         /// </summary>
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-        public BinanceEnvironment(): base(TradeEnvironmentNames.Live)
+        public BinanceEnvironment() : base(TradeEnvironmentNames.Live)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         { }
 
@@ -70,22 +70,22 @@ namespace Binance.Net
         /// </summary>
         public static BinanceEnvironment? GetEnvironmentByName(string? name)
          => name switch
-            {
-                TradeEnvironmentNames.Live => Live,
-                TradeEnvironmentNames.Testnet => Testnet,
-                "us" => Us,
-                "" => Live,
-                null => Live,
-                _ => default
-            };
+         {
+             TradeEnvironmentNames.Live => Live,
+             TradeEnvironmentNames.Testnet => Testnet,
+             "us" => Us,
+             "" => Live,
+             null => Live,
+             _ => default
+         };
 
         internal BinanceEnvironment(
-            string name, 
-            string spotRestAddress, 
-            string spotSocketStreamAddress, 
+            string name,
+            string spotRestAddress,
+            string spotSocketStreamAddress,
             string spotSocketApiAddress,
-            string? blvtSocketAddress, 
-            string? usdFuturesRestAddress, 
+            string? blvtSocketAddress,
+            string? usdFuturesRestAddress,
             string? usdFuturesSocketAddress,
             string? usdFuturesSocketApiAddress,
             string? coinFuturesRestAddress,
@@ -106,10 +106,16 @@ namespace Binance.Net
         }
 
         /// <summary>
+        /// Available environment names
+        /// </summary>
+        /// <returns></returns>
+        public static string[] All => [Live.Name, Testnet.Name];
+
+        /// <summary>
         /// Live environment
         /// </summary>
-        public static BinanceEnvironment Live { get; } 
-            = new BinanceEnvironment(TradeEnvironmentNames.Live, 
+        public static BinanceEnvironment Live { get; }
+            = new BinanceEnvironment(TradeEnvironmentNames.Live,
                                      BinanceApiAddresses.Default.RestClientAddress,
                                      BinanceApiAddresses.Default.SocketClientStreamAddress,
                                      BinanceApiAddresses.Default.SocketClientApiAddress,

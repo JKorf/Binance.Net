@@ -3,6 +3,7 @@
     /// <summary>
     /// Auto invest ROI
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestRoi
     {
         /// <summary>

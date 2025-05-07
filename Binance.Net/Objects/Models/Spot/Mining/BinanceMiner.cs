@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Miner list
     /// </summary>
+    [SerializationModel]
     public record BinanceMinerList
     {
         /// <summary>
@@ -18,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Worker data
         /// </summary>
-        public IEnumerable<BinanceMinerInfo> WorkerDatas { get; set; } = Array.Empty<BinanceMinerInfo>();
+        public BinanceMinerInfo[] WorkerDatas { get; set; } = Array.Empty<BinanceMinerInfo>();
     }
 
     /// <summary>

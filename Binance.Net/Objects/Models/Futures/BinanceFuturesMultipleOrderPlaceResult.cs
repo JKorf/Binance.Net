@@ -3,7 +3,8 @@
     /// <summary>
     /// Extension to be able to deserialize an error response as well
     /// </summary>
-    internal record BinanceFuturesMultipleOrderPlaceResult: BinanceFuturesOrder
+    [SerializationModel]
+    internal record BinanceFuturesMultipleOrderPlaceResult : BinanceFuturesOrder
     {
         [JsonPropertyName("code")]
         public int Code { get; set; }
@@ -14,6 +15,7 @@
     /// <summary>
     /// Extension to be able to deserialize an error response as well
     /// </summary>
+    [SerializationModel]
     internal record BinanceUsdFuturesMultipleOrderPlaceResult : BinanceUsdFuturesOrder
     {
         [JsonPropertyName("code")]

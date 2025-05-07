@@ -3,6 +3,7 @@
     /// <summary>
     /// Price statistics of the last 24 hours
     /// </summary>
+    [SerializationModel]
     public interface IBinanceTick : IBinance24HPrice
     {
         /// <summary>

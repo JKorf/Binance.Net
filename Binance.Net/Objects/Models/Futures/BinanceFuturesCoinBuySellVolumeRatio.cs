@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Buy/sell volume ratio
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinBuySellVolumeRatio
     {
         /// <summary>

@@ -5,19 +5,20 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account position risk
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountFuturesPositionRiskV2
     {
         /// <summary>
         /// Futures account response (USDT margined)
         /// </summary>
         [JsonPropertyName("futurePositionRiskVos")]
-        public IEnumerable<BinanceSubAccountFuturesPositionRisk> UsdtMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRisk>();
+        public BinanceSubAccountFuturesPositionRisk[] UsdtMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRisk>();
 
         /// <summary>
         /// Delivery account response (COIN margined)
         /// </summary>
         [JsonPropertyName("deliveryPositionRiskVos")]
-        public IEnumerable<BinanceSubAccountFuturesPositionRiskCoin> CoinMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRiskCoin>();
+        public BinanceSubAccountFuturesPositionRiskCoin[] CoinMarginedFutures { get; set; } = Array.Empty<BinanceSubAccountFuturesPositionRiskCoin>();
     }
 
     /// <summary>

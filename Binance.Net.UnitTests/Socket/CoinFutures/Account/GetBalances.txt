@@ -1,0 +1,27 @@
+> { "id": "|1|", "method": "account.balance", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "accountAlias": "fWAuTiuXoCuXmY",
+      "asset": "WLD",
+      "balance": "0.00000000",
+      "withdrawAvailable": "0.00000000",
+      "crossWalletBalance": "0.00000000",
+      "crossUnPnl": "0.00000000",
+      "availableBalance": "0.00000000",
+      "updateTime": 0
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 2400,
+      "count": 10
+    }
+  ]
+}

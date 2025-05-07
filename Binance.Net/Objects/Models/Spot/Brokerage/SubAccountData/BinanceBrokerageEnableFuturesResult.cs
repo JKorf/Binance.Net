@@ -3,6 +3,7 @@
     /// <summary>
     /// Enable Futures Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageEnableFuturesResult
     {
         /// <summary>
@@ -16,7 +17,7 @@
         /// </summary>
         [JsonPropertyName("enableFutures")]
         public bool IsFuturesEnabled { get; set; }
-        
+
         /// <summary>
         /// Update Date
         /// </summary>

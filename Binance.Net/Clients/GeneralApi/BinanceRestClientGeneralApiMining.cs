@@ -20,16 +20,16 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Acquiring CoinName
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceMiningCoin>>> GetMiningCoinListAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMiningCoin[]>> GetMiningCoinListAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/coinList", BinanceExchange.RateLimiter.SpotRestIp);
-            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMiningCoin>>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningCoin[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<IEnumerable<BinanceMiningCoin>>(default);
+                return result.As<BinanceMiningCoin[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<IEnumerable<BinanceMiningCoin>>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningCoin[]>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -38,16 +38,16 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Acquiring Algorithm 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMiningAlgorithm[]>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/algoList", BinanceExchange.RateLimiter.SpotRestIp);
-            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMiningAlgorithm>>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningAlgorithm[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<IEnumerable<BinanceMiningAlgorithm>>(default);
+                return result.As<BinanceMiningAlgorithm[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<IEnumerable<BinanceMiningAlgorithm>>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningAlgorithm[]>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -57,7 +57,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Request Detail Miner List
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceMinerDetails>>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMinerDetails[]>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
@@ -71,12 +71,12 @@ namespace Binance.Net.Clients.GeneralApi
             };
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/detail", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
-            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMinerDetails>>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMinerDetails[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<IEnumerable<BinanceMinerDetails>>(default);
+                return result.As<BinanceMinerDetails[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<IEnumerable<BinanceMinerDetails>>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMinerDetails[]>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }
@@ -204,7 +204,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Account List
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceMiningAccount>>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceMiningAccount[]>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default)
         {
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
@@ -216,12 +216,12 @@ namespace Binance.Net.Clients.GeneralApi
             };
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/statistics/user/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
-            var result = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceMiningAccount>>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningAccount[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<IEnumerable<BinanceMiningAccount>>(default);
+                return result.As<BinanceMiningAccount[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<IEnumerable<BinanceMiningAccount>>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningAccount[]>(new ServerError(result.Data!.Code, result.Data!.Message));
 
             return result.As(result.Data.Data);
         }

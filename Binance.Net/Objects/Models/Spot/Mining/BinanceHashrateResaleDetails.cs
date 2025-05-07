@@ -3,6 +3,7 @@
     /// <summary>
     /// Resale list
     /// </summary>
+    [SerializationModel]
     public record BinanceHashrateResaleDetails
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// Transfer details
         /// </summary>
         [JsonPropertyName("profitTransferDetails")]
-        public IEnumerable<BinanceHashrateResaleDetailsItem> ProfitTransferDetails { get; set; } = Array.Empty<BinanceHashrateResaleDetailsItem>();
+        public BinanceHashrateResaleDetailsItem[] ProfitTransferDetails { get; set; } = Array.Empty<BinanceHashrateResaleDetailsItem>();
     }
 
     /// <summary>

@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Futures stream symbol update
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamSymbolUpdate : BinanceStreamEvent
     {
         /// <summary>
@@ -21,7 +23,6 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Contract type
         /// </summary>
         [JsonPropertyName("ct")]
-        [JsonConverter(typeof(EnumConverter))]
         public ContractType ContractType { get; set; }
         /// <summary>
         /// Delivery date
@@ -39,13 +40,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// Symbol status
         /// </summary>
         [JsonPropertyName("cs")]
-        [JsonConverter(typeof(EnumConverter))]
         public SymbolStatus Status { get; set; }
         /// <summary>
         /// Brackets
         /// </summary>
         [JsonPropertyName("bks")]
-        public IEnumerable<BinanceBracketUpdate>? Brackets { get; set; }
+        public BinanceBracketUpdate[]? Brackets { get; set; }
     }
 
     /// <summary>

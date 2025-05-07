@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of contract
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ContractType>))]
     public enum ContractType
     {
         /// <summary>

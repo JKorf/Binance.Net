@@ -3,6 +3,7 @@
     /// <summary>
     /// Transfer Futures Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageTransferFuturesResult
     {
         /// <summary>
@@ -10,7 +11,7 @@
         /// </summary>
         [JsonPropertyName("txnId")]
         public string Id { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Success
         /// </summary>

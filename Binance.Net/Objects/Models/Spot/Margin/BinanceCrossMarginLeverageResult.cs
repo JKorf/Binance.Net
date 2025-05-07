@@ -3,6 +3,7 @@
     /// <summary>
     /// Result
     /// </summary>
+    [SerializationModel]
     public record BinanceCrossMarginLeverageResult
     {
         /// <summary>

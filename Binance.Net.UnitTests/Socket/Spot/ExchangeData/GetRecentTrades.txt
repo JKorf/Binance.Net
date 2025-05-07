@@ -1,0 +1,26 @@
+> { "id": "|1|", "method": "trades.recent", "params": { "symbol": "ETHUSDT" } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "id": 194686783,
+      "price": "0.01361000",
+      "qty": "0.01400000",
+      "quoteQty": "0.00019054",
+      "time": 1660009530807,
+      "isBuyerMaker": true,
+      "isBestMatch": true
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 2
+    }
+  ]
+}

@@ -7,6 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Staking
     /// <summary>
     /// Unclaimed rewards info
     /// </summary>
+    [SerializationModel]
     public record BinanceSolUnclaimedReward
     {
         /// <summary>

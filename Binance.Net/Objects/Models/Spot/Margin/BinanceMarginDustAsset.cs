@@ -3,6 +3,7 @@
     /// <summary>
     /// Asset info for dust conversion
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginDustAsset
     {
         /// <summary>
@@ -24,7 +25,7 @@
         /// Details
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<BinanceMarginDustAssetDetails> Details { get; set; } = Array.Empty<BinanceMarginDustAssetDetails>();
+        public BinanceMarginDustAssetDetails[] Details { get; set; } = Array.Empty<BinanceMarginDustAssetDetails>();
     }
 
     /// <summary>

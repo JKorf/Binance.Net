@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     /// <summary>
     /// Redemption info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestRedemption
     {
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+﻿using Binance.Net.Enums;
+using Binance.Net.Interfaces;
+using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 
@@ -6,6 +8,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceSocketClientUsdFuturesApi : IBinanceSocketClientUsdFuturesApiShared
     {
+        private const string _topicId = "BinanceUsdFutures";
         public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
 
@@ -22,7 +25,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await ExchangeData.SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.PriceChangePercent))), ct: ct).ConfigureAwait(false);
+            var result = await ExchangeData.SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.PriceChangePercent)
+            {
+                QuoteVolume = update.Data.QuoteVolume
+            })), ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -32,7 +38,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Tickers client
 
         EndpointOptions<SubscribeAllTickersRequest> ITickersSocketClient.SubscribeAllTickersOptions { get; } = new EndpointOptions<SubscribeAllTickersRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(SubscribeAllTickersRequest request, Action<ExchangeEvent<IEnumerable<SharedSpotTicker>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(SubscribeAllTickersRequest request, Action<ExchangeEvent<SharedSpotTicker[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITickersSocketClient)this).SubscribeAllTickersOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -40,14 +46,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var result = await ExchangeData.SubscribeToAllTickerUpdatesAsync(update =>
             {
-                var data = update.Data;
+                IEnumerable<IBinance24HPrice> data = update.Data;
                 if (request.TradingMode != null)
                     data = data.Where(x => request.TradingMode == TradingMode.PerpetualLinear ? !x.Symbol.Contains("_") : x.Symbol.Contains("_"));
-                
+
                 if (!data.Any())
                     return;
 
-                handler(update.AsExchangeEvent<IEnumerable<SharedSpotTicker>>(Exchange, data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)).ToArray()));
+                handler(update.AsExchangeEvent(Exchange, data.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)
+                {
+                    QuoteVolume = x.QuoteVolume
+                }).ToArray()));
             }, ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -58,17 +67,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Trade client
 
         EndpointOptions<SubscribeTradeRequest> ITradeSocketClient.SubscribeTradeOptions { get; } = new EndpointOptions<SubscribeTradeRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(symbol, update => handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, new[] { new SharedTrade(update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
+            var result = await ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new[] { new SharedTrade(update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
             {
                 Side = update.Data.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
-            } })), ct:ct).ConfigureAwait(false);
+            } })), ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -85,7 +94,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
+            var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -100,14 +109,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 new ParameterDescription(nameof(SubscribeBalancesRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<ExchangeEvent<IEnumerable<SharedBalance>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<ExchangeEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
             var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
-                onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance)).ToArray())),
+                onAccountUpdate: update => handler(update.AsExchangeEvent(Exchange, update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -124,34 +133,37 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 new ParameterDescription(nameof(SubscribeFuturesOrderRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedFuturesOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderSocketClient)this).SubscribeFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
-                onOrderUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedFuturesOrder>>(Exchange, new[] {
+                onOrderUpdate: update => handler(update.AsExchangeEvent(Exchange, new[] {
                     new SharedFuturesOrder(
-                        update.Data.UpdateData.Symbol,
+                        ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.UpdateData.Symbol), update.Data.UpdateData.Symbol,
                         update.Data.UpdateData.OrderId.ToString(),
-                        update.Data.UpdateData.Type == Enums.FuturesOrderType.Limit ? SharedOrderType.Limit : update.Data.UpdateData.Type == Enums.FuturesOrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
+                        ParseOrderType(update.Data.UpdateData.Type),
                         update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                         update.Data.UpdateData.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.UpdateData.Status == Enums.OrderStatus.New || update.Data.UpdateData.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                         update.Data.UpdateData.UpdateTime)
                     {
                         ClientOrderId = update.Data.UpdateData.ClientOrderId,
-                        OrderPrice = update.Data.UpdateData.Price,
-                        Quantity = update.Data.UpdateData.Quantity,
-                        QuantityFilled = update.Data.UpdateData.AccumulatedQuantityOfFilledTrades,
+                        OrderPrice = update.Data.UpdateData.Price == 0 ? null : update.Data.UpdateData.Price,
+                        OrderQuantity = new SharedOrderQuantity(update.Data.UpdateData.Quantity, contractQuantity: update.Data.UpdateData.Quantity),
+                        QuantityFilled = new SharedOrderQuantity(update.Data.UpdateData.AccumulatedQuantityOfFilledTrades, contractQuantity : update.Data.UpdateData.AccumulatedQuantityOfFilledTrades),
                         UpdateTime = update.Data.UpdateData.UpdateTime,
                         Fee = update.Data.UpdateData.Fee,
                         FeeAsset = update.Data.UpdateData.FeeAsset,
-                        AveragePrice = update.Data.UpdateData.AveragePrice,
+                        AveragePrice = update.Data.UpdateData.AveragePrice == 0 ? null : update.Data.UpdateData.AveragePrice,
                         PositionSide = update.Data.UpdateData.PositionSide == Enums.PositionSide.Long ? SharedPositionSide.Long : update.Data.UpdateData.PositionSide == Enums.PositionSide.Short ? SharedPositionSide.Short : null,
                         ReduceOnly = update.Data.UpdateData.IsReduce,
                         TimeInForce = update.Data.UpdateData.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : update.Data.UpdateData.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
-                        LastTrade = update.Data.UpdateData.QuantityOfLastFilledTrade == 0 ? null : new SharedUserTrade(update.Data.UpdateData.Symbol, update.Data.UpdateData.OrderId.ToString(), update.Data.UpdateData.TradeId.ToString(), update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.UpdateData.QuantityOfLastFilledTrade, update.Data.UpdateData.PriceLastFilledTrade, update.Data.UpdateData.UpdateTime)
+                        TriggerPrice = update.Data.UpdateData.StopPrice == 0 ? null : update.Data.UpdateData.StopPrice,
+                        IsTriggerOrder = update.Data.UpdateData.StopPrice > 0,
+                        IsCloseOrder = update.Data.UpdateData.IsClosePositionOrder,
+                        LastTrade = update.Data.UpdateData.QuantityOfLastFilledTrade == 0 ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.UpdateData.Symbol), update.Data.UpdateData.Symbol, update.Data.UpdateData.OrderId.ToString(), update.Data.UpdateData.TradeId.ToString(), update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.UpdateData.QuantityOfLastFilledTrade, update.Data.UpdateData.PriceLastFilledTrade, update.Data.UpdateData.UpdateTime)
                         {
                             Role = update.Data.UpdateData.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
                         }
@@ -160,6 +172,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderType ParseOrderType(FuturesOrderType type)
+        {
+            if (type == FuturesOrderType.Market || type == FuturesOrderType.StopMarket || type == FuturesOrderType.TakeProfitMarket || type == FuturesOrderType.TrailingStopMarket)
+                return SharedOrderType.Market;
+
+            if (type == FuturesOrderType.Limit || type == FuturesOrderType.Stop || type == FuturesOrderType.TakeProfit)
+                return SharedOrderType.Limit;
+
+            return SharedOrderType.Other;
         }
         #endregion
 
@@ -205,14 +228,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 new ParameterDescription(nameof(SubscribePositionRequest.ListenKey), typeof(string), "The listenkey for starting the user stream", "123123123")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<SharedPosition[]>> handler, CancellationToken ct)
         {
             var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(request.ListenKey!,
-                onAccountUpdate: update => handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.UpdateData.Positions.Select(x => new SharedPosition(x.Symbol, x.Quantity, update.Data.EventTime)
+                onAccountUpdate: update => handler(update.AsExchangeEvent(Exchange, update.Data.UpdateData.Positions.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.Quantity, update.Data.EventTime)
                 {
                     AverageOpenPrice = x.EntryPrice,
                     PositionSide = x.PositionSide == Enums.PositionSide.Both ? (x.Quantity > 0 ? SharedPositionSide.Long : SharedPositionSide.Short) : x.PositionSide == Enums.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,

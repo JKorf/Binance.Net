@@ -3,6 +3,7 @@
     /// <summary>
     /// Test order commission info
     /// </summary>
+    [SerializationModel]
     public record BinanceTestOrderCommission
     {
         /// <summary>

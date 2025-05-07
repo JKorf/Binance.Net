@@ -1,10 +1,12 @@
 ﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Types of indicators
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<IndicatorType>))]
     public enum IndicatorType
     {
         /// <summary>

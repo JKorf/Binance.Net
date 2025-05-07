@@ -1,4 +1,5 @@
 ﻿
+using Binance.Net.Converters;
 using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
@@ -6,6 +7,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Futures account type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<FuturesAccountType>))]
     public enum FuturesAccountType
     {
         /// <summary>

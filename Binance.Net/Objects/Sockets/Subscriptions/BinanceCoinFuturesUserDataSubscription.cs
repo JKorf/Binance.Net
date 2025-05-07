@@ -137,7 +137,7 @@ namespace Binance.Net.Objects.Sockets
                 _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(gridUpdate.Data.EventTime));
             }
 
-            return new CallResult(null);
+            return CallResult.SuccessResult;
         }
     }
 }

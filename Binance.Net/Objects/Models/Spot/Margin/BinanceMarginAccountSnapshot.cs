@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Margin account snapshot
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginAccountSnapshot
     {
         /// <summary>
@@ -15,7 +17,6 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>
@@ -55,6 +56,6 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// Assets
         /// </summary>
         [JsonPropertyName("userAssets")]
-        public IEnumerable<BinanceMarginBalance> UserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
+        public BinanceMarginBalance[] UserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 }

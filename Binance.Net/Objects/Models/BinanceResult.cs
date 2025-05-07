@@ -3,6 +3,7 @@
     /// <summary>
     /// Query result
     /// </summary>
+    [SerializationModel]
     public record BinanceResult
     {
         /// <summary>
@@ -21,7 +22,8 @@
     /// Query result
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal record BinanceResult<T>: BinanceResult
+    //[SerializationModel]
+    internal record BinanceResult<T> : BinanceResult
     {
         /// <summary>
         /// The data

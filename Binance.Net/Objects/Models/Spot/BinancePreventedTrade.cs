@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Prevented order info
     /// </summary>
+    [SerializationModel]
     public record BinancePreventedTrade
     {
         /// <summary>
@@ -23,6 +25,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("takerOrderId")]
         public long TakerOrderId { get; set; }
         /// <summary>
+        /// Maker symbol
+        /// </summary>
+        [JsonPropertyName("makerSymbol")]
+        public string MakerSymbol { get; set; } = string.Empty;
+        /// <summary>
         /// Maker order id
         /// </summary>
         [JsonPropertyName("makerOrderId")]
@@ -35,7 +42,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
         /// <summary>

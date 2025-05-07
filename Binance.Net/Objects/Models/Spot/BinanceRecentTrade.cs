@@ -5,7 +5,8 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Recent trade info
     /// </summary>
-    public abstract record BinanceRecentTrade: IBinanceRecentTrade
+    [SerializationModel]
+    public abstract record BinanceRecentTrade : IBinanceRecentTrade
     {
         /// <summary>
         /// The id of the trade
@@ -41,6 +42,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Recent trade with quote quantity
     /// </summary>
+    [SerializationModel]
     public record BinanceRecentTradeQuote : BinanceRecentTrade
     {
         /// <inheritdoc />
@@ -55,6 +57,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Recent trade with base quantity
     /// </summary>
+    [SerializationModel]
     public record BinanceRecentTradeBase : BinanceRecentTrade
     {
         /// <inheritdoc />

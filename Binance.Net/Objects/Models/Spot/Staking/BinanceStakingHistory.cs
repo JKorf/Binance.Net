@@ -3,6 +3,7 @@
     /// <summary>
     /// Staking history
     /// </summary>
+    [SerializationModel]
     public record BinanceStakingHistory
     {
         /// <summary>

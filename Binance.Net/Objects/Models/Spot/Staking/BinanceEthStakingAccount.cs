@@ -3,6 +3,7 @@
     /// <summary>
     /// Eth staking account
     /// </summary>
+    [SerializationModel]
     public record BinanceEthStakingAccount
     {
         /// <summary>

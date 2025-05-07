@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddEnum("type", type);
             parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            
+
             var request = _definitions.GetOrCreate(HttpMethod.Post, "dapi/v1/positionMargin", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesPositionMarginResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -110,7 +110,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Get Postion Margin Change History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesMarginChangeHistoryResult>>> GetMarginChangeHistoryAsync(string symbol, FuturesMarginChangeDirectionType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesMarginChangeHistoryResult[]>> GetMarginChangeHistoryAsync(string symbol, FuturesMarginChangeDirectionType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection
             {
@@ -123,7 +123,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/positionMargin/history", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesMarginChangeHistoryResult>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesMarginChangeHistoryResult[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Get Income History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesIncomeHistory>>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesIncomeHistory[]>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -144,7 +144,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/income", BinanceExchange.RateLimiter.FuturesRest, 20, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesIncomeHistory>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesIncomeHistory[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -152,14 +152,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Notional and Leverage Brackets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesSymbolBracket>>> GetBracketsAsync(string? symbolOrPair = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesSymbolBracket[]>> GetBracketsAsync(string? symbolOrPair = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("pair", symbolOrPair);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/dapi/v2/leverageBracket", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesSymbolBracket>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesSymbolBracket[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -167,14 +167,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Position ADL Quantile Estimations
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceFuturesQuantileEstimation>>> GetPositionAdlQuantileEstimationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceFuturesQuantileEstimation[]>> GetPositionAdlQuantileEstimationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/adlQuantile", BinanceExchange.RateLimiter.FuturesRest, 5, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceFuturesQuantileEstimation>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesQuantileEstimation[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -242,13 +242,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceCoinFuturesAccountBalance>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceCoinFuturesAccountBalance[]>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/balance", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceCoinFuturesAccountBalance>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceCoinFuturesAccountBalance[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -256,7 +256,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Position Information
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinancePositionDetailsCoin>>> GetPositionInformationAsync(string? marginAsset = null, string? pair = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinancePositionDetailsCoin[]>> GetPositionInformationAsync(string? marginAsset = null, string? pair = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
 
@@ -265,7 +265,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "dapi/v1/positionRisk", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinancePositionDetailsCoin>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinancePositionDetailsCoin[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

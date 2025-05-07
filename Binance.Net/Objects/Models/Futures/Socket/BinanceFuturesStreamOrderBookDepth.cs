@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// The order book for a asset
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamOrderBookDepth : BinanceStreamEvent, IBinanceFuturesEventOrderBook
     {
         /// <summary>
@@ -43,12 +44,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// The list of diff bids
         /// </summary>
         [JsonPropertyName("b")]
-        public IEnumerable<BinanceOrderBookEntry> Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
         /// <summary>
         /// The list of diff asks
         /// </summary>
         [JsonPropertyName("a")]
-        public IEnumerable<BinanceOrderBookEntry> Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
+        public BinanceOrderBookEntry[] Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }

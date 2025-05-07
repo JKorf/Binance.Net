@@ -16,5 +16,10 @@ What endpoints and subscriptions are called.
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Debug logging**
-Add debug logging related to the issue. Enable Debug logging in the client options by settings LogLevel to Debug.
+**Additional info**
+If the issue is with a specific endpoint please provide:
+response.RequestBody: 
+If possible enable the `options.Rest.OutputOriginalData` client options and provide:
+response.OriginalData: 
+
+If available provide related logging:

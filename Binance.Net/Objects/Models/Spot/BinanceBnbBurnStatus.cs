@@ -3,6 +3,7 @@
     /// <summary>
     /// Bnb burn status
     /// </summary>
+    [SerializationModel]
     public record BinanceBnbBurnStatus
     {
         /// <summary>

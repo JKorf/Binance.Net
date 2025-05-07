@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Wrapper for kline information for a symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceStreamIndexKlineData : BinanceStreamEvent
     {
         /// <summary>
@@ -86,7 +87,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonPropertyName("v")]
         public string Ignore4 { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Number of basic data
         /// </summary>

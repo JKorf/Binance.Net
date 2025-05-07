@@ -3,6 +3,7 @@
     /// <summary>
     /// Index info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCompositeIndexInfo
     {
         /// <summary>
@@ -26,7 +27,7 @@
         /// Base asset list
         /// </summary>
         [JsonPropertyName("baseAssetList")]
-        public IEnumerable<BinanceFuturesCompositeIndexInfoAsset> BaseAssets { get; set; } = Array.Empty<BinanceFuturesCompositeIndexInfoAsset>();
+        public BinanceFuturesCompositeIndexInfoAsset[] BaseAssets { get; set; } = Array.Empty<BinanceFuturesCompositeIndexInfoAsset>();
     }
 
     /// <summary>

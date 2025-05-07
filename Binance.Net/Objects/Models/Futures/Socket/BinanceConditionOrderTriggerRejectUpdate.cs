@@ -2,8 +2,9 @@
 {
 
     /// <summary>
-    /// 
+    /// Condition order reject update
     /// </summary>
+    [SerializationModel]
     public record BinanceConditionOrderTriggerRejectUpdate : BinanceStreamEvent
     {
         /// <summary>

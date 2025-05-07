@@ -3,6 +3,7 @@
     /// <summary>
     /// Price change stats for the current trading day
     /// </summary>
+    [SerializationModel]
     public record BinanceTradingDayTicker
     {
         /// <summary>

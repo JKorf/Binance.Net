@@ -52,11 +52,11 @@ namespace Binance.Net.Clients.SpotApi
 
             string clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _client.ClientOptions.AllowAppendingClientOrderId);
 
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("side", EnumConverter.GetString(side));
-            parameters.AddParameter("type", EnumConverter.GetString(type));
-            parameters.AddOptionalParameter("timeInForce", EnumConverter.GetString(timeInForce));
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
+            parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalParameter("price", rulesCheck.Price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", rulesCheck.Quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", rulesCheck.QuoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -66,7 +66,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.place", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Place Test Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinancePlacedOrder>>> PlaceTestOrderAsync(string symbol,
+        public async Task<CallResult<BinanceResponse<BinanceTestOrderCommission>>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -91,11 +91,11 @@ namespace Binance.Net.Clients.SpotApi
             SelfTradePreventionMode? selfTradePreventionMode = null,
             CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new ParameterCollection();
             parameters.AddParameter("symbol", symbol);
-            parameters.AddParameter("side", EnumConverter.GetString(side));
-            parameters.AddParameter("type", EnumConverter.GetString(type));
-            parameters.AddOptionalParameter("timeInForce", EnumConverter.GetString(timeInForce));
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
+            parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -105,8 +105,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
-            return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true, ct: ct).ConfigureAwait(false);
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            return await _client.QueryAsync<BinanceTestOrderCommission>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -183,8 +183,8 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },
-                { "cancelReplaceMode", EnumConverter.GetString(cancelReplaceMode) }
             };
+            parameters.AddEnum("cancelReplaceMode", cancelReplaceMode);
             parameters.AddEnum("side", side);
             parameters.AddEnum("type", type);
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
@@ -210,11 +210,11 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Open Orders
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("symbol", symbol);
-            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.status", parameters, true, true, weight: symbol == null ? 80 : 6, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrder[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.status", parameters, true, true, weight: symbol == null ? 80 : 6, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -222,11 +222,11 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel All Orders
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceOrder[]>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
-            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.cancelAll", parameters, true, true, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrder[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.cancelAll", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -253,7 +253,7 @@ namespace Binance.Net.Clients.SpotApi
             int? stopStrategyId = null,
             int? stopStrategyType = null,
             int? stopIcebergQty = null,
-            SelfTradePreventionMode? selfTradePreventionMode = null, 
+            SelfTradePreventionMode? selfTradePreventionMode = null,
             CancellationToken ct = default)
         {
             limitClientOrderId = LibraryHelpers.ApplyBrokerId(limitClientOrderId, BinanceExchange.ClientOrderIdSpot, 36, _client.ClientOptions.AllowAppendingClientOrderId);
@@ -276,7 +276,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
 
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("selfTradePreventionMode", EnumConverter.GetString(selfTradePreventionMode));
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
 
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
@@ -332,9 +332,9 @@ namespace Binance.Net.Clients.SpotApi
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "aboveType", EnumConverter.GetString(aboveOrderType) },
-                { "belowType", EnumConverter.GetString(belowOrderType) },
             };
+            parameters.AddEnum("aboveType", aboveOrderType);
+            parameters.AddEnum("belowType", belowOrderType);
             parameters.AddEnum("side", side);
             parameters.AddOptional("listClientOrderId", listClientOrderId);
 
@@ -402,9 +402,9 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Open Oco Orders
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOpenOcoOrdersAsync(CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOpenOcoOrdersAsync(CancellationToken ct = default)
         {
-            return await _client.QueryAsync<IEnumerable<BinanceOrderOcoList>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrderLists.status", new Dictionary<string, object>(), true, true, weight: 6, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrderOcoList[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrderLists.status", new Dictionary<string, object>(), true, true, weight: 6, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -412,7 +412,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Order History
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceOrder>>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
@@ -420,7 +420,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceOrder>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"allOrders", parameters, true, true, weight: 20, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrder[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"allOrders", parameters, true, true, weight: 20, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -428,14 +428,14 @@ namespace Binance.Net.Clients.SpotApi
         #region Get OCO Order History
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceOrderOcoList>>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("fromId", fromOrderId);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceOrderOcoList>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"allOrderLists", parameters, true, true, weight: 20, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrderOcoList[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"allOrderLists", parameters, true, true, weight: 20, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -443,7 +443,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get User Trades
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceTrade>>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceTrade[]>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
@@ -452,7 +452,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _client.QueryAsync<IEnumerable<BinanceTrade>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myTrades", parameters, true, true, weight: 20, ct: ct).ConfigureAwait(false);
+            var weight = orderId == null ? 20 : 5;
+            return await _client.QueryAsync<BinanceTrade[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myTrades", parameters, true, true, weight: weight, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -460,7 +461,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Prevented Trades
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinancePreventedTrade>>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinancePreventedTrade[]>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("symbol", symbol);
@@ -469,7 +470,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("fromPreventedMatchId", fromPreventedTradeId);
             parameters.AddOptionalParameter("limit", limit);
             int weight = preventedTradeId != null ? 2 : 20;
-            return await _client.QueryAsync<IEnumerable<BinancePreventedTrade>>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myPreventedMatches", parameters, true, true, weight: weight, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinancePreventedTrade[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"myPreventedMatches", parameters, true, true, weight: weight, ct: ct).ConfigureAwait(false);
         }
 
         #endregion

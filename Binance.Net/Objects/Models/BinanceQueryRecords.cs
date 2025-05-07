@@ -4,13 +4,14 @@
     /// Query results
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    //[SerializationModel]
     public record BinanceQueryRecords<T>
     {
         /// <summary>
         /// The list records
         /// </summary>
         [JsonPropertyName("rows")]
-        public IEnumerable<T> Rows { get; set; } = Array.Empty<T>();
+        public T[] Rows { get; set; } = Array.Empty<T>();
         /// <summary>
         /// The total count of the records
         /// </summary>

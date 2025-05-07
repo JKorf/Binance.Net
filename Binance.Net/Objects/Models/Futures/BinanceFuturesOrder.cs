@@ -1,10 +1,13 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// The result of query order
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesOrder
     {
         /// <summary>
@@ -28,9 +31,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("clientOrderId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
 
         /// <summary>
@@ -118,7 +119,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// For what time the order lasts
         /// </summary>
-        [JsonPropertyName("timeInForce"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("timeInForce")]
         public TimeInForce TimeInForce { get; set; }
 
         /// <summary>
@@ -168,7 +169,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("positionSide")]
         public PositionSide PositionSide { get; set; }
-        
+
         /// <summary>
         /// Price protect
         /// </summary>
@@ -178,19 +179,20 @@ namespace Binance.Net.Objects.Models.Futures
         /// <summary>
         /// Price match type
         /// </summary>
-        [JsonPropertyName("priceMatch"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("priceMatch")]
         public PriceMatch PriceMatch { get; set; }
 
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
     }
 
     /// <summary>
     /// Usdt futures order
     /// </summary>
+    [SerializationModel]
     public record BinanceUsdFuturesOrder : BinanceFuturesOrder
     {
 

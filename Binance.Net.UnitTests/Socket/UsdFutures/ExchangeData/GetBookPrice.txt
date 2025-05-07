@@ -1,0 +1,24 @@
+> { "id": "|1|", "method": "ticker.book", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "lastUpdateId": 1027024,
+    "symbol": "BTCUSDT",
+    "bidPrice": "4.00000000",
+    "bidQty": "431.00000000",
+    "askPrice": "4.00000200",
+    "askQty": "9.00000000",
+    "time": 1589437530011 
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 2400,
+      "count": 2
+    }
+  ]
+}

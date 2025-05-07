@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub accounts margin summary
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountsMarginSummary
     {
         /// <summary>
@@ -24,7 +25,7 @@
         /// Sub account details
         /// </summary>
         [JsonPropertyName("subAccountList")]
-        public IEnumerable<BinanceSubAccountMarginInfo> SubAccounts { get; set; } = Array.Empty<BinanceSubAccountMarginInfo>();
+        public BinanceSubAccountMarginInfo[] SubAccounts { get; set; } = Array.Empty<BinanceSubAccountMarginInfo>();
     }
 
     /// <summary>

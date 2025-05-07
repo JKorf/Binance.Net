@@ -1,0 +1,20 @@
+> { "id": "|1|", "method": "ticker.price", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+	"symbol": "BTCUSDT",
+	"price": "6000.01",
+	"time": 1589437530011  
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 2400,
+      "count": 2
+    }
+  ]
+}

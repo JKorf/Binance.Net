@@ -1,0 +1,35 @@
+> { "id": "|1|", "method": "account.position", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+    "status": 200,
+    "result": [
+        {
+            "symbol": "BTCUSD_PERP",
+            "positionAmt": "0",
+            "entryPrice": "0.00000000",
+            "markPrice": "62297.60417296",
+            "unRealizedProfit": "0.00000000",
+            "liquidationPrice": "0",
+            "leverage": "7",
+            "maxQty": "100",
+            "marginType": "cross",
+            "isolatedMargin": "0.00000000",
+            "isAutoAddMargin": "false",
+            "positionSide": "BOTH",
+            "notionalValue": "0",
+            "isolatedWallet": "0",
+            "updateTime": 1726731195634,
+            "breakEvenPrice": "0.00000000"
+        }
+    ],
+    "rateLimits": [
+        {
+            "rateLimitType": "REQUEST_WEIGHT",
+            "interval": "MINUTE",
+            "intervalNum": 1,
+            "limit": 2400,
+            "count": 10
+        }
+    ]
+}

@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub accounts btc value summary
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountSpotAssetsSummary
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// Sub account values
         /// </summary>
         [JsonPropertyName("spotSubUserAssetBtcVoList")]
-        public IEnumerable<BinanceSubAccountBtcValue> SubAccountsBtcValues { get; set; } = Array.Empty<BinanceSubAccountBtcValue>();
+        public BinanceSubAccountBtcValue[] SubAccountsBtcValues { get; set; } = Array.Empty<BinanceSubAccountBtcValue>();
     }
 
     /// <summary>

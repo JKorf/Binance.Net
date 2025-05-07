@@ -3,6 +3,7 @@
     /// <summary>
     /// Interest rate history
     /// </summary>
+    [SerializationModel]
     public record BinanceInterestRateHistory
     {
         /// <summary>

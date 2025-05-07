@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Order type for a spot order
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SpotOrderType>))]
     public enum SpotOrderType
     {
         /// <summary>
@@ -47,6 +49,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Order type for a futures order
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<FuturesOrderType>))]
     public enum FuturesOrderType
     {
         /// <summary>

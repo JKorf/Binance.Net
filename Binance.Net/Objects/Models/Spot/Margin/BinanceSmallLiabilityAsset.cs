@@ -3,6 +3,7 @@
     /// <summary>
     /// Small liability asset
     /// </summary>
+    [SerializationModel]
     public record BinanceSmallLiabilityAsset
     {
         /// <summary>
