@@ -518,20 +518,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Leveraged tokens
 
-        #region Get Leveraged Token info
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBlvtInfo[]>> GetLeveragedTokenInfoAsync(int? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/blvt/tokenInfo", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync<BinanceBlvtInfo[]>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Get historical klines
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBlvtKline[]>> GetLeveragedTokensHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
@@ -598,6 +584,47 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/delist-schedule", BinanceExchange.RateLimiter.SpotRestIp, 100);
             return await _baseClient.SendAsync<BinanceMarginDelistSchedule[]>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Query Isolated Margin Tier Data
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceIsolatedMarginTier>>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("tier", tier);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/isolatedMarginTier", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            return await _baseClient.SendAsync<IEnumerable<BinanceIsolatedMarginTier>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Query Margin Available Inventory
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceMarginAvailableInventory>> GetMarginAvaliableInventoryAsync(MarginInventoryType type, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("type", type);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/available-inventory", BinanceExchange.RateLimiter.SpotRestUid, 50, true);
+            return await _baseClient.SendAsync<BinanceMarginAvailableInventory>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Query Liability Coin Leverage Bracket in Cross Margin Pro Mode
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>> GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/leverageBracket", BinanceExchange.RateLimiter.SpotRestIp, 1);
+            return await _baseClient.SendAsync<IEnumerable<BinanceCrossMarginProLiabilityCoinLeverageBracket>>(request, null, ct).ConfigureAwait(false);
         }
 
         #endregion

@@ -25,6 +25,11 @@ namespace Binance.Net.Enums
         [Map("EXPIRE_BOTH")]
         ExpireBoth,
         /// <summary>
+        /// Decrement
+        /// </summary>
+        [Map("DECREMENT")]
+        Decrement,
+        /// <summary>
         /// None
         /// </summary>
         [Map("NONE")]

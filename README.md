@@ -230,6 +230,13 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
     * Removed legacy ISpotClient and IFuturesClient implementations
     * Removed legacy AddBinance(restOptions, socketOptions) DI overload
 
+* Version 10.20.0 - 07 May 2025
+    * Added NFT Endpoints
+    * Added missing margin market data endpoints
+    * Added SelfTradePreventionMode missing enum value
+    * Removed ceased BVLT endpoints
+    * Fix Coin-M stream path
+
 * Version 10.19.1 - 15 Apr 2025
     * Added listClientOrderId to restClient.SpotApi.Trading.PlaceOcoOrderListAsync endpoint
     * Fixed warning for unknown symbol filter type
