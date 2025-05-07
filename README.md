@@ -191,6 +191,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 10.20.0 - 07 May 2025
+    * Added NFT Endpoints
+    * Added missing margin market data endpoints
+    * Added SelfTradePreventionMode missing enum value
+    * Removed ceased BVLT endpoints
+    * Fix Coin-M stream path
+
 * Version 10.19.1 - 15 Apr 2025
     * Added listClientOrderId to restClient.SpotApi.Trading.PlaceOcoOrderListAsync endpoint
     * Fixed warning for unknown symbol filter type
