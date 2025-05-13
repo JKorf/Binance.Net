@@ -17,6 +17,9 @@ using Binance.Net.Objects.Models.Spot.Staking;
 namespace Binance.Net.Converters
 {
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
+    [JsonSerializable(typeof(Dictionary<string, object>))]
+    [JsonSerializable(typeof(List<Dictionary<string, object>>))]
+    [JsonSerializable(typeof(ParameterCollection[]))]
     [JsonSerializable(typeof(string[]))]
     [JsonSerializable(typeof(BinanceResponse<BinanceAccountInfo>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceCurrentRateLimit[]>))]
