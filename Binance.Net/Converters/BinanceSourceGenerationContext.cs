@@ -9,6 +9,7 @@ using Binance.Net.Objects.Models.Spot.CopyTrading;
 using Binance.Net.Objects.Models.Spot.Loans;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.Mining;
+using Binance.Net.Objects.Models.Spot.NFT;
 using Binance.Net.Objects.Models.Spot.SimpleEarn;
 using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Models.Spot.Staking;
@@ -564,6 +565,12 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceConstituents))]
     [JsonSerializable(typeof(BinanceInsuranceFundBalance))]
     [JsonSerializable(typeof(BinanceInsuranceFundBalance[]))]
+    [JsonSerializable(typeof(BinanceMarginAvailableInventory))]
+    [JsonSerializable(typeof(BinanceCrossMarginProLiabilityCoinLeverageBracket))]
+    [JsonSerializable(typeof(BinanceListRecords<BinanceNftDeposit>))]
+    [JsonSerializable(typeof(BinanceListRecords<BinanceNftWithdraw>))]
+    [JsonSerializable(typeof(BinanceListRecords<BinanceNftTransaction>))]
+    [JsonSerializable(typeof(BinanceListRecords<BinanceNftAsset>))]
     internal partial class BinanceSourceGenerationContext : JsonSerializerContext
     {
     }
