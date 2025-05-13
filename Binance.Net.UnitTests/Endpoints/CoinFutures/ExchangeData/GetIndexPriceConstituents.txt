@@ -1,0 +1,25 @@
+GET
+/dapi/v1/constituents
+false
+{
+    "symbol": "BTCUSD",
+    "time": 1697422647853,
+    "constituents": [
+        {
+            "exchange": "bitstamp",
+            "symbol": "btcusd"
+        },
+        {
+            "exchange": "coinbase",
+            "symbol": "BTC-USD"
+        },
+        {
+            "exchange": "kraken",
+            "symbol": "XBT/USD"
+        },
+        {
+            "exchange": "binance_cross",
+            "symbol": "BTCUSDC*index(USDCUSD)"
+        }
+    ]
+}

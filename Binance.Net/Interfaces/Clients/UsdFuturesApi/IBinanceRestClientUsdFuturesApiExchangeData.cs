@@ -356,5 +356,13 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="toAsset">To asset</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceFuturesConvertSymbol[]>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get index price constituents for a symbol
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol name</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default);
     }
 }

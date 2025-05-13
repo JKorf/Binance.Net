@@ -563,5 +563,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Get Index Price Constituents
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/constituents", BinanceExchange.RateLimiter.FuturesRest, 2, false);
+            var result = await _baseClient.SendAsync<BinanceConstituents>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
     }
 }

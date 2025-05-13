@@ -561,6 +561,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal[]))]
     
     [JsonSerializable(typeof(Enums.SymbolFilterType[]))]
+    [JsonSerializable(typeof(BinanceConstituents))]
     internal partial class BinanceSourceGenerationContext : JsonSerializerContext
     {
     }

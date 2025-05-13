@@ -492,6 +492,9 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiExchangeData.GetPricesAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiExchangeData.GetIndexPriceConstituentsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -2241,6 +2244,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetConvertSymbolsAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetIndexPriceConstituentsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -3870,6 +3876,21 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCoinFuturesAccountBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceConstituent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceConstituentArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceConstituents">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -11857,6 +11878,14 @@
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiExchangeData.GetIndexPriceConstituentsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get index price constituents for a symbol
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
+            </summary>
+            <param name="symbol">Symbol name</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.CoinFuturesApi.IBinanceRestClientCoinFuturesApiShared">
             <summary>
             Shared interface for COIN-M Futures rest API usage
@@ -18130,6 +18159,14 @@
             </summary>
             <param name="fromAsset">From asset</param>
             <param name="toAsset">To asset</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetIndexPriceConstituentsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get index price constituents for a symbol
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
+            </summary>
+            <param name="symbol">Symbol name</param>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiShared">
@@ -31831,6 +31868,51 @@
         <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoSubOrder.OriginalQuantity">
             <summary>
             Original quantity
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceConstituents">
+            <summary>
+            Index price constituents info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituents.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituents.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituents.Constituents">
+            <summary>
+            Constituents
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceConstituent">
+            <summary>
+            Constituent info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituent.Exchange">
+            <summary>
+            Exchange
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituent.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituent.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceConstituent.Weight">
+            <summary>
+            Weight
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountAsset">
