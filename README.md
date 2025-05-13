@@ -192,6 +192,39 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 11.0.0 - 13 May 2025
+    * Updated CryptoExchange.Net to version 9.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for Native AOT compilation
+    * Added RateLimitUpdated event
+    * Added IBookTickerRestClient implementation to CoinFutures, UsdtFutures and Spot Shared clients
+    * Added IFuturesOrderClientIdClient implementation to CoinFutures, UsdtFutures Shared clients
+    * Added ISpotOrderClientIdClient implementation to Spot Shared client
+    * Added IFuturesTriggerOrderRestClient implementation to CoinFutures, UsdtFutures Shared clients
+    * Added ISpotTriggerOrderRestClient implementation to Spot Shared client
+    * Added IFuturesTpSlRestClient implementation to CoinFutures, UsdtFutures Shared clients
+    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
+    * Added GenerateClientOrderId method to CoinFutures, UsdtFutures and Spot Shared clients
+    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
+    * Added TriggerPrice, IsTriggerOrder, IsCloseOrder to SharedFuturesOrder response model
+    * Added TriggerPrice, IsTriggerOrder to SharedSpotOrder response model
+    * Added MaxShortLeverage and MaxLongLeverage to SharedFuturesSymbol response model
+    * Added StopLossPrice and TakeProfitPrice to SharedPosition response model
+    * Added TriggerPrice and IsTriggerOrder to SharedSpotOrder response model
+    * Added QuoteVolume to SharedSpotTicker response model
+    * Added All property to retrieve all available environment on BinanceEnvironment
+    * Added restClient.UsdtFuturesApi.ExchangeData.GetIndexPriceConstituentsAsync endpoint
+    * Added restClient.CoinFuturesApi.ExchangeData.GetIndexPriceConstituentsAsync endpoint
+    * Added restClient.UsdFuturesApi.ExchangeData.GetInsuranceFundBalancesAsync endpoint
+    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
+    * Updated all IEnumerable response and model types to array response types
+    * Updated all PlaceMultipleOrdersAsync methods to return an error if all orders fail to place
+    * Updated restClient.SpotApi.Trading.GetUserTradesAsync weight from 20 to 5 if orderId parameter is provided
+    * Fixed incorrect DataTradeMode on certain Shared interface responses
+    * Fixed deserialization error for trailing orders
+    * Removed Newtonsoft.Json dependency
+    * Removed legacy ISpotClient and IFuturesClient implementations
+    * Removed legacy AddBinance(restOptions, socketOptions) DI overload
+
 * Version 11.0.0-beta4 - 01 May 2025
     * Updated CryptoExchange.Net version to 9.0.0-beta5
     * Added property to retrieve all available API environments
