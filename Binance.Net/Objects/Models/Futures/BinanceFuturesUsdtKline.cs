@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Candlestick information for symbol
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BinanceFuturesUsdtKline, BinanceSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BinanceFuturesUsdtKline>))]
     [SerializationModel]
     public record BinanceFuturesUsdtKline : BinanceKlineBase
     {

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.Blvt
     /// <summary>
     /// Blvt kline
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BinanceBlvtKline, BinanceSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BinanceBlvtKline>))]
     [SerializationModel]
     public record BinanceBlvtKline
     {
