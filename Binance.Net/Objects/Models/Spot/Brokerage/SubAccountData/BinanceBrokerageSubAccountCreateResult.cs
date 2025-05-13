@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub Account Create Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccountCreateResult
     {
         /// <summary>

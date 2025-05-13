@@ -1,4 +1,6 @@
-﻿using CryptoExchange.Net.RateLimiting;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
@@ -48,6 +50,8 @@ namespace Binance.Net
         internal const string ClientOrderIdPrefixSpot = ClientOrderIdSpot + LibraryHelpers.ClientOrderIdSeparator;
         internal const string ClientOrderIdPrefixFutures = ClientOrderIdFutures + LibraryHelpers.ClientOrderIdSeparator;
 
+        internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BinanceSourceGenerationContext>();
+
         /// <summary>
         /// Format a base and quote asset to a Binance recognized symbol 
         /// </summary>
@@ -82,6 +86,10 @@ namespace Binance.Net
         /// Event for when a rate limit is triggered
         /// </summary>
         public event Action<RateLimitEvent> RateLimitTriggered;
+        /// <summary>
+        /// Event when the rate limit is updated. Note that it's only updated when a request is send, so there are no specific updates when the current usage is decaying.
+        /// </summary>
+        public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal BinanceRateLimiters()
@@ -112,24 +120,30 @@ namespace Binance.Net
                                             .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new IGuardFilter[] { new HostFilter("wss://ws-fapi.binance.com") }, 2400, TimeSpan.FromMinutes(1), RateLimitWindowType.Fixed, connectionWeight: 5));
 
             EndpointLimit.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            EndpointLimit.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             SpotRestIp.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            SpotRestIp.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             SpotRestUid.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            SpotRestUid.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             SpotSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            SpotSocket.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             FuturesRest.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            FuturesRest.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             FuturesSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            FuturesSocket.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
         }
 
         internal IRateLimitGate EndpointLimit { get; private set; }
 
-        internal IRateLimitGate SpotRestIp { get; private set; } 
+        internal IRateLimitGate SpotRestIp { get; private set; }
 
-        internal IRateLimitGate SpotRestUid { get; private set; } 
+        internal IRateLimitGate SpotRestUid { get; private set; }
 
-        internal IRateLimitGate SpotSocket { get; private set; } 
+        internal IRateLimitGate SpotSocket { get; private set; }
 
-        internal IRateLimitGate FuturesRest { get; private set; } 
+        internal IRateLimitGate FuturesRest { get; private set; }
 
-        internal IRateLimitGate FuturesSocket { get; private set; } 
+        internal IRateLimitGate FuturesSocket { get; private set; }
 
     }
 }

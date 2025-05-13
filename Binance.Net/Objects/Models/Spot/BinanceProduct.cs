@@ -3,6 +3,7 @@
     /// <summary>
     /// Info on a product
     /// </summary>
+    [SerializationModel]
     public record BinanceProduct
     {
         /// <summary>
@@ -90,7 +91,7 @@
         /// Tags
         /// </summary>
         [JsonPropertyName("tags")]
-        public IEnumerable<string> Tags { get; set; } = Array.Empty<string>();
+        public string[] Tags { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Is Etf enabled
         /// </summary>

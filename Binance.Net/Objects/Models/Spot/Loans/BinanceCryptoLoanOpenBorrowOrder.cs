@@ -3,6 +3,7 @@
     /// <summary>
     /// Open borrow order info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanOpenBorrowOrder
     {
         /// <summary>

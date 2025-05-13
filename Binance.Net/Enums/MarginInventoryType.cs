@@ -5,6 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Type of margin inventory.
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<MarginInventoryType>))]
     public enum MarginInventoryType
     {
         /// <summary>

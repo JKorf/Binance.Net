@@ -1,9 +1,10 @@
 ﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
+    [SerializationModel]
     internal record BinanceSubAccountWrapper
     {
         [JsonPropertyName("subAccounts")]
-        public IEnumerable<BinanceSubAccount>? SubAccounts { get; set; }
+        public BinanceSubAccount[]? SubAccounts { get; set; }
     }
 
     /// <summary>

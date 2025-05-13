@@ -1,0 +1,37 @@
+GET
+/fapi/v1/insuranceBalance
+false
+{
+   "symbols":[
+      "BNBUSDT",
+      "BTCUSDT",
+      "BTCUSDT_250627",
+      "BTCUSDT_250926",
+      "ETHBTC",
+      "ETHUSDT",
+      "ETHUSDT_250627",
+      "ETHUSDT_250926"
+   ],
+   "assets":[
+      {
+         "asset":"USDC",
+         "marginBalance":"299999998.6497832",
+         "updateTime":1745366402000
+      },
+      {
+         "asset":"USDT",
+         "marginBalance":"793930579.315848",
+         "updateTime":1745366402000
+      },
+      {
+         "asset":"BTC",
+         "marginBalance":"61.73143554",
+         "updateTime":1745366402000
+      },
+      {
+         "asset":"BNFCR",
+         "marginBalance":"633223.99396922",
+         "updateTime":1745366402000
+      }
+   ]
+}

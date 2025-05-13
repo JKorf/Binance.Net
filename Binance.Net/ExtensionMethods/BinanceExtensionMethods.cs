@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static int? UsedWeight(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
+        public static int? UsedWeight(this KeyValuePair<string, string[]>[]? headers)
         {
             if (headers == null)
                 return null;
@@ -28,7 +28,7 @@
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static int? UsedOrderCount(this IEnumerable<KeyValuePair<string, IEnumerable<string>>>? headers)
+        public static int? UsedOrderCount(this KeyValuePair<string, string[]>[]? headers)
         {
             if (headers == null)
                 return null;

@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub Account
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccount : BinanceBrokerageSubAccountCommission
     {
         /// <summary>

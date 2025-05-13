@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Futures account transfer type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<FuturesTransferType>))]
     public enum FuturesTransferType
     {
         /// <summary>

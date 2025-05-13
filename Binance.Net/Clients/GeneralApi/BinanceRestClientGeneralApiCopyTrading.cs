@@ -40,13 +40,13 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Lead Symbol
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceCopyTradingLeadSymbol>>> GetLeadSymbolAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceCopyTradingLeadSymbol[]>> GetLeadSymbolAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/copyTrading/futures/leadSymbol", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
-            var data = await _baseClient.SendAsync<BinanceResult<IEnumerable<BinanceCopyTradingLeadSymbol>>>(request, parameters, ct).ConfigureAwait(false);
+            var data = await _baseClient.SendAsync<BinanceResult<BinanceCopyTradingLeadSymbol[]>>(request, parameters, ct).ConfigureAwait(false);
 
             return data.As(data.Data.Data);
         }

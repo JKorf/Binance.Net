@@ -3,6 +3,7 @@
     /// <summary>
     /// Rewards history
     /// </summary>
+    [SerializationModel]
     public record BinanceEthRewardsHistory
     {
         /// <summary>

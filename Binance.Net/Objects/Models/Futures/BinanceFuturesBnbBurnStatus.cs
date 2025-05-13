@@ -3,7 +3,8 @@
     /// <summary>
     /// BNB burn for fee reduction status
     /// </summary>
-    public record BinanceBnbBurnStatus
+    [SerializationModel]
+    public record BinanceFuturesBnbBurnStatus
     {
         /// <summary>
         /// Fee burn status

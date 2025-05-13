@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Convert
 {
     /// <summary>
     /// Convert Quote
     /// </summary>
+    [SerializationModel]
     public record BinanceConvertResult
     {
         /// <summary>
@@ -21,7 +23,6 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("orderStatus")]
         public ConvertOrderStatus Status { get; set; }
     }

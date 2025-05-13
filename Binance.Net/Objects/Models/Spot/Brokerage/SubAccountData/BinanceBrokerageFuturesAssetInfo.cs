@@ -3,13 +3,14 @@
     /// <summary>
     /// Futures Asset Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageFuturesAssetInfo
     {
         /// <summary>
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceBrokerageSubAccountFuturesAssetInfo> Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountFuturesAssetInfo>();
+        public BinanceBrokerageSubAccountFuturesAssetInfo[] Data { get; set; } = Array.Empty<BinanceBrokerageSubAccountFuturesAssetInfo>();
 
         /// <summary>
         /// Timestamp
@@ -35,7 +36,7 @@
         /// </summary>
         [JsonPropertyName("futuresEnable")]
         public bool IsFuturesEnable { get; set; }
-        
+
         /// <summary>
         /// Total Initial Margin Of Usdt
         /// </summary>
@@ -47,31 +48,31 @@
         /// </summary>
         [JsonPropertyName("totalMaintenanceMarginOfUsdt")]
         public decimal TotalMaintenanceMarginOfUsdt { get; set; }
-        
+
         /// <summary>
         /// Total Wallet Balance Of Usdt
         /// </summary>
         [JsonPropertyName("totalWalletBalanceOfUsdt")]
         public decimal TotalWalletBalanceOfUsdt { get; set; }
-        
+
         /// <summary>
         /// Total Unrealized Profit Of Usdt
         /// </summary>
         [JsonPropertyName("totalUnrealizedProfitOfUsdt")]
         public decimal TotalUnrealizedProfitOfUsdt { get; set; }
-        
+
         /// <summary>
         /// Total Margin Balance Of Usdt
         /// </summary>
         [JsonPropertyName("totalMarginBalanceOfUsdt")]
         public decimal TotalMarginBalanceOfUsdt { get; set; }
-        
+
         /// <summary>
         /// Total Position Initial Margin Of Usdt
         /// </summary>
         [JsonPropertyName("totalPositionInitialMarginOfUsdt")]
         public decimal TotalPositionInitialMarginOfUsdt { get; set; }
-        
+
         /// <summary>
         /// Total Open Order Initial Margin Of Usdt
         /// </summary>

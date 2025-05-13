@@ -3,6 +3,7 @@
     /// <summary>
     /// Convert Pairs
     /// </summary>
+    [SerializationModel]
     public record BinanceConvertAssetPair
     {
         /// <summary>

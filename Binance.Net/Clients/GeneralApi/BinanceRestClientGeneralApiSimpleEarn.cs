@@ -6,7 +6,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Binance.Net.Clients.GeneralApi
 {
-    internal class BinanceRestClientGeneralApiSimpleEarn: IBinanceRestClientGeneralApiSimpleEarn
+    internal class BinanceRestClientGeneralApiSimpleEarn : IBinanceRestClientGeneralApiSimpleEarn
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 
@@ -44,7 +44,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("current", page);
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
-            
+
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/list", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnLockedProduct>>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -143,7 +143,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptional("current", page);
             parameters.AddOptional("size", pageSize);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
-            
+
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/flexible/position", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceSimpleEarnFlexiblePosition>>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -398,7 +398,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Locked Subscription Preview
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSimpleEarnLockedPreview>>> GetLockedSubscriptionPreviewAsync(string projectId, decimal quantity, bool? autoSubscribe = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSimpleEarnLockedPreview[]>> GetLockedSubscriptionPreviewAsync(string projectId, decimal quantity, bool? autoSubscribe = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection
             {
@@ -409,7 +409,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/subscriptionPreview", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSimpleEarnLockedPreview>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSimpleEarnLockedPreview[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

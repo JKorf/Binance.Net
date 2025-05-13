@@ -3,6 +3,7 @@
     /// <summary>
     /// Enable Margin Result
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageEnableMarginResult
     {
         /// <summary>
@@ -16,7 +17,7 @@
         /// </summary>
         [JsonPropertyName("enableMargin")]
         public bool IsMarginEnabled { get; set; }
-        
+
         /// <summary>
         /// Update Date
         /// </summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Response to the change in initial leverage request
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesInitialLeverageChangeResult
     {
         /// <summary>

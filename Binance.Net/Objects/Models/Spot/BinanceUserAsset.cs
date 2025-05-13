@@ -3,6 +3,7 @@
     /// <summary>
     /// Information about an asset for a user
     /// </summary>
+    [SerializationModel]
     public record BinanceUserAsset
     {
         /// <summary>
@@ -74,7 +75,7 @@
         /// Networks
         /// </summary>
         [JsonPropertyName("networkList")]
-        public IEnumerable<BinanceNetwork> NetworkList { get; set; } = Array.Empty<BinanceNetwork>();
+        public BinanceNetwork[] NetworkList { get; set; } = Array.Empty<BinanceNetwork>();
     }
 
     /// <summary>

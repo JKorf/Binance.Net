@@ -20,41 +20,43 @@
         /// The rate limits used
         /// </summary>
         [JsonPropertyName("rateLimits")]
-        public IEnumerable<BinanceRateLimit> RateLimits { get; set; } = Array.Empty<BinanceRateLimit>();
+        public BinanceRateLimit[] RateLimits { get; set; } = Array.Empty<BinanceRateLimit>();
         /// <summary>
         /// Filters
         /// </summary>
         [JsonPropertyName("exchangeFilters")]
-        public IEnumerable<object> ExchangeFilters { get; set; } = Array.Empty<object>();
+        public object[] ExchangeFilters { get; set; } = Array.Empty<object>();
     }
 
     /// <summary>
     /// Exchange info
     /// </summary>
-    public record BinanceFuturesUsdtExchangeInfo: BinanceFuturesExchangeInfo
+    [SerializationModel]
+    public record BinanceFuturesUsdtExchangeInfo : BinanceFuturesExchangeInfo
     {
         /// <summary>
         /// All symbols supported
         /// </summary>
         [JsonPropertyName("symbols")]
-        public IEnumerable<BinanceFuturesUsdtSymbol> Symbols { get; set; } = Array.Empty<BinanceFuturesUsdtSymbol>();
+        public BinanceFuturesUsdtSymbol[] Symbols { get; set; } = Array.Empty<BinanceFuturesUsdtSymbol>();
 
         /// <summary>
         /// All assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceFuturesUsdtAsset> Assets { get; set; } = Array.Empty<BinanceFuturesUsdtAsset>();
+        public BinanceFuturesUsdtAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesUsdtAsset>();
     }
 
     /// <summary>
     /// Exchange info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinExchangeInfo : BinanceFuturesExchangeInfo
     {
         /// <summary>
         /// All symbols supported
         /// </summary>
         [JsonPropertyName("symbols")]
-        public IEnumerable<BinanceFuturesCoinSymbol> Symbols { get; set; } = Array.Empty<BinanceFuturesCoinSymbol>();
+        public BinanceFuturesCoinSymbol[] Symbols { get; set; } = Array.Empty<BinanceFuturesCoinSymbol>();
     }
 }

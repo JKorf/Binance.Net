@@ -43,7 +43,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="roiType">ROI type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BinanceAutoInvestRoi>>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default);
+        Task<WebCallResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default);
         /// <summary>
         /// Get index info
         /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Query-Index-Details" /></para>
@@ -97,7 +97,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceAutoInvestEditResult>> EditPlanAsync(string planId, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, int? subscriptionStartTime = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Redeem index linked plan
         /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Redemption" /></para>
@@ -160,7 +160,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BinanceAutoInvestRedemption>>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceAutoInvestRedemption[]>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get holding details of a plan
@@ -188,7 +188,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BinanceAutoInvestRebalanceInfo>>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceAutoInvestRebalanceInfo[]>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
     }
 }

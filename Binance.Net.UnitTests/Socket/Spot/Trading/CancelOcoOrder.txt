@@ -1,0 +1,73 @@
+> { "id": "|1|", "method": "orderList.cancel", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "orderListId": 1274512,
+    "contingencyType": "OCO",
+    "listStatusType": "ALL_DONE",
+    "listOrderStatus": "ALL_DONE",
+    "listClientOrderId": "6023531d7edaad348f5aff",
+    "transactionTime": 1660801720215,
+    "symbol": "BTCUSDT",
+    "orders": [
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138901,
+        "clientOrderId": "BqtFCj5odMoWtSqGk2X9tU"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138902,
+        "clientOrderId": "jLnZpj5enfMXTuhKB1d0us"
+      }
+    ],
+    "orderReports": [
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138901,
+        "orderListId": 1274512,
+        "clientOrderId": "BqtFCj5odMoWtSqGk2X9tU",
+        "transactTime": 1660801720215,
+        "price": "23410.00000000",
+        "origQty": "0.00650000",
+        "executedQty": "0.00000000",
+        "origQuoteOrderQty": "0.000000",
+        "cummulativeQuoteQty": "0.00000000",
+        "status": "CANCELED",
+        "timeInForce": "GTC",
+        "type": "STOP_LOSS_LIMIT",
+        "side": "SELL",
+        "stopPrice": "23405.00000000",
+        "selfTradePreventionMode": "NONE"
+      },
+      {
+        "symbol": "BTCUSDT",
+        "orderId": 12569138902,
+        "orderListId": 1274512,
+        "clientOrderId": "jLnZpj5enfMXTuhKB1d0us",
+        "transactTime": 1660801720215,
+        "price": "23420.00000000",
+        "origQty": "0.00650000",
+        "executedQty": "0.00000000",
+        "origQuoteOrderQty": "0.000000",
+        "cummulativeQuoteQty": "0.00000000",
+        "status": "CANCELED",
+        "timeInForce": "GTC",
+        "type": "LIMIT_MAKER",
+        "side": "SELL",
+        "selfTradePreventionMode": "NONE"
+      }
+    ]
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 1
+    }
+  ]
+}

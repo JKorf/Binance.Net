@@ -126,7 +126,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 _balanceLockHandler?.Invoke(message.As(lockUpdate.Data, lockUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(lockUpdate.Data.EventTime));
             }
 
-            return new CallResult(null);
+            return CallResult.SuccessResult;
         }
     }
 }

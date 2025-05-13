@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Repay info
     /// </summary>
+    [SerializationModel]
     public record BinanceRepay
     {
         /// <summary>

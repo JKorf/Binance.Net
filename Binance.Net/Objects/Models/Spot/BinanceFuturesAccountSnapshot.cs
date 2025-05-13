@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -8,6 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Snapshot data of a futures account
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAccountSnapshot
     {
         /// <summary>
@@ -18,7 +20,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
 
@@ -38,12 +39,12 @@ namespace Binance.Net.Objects.Models.Spot
         /// List of assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceFuturesAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
+        public BinanceFuturesAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
         /// <summary>
         /// List of positions
         /// </summary>
         [JsonPropertyName("position")]
-        public IEnumerable<BinanceFuturesSnapshotPosition> Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
+        public BinanceFuturesSnapshotPosition[] Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
     }
 
     /// <summary>

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Cancel replace mode
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<CancelReplaceMode>))]
     public enum CancelReplaceMode
     {
         /// <summary>

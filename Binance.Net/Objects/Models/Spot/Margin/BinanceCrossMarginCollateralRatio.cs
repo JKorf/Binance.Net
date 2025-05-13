@@ -3,18 +3,19 @@
     /// <summary>
     /// Cross margin collateral info
     /// </summary>
+    [SerializationModel]
     public record BinanceCrossMarginCollateralRatio
     {
         /// <summary>
         /// Collaterals
         /// </summary>
         [JsonPropertyName("collaterals")]
-        public IEnumerable<BinanceCrossMarginCollateral> Collaterals { get; set; } = Array.Empty<BinanceCrossMarginCollateral>();
+        public BinanceCrossMarginCollateral[] Collaterals { get; set; } = Array.Empty<BinanceCrossMarginCollateral>();
         /// <summary>
         /// Asset names
         /// </summary>
         [JsonPropertyName("assetNames")]
-        public IEnumerable<string> AssetNames { get; set; } = Array.Empty<string>();
+        public string[] AssetNames { get; set; } = Array.Empty<string>();
     }
 
     /// <summary>

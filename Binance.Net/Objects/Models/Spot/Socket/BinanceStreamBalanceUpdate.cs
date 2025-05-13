@@ -3,7 +3,8 @@
     /// <summary>
     /// Update when asset is withdrawn/deposited 
     /// </summary>
-    public record BinanceStreamBalanceUpdate: BinanceStreamEvent
+    [SerializationModel]
+    public record BinanceStreamBalanceUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// The asset which changed

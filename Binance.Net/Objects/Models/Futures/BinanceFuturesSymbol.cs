@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Filters for order on this symbol
         /// </summary>
         [JsonPropertyName("filters")]
-        public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
+        public BinanceSymbolFilter[] Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
         /// <summary>
         /// Contract type
         /// </summary>
@@ -67,7 +67,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Allowed order types
         /// </summary>
         [JsonPropertyName("orderTypes")]
-        public IEnumerable<FuturesOrderType> OrderTypes { get; set; } = Array.Empty<FuturesOrderType>();
+        public FuturesOrderType[] OrderTypes { get; set; } = Array.Empty<FuturesOrderType>();
         /// <summary>
         /// The symbol
         /// </summary>
@@ -102,7 +102,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Sub types
         /// </summary>
         [JsonPropertyName("underlyingSubType")]
-        public IEnumerable<string> UnderlyingSubType { get; set; } = Array.Empty<string>();
+        public string[] UnderlyingSubType { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Liquidation fee
@@ -119,7 +119,7 @@ namespace Binance.Net.Objects.Models.Futures
         /// Allowed order time in force
         /// </summary>
         [JsonPropertyName("timeInForce")]
-        public IEnumerable<TimeInForce> TimeInForce { get; set; } = Array.Empty<TimeInForce>();
+        public TimeInForce[] TimeInForce { get; set; } = Array.Empty<TimeInForce>();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
         /// </summary>
@@ -165,7 +165,8 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public record BinanceFuturesUsdtSymbol: BinanceFuturesSymbol
+    [SerializationModel]
+    public record BinanceFuturesUsdtSymbol : BinanceFuturesSymbol
     {
         /// <summary>
         /// The status of the symbol
@@ -183,7 +184,8 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Information about a futures symbol
     /// </summary>
-    public record BinanceFuturesCoinSymbol: BinanceFuturesSymbol
+    [SerializationModel]
+    public record BinanceFuturesCoinSymbol : BinanceFuturesSymbol
     {
 
         /// <summary>
@@ -203,6 +205,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("equalQtyPrecision")]
         public int EqualQuantityPrecision { get; set; }
-       
+
     }
 }

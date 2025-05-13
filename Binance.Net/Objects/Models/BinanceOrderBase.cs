@@ -1,10 +1,13 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Order info
     /// </summary>
+    [SerializationModel]
     public record BinanceOrderBase
     {
         /// <summary>
@@ -28,18 +31,14 @@ namespace Binance.Net.Objects.Models
         /// Original order id
         /// </summary>
         [JsonPropertyName("origClientOrderId")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string OriginalClientOrderId { get; set; } = string.Empty;
 
         /// <summary>
         /// The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("clientOrderId")]
-        [JsonConverterCtor(typeof(ReplaceConverter),
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))] // TODO TEST
         public string ClientOrderId { get; set; } = string.Empty;
 
         private decimal _price;
@@ -106,7 +105,26 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("stopPrice")]
         public decimal? StopPrice { get; set; }
-
+        /// <summary>
+        /// Trailing delta
+        /// </summary>
+        [JsonPropertyName("trailingDelta")]
+        public int? TrailingDelta { get; set; }
+        /// <summary>
+        /// Trailing delta time
+        /// </summary>
+        [JsonPropertyName("trailingTime")]
+        public DateTime? TrailingTime { get; set; }
+        /// <summary>
+        /// Strategy id
+        /// </summary>
+        [JsonPropertyName("strategyId")]
+        public long? StrategyId { get; set; }
+        /// <summary>
+        /// Strategy type
+        /// </summary>
+        [JsonPropertyName("strategyType")]
+        public long? StrategyType { get; set; }
         /// <summary>
         /// The iceberg quantity
         /// </summary>
@@ -167,7 +185,18 @@ namespace Binance.Net.Objects.Models
         /// <summary>
         /// Self trade prevention mode
         /// </summary>
-        [JsonPropertyName("selfTradePreventionMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
+
+        /// <summary>
+        /// Prevented self trade match id
+        /// </summary>
+        [JsonPropertyName("preventedMatchId")]
+        public long? PreventedMatchId { get; set; }
+        /// <summary>
+        /// Prevented self trade quantity
+        /// </summary>
+        [JsonPropertyName("preventedQuantity")]
+        public decimal? PreventedMatchQuantity { get; set; }
     }
 }

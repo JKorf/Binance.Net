@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Convert order status
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesConvertStatus
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Portfolio margin collateral rate info
     /// </summary>
+    [SerializationModel]
     public record BinancePortfolioMarginCollateralRate
     {
         /// <summary>

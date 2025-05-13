@@ -3,6 +3,7 @@
     /// <summary>
     /// Collateral asset info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanCollateralAsset
     {
         /// <summary>

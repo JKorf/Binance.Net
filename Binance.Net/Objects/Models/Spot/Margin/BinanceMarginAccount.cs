@@ -3,6 +3,7 @@
     /// <summary>
     /// Information about margin account
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginAccount
     {
         /// <summary>
@@ -59,7 +60,7 @@
         /// Balance list
         /// </summary>
         [JsonPropertyName("userAssets")]
-        public IEnumerable<BinanceMarginBalance> Balances { get; set; } = Array.Empty<BinanceMarginBalance>();
+        public BinanceMarginBalance[] Balances { get; set; } = Array.Empty<BinanceMarginBalance>();
     }
 
     /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// VIP level and futures/margin enabled status
     /// </summary>
+    [SerializationModel]
     public record BinanceVipLevelAndStatus
     {
         /// <summary>

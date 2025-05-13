@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Borrow status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BorrowStatus>))]
     public enum BorrowStatus
     {
         /// <summary>

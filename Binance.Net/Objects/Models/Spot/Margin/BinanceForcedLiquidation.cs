@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Margin
     /// <summary>
     /// Forced liquidation info
     /// </summary>
+    [SerializationModel]
     public record BinanceForcedLiquidation
     {
         /// <summary>

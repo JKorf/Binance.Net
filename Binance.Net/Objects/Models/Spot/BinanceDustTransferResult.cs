@@ -3,6 +3,7 @@
     /// <summary>
     /// Result of dust transfer
     /// </summary>
+    [SerializationModel]
     public record BinanceDustTransferResult
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// Transfer entries
         /// </summary>
         [JsonPropertyName("transferResult")]
-        public IEnumerable<BinanceDustTransferResultEntry> TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
+        public BinanceDustTransferResultEntry[] TransferResult { get; set; } = Array.Empty<BinanceDustTransferResultEntry>();
     }
 
     /// <summary>

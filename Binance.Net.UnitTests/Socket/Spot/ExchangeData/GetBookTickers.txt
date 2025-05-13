@@ -1,0 +1,31 @@
+> { "id": "|1|", "method": "ticker.book", "params": { "symbol": "ETHUSDT" } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BNBBTC",
+      "bidPrice": "0.01358000",
+      "bidQty": "12.53400000",
+      "askPrice": "0.01358100",
+      "askQty": "17.83700000"
+    },
+    {
+      "symbol": "BTCUSDT",
+      "bidPrice": "23980.49000000",
+      "bidQty": "0.01000000",
+      "askPrice": "23981.31000000",
+      "askQty": "0.01512000"
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 4
+    }
+  ]
+}

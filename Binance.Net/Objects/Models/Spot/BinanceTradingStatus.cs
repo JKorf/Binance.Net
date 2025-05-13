@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Trade status
     /// </summary>
+    [SerializationModel]
     public record BinanceTradingStatus
     {
         /// <summary>
@@ -28,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Dictionary of indicator lists for symbols
         /// </summary>
         [JsonPropertyName("indicators")]
-        public Dictionary<string, IEnumerable<BinanceIndicator>> Indicators { get; set; } = new Dictionary<string, IEnumerable<BinanceIndicator>>();
+        public Dictionary<string, BinanceIndicator[]> Indicators { get; set; } = new Dictionary<string, BinanceIndicator[]>();
         /// <summary>
         /// Last update time
         /// </summary>

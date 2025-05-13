@@ -3,6 +3,7 @@
     /// <summary>
     /// IP Restriction
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageIpRestrictionBase
     {
         /// <summary>
@@ -21,7 +22,7 @@
         /// IP list
         /// </summary>
         [JsonPropertyName("ipList")]
-        public IEnumerable<string> IpList { get; set; } = Array.Empty<string>();
+        public string[] IpList { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Timestamp
@@ -29,10 +30,11 @@
         [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateDate { get; set; }
     }
-    
+
     /// <summary>
     /// IP Restriction
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageIpRestriction : BinanceBrokerageIpRestrictionBase
     {
         /// <summary>

@@ -1,11 +1,13 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
     /// Update data about an order
     /// </summary>
-    public record BinanceStreamOrderUpdate: BinanceStreamEvent
+    public record BinanceStreamOrderUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// The id of the order as assigned by Binance
@@ -21,9 +23,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The new client order id
         /// </summary>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order
@@ -74,9 +74,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// The original client order id
         /// </summary>
         [JsonPropertyName("C")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string? OriginalClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The execution type
@@ -208,7 +206,6 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// Prevented match id
         /// </summary>
         [JsonPropertyName("V")]
-        [JsonConverter(typeof(EnumConverter))]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
         /// <summary>
         /// Working time; when it entered the order book

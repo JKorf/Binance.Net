@@ -3,6 +3,7 @@
     /// <summary>
     /// Redemption
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnRedemption
     {
         /// <summary>

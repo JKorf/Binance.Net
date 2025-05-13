@@ -1,10 +1,15 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Redemption status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AutoInvestRedemptionStatus>))]
     public enum AutoInvestRedemptionStatus
     {
         /// <summary>

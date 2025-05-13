@@ -1,10 +1,12 @@
 ﻿using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// C2C user trade
     /// </summary>
+    [SerializationModel]
     public record BinanceC2CUserTrade
     {
         /// <summary>
@@ -55,7 +57,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("orderStatus")]
         public C2COrderStatus OrderStatus { get; set; }
         /// <summary>

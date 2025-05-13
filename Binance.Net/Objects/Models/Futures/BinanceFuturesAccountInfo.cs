@@ -3,13 +3,14 @@
     /// <summary>
     /// Information about an account
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAccountInfo
     {
         /// <summary>
         /// Information about an account assets
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceFuturesAccountAsset> Assets { get; set; } = Array.Empty<BinanceFuturesAccountAsset>();
+        public BinanceFuturesAccountAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesAccountAsset>();
 
         /// <summary>
         /// Boolean indicating if this account can deposit
@@ -57,7 +58,7 @@
         /// Information about an account positions
         /// </summary>
         [JsonPropertyName("positions")]
-        public IEnumerable<BinancePositionInfoUsdt> Positions { get; set; } = Array.Empty<BinancePositionInfoUsdt>();
+        public BinancePositionInfoUsdt[] Positions { get; set; } = Array.Empty<BinancePositionInfoUsdt>();
 
         /// <summary>
         /// Total initial margin

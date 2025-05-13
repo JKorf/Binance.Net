@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Cloud mining payment/refund history
     /// </summary>
+    [SerializationModel]
     public record BinanceCloudMiningHistory
     {
         /// <summary>
@@ -22,7 +24,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Type
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("type")]
         public CloudMiningPaymentStatus Type { get; set; }
 

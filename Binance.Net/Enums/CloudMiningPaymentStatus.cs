@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Cloud mining payment status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<CloudMiningPaymentStatus>))]
     public enum CloudMiningPaymentStatus
     {
         /// <summary>

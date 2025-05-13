@@ -3,6 +3,7 @@
     /// <summary>
     /// Ltv adjustment info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanLtvAdjustRecord
     {
         /// <summary>

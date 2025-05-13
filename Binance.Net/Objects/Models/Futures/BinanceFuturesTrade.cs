@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesTrade
     {
         /// <summary>
@@ -79,7 +80,8 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade details
     /// </summary>
-    public record BinanceFuturesUsdtTrade: BinanceFuturesTrade
+    [SerializationModel]
+    public record BinanceFuturesUsdtTrade : BinanceFuturesTrade
     {
         /// <summary>
         /// Quote quantity
@@ -91,6 +93,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Trade details
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesCoinTrade : BinanceFuturesTrade
     {
         /// <summary>

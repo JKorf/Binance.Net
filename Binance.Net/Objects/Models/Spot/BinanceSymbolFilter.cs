@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// A filter for order placed on a symbol.
     /// </summary>
-    [JsonConverter(typeof(SymbolFilterConverter))]
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolFilter>))]
     public record BinanceSymbolFilter
     {
         /// <summary>
@@ -19,7 +19,8 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Price filter
     /// </summary>
-    public record BinanceSymbolPriceFilter: BinanceSymbolFilter
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolPriceFilter>))]
+    public record BinanceSymbolPriceFilter : BinanceSymbolFilter
     {
         /// <summary>
         /// The minimal price the order can be for
@@ -38,6 +39,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Price percentage filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolPercentPriceFilter>))]
     public record BinanceSymbolPercentPriceFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -62,6 +64,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Price percentage filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolPercentPriceBySideFilter>))]
     public record BinanceSymbolPercentPriceBySideFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -89,6 +92,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Lot size filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolLotSizeFilter>))]
     public record BinanceSymbolLotSizeFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -108,6 +112,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Market lot size filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolMarketLotSizeFilter>))]
     public record BinanceSymbolMarketLotSizeFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -127,6 +132,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Min notional filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolMinNotionalFilter>))]
     public record BinanceSymbolMinNotionalFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -148,6 +154,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Notional filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolNotionalFilter>))]
     public record BinanceSymbolNotionalFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -179,6 +186,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     ///Max orders filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolMaxOrdersFilter>))]
     public record BinanceSymbolMaxOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -190,6 +198,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Max algo orders filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolMaxAlgorithmicOrdersFilter>))]
     public record BinanceSymbolMaxAlgorithmicOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -201,6 +210,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Max iceberg parts filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolIcebergPartsFilter>))]
     public record BinanceSymbolIcebergPartsFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -212,6 +222,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Max position filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolMaxPositionFilter>))]
     public record BinanceSymbolMaxPositionFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -223,6 +234,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Trailing delta filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceSymbolTrailingDeltaFilter>))]
     public record BinanceSymbolTrailingDeltaFilter : BinanceSymbolFilter
     {
         /// <summary>
@@ -242,10 +254,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public int MaxTrailingBelowDelta { get; set; }
     }
-    
+
     /// <summary>
     /// Max Iceberg Orders Filter
     /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceMaxNumberOfIcebergOrdersFilter>))]
     public record BinanceMaxNumberOfIcebergOrdersFilter : BinanceSymbolFilter
     {
         /// <summary>

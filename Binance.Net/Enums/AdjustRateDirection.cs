@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Rate direction
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AdjustRateDirection>))]
     public enum AdjustRateDirection
     {
         /// <summary>

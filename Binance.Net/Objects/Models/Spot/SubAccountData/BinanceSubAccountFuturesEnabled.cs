@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub account futures trading enabled
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountFuturesEnabled
     {
         /// <summary>

@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     /// <summary>
     /// Transactions
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestPlanTransactions
     {
         /// <summary>
@@ -16,7 +17,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         /// Results
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BinanceAutoInvestPlanTransaction> List { get; set; } = Array.Empty<BinanceAutoInvestPlanTransaction>();
+        public BinanceAutoInvestPlanTransaction[] List { get; set; } = Array.Empty<BinanceAutoInvestPlanTransaction>();
     }
 
     /// <summary>

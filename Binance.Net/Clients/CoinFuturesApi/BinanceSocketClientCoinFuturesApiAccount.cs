@@ -24,12 +24,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceCoinFuturesAccountBalance>>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
 
-            return await _client.QueryAsync<IEnumerable<BinanceCoinFuturesAccountBalance>>(_client.ClientOptions.Environment.CoinFuturesSocketApiAddress!.AppendPath("ws-dapi/v1"), $"account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceCoinFuturesAccountBalance[]>(_client.ClientOptions.Environment.CoinFuturesSocketApiAddress!.AppendPath("ws-dapi/v1"), $"account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
         }
 
         #endregion

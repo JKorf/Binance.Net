@@ -3,6 +3,7 @@
     /// <summary>
     /// Isolated margin tier data
     /// </summary>
+    [SerializationModel]
     public record BinanceIsolatedMarginTierData
     {
         /// <summary>

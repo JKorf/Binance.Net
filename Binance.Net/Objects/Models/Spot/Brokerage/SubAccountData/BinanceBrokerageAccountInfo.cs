@@ -3,6 +3,7 @@
     /// <summary>
     /// Account Info
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageAccountInfo
     {
         /// <summary>
@@ -34,7 +35,7 @@
         /// </summary>
         [JsonPropertyName("subAccountQty")]
         public int SubAccountQuantity { get; set; }
-        
+
         /// <summary>
         /// Max Sub Account Quantity
         /// </summary>

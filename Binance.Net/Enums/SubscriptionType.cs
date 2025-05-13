@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Simple earn subscription type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SubscriptionType>))]
     public enum SubscriptionType
     {
         /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// SOL staking quota
     /// </summary>
+    [SerializationModel]
     public record BinanceSolStakingQuota
     {
         /// <summary>

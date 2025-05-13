@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Revenue list
     /// </summary>
+    [SerializationModel]
     public record BinanceOtherRevenueList
     {
         /// <summary>
@@ -21,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// Revenue items
         /// </summary>
         [JsonPropertyName("otherProfits")]
-        public IEnumerable<BinanceOtherRevenueItem> OtherProfits { get; set; } = Array.Empty<BinanceOtherRevenueItem>();
+        public BinanceOtherRevenueItem[] OtherProfits { get; set; } = Array.Empty<BinanceOtherRevenueItem>();
     }
 
     /// <summary>

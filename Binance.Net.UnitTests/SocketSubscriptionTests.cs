@@ -19,9 +19,9 @@ namespace Binance.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "https://api.binance.com", "data", stjCompare: true);
-            //await tester.ValidateAsync<BinanceStreamTrade>((client, handler) => client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
-            //await tester.ValidateAsync<BinanceStreamAggregatedTrade>((client, handler) => client.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync("BTCUSDT", handler), "AggregatedTrades");
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "https://api.binance.com", "data");
+            await tester.ValidateAsync<BinanceStreamTrade>((client, handler) => client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
+            await tester.ValidateAsync<BinanceStreamAggregatedTrade>((client, handler) => client.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync("BTCUSDT", handler), "AggregatedTrades");
             await tester.ValidateAsync<IBinanceStreamKlineData>((client, handler) => client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.EightHour, handler), "Klines", ignoreProperties: new List<string> { "B" });
             await tester.ValidateAsync<IBinanceMiniTick>((client, handler) => client.SpotApi.ExchangeData.SubscribeToMiniTickerUpdatesAsync("BTCUSDT", handler), "MiniTicker");
             await tester.ValidateAsync<BinanceStreamBookPrice>((client, handler) => client.SpotApi.ExchangeData.SubscribeToBookTickerUpdatesAsync("BTCUSDT", handler), "BookTicker");
@@ -37,7 +37,7 @@ namespace Binance.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/Account", "https://api.binance.com", "data", stjCompare: true);
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/Account", "https://api.binance.com", "data");
             await tester.ValidateAsync<BinanceStreamOrderUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onOrderUpdateMessage: handler), "Order");
             await tester.ValidateAsync<BinanceStreamOrderList>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onOcoOrderUpdateMessage: handler), "OcoOrder");
             await tester.ValidateAsync<BinanceStreamPositionsUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onAccountPositionMessage: handler), "AccountPosition");
@@ -51,7 +51,7 @@ namespace Binance.Net.UnitTests
             {
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "https://fapi.binance.com", "data", stjCompare: true);
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "https://fapi.binance.com", "data");
             await tester.ValidateAsync<BinanceFuturesUsdtStreamMarkPrice>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToMarkPriceUpdatesAsync("BTCUSDT", 1000, handler), "MarkPrice");
             await tester.ValidateAsync<IBinanceStreamKlineData>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneMonth, handler), "Klines", ignoreProperties: new List<string> { "B" });
             await tester.ValidateAsync<BinanceStreamContinuousKlineData>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToContinuousContractKlineUpdatesAsync("BTCUSDT", Enums.ContractType.Perpetual, Enums.KlineInterval.OneMonth, handler), "ContKlines", ignoreProperties: new List<string> { "B" });
@@ -64,7 +64,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync<IBinanceFuturesEventOrderBook>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync("BTCUSDT", 5, 100, handler), "PartialBook");
             await tester.ValidateAsync<IBinanceFuturesEventOrderBook>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToOrderBookUpdatesAsync("BTCUSDT", 100, handler), "Book");
             await tester.ValidateAsync<BinanceFuturesStreamSymbolUpdate>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToSymbolUpdatesAsync(handler), "SymbolUpdates");
-            await tester.ValidateAsync<IEnumerable<BinanceFuturesStreamAssetIndexUpdate>>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToAssetIndexUpdatesAsync(handler), "AssetIndex");
+            await tester.ValidateAsync<BinanceFuturesStreamAssetIndexUpdate[]>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToAssetIndexUpdatesAsync(handler), "AssetIndex");
             await tester.ValidateAsync<BinanceFuturesStreamConfigUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onLeverageUpdate: handler), "Leverage");
             await tester.ValidateAsync<BinanceFuturesStreamConfigUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onLeverageUpdate: handler), "MultiAssetMode");
             await tester.ValidateAsync<BinanceFuturesStreamMarginUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onMarginUpdate: handler), "MarginUpdate");

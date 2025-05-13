@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Sub account historic transfer
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountTransferSubAccount
     {
         /// <summary>

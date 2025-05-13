@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     /// <summary>
     /// Sub order list
     /// </summary>
+    [SerializationModel]
     public record BinanceAlgoSubOrderList
     {
         /// <summary>
@@ -26,7 +27,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Sub orders
         /// </summary>
         [JsonPropertyName("subOrders")]
-        public IEnumerable<BinanceAlgoSubOrder> SubOrders { get; set; } = Array.Empty<BinanceAlgoSubOrder>();
+        public BinanceAlgoSubOrder[] SubOrders { get; set; } = Array.Empty<BinanceAlgoSubOrder>();
     }
 
     /// <summary>

@@ -5,7 +5,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     /// <summary>
     /// Shared interface for Spot rest API usage
     /// </summary>
-    public interface IBinanceRestClientSpotApiShared:
+    public interface IBinanceRestClientSpotApiShared :
         IAssetsRestClient,
         IBalanceRestClient,
         IDepositRestClient,
@@ -19,7 +19,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         IWithdrawalRestClient,
         IWithdrawRestClient,
         IListenKeyRestClient,
-        IFeeRestClient
+        IFeeRestClient,
+        ISpotOrderClientIdRestClient,
+        ISpotTriggerOrderRestClient,
+        IBookTickerRestClient
     {
     }
 }

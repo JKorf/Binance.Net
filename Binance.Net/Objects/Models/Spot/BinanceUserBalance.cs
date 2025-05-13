@@ -3,6 +3,7 @@
     /// <summary>
     /// User balance
     /// </summary>
+    [SerializationModel]
     public record BinanceUserBalance : BinanceBalance
     {
         /// <summary>
