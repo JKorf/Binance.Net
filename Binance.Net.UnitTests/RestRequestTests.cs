@@ -260,6 +260,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetAssetIndexesAsync(), "GetAssetIndexes");
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetBasisAsync("ETHUSDT", Enums.ContractType.Perpetual, Enums.PeriodInterval.ThirtyMinutes), "GetBasis");
             await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetIndexPriceConstituentsAsync("ETHUSDT"), "GetIndexPriceConstituents");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.ExchangeData.GetInsuranceFundBalancesAsync("ETHUSDT"), "GetInsuranceFundBalances");
         }
 
         [Test]

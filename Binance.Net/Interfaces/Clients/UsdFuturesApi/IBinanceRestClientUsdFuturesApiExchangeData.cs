@@ -364,5 +364,20 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get insurance fund balances snapshot
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol name</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceInsuranceFundBalance>> GetInsuranceFundBalancesAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get insurance fund balances snapshot
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceInsuranceFundBalance[]>> GetInsuranceFundBalancesAsync(CancellationToken ct = default);
     }
 }

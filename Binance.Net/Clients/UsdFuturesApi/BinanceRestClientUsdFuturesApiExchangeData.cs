@@ -227,6 +227,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Get Recent Trades
         /// <inheritdoc />
         public async Task<WebCallResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
@@ -239,7 +240,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var result = await _baseClient.SendAsync<BinanceRecentTradeQuote[]>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IBinanceRecentTrade[]>(result.Data);
         }
+        #endregion
 
+        #region Get Trade History
         /// <inheritdoc />
         public async Task<WebCallResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
             CancellationToken ct = default)
@@ -253,6 +256,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var result = await _baseClient.SendAsync<BinanceRecentTradeQuote[]>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IBinanceRecentTrade[]>(result.Data);
         }
+        #endregion
 
         #region Mark Price
 
@@ -572,6 +576,33 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.Add("symbol", symbol);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/constituents", BinanceExchange.RateLimiter.FuturesRest, 2, false);
             var result = await _baseClient.SendAsync<BinanceConstituents>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Insurance Fund Balances
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceInsuranceFundBalance>> GetInsuranceFundBalancesAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/insuranceBalance", BinanceExchange.RateLimiter.FuturesRest, 1, false);
+            var result = await _baseClient.SendAsync<BinanceInsuranceFundBalance>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Insurance Fund Balances
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceInsuranceFundBalance[]>> GetInsuranceFundBalancesAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/insuranceBalance", BinanceExchange.RateLimiter.FuturesRest, 1, false);
+            var result = await _baseClient.SendAsync<BinanceInsuranceFundBalance[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 

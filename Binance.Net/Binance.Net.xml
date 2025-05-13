@@ -2247,6 +2247,12 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetIndexPriceConstituentsAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -4556,6 +4562,26 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesUsdtTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceInsuranceFundAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceInsuranceFundAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceInsuranceFundBalance">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceInsuranceFundBalanceArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -18167,6 +18193,21 @@
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
             </summary>
             <param name="symbol">Symbol name</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get insurance fund balances snapshot
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+            </summary>
+            <param name="symbol">Symbol name</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get insurance fund balances snapshot
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+            </summary>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiShared">
@@ -34311,6 +34352,41 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesUsdtKline.TakerBuyQuoteVolume">
             <inheritdoc/>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundBalance">
+            <summary>
+            Insurance fund balance info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundBalance.Symbols">
+            <summary>
+            Symbols
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundBalance.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset">
+            <summary>
+            Insurance fund asset balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset.MarginBalance">
+            <summary>
+            Margin balance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset.UpdateTime">
+            <summary>
+            Update time
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionBase">
             <summary>

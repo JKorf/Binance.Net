@@ -562,6 +562,8 @@ namespace Binance.Net.Converters
     
     [JsonSerializable(typeof(Enums.SymbolFilterType[]))]
     [JsonSerializable(typeof(BinanceConstituents))]
+    [JsonSerializable(typeof(BinanceInsuranceFundBalance))]
+    [JsonSerializable(typeof(BinanceInsuranceFundBalance[]))]
     internal partial class BinanceSourceGenerationContext : JsonSerializerContext
     {
     }
