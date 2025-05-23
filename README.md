@@ -192,6 +192,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 11.0.1 - 23 May 2025
+    * Updated spot testnet websocket URLs
+    * Updated request weight for MarginBorrowAsync and MarginRepayAsync endpoints
+
 * Version 11.0.0 - 13 May 2025
     * Updated CryptoExchange.Net to version 9.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added support for Native AOT compilation
