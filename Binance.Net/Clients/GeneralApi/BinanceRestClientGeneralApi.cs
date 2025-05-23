@@ -40,6 +40,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
         #endregion
 
         #region constructor/destructor
@@ -58,6 +60,7 @@ namespace Binance.Net.Clients.GeneralApi
             Staking = new BinanceRestClientGeneralApiStaking(this);
             SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
             CopyTrading = new BinanceRestClientGeneralApiCopyTrading(this);
+            GiftCard = new BinanceRestClientGeneralApiGiftCard(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
