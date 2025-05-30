@@ -120,6 +120,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
             services.AddTransient<IBinanceTrackerFactory, BinanceTrackerFactory>();
+            services.AddSingleton<IBinanceUserClientProvider, BinanceUserClientProvider>(x =>
+            new BinanceUserClientProvider(
+                x.GetRequiredService<HttpClient>(),
+                x.GetRequiredService<ILoggerFactory>(),
+                x.GetRequiredService<IOptions<BinanceRestOptions>>(),
+                x.GetRequiredService<IOptions<BinanceSocketOptions>>()));
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBinanceSocketClient>().SpotApi.SharedClient);
