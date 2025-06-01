@@ -182,7 +182,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Deposit Addresses List
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceDepositAddress>>> GetDepositAddressesListAsync(string asset, string? network = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceDepositAddress[]>> GetDepositAddressesListAsync(string asset, string? network = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
 
@@ -193,7 +193,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("network", network);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/deposit/address/list", BinanceExchange.RateLimiter.SpotRestIp, 10, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceDepositAddress>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceDepositAddress[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

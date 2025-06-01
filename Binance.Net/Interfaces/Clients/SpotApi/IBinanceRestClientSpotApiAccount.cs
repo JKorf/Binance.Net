@@ -373,7 +373,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="network">Network</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of deposit addresses</returns>
-        Task<WebCallResult<IEnumerable<BinanceDepositAddress>>> GetDepositAddressesListAsync(string asset, string? network = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceDepositAddress[]>> GetDepositAddressesListAsync(string asset, string? network = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get personal margin level information for your account
