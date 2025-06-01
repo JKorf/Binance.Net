@@ -1343,6 +1343,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDepositAddressesAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetDailySpotAccountSnapshotAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -15274,6 +15277,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Deposit address</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetDepositAddressesAsync(System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get all deposit addresses for an asset
+            <para><a href="https://developers.binance.com/docs/wallet/capital/fetch-deposit-address-list-with-network" /></para>
+            </summary>
+            <param name="asset">Asset to get address for, for example `ETH`</param>
+            <param name="network">Filter by network</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetMarginLevelInformationAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get personal margin level information for your account
@@ -22900,6 +22914,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositAddress.Asset">
             <summary>
             Asset the address is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositAddress.IsDefault">
+            <summary>
+            Is default address
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDeposit">
