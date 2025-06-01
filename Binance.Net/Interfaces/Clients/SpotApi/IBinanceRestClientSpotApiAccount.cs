@@ -366,6 +366,16 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets the list of deposit addresses for an asset
+        /// <para><a href="https://developers.binance.com/docs/wallet/capital/fetch-deposit-address-list-with-network" /></para>
+        /// </summary>
+        /// <param name="asset">Asset to get address for, for example `ETH`</param>
+        /// <param name="network">Network</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of deposit addresses</returns>
+        Task<WebCallResult<IEnumerable<BinanceDepositAddress>>> GetDepositAddressesListAsync(string asset, string? network = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get personal margin level information for your account
         /// <para><a href="https://developers.binance.com/docs/margin_trading/account/Get-Summary-Of-Margin-Account" /></para>
         /// </summary>

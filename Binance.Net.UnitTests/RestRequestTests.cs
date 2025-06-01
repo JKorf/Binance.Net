@@ -30,6 +30,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.GetWithdrawalHistoryAsync(), "GetWithdrawalHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetWithdrawalAddressesAsync(), "GetWithdrawalAddresses");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetDepositAddressAsync("ETH"), "GetDepositAddress");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetDepositAddressesListAsync("ETH"), "GetDepositAddressesList");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetDepositHistoryAsync(), "GetDepositHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetDailySpotAccountSnapshotAsync(), "GetDailySpotAccountSnapshot", "snapshotVos");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetDailyMarginAccountSnapshotAsync(), "GetDailyMarginAccountSnapshot", "snapshotVos");
