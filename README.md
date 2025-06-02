@@ -192,6 +192,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 11.1.0 - 02 Jun 2025
+    * Updated CryptoExchange.Net to version 9.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added (I)BingXUserClientProvider allowing for easy client management when handling multiple users
+    * Added restClient.SpotApi.Account.GetDepositAddressesAsync endpoint
+
 * Version 11.0.1 - 23 May 2025
     * Updated spot testnet websocket URLs
     * Updated request weight for MarginBorrowAsync and MarginRepayAsync endpoints
