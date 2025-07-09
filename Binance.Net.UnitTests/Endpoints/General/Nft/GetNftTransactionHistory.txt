@@ -1,0 +1,34 @@
+GET
+/sapi/v1/nft/history/transactions
+true
+{
+  "total": 2,
+  "list": [
+    {
+      "orderNo": "1_470502070600699904",
+      "tokens": [
+        {
+          "network": "BSC",
+          "tokenId": "216000000496",
+          "contractAddress": "MYSTERY_BOX0000087"
+        }
+      ],
+      "tradeTime": 1626941236000,     
+      "tradeAmount": "19.60000000",  
+      "tradeCurrency": "BNB"            
+    },
+    {
+      "orderNo": "1_488306442479116288",
+      "tokens": [
+        {
+          "network": "BSC",
+          "tokenId": "132900000007",
+          "contractAddress": "0xAf12111a592e408DAbC740849fcd5e68629D9fb6"
+        }
+      ],
+      "tradeTime": 1631186130000,
+      "tradeAmount": "192.00000000",
+      "tradeCurrency": "BNB"
+    }
+  ]
+}

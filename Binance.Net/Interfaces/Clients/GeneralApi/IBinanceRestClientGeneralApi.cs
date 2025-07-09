@@ -63,5 +63,10 @@
         /// Endpoints related to Binance Gift Cards
         /// </summary>
         public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
+
+        /// Endpoints related to Binance Nft
+        /// </summary>
+        /// <see cref="IBinanceRestClientGeneralApiNft"/>
+        IBinanceRestClientGeneralApiNft Nft { get; }
     }
 }
