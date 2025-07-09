@@ -40,6 +40,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiNft Nft { get; }
         #endregion
 
         #region constructor/destructor
@@ -58,6 +60,7 @@ namespace Binance.Net.Clients.GeneralApi
             Staking = new BinanceRestClientGeneralApiStaking(this);
             SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
             CopyTrading = new BinanceRestClientGeneralApiCopyTrading(this);
+            Nft = new BinanceRestClientGeneralApiNFT(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;

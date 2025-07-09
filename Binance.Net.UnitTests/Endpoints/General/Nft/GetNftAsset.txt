@@ -1,0 +1,23 @@
+GET
+/sapi/v1/nft/user/getAsset
+true
+{
+  "total": 347,
+  "list": [
+    {
+      "network": "BSC",
+      "contractAddress": "REGULAR11234567891779",
+      "tokenId": "100900000017"
+    },
+    {
+      "network": "BSC",
+      "contractAddress": "SSMDQ8W59",
+      "tokenId": "200500000011"
+    },
+    {
+      "network": "BSC",
+      "contractAddress": "SSMDQ8W59",
+      "tokenId": "200500000019"
+    }
+  ]
+}
