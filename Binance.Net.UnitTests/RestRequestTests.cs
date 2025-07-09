@@ -475,6 +475,20 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.AutoInvest.GetIndexLinkedPlanRebalanceHistoryAsync(), "GetIndexLinkedPlanRebalanceHistory");
         }
 
+        [Test]
+        public async Task ValidateGeneralFuturesCalls()
+        {
+          var client = new BinanceRestClient(opts => 
+          {
+              opts.RateLimiterEnabled = false;
+              opts.AutoTimestamp = false;
+              opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+          });
+          var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/Futures", "https://api.binance.com", IsAuthenticated);
+          await tester.ValidateAsync(client => client.GeneralApi.Futures.TransferFuturesAccountAsync("ETH", 1, Enums.FuturesTransferType.FromSpotToUsdtFutures), "TransferFuturesAccount");
+          await tester.ValidateAsync(client => client.GeneralApi.Futures.GetFuturesTransferHistoryAsync("ETH", DateTime.UtcNow.AddDays(-1)), "GetFuturesTransferHistory");
+        }
+
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;
