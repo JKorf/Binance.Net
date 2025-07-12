@@ -1,0 +1,7 @@
+GET
+/sapi/v1/copyTrading/futures/userStatus
+true
+{
+  "isLeadTrader": true,
+  "time": 1717382310843
+}
