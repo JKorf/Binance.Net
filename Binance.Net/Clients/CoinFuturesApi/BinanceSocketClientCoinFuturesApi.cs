@@ -10,6 +10,7 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -54,7 +55,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             => new BinanceAuthenticationProvider(credentials);
 
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         public IBinanceSocketClientCoinFuturesApiShared SharedClient => this;
 

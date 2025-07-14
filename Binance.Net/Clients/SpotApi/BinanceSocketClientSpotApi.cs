@@ -12,6 +12,7 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -68,7 +69,7 @@ namespace Binance.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
