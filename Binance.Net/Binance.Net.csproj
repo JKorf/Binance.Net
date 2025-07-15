@@ -21,7 +21,6 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <PackageReleaseNotes>https://github.com/JKorf/Binance.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
