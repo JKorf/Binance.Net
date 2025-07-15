@@ -59,6 +59,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceResponse<BinancePositionDetailsCoin[]>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrder>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrder[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceCheckTime>))]
 
     // End manual defined attributes
 
