@@ -1,0 +1,22 @@
+GET
+/sapi/v1/nft/history/deposit
+true
+{
+  "total": 2,
+  "list": [
+    {
+      "network": "ETH",
+      "txID": null,
+      "contractAdrress": "0xe507c961ee127d4439977a61af39c34eafee0dc6",
+      "tokenId": "10014",
+      "timestamp": 1629986047000  
+    },
+    {
+      "network": "BSC",
+      "txID": null,
+      "contractAdrress": "0x058451b463bab04f52c0799d55c4094f507acfa9",
+      "tokenId": "10016",
+      "timestamp": 1630083581000
+    }
+  ]
+}

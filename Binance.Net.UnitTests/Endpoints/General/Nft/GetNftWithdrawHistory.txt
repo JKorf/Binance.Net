@@ -1,0 +1,26 @@
+GET
+/sapi/v1/nft/history/withdraw
+true
+{
+  "total": 178,
+  "list": [
+    {
+      "network": "ETH",
+      "txID": "0x2be5eed31d787fdb4880bc631c8e76bdfb6150e137f5cf1732e0416ea206f57f",
+      "contractAdrress": "0xe507c961ee127d4439977a61af39c34eafee0dc6",
+      "tokenId": "1000001247",
+      "timestamp": 1633674433000,
+      "fee": 0.1,
+      "feeAsset": "ETH"
+    },
+    {
+      "network": "ETH",
+      "txID": "0x3b3aea5c0a4faccd6f306641e6deb9713ab229ac233be3be227f580311e4362a",
+      "contractAdrress": "0xe507c961ee127d4439977a61af39c34eafee0dc6",
+      "tokenId": "40000030",
+      "timestamp": 1633677022000,
+      "fee": 0.1,
+      "feeAsset": "ETH"
+    }
+  ]
+}
