@@ -30,6 +30,18 @@ namespace Binance.Net.Clients.SpotApi
 
         private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
+        private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
+
+        private readonly HashSet<string> _userEvents = new HashSet<string>
+        {
+            "outboundAccountPosition",
+            "balanceUpdate",
+            "executionReport",
+            "listStatus",
+            "listenKeyExpired",
+            "eventStreamTerminated",
+            "externalLockUpdate"
+        };
         #endregion
 
         /// <inheritdoc />
@@ -71,6 +83,7 @@ namespace Binance.Net.Clients.SpotApi
 
         protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+                
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {
@@ -78,7 +91,12 @@ namespace Binance.Net.Clients.SpotApi
             if (id != null)
                 return id.ToString();
 
-            return message.GetValue<string>(_streamPath);
+            var stream = message.GetValue<string>(_streamPath); ;
+            var e = message.GetValue<string>(_ePath);
+            if (e != null && _userEvents.Contains(e))
+                return stream + e;
+
+            return stream;
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)

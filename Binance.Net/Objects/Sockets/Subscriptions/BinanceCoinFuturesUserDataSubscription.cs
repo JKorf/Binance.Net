@@ -10,10 +10,7 @@ namespace Binance.Net.Objects.Sockets
     /// <inheritdoc />
     internal class BinanceCoinFuturesUserDataSubscription : Subscription<BinanceSocketQueryResponse, BinanceSocketQueryResponse>
     {
-        private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
-
-        /// <inheritdoc />
-        public override HashSet<string> ListenerIdentifiers { get; set; }
+        private readonly string _lk;
 
         private readonly Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? _orderHandler;
         private readonly Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? _configHandler;
@@ -23,43 +20,12 @@ namespace Binance.Net.Objects.Sockets
         private readonly Action<DataEvent<BinanceStrategyUpdate>>? _strategyHandler;
         private readonly Action<DataEvent<BinanceGridUpdate>>? _gridHandler;
 
-        /// <inheritdoc />
-        public override Type? GetMessageType(IMessageAccessor message)
-        {
-            var identifier = message.GetValue<string>(_ePath);
-            if (string.Equals(identifier, "ACCOUNT_CONFIG_UPDATE", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>);
-            if (string.Equals(identifier, "MARGIN_CALL", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>);
-            if (string.Equals(identifier, "ACCOUNT_UPDATE", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>);
-            if (string.Equals(identifier, "ORDER_TRADE_UPDATE", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>);
-            if (string.Equals(identifier, "listenKeyExpired", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceStreamEvent>);
-            if (string.Equals(identifier, "STRATEGY_UPDATE", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceStrategyUpdate>);
-            if (string.Equals(identifier, "GRID_UPDATE", StringComparison.Ordinal))
-                return typeof(BinanceCombinedStream<BinanceGridUpdate>);
-
-            return null;
-        }
-
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="topics"></param>
-        /// <param name="orderHandler"></param>
-        /// <param name="configHandler"></param>
-        /// <param name="marginHandler"></param>
-        /// <param name="accountHandler"></param>
-        /// <param name="listenkeyHandler"></param>
-        /// <param name="strategyHandler"></param>
-        /// <param name="gridHandler"></param>
         public BinanceCoinFuturesUserDataSubscription(
             ILogger logger,
-            List<string> topics,
+            string listenKey,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? orderHandler,
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? configHandler,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? marginHandler,
@@ -75,7 +41,18 @@ namespace Binance.Net.Objects.Sockets
             _listenkeyHandler = listenkeyHandler;
             _strategyHandler = strategyHandler;
             _gridHandler = gridHandler;
-            ListenerIdentifiers = new HashSet<string>(topics);
+
+            _lk = listenKey;
+
+            MessageMatcher = MessageMatcher.Create([
+                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>(_lk + "ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>(_lk + "MARGIN_CALL", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>(_lk + "ACCOUNT_UPDATE", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>(_lk + "ORDER_TRADE_UPDATE", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceStreamEvent>>(_lk + "listenKeyExpired", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceStrategyUpdate>>(_lk + "STRATEGY_UPDATE", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceGridUpdate>>(_lk + "GRID_UPDATE", DoHandleMessage)
+                ]);
         }
 
         /// <inheritdoc />
@@ -84,7 +61,7 @@ namespace Binance.Net.Objects.Sockets
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = ListenerIdentifiers.ToArray(),
+                Params = [_lk],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -95,48 +72,55 @@ namespace Binance.Net.Objects.Sockets
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = ListenerIdentifiers.ToArray(),
+                Params = [_lk],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
 
 
-        /// <inheritdoc />
-        public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>> message)
         {
-            if (message.Data is BinanceCombinedStream<BinanceFuturesStreamConfigUpdate> configUpdate)
-            {
-                configUpdate.Data.ListenKey = configUpdate.Stream;
-                _configHandler?.Invoke(message.As(configUpdate.Data, configUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(configUpdate.Data.EventTime));
-            }
-            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamMarginUpdate> marginUpdate)
-            {
-                marginUpdate.Data.ListenKey = marginUpdate.Stream;
-                _marginHandler?.Invoke(message.As(marginUpdate.Data, marginUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(marginUpdate.Data.EventTime));
-            }
-            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamAccountUpdate> accountUpdate)
-            {
-                accountUpdate.Data.ListenKey = accountUpdate.Stream;
-                _accountHandler?.Invoke(message.As(accountUpdate.Data, accountUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(accountUpdate.Data.EventTime));
-            }
-            else if (message.Data is BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> orderUpdate)
-            {
-                orderUpdate.Data.ListenKey = orderUpdate.Stream;
-                _orderHandler?.Invoke(message.As(orderUpdate.Data, orderUpdate.Stream, orderUpdate.Data.UpdateData.Symbol, SocketUpdateType.Update).WithDataTimestamp(orderUpdate.Data.EventTime));
-            }
-            else if (message.Data is BinanceCombinedStream<BinanceStreamEvent> listenKeyUpdate)
-            {
-                _listenkeyHandler?.Invoke(message.As(listenKeyUpdate.Data, listenKeyUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(listenKeyUpdate.Data.EventTime));
-            }
-            else if (message.Data is BinanceCombinedStream<BinanceStrategyUpdate> strategyUpdate)
-            {
-                _strategyHandler?.Invoke(message.As(strategyUpdate.Data, strategyUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(strategyUpdate.Data.EventTime));
-            }
-            else if (message.Data is BinanceCombinedStream<BinanceGridUpdate> gridUpdate)
-            {
-                _gridHandler?.Invoke(message.As(gridUpdate.Data, gridUpdate.Stream, null, SocketUpdateType.Update).WithDataTimestamp(gridUpdate.Data.EventTime));
-            }
+            message.Data.Data.ListenKey = message.Data.Stream;
+            _configHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
 
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>> message)
+        {
+            message.Data.Data.ListenKey = message.Data.Stream;
+            _marginHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
+
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>> message)
+        {
+            message.Data.Data.ListenKey = message.Data.Stream;
+            _accountHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
+
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>> message)
+        {
+            message.Data.Data.ListenKey = message.Data.Stream;
+            _orderHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, message.Data.Data.UpdateData.Symbol, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
+
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceStreamEvent>> message)
+        {
+            _listenkeyHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
+
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceStrategyUpdate>> message)
+        {
+            _strategyHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
+
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceGridUpdate>> message)
+        {
+            _gridHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
             return CallResult.SuccessResult;
         }
     }
