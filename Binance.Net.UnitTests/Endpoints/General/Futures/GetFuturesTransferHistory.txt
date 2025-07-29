@@ -1,0 +1,16 @@
+GET
+/sapi/v1/futures/transfer
+true
+{
+  "rows": [
+    {
+      "asset": "USDT",
+      "tranId": 100000001,
+      "amount": "40.84624400",
+      "type": "1",
+      "timestamp": 1555056425000,
+      "status": "CONFIRMED"
+    }
+  ],
+  "total": 1
+}
