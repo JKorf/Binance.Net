@@ -11,6 +11,8 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using System.IO;
+using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -27,6 +29,20 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region fields
         private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
+        private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
+
+        private readonly HashSet<string> _userEvents = new HashSet<string>
+        {
+            "ACCOUNT_CONFIG_UPDATE",
+            "MARGIN_CALL",
+            "ACCOUNT_UPDATE",
+            "ORDER_TRADE_UPDATE",
+            "TRADE_LITE",
+            "listenKeyExpired",
+            "STRATEGY_UPDATE",
+            "GRID_UPDATE",
+            "CONDITIONAL_ORDER_TRIGGER_REJECT"
+        };
 
         internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
@@ -69,7 +85,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
@@ -92,7 +108,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (id != null)
                 return id.ToString();
 
-            return message.GetValue<string>(_streamPath);
+            var stream = message.GetValue<string>(_streamPath); ;
+            var e = message.GetValue<string>(_ePath);
+            if (e != null && _userEvents.Contains(e))
+                return stream + e;
+
+            return stream;
         }
 
         internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)

@@ -40,6 +40,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
         #endregion
 
         #region constructor/destructor
@@ -58,6 +60,7 @@ namespace Binance.Net.Clients.GeneralApi
             Staking = new BinanceRestClientGeneralApiStaking(this);
             SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
             CopyTrading = new BinanceRestClientGeneralApiCopyTrading(this);
+            GiftCard = new BinanceRestClientGeneralApiGiftCard(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
@@ -120,7 +123,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
-            if (!accessor.IsJson)
+            if (!accessor.IsValid)
                 return new ServerError(null, "Unknown request error", exception: exception);
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
@@ -158,7 +161,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         private BinanceRateLimitError GetRateLimitError(IMessageAccessor accessor)
         {
-            if (!accessor.IsJson)
+            if (!accessor.IsValid)
                 return new BinanceRateLimitError(accessor.GetOriginalString());
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));

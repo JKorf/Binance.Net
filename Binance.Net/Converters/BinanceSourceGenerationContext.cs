@@ -6,6 +6,7 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.CopyTrading;
+using Binance.Net.Objects.Models.Spot.GiftCard;
 using Binance.Net.Objects.Models.Spot.Loans;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.Mining;
@@ -16,6 +17,12 @@ using Binance.Net.Objects.Models.Spot.Staking;
 
 namespace Binance.Net.Converters
 {
+    [JsonSerializable(typeof(BinanceGiftCardResponse<BinaceGiftCardData>))]
+    [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardRedeemData>))]
+    [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardValidity>))]
+    [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardTokenLimit>))]
+    [JsonSerializable(typeof(BinanceGiftCardResponse<string>))]
+
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
     [JsonSerializable(typeof(Dictionary<string, object>))]
     [JsonSerializable(typeof(List<Dictionary<string, object>>))]
@@ -59,6 +66,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceResponse<BinancePositionDetailsCoin[]>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrder>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceFuturesOrder[]>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceCheckTime>))]
 
     // End manual defined attributes
 

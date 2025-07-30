@@ -132,7 +132,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetIsolatedMarginSymbolsAsync("ETHUSDT", 5000, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(new[] { "ETH" }, false, null, CancellationToken.None), true);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), false);
+            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetConvertListAllPairsAsync(null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetDelistScheduleAsync(null, CancellationToken.None), true);
 
