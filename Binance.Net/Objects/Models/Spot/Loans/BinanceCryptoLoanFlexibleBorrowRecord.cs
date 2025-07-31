@@ -36,7 +36,6 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Status of the order
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("status")]
         public FlexibleBorrowRecordStatus Status { get; set; }
     }

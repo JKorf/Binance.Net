@@ -5,6 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Loan liquidation status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<LoanLiquidationStatus>))]
     public enum LoanLiquidationStatus
     {
         /// <summary>

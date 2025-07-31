@@ -30,7 +30,6 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         /// <summary>
         /// Status of the repay
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("repayStatus")]
         public RepayStatus RepayStatus { get; set; }
         /// <summary>

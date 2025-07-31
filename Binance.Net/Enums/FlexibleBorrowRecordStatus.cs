@@ -5,6 +5,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// Flexible Borrow Status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<FlexibleBorrowRecordStatus>))]
     public enum FlexibleBorrowRecordStatus
     {
         /// <summary>
