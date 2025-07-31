@@ -489,6 +489,22 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Futures.GetFuturesTransferHistoryAsync("ETH", DateTime.UtcNow.AddDays(-1)), "GetFuturesTransferHistory");
         }
 
+        [Test]
+        public async Task ValidateGeneralNftCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/Nft", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftDepositHistoryAsync(), "GetNftDepositHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftWithdrawHistoryAsync(), "GetNftWithdrawHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftTransactionHistoryAsync(Enums.NftOrderType.PurchaseOrder), "GetNftTransactionHistory");
+            await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftAssetAsync(), "GetNftAsset");
+        }
+
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;
