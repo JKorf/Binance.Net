@@ -3,10 +3,9 @@
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
-    /// Adjust info
+    /// Borrow record
     /// </summary>
-    [SerializationModel]
-    public record BinanceCryptoLoanLtvAdjust
+    public record BinanceCryptoLoanFlexibleBorrowRecord
     {
         /// <summary>
         /// The loaning asset
@@ -19,24 +18,25 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Direction
+        /// The loan quantity
         /// </summary>
-        [JsonPropertyName("direction")]
-        public string Direction { get; set; } = string.Empty;
+        [JsonPropertyName("initialLoanAmount")]
+        public decimal InitialLoanQuantity { get; set; }
         /// <summary>
-        /// Adjustment amount
+        /// The collateral quantity
         /// </summary>
-        [JsonPropertyName("adjustmentAmount")]
-        public decimal Quantity { get; set; }
+        [JsonPropertyName("initialCollateralAmount")]
+        public decimal InitialCollateralQuantity { get; set; }
         /// <summary>
-        /// Current ltv
+        /// Borrow timestamp
         /// </summary>
-        [JsonPropertyName("currentLTV")]
-        public decimal CurrentLtv { get; set; }
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("borrowTime")]
+        public DateTime BorrowTime { get; set; }
         /// <summary>
-        /// Status
+        /// Status of the order
         /// </summary>
         [JsonPropertyName("status")]
-        public FlexibleBorrowStatus Status { get; set; }
+        public FlexibleBorrowRecordStatus Status { get; set; }
     }
 }

@@ -31,10 +31,5 @@
         /// </summary>
         [JsonPropertyName("maxLimit")]
         public decimal MaxLimit { get; set; }
-        /// <summary>
-        /// Vip level
-        /// </summary>
-        [JsonPropertyName("vipLevel")]
-        public int VipLevel { get; set; }
     }
 }

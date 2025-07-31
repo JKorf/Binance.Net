@@ -17,11 +17,6 @@
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Repay quantity
-        /// </summary>
-        [JsonPropertyName("repayAmount")]
-        public decimal RepayQuantity { get; set; }
-        /// <summary>
         /// Rate
         /// </summary>
         [JsonPropertyName("rate")]

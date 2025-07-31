@@ -1,12 +1,9 @@
-﻿using Binance.Net.Enums;
-
-namespace Binance.Net.Objects.Models.Spot.Loans
+﻿namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
-    /// Adjust info
+    /// Ltv adjustment info
     /// </summary>
-    [SerializationModel]
-    public record BinanceCryptoLoanLtvAdjust
+    public record BinanceCryptoLoanFlexibleLtvAdjustRecord
     {
         /// <summary>
         /// The loaning asset
@@ -24,19 +21,25 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
-        /// Adjustment amount
+        /// Collateral amount
         /// </summary>
-        [JsonPropertyName("adjustmentAmount")]
+        [JsonPropertyName("collateralAmount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Current ltv
+        /// Pre adjust ltv
         /// </summary>
-        [JsonPropertyName("currentLTV")]
-        public decimal CurrentLtv { get; set; }
+        [JsonPropertyName("preLTV")]
+        public decimal PreLtv { get; set; }
         /// <summary>
-        /// Status
+        /// Post adjust ltv
         /// </summary>
-        [JsonPropertyName("status")]
-        public FlexibleBorrowStatus Status { get; set; }
+        [JsonPropertyName("afterLTV")]
+        public decimal AfterLtv { get; set; }
+        /// <summary>
+        /// Adjust time
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("adjustTime")]
+        public DateTime AdjustTime { get; set; }
     }
 }
