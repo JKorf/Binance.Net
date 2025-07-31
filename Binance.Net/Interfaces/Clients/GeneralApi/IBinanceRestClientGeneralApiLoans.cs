@@ -228,5 +228,47 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanRepayRecord>>> GetRepayHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get interest rate and borrow limit of loanable assets.
+        /// </summary>
+        /// <param name="loanAsset">Filter by loan asset</param>
+        /// <param name="vipLevel">VIP level filter</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get LTV information and collateral limit of collateral assets.
+        /// </summary>
+        /// <param name="collateralAsset">Filter by collateral asset</param>
+        /// <param name="vipLevel">VIP level filter</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the latest rate of collateral coin/loan coin when using collateral repay.
+        /// </summary>
+        /// <param name="loanAsset">Loan asset</param>
+        /// <param name="collateralAsset">Collateral asset</param>
+        /// <param name="quantity">Repay amount</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Customize margin call (FULLY RETIRED)
+        /// </summary>
+        /// <param name="marginCall">Margin call value</param>
+        /// <param name="orderId">Order ID filter</param>
+        /// <param name="collateralAsset">Collateral asset filter</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>> CustomizeMarginCallAsync(decimal marginCall, string? orderId = null, string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }
