@@ -499,8 +499,8 @@ namespace Binance.Net.UnitTests
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/CopyTrading", "https://api.binance.com", IsAuthenticated);
-            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetUserStatusAsync(), "GetUserStatusAsync");
-            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetLeadSymbolAsync(), "GetLeadSymbolAsync");
+            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetUserStatusAsync(), "GetUserStatus", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetLeadSymbolAsync(), "GetLeadSymbol", nestedJsonProperty: "data");
         }
 
         private bool IsAuthenticated(WebCallResult result)

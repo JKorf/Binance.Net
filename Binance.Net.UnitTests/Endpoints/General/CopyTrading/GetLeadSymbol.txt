@@ -15,5 +15,5 @@ true
         "baseAsset": "ETH",
         "quoteAsset": "USDT"
      }
-   ],
+   ]
 }
