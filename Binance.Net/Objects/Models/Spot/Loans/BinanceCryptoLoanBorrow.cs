@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Borrow info
@@ -27,14 +29,9 @@
         [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
-        /// Hourly interest rate
+        /// Status
         /// </summary>
-        [JsonPropertyName("hourlyInterestRate")]
-        public decimal HourlyInterestRate { get; set; }
-        /// <summary>
-        /// Borrow order id
-        /// </summary>
-        [JsonPropertyName("orderId")]
-        public long OrderId { get; set; }
+        [JsonPropertyName("status")]
+        public FlexibleBorrowStatus Status { get; set; }
     }
 }
