@@ -752,6 +752,12 @@
         <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CopyTrading">
             <inheritdoc />
         </member>
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.GiftCard">
+            <inheritdoc />
+        </member>
+        <member name="P:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.Nft">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -945,6 +951,27 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiFutures.GetFuturesTransferHistoryAsync(System.String,System.DateTime,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard.CreateSingleTokenGiftCardAsync(System.String,System.Double,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard.CreateDualTokenGiftCardAsync(System.String,System.String,System.Double,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard.RedeemGiftCardAsync(System.String,System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard.VerifyGiftCardByNumberAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard.GetTokenLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiGiftCard.GetRsaPublicKeyAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiLoans">
@@ -6618,6 +6645,51 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCopyTradingUserStatusArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinaceGiftCardData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardRedeemData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseBinaceGiftCardData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseBinanceGiftCardRedeemData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseBinanceGiftCardTokenLimit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseBinanceGiftCardValidity">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseString">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardTokenLimit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardValidity">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -12803,6 +12875,17 @@
             </summary>
             <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiCopyTrading"/>
         </member>
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.GiftCard">
+            <summary>
+            Endpoints related to Binance Gift Cards
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApi.Nft">
+            <summary>
+            Endpoints related to Binance Nft
+            </summary>
+            <see cref="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiNft"/>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiAutoInvest">
             <summary>
             Binance Auto Invest endpoints
@@ -13499,6 +13582,75 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>History</returns>
+        </member>
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard">
+            <summary>
+            Binance gift card endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard.CreateSingleTokenGiftCardAsync(System.String,System.Double,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Create a single-token gift card
+            <para><a href="https://developers.binance.com/docs/gift_card/market-data" /></para>
+            </summary>
+            <param name="token">The token type contained in the Binance Gift Card</param>
+            <param name="amount">The amount of the token contained in the Binance Gift Card</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard.CreateDualTokenGiftCardAsync(System.String,System.String,System.Double,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Create a dual-token gift card
+            <para><a href="https://developers.binance.com/docs/gift_card/market-data/Create-a-dual-token-gift-card" /></para>
+            </summary>
+            <param name="baseToken">The token you want to pay, example: BUSD</param>
+            <param name="faceToken">The token you want to buy, example: BNB</param>
+            <param name="baseTokenAmount">The base token asset quantity, example: 1.002</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard.RedeemGiftCardAsync(System.String,System.String,System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Redeem a Binance Gift Card
+            <para><a href="https://developers.binance.com/docs/gift_card/market-data/Redeem-a-Binance-Gift-Card" /></para>
+            </summary>
+            <param name="code">Redemption code of Binance Gift Card to be redeemed, supports both Plaintext and Encrypted code.</param>
+            <param name="externalUid">External UID</param>
+            <param name="useEncryption">Encrypts the code if true, sends as plaintext otherwise</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard.VerifyGiftCardByNumberAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Verify Binance Gift Card by Gift Card Number
+            <para><a href="https://developers.binance.com/docs/gift_card/market-data/Verify-Binance-Gift-Card-by-Gift-Card-Number" /></para>
+            </summary>
+            <param name="referenceNumber">The Gift Card Number</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard.GetTokenLimitAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get Token Limit
+            <para><a href="https://developers.binance.com/docs/gift_card/market-data/Fetch-Token-Limit" /></para>
+            </summary>
+            <param name="baseToken">The token you want to pay, example: BUSD</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiGiftCard.GetRsaPublicKeyAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get RSA public key
+            <para><a href="https://developers.binance.com/docs/gift_card/market-data/Fetch-RSA-Public-Key" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiLoans">
             <summary>
@@ -26950,6 +27102,116 @@
         <member name="P:Binance.Net.Objects.Models.Spot.CopyTrading.BinanceCopyTradingUserStatus.Timestamp">
             <summary>
             Time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.GiftCard.BinaceGiftCardData">
+            <summary>
+            Binance Gift Card data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinaceGiftCardData.ReferenceNumber">
+            <summary>
+            Reference number
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinaceGiftCardData.Code">
+            <summary>
+            Code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinaceGiftCardData.ExpiredTime">
+            <summary>
+            Expired time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardRedeemData">
+            <summary>
+            Binance Gift Card redeem data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardRedeemData.ReferenceNumber">
+            <summary>
+            Reference number
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardRedeemData.IdentityNumber">
+            <summary>
+            Identity Number
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardRedeemData.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardRedeemData.Amount">
+            <summary>
+            Amount
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardResponse`1">
+            <summary>
+            Query results 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardResponse`1.Code">
+            <summary>
+            Response code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardResponse`1.Message">
+            <summary>
+            Response message
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardResponse`1.Data">
+            <summary>
+            Response data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardResponse`1.Success">
+            <summary>
+            Whether the call was successful
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardTokenLimit">
+            <summary>
+            Binance Gift Card token limit data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardTokenLimit.Coin">
+            <summary>
+            Coin
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardTokenLimit.FromMin">
+            <summary>
+            From min
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardTokenLimit.FromMax">
+            <summary>
+            From max 
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardValidity">
+            <summary>
+            Binance Gift Card validity data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardValidity.Valid">
+            <summary>
+            Is gift card valid
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardValidity.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.GiftCard.BinanceGiftCardValidity.Amount">
+            <summary>
+            Amount
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.IsolatedMargin.BinanceIsolatedMarginSymbol">
