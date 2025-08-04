@@ -105,7 +105,7 @@ namespace Binance.Net.SymbolOrderBooks
 
         private void HandleUpdate(DataEvent<IBinanceEventOrderBook> data)
         {
-            if(data.Data.FirstUpdateId != null)
+            if (data.Data.FirstUpdateId != null)
                 UpdateOrderBook(data.Data.FirstUpdateId.Value, data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
             else
                 UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
@@ -114,10 +114,10 @@ namespace Binance.Net.SymbolOrderBooks
 
         private void HandleUpdate(DataEvent<IBinanceOrderBook> data)
         {
-            if (Levels == null)            
-                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);            
-            else            
-                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);            
+            if (Levels == null)
+                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+            else
+                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
         }
 
         /// <inheritdoc />

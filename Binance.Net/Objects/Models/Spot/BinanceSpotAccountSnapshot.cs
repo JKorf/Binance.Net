@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Snapshot data of a spot account
     /// </summary>
+    [SerializationModel]
     public record BinanceSpotAccountSnapshot
     {
         /// <summary>
@@ -15,7 +17,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// Account type the data is for
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
         /// <summary>
@@ -39,7 +40,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// List of balances
         /// </summary>
         [JsonPropertyName("balances")]
-        public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
+        public BinanceBalance[] Balances { get; set; } = Array.Empty<BinanceBalance>();
 
     }
 }

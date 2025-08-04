@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
     /// <summary>
     /// Resale list
     /// </summary>
+    [SerializationModel]
     public record BinanceHashrateResaleList
     {
         /// <summary>
@@ -19,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// Details
         /// </summary>
         [JsonPropertyName("configDetails")]
-        public IEnumerable<BinanceHashrateResaleItem> ResaleItmes { get; set; } = Array.Empty<BinanceHashrateResaleItem>();
+        public BinanceHashrateResaleItem[] ResaleItmes { get; set; } = Array.Empty<BinanceHashrateResaleItem>();
     }
 
     /// <summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Auto invest source asset info
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestSourceAssets
     {
         /// <summary>
@@ -19,7 +20,7 @@
         /// Source assets
         /// </summary>
         [JsonPropertyName("sourceAssets")]
-        public IEnumerable<BinanceAutoInvestSourceAssetInfo> SourceAssets { get; set; } = Array.Empty<BinanceAutoInvestSourceAssetInfo>();
+        public BinanceAutoInvestSourceAssetInfo[] SourceAssets { get; set; } = Array.Empty<BinanceAutoInvestSourceAssetInfo>();
     }
 
     /// <summary>

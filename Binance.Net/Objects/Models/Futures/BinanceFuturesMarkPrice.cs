@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Mark Price and Funding Rate
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesMarkPrice : IBinanceFuturesMarkPrice
     {
         /// <summary>
@@ -55,7 +56,8 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Mark price for Coin-M future
     /// </summary>
-    public record BinanceFuturesCoinMarkPrice: BinanceFuturesMarkPrice
+    [SerializationModel]
+    public record BinanceFuturesCoinMarkPrice : BinanceFuturesMarkPrice
     {
         /// <summary>
         /// The pair

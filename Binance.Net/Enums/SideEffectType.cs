@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Side effect for a margin order
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SideEffectType>))]
     public enum SideEffectType
     {
         /// <summary>

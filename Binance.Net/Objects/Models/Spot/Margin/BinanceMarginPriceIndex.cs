@@ -3,6 +3,7 @@
     /// <summary>
     /// Price index for a symbol
     /// </summary>
+    [SerializationModel]
     public record BinanceMarginPriceIndex
     {
         /// <summary>

@@ -212,10 +212,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region All Market Mini Tickers Stream
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinanceMiniTick>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IBinanceMiniTick[]>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinMiniTick>>>>(data =>
-                onMessage(data.As<IEnumerable<IBinanceMiniTick>>(data.Data.Data)
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamCoinMiniTick[]>>>(data =>
+                onMessage(data.As<IBinanceMiniTick[]>(data.Data.Data)
                 .WithStreamId(data.Data.Stream)
                 .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
@@ -246,10 +246,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region All Market Tickers Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IEnumerable<IBinance24HPrice>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IBinance24HPrice[]>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceStreamCoinTick>>>>(data =>
-                onMessage(data.As<IEnumerable<IBinance24HPrice>>(data.Data.Data)
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamCoinTick[]>>>(data =>
+                onMessage(data.As<IBinance24HPrice[]>(data.Data.Data)
                 .WithStreamId(data.Data.Stream)
                 .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
@@ -304,11 +304,11 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Mark Price Stream for All market
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<DataEvent<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>> onMessage, int? updateInterval = null, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMarkPriceUpdatesAsync(Action<DataEvent<BinanceFuturesCoinStreamMarkPrice[]>> onMessage, int? updateInterval = null, CancellationToken ct = default)
         {
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<IEnumerable<BinanceFuturesCoinStreamMarkPrice>>>>(data =>
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesCoinStreamMarkPrice[]>>>(data =>
                 onMessage(data.As(data.Data.Data)
                 .WithStreamId(data.Data.Stream)
                 .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));

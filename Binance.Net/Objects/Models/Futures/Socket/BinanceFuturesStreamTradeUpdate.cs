@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Update data about a trade
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesStreamTradeUpdate : BinanceStreamEvent
     {
         /// <summary>
@@ -42,9 +44,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         ///     "settlement_autoclose-": settlement order for delisting or delivery
         /// </remarks>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order

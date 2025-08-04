@@ -1,10 +1,13 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures.AlgoOrders
 {
     /// <summary>
     /// Algo orders
     /// </summary>
+    [SerializationModel]
     public record BinanceAlgoOrders
     {
         /// <summary>
@@ -16,7 +19,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Orders
         /// </summary>
         [JsonPropertyName("orders")]
-        public IEnumerable<BinanceAlgoOrder> Orders { get; set; } = Array.Empty<BinanceAlgoOrder>();
+        public BinanceAlgoOrder[] Orders { get; set; } = Array.Empty<BinanceAlgoOrder>();
     }
 
     /// <summary>
@@ -68,9 +71,7 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// Client algo id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientAlgoId { get; set; } = string.Empty;
         /// <summary>
         /// Book time
@@ -97,7 +98,6 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
         /// <summary>
         /// Urgency
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("urgency")]
         public OrderUrgency? Urgency { get; set; }
     }

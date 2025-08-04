@@ -1,8 +1,11 @@
-﻿namespace Binance.Net.Enums
+﻿using Binance.Net.Converters;
+
+namespace Binance.Net.Enums
 {
     /// <summary>
     /// Trade rules behaviour
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<TradeRulesBehaviour>))]
     public enum TradeRulesBehaviour
     {
         /// <summary>

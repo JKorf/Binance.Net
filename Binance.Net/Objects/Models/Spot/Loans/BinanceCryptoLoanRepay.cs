@@ -1,10 +1,12 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Repay info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanRepay
     {
         /// <summary>
@@ -18,30 +20,29 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Current LTV
+        /// Remaining debt
         /// </summary>
-        [JsonPropertyName("currentLTV")]
-        public decimal? CurrentLTV { get; set; }
-        /// <summary>
-        /// Remaining principal
-        /// </summary>
-        [JsonPropertyName("remainingPrincipal")]
-        public decimal? RemainingPrincipal { get; set; }
-        /// <summary>
-        /// Repay status
-        /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
-        [JsonPropertyName("repayStatus")]
-        public BorrowStatus RepayStatus { get; set; }
+        [JsonPropertyName("remainingDebt")]
+        public decimal? RemainingDebt { get; set; }
         /// <summary>
         /// Remaining collateral
         /// </summary>
         [JsonPropertyName("remainingCollateral")]
         public decimal? RemainingCollateral { get; set; }
         /// <summary>
-        /// Remaining interest
+        /// Fully repaid
         /// </summary>
-        [JsonPropertyName("remainingInterest")]
-        public decimal? RemainingInterest { get; set; }
+        [JsonPropertyName("fullRepayment")]
+        public bool FullRepayment{ get; set; }
+        /// <summary>
+        /// Current LTV
+        /// </summary>
+        [JsonPropertyName("currentLTV")]
+        public decimal? CurrentLTV { get; set; }
+        /// <summary>
+        /// Repay status
+        /// </summary>
+        [JsonPropertyName("repayStatus")]
+        public RepayStatus RepayStatus { get; set; }
     }
 }

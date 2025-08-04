@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Self trade prevention mode
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SelfTradePreventionMode>))]
     public enum SelfTradePreventionMode
     {
         /// <summary>
@@ -22,6 +24,11 @@ namespace Binance.Net.Enums
         /// </summary>
         [Map("EXPIRE_BOTH")]
         ExpireBoth,
+        /// <summary>
+        /// Decrement
+        /// </summary>
+        [Map("DECREMENT")]
+        Decrement,
         /// <summary>
         /// None
         /// </summary>

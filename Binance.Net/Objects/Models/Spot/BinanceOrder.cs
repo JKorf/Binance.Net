@@ -3,7 +3,8 @@
     /// <summary>
     /// Information regarding a specific order
     /// </summary>
-    public record BinanceOrder: BinanceOrderBase
+    [SerializationModel]
+    public record BinanceOrder : BinanceOrderBase
     {
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Binance.Net.Objects.Models.Spot
 {
+    [SerializationModel]
     internal record BinanceListenKey
     {
         [JsonPropertyName("listenKey")]

@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub account details
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountEmail
     {
         /// <summary>

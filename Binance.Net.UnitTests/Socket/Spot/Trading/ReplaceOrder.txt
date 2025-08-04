@@ -1,0 +1,68 @@
+> { "id": "|1|", "method": "order.cancelReplace", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "cancelResult": "SUCCESS",
+    "newOrderResult": "SUCCESS",
+    "cancelResponse": {
+      "symbol": "BTCUSDT",
+      "origClientOrderId": "4d96324ff9d44481926157", 
+      "orderId": 125690984230,
+      "orderListId": -1,
+      "clientOrderId": "91fe37ce9e69c90d6358c0",     
+      "transactTime": 1684804350068,
+      "price": "23450.00000000",
+      "origQty": "0.00847000",
+      "executedQty": "0.00001000",
+      "origQuoteOrderQty": "0.000000",
+      "cummulativeQuoteQty": "0.23450000",
+      "status": "CANCELED",
+      "timeInForce": "GTC",
+      "type": "LIMIT",
+      "side": "SELL",
+      "selfTradePreventionMode": "NONE"
+    },
+    "newOrderResponse": {
+      "symbol": "BTCUSDT",
+      "orderId": 12569099453,
+      "orderListId": -1,
+      "clientOrderId": "bX5wROblo6YeDwa9iTLeyY",
+      "transactTime": 1660813156959,
+      "price": "23416.10000000",
+      "origQty": "0.00847000",
+      "executedQty": "0.00000000",
+      "origQuoteOrderQty": "0.000000",
+      "cummulativeQuoteQty": "0.00000000",
+      "status": "NEW",
+      "timeInForce": "GTC",
+      "type": "LIMIT",
+      "side": "SELL",
+      "selfTradePreventionMode": "NONE"
+    }
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "SECOND",
+      "intervalNum": 10,
+      "limit": 50,
+      "count": 1
+    },
+    {
+      "rateLimitType": "ORDERS",
+      "interval": "DAY",
+      "intervalNum": 1,
+      "limit": 160000,
+      "count": 1
+    },
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 1
+    }
+  ]
+}

@@ -3,6 +3,7 @@
     /// <summary>
     /// Repay rate info
     /// </summary>
+    [SerializationModel]
     public record BinanceCryptoLoanRepayRate
     {
         /// <summary>
@@ -15,11 +16,6 @@
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
-        /// <summary>
-        /// Repay quantity
-        /// </summary>
-        [JsonPropertyName("repayAmount")]
-        public decimal RepayQuantity { get; set; }
         /// <summary>
         /// Rate
         /// </summary>

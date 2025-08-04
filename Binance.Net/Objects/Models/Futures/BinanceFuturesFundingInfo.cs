@@ -3,6 +3,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Funding rate information for Futures trading
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesFundingInfo
     {
         /// <summary>

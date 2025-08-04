@@ -3,6 +3,7 @@
     /// <summary>
     /// Futures Commission Rebate
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageFuturesRebate
     {
         /// <summary>

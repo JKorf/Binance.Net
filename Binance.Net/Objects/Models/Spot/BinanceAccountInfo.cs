@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot
@@ -6,6 +7,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about an account
     /// </summary>
+    [SerializationModel]
     public record BinanceAccountInfo
     {
         /// <summary>
@@ -72,19 +74,18 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The type of account
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
         /// <summary>
         /// Permissions types
         /// </summary>
         [JsonPropertyName("permissions")]
-        public IEnumerable<PermissionType> Permissions { get; set; } = Array.Empty<PermissionType>();
+        public PermissionType[] Permissions { get; set; } = Array.Empty<PermissionType>();
         /// <summary>
         /// List of assets with their current balances
         /// </summary>
         [JsonPropertyName("balances")]
-        public IEnumerable<BinanceBalance> Balances { get; set; } = Array.Empty<BinanceBalance>();
+        public BinanceBalance[] Balances { get; set; } = Array.Empty<BinanceBalance>();
     }
 
     /// <summary>

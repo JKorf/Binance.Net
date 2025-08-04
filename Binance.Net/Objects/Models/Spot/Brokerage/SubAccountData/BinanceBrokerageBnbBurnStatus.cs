@@ -3,6 +3,7 @@
     /// <summary>
     /// BNB Burn Status
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageBnbBurnStatus
     {
         /// <summary>
@@ -16,7 +17,7 @@
         /// </summary>
         [JsonPropertyName("spotBNBBurn")]
         public bool IsSpotBnbBurn { get; set; }
-        
+
         /// <summary>
         /// Is Interest BNB Burn
         /// </summary>

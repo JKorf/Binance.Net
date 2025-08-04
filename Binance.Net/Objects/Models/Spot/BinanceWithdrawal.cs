@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about a withdrawal
     /// </summary>
+    [SerializationModel]
     public record BinanceWithdrawal
     {
         /// <summary>
@@ -86,7 +87,6 @@ namespace Binance.Net.Objects.Models.Spot
         /// <summary>
         /// The wallet type the withdrawal was from
         /// </summary>
-        [JsonConverter(typeof(EnumConverter))]
         [JsonPropertyName("walletType")]
         public WalletType WalletType { get; set; }
 

@@ -3,6 +3,7 @@
     /// <summary>
     /// Cross margin interest data
     /// </summary>
+    [SerializationModel]
     public record BinanceInterestMarginData
     {
         /// <summary>

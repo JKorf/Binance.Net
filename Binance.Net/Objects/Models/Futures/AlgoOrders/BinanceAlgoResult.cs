@@ -3,7 +3,8 @@
     /// <summary>
     /// Algo order result
     /// </summary>
-    public record BinanceAlgoResult: BinanceResult
+    [SerializationModel]
+    public record BinanceAlgoResult : BinanceResult
     {
         /// <summary>
         /// Algo order id

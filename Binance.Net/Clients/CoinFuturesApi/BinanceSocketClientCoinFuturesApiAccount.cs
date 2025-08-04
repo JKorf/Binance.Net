@@ -24,12 +24,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<IEnumerable<BinanceCoinFuturesAccountBalance>>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<CallResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
 
-            return await _client.QueryAsync<IEnumerable<BinanceCoinFuturesAccountBalance>>(_client.ClientOptions.Environment.CoinFuturesSocketApiAddress!.AppendPath("ws-dapi/v1"), $"account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceCoinFuturesAccountBalance[]>(_client.ClientOptions.Environment.CoinFuturesSocketApiAddress!.AppendPath("ws-dapi/v1"), $"account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -67,8 +67,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
-            var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, new List<string> { listenKey }, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
-            return await _client.SubscribeInternalAsync(_client.BaseAddress.AppendPath("stream"), subscription, ct).ConfigureAwait(false);
+            var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, listenKey, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
+            return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
 
         #endregion

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// The type of execution
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ExecutionType>))]
     public enum ExecutionType
     {
         /// <summary>

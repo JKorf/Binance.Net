@@ -3,6 +3,7 @@
     /// <summary>
     /// Simple Earn collateral record
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnCollateralRecord
     {
         /// <summary>

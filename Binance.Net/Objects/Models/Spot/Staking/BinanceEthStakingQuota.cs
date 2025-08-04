@@ -3,6 +3,7 @@
     /// <summary>
     /// Eth staking quota
     /// </summary>
+    [SerializationModel]
     public record BinanceEthStakingQuota
     {
         /// <summary>

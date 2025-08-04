@@ -3,6 +3,7 @@
     /// <summary>
     /// Simple Earn personal quota left
     /// </summary>
+    [SerializationModel]
     public record BinanceSimpleEarnPersonalQuotaLeft
     {
         /// <summary>

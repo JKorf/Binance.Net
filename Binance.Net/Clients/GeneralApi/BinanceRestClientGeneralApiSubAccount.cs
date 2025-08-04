@@ -21,7 +21,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Query Sub-account List(For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccount>>> GetSubAccountsAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccount[]>> GetSubAccountsAsync(string? email = null, int? page = null, int? limit = null, int? receiveWindow = null, bool? isFreeze = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("email", email);
@@ -32,7 +32,7 @@ namespace Binance.Net.Clients.GeneralApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceSubAccountWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result ? result.As<IEnumerable<BinanceSubAccount>>(result.Data.SubAccounts) : result.As<IEnumerable<BinanceSubAccount>>(default);
+            return result ? result.As<BinanceSubAccount[]>(result.Data.SubAccounts) : result.As<BinanceSubAccount[]>(default);
         }
 
         #endregion
@@ -40,7 +40,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Query Sub-account Transfer History(For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountTransfer>>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountTransfer[]>> GetSubAccountTransferHistoryForMasterAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("fromEmail", fromEmail);
@@ -52,7 +52,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/sub/transfer/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSubAccountTransfer>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSubAccountTransfer[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -88,7 +88,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Query Sub-account Assets(For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceBalance>>> GetSubAccountAssetsAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceBalance[]>> GetSubAccountAssetsAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
 
@@ -102,10 +102,10 @@ namespace Binance.Net.Clients.GeneralApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v3/sub-account/assets", BinanceExchange.RateLimiter.SpotRestUid, 60, true);
             var result = await _baseClient.SendAsync<BinanceSubAccountAsset>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<IEnumerable<BinanceBalance>>(default);
+                return result.As<BinanceBalance[]>(default);
 
             if (!result.Data.Success)
-                return result.AsError<IEnumerable<BinanceBalance>>(new ServerError(result.Data!.Message));
+                return result.AsError<BinanceBalance[]>(new ServerError(result.Data!.Message));
 
             return result.As(result.Data.Balances);
         }
@@ -136,7 +136,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Sub-account Deposit History (For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountDeposit>>> GetSubAccountDepositHistoryAsync(string email, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? offset = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountDeposit[]>> GetSubAccountDepositHistoryAsync(string email, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? offset = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             email.ValidateNotNull(nameof(email));
 
@@ -153,7 +153,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/capital/deposit/subHisrec", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSubAccountDeposit>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSubAccountDeposit[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -161,14 +161,14 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Sub-account's Status on Margin/Futures(For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountStatus>>> GetSubAccountStatusAsync(string? email = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountStatus[]>> GetSubAccountStatusAsync(string? email = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("email", email);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/status", BinanceExchange.RateLimiter.SpotRestIp, 10, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSubAccountStatus>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSubAccountStatus[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -300,7 +300,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Futures Postion-Risk of Sub-account (For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountFuturesPositionRisk>>> GetSubAccountsFuturesPositionRiskAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountFuturesPositionRisk[]>> GetSubAccountsFuturesPositionRiskAsync(string email, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection
             {
@@ -310,7 +310,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/futures/positionRisk", BinanceExchange.RateLimiter.SpotRestIp, 10, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSubAccountFuturesPositionRisk>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSubAccountFuturesPositionRisk[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -418,7 +418,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Sub-account Transfer History (For Sub-account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountTransferSubAccount>>> GetSubAccountTransferHistoryForSubAccountAsync(string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountTransferSubAccount[]>> GetSubAccountTransferHistoryForSubAccountAsync(string? asset = null, SubAccountTransferSubAccountType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("asset", asset);
@@ -429,7 +429,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/transfer/subUserHistory", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            return await _baseClient.SendAsync<IEnumerable<BinanceSubAccountTransferSubAccount>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceSubAccountTransferSubAccount[]>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -490,7 +490,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Query Universal Transfer History (For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>> GetUniversalTransferHistoryAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountUniversalTransferTransaction[]>> GetUniversalTransferHistoryAsync(string? fromEmail = null, string? toEmail = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalParameter("fromEmail", fromEmail);
@@ -503,7 +503,7 @@ namespace Binance.Net.Clients.GeneralApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/universalTransfer", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceSubAccountUniversalTransfersList>(request, parameters, ct).ConfigureAwait(false);
-            return result ? result.As<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>(result.Data.Transactions) : result.As<IEnumerable<BinanceSubAccountUniversalTransferTransaction>>(default);
+            return result ? result.As<BinanceSubAccountUniversalTransferTransaction[]>(result.Data.Transactions) : result.As<BinanceSubAccountUniversalTransferTransaction[]>(default);
         }
 
         #endregion
@@ -536,7 +536,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "subAccountApiKey", apiKey }
             };
 
-            if(ipAddresses != null)
+            if (ipAddresses != null)
                 parameters.AddOptionalParameter("ipAddress", string.Join(",", ipAddresses));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
@@ -563,13 +563,13 @@ namespace Binance.Net.Clients.GeneralApi
         #region Query Sub-account Futures Asset Transfer History (For Master Account)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceSubAccountAssetTransferHistory>>> GetFuturesAssetTransferHistoryAsync(string email, FuturesAccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSubAccountAssetTransferHistory[]>> GetFuturesAssetTransferHistoryAsync(string email, FuturesAccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection()
             {
                 { "email", email },
-                { "futuresType", EnumConverter.GetString(accountType) },
             };
+            parameters.AddEnum("futuresType", accountType);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -578,7 +578,7 @@ namespace Binance.Net.Clients.GeneralApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sub-account/futures/internalTransfer", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceSubAccountAssetTransferHistoryList>(request, parameters, ct).ConfigureAwait(false);
-            return result ? result.As(result.Data.Transfers) : result.As<IEnumerable<BinanceSubAccountAssetTransferHistory>>(default);
+            return result ? result.As(result.Data.Transfers) : result.As<BinanceSubAccountAssetTransferHistory[]>(default);
         }
 
         #endregion
@@ -594,11 +594,10 @@ namespace Binance.Net.Clients.GeneralApi
             {
                 { "fromEmail", fromEmail },
                 { "toEmail", toEmail },
-                { "futuresType", EnumConverter.GetString(accountType) },
                 { "asset", asset },
                 { "amount", quantity.ToString(CultureInfo.InvariantCulture) }
             };
-
+            parameters.AddEnum("futuresType", accountType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sub-account/futures/internalTransfer", BinanceExchange.RateLimiter.SpotRestIp, 1, true);

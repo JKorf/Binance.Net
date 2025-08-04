@@ -6,6 +6,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Symbol info
     /// </summary>
+    [SerializationModel]
     public record BinanceSymbol
     {
         /// <summary>
@@ -43,7 +44,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Allowed order types
         /// </summary>
         [JsonPropertyName("orderTypes")]
-        public IEnumerable<SpotOrderType> OrderTypes { get; set; } = Array.Empty<SpotOrderType>();
+        public SpotOrderType[] OrderTypes { get; set; } = Array.Empty<SpotOrderType>();
         /// <summary>
         /// Iceberg orders allowed
         /// </summary>
@@ -54,6 +55,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("cancelReplaceAllowed")]
         public bool CancelReplaceAllowed { get; set; }
+        /// <summary>
+        /// Allow amend
+        /// </summary>
+        [JsonPropertyName("allowAmend")]
+        public bool AllowAmend { get; set; }
         /// <summary>
         /// Spot trading orders allowed
         /// </summary>
@@ -98,33 +104,33 @@ namespace Binance.Net.Objects.Models.Spot
         /// Permissions types
         /// </summary>
         [JsonPropertyName("permissions")]
-        public IEnumerable<PermissionType> Permissions { get; set; } = Array.Empty<PermissionType>();
+        public PermissionType[] Permissions { get; set; } = Array.Empty<PermissionType>();
         /// <summary>
         /// Permission sets
         /// </summary>
-        [JsonPropertyName("permissionSets"), JsonConverter(typeof(PermissionTypeConverter))]
-        public IEnumerable<IEnumerable<PermissionType>> PermissionSets { get; set; } = Array.Empty<IEnumerable<PermissionType>>();
+        [JsonPropertyName("permissionSets"), JsonConverter(typeof(AccountTypeConverterImp<PermissionType[][]>))]
+        public PermissionType[][] PermissionSets { get; set; } = Array.Empty<PermissionType[]>();
 
         /// <summary>
         /// Filters for order on this symbol
         /// </summary>
         [JsonPropertyName("filters")]
-        public IEnumerable<BinanceSymbolFilter> Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
+        public BinanceSymbolFilter[] Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();
         /// <summary>
         /// Default self trade prevention
         /// </summary>
         [JsonPropertyName("defaultSelfTradePreventionMode")]
-        [JsonConverter(typeof(EnumConverter))]
         public SelfTradePreventionMode DefaultSelfTradePreventionMode { get; set; }
         /// <summary>
         /// Allowed self trade prevention modes
         /// </summary>
         [JsonPropertyName("allowedSelfTradePreventionModes")]
-        public IEnumerable<SelfTradePreventionMode> AllowedSelfTradePreventionModes { get; set; } = Array.Empty<SelfTradePreventionMode>();
+        public SelfTradePreventionMode[] AllowedSelfTradePreventionModes { get; set; } = Array.Empty<SelfTradePreventionMode>();
+
         /// <summary>
         /// Filter for max amount of iceberg parts for this symbol
         /// </summary>
-        [JsonIgnore]        
+        [JsonIgnore]
         public BinanceSymbolIcebergPartsFilter? IceBergPartsFilter => Filters.OfType<BinanceSymbolIcebergPartsFilter>().FirstOrDefault();
         /// <summary>
         /// Filter for max accuracy of the quantity for this symbol

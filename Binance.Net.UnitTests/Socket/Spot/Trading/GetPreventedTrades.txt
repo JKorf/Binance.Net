@@ -1,0 +1,29 @@
+> { "id": "|1|", "method": "myPreventedMatches", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": [
+    {
+      "symbol": "BTCUSDT",
+      "preventedMatchId": 1,
+      "takerOrderId": 5,
+      "makerSymbol": "BTCUSDT",
+      "makerOrderId": 3,
+      "tradeGroupId": 1,
+      "selfTradePreventionMode": "EXPIRE_MAKER",
+      "price": "1.100000",
+      "makerPreventedQuantity": "1.300000",
+      "transactTime": 1669101687094
+    }
+  ],
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 6000,
+      "count": 20
+    }
+  ]
+}

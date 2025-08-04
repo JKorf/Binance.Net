@@ -1,4 +1,5 @@
-﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+﻿using Binance.Net.Converters;
+using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Options;
@@ -9,6 +10,8 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using System.IO;
+using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -18,6 +21,18 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region fields
         private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
+        private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
+
+        private readonly HashSet<string> _userEvents = new HashSet<string>
+        {
+            "ACCOUNT_CONFIG_UPDATE",
+            "MARGIN_CALL",
+            "ACCOUNT_UPDATE",
+            "ORDER_TRADE_UPDATE",
+            "listenKeyExpired",
+            "STRATEGY_UPDATE",
+            "GRID_UPDATE"
+        };
         #endregion
 
         /// <inheritdoc />
@@ -52,9 +67,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         public IBinanceSocketClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
@@ -70,7 +85,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (id != null)
                 return id.ToString();
 
-            return message.GetValue<string>(_streamPath);
+            var stream = message.GetValue<string>(_streamPath); ;
+            var e = message.GetValue<string>(_ePath);
+            if (e != null && _userEvents.Contains(e))
+                return stream + e;
+
+            return stream;
         }
 
         #endregion

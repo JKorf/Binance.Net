@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     /// <summary>
     /// Information about a deposit
     /// </summary>
+    [SerializationModel]
     public record BinanceSubAccountDeposit
     {
         /// <summary>

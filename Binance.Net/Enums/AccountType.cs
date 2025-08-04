@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Type of account
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AccountType>))]
     public enum AccountType
     {
         /// <summary>
@@ -26,6 +28,6 @@ namespace Binance.Net.Enums
         /// Leveraged account type
         /// </summary>
         [Map("LEVERAGED")]
-        Leveraged       
+        Leveraged
     }
 }

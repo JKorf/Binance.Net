@@ -1,4 +1,5 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Converters;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
@@ -11,6 +12,7 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -28,6 +30,18 @@ namespace Binance.Net.Clients.SpotApi
 
         private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
+        private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
+
+        private readonly HashSet<string> _userEvents = new HashSet<string>
+        {
+            "outboundAccountPosition",
+            "balanceUpdate",
+            "executionReport",
+            "listStatus",
+            "listenKeyExpired",
+            "eventStreamTerminated",
+            "externalLockUpdate"
+        };
         #endregion
 
         /// <inheritdoc />
@@ -67,10 +81,9 @@ namespace Binance.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
-
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
-
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+                
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {
@@ -78,7 +91,12 @@ namespace Binance.Net.Clients.SpotApi
             if (id != null)
                 return id.ToString();
 
-            return message.GetValue<string>(_streamPath);
+            var stream = message.GetValue<string>(_streamPath); ;
+            var e = message.GetValue<string>(_ePath);
+            if (e != null && _userEvents.Contains(e))
+                return stream + e;
+
+            return stream;
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)

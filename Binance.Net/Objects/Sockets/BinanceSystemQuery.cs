@@ -3,13 +3,11 @@ using CryptoExchange.Net.Sockets;
 
 namespace Binance.Net.Objects.Sockets
 {
-    internal class BinanceSystemQuery<T> : Query<T> where T: BinanceSocketQueryResponse
+    internal class BinanceSystemQuery<T> : Query<T> where T : BinanceSocketQueryResponse
     {
-        public override HashSet<string> ListenerIdentifiers { get; set; }
-
         public BinanceSystemQuery(BinanceSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
-            ListenerIdentifiers = new HashSet<string> { request.Id.ToString() };
+            MessageMatcher = MessageMatcher.Create<T>(request.Id.ToString());
         }
     }
 }

@@ -3,6 +3,7 @@
     /// <summary>
     /// Bankruptcy loan info
     /// </summary>
+    [SerializationModel]
     public record BinancePortfolioMarginLoan
     {
         /// <summary>

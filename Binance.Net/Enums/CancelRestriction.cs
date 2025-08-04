@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Restrictions for order cancelation
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<CancelRestriction>))]
     public enum CancelRestriction
     {
         /// <summary>

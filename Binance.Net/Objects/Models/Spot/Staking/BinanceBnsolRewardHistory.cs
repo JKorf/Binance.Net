@@ -7,6 +7,7 @@ namespace Binance.Net.Objects.Models.Spot.Staking
     /// <summary>
     /// SOL rewards history
     /// </summary>
+    [SerializationModel]
     public record BinanceBnsolRewardHistory
     {
         /// <summary>

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// The direction to change futures margin
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<FuturesMarginChangeDirectionType>))]
     public enum FuturesMarginChangeDirectionType
     {
         /// <summary>

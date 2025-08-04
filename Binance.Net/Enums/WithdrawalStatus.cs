@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// The status of a withdrawal
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<WithdrawalStatus>))]
     public enum WithdrawalStatus
     {
         /// <summary>

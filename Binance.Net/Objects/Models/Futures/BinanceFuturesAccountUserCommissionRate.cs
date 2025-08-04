@@ -3,6 +3,7 @@
     /// <summary>
     /// User commission rate
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesAccountUserCommissionRate
     {
         /// <summary>

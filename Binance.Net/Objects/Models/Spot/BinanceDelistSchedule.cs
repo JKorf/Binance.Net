@@ -3,6 +3,7 @@
     /// <summary>
     /// Spot symbol delist info
     /// </summary>
+    [SerializationModel]
     public record BinanceDelistSchedule
     {
         /// <summary>
@@ -15,6 +16,6 @@
         /// Symbols being delisted
         /// </summary>
         [JsonPropertyName("symbols")]
-        public IEnumerable<string> Symbols { get; set; } = new List<string>();
+        public string[] Symbols { get; set; } = [];
     }
 }

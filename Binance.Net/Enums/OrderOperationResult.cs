@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Operation result
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<OrderOperationResult>))]
     public enum OrderOperationResult
     {
         /// <summary>

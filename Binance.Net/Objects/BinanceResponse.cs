@@ -5,6 +5,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Binance response
     /// </summary>
+    [SerializationModel]
     public class BinanceResponse
     {
         /// <summary>
@@ -27,7 +28,7 @@ namespace Binance.Net.Objects
         /// Rate limit info
         /// </summary>
         [JsonPropertyName("rateLimits")]
-        public IEnumerable<BinanceCurrentRateLimit> Ratelimits { get; set; } = new List<BinanceCurrentRateLimit>();
+        public BinanceCurrentRateLimit[] Ratelimits { get; set; } = [];
 
     }
 
@@ -69,7 +70,7 @@ namespace Binance.Net.Objects
     /// <summary>
     /// Error data
     /// </summary>
-    public class BinanceResponseErrorData 
+    public class BinanceResponseErrorData
     {
         /// <summary>
         /// Server time

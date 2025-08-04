@@ -70,8 +70,8 @@
         public static BinanceApiAddresses TestNet = new BinanceApiAddresses
         {
             RestClientAddress = "https://testnet.binance.vision",
-            SocketClientStreamAddress = "wss://testnet.binance.vision",
-            SocketClientApiAddress = "wss://testnet.binance.vision",
+            SocketClientStreamAddress = "wss://stream.testnet.binance.vision",
+            SocketClientApiAddress = "wss://ws-api.testnet.binance.vision",
             BlvtSocketClientAddress = "wss://fstream.binancefuture.com",
             UsdFuturesRestClientAddress = "https://testnet.binancefuture.com",
             UsdFuturesSocketClientAddress = "wss://fstream.binancefuture.com",

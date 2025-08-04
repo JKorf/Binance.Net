@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Convert Order status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ConvertOrderStatus>))]
     public enum ConvertOrderStatus
     {
         /// <summary>

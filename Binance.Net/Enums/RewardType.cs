@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Simple Earn Reward type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<RewardType>))]
     public enum RewardType
     {
         /// <summary>

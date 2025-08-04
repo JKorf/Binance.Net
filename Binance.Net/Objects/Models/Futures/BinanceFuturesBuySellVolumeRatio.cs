@@ -3,6 +3,7 @@
     /// <summary>
     /// Buy Sell Volume Ratio Info
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesBuySellVolumeRatio
     {
         /// <summary>

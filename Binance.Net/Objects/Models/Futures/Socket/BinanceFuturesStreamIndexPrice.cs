@@ -3,7 +3,8 @@
     /// <summary>
     /// Index price update
     /// </summary>
-    public record BinanceFuturesStreamIndexPrice: BinanceStreamEvent
+    [SerializationModel]
+    public record BinanceFuturesStreamIndexPrice : BinanceStreamEvent
     {
         /// <summary>
         /// The pair

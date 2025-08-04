@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     /// <summary>
     /// Transaction status
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestOneTimeTransactionStatus
     {
         /// <summary>

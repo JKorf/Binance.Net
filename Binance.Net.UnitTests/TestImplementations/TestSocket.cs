@@ -4,7 +4,10 @@ using System.Net.WebSockets;
 using System.Security.Authentication;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
+using Binance.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 
@@ -50,7 +53,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public TimeSpan KeepAliveInterval { get; set; }
         public Func<Task<Uri>> GetReconnectionUrl { get; set; }
 
-        public Task<CallResult> ConnectAsync()
+        public Task<CallResult> ConnectAsync(CancellationToken ct)
         {
             Connected = CanConnect;
             return Task.FromResult(CanConnect ? new CallResult(null) : new CallResult(new CantConnectError()));
@@ -102,7 +105,7 @@ namespace Binance.Net.UnitTests.TestImplementations
 
         public void InvokeMessage<T>(T data)
         {
-            OnStreamMessage?.Invoke(WebSocketMessageType.Text, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(data)))).Wait();
+            OnStreamMessage?.Invoke(WebSocketMessageType.Text, new ReadOnlyMemory<byte>(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(data, SerializerOptions.WithConverters(new BinanceSourceGenerationContext()))))).Wait();
         }
 
         public void SetProxy(ApiProxy proxy)
@@ -122,5 +125,6 @@ namespace Binance.Net.UnitTests.TestImplementations
         }
 
         public void UpdateProxy(ApiProxy proxy) => throw new NotImplementedException();
+        public bool Send(int id, byte[] data, int weight) => throw new NotImplementedException();
     }
 }

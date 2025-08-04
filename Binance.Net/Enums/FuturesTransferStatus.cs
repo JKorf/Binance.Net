@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Status of a transfer between spot and futures account
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<FuturesTransferStatus>))]
     public enum FuturesTransferStatus
     {
         /// <summary>

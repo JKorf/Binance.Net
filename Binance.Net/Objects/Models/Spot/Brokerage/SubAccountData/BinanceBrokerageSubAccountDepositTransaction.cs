@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     /// <summary>
     /// Sub Account Deposit Transaction
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccountDepositTransaction
     {
         /// <summary>
@@ -30,25 +31,25 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
-        
+
         /// <summary>
         /// Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Date
         /// </summary>
         [JsonPropertyName("insertTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
-        
+
         /// <summary>
         /// Network
         /// </summary>
         [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Status
         /// </summary>
@@ -60,7 +61,7 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
         /// </summary>
         [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Source Address
         /// </summary>

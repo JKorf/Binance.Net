@@ -32,7 +32,7 @@
         /// List of asset details
         /// </summary>
         [JsonPropertyName("assets")]
-        public IEnumerable<BinanceSubAccountFuturesAsset> Assets { get; set; } = Array.Empty<BinanceSubAccountFuturesAsset>();
+        public BinanceSubAccountFuturesAsset[] Assets { get; set; } = Array.Empty<BinanceSubAccountFuturesAsset>();
         /// <summary>
         /// Can deposit
         /// </summary>

@@ -3,6 +3,7 @@
     /// <summary>
     /// Trade result
     /// </summary>
+    [SerializationModel]
     public record BinanceAutoInvestTradeResult
     {
         /// <summary>

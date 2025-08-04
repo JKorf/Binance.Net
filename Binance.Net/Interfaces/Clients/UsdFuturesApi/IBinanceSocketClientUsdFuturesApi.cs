@@ -13,14 +13,17 @@
         /// <summary>
         /// Account streams and queries
         /// </summary>
+        /// <see cref="IBinanceSocketClientUsdFuturesApiAccount"/>
         IBinanceSocketClientUsdFuturesApiAccount Account { get; }
         /// <summary>
         /// Exchange data streams and queries
         /// </summary>
+        /// <see cref="IBinanceSocketClientUsdFuturesApiExchangeData"/>
         IBinanceSocketClientUsdFuturesApiExchangeData ExchangeData { get; }
         /// <summary>
         /// Trading data and queries
         /// </summary>
+        /// <see cref="IBinanceSocketClientUsdFuturesApiTrading"/>
         IBinanceSocketClientUsdFuturesApiTrading Trading { get; }
     }
 }

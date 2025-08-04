@@ -3,6 +3,7 @@
     /// <summary>
     /// Trade info
     /// </summary>
+    [SerializationModel]
     public record BinanceOrderTrade
     {
         /// <summary>

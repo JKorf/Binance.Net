@@ -1,3 +1,4 @@
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
@@ -5,7 +6,8 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     /// <summary>
     /// Order update
     /// </summary>
-    public record BinanceFuturesStreamOrderUpdate: BinanceStreamEvent
+    [SerializationModel]
+    public record BinanceFuturesStreamOrderUpdate : BinanceStreamEvent
     {
         /// <summary>
         /// Update data
@@ -38,9 +40,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// The new client order id
         /// </summary>
         [JsonPropertyName("c")]
-        [JsonConverterCtor(typeof(ReplaceConverter), 
-            $"{BinanceExchange.ClientOrderIdPrefixSpot}->",
-            $"{BinanceExchange.ClientOrderIdPrefixFutures}->")]
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
         /// The side of the order
@@ -166,7 +166,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// If Close-All, only pushed with conditional order
         /// </summary>
         [JsonPropertyName("cp")]
-        public bool PushedConditionalOrder { get; set; }
+        public bool IsClosePositionOrder { get; set; }
         /// <summary>
         /// Activation Price, only pushed with TRAILING_STOP_MARKET order
         /// </summary>

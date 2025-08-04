@@ -1,5 +1,7 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Objects.Options;
+using Binance.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -130,7 +132,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetIsolatedMarginSymbolsAsync("ETHUSDT", 5000, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(new[] { "ETH" }, false, null, CancellationToken.None), true);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), false);
+            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetConvertListAllPairsAsync(null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetDelistScheduleAsync(null, CancellationToken.None), true);
 
@@ -214,6 +216,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetIndexPriceKlinesAsync("ETHUSDT", Enums.KlineInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetAssetIndexesAsync(CancellationToken.None), false);
             await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetBasisAsync("ETHUSDT", Enums.ContractType.Perpetual, Enums.PeriodInterval.OneDay, null, null, null, CancellationToken.None), false);
+            await RunAndCheckResult(client => client.UsdFuturesApi.ExchangeData.GetIndexPriceConstituentsAsync("ETHUSDT", CancellationToken.None), false);
         }
 
         [Test]
@@ -272,6 +275,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetTopLongShortAccountRatioAsync("ETHUSD", Enums.PeriodInterval.OneDay, null, null, null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetFundingInfoAsync(CancellationToken.None), false);
             await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetFundingRatesAsync("ETHUSD_PERP", null, null, null, CancellationToken.None), false);
+            await RunAndCheckResult(client => client.CoinFuturesApi.ExchangeData.GetIndexPriceConstituentsAsync("ETHUSD", CancellationToken.None), false);
         }
 
         [Test]
@@ -281,6 +285,14 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.CoinFuturesApi.Trading.GetOrdersAsync("ETHUSD_PERP", default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.CoinFuturesApi.Trading.GetForcedOrdersAsync(default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.CoinFuturesApi.Trading.GetUserTradesAsync("ETHUSD_PERP", default, default, default, default, default, default, default, default), true);
+        }
+
+        [Test]
+        public async Task TestOrderBooks()
+        {
+            await TestOrderBook(new BinanceSpotSymbolOrderBook("ETHUSDT"));
+            await TestOrderBook(new BinanceFuturesUsdtSymbolOrderBook("ETHUSDT"));
+            await TestOrderBook(new BinanceFuturesCoinSymbolOrderBook("ETHUSD_PERP"));
         }
     }
 }

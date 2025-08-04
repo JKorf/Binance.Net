@@ -3,6 +3,7 @@
     /// <summary>
     /// Dust log response details
     /// </summary>
+    [SerializationModel]
     public record BinanceDustLogList
     {
         /// <summary>
@@ -14,7 +15,7 @@
         /// Rows
         /// </summary>
         [JsonPropertyName("userAssetDribblets")]
-        public IEnumerable<BinanceDustLog> UserAssetDribblets { get; set; } = Array.Empty<BinanceDustLog>();
+        public BinanceDustLog[] UserAssetDribblets { get; set; } = Array.Empty<BinanceDustLog>();
     }
 
     /// <summary>
@@ -41,7 +42,7 @@
         /// Detail logs
         /// </summary>
         [JsonPropertyName("userAssetDribbletDetails")]
-        public IEnumerable<BinanceDustLogDetails> Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();
+        public BinanceDustLogDetails[] Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();
         /// <summary>
         /// Timestamp
         /// </summary>

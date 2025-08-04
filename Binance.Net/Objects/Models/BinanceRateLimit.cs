@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models
     /// <summary>
     /// Rate limit info
     /// </summary>
+    [SerializationModel]
     public record BinanceRateLimit
     {
         /// <summary>

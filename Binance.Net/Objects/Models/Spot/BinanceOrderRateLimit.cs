@@ -3,7 +3,8 @@
     /// <summary>
     /// Rate limit info
     /// </summary>
-    public record BinanceCurrentRateLimit: BinanceRateLimit
+    [SerializationModel]
+    public record BinanceCurrentRateLimit : BinanceRateLimit
     {
         /// <summary>
         /// The current used amount

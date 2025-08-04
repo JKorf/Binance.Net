@@ -3,6 +3,7 @@
     /// <summary>
     /// Sub Account Api Key
     /// </summary>
+    [SerializationModel]
     public record BinanceBrokerageSubAccountApiKey
     {
         /// <summary>
@@ -22,13 +23,13 @@
         /// </summary>
         [JsonPropertyName("canTrade")]
         public bool IsSpotTradingEnabled { get; set; }
-        
+
         /// <summary>
         /// Is Margin Trading Enabled
         /// </summary>
         [JsonPropertyName("marginTrade")]
         public bool IsMarginTradingEnabled { get; set; }
-        
+
         /// <summary>
         /// Is Futures Trading Enabled
         /// </summary>

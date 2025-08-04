@@ -1,10 +1,15 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Index status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<AutoInvestIndexStatus>))]
     public enum AutoInvestIndexStatus
     {
         /// <summary>

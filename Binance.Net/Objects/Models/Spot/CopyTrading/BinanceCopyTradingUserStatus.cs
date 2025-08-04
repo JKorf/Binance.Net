@@ -3,6 +3,7 @@
     /// <summary>
     /// Copy trading user status
     /// </summary>
+    [SerializationModel]
     public record BinanceCopyTradingUserStatus
     {
         /// <summary>

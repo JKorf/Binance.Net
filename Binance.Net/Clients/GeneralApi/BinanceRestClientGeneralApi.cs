@@ -5,6 +5,7 @@ using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.SharedApis;
+using Binance.Net.Converters;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -39,11 +40,15 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiSimpleEarn SimpleEarn { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiCopyTrading CopyTrading { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientGeneralApiNft Nft { get; }
         #endregion
 
         #region constructor/destructor
 
-        internal BinanceRestClientGeneralApi(ILogger logger, HttpClient? httpClient, BinanceRestClient baseClient, BinanceRestOptions options) 
+        internal BinanceRestClientGeneralApi(ILogger logger, HttpClient? httpClient, BinanceRestClient baseClient, BinanceRestOptions options)
             : base(logger, httpClient, options.Environment.SpotRestAddress, options, options.SpotOptions)
         {
             _baseClient = baseClient;
@@ -57,6 +62,8 @@ namespace Binance.Net.Clients.GeneralApi
             Staking = new BinanceRestClientGeneralApiStaking(this);
             SimpleEarn = new BinanceRestClientGeneralApiSimpleEarn(this);
             CopyTrading = new BinanceRestClientGeneralApiCopyTrading(this);
+            GiftCard = new BinanceRestClientGeneralApiGiftCard(this);
+            Nft = new BinanceRestClientGeneralApiNFT(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
@@ -69,9 +76,8 @@ namespace Binance.Net.Clients.GeneralApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
-
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
@@ -118,24 +124,24 @@ namespace Binance.Net.Clients.GeneralApi
             => BinanceRestClientSpotApi._timeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
-            if (!accessor.IsJson)
-                return new ServerError(accessor.GetOriginalString());
+            if (!accessor.IsValid)
+                return new ServerError(null, "Unknown request error", exception: exception);
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
             if (msg == null)
-                return new ServerError(accessor.GetOriginalString());
+                return new ServerError(null, "Unknown request error", exception: exception);
 
             if (code == null)
-                return new ServerError(msg);
+                return new ServerError(null, msg, exception);
 
-            return new ServerError(code.Value, msg);
+            return new ServerError(code.Value, msg, exception);
         }
 
         /// <inheritdoc />
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
         {
             var error = GetRateLimitError(accessor);
             var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));
@@ -158,7 +164,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         private BinanceRateLimitError GetRateLimitError(IMessageAccessor accessor)
         {
-            if (!accessor.IsJson)
+            if (!accessor.IsValid)
                 return new BinanceRateLimitError(accessor.GetOriginalString());
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));

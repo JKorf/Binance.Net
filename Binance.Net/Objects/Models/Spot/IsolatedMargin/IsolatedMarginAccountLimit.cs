@@ -4,6 +4,7 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     /// <summary>
     /// Enabled account limit
     /// </summary>
+    [SerializationModel]
     public record IsolatedMarginAccountLimit
     {
         /// <summary>

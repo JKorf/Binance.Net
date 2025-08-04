@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Futures
     /// <summary>
     /// Futures income history result
     /// </summary>
+    [SerializationModel]
     public record BinanceFuturesIncomeHistory
     {
         /// <summary>

@@ -1,12 +1,14 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Candlestick information for symbol
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
-    public record BinanceSpotKline: BinanceKlineBase
+    [JsonConverter(typeof(ArrayConverter<BinanceSpotKline>))]
+    [SerializationModel]
+    public record BinanceSpotKline : BinanceKlineBase
     {
         /// <summary>
         /// The volume traded during this candlestick

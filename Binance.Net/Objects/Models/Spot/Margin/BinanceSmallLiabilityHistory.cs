@@ -3,6 +3,7 @@
     /// <summary>
     /// Small liability history
     /// </summary>
+    [SerializationModel]
     public record BinanceSmallLiabilityHistory
     {
         /// <summary>

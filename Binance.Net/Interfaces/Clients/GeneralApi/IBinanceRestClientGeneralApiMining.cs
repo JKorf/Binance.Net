@@ -14,7 +14,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Coins info</returns>
-        Task<WebCallResult<IEnumerable<BinanceMiningCoin>>> GetMiningCoinListAsync(CancellationToken ct = default);
+        Task<WebCallResult<BinanceMiningCoin[]>> GetMiningCoinListAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets mining algorithms info
@@ -22,7 +22,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algorithms info</returns>
-        Task<WebCallResult<IEnumerable<BinanceMiningAlgorithm>>> GetMiningAlgorithmListAsync(CancellationToken ct = default);
+        Task<WebCallResult<BinanceMiningAlgorithm[]>> GetMiningAlgorithmListAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets miner details
@@ -33,7 +33,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="workerName">Miners name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Miner details</returns>
-        Task<WebCallResult<IEnumerable<BinanceMinerDetails>>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default);
+        Task<WebCallResult<BinanceMinerDetails[]>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets miner list
@@ -97,7 +97,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="userName">Mining account user name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Revenue list</returns>
-        Task<WebCallResult<IEnumerable<BinanceMiningAccount>>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
+        Task<WebCallResult<BinanceMiningAccount[]>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets hash rate resale list

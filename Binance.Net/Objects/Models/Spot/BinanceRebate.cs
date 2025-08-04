@@ -5,6 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Rebates page wrapper
     /// </summary>
+    [SerializationModel]
     public record BinanceRebateWrapper
     {
         /// <summary>
@@ -26,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Rebate data for this page
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<BinanceRebate> Data { get; set; } = Array.Empty<BinanceRebate>();
+        public BinanceRebate[] Data { get; set; } = Array.Empty<BinanceRebate>();
     }
 
     /// <summary>

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Valid Time
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<ValidTime>))]
     public enum ValidTime
     {
         /// <summary>

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Attributes;
+﻿using Binance.Net.Converters;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
     /// <summary>
     /// Sub Account Deposit Status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SubAccountDepositStatus>))]
     public enum SubAccountDepositStatus
     {
         /// <summary>
