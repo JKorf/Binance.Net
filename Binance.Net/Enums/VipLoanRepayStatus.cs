@@ -6,6 +6,7 @@ namespace Binance.Net.Enums
     /// <summary>
     /// VIP Loan repay status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<VipLoanRepayStatus>))]
     public enum VipLoanRepayStatus
     {
         /// <summary>

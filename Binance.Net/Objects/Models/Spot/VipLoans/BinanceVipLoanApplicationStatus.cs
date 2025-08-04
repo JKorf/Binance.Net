@@ -51,7 +51,6 @@ namespace Binance.Net.Objects.Models.Spot.VipLoans
         /// Application status
         /// </summary>
         [JsonPropertyName("status")]
-        [JsonConverter(typeof(EnumConverter))]
         public VipLoanApplicationStatus Status { get; set; }
         /// <summary>
         /// Loan date

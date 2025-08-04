@@ -575,7 +575,20 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferResult[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransaction[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal[]))]
-    
+
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanAsset[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData[]))]
+
     [JsonSerializable(typeof(Enums.SymbolFilterType[]))]
     [JsonSerializable(typeof(BinanceConstituents))]
     [JsonSerializable(typeof(BinanceInsuranceFundBalance))]
