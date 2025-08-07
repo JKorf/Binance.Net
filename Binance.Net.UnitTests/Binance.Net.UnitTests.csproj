@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Endpoints\General\GiftCard\" />
     <Folder Include="Endpoints\General\SimpleEarn\" />
     <Folder Include="Endpoints\General\Staking\" />
     <Folder Include="Endpoints\General\SubAccount\" />

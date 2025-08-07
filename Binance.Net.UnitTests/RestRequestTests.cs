@@ -505,6 +505,24 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftAssetAsync(), "GetNftAsset");
         }
 
+        [Test]
+        public async Task ValidateGeneralGiftCardCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/GiftCard", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.CreateSingleTokenGiftCardAsync("BUSD", 1.002), "CreateSingleTokenGiftCard");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.CreateDualTokenGiftCardAsync("BUSD", "BNB", 1.002), "CreateDualTokenGiftCard");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.RedeemGiftCardAsync("6H9EKF5ECCWFBHGE", useEncryption: false), "RedeemGiftCard");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.VerifyGiftCardByNumberAsync("0033002144060553"), "VerifyGiftCardByNumber");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.GetTokenLimitAsync("BUSD"), "GetTokenLimit");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.GetRsaPublicKeyAsync(), "GetRsaPublicKey");
+        }
+
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;
