@@ -1,0 +1,41 @@
+GET
+/sapi/v1/mining/statistics/user/list
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "type": "H_hashrate",
+      "userName": "test",
+      "list": [
+        {
+          "time": 1585267200000,
+          "hashrate": "0.00000000",
+          "reject": "0.00000000"
+        },
+        {
+          "time": 1585353600000,
+          "hashrate": "0.00000000",
+          "reject": "0.00000000"
+        }
+      ]
+    },
+    {
+      "type": "D_hashrate",
+      "userName": "test",
+      "list": [
+        {
+          "time": 1587906000000,
+          "hashrate": "0.00000000",
+          "reject": "0.00000000"
+        },
+        {
+          "time": 1587909600000,
+          "hashrate": "0.00000000",
+          "reject": "0.00000000"
+        }
+      ]
+    }
+  ]
+}

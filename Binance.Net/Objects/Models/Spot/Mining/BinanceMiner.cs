@@ -11,14 +11,17 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Total number of entries
         /// </summary>
+        [JsonPropertyName("totalNum")]
         public int TotalNum { get; set; }
         /// <summary>
         /// Page size
         /// </summary>
+        [JsonPropertyName("pageSize")]
         public int PageSize { get; set; }
         /// <summary>
         /// Worker data
         /// </summary>
+        [JsonPropertyName("workerDatas")]
         public BinanceMinerInfo[] WorkerDatas { get; set; } = Array.Empty<BinanceMinerInfo>();
     }
 

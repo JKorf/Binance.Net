@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Models.Spot.Mining
         /// <summary>
         /// Total number of results
         /// </summary>
-        [JsonPropertyName("totalName")]
+        [JsonPropertyName("totalNum")]
         public int TotalNum { get; set; }
         /// <summary>
         /// Page size

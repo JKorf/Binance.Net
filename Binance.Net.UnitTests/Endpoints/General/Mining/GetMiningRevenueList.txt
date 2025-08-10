@@ -1,0 +1,43 @@
+GET
+/sapi/v1/mining/payment/list
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "accountProfits": [
+      {
+        "time": 1586188800000,
+        "type": 31,
+        "hashTransfer": null,
+        "transferAmount": null,
+        "dayHashRate": 129129903378244,
+        "profitAmount": 8.6083060304,
+        "coinName":"BTC",
+        "status": 2
+      },
+      {
+        "time": 1607529600000,
+        "coinName": "BTC",
+        "type": 0,
+        "dayHashRate": 9942053925926,
+        "profitAmount": 0.85426469,
+        "hashTransfer": 200000000000,
+        "transferAmount": 0.02180958,
+        "status": 2
+      },
+      {
+        "time": 1607443200000,
+        "coinName": "BTC",
+        "type": 31,
+        "dayHashRate": 200000000000,
+        "profitAmount": 0.02905916,
+        "hashTransfer": null,
+        "transferAmount": null,
+        "status": 2
+      }
+    ],
+    "totalNum": 3,
+    "pageSize": 20
+  }
+}

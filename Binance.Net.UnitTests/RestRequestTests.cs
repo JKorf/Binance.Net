@@ -505,6 +505,31 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftAssetAsync(), "GetNftAsset");
         }
 
+        [Test]
+        public async Task ValidateGeneralMiningCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/Mining", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningCoinListAsync(),"GetMiningCoinList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAlgorithmListAsync(),"GetMiningAlgorithmList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMinerDetailsAsync("sha256", "test", "bhdc1.16A10404B"),"GetMinerDetails", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMinerListAsync("sha256", "test"),"GetMinerList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningRevenueListAsync("sha256", "test"),"GetMiningRevenueList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningOtherRevenueListAsync("sha256", "test"),"GetMiningOtherRevenueList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningStatisticsAsync("sha256", "test"),"GetMiningStatistics", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAccountListAsync("sha256", "test"),"GetMiningAccountList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetHashrateResaleListAsync(),"GetHashrateResaleList", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetHashrateResaleDetailsAsync(168, "test"),"GetHashrateResaleDetails", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.PlaceHashrateResaleRequestAsync("test", "sha256", DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, "S19Pro", 100000000),"PlaceHashrateResaleRequest", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.CancelHashrateResaleRequestAsync(168, "test"),"CancelHashrateResaleRequest", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAccountEarningsAsync("sha256"),"GetMiningAccountEarnings", nestedJsonProperty: "data");
+        }
+
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;
