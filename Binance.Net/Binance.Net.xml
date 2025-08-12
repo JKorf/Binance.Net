@@ -20351,7 +20351,12 @@
             </summary>
             <param name="message"></param>
         </member>
-        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(System.Nullable{System.Int32},System.String,System.Exception)">
+        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(System.Int32,System.String)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(CryptoExchange.Net.Objects.Errors.ErrorInfo,System.Exception)">
             <summary>
             ctor
             </summary>

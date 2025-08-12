@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Objects.Internal;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 
@@ -6,8 +7,11 @@ namespace Binance.Net.Objects.Sockets
 {
     internal class BinanceSpotQuery<T> : Query<T> where T : BinanceResponse
     {
-        public BinanceSpotQuery(BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
+        private readonly SocketApiClient _client;
+
+        public BinanceSpotQuery(SocketApiClient client, BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
+            _client = client;
             MessageMatcher = MessageMatcher.Create<T>(request.Id.ToString(), HandleMessage);
         }
 
@@ -18,13 +22,13 @@ namespace Binance.Net.Objects.Sockets
                 if (message.Data.Status == 418 || message.Data.Status == 429)
                 {
                     // Rate limit error 
-                    return new CallResult<T>(new BinanceRateLimitError(message.Data.Error!.Code, message.Data.Error!.Message, null)
+                    return new CallResult<T>(new BinanceRateLimitError(message.Data.Error!.Code, message.Data.Error!.Message)
                     {
                         RetryAfter = message.Data.Error.Data!.RetryAfter
                     }, message.OriginalData);
                 }
 
-                return new CallResult<T>(new ServerError(message.Data.Error!.Code, message.Data.Error!.Message), message.OriginalData);
+                return new CallResult<T>(new ServerError(message.Data.Error!.Code.ToString(), _client.GetErrorInfo(message.Data.Error!.Code, message.Data.Error!.Message)), message.OriginalData);
             }
 
             return new CallResult<T>(message.Data, message.OriginalData, null);

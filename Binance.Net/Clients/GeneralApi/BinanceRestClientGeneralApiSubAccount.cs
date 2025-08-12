@@ -3,6 +3,7 @@ using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.SubAccountData;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -105,7 +106,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceBalance[]>(default);
 
             if (!result.Data.Success)
-                return result.AsError<BinanceBalance[]>(new ServerError(result.Data!.Message));
+                return result.AsError<BinanceBalance[]>(new ServerError(null, ErrorInfo.Unknown with { Message = result.Data!.Message }));
 
             return result.As(result.Data.Balances);
         }

@@ -7,6 +7,7 @@ using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
 using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.PortfolioMargin;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Binance.Net.Clients.SpotApi
@@ -207,7 +208,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceSpotAccountSnapshot[]>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
             if (result.Data.Code != 200)
-                return result.AsError<BinanceSpotAccountSnapshot[]>(new ServerError(result.Data.Code, result.Data.Message));
+                return result.AsError<BinanceSpotAccountSnapshot[]>(new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
 
             return result.As(result.Data.SnapshotData);
         }
@@ -219,7 +220,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceMarginAccountSnapshot[]>>(AccountType.Margin, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
             if (result.Data.Code != 200)
-                return result.AsError<BinanceMarginAccountSnapshot[]>(new ServerError(result.Data.Code, result.Data.Message));
+                return result.AsError<BinanceMarginAccountSnapshot[]>(new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
 
             return result.As(result.Data.SnapshotData);
         }
@@ -232,7 +233,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceFuturesAccountSnapshot[]>>(AccountType.Futures, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
             if (result.Data.Code != 200)
-                return result.AsError<BinanceFuturesAccountSnapshot[]>(new ServerError(result.Data.Code, result.Data.Message));
+                return result.AsError<BinanceFuturesAccountSnapshot[]>(new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
 
             return result.As(result.Data.SnapshotData);
         }
@@ -1074,7 +1075,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!result)
                 return result.As<BinanceTradingStatus>(default);
 
-            return !string.IsNullOrEmpty(result.Data.Message) ? result.AsError<BinanceTradingStatus>(new ServerError(result.Data.Message!)) : result.As(result.Data.Data);
+            return !string.IsNullOrEmpty(result.Data.Message) ? result.AsError<BinanceTradingStatus>(new ServerError(null, ErrorInfo.Unknown with { Message = result.Data.Message! })) : result.As(result.Data.Data);
         }
         #endregion
 
@@ -1107,7 +1108,7 @@ namespace Binance.Net.Clients.SpotApi
                 return result.As<BinanceRebateWrapper>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceRebateWrapper>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceRebateWrapper>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }

@@ -135,7 +135,7 @@ namespace Binance.Net.UnitTests
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
-            Assert.That(result.Error.Code == 123);
+            Assert.That(result.Error.ErrorCode == "123");
             Assert.That(result.Error.Message == "Error!");
         }
 

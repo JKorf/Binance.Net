@@ -7,6 +7,7 @@
         public decimal? QuoteQuantity { get; set; }
         public decimal? Price { get; set; }
         public decimal? StopPrice { get; set; }
+        public string? ErrorParameter { get; set; }
         public string? ErrorMessage { get; set; }
 
         public static BinanceTradeRuleResult CreatePassed(decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice)
@@ -21,12 +22,13 @@
             };
         }
 
-        public static BinanceTradeRuleResult CreateFailed(string message)
+        public static BinanceTradeRuleResult CreateFailed(string parameter, string message)
         {
             return new BinanceTradeRuleResult
             {
                 Passed = false,
-                ErrorMessage = message
+                ErrorMessage = message,
+                ErrorParameter = parameter
             };
         }
     }

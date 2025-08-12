@@ -135,7 +135,7 @@ namespace Binance.Net.Clients.SpotApi
                 Id = ExchangeHelpers.NextId()
             };
 
-            var query = new BinanceSpotQuery<BinanceResponse<T>>(request, false, weight);
+            var query = new BinanceSpotQuery<BinanceResponse<T>>(this, request, false, weight);
             var result = await QueryAsync(url, query, ct).ConfigureAwait(false);
             if (!result.Success && result.Error is BinanceRateLimitError rle)
             {
@@ -161,7 +161,7 @@ namespace Binance.Net.Clients.SpotApi
                 await ExchangeData.GetExchangeInfoAsync().ConfigureAwait(false);
 
             if (_exchangeInfo == null)
-                return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
+                return BinanceTradeRuleResult.CreateFailed("", "Unable to retrieve trading rules, validation failed");
 
             return BinanceHelpers.ValidateTradeRules(_logger, ApiOptions.TradeRulesBehaviour, _exchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
         }

@@ -55,7 +55,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceTestOrderCommission>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceTestOrderCommission>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -225,7 +225,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceReplaceOrderResult>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceReplaceOrderResult>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -355,7 +355,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceOrderOcoList>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceOrderOcoList>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity!.Value;
@@ -964,7 +964,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceMarginOrderOcoList>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceMarginOrderOcoList>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity!.Value;
@@ -1116,7 +1116,7 @@ namespace Binance.Net.Clients.SpotApi
                 return result.As<BinanceC2CUserTrade[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceC2CUserTrade[]>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceC2CUserTrade[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -1140,7 +1140,7 @@ namespace Binance.Net.Clients.SpotApi
                 return result.As<BinancePayTrade[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinancePayTrade[]>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinancePayTrade[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
