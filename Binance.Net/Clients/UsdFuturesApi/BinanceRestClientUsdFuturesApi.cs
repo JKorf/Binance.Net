@@ -130,8 +130,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
                 new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "FillOrKill order could not be filled immediately", "-5021"),
                 new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "PostOnly order could not be placed", "-5022"),
+                new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "Only limit orders supported", "-5025"),
                 new ErrorInfo(ErrorType.InvalidOperation, false, "Symbol not in trading status", "-5024"),
-                new ErrorInfo(ErrorType.OrderTypeInvalid, false, "Only limit orders supported", "-5025"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Maximum modify order limit exceeded", "-5026"),
                 new ErrorInfo(ErrorType.QuantityInvalid, false, "Order notional value too small", "-5029"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid price match", "-5037"),
@@ -366,15 +366,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
-                return new ServerError(null, ErrorInfo.Unknown, exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
             if (msg == null)
-                return new ServerError(null, ErrorInfo.Unknown, exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             if (code == null)
-                return new ServerError(null, new ErrorInfo(ErrorType.Unknown, false, msg));
+                return new ServerError(new ErrorInfo(ErrorType.Unknown, false, msg));
 
             var errorInfo = GetErrorInfo(code.Value, msg);
             return new ServerError(code.Value.ToString(), errorInfo, exception);
