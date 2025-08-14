@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Subscribe Locked Product
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSimpleEarnPurchase>> SubscribeLockedProductAsync(string projectId, decimal quantity, bool? autoSubscribe = null, AccountSource? sourceAccount = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceSimpleEarnPurchase>> SubscribeLockedProductAsync(string projectId, decimal quantity, bool? autoSubscribe = null, AccountSource? sourceAccount = null, RedeemDestination? redeemDestination = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection()
             {
@@ -84,6 +84,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptional("autoSubscribe", autoSubscribe);
             parameters.AddOptionalEnum("sourceAccount", sourceAccount);
+            parameters.AddOptionalEnum("redeemTo", redeemDestination);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/subscribe", BinanceExchange.RateLimiter.EndpointLimit, 1, true,
@@ -410,6 +411,24 @@ namespace Binance.Net.Clients.GeneralApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/simple-earn/locked/subscriptionPreview", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceSimpleEarnLockedPreview[]>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Set Locked Redeem Option
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceSimpleEarnResult>> SetLockedRedeemOptionAsync(string positionId, RedeemDestination redeemDestination, long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection
+            {
+                { "positionId", positionId },
+                { "redeemTo", redeemDestination }
+            };
+            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/simple-earn/locked/setRedeemOption", BinanceExchange.RateLimiter.SpotRestIp, 50, true);
+            return await _baseClient.SendAsync<BinanceSimpleEarnResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

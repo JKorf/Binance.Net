@@ -1100,7 +1100,7 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SubscribeFlexibleProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SubscribeLockedProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SubscribeLockedProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{Binance.Net.Enums.RedeemDestination},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.RedeemFlexibleProductAsync(System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -1152,6 +1152,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetLockedSubscriptionPreviewAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.SetLockedRedeemOptionAsync(System.String,Binance.Net.Enums.RedeemDestination,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSimpleEarn.GetRateHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -10757,6 +10760,21 @@
             Referral kickback
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.RedeemDestination">
+            <summary>
+            Simple earn redemption type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RedeemDestination.Spot">
+            <summary>
+            Redeem to spot account
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.RedeemDestination.Flexible">
+            <summary>
+            Redeem to flexible product
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.RedemptionType">
             <summary>
             Simple earn redemption type
@@ -14331,7 +14349,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SubscribeLockedProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SubscribeLockedProductAsync(System.String,System.Decimal,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.AccountSource},System.Nullable{Binance.Net.Enums.RedeemDestination},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Subscribe to locked product
             <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-locked-product-trade" /></para>
@@ -14340,6 +14358,7 @@
             <param name="quantity">Quantity</param>
             <param name="autoSubscribe">Auto subscribe, default true</param>
             <param name="sourceAccount">Source account</param>
+            <param name="redeemDestination">Redeem destination, default "Flexible"</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -14558,6 +14577,17 @@
             <param name="projectId">Project id</param>
             <param name="quantity">Quantity</param>
             <param name="autoSubscribe">Auto subscribe</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiSimpleEarn.SetLockedRedeemOptionAsync(System.String,Binance.Net.Enums.RedeemDestination,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Set locked redeem option 
+            <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-product-redeem-option" /></para>
+            </summary>
+            <param name="positionId">Position id</param>
+            <param name="redeemDestination">Account for redemption, SPOT or FLEXIBLE</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -30345,6 +30375,11 @@
             Purchase id
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.ProductId">
+            <summary>
+            Product id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Type">
             <summary>
             Subscription type
@@ -30453,6 +30488,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.PositionId">
             <summary>
             Position id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ParentPositionId">
+            <summary>
+            Parent Position id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ProjectId">
@@ -30820,6 +30860,11 @@
             Purchase id
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.ProjectId">
+            <summary>
+            Purchase id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Type">
             <summary>
             Subscription type
@@ -30860,9 +30905,44 @@
             Quantity
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.OriginalQuantity">
+            <summary>
+            Original quantity 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.LossQuantity">
+            <summary>
+            Loss quantity 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Complete">
+            <summary>
+            Is complete 
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Asset">
             <summary>
             Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.RewardAsset">
+            <summary>
+            Reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.RewardAmt">
+            <summary>
+            Reward amt 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.extraRewardAsset">
+            <summary>
+            Extra reward asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.EstimateExtraRewardAmt">
+            <summary>
+            Estimate extra reward asset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Timestamp">
