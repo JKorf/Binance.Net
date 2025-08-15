@@ -90,7 +90,7 @@ namespace Binance.Net.Clients.GeneralApi
         internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
             var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-            if (!result && result.Error!.ErrorType == ErrorType.TimestampInvalid && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 BinanceRestClientSpotApi._timeSyncState.LastSyncTime = DateTime.MinValue;
@@ -104,7 +104,7 @@ namespace Binance.Net.Clients.GeneralApi
         internal async Task<WebCallResult> SendToAddressAsync(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
             var result = await base.SendAsync(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-            if (!result && result.Error!.ErrorType == ErrorType.TimestampInvalid && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 BinanceRestClientSpotApi._timeSyncState.LastSyncTime = DateTime.MinValue;
@@ -128,18 +128,18 @@ namespace Binance.Net.Clients.GeneralApi
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
-                return new ServerError(null, ErrorInfo.Unknown, exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
             if (msg == null)
-                return new ServerError(null, ErrorInfo.Unknown, exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             if (code == null)
-                return new ServerError(null, new ErrorInfo(ErrorType.Unknown, false, msg));
+                return new ServerError(new ErrorInfo(ErrorType.Unknown, false, msg));
 
             var errorInfo = GetErrorInfo(code.Value, msg);
-            return new ServerError(code.Value.ToString(), errorInfo, exception);
+            return new ServerError(code.Value, errorInfo, exception);
         }
 
         /// <inheritdoc />

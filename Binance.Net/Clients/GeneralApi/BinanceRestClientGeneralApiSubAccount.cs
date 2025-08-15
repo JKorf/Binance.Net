@@ -106,7 +106,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceBalance[]>(default);
 
             if (!result.Data.Success)
-                return result.AsError<BinanceBalance[]>(new ServerError(null, ErrorInfo.Unknown with { Message = result.Data!.Message }));
+                return result.AsError<BinanceBalance[]>(new ServerError(ErrorInfo.Unknown with { Message = result.Data!.Message }));
 
             return result.As(result.Data.Balances);
         }

@@ -8,6 +8,7 @@ using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
@@ -46,6 +47,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
+
+        protected override ErrorCollection ErrorMapping => BinanceErrors.FuturesErrors;
+
         #endregion
 
         /// <inheritdoc />

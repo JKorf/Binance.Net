@@ -694,7 +694,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
             if (!result.Data.Any())
-                return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
+                return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
 
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedLeverage(result.Data.First().Leverage)
             {

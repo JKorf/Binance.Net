@@ -181,7 +181,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }
 
             if (result.All(x => !x.Success))
-                return response.AsErrorWithData(new ServerError(null, new ErrorInfo(ErrorType.AllOrdersFailed, false, "All orders failed")), result.ToArray());
+                return response.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, false, "All orders failed")), result.ToArray());
 
             return response.As(result.ToArray());
         }

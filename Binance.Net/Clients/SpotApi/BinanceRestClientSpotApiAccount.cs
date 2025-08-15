@@ -1075,7 +1075,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!result)
                 return result.As<BinanceTradingStatus>(default);
 
-            return !string.IsNullOrEmpty(result.Data.Message) ? result.AsError<BinanceTradingStatus>(new ServerError(null, ErrorInfo.Unknown with { Message = result.Data.Message! })) : result.As(result.Data.Data);
+            return !string.IsNullOrEmpty(result.Data.Message) ? result.AsError<BinanceTradingStatus>(new ServerError(ErrorInfo.Unknown with { Message = result.Data.Message! })) : result.As(result.Data.Data);
         }
         #endregion
 

@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var ticker = resultTicker.Data.SingleOrDefault();
             if (ticker == null)
-                return resultTicker.AsExchangeError<SharedBookTicker>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
+                return resultTicker.AsExchangeError<SharedBookTicker>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
 
             return resultTicker.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedBookTicker(
                 ExchangeSymbolCache.ParseSymbol(_topicId, ticker.Symbol),
@@ -171,7 +171,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var mark = resultMarkPrice.Result.Data.SingleOrDefault();
 
             if (ticker == null || mark == null)
-                return resultTicker.Result.AsExchangeError<SharedFuturesTicker>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
+                return resultTicker.Result.AsExchangeError<SharedFuturesTicker>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
 
             return resultTicker.Result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedFuturesTicker(
                 ExchangeSymbolCache.ParseSymbol(_topicId, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice, ticker.LowPrice, ticker.Volume, ticker.PriceChangePercent)
@@ -660,7 +660,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
             if (!result.Data.Any())
-                return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
+                return result.AsExchangeError<SharedLeverage>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found")));
 
             var data = result.Data.Where(x => x.Symbol == symbol).ToList();
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedLeverage(data.First().Leverage)
