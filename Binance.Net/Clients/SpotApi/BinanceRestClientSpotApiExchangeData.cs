@@ -165,7 +165,7 @@ namespace Binance.Net.Clients.SpotApi
                 return data.As<BinanceProduct[]>(null);
 
             if (!data.Data.Success)
-                return data.AsError<BinanceProduct[]>(new ServerError(data.Data.Code, data.Data.Message + " - " + data.Data.MessageDetail));
+                return data.AsError<BinanceProduct[]>(new ServerError(data.Data.Code.ToString(), _baseClient.GetErrorInfo(data.Data.Code, data.Data.Message + " - " + data.Data.MessageDetail)));
 
             return data.As(data.Data.Data);
         }

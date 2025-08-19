@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return data.As<BinanceCopyTradingUserStatus>(default);
 
             if (data.Data?.Code != 0)
-                return data.AsError<BinanceCopyTradingUserStatus>(new ServerError(data.Data!.Code, data.Data!.Message));
+                return data.AsError<BinanceCopyTradingUserStatus>(new ServerError(data.Data!.Code.ToString(), _baseClient.GetErrorInfo(data.Data!.Code, data.Data!.Message)));
 
             return data.As(data.Data.Data);
         }

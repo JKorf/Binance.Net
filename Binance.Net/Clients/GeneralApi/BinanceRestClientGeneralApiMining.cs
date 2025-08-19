@@ -29,7 +29,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMiningCoin[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMiningCoin[]>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningCoin[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -47,7 +47,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMiningAlgorithm[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMiningAlgorithm[]>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningAlgorithm[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -76,7 +76,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMinerDetails[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMinerDetails[]>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMinerDetails[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -107,7 +107,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMinerList>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMinerList>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMinerList>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -139,7 +139,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceRevenueList>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceRevenueList>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceRevenueList>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -171,7 +171,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceOtherRevenueList>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceOtherRevenueList>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceOtherRevenueList>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -196,7 +196,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMiningStatistic>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMiningStatistic>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningStatistic>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -221,7 +221,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMiningAccount[]>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMiningAccount[]>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningAccount[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -241,7 +241,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceHashrateResaleList>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceHashrateResaleList>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceHashrateResaleList>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -269,7 +269,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceHashrateResaleDetails>(default);
 
             if (result.Data?.Code != 0)
-                result.AsError<BinanceHashrateResaleDetails>(new ServerError(result.Data!.Code, result.Data!.Message));
+                result.AsError<BinanceHashrateResaleDetails>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -301,7 +301,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<int>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<int>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<int>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -327,7 +327,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<bool>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<bool>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<bool>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
@@ -353,7 +353,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return result.As<BinanceMiningEarnings>(default);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceMiningEarnings>(new ServerError(result.Data!.Code, result.Data!.Message));
+                return result.AsError<BinanceMiningEarnings>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
             return result.As(result.Data.Data);
         }
