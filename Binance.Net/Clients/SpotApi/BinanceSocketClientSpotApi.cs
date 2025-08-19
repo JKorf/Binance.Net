@@ -33,7 +33,7 @@ namespace Binance.Net.Clients.SpotApi
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
         private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
 
-        protected override ErrorCollection ErrorMapping => BinanceErrors.SpotErrors;
+        protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
 
         private readonly HashSet<string> _userEvents = new HashSet<string>
         {

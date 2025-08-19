@@ -151,33 +151,6 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
-        public void AddingAuthToRequest_Should_AddApiKeyHeader()
-        {
-            // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
-            var client = new HttpClient();
-            var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
-
-            // act
-            var headers = new Dictionary<string, string>();
-            IDictionary<string, object> uriParams = null;
-            IDictionary<string, object> bodyParams = null;
-            authProvider.AuthenticateRequest(
-                new BinanceRestApiClient(new TraceLogger(), new BinanceRestOptions(), new BinanceRestOptions().SpotOptions),
-                request.Uri,
-                HttpMethod.Get,
-                ref uriParams,
-                ref bodyParams,
-                ref headers,
-                true, ArrayParametersSerialization.MultipleValues,
-                HttpMethodParameterPosition.InUri,
-                RequestBodyFormat.Json);
-
-            // assert
-            Assert.That(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
-        }
-
-        [Test]
         public void CheckSignatureExample1()
         {
             var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));

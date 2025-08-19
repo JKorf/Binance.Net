@@ -24,7 +24,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
         private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
 
-        protected override ErrorCollection ErrorMapping => BinanceErrors.FuturesErrors;
+        protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
 
         private readonly HashSet<string> _userEvents = new HashSet<string>
         {

@@ -48,7 +48,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
 
-        protected override ErrorCollection ErrorMapping => BinanceErrors.FuturesErrors;
+        protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
 
         #endregion
 

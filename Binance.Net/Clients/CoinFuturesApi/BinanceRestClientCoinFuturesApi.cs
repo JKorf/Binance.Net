@@ -26,7 +26,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Coin Futures Api");
 
-        protected override ErrorCollection ErrorMapping => BinanceErrors.FuturesErrors;
+        protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
 
         #endregion
 

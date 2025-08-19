@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.SpotApi
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
-        protected override ErrorCollection ErrorMapping => BinanceErrors.SpotErrors;
+        protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
         #endregion
 
         #region Api clients

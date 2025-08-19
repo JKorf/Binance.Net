@@ -26,7 +26,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("USD Futures Api");
 
-        protected override ErrorCollection ErrorMapping => BinanceErrors.FuturesErrors;
+        protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
         #endregion
 
         #region Api clients

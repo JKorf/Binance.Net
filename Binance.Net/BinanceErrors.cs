@@ -9,7 +9,7 @@ namespace Binance.Net
 {
     internal static class BinanceErrors
     {
-        public static ErrorCollection SpotErrors { get; } = new ErrorCollection(
+        public static ErrorMapping SpotErrors { get; } = new ErrorMapping(
             [
                 new ErrorInfo(ErrorType.Unauthorized, false, "Not authorized to execute the request", "-1002"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "Invalid API-key, IP, or permissions for action", "-2015"),
@@ -35,7 +35,6 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Client order id not sent", "-1118"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Client order id not sent", "-1119"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid interval", "-1120"),
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid symbol", "-1121"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid symbol status", "-1122"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Lookup period too big", "-1127"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Parameter combination invalid", "-1128"),
@@ -53,6 +52,7 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.InvalidParameter, false, "OCO buy take profit price must be above", "-1198"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "OCO sell take profit price must be below", "-1199"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid client order id", "-2039"),
+                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid listen key", "-1125"),
 
                 new ErrorInfo(ErrorType.RateLimitSubscription, false, "One of OCO order should be market", "-1191"),
 
@@ -62,7 +62,7 @@ namespace Binance.Net
 
                 new ErrorInfo(ErrorType.RateLimitRequest, false, "Request rate limit reached", "-1003"),
 
-                new ErrorInfo(ErrorType.InvalidListenKey, false, "Invalid listen key", "-1125"),
+                new ErrorInfo(ErrorType.UnknownSymbol, false, "Invalid symbol", "-1121"),
 
                 new ErrorInfo(ErrorType.UnknownOrder, false, "Order does not exist", "-2013"),
                 new ErrorInfo(ErrorType.UnknownOrder, false, "Order archived", "-2026"),
@@ -84,7 +84,7 @@ namespace Binance.Net
 
                         "TRAILING_DELTA" => new ErrorInfo(ErrorType.InvalidParameter, false, "TrailingDelta is not within the defined range of the filter for that order type", code),
                         "ICEBERG_PARTS" => new ErrorInfo(ErrorType.InvalidParameter, false, "ICEBERG order would break into too many parts; icebergQty is too small", code),
-                        "MAX_POSITION" => new ErrorInfo(ErrorType.Unknown, false, "The account's position has reached the maximum defined limit", code),
+                        "MAX_POSITION" => new ErrorInfo(ErrorType.MaxPosition, false, "The account's position has reached the maximum defined limit", code),
 
                         "MAX_NUM_ORDERS" => new ErrorInfo(ErrorType.RateLimitOrder, false, "Account has too many open orders on the symbol", code),
                         "MAX_NUM_ALGO_ORDERS" => new ErrorInfo(ErrorType.RateLimitOrder, false, "Account has too many open stop loss and/or take profit orders on the symbol", code),
@@ -124,7 +124,7 @@ namespace Binance.Net
             ]
         );
 
-        public static ErrorCollection FuturesErrors { get; } = new ErrorCollection(
+        public static ErrorMapping FuturesErrors { get; } = new ErrorMapping(
             [
                 new ErrorInfo(ErrorType.Unauthorized, false, "Not authorized to execute the request", "-1002"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "API key format invalid", "-2014"),
@@ -168,7 +168,6 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Client order id not sent", "-1118"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Client order id not sent", "-1119"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid interval", "-1120"),
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid symbol", "-1121"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid symbol status", "-1122"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Asset not supported", "-1126"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Lookup period too big", "-1127"),
@@ -178,8 +177,9 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Client order id invalid length", "-4015"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid activation price", "-4135"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Reduce only must be true for closing position", "-4138"),
+                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid listen key", "-1125"),
 
-                new ErrorInfo(ErrorType.InvalidListenKey, false, "Invalid listen key", "-1125"),
+                new ErrorInfo(ErrorType.UnknownSymbol, false, "Invalid symbol", "-1121"),
 
                 new ErrorInfo(ErrorType.Unknown, false, "Batch cancel failed", "-2012"),
 
@@ -212,8 +212,6 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.InvalidPrice, false, "Price not increased by tick size", "-4014"),
                 new ErrorInfo(ErrorType.InvalidPrice, false, "Price lower than multiplier floor", "-4024"),
                 new ErrorInfo(ErrorType.InvalidPrice, false, "Price higher than multiplier cap", "-4016"),
-                new ErrorInfo(ErrorType.InvalidPrice, false, "Price higher than multiplier cap", "-4016"),
-                new ErrorInfo(ErrorType.InvalidPrice, false, "Price lower than multiplier floor", "-4024"),
                 new ErrorInfo(ErrorType.InvalidPrice, false, "(Stop)price too low", "-4184"),
 
                 new ErrorInfo(ErrorType.InvalidQuantity, false, "Quantity less than 0", "-4003"),
