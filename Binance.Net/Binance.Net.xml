@@ -23244,6 +23244,11 @@
             Tax commission rates for trades from the order.
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.SpecialCommissions">
+            <summary>
+            Special commission rates for trades from the order.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Discount">
             <summary>
             Discount commission when paying in BNB
@@ -25386,6 +25391,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTestOrderCommission.TaxFeeForOrder">
             <summary>
             Tax fee rates on trades from the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTestOrderCommission.SpecialFeeForOrder">
+            <summary>
+            Special fee rates on trades from the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTestOrderCommission.Discount">
