@@ -94,6 +94,9 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
             bool? autoRepayAtCancel = null,
+            PegPriceType? pegPriceType = null,
+            int? pegOffsetValue = null,
+            PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
             int weight = 1,
             CancellationToken ct = default)
@@ -140,6 +143,9 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalEnum("pegPriceType", pegPriceType);
+            parameters.AddOptional("pegOffsetValue", pegOffsetValue);
+            parameters.AddOptionalEnum("pegOffsetType", pegOffsetType);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, path, gate, 1, true);
             return await SendAsync<BinancePlacedOrder>(request, parameters, ct, weight: weight).ConfigureAwait(false);

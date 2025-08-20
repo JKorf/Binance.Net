@@ -1733,7 +1733,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{Binance.Net.Enums.PegPriceType},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.PegOffsetType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{Binance.Net.Enums.CancelRestriction},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -2894,6 +2894,26 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PayWalletType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PegOffsetType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullablePegOffsetType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PegPriceType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullablePegPriceType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -10292,6 +10312,31 @@
             Earn wallet
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.PegOffsetType">
+            <summary>
+            Peg offset type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PegOffsetType.PriceLevel">
+            <summary>
+            Price level
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PegPriceType">
+            <summary>
+            Peg price type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PegPriceType.PrimaryPeg">
+            <summary>
+            Primary peg
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PegPriceType.MarketPeg">
+            <summary>
+            Market peg
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.PeriodInterval">
             <summary>
             The interval for the period
@@ -16655,7 +16700,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Fee info if computeCommissionRates was set to true, else empty</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{Binance.Net.Enums.PegPriceType},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.PegOffsetType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints" /></para>
@@ -16675,6 +16720,9 @@
             <param name="strategyId">Strategy id</param>
             <param name="strategyType">Strategy type</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="pegPriceType">Peg price type</param>
+            <param name="pegOffsetValue">Peg offset value</param>
+            <param name="pegOffsetType">Peg offset type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -20769,6 +20817,26 @@
         <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PreventedMatchQuantity">
             <summary>
             Prevented self trade quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PegPriceType">
+            <summary>
+            Peg price type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PegOffsetValue">
+            <summary>
+            Peg offset value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PegOffsetType">
+            <summary>
+            Peg offset type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PeggedPrice">
+            <summary>
+            Pegged price
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.BinanceOrderBookEntry">
@@ -25018,6 +25086,11 @@
             Whether or not it is allowed to specify the quantity of a market order in the quote asset
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PegInstructionsAllowed">
+            <summary>
+            Peg instructions allowed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.BaseFeePrecision">
             <summary>
             The precision of the base asset fee
@@ -25361,6 +25434,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfIcebergOrdersFilter.MaxNumIcebergOrders">
             <summary>
             Maximum number of iceberg orders for this symbol
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderAmendsFilter">
+            <summary>
+            Max Order Amends Filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderAmendsFilter.MaxNumOrderAmends">
+            <summary>
+            Maximum number of order amends for a single order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderListsFilter">
+            <summary>
+            Max Order Lists Filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderListsFilter.MaxNumOrderLists">
+            <summary>
+            Maximum number of open order lists
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSystemStatus">

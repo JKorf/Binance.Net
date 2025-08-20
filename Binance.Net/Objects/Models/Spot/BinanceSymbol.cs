@@ -91,6 +91,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("quoteOrderQtyMarketAllowed")]
         public bool QuoteOrderQuantityMarketAllowed { get; set; }
         /// <summary>
+        /// Peg instructions allowed
+        /// </summary>
+        [JsonPropertyName("pegInstructionsAllowed")]
+        public bool PegInstructionsAllowed { get; set; }
+        /// <summary>
         /// The precision of the base asset fee
         /// </summary>
         [JsonPropertyName("baseCommissionPrecision")]

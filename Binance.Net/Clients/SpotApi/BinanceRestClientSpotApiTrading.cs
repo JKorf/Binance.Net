@@ -109,6 +109,9 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyId = null,
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
+            PegPriceType? pegPriceType = null,
+            int? pegOffsetValue = null,
+            PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -132,6 +135,9 @@ namespace Binance.Net.Clients.SpotApi
                 strategyType,
                 selfTradePreventionMode,
                 null,
+                pegPriceType,
+                pegOffsetValue,
+                pegOffsetType,
                 receiveWindow,
                 1,
                 ct).ConfigureAwait(false);
@@ -785,6 +791,9 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 selfTradePreventionMode,
                 autoRepayAtCancel,
+                null,
+                null,
+                null,
                 receiveWindow,
                 weight: 6,
                 ct).ConfigureAwait(false);
