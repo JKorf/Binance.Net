@@ -48,6 +48,12 @@ namespace Binance.Net.Clients.GeneralApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/copyTrading/futures/leadSymbol", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
             var data = await _baseClient.SendAsync<BinanceResult<BinanceCopyTradingLeadSymbol[]>>(request, parameters, ct).ConfigureAwait(false);
 
+            if (!data.Success)
+                return data.As<BinanceCopyTradingLeadSymbol[]>(default);
+
+            if (data.Data?.Code != 0)
+                return data.AsError<BinanceCopyTradingLeadSymbol[]>(new ServerError(data.Data!.Code, data.Data!.Message));
+
             return data.As(data.Data.Data);
         }
 

@@ -1,4 +1,4 @@
-﻿using Binance.Net.Clients;
+using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
@@ -478,7 +478,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateGeneralFuturesCalls()
         {
-            var client = new BinanceRestClient(opts => 
+            var client = new BinanceRestClient(opts =>
             {
                 opts.RateLimiterEnabled = false;
                 opts.AutoTimestamp = false;
@@ -503,6 +503,20 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftWithdrawHistoryAsync(), "GetNftWithdrawHistory");
             await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftTransactionHistoryAsync(Enums.NftOrderType.PurchaseOrder), "GetNftTransactionHistory");
             await tester.ValidateAsync(client => client.GeneralApi.Nft.GetNftAssetAsync(), "GetNftAsset");
+        }
+
+        [Test]
+        public async Task ValidateGeneralCopyTradingCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/CopyTrading", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetUserStatusAsync(), "GetUserStatus", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetLeadSymbolAsync(), "GetLeadSymbol", nestedJsonProperty: "data");
         }
 
         private bool IsAuthenticated(WebCallResult result)
