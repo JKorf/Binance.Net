@@ -84,6 +84,16 @@ namespace Binance.Net.Enums
         /// Position Risk Control Filter
         /// </summary>
         [Map("POSITION_RISK_CONTROL")]
-        PositionRiskControl
+        PositionRiskControl,
+        /// <summary>
+        /// Max number of edits per order
+        /// </summary>
+        [Map("MAX_NUM_ORDER_AMENDS")]
+        OrderAmends,
+        /// <summary>
+        /// Max number of order lists
+        /// </summary>
+        [Map("MAX_NUM_ORDER_LISTS")]
+        OrderLists
     }
 }

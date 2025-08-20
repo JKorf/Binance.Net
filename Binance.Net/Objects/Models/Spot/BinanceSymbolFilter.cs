@@ -266,4 +266,28 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         public int MaxNumIcebergOrders { get; set; }
     }
+
+    /// <summary>
+    /// Max Order Amends Filter
+    /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceMaxNumberOfOrderAmendsFilter>))]
+    public record BinanceMaxNumberOfOrderAmendsFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// Maximum number of order amends for a single order
+        /// </summary>
+        public int MaxNumOrderAmends { get; set; }
+    }
+
+    /// <summary>
+    /// Max Order Lists Filter
+    /// </summary>
+    [JsonConverter(typeof(SymbolFilterConverterImp<BinanceMaxNumberOfOrderListsFilter>))]
+    public record BinanceMaxNumberOfOrderListsFilter : BinanceSymbolFilter
+    {
+        /// <summary>
+        /// Maximum number of open order lists
+        /// </summary>
+        public int MaxNumOrderLists { get; set; }
+    }
 }

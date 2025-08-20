@@ -11207,6 +11207,16 @@
             Position Risk Control Filter
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.OrderAmends">
+            <summary>
+            Max number of edits per order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.OrderLists">
+            <summary>
+            Max number of order lists
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
             <summary>
             Status of a symbol
@@ -25184,6 +25194,16 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.TrailingDeltaFilter">
             <summary>
             Filter for the trailing delta values
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.MaxOrderEditsFilter">
+            <summary>
+            Filter for the max number of edits per order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.MaxOrderListsFilter">
+            <summary>
+            Filter for the max order lists
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbolFilter">
