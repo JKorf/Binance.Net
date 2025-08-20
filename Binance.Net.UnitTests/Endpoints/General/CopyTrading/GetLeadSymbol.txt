@@ -1,0 +1,19 @@
+GET
+/sapi/v1/copyTrading/futures/leadSymbol
+true
+{
+   "code": "000000",
+   "message": "success",
+   "data": [
+     {
+        "symbol": "BTCUSDT",
+        "baseAsset": "BTC",
+        "quoteAsset": "USDT"
+     },
+     {
+        "symbol": "ETHUSDT",
+        "baseAsset": "ETH",
+        "quoteAsset": "USDT"
+     }
+   ]
+}
