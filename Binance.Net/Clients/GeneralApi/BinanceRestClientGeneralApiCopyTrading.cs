@@ -52,7 +52,7 @@ namespace Binance.Net.Clients.GeneralApi
                 return data.As<BinanceCopyTradingLeadSymbol[]>(default);
 
             if (data.Data?.Code != 0)
-                return data.AsError<BinanceCopyTradingLeadSymbol[]>(new ServerError(data.Data!.Code, data.Data!.Message));
+                return data.AsError<BinanceCopyTradingLeadSymbol[]>(new ServerError(data.Data!.Code, _baseClient.GetErrorInfo(data.Data!.Code, data.Data!.Message)));
 
             return data.As(data.Data.Data);
         }
