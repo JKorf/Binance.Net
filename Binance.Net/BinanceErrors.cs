@@ -14,6 +14,7 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.Unauthorized, false, "Not authorized to execute the request", "-1002"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "Invalid API-key, IP, or permissions for action", "-2015"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "API key format invalid", "-2014"),
+                new ErrorInfo(ErrorType.Unauthorized, false, "Invalid API key", "-2008"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "Signature invalid, check your API credentials", "-1022"),
 
                 new ErrorInfo(ErrorType.InvalidTimestamp, false, "Request timestamp invalid, check time sync", "-1021"),
