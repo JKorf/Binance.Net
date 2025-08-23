@@ -1,5 +1,5 @@
-﻿using System.Text;
-using CryptoExchange.Net.Clients;
+﻿using CryptoExchange.Net.Clients;
+using System.Text;
 
 namespace Binance.Net
 {
@@ -9,51 +9,39 @@ namespace Binance.Net
         {
         }
 
-        public override void AuthenticateRequest(
-            RestApiClient apiClient,
-            Uri uri,
-            HttpMethod method,
-            ref IDictionary<string, object>? uriParameters,
-            ref IDictionary<string, object>? bodyParameters,
-            ref Dictionary<string, string>? headers,
-            bool auth,
-            ArrayParametersSerialization arraySerialization,
-            HttpMethodParameterPosition parameterPosition,
-            RequestBodyFormat requestBodyFormat)
+        public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            headers ??= new Dictionary<string, string>();
-            headers.Add("X-MBX-APIKEY", ApiKey);
+            request.Headers.Add("X-MBX-APIKEY", ApiKey);
 
-            if (!auth)
+            if (!request.Authenticated)
                 return;
 
-            IDictionary<string, object> parameters;
-            if (parameterPosition == HttpMethodParameterPosition.InUri)
-            {
-                uriParameters ??= new Dictionary<string, object>();
-                parameters = uriParameters;
-            }
-            else
-            {
-                bodyParameters ??= new Dictionary<string, object>();
-                parameters = bodyParameters;
-            }
-
             var timestamp = GetMillisecondTimestamp(apiClient);
+            var parameters = request.GetPositionParameters();
             parameters.Add("timestamp", timestamp);
 
-            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
+            if (request.ParameterPosition == HttpMethodParameterPosition.InUri)
             {
-                if (uriParameters != null)
-                    uri = uri.SetParameters(uriParameters, arraySerialization);
-                parameters.Add("signature", SignHMACSHA256(parameterPosition == HttpMethodParameterPosition.InUri ? uri.Query.Replace("?", "") : parameters.ToFormData()));
+                var queryString = request.GetQueryString();
+                var signature = Sign(queryString);
+                parameters.Add("signature", signature);
+                request.SetQueryString($"{queryString}&signature={signature}");
             }
             else
             {
-                var parameterString = parameters.ToFormData();
-                var sign = SignRSASHA256(Encoding.ASCII.GetBytes(parameterString), SignOutputType.Base64);
-                parameters.Add("signature", sign);
+                var parameterData = request.BodyParameters.ToFormData();
+                var signature = Sign(parameterData);
+                parameters.Add("signature", signature);
+                request.SetBodyContent($"{parameterData}&signature={signature}");
             }
+        }
+
+        private string Sign(string data)
+        {
+            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
+                return SignHMACSHA256(data);
+            else
+                return SignRSASHA256(Encoding.ASCII.GetBytes(data), SignOutputType.Base64);
         }
 
         public Dictionary<string, object> AuthenticateSocketParameters(Dictionary<string, object> providedParameters)

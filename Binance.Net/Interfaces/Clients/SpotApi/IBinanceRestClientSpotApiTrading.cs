@@ -74,6 +74,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="strategyId">Strategy id</param>
         /// <param name="strategyType">Strategy type</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="pegPriceType">Peg price type</param>
+        /// <param name="pegOffsetValue">Peg offset value</param>
+        /// <param name="pegOffsetType">Peg offset type</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Id's for the placed order</returns>
@@ -92,6 +95,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? strategyId = null,
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
+            PegPriceType? pegPriceType = null,
+            int? pegOffsetValue = null,
+            PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
             CancellationToken ct = default);
 

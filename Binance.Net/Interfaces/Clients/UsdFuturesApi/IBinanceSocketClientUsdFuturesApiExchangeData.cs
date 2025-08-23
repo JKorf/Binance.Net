@@ -128,9 +128,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+        /// <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol and intervals
@@ -140,9 +141,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="intervals">The intervals of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+        /// <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols
@@ -152,9 +154,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="interval">The interval of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+        /// <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols and intervals
@@ -164,9 +167,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="intervals">The intervals of the candlesticks</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+        /// <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the continuous contract candlestick update stream for the provided pair

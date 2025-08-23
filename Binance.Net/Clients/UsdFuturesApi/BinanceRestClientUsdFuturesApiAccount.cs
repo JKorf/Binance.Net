@@ -52,7 +52,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceFuturesInitialLeverageChangeResult>> ChangeInitialLeverageAsync(string symbol, int leverage, long? receiveWindow = null, CancellationToken ct = default)
         {
-            leverage.ValidateIntBetween(nameof(leverage), 1, 125);
             var parameters = new ParameterCollection
             {
                 { "symbol", symbol },

@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Objects
+﻿using CryptoExchange.Net.Objects.Errors;
+
+namespace Binance.Net.Objects
 {
     /// <summary>
     /// Binance rate limit error
@@ -16,8 +18,13 @@
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceRateLimitError(int? code, string message, Exception? exception) : base(code, message, exception)
+        public BinanceRateLimitError(int code, string message) : base(_errorInfo with { ErrorCodes = [code.ToString()], Message = _errorInfo.Message + ": " + message }, null)
         {
         }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        protected BinanceRateLimitError(ErrorInfo info, Exception? exception) : base(info, exception) { }
     }
 }

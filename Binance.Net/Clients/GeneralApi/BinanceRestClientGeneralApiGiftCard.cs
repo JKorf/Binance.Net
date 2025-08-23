@@ -59,12 +59,12 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>> RedeemGiftCardAsync(string code, string? externalUid = null, bool useEncryption = true, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            #if NETSTANDARD2_0
+#if NETSTANDARD2_0
             if (useEncryption)
-                return new WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>(new WebError("Encryption is not supported when targeting NETSTANDARD2_0. Please disable `useEncryption` or upgrade your target framework."));
+                return new WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>(ArgumentError.Invalid(nameof(useEncryption), "Encryption is not supported when targeting NETSTANDARD2_0. Please disable `useEncryption` or upgrade your target framework."));
             else
                 parameters.Add("code", code);
-            #else
+#else
             if (useEncryption)
             {
                 var keyResult = await GetRsaPublicKeyAsync(receiveWindow, ct).ConfigureAwait(false);

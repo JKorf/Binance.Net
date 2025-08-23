@@ -9,6 +9,7 @@ using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using Binance.Net.Converters;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -28,6 +29,8 @@ namespace Binance.Net.Clients.SpotApi
         internal DateTime? _lastExchangeInfoUpdate;
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
+
+        protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
         #endregion
 
         #region Api clients
@@ -42,7 +45,6 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public string ExchangeName => "Binance";
         #endregion
-
 
         #region constructor/destructor
         internal BinanceRestClientSpotApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)
@@ -92,6 +94,9 @@ namespace Binance.Net.Clients.SpotApi
             int? strategyType = null,
             SelfTradePreventionMode? selfTradePreventionMode = null,
             bool? autoRepayAtCancel = null,
+            PegPriceType? pegPriceType = null,
+            int? pegOffsetValue = null,
+            PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
             int weight = 1,
             CancellationToken ct = default)
@@ -106,7 +111,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinancePlacedOrder>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinancePlacedOrder>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -138,6 +143,9 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalEnum("pegPriceType", pegPriceType);
+            parameters.AddOptional("pegOffsetValue", pegOffsetValue);
+            parameters.AddOptionalEnum("pegOffsetType", pegOffsetType);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, path, gate, 1, true);
             return await SendAsync<BinancePlacedOrder>(request, parameters, ct, weight: weight).ConfigureAwait(false);
@@ -152,7 +160,7 @@ namespace Binance.Net.Clients.SpotApi
                 await ExchangeData.GetExchangeInfoAsync(ct: ct).ConfigureAwait(false);
 
             if (_exchangeInfo == null)
-                return BinanceTradeRuleResult.CreateFailed("Unable to retrieve trading rules, validation failed");
+                return BinanceTradeRuleResult.CreateFailed("", "Unable to retrieve trading rules, validation failed");
 
             return BinanceHelpers.ValidateTradeRules(_logger, ApiOptions.TradeRulesBehaviour, _exchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
         }
@@ -160,7 +168,7 @@ namespace Binance.Net.Clients.SpotApi
         internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
             var result = await base.SendAsync(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-            if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 _timeSyncState.LastSyncTime = DateTime.MinValue;
@@ -174,7 +182,7 @@ namespace Binance.Net.Clients.SpotApi
         internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
             var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-            if (!result && result.Error!.Code == -1021 && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 _timeSyncState.LastSyncTime = DateTime.MinValue;
@@ -202,17 +210,18 @@ namespace Binance.Net.Clients.SpotApi
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
-                return new ServerError(null, "Unknown request error", exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
             if (msg == null)
-                return new ServerError(null, "Unknown request error", exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             if (code == null)
-                return new ServerError(null, msg, exception);
+                return new ServerError(new ErrorInfo(ErrorType.Unknown, false, msg));
 
-            return new ServerError(code.Value, msg, exception);
+            var errorInfo = GetErrorInfo(code.Value, msg);
+            return new ServerError(code.Value.ToString(), errorInfo, exception);
         }
 
         /// <inheritdoc />
@@ -250,7 +259,7 @@ namespace Binance.Net.Clients.SpotApi
             if (code == null)
                 return new BinanceRateLimitError(msg);
 
-            return new BinanceRateLimitError(code.Value, msg, null);
+            return new BinanceRateLimitError(code.Value, msg);
         }
     }
 }
