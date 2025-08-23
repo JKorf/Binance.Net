@@ -47,6 +47,19 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+
+        #region Get Account Info
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+            return await _client.QueryAsync<BinanceFuturesAccountInfo>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"account.status", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #endregion
 
         #region Streams

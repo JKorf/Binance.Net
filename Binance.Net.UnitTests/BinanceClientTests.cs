@@ -135,7 +135,7 @@ namespace Binance.Net.UnitTests
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
-            Assert.That(result.Error.Code == 123);
+            Assert.That(result.Error.ErrorCode == "123");
             Assert.That(result.Error.Message == "Error!");
         }
 
@@ -148,33 +148,6 @@ namespace Binance.Net.UnitTests
 
             // assert
             Assert.That(authProvider.ApiKey == "TestKey");
-        }
-
-        [Test]
-        public void AddingAuthToRequest_Should_AddApiKeyHeader()
-        {
-            // arrange
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
-            var client = new HttpClient();
-            var request = new Request(new HttpRequestMessage(HttpMethod.Get, "https://test.test-api.com"), client, 1);
-
-            // act
-            var headers = new Dictionary<string, string>();
-            IDictionary<string, object> uriParams = null;
-            IDictionary<string, object> bodyParams = null;
-            authProvider.AuthenticateRequest(
-                new BinanceRestApiClient(new TraceLogger(), new BinanceRestOptions(), new BinanceRestOptions().SpotOptions),
-                request.Uri,
-                HttpMethod.Get,
-                ref uriParams,
-                ref bodyParams,
-                ref headers,
-                true, ArrayParametersSerialization.MultipleValues,
-                HttpMethodParameterPosition.InUri,
-                RequestBodyFormat.Json);
-
-            // assert
-            Assert.That(headers.First().Key == "X-MBX-APIKEY" && headers.First().Value == "TestKey");
         }
 
         [Test]

@@ -17,6 +17,11 @@
         [JsonPropertyName("taxCommissionForOrder")]
         public BinanceFee TaxFeeForOrder { get; set; } = null!;
         /// <summary>
+        /// Special fee rates on trades from the order
+        /// </summary>
+        [JsonPropertyName("specialCommission")]
+        public BinanceFee SpecialFeeForOrder { get; set; } = null!;
+        /// <summary>
         /// Discount info
         /// </summary>
         [JsonPropertyName("discount")]

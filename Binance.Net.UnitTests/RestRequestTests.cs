@@ -1,4 +1,4 @@
-﻿using Binance.Net.Clients;
+using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Futures;
@@ -479,7 +479,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateGeneralFuturesCalls()
         {
-            var client = new BinanceRestClient(opts => 
+            var client = new BinanceRestClient(opts =>
             {
                 opts.RateLimiterEnabled = false;
                 opts.AutoTimestamp = false;
@@ -507,6 +507,21 @@ namespace Binance.Net.UnitTests
         }
 
         [Test]
+        public async Task ValidateGeneralCopyTradingCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+          
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/CopyTrading", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetUserStatusAsync(), "GetUserStatus", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetLeadSymbolAsync(), "GetLeadSymbol", nestedJsonProperty: "data");
+        }
+          
+        [Test]
         public async Task ValidateGeneralSimpleEarnCalls()
         {
             var client = new BinanceRestClient(opts =>
@@ -515,6 +530,7 @@ namespace Binance.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
+            
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/SimpleEarn", "https://api.binance.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetAccountAsync(),"GetAccount");
             await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleProductsAsync(),"GetFlexibleProducts");

@@ -1736,7 +1736,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceTestOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{Binance.Net.Enums.PegPriceType},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.PegOffsetType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.String,System.Nullable{Binance.Net.Enums.CancelRestriction},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -2454,6 +2454,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiAccount.GetAccountInfoAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiAccount.GetAccountInfoV1Async(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -2481,16 +2484,16 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToAllMarkPriceUpdatesAsync(System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesUsdtStreamMarkPrice[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.SubscribeToContinuousContractKlineUpdatesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStreamContinuousKlineData}},System.Threading.CancellationToken)">
@@ -2901,6 +2904,26 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PegOffsetType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullablePegOffsetType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PegPriceType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.NullablePegPriceType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.PermissionType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -3112,6 +3135,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceCoinFuturesAccountBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesAccountInfo">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -10295,6 +10323,31 @@
             Earn wallet
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.PegOffsetType">
+            <summary>
+            Peg offset type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PegOffsetType.PriceLevel">
+            <summary>
+            Price level
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.PegPriceType">
+            <summary>
+            Peg price type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PegPriceType.PrimaryPeg">
+            <summary>
+            Primary peg
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.PegPriceType.MarketPeg">
+            <summary>
+            Market peg
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.PeriodInterval">
             <summary>
             The interval for the period
@@ -11178,6 +11231,16 @@
         <member name="F:Binance.Net.Enums.SymbolFilterType.PositionRiskControl">
             <summary>
             Position Risk Control Filter
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.OrderAmends">
+            <summary>
+            Max number of edits per order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolFilterType.OrderLists">
+            <summary>
+            Max number of order lists
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SymbolStatus">
@@ -16685,7 +16748,7 @@
             <param name="ct">Cancellation token</param>
             <returns>Fee info if computeCommissionRates was set to true, else empty</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.SpotOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{Binance.Net.Enums.PegPriceType},System.Nullable{System.Int32},System.Nullable{Binance.Net.Enums.PegOffsetType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints" /></para>
@@ -16705,6 +16768,9 @@
             <param name="strategyId">Strategy id</param>
             <param name="strategyType">Strategy type</param>
             <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="pegPriceType">Peg price type</param>
+            <param name="pegOffsetValue">Peg offset value</param>
+            <param name="pegOffsetType">Peg offset type</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -19203,6 +19269,14 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiAccount.GetAccountInfoV1Async(System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get account information, including position and balances
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
@@ -19331,7 +19405,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
@@ -19340,10 +19414,11 @@
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+            <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.String,System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Subscribes to the candlestick update stream for the provided symbol and intervals
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
@@ -19352,10 +19427,11 @@
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+            <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
@@ -19364,10 +19440,11 @@
             <param name="interval">The interval of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+            <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Binance.Net.Enums.KlineInterval},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceStreamKlineData}},System.Boolean,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Subscribes to the candlestick update stream for the provided symbols and intervals
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
@@ -19376,6 +19453,7 @@
             <param name="intervals">The intervals of the candlesticks</param>
             <param name="onMessage">The event handler for the received data</param>
             <param name="premiumIndex">Whether you want to subscribe to premium index k-lines</param>
+            <param name="priceIndex">Whether you want to subscribe to price index k-lines</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -20381,7 +20459,12 @@
             </summary>
             <param name="message"></param>
         </member>
-        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(System.Nullable{System.Int32},System.String,System.Exception)">
+        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(System.Int32,System.String)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.BinanceRateLimitError.#ctor(CryptoExchange.Net.Objects.Errors.ErrorInfo,System.Exception)">
             <summary>
             ctor
             </summary>
@@ -20794,6 +20877,26 @@
         <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PreventedMatchQuantity">
             <summary>
             Prevented self trade quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PegPriceType">
+            <summary>
+            Peg price type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PegOffsetValue">
+            <summary>
+            Peg offset value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PegOffsetType">
+            <summary>
+            Peg offset type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceOrderBase.PeggedPrice">
+            <summary>
+            Pegged price
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.BinanceOrderBookEntry">
@@ -23269,6 +23372,11 @@
             Tax commission rates for trades from the order.
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.SpecialCommissions">
+            <summary>
+            Special commission rates for trades from the order.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Discount">
             <summary>
             Discount commission when paying in BNB
@@ -25038,6 +25146,11 @@
             Whether or not it is allowed to specify the quantity of a market order in the quote asset
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.PegInstructionsAllowed">
+            <summary>
+            Peg instructions allowed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.BaseFeePrecision">
             <summary>
             The precision of the base asset fee
@@ -25131,6 +25244,16 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.TrailingDeltaFilter">
             <summary>
             Filter for the trailing delta values
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.MaxOrderEditsFilter">
+            <summary>
+            Filter for the max number of edits per order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.MaxOrderListsFilter">
+            <summary>
+            Filter for the max order lists
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbolFilter">
@@ -25383,6 +25506,26 @@
             Maximum number of iceberg orders for this symbol
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderAmendsFilter">
+            <summary>
+            Max Order Amends Filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderAmendsFilter.MaxNumOrderAmends">
+            <summary>
+            Maximum number of order amends for a single order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderListsFilter">
+            <summary>
+            Max Order Lists Filter
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfOrderListsFilter.MaxNumOrderLists">
+            <summary>
+            Maximum number of open order lists
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSystemStatus">
             <summary>
             The status of Binance
@@ -25411,6 +25554,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTestOrderCommission.TaxFeeForOrder">
             <summary>
             Tax fee rates on trades from the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTestOrderCommission.SpecialFeeForOrder">
+            <summary>
+            Special fee rates on trades from the order
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTestOrderCommission.Discount">

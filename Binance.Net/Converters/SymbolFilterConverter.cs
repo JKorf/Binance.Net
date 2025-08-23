@@ -117,6 +117,18 @@ namespace Binance.Net.Converters
                         MaxNumIcebergOrders = obj.TryGetProperty("maxNumIcebergOrders", out var ele) ? ele.GetInt32() : 0
                     };
                     break;
+                case SymbolFilterType.OrderAmends:
+                    result = new BinanceMaxNumberOfOrderAmendsFilter
+                    {
+                        MaxNumOrderAmends = obj.TryGetProperty("maxNumOrderAmends", out var maxAm) ? maxAm.GetInt32() : 0
+                    };
+                    break;
+                case SymbolFilterType.OrderLists:
+                    result = new BinanceMaxNumberOfOrderListsFilter
+                    {
+                        MaxNumOrderLists = obj.TryGetProperty("maxNumOrderLists", out var maxLists) ? maxLists.GetInt32() : 0
+                    };
+                    break;
                 case SymbolFilterType.PositionRiskControl:
                     result = new BinanceSymbolFilter();
                     break;

@@ -198,5 +198,25 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("preventedQuantity")]
         public decimal? PreventedMatchQuantity { get; set; }
+        /// <summary>
+        /// Peg price type
+        /// </summary>
+        [JsonPropertyName("pegPriceType")]
+        public PegPriceType? PegPriceType { get; set; }
+        /// <summary>
+        /// Peg offset value
+        /// </summary>
+        [JsonPropertyName("pegOffsetValue")]
+        public int? PegOffsetValue { get; set; }
+        /// <summary>
+        /// Peg offset type
+        /// </summary>
+        [JsonPropertyName("pegOffsetType")]
+        public PegOffsetType? PegOffsetType { get; set; }
+        /// <summary>
+        /// Pegged price
+        /// </summary>
+        [JsonPropertyName("peggedPrice")]
+        public decimal? PeggedPrice { get; set; }
     }
 }

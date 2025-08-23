@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Models.Futures;
+using CryptoExchange.Net.Objects.Errors;
 using System.Text.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
@@ -59,7 +60,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceFuturesOrder>(new ArgumentError(rulesCheck.ErrorMessage!));
+                return new WebCallResult<BinanceFuturesOrder>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -119,7 +120,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     if (!rulesCheck.Passed)
                     {
                         _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                        return new WebCallResult<CallResult<BinanceFuturesOrder>[]>(new ArgumentError(rulesCheck.ErrorMessage!));
+                        return new WebCallResult<CallResult<BinanceFuturesOrder>[]>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
                     }
 
                     order.Quantity = rulesCheck.Quantity;
@@ -176,12 +177,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
             foreach (var item in response.Data)
             {
                 result.Add(item.Code != 0
-                    ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code, item.Message))
+                    ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code.ToString(), _baseClient.GetErrorInfo(item.Code, item.Message)))
                     : new CallResult<BinanceFuturesOrder>(item));
             }
 
             if (result.All(x => !x.Success))
-                return response.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+                return response.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, false, "All orders failed")), result.ToArray());
 
             return response.As(result.ToArray());
         }
@@ -314,7 +315,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             foreach (var item in response.Data)
             {
                 result.Add(item.Code != 0
-                    ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code, item.Message))
+                    ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code.ToString(), _baseClient.GetErrorInfo(item.Code, item.Message)))
                     : new CallResult<BinanceFuturesOrder>(item));
             }
 
