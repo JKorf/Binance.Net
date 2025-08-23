@@ -195,6 +195,20 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 11.5.1 - 21 Aug 2025
+    * Added Invalid api key error mapping
+
+* Version 11.5.0 - 20 Aug 2025
+    * Updated CryptoExchange.Net to version 9.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added improved error parsing
+    * Added SpecialCommissions to fee responses
+    * Added Spot API price peg support
+    * Added support for OrderAmends and OrderLists filter in Spot API symbol
+    * Added support for priceIndex klines subscription in UsdFutures websocket API
+    * Added socketClient.UsdFuturesApi.Account.GetAccountInfoV1Async query
+    * Updated rest request sending too prevent duplicate parameter serialization
+    * Removed leverage values checks no longer valid
+
 * Version 11.4.0 - 04 Aug 2025
     * Updated CryptoExchange.Net to version 9.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Updated CryptoLoans API from partially supported V1 to fully supported V2

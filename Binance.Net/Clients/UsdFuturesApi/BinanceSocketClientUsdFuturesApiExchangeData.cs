@@ -151,25 +151,33 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Kline/Candlestick Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default) => await SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, onMessage, premiumIndex, ct).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default) => await SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, onMessage, premiumIndex, priceIndex, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default) => await SubscribeToKlineUpdatesAsync(new[] { symbol }, intervals, onMessage, premiumIndex, ct).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default) => await SubscribeToKlineUpdatesAsync(new[] { symbol }, intervals, onMessage, premiumIndex, priceIndex, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default) =>
-            await SubscribeToKlineUpdatesAsync(symbols, new[] { interval }, onMessage, premiumIndex, ct).ConfigureAwait(false);
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default) =>
+            await SubscribeToKlineUpdatesAsync(symbols, new[] { interval }, onMessage, premiumIndex, priceIndex, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, bool premiumIndex = false, bool priceIndex = false, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
+            if (premiumIndex && priceIndex)
+                throw new ArgumentException("Either premiumIndex or priceIndex can be set true but not both");
+
             var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data =>
                 onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data)
                 .WithStreamId(data.Data.Stream)
                 .WithSymbol(data.Data.Data.Symbol)
                 .WithDataTimestamp(data.Data.Data.EventTime)));
-            symbols = symbols.SelectMany(a => intervals.Select(i => (premiumIndex ? "p" + a.ToUpper(CultureInfo.InvariantCulture) : a.ToLower(CultureInfo.InvariantCulture)) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
+            symbols = symbols.SelectMany(a => intervals.Select(i => 
+            (premiumIndex 
+            ? "p" + a.ToUpper(CultureInfo.InvariantCulture) 
+            : priceIndex ? "i" + a.ToUpper(CultureInfo.InvariantCulture)
+            : a.ToLower(CultureInfo.InvariantCulture)
+            ) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
 

@@ -22,6 +22,11 @@
         [JsonPropertyName("taxCommission")]
         public BinanceCommissionInfo TaxCommissions { get; set; } = null!;
         /// <summary>
+        /// Special commission rates for trades from the order.
+        /// </summary>
+        [JsonPropertyName("specialCommission")]
+        public BinanceCommissionInfo SpecialCommissions { get; set; } = null!;
+        /// <summary>
         /// Discount commission when paying in BNB
         /// </summary>
         [JsonPropertyName("discount")]

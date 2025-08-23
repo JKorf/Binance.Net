@@ -46,7 +46,7 @@ namespace Binance.Net.UnitTests
             var result = await CreateClient().SpotApi.ExchangeData.GetTickerAsync("TSTTST", default);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error.Code, Is.EqualTo(-1121));
+            Assert.That(result.Error.ErrorCode, Is.EqualTo("-1121"));
         }
 
         [Test]

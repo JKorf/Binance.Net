@@ -74,13 +74,13 @@ namespace Binance.Net
 
             var symbolData = exchangeInfo.Symbols.SingleOrDefault(s => string.Equals(s.Name, symbol, StringComparison.CurrentCultureIgnoreCase));
             if (symbolData == null)
-                return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Symbol {symbol} not found");
+                return BinanceTradeRuleResult.CreateFailed("Symbol", $"Trade rules check failed: Symbol {symbol} not found");
 
             if (type != null)
             {
                 if (!symbolData.OrderTypes.Contains(type.Value))
                 {
-                    return BinanceTradeRuleResult.CreateFailed(
+                    return BinanceTradeRuleResult.CreateFailed("orderType",
                         $"Trade rules check failed: {type} order type not allowed for {symbol}");
                 }
             }
@@ -107,7 +107,7 @@ namespace Binance.Net
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                         {
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
+                            return BinanceTradeRuleResult.CreateFailed("quantity", $"Trade rules check failed: LotSize filter failed. Original quantity: {quantity}, Closest allowed: {outputQuantity}");
                         }
 
                         logger.Log(LogLevel.Information, $"Quantity clamped from {quantity} to {outputQuantity} based on lot size filter");
@@ -121,7 +121,7 @@ namespace Binance.Net
                 {
                     if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                     {
-                        return BinanceTradeRuleResult.CreateFailed(
+                        return BinanceTradeRuleResult.CreateFailed("quoteQuantity",
                             $"Trade rules check failed: MinNotional filter failed. Order value: {quoteQuantity}, minimal order value: {symbolData.MinNotionalFilter.MinNotional}");
                     }
 
@@ -141,7 +141,7 @@ namespace Binance.Net
                     if (outputPrice != price)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
+                            return BinanceTradeRuleResult.CreateFailed("price", $"Trade rules check failed: Price filter max/min failed. Original price: {price}, Closest allowed: {outputPrice}");
 
                         logger.Log(LogLevel.Information, $"price clamped from {price} to {outputPrice} based on price filter");
                     }
@@ -154,7 +154,7 @@ namespace Binance.Net
                         {
                             if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             {
-                                return BinanceTradeRuleResult.CreateFailed(
+                                return BinanceTradeRuleResult.CreateFailed("stopPrice",
                                     $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
                             }
 
@@ -171,7 +171,7 @@ namespace Binance.Net
                     if (outputPrice != beforePrice)
                     {
                         if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
-                            return BinanceTradeRuleResult.CreateFailed($"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
+                            return BinanceTradeRuleResult.CreateFailed("price", $"Trade rules check failed: Price filter tick failed. Original price: {price}, Closest allowed: {outputPrice}");
 
                         logger.Log(LogLevel.Information, $"price floored from {beforePrice} to {outputPrice} based on price filter");
                     }
@@ -185,6 +185,7 @@ namespace Binance.Net
                             if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                             {
                                 return BinanceTradeRuleResult.CreateFailed(
+                                    "stopPrice",
                                     $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
                             }
 
@@ -205,11 +206,12 @@ namespace Binance.Net
                 if (tradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
                 {
                     return BinanceTradeRuleResult.CreateFailed(
+                        "quantity",
                         $"Trade rules check failed: MinNotional filter failed. Order quantity: {notional}, minimal order quantity: {symbolData.MinNotionalFilter.MinNotional}");
                 }
 
                 if (symbolData.LotSizeFilter == null)
-                    return BinanceTradeRuleResult.CreateFailed("Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");
+                    return BinanceTradeRuleResult.CreateFailed("quantity", "Trade rules check failed: MinNotional filter failed. Unable to auto comply because LotSizeFilter not present");
 
                 var minQuantity = symbolData.MinNotionalFilter.MinNotional / outputPrice.Value;
                 var stepSize = symbolData.LotSizeFilter!.StepSize;

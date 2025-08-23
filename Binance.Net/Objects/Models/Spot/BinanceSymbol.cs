@@ -91,6 +91,11 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("quoteOrderQtyMarketAllowed")]
         public bool QuoteOrderQuantityMarketAllowed { get; set; }
         /// <summary>
+        /// Peg instructions allowed
+        /// </summary>
+        [JsonPropertyName("pegInstructionsAllowed")]
+        public bool PegInstructionsAllowed { get; set; }
+        /// <summary>
         /// The precision of the base asset fee
         /// </summary>
         [JsonPropertyName("baseCommissionPrecision")]
@@ -187,5 +192,15 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonIgnore]
         public BinanceSymbolTrailingDeltaFilter? TrailingDeltaFilter => Filters.OfType<BinanceSymbolTrailingDeltaFilter>().FirstOrDefault();
+        /// <summary>
+        /// Filter for the max number of edits per order
+        /// </summary>
+        [JsonIgnore]
+        public BinanceMaxNumberOfOrderAmendsFilter? MaxOrderEditsFilter => Filters.OfType<BinanceMaxNumberOfOrderAmendsFilter>().FirstOrDefault();
+        /// <summary>
+        /// Filter for the max order lists
+        /// </summary>
+        [JsonIgnore]
+        public BinanceMaxNumberOfOrderListsFilter? MaxOrderListsFilter => Filters.OfType<BinanceMaxNumberOfOrderListsFilter>().FirstOrDefault();
     }
 }
