@@ -18,6 +18,11 @@ namespace Binance.Net.Enums
         /// Index
         /// </summary>
         [Map("INDEX")]
-        Index
+        Index,
+        /// <summary>
+        /// Pre-market
+        /// </summary>
+        [Map("PREMARKET")]
+        PreMarket
     }
 }

@@ -314,6 +314,9 @@
         <member name="M:Binance.Net.Clients.BinanceUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.BinanceUserClientProvider.ClearUserClients(System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.BinanceUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
             <inheritdoc />
         </member>
@@ -11440,6 +11443,11 @@
             Index
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.PreMarket">
+            <summary>
+            Pre-market
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.UniversalTransferType">
             <summary>
             Universal transfer type
@@ -15356,6 +15364,11 @@
             <param name="userIdentifier">The identifier for the user</param>
             <param name="credentials">The credentials for the user</param>
             <param name="environment">The environment to use</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.IBinanceUserClientProvider.ClearUserClients(System.String)">
+            <summary>
+            Reset the cached clients for a user. This can be useful when a user changes API credentials.
+            </summary>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.IBinanceUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
             <summary>
