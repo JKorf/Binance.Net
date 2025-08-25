@@ -1,0 +1,27 @@
+GET
+/sapi/v1/mining/statistics/user/status
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "fifteenMinHashRate": "457835490067496409.00000000",
+    "dayHashRate": "214289268068874127.65000000",
+    "validNum": 0,
+    "invalidNum": 17562,
+    "profitToday":{
+      "BTC":"0.00314332",
+      "BSV":"56.17055953",
+      "BCH":"106.61586001"
+     },
+    "profitYesterday":{
+      "BTC":"0.00314332",
+       "BSV":"56.17055953",
+       "BCH":"106.61586001"
+     },
+
+    "userName": "test",
+    "unit": "h/s",
+    "algo": "sha256"
+  }
+}

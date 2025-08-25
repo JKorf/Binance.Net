@@ -15,7 +15,7 @@
         /// The id of the coin
         /// </summary>
         [JsonPropertyName("coinId")]
-        public string CoinId { get; set; } = string.Empty;
+        public int? CoinId { get; set; } = null;
         /// <summary>
         /// The pool index
         /// </summary>
@@ -26,7 +26,7 @@
         /// Algorithm id
         /// </summary>
         [JsonPropertyName("algoId")]
-        public string AlgorithmId { get; set; } = string.Empty;
+        public int? AlgorithmId { get; set; } = null;
         /// <summary>
         /// Algorithm name
         /// </summary>

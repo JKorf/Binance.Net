@@ -1,0 +1,15 @@
+GET
+/sapi/v1/mining/pub/algoList
+false
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "algoName": "sha256",
+      "algoId": 1,
+      "poolIndex": 0,
+      "unit": "h/s"
+    }
+  ]
+}

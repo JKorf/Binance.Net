@@ -1,0 +1,31 @@
+GET
+/sapi/v1/mining/worker/list
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "workerDatas": [
+      {
+        "workerId": "1420554439452400131",
+        "workerName": "2X73",
+        "status": 3,
+        "hashRate": 0,
+        "dayHashRate": 0,
+        "rejectRate": 0,
+        "lastShareTime": 1587712919000
+      },
+      {
+        "workerId": "7893926126382807951",
+        "workerName": "AZDC1.1A10101",
+        "status": 2,
+        "hashRate": 29711247541680,
+        "dayHashRate": 12697781298013.66,
+        "rejectRate": 0,
+        "lastShareTime": 1587969727000
+      }
+    ],
+    "totalNum": 18530,
+    "pageSize": 20
+  }
+}

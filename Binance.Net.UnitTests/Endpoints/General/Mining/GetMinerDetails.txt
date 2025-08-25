@@ -1,0 +1,41 @@
+GET
+/sapi/v1/mining/worker/detail
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "workerName": "bhdc1.16A10404B",
+      "type": "H_hashrate",
+      "hashrateDatas": [
+        {
+          "time": 1587902400000,
+          "hashrate": "0",
+          "reject": 0
+        },
+        {
+          "time": 1587906000000,
+          "hashrate": "0",
+          "reject": 0
+        }
+      ]
+    },
+    {
+      "workerName": "bhdc1.16A10404B",
+      "type": "D_hashrate",
+      "hashrateDatas": [
+        {
+          "time": 1587902400000,
+          "hashrate": "0",
+          "reject": 0
+        },
+        {
+          "time": 1587906000000,
+          "hashrate": "0",
+          "reject": 0
+        }
+      ]
+    }
+  ]
+}

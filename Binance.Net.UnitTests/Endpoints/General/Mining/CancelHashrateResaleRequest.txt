@@ -1,0 +1,8 @@
+POST
+/sapi/v1/mining/hash-transfer/config/cancel
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": true
+}

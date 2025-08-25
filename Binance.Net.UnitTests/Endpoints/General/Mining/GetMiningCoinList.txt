@@ -1,0 +1,16 @@
+GET
+/sapi/v1/mining/pub/coinList
+false
+{
+  "code": 0,
+  "msg": "",
+  "data": [
+    {
+      "coinName": "BTC",
+      "coinId": 1,
+      "poolIndex": 0,
+      "algoId": 1,
+      "algoName": "sha256"
+    }
+  ]
+}

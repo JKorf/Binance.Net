@@ -1,0 +1,21 @@
+GET
+/sapi/v1/mining/payment/uid
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "accountProfits": [
+      {
+        "time": 1607443200000,
+        "coinName": "BTC",
+        "type": 2,
+        "puid": 59985472,
+        "subName": "vdvaghani",
+        "amount": 0.09186957
+      }
+    ],
+    "totalNum": 3,
+    "pageSize": 20
+  }
+}

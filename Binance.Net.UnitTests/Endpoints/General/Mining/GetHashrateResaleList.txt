@@ -1,0 +1,33 @@
+GET
+/sapi/v1/mining/hash-transfer/config/details/list
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "configDetails": [
+      {
+        "configId": 168,
+        "poolUsername": "123",
+        "toPoolUsername": "user1",
+        "algoName": "Ethash",
+        "hashRate": 5000000,
+        "startDay": 20201210,
+        "endDay": 20210405,
+        "status": 1
+      },
+      {
+        "configId": 166,
+        "poolUsername": "pop",
+        "toPoolUsername": "111111",
+        "algoName": "Ethash",
+        "hashRate": 3320000,
+        "startDay": 20201226,
+        "endDay": 20201227,
+        "status": 0
+      }
+    ],
+    "totalNum": 21,
+    "pageSize": 200
+  }
+}

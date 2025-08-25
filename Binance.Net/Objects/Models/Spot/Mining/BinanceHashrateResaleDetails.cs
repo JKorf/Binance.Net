@@ -46,7 +46,7 @@
         /// <summary>
         /// Algorithm
         /// </summary>
-        [JsonPropertyName("alsoName")]
+        [JsonPropertyName("algoName")]
         public string AlgoName { get; set; } = string.Empty;
         /// <summary>
         /// Hash rate

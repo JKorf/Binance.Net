@@ -1,0 +1,20 @@
+GET
+/sapi/v1/mining/payment/other
+true
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "otherProfits": [
+      {
+        "time": 1607443200000,
+        "coinName": "BTC",
+        "type": 4,
+        "profitAmount": 0.0011859,
+        "status": 2
+      }
+    ],
+    "totalNum": 3,
+    "pageSize": 20
+  }
+}
