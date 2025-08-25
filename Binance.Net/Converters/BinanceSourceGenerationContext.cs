@@ -90,6 +90,8 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Internal.BinanceSocketRequest[]))]
     [JsonSerializable(typeof(Objects.Internal.BinanceSocketQuery[]))]
     
+    [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceMarginCallUpdate>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceLiabilityUpdate>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesStreamCoinKlineData>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesStreamIndexPrice>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesCoinStreamMarkPrice>))]

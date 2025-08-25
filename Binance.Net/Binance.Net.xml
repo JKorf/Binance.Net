@@ -24,9 +24,9 @@
             Spot Socket API address
             </summary>
         </member>
-        <member name="P:Binance.Net.BinanceEnvironment.BlvtSocketAddress">
+        <member name="P:Binance.Net.BinanceEnvironment.RiskDataSocketAddress">
             <summary>
-            Blvt Socket API address
+            Risk data Socket API address
             </summary>
         </member>
         <member name="P:Binance.Net.BinanceEnvironment.UsdFuturesRestAddress">
@@ -1325,6 +1325,45 @@
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiSubAccount.FuturesAssetTransferAsync(System.String,System.String,Binance.Net.Enums.FuturesAccountType,System.String,System.Decimal,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetBorrowInterestRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanInterestaRateHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanAssetDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanCollateralAssetDataAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanOngoinOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanRepaymentHistoryAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanAccuredInterestAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetVipLoanCollateralAccountAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.GetApplicationStatusAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.RenewVipLoanAsync(System.Int64,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.RepayVipLoanAsync(System.Int64,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiVipLoans.BorrowVipLoanAsync(System.Int64,System.String,System.Decimal,System.String,System.String,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApi" />
         </member>
@@ -1542,6 +1581,15 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.CloseIsolatedMarginUserStreamAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.KeepAliveRiskDataUserStreamAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StopRiskDataUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1905,6 +1953,9 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.SubscribeToUserRiskDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData">
@@ -3094,6 +3145,16 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.VipLoanApplicationStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.VipLoanRepayStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.WalletType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -3505,6 +3566,16 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCombinedStreamBinanceBlvtInfoUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCombinedStreamBinanceLiabilityUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCombinedStreamBinanceMarginCallUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -7114,6 +7185,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceLiabilityUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceLoan">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -7180,6 +7256,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceMarginBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceMarginCallUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -8410,6 +8491,126 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSubAccountWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanAccuredInterest">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanAccuredInterestArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanApplicationStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanApplicationStatusArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanBorrowData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanBorrowDataArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanBorrowInterestRate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanBorrowInterestRateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanCollateralAccountLockedValue">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanCollateralAccountLockedValueArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanCollateralAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanCollateralAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanInterestRate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanInterestRateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanOngoingOrderData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanOngoingOrderDataArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanRenewData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanRenewDataArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanRepayData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanRepayDataArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanRepayHistoryData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceVipLoanRepayHistoryDataArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -11661,6 +11862,71 @@
         <member name="F:Binance.Net.Enums.ValidTime.TwoMinutes">
             <summary>
             2 minutes
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.VipLoanApplicationStatus">
+            <summary>
+            VIP Loan application status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.AccruingInterest">
+            <summary>
+            Accruing interest
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Overdue">
+            <summary>
+            Overdue
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Liquidating">
+            <summary>
+            Liquidating
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Repaying">
+            <summary>
+            Repaying
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Repaid">
+            <summary>
+            Repaying
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Liquidated">
+            <summary>
+            Liquidated
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanApplicationStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.VipLoanRepayStatus">
+            <summary>
+            VIP Loan repay status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanRepayStatus.Repaid">
+            <summary>
+            Repaid
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanRepayStatus.Repaying">
+            <summary>
+            Repaying
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.VipLoanRepayStatus.Failed">
+            <summary>
+            Failed
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.WalletType">
@@ -15281,6 +15547,161 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans">
+            <summary>
+            Binance VIP Loan endpoints
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetBorrowInterestRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan borrow interest rate
+            <para><a href="https://developers.binance.com/docs/vip_loan/market-data" /></para>
+            </summary>
+            <param name="loanAsset">Filler by loan asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanInterestaRateHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan interest rate History
+            <para><a href="https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History" /></para>
+            </summary>
+            <param name="loanAsset">Filler by loan asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="limit">Page size limit</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanAssetDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get loanable asset data
+            <para><a href="https://developers.binance.com/docs/vip_loan/market-data/Get-Loanable-Assets-Data" /></para>
+            </summary>
+            <param name="loanAsset">Filler by loan asset</param>
+            <param name="vipLevel">User's vip level</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanCollateralAssetDataAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get collateral asset data
+            <para><a href="https://developers.binance.com/docs/vip_loan/market-data/Get-Collateral-Asset-Data" /></para>
+            </summary>
+            <param name="collateralAsset">Filler by collateral asset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanOngoinOrdersAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan ongoing orders
+            <para><a href="https://developers.binance.com/docs/vip_loan/user-information" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="collateralAccountId">Collateral account id</param>
+            <param name="loanAsset">Asset to loan</param>
+            <param name="collateralAsset">Collateral asset</param>
+            <param name="page">Current page</param>
+            <param name="limit">Page size limit</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanRepaymentHistoryAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan repayment history
+            <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Repayment-History" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="loanAsset">Asset to loan</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="limit">Page size limit</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanAccuredInterestAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan accrued interest
+            <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="loanAsset">Asset to loan</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Current page</param>
+            <param name="limit">Page size limit</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetVipLoanCollateralAccountAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan Collateral Account
+            <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Check-Locked-Value-of-VIP-Collateral-Account" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="collateralAccountId">Collateral account id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.GetApplicationStatusAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get VIP Loan application status
+            <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Query-Application-Status" /></para>
+            </summary>
+            <param name="page">Current page</param>
+            <param name="limit">Page size limit</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.RenewVipLoanAsync(System.Int64,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Renew VIP Loan
+            <para><a href="https://developers.binance.com/docs/vip_loan/trade" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="loanTerm">Loan term in days, 30/60</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.RepayVipLoanAsync(System.Int64,System.Decimal,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Repay VIP Loan
+            <para><a href="https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Repay" /></para>
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="quantity">Quantity to repay</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.GeneralApi.IBinanceRestClientGeneralApiVipLoans.BorrowVipLoanAsync(System.Int64,System.String,System.Decimal,System.String,System.String,System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Borrow VIP Loan
+            <para><a href="https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Borrow" /></para>
+            </summary>
+            <param name="loanAccountId">Loan account id</param>
+            <param name="loanAsset">Asset to loan</param>
+            <param name="loanQuantity">Loan quantity</param>
+            <param name="collateralAccountId">Collateral account id</param>
+            <param name="collateralAsset">Collateral asset</param>
+            <param name="flexibleRate">Is flexible rate</param>
+            <param name="loanTerm">Loan term in days, 30/60</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.IBinanceRestClient">
             <summary>
             Client for accessing the Binance Rest API. 
@@ -16250,6 +16671,32 @@
             </summary>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(System.Threading.CancellationToken)">
+            <summary>
+            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
+            <para><a href="https://developers.binance.com/docs/margin_trading/risk-data-stream/Start-User-Data-Stream" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>Listen key</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.KeepAliveRiskDataUserStreamAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+            <para><a href="https://developers.binance.com/docs/margin_trading/risk-data-stream/Keepalive-User-Data-Stream" /></para>
+            </summary>
+            <param name="listenKey">The listen key to keep alive</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StopRiskDataUserStreamAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Stops the current user stream
+            <para><a href="https://developers.binance.com/docs/margin_trading/risk-data-stream/Close-User-Data-Stream" /></para>
+            </summary>
+            <param name="listenKey">The listen key to keep alive</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -17466,6 +17913,16 @@
             <param name="onListenKeyExpired">The event handler for when the listen key has expired. No events will be send anymore after this</param>
             <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped. For example, after you call <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)" /></param>
             <param name="onBalanceLockUpdate">The event handler for when the part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral. </param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserRiskDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the risk data account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(System.Threading.CancellationToken)">StartRiskDataUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
+            </summary>
+            <param name="listenKey">Listen key retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(System.Threading.CancellationToken)">StartRiskDataUserStreamAsync</see> method</param>
+            <param name="onMarginCallUpdate">Event handler for margin call status updates</param>
+            <param name="onLiabilityUpdate">Event handler for liability updates</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -20386,9 +20843,9 @@
             The address used by the BinanceSocketClient for the Spot API
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.BinanceApiAddresses.BlvtSocketClientAddress">
+        <member name="P:Binance.Net.Objects.BinanceApiAddresses.RiskDataSocketClientAddress">
             <summary>
-            The address used by the BinanceSocketClient for connecting to the BLVT streams
+            The address used by the BinanceSocketClient for connecting to the margin Risk Data streams
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.BinanceApiAddresses.UsdFuturesRestClientAddress">
@@ -28841,6 +29298,36 @@
             Quote asset max borrowable
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate">
+            <summary>
+            Liability update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate.ListenKey">
+            <summary>
+            Listen key
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate.UpdateType">
+            <summary>
+            Liability update type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate.Principle">
+            <summary>
+            Principle quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate.Interest">
+            <summary>
+            Interest quantity
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAccount">
             <summary>
             Information about margin account
@@ -29059,6 +29546,26 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginAvailableInventory.UpdateTime">
             <summary>
             Update time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate">
+            <summary>
+            Margin call update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate.ListenKey">
+            <summary>
+            Listen key
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate.MarginLevel">
+            <summary>
+            Margin level
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate.MarginCallStatus">
+            <summary>
+            Margin call status
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDelistSchedule">
@@ -32624,6 +33131,486 @@
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.CreateTime">
             <summary>
             The time the universal transaction was created
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest">
+            <summary>
+            VIP Loan accured interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.PrincipalQuantity">
+            <summary>
+            Principal quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.InterestQuantity">
+            <summary>
+            Interest quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.AnnualInterestRate">
+            <summary>
+            Annual interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.AccrualTime">
+            <summary>
+            Accrual time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.OrderId">
+            <summary>
+            Latest order ID for renewal order
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus">
+            <summary>
+            VIP Loan application status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanAccountId">
+            <summary>
+            ID of account receiving loan
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.RequestId">
+            <summary>
+            Request id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanQuantity">
+            <summary>
+            Loan quantity 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.CollateralAccountId">
+            <summary>
+            Collateral account id separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanTerm">
+            <summary>
+            Loan term
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.Status">
+            <summary>
+            Application status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanDate">
+            <summary>
+            Loan date
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset">
+            <summary>
+            VIP Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.FlexibleDailyInterestRate">
+            <summary>
+            Flexible daily interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.FlexibleYearlyInterestRate">
+            <summary>
+            Flexible yearly interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.DailyInterestRate30Days">
+            <summary>
+            Daily interest rate for 30 days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.YearlyInterestRate30Days">
+            <summary>
+            Yearly interest rate for 30 days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.DailyInterestRate60Days">
+            <summary>
+            Daily interest rate for 60 days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.YearlyInterestRate60Days">
+            <summary>
+            Yearly interest rate for 60 days
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.MinLimit">
+            <summary>
+            Min limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.MaxLimit">
+            <summary>
+            Min limit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.VipLevel">
+            <summary>
+            VIP level
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData">
+            <summary>
+            VIP Loan borrow data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanAccountId">
+            <summary>
+            Loan account id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.RequestId">
+            <summary>
+            Request Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.IsFlexibleRate">
+            <summary>
+            Is flexible rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanQuantity">
+            <summary>
+            Loan quantity 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.CollateralAccountId">
+            <summary>
+            Collateral accounts id separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanTerm">
+            <summary>
+            Loan term
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate">
+            <summary>
+            VIP Loan interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.FlexibleDailyInterestRate">
+            <summary>
+            Flexible daily interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.FlexibleYearlyInterestRate">
+            <summary>
+            Flexible yearly interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue">
+            <summary>
+            VIP Loan repayment data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue.CollateralAccountId">
+            <summary>
+            Collateral account id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset">
+            <summary>
+            VIP Loan collateral asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.CollateralAsset">
+            <summary>
+            Collateral asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.FirstCollateralRatio">
+            <summary>
+            First collateral ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.FirstCollateralRange">
+            <summary>
+            First collateral range
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.SecondCollateralRatio">
+            <summary>
+            Second collateral ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.SecondCollateralRange">
+            <summary>
+            Second collateral range
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.ThirdCollateralRatio">
+            <summary>
+            Third collateral ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.ThirdCollateralRange">
+            <summary>
+            Third collateral range
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.FourthCollateralRatio">
+            <summary>
+            Fourth collateral ratio
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.FourthCollateralRange">
+            <summary>
+            Fourth collateral range
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate">
+            <summary>
+            VIP Loan interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate.AnnualizedInterestRate">
+            <summary>
+            Annualized interest rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData">
+            <summary>
+            VIP Loan ongoing order data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanTotalDebt">
+            <summary>
+            Loan debt quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.ResidualInterest">
+            <summary>
+            Loan residual interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.CollateralAccountId">
+            <summary>
+            Collateral account id separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.TotalCollateralValueAfterHaircur">
+            <summary>
+            Total collateral value after haircur
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LockedCollateralValue">
+            <summary>
+            Locked collateral value
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LTV">
+            <summary>
+            Current LTV
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.ExpirationTime">
+            <summary>
+            Expiration time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanDate">
+            <summary>
+            Loan date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanTerm">
+            <summary>
+            Loan term
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData">
+            <summary>
+            VIP Loan renew data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanAccountId">
+            <summary>
+            Loan account id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanQuantity">
+            <summary>
+            Loan quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.CollateralAccountId">
+            <summary>
+            Collateral account id separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanTerm">
+            <summary>
+            LoanTerm
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData">
+            <summary>
+            VIP Loan repay data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RepayQuantity">
+            <summary>
+            Repay quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RemainingPrincipal">
+            <summary>
+            Remaining principal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RemainingInterest">
+            <summary>
+            Remaining interest
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.LTV">
+            <summary>
+            Current LTV
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RepayStatus">
+            <summary>
+            Repay status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData">
+            <summary>
+            VIP Loan repayment data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.RepayQuantity">
+            <summary>
+            Repay quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.CollateralAsset">
+            <summary>
+            Collateral assets separated by `,`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.RepayStatus">
+            <summary>
+            Repay status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.LoanDate">
+            <summary>
+            Loan date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.RepayTime">
+            <summary>
+            Repay time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.OrderId">
+            <summary>
+            Order id
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.BinanceStreamEvent">
@@ -37114,6 +38101,24 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetUnsubQuery">
+            <inheritdoc />
+        </member>
+        <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}},System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.GetUnsubQuery">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">

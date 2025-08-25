@@ -5,6 +5,7 @@ using Binance.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using Binance.Net.Objects.Models;
+using Binance.Net.Objects.Models.Spot.Margin;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -12,6 +13,7 @@ namespace Binance.Net.Clients.SpotApi
     internal class BinanceSocketClientSpotApiAccount : IBinanceSocketClientSpotApiAccount
     {
         private readonly BinanceSocketClientSpotApi _client;
+        private readonly string? _riskDataBaseAddress;
 
         private readonly ILogger _logger;
 
@@ -20,6 +22,7 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceSocketClientSpotApiAccount(ILogger logger, BinanceSocketClientSpotApi client)
         {
             _client = client;
+            _riskDataBaseAddress = client.ClientOptions.Environment.RiskDataSocketAddress;
             _logger = logger;
         }
 
@@ -114,6 +117,24 @@ namespace Binance.Net.Clients.SpotApi
             listenKey.ValidateNotNull(nameof(listenKey));
             var subscription = new BinanceSpotUserDataSubscription(_logger, listenKey, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onListenKeyExpired, onUserDataStreamTerminated, onBalanceLockUpdate, false);
             return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Risk User Data Stream
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
+            string listenKey,
+            Action<DataEvent<BinanceMarginCallUpdate>>? onMarginCallUpdate = null,
+            Action<DataEvent<BinanceLiabilityUpdate>>? onLiabilityUpdate = null,
+            CancellationToken ct = default)
+        {
+            if (_riskDataBaseAddress == null)
+                throw new NotSupportedException("RiskData base address not configured");
+
+            listenKey.ValidateNotNull(nameof(listenKey));
+            var subscription = new BinanceMarginRiskDataSubscription(_logger, listenKey, onMarginCallUpdate, onLiabilityUpdate, false);
+            return await _client.SubscribeInternalAsync(_riskDataBaseAddress, subscription, ct).ConfigureAwait(false);
         }
         #endregion
 

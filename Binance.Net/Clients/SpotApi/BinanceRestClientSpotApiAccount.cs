@@ -1063,6 +1063,54 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Create a Risk Data ListenKey
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<string>> StartRiskDataUserStreamAsync(CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/margin/listen-key", BinanceExchange.RateLimiter.SpotRestUid, 3000);
+            var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
+            return result.As(result.Data?.ListenKey!);
+        }
+
+        #endregion
+
+        #region Ping/Keep-alive a Risk Data ListenKey
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default)
+        {
+            listenKey.ValidateNotNull(nameof(listenKey));
+
+            var parameters = new ParameterCollection
+            {
+                { "listenKey", listenKey },
+            };
+
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/margin/listen-key", BinanceExchange.RateLimiter.SpotRestUid, 3000);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Invalidate a Risk Data ListenKey
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default)
+        {
+            listenKey.ValidateNotNull(nameof(listenKey));
+            var parameters = new ParameterCollection
+            {
+                { "listenKey", listenKey }
+            };
+
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/margin/listen-key", BinanceExchange.RateLimiter.SpotRestUid, 3000);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+
         #region Trading status
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
