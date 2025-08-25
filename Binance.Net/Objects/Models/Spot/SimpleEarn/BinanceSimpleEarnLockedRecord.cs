@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// <summary>
         /// Position id
         /// </summary>
-        [JsonPropertyName("positionId")]
+        [JsonPropertyName("positionId"), JsonConverter(typeof(NumberStringConverter))]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
@@ -34,6 +34,11 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// </summary>
         [JsonPropertyName("purchaseId")]
         public long PurchaseId { get; set; }
+        /// <summary>
+        /// Purchase id
+        /// </summary>
+        [JsonPropertyName("projectId")]
+        public string ProjectId { get; set; } = string.Empty;
         /// <summary>
         /// Subscription type
         /// </summary>

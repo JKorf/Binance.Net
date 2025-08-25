@@ -1,0 +1,6 @@
+GET
+/sapi/v1/simple-earn/flexible/personalLeftQuota
+true
+{
+  "leftPersonalQuota": "1000"
+}

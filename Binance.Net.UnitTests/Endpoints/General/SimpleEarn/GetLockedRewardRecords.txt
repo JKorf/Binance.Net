@@ -1,0 +1,23 @@
+GET
+/sapi/v1/simple-earn/locked/history/rewardsRecord
+true
+{
+  "rows": [
+    {
+      "positionId": 123123,
+      "time": 1575018510000,
+      "asset": "BNB",
+      "lockPeriod": "30",
+      "amount": "21312.23223",
+      "type":"Locked Rewards"
+    },
+    {
+      "positionId": 123123,
+      "time":1575018510000,
+      "asset":"BNB",
+      "amount":"1.23223",
+      "type":"Boost Rewards"
+     }
+  ],
+  "total": 1
+}

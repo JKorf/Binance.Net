@@ -1,0 +1,8 @@
+POST
+/sapi/v1/simple-earn/locked/subscribe
+true
+{
+  "purchaseId": 40607,
+  "positionId": "12345",
+  "success": true
+}
