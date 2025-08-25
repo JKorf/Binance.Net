@@ -1,8 +1,13 @@
 ﻿using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Futures.Socket;
+using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.Socket;
+using Binance.Net.Objects.Options;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Testing;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,15 +38,21 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateSpotAccountSubscriptions()
         {
-            var client = new BinanceSocketClient(opts =>
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
-            });
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
+            }), logger);
             var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/Account", "https://api.binance.com", "data");
             await tester.ValidateAsync<BinanceStreamOrderUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onOrderUpdateMessage: handler), "Order");
             await tester.ValidateAsync<BinanceStreamOrderList>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onOcoOrderUpdateMessage: handler), "OcoOrder");
             await tester.ValidateAsync<BinanceStreamPositionsUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onAccountPositionMessage: handler), "AccountPosition");
             await tester.ValidateAsync<BinanceStreamBalanceUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync("123", onAccountBalanceUpdate: handler), "Balance");
+            
+            await tester.ValidateAsync<BinanceMarginCallUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserRiskDataUpdatesAsync("123", onMarginCallUpdate: handler), "MarginCall");
+            await tester.ValidateAsync<BinanceLiabilityUpdate>((client, handler) => client.SpotApi.Account.SubscribeToUserRiskDataUpdatesAsync("123", onLiabilityUpdate: handler), "Liability");
         }
 
         [Test]

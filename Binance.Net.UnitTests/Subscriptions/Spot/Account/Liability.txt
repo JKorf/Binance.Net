@@ -1,0 +1,15 @@
+> { "method": "SUBSCRIBE", "params": [ "123" ], "id": "|1|" }
+< { "result": null, "id": |1| }
+= 
+{ 
+	"stream": "123",
+	"data": 
+     {
+	  "e": "USER_LIABILITY_CHANGE",
+	  "E": 1701949801133,
+	  "a": "BTC",
+	  "t": "BORROW",
+	  "p": "0.00000100",
+	  "i": "0.00000000"
+	}
+}

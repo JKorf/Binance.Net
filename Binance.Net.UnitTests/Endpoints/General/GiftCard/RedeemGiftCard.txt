@@ -1,0 +1,14 @@
+POST
+/sapi/v1/giftcard/redeemCode
+true
+{
+  "code":"000000",
+  "message":"success",
+  "data":{
+    "referenceNo":"0033002328060227",
+    "identityNo":"10317392647411060736",
+    "token":"BNB",
+    "amount":"0.00000001"
+  },
+  "success":true
+}

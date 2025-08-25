@@ -844,5 +844,32 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceCommissions>> GetCommissionRatesAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/risk-data-stream/Start-User-Data-Stream" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Listen key</returns>
+        Task<WebCallResult<string>> StartRiskDataUserStreamAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/risk-data-stream/Keepalive-User-Data-Stream" /></para>
+        /// </summary>
+        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
+
+        /// <summary>
+        /// Stops the current user stream
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/risk-data-stream/Close-User-Data-Stream" /></para>
+        /// </summary>
+        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
+
     }
 }
