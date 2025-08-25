@@ -6744,7 +6744,7 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
-        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseBinanceGiftCardTokenLimit">
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardResponseBinanceGiftCardTokenLimitArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -6760,6 +6760,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardTokenLimit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceGiftCardTokenLimitArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>

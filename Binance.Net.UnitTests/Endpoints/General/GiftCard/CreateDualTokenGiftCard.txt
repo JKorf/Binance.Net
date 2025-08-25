@@ -1,0 +1,13 @@
+POST
+/sapi/v1/giftcard/buyCode
+true
+{
+  "code": "000000",
+  "message": "success",
+  "data": {
+      "referenceNo": "0033002144060553",
+      "code": "6H9EKF5ECCWFBHGE",
+      "expiredTime": 1727417154000
+  },
+  "success": true
+}

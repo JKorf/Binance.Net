@@ -1,0 +1,15 @@
+GET
+/sapi/v1/giftcard/buyCode/token-limit
+true
+{
+  "code": "000000",
+  "message": "success",
+  "data": [
+    {
+      "coin": "BNB",
+      "fromMin": "0.01",
+      "fromMax": "1"
+    }
+  ],
+  "success":true
+}

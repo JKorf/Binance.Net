@@ -113,14 +113,14 @@ namespace Binance.Net.Clients.GeneralApi
         #region Fetch Token Limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("baseToken", baseToken);
             parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/giftcard/buyCode/token-limit", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            return await _baseClient.SendAsync<BinanceGiftCardResponse<BinanceGiftCardTokenLimit>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion
