@@ -23,6 +23,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<string>))]
 
+    [JsonSerializable(typeof(BinanceResult<BinanceReplaceOrderResult>))]
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
     [JsonSerializable(typeof(Dictionary<string, object>))]
     [JsonSerializable(typeof(List<Dictionary<string, object>>))]
