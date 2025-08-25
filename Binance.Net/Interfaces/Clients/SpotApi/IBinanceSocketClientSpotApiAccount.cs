@@ -1,6 +1,7 @@
 ﻿using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Objects.Sockets;
 
@@ -76,5 +77,19 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
                                                                              Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
                                                                              Action<DataEvent<BinanceStreamBalanceLockUpdate>>? onBalanceLockUpdate = null,
                                                                              CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to the risk data account update stream. Prior to using this, the <see cref="IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(CancellationToken)">StartRiskDataUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
+        /// </summary>
+        /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(CancellationToken)">StartRiskDataUserStreamAsync</see> method</param>
+        /// <param name="onMarginCallUpdate">Event handler for margin call status updates</param>
+        /// <param name="onLiabilityUpdate">Event handler for liability updates</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
+            string listenKey,
+            Action<DataEvent<BinanceMarginCallUpdate>>? onMarginCallUpdate = null,
+            Action<DataEvent<BinanceLiabilityUpdate>>? onLiabilityUpdate = null,
+            CancellationToken ct = default);
     }
 }

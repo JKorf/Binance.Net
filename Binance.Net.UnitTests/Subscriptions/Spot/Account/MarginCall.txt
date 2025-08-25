@@ -1,0 +1,13 @@
+> { "method": "SUBSCRIBE", "params": [ "123" ], "id": "|1|" }
+< { "result": null, "id": |1| }
+= 
+{ 
+	"stream": "123",
+	"data": 
+     {
+	   "e": "MARGIN_LEVEL_STATUS_CHANGE",
+	   "E": 1701949763462,
+	   "l": "1.1",
+	   "s": "MARGIN_CALL"
+	}
+}

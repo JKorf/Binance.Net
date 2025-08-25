@@ -144,7 +144,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Trading.PlaceOrderAsync("ETHUSDT", Enums.OrderSide.Sell, Enums.SpotOrderType.Market, 1), "PlaceOrder");
             await tester.ValidateAsync(client => client.SpotApi.Trading.CancelOrderAsync("ETHUSDT", 123), "CancelOrder");
             await tester.ValidateAsync(client => client.SpotApi.Trading.CancelAllOrdersAsync("ETHUSDT"), "CancelAllOrders");
-            await tester.ValidateAsync(client => client.SpotApi.Trading.ReplaceOrderAsync("ETHUSDT", Enums.OrderSide.Sell, Enums.SpotOrderType.Limit, Enums.CancelReplaceMode.AllowFailure, 123, quantity: 1), "ReplaceOrder");
+            await tester.ValidateAsync(client => client.SpotApi.Trading.ReplaceOrderAsync("ETHUSDT", Enums.OrderSide.Sell, Enums.SpotOrderType.Limit, Enums.CancelReplaceMode.AllowFailure, 123, quantity: 1), "ReplaceOrder", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOrderAsync("ETHUSDT", 123), "GetOrder");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOpenOrdersAsync("ETHUSDT"), "GetOpenOrders");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOrdersAsync("ETHUSDT"), "GetOrders");
@@ -521,6 +521,25 @@ namespace Binance.Net.UnitTests
         }
       
         [Test]
+        public async Task ValidateGeneralGiftCardCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+          
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/GiftCard", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.CreateSingleTokenGiftCardAsync("BUSD", 1.002), "CreateSingleTokenGiftCard");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.CreateDualTokenGiftCardAsync("BUSD", "BNB", 1.002), "CreateDualTokenGiftCard");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.RedeemGiftCardAsync("6H9EKF5ECCWFBHGE", useEncryption: false), "RedeemGiftCard");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.VerifyGiftCardByNumberAsync("0033002144060553"), "VerifyGiftCardByNumber");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.GetTokenLimitAsync("BUSD"), "GetTokenLimit");
+            await tester.ValidateAsync(client => client.GeneralApi.GiftCard.GetRsaPublicKeyAsync(), "GetRsaPublicKey");
+        }
+      
+        [Test]
         public async Task ValidateGeneralMiningCalls()
         {
             var client = new BinanceRestClient(opts =>
@@ -545,7 +564,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Mining.CancelHashrateResaleRequestAsync(168, "test"),"CancelHashrateResaleRequest", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAccountEarningsAsync("sha256"),"GetMiningAccountEarnings", nestedJsonProperty: "data");
         }
-
+          
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;

@@ -20,9 +20,10 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinaceGiftCardData>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardRedeemData>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardValidity>))]
-    [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardTokenLimit>))]
+    [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<string>))]
 
+    [JsonSerializable(typeof(BinanceResult<BinanceReplaceOrderResult>))]
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
     [JsonSerializable(typeof(Dictionary<string, object>))]
     [JsonSerializable(typeof(List<Dictionary<string, object>>))]
@@ -90,6 +91,8 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Internal.BinanceSocketRequest[]))]
     [JsonSerializable(typeof(Objects.Internal.BinanceSocketQuery[]))]
     
+    [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceMarginCallUpdate>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceLiabilityUpdate>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesStreamCoinKlineData>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesStreamIndexPrice>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesCoinStreamMarkPrice>))]
@@ -576,7 +579,20 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferResult[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransaction[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Brokerage.SubAccountData.BinanceBrokerageTransferTransactionUniversal[]))]
-    
+
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanAsset[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData[]))]
+
     [JsonSerializable(typeof(Enums.SymbolFilterType[]))]
     [JsonSerializable(typeof(BinanceConstituents))]
     [JsonSerializable(typeof(BinanceInsuranceFundBalance))]

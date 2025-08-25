@@ -18,9 +18,9 @@
         /// </summary>
         public string SocketClientApiAddress { get; set; } = string.Empty;
         /// <summary>
-        /// The address used by the BinanceSocketClient for connecting to the BLVT streams
+        /// The address used by the BinanceSocketClient for connecting to the margin Risk Data streams
         /// </summary>
-        public string? BlvtSocketClientAddress { get; set; }
+        public string? RiskDataSocketClientAddress { get; set; }
         /// <summary>
         /// The address used by the BinanceClient for the USD futures API
         /// </summary>
@@ -55,7 +55,7 @@
             RestClientAddress = "https://api.binance.com",
             SocketClientStreamAddress = "wss://stream.binance.com:9443/",
             SocketClientApiAddress = "wss://ws-api.binance.com:443/",
-            BlvtSocketClientAddress = "wss://nbstream.binance.com/",
+            RiskDataSocketClientAddress = "wss://margin-stream.binance.com/",
             UsdFuturesRestClientAddress = "https://fapi.binance.com",
             UsdFuturesSocketClientAddress = "wss://fstream.binance.com/",
             UsdFuturesSocketApiClientAddress = "wss://ws-fapi.binance.com/",
@@ -72,7 +72,6 @@
             RestClientAddress = "https://testnet.binance.vision",
             SocketClientStreamAddress = "wss://stream.testnet.binance.vision",
             SocketClientApiAddress = "wss://ws-api.testnet.binance.vision",
-            BlvtSocketClientAddress = "wss://fstream.binancefuture.com",
             UsdFuturesRestClientAddress = "https://testnet.binancefuture.com",
             UsdFuturesSocketClientAddress = "wss://fstream.binancefuture.com",
             UsdFuturesSocketApiClientAddress = "wss://testnet.binancefuture.com",

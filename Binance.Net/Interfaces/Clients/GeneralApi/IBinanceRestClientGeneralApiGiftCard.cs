@@ -64,7 +64,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         
-        Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Get RSA public key

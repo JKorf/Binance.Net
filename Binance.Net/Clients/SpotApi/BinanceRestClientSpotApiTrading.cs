@@ -6,6 +6,7 @@ using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.Margin;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -265,9 +266,29 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalEnum("cancelRestrictions", cancelRestriction);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true);
-            var result = await _baseClient.SendAsync<BinanceReplaceOrderResult>(request, parameters, ct).ConfigureAwait(false);
-            return result;
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true, tryParseOnNonSuccess: true);
+            var result = await _baseClient.SendAsync<BinanceResult<BinanceReplaceOrderResult>>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<BinanceReplaceOrderResult>(default);
+
+            if (result.Data?.Data == null)
+            {
+                if (result.Data == null)
+                    return result.AsError<BinanceReplaceOrderResult>(new ServerError(ErrorInfo.Unknown));
+
+                // A general API error
+                return result.AsError<BinanceReplaceOrderResult>(new ServerError(result.Data.Code, _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+            }
+
+            if (result.Data.Data.NewOrderResult == OrderOperationResult.NotAttempted)
+                // Not attempted because cancel failed
+                return result.AsErrorWithData<BinanceReplaceOrderResult>(new ServerError(result.Data.Data.CancelResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.CancelResponse.Code.Value, result.Data.Data.CancelResponse.Message)), result.Data.Data);
+
+            if (result.Data.Data.NewOrderResult == OrderOperationResult.Failure)
+                // New order attempted; if cancel failed this still takes priority since cancelReplaceMode was AllowFailure
+                return result.AsErrorWithData<BinanceReplaceOrderResult>(new ServerError(result.Data.Data.NewOrderResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.NewOrderResponse.Code.Value, result.Data.Data.NewOrderResponse.Message)), result.Data.Data);
+
+            return result.As<BinanceReplaceOrderResult>(result.Data.Data);
         }
         #endregion
 

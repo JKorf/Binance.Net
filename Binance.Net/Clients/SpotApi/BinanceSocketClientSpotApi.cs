@@ -43,7 +43,9 @@ namespace Binance.Net.Clients.SpotApi
             "listStatus",
             "listenKeyExpired",
             "eventStreamTerminated",
-            "externalLockUpdate"
+            "externalLockUpdate",
+            "MARGIN_LEVEL_STATUS_CHANGE",
+            "USER_LIABILITY_CHANGE"
         };
         #endregion
 
