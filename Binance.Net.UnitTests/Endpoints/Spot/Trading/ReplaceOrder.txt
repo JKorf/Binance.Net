@@ -2,6 +2,7 @@ POST
 /api/v3/order/cancelReplace
 true
 {
+  "data": {
   "cancelResult": "SUCCESS",
   "newOrderResult": "SUCCESS",
   "cancelResponse": {
@@ -38,5 +39,6 @@ true
     "workingTime": 1669277163808,
     "fills": [],
     "selfTradePreventionMode": "NONE"
+  }
   }
 }
