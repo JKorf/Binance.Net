@@ -10344,6 +10344,16 @@
             Stop price would trigger immediately
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.WouldMatchImmediately">
+            <summary>
+            Trade would match immediately
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.OrderRejectReason.OCOOrderBadPrices">
+            <summary>
+            OCO order bad prices
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.OrderResponseType">
             <summary>
             Response type
