@@ -1,0 +1,30 @@
+GET
+/sapi/v1/simple-earn/locked/list
+true
+{
+  "rows": [
+    {
+      "projectId": "Axs*90",
+      "detail": {
+        "asset": "AXS",
+        "rewardAsset": "AXS",
+        "duration": 90,
+        "renewable": true,
+        "isSoldOut": true,
+        "apr": "1.2069",
+        "status": "CREATED",
+        "subscriptionStartTime": "1646182276000",
+        "extraRewardAsset": "BNB",
+        "extraRewardAPR": "0.23",
+        "boostRewardAsset": "AXS",
+        "boostApr": "0.0121",
+        "boostEndTime": "1646182276000"
+      },
+      "quota": {
+        "totalPersonalQuota": "2",
+        "minimum": "0.001"
+      }
+    }
+  ],
+  "total": 1
+}
