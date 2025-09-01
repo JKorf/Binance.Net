@@ -17,6 +17,11 @@
         [JsonPropertyName("positionId"), JsonConverter(typeof(NumberStringConverter))]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
+        /// Parent Position id
+        /// </summary>
+        [JsonPropertyName("parentPositionId"), JsonConverter(typeof(NumberStringConverter))]
+        public string ParentPositionId { get; set; } = string.Empty;
+        /// <summary>
         /// Project id
         /// </summary>
         [JsonPropertyName("projectId")]

@@ -1,0 +1,17 @@
+GET
+/sapi/v1/simple-earn/flexible/history/redemptionRecord
+true
+{
+  "rows": [
+    {
+      "amount": "10.54000000",
+      "asset": "USDT",
+      "time": 1577257222000,
+      "projectId": "USDT001",
+      "redeemId": 40607,
+      "destAccount":"SPOT",
+      "status": "PAID"
+    }
+  ],
+  "total": 1
+}
