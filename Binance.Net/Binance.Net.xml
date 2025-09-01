@@ -20991,6 +20991,26 @@
             Retry after time
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseErrorData.CancelResult">
+            <summary>
+            Cancel result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseErrorData.NewOrderResult">
+            <summary>
+            New order result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseErrorData.CancelResponse">
+            <summary>
+            Cancel order response. Make sure to check that the CancelResult is Success, else the CancelResponse.Message will contain more info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResponseErrorData.NewOrderResponse">
+            <summary>
+            New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Binance24HPriceBase">
             <summary>
             24 hour rolling window price data
