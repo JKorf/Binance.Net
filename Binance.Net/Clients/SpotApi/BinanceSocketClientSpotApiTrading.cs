@@ -2,6 +2,8 @@
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
+using Binance.Net.Objects.Sockets;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -202,7 +204,29 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
 
-            return await _client.QueryAsync<BinanceReplaceOrderResult>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.cancelReplace", parameters, true, true, ct: ct).ConfigureAwait(false);
+            var result = await _client.QueryAsync(
+                _client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"),
+                $"order.cancelReplace",
+                parameters,
+                (client, request) => new BinanceSpotOrderReplaceQuery(client, request, false),
+                true,
+                true,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<BinanceResponse<BinanceReplaceOrderResult>>(default);
+
+            if (result.Data == null)
+                return result.AsError<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(ErrorInfo.Unknown));
+
+            if (result.Data.Result.NewOrderResult == OrderOperationResult.NotAttempted)
+                // Not attempted because cancel failed
+                return result.AsErrorWithData<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(result.Data.Result.CancelResponse!.Code!.Value, _client.GetErrorInfo(result.Data.Result.CancelResponse.Code.Value, result.Data.Result.CancelResponse.Message)), result.Data);
+
+            if (result.Data.Result.NewOrderResult == OrderOperationResult.Failure)
+                // New order attempted; if cancel failed this still takes priority since cancelReplaceMode was AllowFailure
+                return result.AsErrorWithData<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(result.Data.Result.NewOrderResponse!.Code!.Value, _client.GetErrorInfo(result.Data.Result.NewOrderResponse.Code.Value, result.Data.Result.NewOrderResponse.Message)), result.Data);
+
+            return result;
         }
 
         #endregion

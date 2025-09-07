@@ -1,0 +1,7 @@
+POST
+/sapi/v1/simple-earn/flexible/subscribe
+true
+{
+  "purchaseId": 40607,
+  "success": true
+}

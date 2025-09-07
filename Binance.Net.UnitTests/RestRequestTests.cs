@@ -1,4 +1,5 @@
 using Binance.Net.Clients;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
@@ -519,7 +520,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetUserStatusAsync(), "GetUserStatus", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.GeneralApi.CopyTrading.GetLeadSymbolAsync(), "GetLeadSymbol", nestedJsonProperty: "data");
         }
-      
+          
         [Test]
         public async Task ValidateGeneralGiftCardCalls()
         {
@@ -540,6 +541,43 @@ namespace Binance.Net.UnitTests
         }
       
         [Test]
+        public async Task ValidateGeneralSimpleEarnCalls()
+        {
+            var client = new BinanceRestClient(opts =>
+            {
+                opts.RateLimiterEnabled = false;
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
+            });
+
+            var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/SimpleEarn", "https://api.binance.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetAccountAsync(),"GetAccount");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleProductsAsync(),"GetFlexibleProducts");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedProductsAsync(),"GetLockedProducts");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleProductPositionsAsync(),"GetFlexibleProductPositions");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedProductPositionsAsync(),"GetLockedProductPositions");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexiblePersonalQuotaLeftAsync("123"),"GetFlexiblePersonalQuotaLeft");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedPersonalQuotaLeftAsync("123"),"GetLockedPersonalQuotaLeft");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.SubscribeFlexibleProductAsync("123", 1),"SubscribeFlexibleProduct");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.SubscribeLockedProductAsync("123", 1),"SubscribeLockedProduct");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.RedeemFlexibleProductAsync("123"),"RedeemFlexibleProduct");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.RedeemLockedProductAsync("123"),"RedeemLockedProduct");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.SetFlexibleAutoSubscribeAsync("123", true),"SetFlexibleAutoSubscribe");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.SetLockedAutoSubscribeAsync("123", true),"SetLockedAutoSubscribe");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleSubscriptionPreviewAsync("123", 1),"GetFlexibleSubscriptionPreview");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedSubscriptionPreviewAsync("123", 1),"GetLockedSubscriptionPreview");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.SetLockedRedeemOptionAsync("123", RedeemDestination.Flexible),"SetLockedRedeemOption");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleSubscriptionRecordsAsync(),"GetFlexibleSubscriptionRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedSubscriptionRecordsAsync(),"GetLockedSubscriptionRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleRedemptionRecordsAsync(),"GetFlexibleRedemptionRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedRedemptionRecordsAsync(),"GetLockedRedemptionRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetFlexibleRewardRecordsAsync(RewardType.All),"GetFlexibleRewardRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetLockedRewardRecordsAsync(),"GetLockedRewardRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetCollateralRecordsAsync("123"),"GetCollateralRecords");
+            await tester.ValidateAsync(client => client.GeneralApi.SimpleEarn.GetRateHistoryAsync("123"),"GetRateHistory");
+        }
+      
+        [Test]
         public async Task ValidateGeneralMiningCalls()
         {
             var client = new BinanceRestClient(opts =>
@@ -548,7 +586,7 @@ namespace Binance.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
             });
-          
+
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/General/Mining", "https://api.binance.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningCoinListAsync(),"GetMiningCoinList", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAlgorithmListAsync(),"GetMiningAlgorithmList", nestedJsonProperty: "data");
@@ -564,7 +602,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Mining.CancelHashrateResaleRequestAsync(168, "test"),"CancelHashrateResaleRequest", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAccountEarningsAsync("sha256"),"GetMiningAccountEarnings", nestedJsonProperty: "data");
         }
-          
+
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;

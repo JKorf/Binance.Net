@@ -524,9 +524,16 @@ namespace Binance.Net.Clients.SpotApi
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.PendingNew || status == OrderStatus.New || status == OrderStatus.PartiallyFilled || status == OrderStatus.PendingCancel) return SharedOrderStatus.Open;
-            if (status == OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            if (status == OrderStatus.PartiallyFilled
+                || status == OrderStatus.New
+                || status == OrderStatus.PendingNew
+                || status == OrderStatus.PendingCancel)
+                return SharedOrderStatus.Open;
+
+            return SharedOrderStatus.Canceled;
         }
 
         private SharedOrderType ParseOrderType(SpotOrderType type)

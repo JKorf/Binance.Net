@@ -1,4 +1,5 @@
-﻿using Binance.Net.Objects.Models.Spot;
+﻿using Binance.Net.Enums;
+using Binance.Net.Objects.Models.Spot;
 
 namespace Binance.Net.Objects
 {
@@ -72,6 +73,8 @@ namespace Binance.Net.Objects
     /// </summary>
     public class BinanceResponseErrorData
     {
+        // ### Rate limit error response
+
         /// <summary>
         /// Server time
         /// </summary>
@@ -82,5 +85,29 @@ namespace Binance.Net.Objects
         /// </summary>
         [JsonPropertyName("retryAfter")]
         public DateTime? RetryAfter { get; set; }
+
+
+        // ### Replace order error response
+
+        /// <summary>
+        /// Cancel result
+        /// </summary>
+        [JsonPropertyName("cancelResult")]
+        public OrderOperationResult CancelResult { get; set; }
+        /// <summary>
+        /// New order result
+        /// </summary>
+        [JsonPropertyName("newOrderResult")]
+        public OrderOperationResult NewOrderResult { get; set; }
+        /// <summary>
+        /// Cancel order response. Make sure to check that the CancelResult is Success, else the CancelResponse.Message will contain more info
+        /// </summary>
+        [JsonPropertyName("cancelResponse")]
+        public BinanceReplaceCancelOrder? CancelResponse { get; set; }
+        /// <summary>
+        /// New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
+        /// </summary>
+        [JsonPropertyName("newOrderResponse")]
+        public BinanceReplaceOrder? NewOrderResponse { get; set; }
     }
 }

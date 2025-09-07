@@ -1,0 +1,6 @@
+POST
+/sapi/v1/simple-earn/locked/setAutoSubscribe
+true
+{
+  "success": true
+}

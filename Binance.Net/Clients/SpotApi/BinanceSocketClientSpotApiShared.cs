@@ -145,7 +145,7 @@ namespace Binance.Net.Clients.SpotApi
                         update.Data.Id.ToString(),
                         ParseOrderType(update.Data.Type),
                         update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                        update.Data.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.Status == Enums.OrderStatus.New || update.Data.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                        ParseOrderStatus(update.Data.Status),
                         update.Data.CreateTime)
                     {
                         ClientOrderId = update.Data.ClientOrderId,
@@ -167,6 +167,20 @@ namespace Binance.Net.Clients.SpotApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderStatus ParseOrderStatus(OrderStatus status)
+        {
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            if (status == OrderStatus.PartiallyFilled
+                || status == OrderStatus.New
+                || status == OrderStatus.PendingNew 
+                || status == OrderStatus.PendingCancel)
+                return SharedOrderStatus.Open;
+
+            return SharedOrderStatus.Canceled;
         }
 
         private SharedOrderType ParseOrderType(SpotOrderType type)
