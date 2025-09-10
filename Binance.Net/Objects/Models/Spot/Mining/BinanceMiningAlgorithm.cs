@@ -15,7 +15,7 @@
         /// The id of the algorithm
         /// </summary>
         [JsonPropertyName("algoId")]
-        public string AlgorithmId { get; set; } = string.Empty;
+        public int? AlgorithmId { get; set; } = null;
         /// <summary>
         /// The pool index
         /// </summary>

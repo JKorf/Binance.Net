@@ -1,0 +1,30 @@
+GET
+/sapi/v1/mining/hash-transfer/profit/details
+true
+{
+	"code": 0,
+	"msg": "",
+	"data": {
+		"profitTransferDetails": [{
+				"poolUsername": "test4001",
+				"toPoolUsername": "pop",
+				"algoName": "sha256",
+				"hashRate": 200000000000,
+				"day": 20201213,
+				"amount": 0.2256872,
+				"coinName": "BTC"
+			},
+			{
+				"poolUsername": "test4001",
+				"toPoolUsername": "pop",
+				"algoName": "sha256",
+				"hashRate": 200000000000,
+				"day": 20201213,
+				"amount": 0.2256872,
+				"coinName": "BTC"
+			}
+		],
+		"totalNum": 8,
+		"pageSize": 200
+	}
+}

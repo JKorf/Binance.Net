@@ -20,7 +20,7 @@
         /// <summary>
         /// Hash rate data
         /// </summary>
-        [JsonPropertyName("hashRateDatas")]
+        [JsonPropertyName("hashrateDatas")]
         public BinanceHashRate[] HashRateDatas { get; set; } = Array.Empty<BinanceHashRate>();
     }
 
@@ -38,7 +38,7 @@
         /// <summary>
         /// Hashrate
         /// </summary>
-        [JsonPropertyName("hashRate")]
+        [JsonPropertyName("hashrate")]
         public decimal HashRate { get; set; }
         /// <summary>
         /// Rejected
