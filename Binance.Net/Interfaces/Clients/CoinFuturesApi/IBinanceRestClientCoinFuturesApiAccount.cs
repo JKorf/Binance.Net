@@ -115,11 +115,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="incomeType">The income type filter to apply to the request</param>
         /// <param name="startTime">Time to start getting income history from</param>
         /// <param name="endTime">Time to stop getting income history from</param>
+        /// <param name="page">Page number</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The income history for the futures account</returns>
-        Task<WebCallResult<BinanceFuturesIncomeHistory[]>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesIncomeHistory[]>> GetIncomeHistoryAsync(string? symbol = null, string? incomeType = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
