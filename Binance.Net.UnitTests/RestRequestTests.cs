@@ -605,6 +605,8 @@ namespace Binance.Net.UnitTests
 
         // Stacking tests (placeholder) 
 
+        // SubAccount tests (placeholder)
+
         // AlphaTrading tests (placeholder) 
 
         // VipLoans tests (placeholder)
