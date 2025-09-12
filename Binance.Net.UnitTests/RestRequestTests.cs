@@ -603,13 +603,13 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.GeneralApi.Mining.GetMiningAccountEarningsAsync("sha256"),"GetMiningAccountEarnings", nestedJsonProperty: "data");
         }
 
-        // Stacking tests (placeholder) 
+        // Staking tests (placeholder) 
 
         // SubAccount tests (placeholder)
 
-        // AlphaTrading tests (placeholder) 
+        // Alpha Trading tests (placeholder) 
 
-        // VipLoans tests (placeholder)
+        // Vip Loans tests (placeholder)
 
         private bool IsAuthenticated(WebCallResult result)
         {
