@@ -753,7 +753,7 @@ namespace Binance.Net.Clients.SpotApi
                 return withdrawals.AsExchangeResult<SharedWithdrawal[]>(Exchange, null, default);
 
             // Determine next token
-            OffsetToken nextToken;
+            OffsetToken? nextToken = null;
             if (withdrawals.Data.Count() == (request.Limit ?? 100))
                 nextToken = new OffsetToken((offset ?? 0) + withdrawals.Data.Count());
 
@@ -765,7 +765,7 @@ namespace Binance.Net.Clients.SpotApi
                 TransactionId = x.TransactionId,
                 Fee = x.TransactionFee,
                 Id = x.Id
-            }).ToArray());
+            }).ToArray(), nextToken);
         }
 
         #endregion
