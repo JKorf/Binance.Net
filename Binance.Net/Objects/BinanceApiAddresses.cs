@@ -81,6 +81,23 @@
         };
 
         /// <summary>
+        /// The addresses to connect to the binance demo environment
+        /// </summary>
+        public static BinanceApiAddresses Demo = new BinanceApiAddresses
+        {
+            RestClientAddress = "https://demo-api.binance.com",
+            SocketClientStreamAddress = "wss://demo-stream.binance.com/",
+            SocketClientApiAddress = "wss://demo-ws-api.binance.com/",
+            RiskDataSocketClientAddress = "wss://demo-margin-stream.binance.com/",
+            UsdFuturesRestClientAddress = "https://demo-fapi.binance.com",
+            UsdFuturesSocketClientAddress = "wss://demo-fstream.binance.com/",
+            UsdFuturesSocketApiClientAddress = null, // wsapi is not yet supported for demo futures
+            CoinFuturesRestClientAddress = "https://demo-dapi.binance.com",
+            CoinFuturesSocketClientAddress = "wss://demo-dstream.binance.com/",
+            CoinFuturesSocketApiClientAddress = null, // wsapi is not yet supported for demo futures
+        };
+
+        /// <summary>
         /// The addresses to connect to binance.us. (binance.us futures not are not available)
         /// </summary>
         public static BinanceApiAddresses Us = new BinanceApiAddresses

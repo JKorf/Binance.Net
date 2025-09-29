@@ -73,6 +73,7 @@ namespace Binance.Net
          {
              TradeEnvironmentNames.Live => Live,
              TradeEnvironmentNames.Testnet => Testnet,
+             "demo" => DemoSpot,
              "us" => Us,
              "" => Live,
              null => Live,
@@ -109,7 +110,7 @@ namespace Binance.Net
         /// Available environment names
         /// </summary>
         /// <returns></returns>
-        public static string[] All => [Live.Name, Testnet.Name];
+        public static string[] All => [Live.Name, Testnet.Name, Demo.Name, Us.Name];
 
         /// <summary>
         /// Live environment
@@ -142,6 +143,22 @@ namespace Binance.Net
                                      BinanceApiAddresses.TestNet.CoinFuturesRestClientAddress,
                                      BinanceApiAddresses.TestNet.CoinFuturesSocketClientAddress,
                                      BinanceApiAddresses.TestNet.CoinFuturesSocketApiClientAddress);
+
+        /// <summary>
+        /// Demo environment
+        /// </summary>
+        public static BinanceEnvironment Demo { get; }
+          = new BinanceEnvironment("demo",
+                                   BinanceApiAddresses.Demo.RestClientAddress,
+                                   BinanceApiAddresses.Demo.SocketClientStreamAddress,
+                                   BinanceApiAddresses.Demo.SocketClientApiAddress,
+                                   BinanceApiAddresses.Demo.RiskDataSocketClientAddress,
+                                   BinanceApiAddresses.Demo.UsdFuturesRestClientAddress,
+                                   BinanceApiAddresses.Demo.UsdFuturesSocketClientAddress,
+                                   BinanceApiAddresses.Demo.UsdFuturesSocketApiClientAddress,
+                                   BinanceApiAddresses.Demo.CoinFuturesRestClientAddress,
+                                   BinanceApiAddresses.Demo.CoinFuturesSocketClientAddress,
+                                   BinanceApiAddresses.Demo.CoinFuturesSocketApiClientAddress);
 
         /// <summary>
         /// Binance.us environment
