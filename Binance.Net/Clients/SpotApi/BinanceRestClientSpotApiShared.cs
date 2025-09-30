@@ -630,6 +630,7 @@ namespace Binance.Net.Clients.SpotApi
                     MaxWithdrawQuantity = x.WithdrawMax,
                     WithdrawEnabled = x.WithdrawEnabled,
                     WithdrawFee = x.WithdrawFee,
+                    ContractAddress = x.ContractAddress
                 }).ToArray()
             }).ToArray());
         }
@@ -660,7 +661,8 @@ namespace Binance.Net.Clients.SpotApi
                     MinWithdrawQuantity = x.WithdrawMin,
                     MaxWithdrawQuantity = x.WithdrawMax,
                     WithdrawEnabled = x.WithdrawEnabled,
-                    WithdrawFee = x.WithdrawFee
+                    WithdrawFee = x.WithdrawFee,
+                    ContractAddress = x.ContractAddress
                 }).ToArray()
             });
         }

@@ -73,7 +73,7 @@ namespace Binance.Net
          {
              TradeEnvironmentNames.Live => Live,
              TradeEnvironmentNames.Testnet => Testnet,
-             "demo" => DemoSpot,
+             "demo" => Demo,
              "us" => Us,
              "" => Live,
              null => Live,

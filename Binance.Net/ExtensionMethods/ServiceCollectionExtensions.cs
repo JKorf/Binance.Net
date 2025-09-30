@@ -103,6 +103,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
             services.AddTransient<IBinanceTrackerFactory, BinanceTrackerFactory>();
+            services.AddTransient<ITrackerFactory, BinanceTrackerFactory>();
             services.AddSingleton<IBinanceUserClientProvider, BinanceUserClientProvider>(x =>
             new BinanceUserClientProvider(
                 x.GetRequiredService<HttpClient>(),

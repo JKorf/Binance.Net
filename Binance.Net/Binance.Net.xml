@@ -85,6 +85,11 @@
             Testnet environment
             </summary>
         </member>
+        <member name="P:Binance.Net.BinanceEnvironment.Demo">
+            <summary>
+            Demo environment
+            </summary>
+        </member>
         <member name="P:Binance.Net.BinanceEnvironment.Us">
             <summary>
             Binance.us environment
@@ -213,7 +218,13 @@
             </summary>
             <param name="serviceProvider">Service provider for resolving logging and clients</param>
         </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.CanCreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.BinanceTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.CanCreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.BinanceTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
@@ -3134,6 +3145,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.TransferDirection">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.TravelRuleStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -11680,6 +11696,21 @@
         <member name="F:Binance.Net.Enums.TransferDirection.RollOut">
             <summary>
             Roll-out
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.TravelRuleStatus">
+            <summary>
+            Travel rule status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TravelRuleStatus.NotRequired">
+            <summary>
+            Not required or already provided
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TravelRuleStatus.Required">
+            <summary>
+            Travel rule info required
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.UnderlyingType">
@@ -20832,25 +20863,6 @@
             Tracker factory
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
-            <summary>
-            Create a new kline tracker
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="interval">Kline interval</param>
-            <param name="limit">The max amount of klines to retain</param>
-            <param name="period">The max period the data should be retained</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
-            <summary>
-            Create a new trade tracker for a symbol
-            </summary>
-            <param name="symbol">The symbol</param>
-            <param name="limit">The max amount of klines to retain</param>
-            <param name="period">The max period the data should be retained</param>
-            <returns></returns>
-        </member>
         <member name="T:Binance.Net.Interfaces.IBinanceTrade">
             <summary>
             Information about a trade
@@ -20949,6 +20961,11 @@
         <member name="F:Binance.Net.Objects.BinanceApiAddresses.TestNet">
             <summary>
             The addresses to connect to the binance testnet
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Objects.BinanceApiAddresses.Demo">
+            <summary>
+            The addresses to connect to the binance demo environment
             </summary>
         </member>
         <member name="F:Binance.Net.Objects.BinanceApiAddresses.Us">
@@ -24080,6 +24097,11 @@
             Transaction source address. Note: Please note that the source address returned may not be accurate due to network-specific characteristics. If multiple source addresses found, only the first address will be returned
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.TravelRuleStatus">
+            <summary>
+            Travel rule status
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDividendRecord">
             <summary>
             Dividend record
@@ -26577,6 +26599,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.SameAddress">
             <summary>
             If the asset needs to provide memo to withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.WithdrawNeedsTag">
+            <summary>
+            If a tag needs to be provided when withdrawing the asset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceNetwork.EstimatedArrivalTime">
