@@ -83,5 +83,10 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("sourceAddress")]
         public string? SourceAddress { get; set; }
+        /// <summary>
+        /// Travel rule status
+        /// </summary>
+        [JsonPropertyName("sourceAddress")]
+        public TravelRuleStatus TravelRuleStatus { get; set; }
     }
 }
