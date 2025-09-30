@@ -196,6 +196,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 11.8.0 - 30 Sep 2025
+    * Updated CryptoExchange.Net version to 9.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added ITrackerFactory to TrackerFactory implementation
+    * Added ContractAddress mapping in Shared IAssetClient implementation
+    * Added Demo environment
+    * Added WithdrawNeedsTag property to restClient.SpotApi.Account.GetUserAssetsAsync response model
+    * Added TravelRuleStatus property to restClient.SpotApi.Account.GetDepositHistoryAsync response model
+
 * Version 11.7.1 - 10 Sep 2025
     * Added page parameter to restClient.CoinFuturesApi.Account.GetIncomeHistoryAsync endpoint
     * Fixed some deserialization issues in Mining endpoints
