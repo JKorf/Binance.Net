@@ -185,6 +185,11 @@
         [JsonPropertyName("sameAddress")]
         public bool SameAddress { get; set; }
         /// <summary>
+        /// If a tag needs to be provided when withdrawing the asset
+        /// </summary>
+        [JsonPropertyName("withdrawTag")]
+        public bool WithdrawNeedsTag { get; set; }
+        /// <summary>
         /// Estimated arrival time
         /// </summary>
         [JsonPropertyName("estimatedArrivalTime")]
