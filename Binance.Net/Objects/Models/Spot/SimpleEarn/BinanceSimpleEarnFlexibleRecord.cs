@@ -58,6 +58,6 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         /// Status
         /// </summary>
         [JsonPropertyName("status")]
-        public SubscriptionStatus Status { get; set; }
+        public Enums.SubscriptionStatus Status { get; set; }
     }
 }
