@@ -464,8 +464,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 x.Price,
                 x.Timestamp)
             {
-                Price = x.Price,
-                Quantity = x.Quantity,
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.Maker ? SharedRole.Maker : SharedRole.Taker
@@ -880,11 +878,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion
 
         #region Balance Client
-        EndpointOptions<GetBalancesRequest> IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions<GetBalancesRequest>(true);
+        GetBalancesOptions IBalanceRestClient.GetBalancesOptions { get; } = new GetBalancesOptions(AccountTypeFilter.Futures);
 
         async Task<ExchangeWebResult<SharedBalance[]>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
-            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
+            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedBalance[]>(Exchange, validationError);
 

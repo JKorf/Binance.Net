@@ -160,7 +160,8 @@ namespace Binance.Net.Clients.SpotApi
                         IsTriggerOrder = update.Data.StopPrice > 0,
                         LastTrade = update.Data.LastQuantityFilled == 0 ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.Id.ToString(), update.Data.TradeId.ToString(), update.Data.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, update.Data.LastQuantityFilled, update.Data.LastPriceFilled, update.Data.UpdateTime)
                         {
-                            Role = update.Data.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker
+                            Role = update.Data.BuyerIsMaker ? SharedRole.Maker : SharedRole.Taker,
+                            ClientOrderId = update.Data.ClientOrderId
                         }
                     }
                 })),

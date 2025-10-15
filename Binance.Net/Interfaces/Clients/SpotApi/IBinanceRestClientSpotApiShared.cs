@@ -22,7 +22,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         IFeeRestClient,
         ISpotOrderClientIdRestClient,
         ISpotTriggerOrderRestClient,
-        IBookTickerRestClient
+        IBookTickerRestClient,
+        ITransferRestClient
     {
     }
 }
