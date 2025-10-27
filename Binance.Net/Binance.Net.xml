@@ -37823,6 +37823,11 @@
             The GoodTillDate if GTD time in force
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.ExpireReason">
+            <summary>
+            Expire reason
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate">
             <summary>
             Futures stream symbol update

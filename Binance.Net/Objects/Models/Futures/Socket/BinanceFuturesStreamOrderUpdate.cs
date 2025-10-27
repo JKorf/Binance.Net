@@ -202,5 +202,10 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonPropertyName("gtd")]
         public DateTime? GoodTillDate { get; set; }
+        /// <summary>
+        /// Expire reason
+        /// </summary>
+        [JsonPropertyName("er")]
+        public string? ExpireReason { get; set; }
     }
 }
