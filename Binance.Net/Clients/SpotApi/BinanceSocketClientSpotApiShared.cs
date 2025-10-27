@@ -59,7 +59,11 @@ namespace Binance.Net.Clients.SpotApi
         EndpointOptions<SubscribeTradeRequest> ITradeSocketClient.SubscribeTradeOptions { get; } = new EndpointOptions<SubscribeTradeRequest>(false)
         {
             SupportsMultipleSymbols = true,
-            MaxSymbolCount = 200
+            MaxSymbolCount = 200,
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("Aggregated", typeof(bool), "Whether to subscribe to aggregated trade updates instead of individual trade updates", true)
+            }
         };
         async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
@@ -68,12 +72,24 @@ namespace Binance.Net.Clients.SpotApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await ExchangeData.SubscribeToTradeUpdatesAsync(symbols, update => handler(update.AsExchangeEvent(Exchange, new[] { new SharedTrade(update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
+            if (ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "Aggregated") == true)
             {
-                Side = update.Data.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
-            } })), ct).ConfigureAwait(false);
+                var result = await ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(symbols, update => handler(update.AsExchangeEvent(Exchange, new[] { new SharedTrade(update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
+                {
+                    Side = update.Data.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
+                } })), ct).ConfigureAwait(false);
 
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+                return new ExchangeResult<UpdateSubscription>(Exchange, result);
+            }
+            else
+            {
+                var result = await ExchangeData.SubscribeToTradeUpdatesAsync(symbols, update => handler(update.AsExchangeEvent(Exchange, new[] { new SharedTrade(update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
+                {
+                    Side = update.Data.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
+                } })), ct).ConfigureAwait(false);
+
+                return new ExchangeResult<UpdateSubscription>(Exchange, result);
+            }
         }
 
         #endregion
