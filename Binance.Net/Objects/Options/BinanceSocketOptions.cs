@@ -35,6 +35,11 @@ namespace Binance.Net.Objects.Options
         public bool AllowAppendingClientOrderId { get; set; } = true;
 
         /// <summary>
+        /// Broker id
+        /// </summary>
+        public string? BrokerId { get; set; }
+
+        /// <summary>
         /// Options for the Spot API
         /// </summary>
         public BinanceSocketApiOptions SpotOptions { get; private set; } = new BinanceSocketApiOptions();
@@ -53,6 +58,7 @@ namespace Binance.Net.Objects.Options
         {
             targetOptions = base.Set<BinanceSocketOptions>(targetOptions);
             targetOptions.AllowAppendingClientOrderId = AllowAppendingClientOrderId;
+            targetOptions.BrokerId = BrokerId;
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.UsdFuturesOptions = UsdFuturesOptions.Set(targetOptions.UsdFuturesOptions);
             targetOptions.CoinFuturesOptions = CoinFuturesOptions.Set(targetOptions.CoinFuturesOptions);

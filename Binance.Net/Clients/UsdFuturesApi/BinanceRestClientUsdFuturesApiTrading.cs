@@ -71,7 +71,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             price = rulesCheck.Price;
             stopPrice = rulesCheck.StopPrice;
 
-            var clientOrderId = LibraryHelpers.ApplyBrokerId(newClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            var clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    newClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection()
             {
@@ -134,7 +138,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             int i = 0;
             foreach (var order in orders)
             {
-                var clientOrderId = LibraryHelpers.ApplyBrokerId(order.NewClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+                var clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    order.NewClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
                 var orderParameters = new ParameterCollection()
                 {
@@ -197,7 +205,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            {
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(
+                    origClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            }
 
             var parameters = new ParameterCollection
             {
@@ -219,7 +233,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public async Task<WebCallResult<BinanceFuturesOrderEditHistory[]>> GetOrderEditHistoryAsync(string symbol, long? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (clientOrderId != null)
-                clientOrderId = LibraryHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            {
+                clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    clientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            }
 
             var parameters = new ParameterCollection
             {
@@ -247,7 +267,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            {
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(
+                    origClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            }
 
             var parameters = new ParameterCollection
             {
@@ -290,7 +316,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            {
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(
+                    origClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            }
 
             var parameters = new ParameterCollection
             {
@@ -325,7 +357,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
             {
                 var clientOrderId = order.ClientOrderId;
                 if (clientOrderId != null)
-                    clientOrderId = LibraryHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+                {
+                    clientOrderId = LibraryHelpers.ApplyBrokerId(
+                        clientOrderId,
+                        LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                        36,
+                        _baseClient.ClientOptions.AllowAppendingClientOrderId);
+                }
 
                 var orderParameters = new ParameterCollection()
                 {
@@ -397,7 +435,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (origClientOrderIdList?.Count > 10)
                 throw new ArgumentException("origClientOrderIdList cannot contain more than 10 items");
 
-            var convertClientOrderIdList = origClientOrderIdList?.Select(x => LibraryHelpers.ApplyBrokerId(x, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId));
+            var convertClientOrderIdList = origClientOrderIdList?.Select(x => LibraryHelpers.ApplyBrokerId(
+                    x,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId));
 
             var parameters = new ParameterCollection
             {
@@ -440,7 +482,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
 
             if (origClientOrderId != null)
-                origClientOrderId = LibraryHelpers.ApplyBrokerId(origClientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            {
+                origClientOrderId = LibraryHelpers.ApplyBrokerId(
+                    origClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            }
 
             var parameters = new ParameterCollection
             {
@@ -552,7 +600,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
-            clientOrderId = LibraryHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    clientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection()
             {
@@ -586,7 +638,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
             long? receiveWindow = null,
             CancellationToken ct = default)
         {
-            clientOrderId = LibraryHelpers.ApplyBrokerId(clientOrderId, BinanceExchange.ClientOrderIdFutures, 36, _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    clientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
             var parameters = new ParameterCollection()
             {

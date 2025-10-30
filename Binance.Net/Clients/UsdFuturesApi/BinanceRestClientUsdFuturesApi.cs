@@ -137,9 +137,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 if (quoteQuantity < symbolData.MinNotionalFilter.MinNotional)
                 {
                     if (ApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                    {
                         return BinanceTradeRuleResult.CreateFailed(
                             "quoteQuantity",
                             $"Trade rules check failed: MinNotional filter failed. Order value: {quoteQuantity}, minimal order value: {symbolData.MinNotionalFilter.MinNotional}");
+                    }
 
                     outputQuoteQuantity = symbolData.MinNotionalFilter.MinNotional;
                     _logger.Log(LogLevel.Information, $"QuoteQuantity adjusted from {quoteQuantity} to {outputQuoteQuantity} based on min notional filter");
@@ -169,9 +171,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         if (outputStopPrice != stopPrice)
                         {
                             if (ApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            {
                                 return BinanceTradeRuleResult.CreateFailed(
                                     "stopPrice",
                                     $"Trade rules check failed: Stop price filter max/min failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+                            }
 
                             _logger.Log(LogLevel.Information,
                                 $"Stop price clamped from {stopPrice} to {outputStopPrice} based on price filter");
@@ -198,9 +202,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         if (outputStopPrice != beforeStopPrice)
                         {
                             if (ApiOptions.TradeRulesBehaviour == TradeRulesBehaviour.ThrowError)
+                            {
                                 return BinanceTradeRuleResult.CreateFailed(
-                                    "stopPrice", 
+                                    "stopPrice",
                                     $"Trade rules check failed: Stop price filter tick failed. Original stop price: {stopPrice}, Closest allowed: {outputStopPrice}");
+                            }
 
                             _logger.Log(LogLevel.Information,
                                 $"Stop price floored from {beforeStopPrice} to {outputStopPrice} based on price filter");

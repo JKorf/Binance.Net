@@ -133,7 +133,7 @@ namespace Binance.Net.Converters
                     result = new BinanceSymbolFilter();
                     break;
                 default:
-                    Trace.WriteLine($"{DateTime.Now:yyyy/MM/dd HH:mm:ss:fff} | Warning | Can't parse symbol filter of type: " + obj.GetProperty("filterType").GetString());
+                    LibraryHelpers.StaticLogger?.LogWarning("Can't parse symbol filter of type: " + obj.GetProperty("filterType").GetString());
                     result = new BinanceSymbolFilter();
                     break;
             }
