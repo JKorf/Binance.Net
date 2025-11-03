@@ -120,11 +120,11 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetUiKlinesAsync("ETHUSDT", Enums.KlineInterval.OneHour, DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, 1, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetCurrentAvgPriceAsync("ETHUSDT", CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT", CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTickersAsync(CancellationToken.None), false);
+            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTickersAsync(null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetTradingDayTickerAsync("ETHUSDT", "0", CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetRollingWindowTickerAsync("ETHUSDT", TimeSpan.FromHours(1), CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetPriceAsync("ETHUSDT", CancellationToken.None), false);
-            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetPricesAsync(CancellationToken.None), false);
+            await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetPricesAsync(null, CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetBookPriceAsync("ETHUSDT", CancellationToken.None), false);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginAssetsAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(client => client.SpotApi.ExchangeData.GetMarginSymbolsAsync(null, CancellationToken.None), true);
