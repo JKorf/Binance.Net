@@ -48,6 +48,17 @@ namespace Binance.Net
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BinanceSourceGenerationContext>();
 
         /// <summary>
+        /// Aliases for Binance assets
+        /// </summary>
+        public static AssetAliasConfiguration AssetAliases { get; } = new AssetAliasConfiguration
+        {
+            Aliases =
+            [
+                new AssetAlias("USDT", SharedSymbol.UsdOrStable.ToUpperInvariant(), AliasType.OnlyToExchange)
+            ]
+        };
+
+        /// <summary>
         /// Format a base and quote asset to a Binance recognized symbol 
         /// </summary>
         /// <param name="baseAsset">Base asset</param>
@@ -57,13 +68,16 @@ namespace Binance.Net
         /// <returns></returns>
         public static string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
         {
+            baseAsset = AssetAliases.CommonToExchangeName(baseAsset.ToUpperInvariant());
+            quoteAsset = AssetAliases.CommonToExchangeName(quoteAsset.ToUpperInvariant());
+
             if (tradingMode == TradingMode.Spot)
-                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+                return baseAsset + quoteAsset;
 
             if (tradingMode.IsLinear())
-                return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : "_" + deliverTime.Value.ToString("yyMMdd"));
+                return baseAsset + quoteAsset + (deliverTime == null ? string.Empty : "_" + deliverTime.Value.ToString("yyMMdd"));
 
-            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? "_PERP" : "_" + deliverTime.Value.ToString("yyMMdd"));
+            return baseAsset + quoteAsset + (deliverTime == null ? "_PERP" : "_" + deliverTime.Value.ToString("yyMMdd"));
         }
 
         /// <summary>
