@@ -1719,40 +1719,40 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTradingDayTickerAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTradingDayTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetTradingDayTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetRollingWindowTickerAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetPriceAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetBookPriceAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiExchangeData.GetMarginAssetsAsync(System.String,System.Threading.CancellationToken)">
@@ -11573,6 +11573,26 @@
             Settings
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.SymbolStatusFilter">
+            <summary>
+            Status of a symbol
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatusFilter.Trading">
+            <summary>
+            Trading
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatusFilter.Halt">
+            <summary>
+            Halted
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SymbolStatusFilter.Break">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.SystemStatus">
             <summary>
             Status of the Binance system
@@ -17002,20 +17022,22 @@
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for the provided symbols
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /></para>
             </summary>
             <param name="symbols">The symbols to get the data for, for example `ETHUSDT`</param>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTickersAsync(System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours for all symbols
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /></para>
             </summary>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns>List of data over the last 24 hours</returns>
         </member>
@@ -17029,13 +17051,14 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTradingDayTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetTradingDayTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Get price change stats for a trading day
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker" /></para>
             </summary>
             <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -17049,13 +17072,14 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetRollingWindowTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Get data based on the last x time, specified as windowSize
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics" /></para>
             </summary>
             <param name="symbols">The symbols to get data for, for example `ETHUSDT`</param>
             <param name="windowSize">The window size to use</param>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -17068,20 +17092,22 @@
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for a symbol.
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /></para>
             </summary>
             <param name="symbols">Symbols to get book price for, for example `ETHUSDT`</param>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetBookPricesAsync(System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for all symbols.
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /></para>
             </summary>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
         </member>
@@ -17094,20 +17120,22 @@
             <param name="ct">Cancellation token</param>
             <returns>Price of symbol</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
              Gets the prices of symbols
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /></para>
             </summary>
             <param name="symbols">The symbols to get the price for, for example `ETHUSDT`</param>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiExchangeData.GetPricesAsync(System.Nullable{Binance.Net.Enums.SymbolStatusFilter},System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /></para>
             </summary>
+            <param name="symbolStatus">Filter by symbol status</param>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
         </member>
