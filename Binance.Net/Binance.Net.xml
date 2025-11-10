@@ -316,7 +316,7 @@
         <member name="T:Binance.Net.Clients.BinanceUserClientProvider">
             <inheritdoc />
         </member>
-        <member name="P:Binance.Net.Clients.BinanceUserClientProvider.Exchange">
+        <member name="P:Binance.Net.Clients.BinanceUserClientProvider.ExchangeName">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.BinanceUserClientProvider.#ctor(System.Action{Binance.Net.Objects.Options.BinanceOptions})">
@@ -38475,7 +38475,7 @@
             Binance order book factory
             </summary>
         </member>
-        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.Exchange">
+        <member name="P:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.ExchangeName">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceOrderBookFactory.#ctor(System.IServiceProvider)">
