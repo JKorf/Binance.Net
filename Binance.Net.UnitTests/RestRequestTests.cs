@@ -3,8 +3,11 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Testing;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -99,11 +102,13 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task ValidateSpotExchangeDataCalls()
         {
-            var client = new BinanceRestClient(opts =>
+            var loggerFact = new LoggerFactory();
+            loggerFact.AddProvider(new TraceLoggerProvider());
+            var client = new BinanceRestClient(null, loggerFact, Options.Create(new BinanceRestOptions
             {
-                opts.AutoTimestamp = false;
-                opts.ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456");
-            });
+                AutoTimestamp = false,
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
+            }));
             var tester = new RestRequestValidator<BinanceRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.binance.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetServerTimeAsync(), "GetServerTime", "serverTime");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExchangeInfoAsync(), "GetExchangeInfo", ignoreProperties: new List<string> { "orderTypes", "timeInForce", "quoteAssetPrecision" });

@@ -6,7 +6,7 @@ namespace Binance.Net.Interfaces
     /// <summary>
     /// Binance order book factory
     /// </summary>
-    public interface IBinanceOrderBookFactory
+    public interface IBinanceOrderBookFactory: IExchangeService
     {
         /// <summary>
         /// Spot order book factory methods
