@@ -198,6 +198,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 11.11.0 - 11 Nov 2025
+    * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added new conditional orders REST endpoints for UsdFutures API
+    * Added new conditional orders Websocket queries for UsdFutures API
+    * Added new onAlgoOrderUpdate Websocket event for UsdFutures API
+
 * Version 11.10.0 - 03 Nov 2025
     * Updated CryptoExchange.Net to version 9.12.0
     * Added support for using SharedSymbol.UsdOrStable in Shared APIs
