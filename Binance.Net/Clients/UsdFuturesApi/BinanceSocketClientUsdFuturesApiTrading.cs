@@ -196,6 +196,91 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Place Conditional Order
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> PlaceConditionalOrderAsync(
+            string symbol,
+            Enums.OrderSide side,
+            ConditionalOrderType type,
+            decimal? quantity,
+            decimal? price = null,
+            Enums.PositionSide? positionSide = null,
+            TimeInForce? timeInForce = null,
+            bool? reduceOnly = null,
+            string? clientOrderId = null,
+            decimal? triggerPrice = null,
+            decimal? activationPrice = null,
+            decimal? callbackRate = null,
+            WorkingType? workingType = null,
+            bool? closePosition = null,
+            bool? priceProtect = null,
+            PriceMatch? priceMatch = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            DateTime? goodTillDate = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var clientOrderIdInt = LibraryHelpers.ApplyBrokerId(
+                    clientOrderId,
+                    LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange, "Futures"),
+                    36,
+                    _client.ClientOptions.AllowAppendingClientOrderId);
+
+            var parameters = new ParameterCollection()
+            {
+                { "algoType", "CONDITIONAL" },
+                { "symbol", symbol }
+            };
+            parameters.AddEnum("side", side);
+            parameters.AddEnum("type", type);
+            parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("clientAlgoId", clientOrderIdInt);
+            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalEnum("timeInForce", timeInForce);
+            parameters.AddOptionalEnum("positionSide", positionSide);
+            parameters.AddOptionalParameter("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("activationPrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalEnum("workingType", workingType);
+            parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLower());
+            parameters.AddOptionalParameter("closePosition", closePosition?.ToString().ToLower());
+            parameters.AddOptionalParameter("priceProtect", priceProtect?.ToString().ToUpper());
+            parameters.AddOptionalEnum("priceMatch", priceMatch);
+            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.AddOptionalMilliseconds("goodTillDate", goodTillDate);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+            return await _client.QueryAsync<BinanceFuturesConditionalOrder>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"algoOrder.place", parameters, true, true, weight: 0, ct: ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Cancel Conditional Order
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> CancelConditionalOrderAsync(
+            long? orderId = null,
+            string? clientOrderId = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            if (clientOrderId != null)
+            {
+                clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    clientOrderId,
+                    LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange, "Futures"),
+                    36,
+                    _client.ClientOptions.AllowAppendingClientOrderId);
+            }
+
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("algoId", orderId);
+            parameters.AddOptional("clientAlgoId", clientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
+
+            return await _client.QueryAsync<BinanceFuturesConditionalOrder>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"algoOrder.cancel", parameters, true, true, weight: 0, ct: ct).ConfigureAwait(false);
+        }
+        #endregion
+
         #endregion
 
         #region Streams

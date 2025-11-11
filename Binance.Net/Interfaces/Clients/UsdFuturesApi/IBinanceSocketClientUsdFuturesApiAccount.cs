@@ -50,6 +50,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
         /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
         /// <param name="onConditionalOrderTriggerRejectUpdate">The event handler for whenever a trigger order failed to place an order</param>
+        /// <param name="onAlgoOrderUpdate">The event handler for whenever a conditional order is changed</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
@@ -63,6 +64,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
             Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate = null,
+            Action<DataEvent<BinanceAlgoOrderUpdate>>? onAlgoOrderUpdate = null,
             CancellationToken ct = default);
     }
 }

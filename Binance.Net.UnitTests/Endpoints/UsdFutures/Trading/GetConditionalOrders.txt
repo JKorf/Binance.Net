@@ -1,0 +1,37 @@
+GET
+/fapi/v1/allAlgoOrders
+true
+[
+   {
+       "algoId": 2146760,
+       "clientAlgoId": "6B2I9XVcJpCjqPAJ4YoFX7",
+       "algoType": "CONDITIONAL",
+       "orderType": "TAKE_PROFIT",
+       "symbol": "BNBUSDT",
+       "side": "SELL",
+       "positionSide": "BOTH",
+       "timeInForce": "GTC",
+       "quantity": "0.01",
+       "algoStatus": "CANCELED",
+       "actualOrderId": "",
+       "actualPrice": "0.00000",
+       "triggerPrice": "750.000",
+       "price": "750.000",
+       "icebergQuantity": null,
+       "tpTriggerPrice": "0.000",
+       "tpPrice": "0.000",
+       "slTriggerPrice": "0.000",
+       "slPrice": "0.000",
+       "tpOrderType": "",
+       "selfTradePreventionMode": "EXPIRE_MAKER",
+       "workingType": "CONTRACT_PRICE",
+       "priceMatch": "NONE",
+       "closePosition": false,
+       "priceProtect": false,
+       "reduceOnly": false,
+       "createTime": 1750485492076,
+       "updateTime": 1750514545091,
+       "triggerTime": 0,
+       "goodTillDate": 0
+   }
+]

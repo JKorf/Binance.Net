@@ -84,6 +84,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync<BinanceFuturesStreamTradeUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onTradeUpdate: handler), "TradeUpdate");
             await tester.ValidateAsync<BinanceStrategyUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onStrategyUpdate : handler), "StrategyUpdate");
             await tester.ValidateAsync<BinanceConditionOrderTriggerRejectUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onConditionalOrderTriggerRejectUpdate: handler), "ConditionalTrigger");
+            await tester.ValidateAsync<BinanceAlgoOrderUpdate>((client, handler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync("123", onAlgoOrderUpdate: handler), "AlgoOrderUpdate", ignoreProperties: ["act"]);
         }
     }
 }

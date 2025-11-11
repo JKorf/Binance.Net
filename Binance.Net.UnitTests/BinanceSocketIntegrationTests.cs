@@ -53,7 +53,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckUpdate<IBinanceTick>((client, updateHandler) => client.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
 
             listenKey = await GetRestClient().UsdFuturesApi.Account.StartUserStreamAsync();
-            await RunAndCheckUpdate<IBinanceTick>((client, updateHandler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync(listenKey.Data, default, default, default, default, default, default, default, default, default, default), false, true);
+            await RunAndCheckUpdate<IBinanceTick>((client, updateHandler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync(listenKey.Data, default, default, default, default, default, default, default, default, default, default, default), false, true);
             await RunAndCheckUpdate<IBinance24HPrice>((client, updateHandler) => client.UsdFuturesApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
 
             listenKey = await GetRestClient().CoinFuturesApi.Account.StartUserStreamAsync();

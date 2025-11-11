@@ -17,6 +17,11 @@ using Binance.Net.Objects.Models.Spot.Staking;
 
 namespace Binance.Net.Converters
 {
+    [JsonSerializable(typeof(BinanceResponse<BinanceFuturesConditionalOrder>))]
+    [JsonSerializable(typeof(BinanceFuturesConditionalOrder))]
+    [JsonSerializable(typeof(BinanceFuturesConditionalOrder[]))]
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceAlgoOrderUpdate>))]
+
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinaceGiftCardData>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardRedeemData>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardValidity>))]

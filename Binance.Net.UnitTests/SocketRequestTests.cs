@@ -60,6 +60,8 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(CreateClient(), client => client.UsdFuturesApi.Trading.GetOrderAsync("ETHUSDT", 123), "GetOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
             await tester.ValidateAsync(CreateClient(), client => client.UsdFuturesApi.Trading.GetPositionsAsync("ETHUSDT"), "GetPositions", responseMapper: x => x.Result, nestedJsonProperty: "result");
 
+            await tester.ValidateAsync(CreateClient(), client => client.UsdFuturesApi.Trading.PlaceConditionalOrderAsync("ETHUSDT", Enums.OrderSide.Buy, Enums.ConditionalOrderType.TakeProfit, 1), "PlaceConditionalOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
+            await tester.ValidateAsync(CreateClient(), client => client.UsdFuturesApi.Trading.CancelConditionalOrderAsync(123), "CancelConditionalOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
         }
 
         [Test]

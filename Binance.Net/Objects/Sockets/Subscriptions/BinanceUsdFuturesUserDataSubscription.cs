@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.Socket;
-using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 
@@ -21,6 +20,7 @@ namespace Binance.Net.Objects.Sockets
         private readonly Action<DataEvent<BinanceStrategyUpdate>>? _strategyHandler;
         private readonly Action<DataEvent<BinanceGridUpdate>>? _gridHandler;
         private readonly Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? _condOrderHandler;
+        private readonly Action<DataEvent<BinanceAlgoOrderUpdate>>? _algoOrderHandler;
 
         /// <summary>
         /// ctor
@@ -36,7 +36,8 @@ namespace Binance.Net.Objects.Sockets
             Action<DataEvent<BinanceStreamEvent>>? listenkeyHandler,
             Action<DataEvent<BinanceStrategyUpdate>>? strategyHandler,
             Action<DataEvent<BinanceGridUpdate>>? gridHandler,
-            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? condOrderHandler) : base(logger, false)
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? condOrderHandler,
+            Action<DataEvent<BinanceAlgoOrderUpdate>>? onAlgoOrderUpdate) : base(logger, false)
         {
             _orderHandler = orderHandler;
             _configHandler = configHandler;
@@ -47,6 +48,7 @@ namespace Binance.Net.Objects.Sockets
             _gridHandler = gridHandler;
             _condOrderHandler = condOrderHandler;
             _tradeHandler = tradeHandler;
+            _algoOrderHandler = onAlgoOrderUpdate;
 
             _lk = listenKey;
 
@@ -60,6 +62,7 @@ namespace Binance.Net.Objects.Sockets
                 new MessageHandlerLink<BinanceCombinedStream<BinanceStrategyUpdate>>(_lk + "STRATEGY_UPDATE", DoHandleMessage),
                 new MessageHandlerLink<BinanceCombinedStream<BinanceGridUpdate>>(_lk + "GRID_UPDATE", DoHandleMessage),
                 new MessageHandlerLink<BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>>(_lk + "CONDITIONAL_ORDER_TRIGGER_REJECT", DoHandleMessage),
+                new MessageHandlerLink<BinanceCombinedStream<BinanceAlgoOrderUpdate>>(_lk + "ALGO_UPDATE", DoHandleMessage),
                 ]);
         }
 
@@ -140,6 +143,12 @@ namespace Binance.Net.Objects.Sockets
         public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamTradeUpdate>> message)
         {
             _tradeHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, message.Data.Data.Symbol, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            return CallResult.SuccessResult;
+        }
+
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceAlgoOrderUpdate>> message)
+        {
+            _algoOrderHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, message.Data.Data.Order.Symbol, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
             return CallResult.SuccessResult;
         }
     }

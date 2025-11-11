@@ -12,6 +12,11 @@
         [JsonPropertyName("algoId")]
         public long AlgoId { get; set; }
         /// <summary>
+        /// Client order id
+        /// </summary>
+        [JsonPropertyName("clientAlgoId")]
+        public string? ClientAlgoId { get; set; }
+        /// <summary>
         /// Successful
         /// </summary>
         [JsonPropertyName("success")]

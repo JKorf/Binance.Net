@@ -1,0 +1,40 @@
+> { "id": "|1|", "method": "algoOrder.place", "params": { "apiKey": "123", "signature": "-", "timestamp": 1660801839480 } }
+= 
+{
+  "id": "|1|",
+  "status": 200,
+  "result": {
+    "algoId": 3000000000003505,
+    "clientAlgoId": "0Xkl1p621E4EryvufmYre1",
+    "algoType": "CONDITIONAL",
+    "orderType": "TAKE_PROFIT",
+    "symbol": "BTCUSDT",
+    "side": "SELL",
+    "positionSide": "SHORT",
+    "timeInForce": "GTC",
+    "quantity": "1.000",
+    "algoStatus": "NEW",
+    "triggerPrice": "120000.00",
+    "price": "160000.00",
+    "icebergQuantity": null,
+    "selfTradePreventionMode": "EXPIRE_MAKER",
+    "workingType": "CONTRACT_PRICE",
+    "priceMatch": "NONE",
+    "closePosition": false,
+    "priceProtect": false,
+    "reduceOnly": false,
+    "createTime": 1762507264142,
+    "updateTime": 1762507264143,
+    "triggerTime": 0,
+    "goodTillDate": 0
+  },
+  "rateLimits": [
+    {
+      "rateLimitType": "REQUEST_WEIGHT",
+      "interval": "MINUTE",
+      "intervalNum": 1,
+      "limit": 2400,
+      "count": 1
+    }
+  ]
+}

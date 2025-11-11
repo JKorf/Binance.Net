@@ -2484,6 +2484,24 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.PlaceConditionalOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.ConditionalOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.CancelConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.CancelAllConditionalOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetOpenConditionalOrdersAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading.GetConditionalOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApi">
             <summary>
             Client providing access to the Binance Usd futures websocket Api
@@ -2530,7 +2548,7 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiAccount.GetAccountInfoV1Async(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -2662,6 +2680,12 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiTrading.GetPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiTrading.PlaceConditionalOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.ConditionalOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceSocketClientUsdFuturesApiTrading.CancelConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.Boolean">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -2698,6 +2722,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.AccountUpdateReason">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.AlgoOrderStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -3242,6 +3271,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesConditionalOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceFuturesOrderArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -3463,6 +3497,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCombinedStreamBinanceStreamEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceCombinedStreamBinanceAlgoOrderUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -4462,6 +4501,16 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesConditionalOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesConditionalOrderArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceFuturesConvertQuote">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -4968,6 +5017,16 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceUsdFuturesOrderArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceAlgoOrderUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceAlgoOrderUpdateOrder">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -8946,6 +9005,46 @@
             Reduced
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.AlgoOrderStatus">
+            <summary>
+            Status of an algo order
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.New">
+            <summary>
+            This status indicates that the conditional order was successfully placed into the Algo Service but has not yet been triggered
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.Canceled">
+            <summary>
+            This status signifies that the conditional order has been canceled
+            </summary>>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.Triggering">
+            <summary>
+            This status suggests that the order has met the triggering condition and has been forwarded to the matching engine
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.Triggered">
+            <summary>
+             This status means that the order has been successfully placed into the matching engine
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.Finished">
+            <summary>
+            This status shows that the triggered conditional order has been filled or canceled in the matching engine
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.Rejected">
+            <summary>
+            This status signifies that the conditional order has been denied by the matching engine, such as in scenarios of margin check failures
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AlgoOrderStatus.Expired">
+            <summary>
+            This status denotes that the conditional order has been canceled by the system. An example would be when a user places a GTE_GTC Time-In-Force conditional order but then closes all positions on that symbol, resulting in system-led cancellation of the conditional order
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AprPeriod">
             <summary>
             Apr period
@@ -9414,6 +9513,36 @@
         <member name="F:Binance.Net.Enums.CloudMiningPaymentStatus.Refund">
             <summary>
             Refund
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.ConditionalOrderType">
+            <summary>
+            Conditional order types
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConditionalOrderType.Stop">
+            <summary>
+            Stop order. Execute a limit order when price reaches a specific Stop price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConditionalOrderType.StopMarket">
+            <summary>
+            Stop market order. Execute a market order when price reaches a specific Stop price
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConditionalOrderType.TakeProfit">
+            <summary>
+            Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConditionalOrderType.TakeProfitMarket">
+            <summary>
+            Take profit market order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.ConditionalOrderType.TrailingStopMarket">
+            <summary>
+            A trailing stop order will execute an order when the price drops below a certain percentage from its all time high since the order was activated
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.ContractType">
@@ -19794,6 +19923,86 @@
             <param name="orderId">The order id. Either this or quoteId should be provided</param>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceConditionalOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.ConditionalOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place a new conditional order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="type">The order type</param>
+            <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The quantity of the base symbol</param>
+            <param name="positionSide">The position side</param>
+            <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
+            <param name="price">The price to use</param>
+            <param name="clientOrderId">Unique id for order</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
+            <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+            <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+            <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an active conditional order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order" /></para>
+            </summary>
+            <param name="orderId">Id of the order to cancel. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelAllConditionalOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all open conditional orders on a symbol
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol to close conditional orders on, for example `ETHUSDT`</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOpenConditionalOrdersAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get all open conditional orders
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="algoType">Filter by algo type</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get info on a specific conditional order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order" /></para>
+            </summary>
+            <param name="orderId">Id of the order to retrieve. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id of the order to retrieve. Either this or orderId should be provided</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetConditionalOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get all conditional orders
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="orderId">Order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="page">Page number</param>
+            <param name="limit">Page size</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApi">
             <summary>
             Binance USD futures streams
@@ -19852,7 +20061,7 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams" /></para>
@@ -19867,6 +20076,7 @@
             <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
             <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
             <param name="onConditionalOrderTriggerRejectUpdate">The event handler for whenever a trigger order failed to place an order</param>
+            <param name="onAlgoOrderUpdate">The event handler for whenever a conditional order is changed</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -20349,6 +20559,42 @@
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Position-Info-V2" /></para>
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiTrading.PlaceConditionalOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.ConditionalOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Place a new conditional order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Algo-Order" /></para>
+            </summary>
+            <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+            <param name="side">The order side (buy/sell)</param>
+            <param name="type">The order type</param>
+            <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+            <param name="quantity">The quantity of the base symbol</param>
+            <param name="positionSide">The position side</param>
+            <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
+            <param name="price">The price to use</param>
+            <param name="clientOrderId">Unique id for order</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
+            <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+            <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+            <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+            <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+            <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
+            <param name="selfTradePreventionMode">Self trade prevention mode</param>
+            <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiTrading.CancelConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an active conditional order
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Algo-Order" /></para>
+            </summary>
+            <param name="orderId">Id of the order to cancel. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
         </member>
@@ -33939,6 +34185,11 @@
             Algo order id
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoResult.ClientAlgoId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoResult.Success">
             <summary>
             Successful
@@ -35095,6 +35346,166 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCompositeIndexInfoAsset.WeightInPercentage">
             <summary>
             Weight in percentage
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder">
+            <summary>
+            Conditional order info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Symbol">
+            <summary>
+            The symbol the order is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.AlgoType">
+            <summary>
+            Algo type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Id">
+            <summary>
+            The order id as assigned by Binance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.ActualOrderId">
+            <summary>
+            Actual order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.ClientOrderId">
+            <summary>
+            The order id as assigned by the client
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Price">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.ActualPrice">
+            <summary>
+            Actual price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.TpTriggerPrice">
+            <summary>
+            Take profit trigger price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.TpPrice">
+            <summary>
+            Take profit price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.SlTriggerPrice">
+            <summary>
+            Stop loss trigger price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.SlPrice">
+            <summary>
+            Stop loss price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Quantity">
+            <summary>
+            The original quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.IcebergQuantity">
+            <summary>
+            Iceberg quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.ReduceOnly">
+            <summary>
+            Reduce Only
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.ClosePosition">
+            <summary>
+            If order is for closing a position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Side">
+            <summary>
+            The side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Status">
+            <summary>
+            The current status of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.TriggerPrice">
+            <summary>
+            Trigger price for the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.TimeInForce">
+            <summary>
+            For what time the order lasts
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.Type">
+            <summary>
+            The type of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.ActivatePrice">
+            <summary>
+            Activation price, only return with TRAILING_STOP_MARKET order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.CallbackRate">
+            <summary>
+            Callback rate, only return with TRAILING_STOP_MARKET order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.UpdateTime">
+            <summary>
+            The time the order was updated
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.CreateTime">
+            <summary>
+            The time the order was created
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.TriggerTime">
+            <summary>
+            The trigger time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.WorkingType">
+            <summary>
+            The working type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.PriceProtect">
+            <summary>
+            Price protect
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.PriceMatch">
+            <summary>
+            Price match type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.SelfTradePreventionMode">
+            <summary>
+            Self trade prevention mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesConditionalOrder.GoodTillDate">
+            <summary>
+            Auto cancel at this date
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesConvertQuote">
@@ -36866,6 +37277,141 @@
             Max notional value
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate">
+            <summary>
+            Algo order update
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate.Order">
+            <summary>
+            Order info
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder">
+            <summary>
+            Order info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Symbol">
+            <summary>
+            The symbol the order is for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.AlgoType">
+            <summary>
+            Algo type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Id">
+            <summary>
+            The order id as assigned by Binance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.ActualOrderId">
+            <summary>
+            Actual order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.ClientOrderId">
+            <summary>
+            The order id as assigned by the client
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Price">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Quantity">
+            <summary>
+            The original quantity of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.AverageFillPrice">
+            <summary>
+            The average fill price of the triggered order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.QuantityFilled">
+            <summary>
+            The quantity filled of the triggered order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.ReduceOnly">
+            <summary>
+            Reduce Only
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.ClosePosition">
+            <summary>
+            If order is for closing a position
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Side">
+            <summary>
+            The side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Status">
+            <summary>
+            The current status of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.TriggerPrice">
+            <summary>
+            Trigger price for the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.TimeInForce">
+            <summary>
+            For what time the order lasts
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.Type">
+            <summary>
+            The type of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.WorkingType">
+            <summary>
+            The working type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.PositionSide">
+            <summary>
+            The position side of the order
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.PriceProtect">
+            <summary>
+            Price protect
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.PriceMatch">
+            <summary>
+            Price match type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.SelfTradePreventionMode">
+            <summary>
+            Self trade prevention mode
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.GoodTillDate">
+            <summary>
+            Auto cancel at this date
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdateOrder.TriggerTime">
+            <summary>
+            Trigger time
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate">
             <summary>
             Condition order reject update
@@ -38389,7 +38935,7 @@
         <member name="T:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}})">
+        <member name="M:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamMarginUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAccountUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceGridUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate}})">
             <summary>
             ctor
             </summary>

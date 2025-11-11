@@ -1,0 +1,9 @@
+DELETE
+/fapi/v1/algoOrder
+true
+{
+   "algoId": 2146760,
+   "clientAlgoId": "6B2I9XVcJpCjqPAJ4YoFX7",
+   "code": "200",
+   "msg": "success"
+}

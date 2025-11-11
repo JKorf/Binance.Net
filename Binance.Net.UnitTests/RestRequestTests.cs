@@ -299,6 +299,13 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.ConvertQuoteRequestAsync("123", "123"), "ConvertQuoteRequest");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.ConvertAcceptQuoteAsync("123"), "ConvertAcceptQuote");
             await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetConvertOrderStatusAsync("123"), "GetConvertOrderStatus");
+
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.PlaceConditionalOrderAsync("ETHUSDT", OrderSide.Sell, ConditionalOrderType.TakeProfit, 1), "PlaceConditionalOrder");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.CancelConditionalOrderAsync(123), "CancelConditionalOrder");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.CancelAllConditionalOrdersAsync("ETHUSDT"), "CancelAllConditionalOrders");
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetOpenConditionalOrdersAsync("ETHUSDT"), "GetOpenConditionalOrders", ignoreProperties: ["tpOrderType"]);
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetConditionalOrderAsync(123), "GetConditionalOrder", ignoreProperties: ["tpOrderType"]);
+            await tester.ValidateAsync(client => client.UsdFuturesApi.Trading.GetConditionalOrdersAsync("ETHUSDT"), "GetConditionalOrders", ignoreProperties: ["tpOrderType"]);
         }
 
         [Test]

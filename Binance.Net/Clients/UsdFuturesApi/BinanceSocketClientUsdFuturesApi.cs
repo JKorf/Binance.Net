@@ -42,7 +42,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             "listenKeyExpired",
             "STRATEGY_UPDATE",
             "GRID_UPDATE",
-            "CONDITIONAL_ORDER_TRIGGER_REJECT"
+            "CONDITIONAL_ORDER_TRIGGER_REJECT",
+            "ALGO_UPDATE"
         };
 
         internal BinanceFuturesUsdtExchangeInfo? _exchangeInfo;

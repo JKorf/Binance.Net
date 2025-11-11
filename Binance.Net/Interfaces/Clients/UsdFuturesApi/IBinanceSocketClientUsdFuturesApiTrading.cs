@@ -105,5 +105,64 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="ct">Cancellation token</param>
         Task<CallResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Place a new conditional order
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/New-Algo-Order" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="side">The order side (buy/sell)</param>
+        /// <param name="type">The order type</param>
+        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">The quantity of the base symbol</param>
+        /// <param name="positionSide">The position side</param>
+        /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
+        /// <param name="price">The price to use</param>
+        /// <param name="clientOrderId">Unique id for order</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
+        /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+        /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
+        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> PlaceConditionalOrderAsync(
+            string symbol,
+            Enums.OrderSide side,
+            ConditionalOrderType type,
+            decimal? quantity,
+            decimal? price = null,
+            Enums.PositionSide? positionSide = null,
+            TimeInForce? timeInForce = null,
+            bool? reduceOnly = null,
+            string? clientOrderId = null,
+            decimal? triggerPrice = null,
+            decimal? activationPrice = null,
+            decimal? callbackRate = null,
+            WorkingType? workingType = null,
+            bool? closePosition = null,
+            bool? priceProtect = null,
+            PriceMatch? priceMatch = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            DateTime? goodTillDate = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel an active conditional order
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/websocket-api/Cancel-Algo-Order" /></para>
+        /// </summary>
+        /// <param name="orderId">Id of the order to cancel. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> CancelConditionalOrderAsync(
+            long? orderId = null,
+            string? clientOrderId = null,
+            long? receiveWindow = null,
+            CancellationToken ct = default);
     }
 }
