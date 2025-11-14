@@ -13,6 +13,7 @@ using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using System.IO;
 using System.Net.WebSockets;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -47,6 +48,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public IBinanceSocketClientCoinFuturesApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceSocketClientCoinFuturesApiTrading Trading { get; }
+
+        public override JsonSerializerOptions JsonSerializerOptions => SerializerOptions.WithConverters(BinanceExchange._serializerContext);
 
         #region constructor/destructor
 

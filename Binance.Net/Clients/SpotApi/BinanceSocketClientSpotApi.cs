@@ -3,6 +3,7 @@ using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
@@ -14,6 +15,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using System.Net.WebSockets;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -55,6 +57,8 @@ namespace Binance.Net.Clients.SpotApi
         public IBinanceSocketClientSpotApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBinanceSocketClientSpotApiTrading Trading { get; }
+
+        public override JsonSerializerOptions JsonSerializerOptions => SerializerOptions.WithConverters(BinanceExchange._serializerContext);
 
         #region constructor/destructor
 
@@ -108,6 +112,24 @@ namespace Binance.Net.Clients.SpotApi
         {
             var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
+        }
+
+        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(string url, string[] topics, Func<U, ValueTask> onData, CancellationToken ct) where T: BinanceCombinedStream<U>
+        {
+            var subscription = new BinanceHighPerfSubscription<T>(_logger, topics, x =>
+            {
+                if (x.Data == null)
+                {
+                    // It's probably a different message (sub confirm for instance), ignore
+                    return new ValueTask();
+                }
+
+                if (!topics.Contains(x.Stream))
+                    return new ValueTask();
+
+                return onData(x.Data);
+            });
+            return base.SubscribeHighPerfAsync(url.AppendPath("stream"), subscription, ct);
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)

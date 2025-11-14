@@ -21367,6 +21367,21 @@
             New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Internal.BinanceHighPerfStream`1.Stream">
+            <summary>
+            The stream combined
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Internal.BinanceHighPerfStream`1.Data">
+            <summary>
+            The data of stream
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Internal.BinanceHighPerfStream`1.Id">
+            <summary>
+            Id for mapping sub response
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Binance24HPriceBase">
             <summary>
             24 hour rolling window price data
@@ -38860,6 +38875,20 @@
         <member name="M:Binance.Net.Objects.Sockets.BinanceCoinFuturesUserDataSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
+        <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String[],System.Func{`0,System.Threading.Tasks.ValueTask})">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.HighPerfSocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.HighPerfSocketConnection)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription">
             <inheritdoc />
         </member>
@@ -39128,6 +39157,9 @@
         </member>
         <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.Bind_BinanceOptions(Microsoft.Extensions.Configuration.IConfiguration,System.Object)">
             <summary>Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.</summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.TryGetConfigurationValue(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String@)">
+            <summary>Tries to get the configuration value for the specified key.</summary>
         </member>
         <member name="M:Microsoft.Extensions.Configuration.Binder.SourceGeneration.BindingExtensions.ValidateConfigurationKeys(System.Type,System.Lazy{System.Collections.Generic.HashSet{System.String}},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Configuration.BinderOptions)">
             <summary>If required by the binder options, validates that there are no unknown keys in the input configuration object.</summary>

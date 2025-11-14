@@ -5,6 +5,7 @@ using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
+using System.Text.Json;
 
 namespace Binance.Net
 {
