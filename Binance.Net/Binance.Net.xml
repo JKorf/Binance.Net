@@ -38878,7 +38878,7 @@
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String[],System.Func{`0,System.Threading.Tasks.ValueTask})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceHighPerfSubscription`1.#ctor(System.String[],System.Func{`0,System.Threading.Tasks.ValueTask})">
             <summary>
             ctor
             </summary>

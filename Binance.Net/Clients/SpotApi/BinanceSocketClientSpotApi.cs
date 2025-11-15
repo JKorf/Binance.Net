@@ -116,7 +116,7 @@ namespace Binance.Net.Clients.SpotApi
 
         internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(string url, string[] topics, Func<U, ValueTask> onData, CancellationToken ct) where T: BinanceCombinedStream<U>
         {
-            var subscription = new BinanceHighPerfSubscription<T>(_logger, topics, x =>
+            var subscription = new BinanceHighPerfSubscription<T>(topics, x =>
             {
                 if (x.Data == null)
                 {

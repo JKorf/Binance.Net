@@ -1,72 +1,85 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Running;
-using Binance.Net;
 using Binance.Net.Clients;
-using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Diagnostics;
-using System.IO.Pipelines;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Binance.Net.Benchmark.Client
 {
     [MemoryDiagnoser]
     //[ThreadingDiagnoser]
     [SimpleJob(RuntimeMoniker.Net48)]
+    [SimpleJob(RuntimeMoniker.Net90)]
     [SimpleJob(RuntimeMoniker.Net10_0)]
     public class SocketTests
     {
-        private readonly BinanceSocketClient client = GetClient();
+        public BinanceSocketClient Client;
+        public ILogger Logger;
+
+        private const int _receiveTarget = 1000; // Should match the number in the server
+
+        [GlobalSetup]
+        public void GlobalSetup()
+        {
+            CreateClient();
+        }
 
         [Benchmark()]
         public async Task HighPerf()
         {
-            //var client = GetClient();
             var waitEvent = new AsyncResetEvent(false, false);
-            var result = await client.SpotApi.ExchangeData.SubscribeToTradeUpdatesPerfAsync(["ETHUSDT"], x =>
+            var received = 0;
+            var result = await Client.SpotApi.ExchangeData.SubscribeToTradeUpdatesPerfAsync(["ETHUSDT"], x =>
             {
-                //Debug.WriteLine($"{x}");
+                received++;
+                
+                if (received == _receiveTarget)
+                    waitEvent.Set();
+
                 return new ValueTask();
             }, CancellationToken.None);
 
-            result.Data.ConnectionClosed += () => waitEvent.Set();
             await waitEvent.WaitAsync();
-            //client.Dispose();
+            await result.Data.CloseAsync();
         }
 
         [Benchmark()]
         public async Task Normal()
         {
-            //var client = GetClient();
             var waitEvent = new AsyncResetEvent(false, false);
-            var result = await client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
+            var received = 0;
+            var result = await Client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
             {
-                //Debug.WriteLine($"{++i}: {x}");
+                received++;
+                if (received == _receiveTarget)
+                    waitEvent.Set();
+
             }, CancellationToken.None);
 
-            result.Data.ConnectionClosed += () => waitEvent.Set();
             await waitEvent.WaitAsync();
-            //client.Dispose();
+            await result.Data.CloseAsync();
         }
 
-        private static BinanceSocketClient GetClient()
+        [GlobalCleanup]
+        public void GlobalCleanup()
+        {
+            Client.Dispose();
+        }
+
+        private void CreateClient()
         {
             var logger = new LoggerFactory();
-            //logger.AddProvider(new TraceLoggerProvider());
-            var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
+            logger.AddProvider(new TraceLoggerProvider());
+            Logger = logger.CreateLogger("Test");
+            Client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
                 RateLimiterEnabled = false,
-                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:5034", "", "", "", "", "", "", "", "")
+                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:57589", "", "", "", "", "", "", "", "")
             }), logger);
-            return client;
         }
     }
 
@@ -74,14 +87,18 @@ namespace Binance.Net.Benchmark.Client
     {
         public static void Main(string[] args)
         {
+            // For manual testing:
+
             //var test = new SocketTests();
-            //for (var i = 0; i < 128; i++)
+            //test.GlobalSetup();
+            //for (var i = 0; i < 1000; i++)
             //{
             //    test.HighPerf().Wait();
             //}
+            //test.GlobalCleanup();
             //Console.ReadLine();
 
-            var summary = BenchmarkRunner.Run<SocketTests>();
+            BenchmarkRunner.Run<SocketTests>();
         }
     }
 }

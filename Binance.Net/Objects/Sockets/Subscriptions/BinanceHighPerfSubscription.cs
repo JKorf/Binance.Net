@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceHighPerfSubscription(ILogger logger, string[] topics, Func<T, ValueTask> handler) : base(logger, handler)
+        public BinanceHighPerfSubscription(string[] topics, Func<T, ValueTask> handler) : base(handler)
         {
             _params = topics;
         }
