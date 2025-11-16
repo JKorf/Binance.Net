@@ -5,20 +5,66 @@ using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using System.Net.WebSockets;
+using System.Text;
 using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
+    public class BinanceMessageConverter : DynamicConverter
+    {
+        public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BinanceExchange._serializerContext);
+
+        public override MessageType GetMessageType(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
+        {
+            var reader = new Utf8JsonReader(data);
+            string? streamId = null;
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.PropertyName)
+                {
+                    if (reader.CurrentDepth == 1 && reader.ValueTextEquals("id"))
+                    {
+                        // Query responsec
+                        reader.Read();
+                        return new MessageType { Type = typeof(BinanceSocketQueryResponse), Identifier = reader.GetInt32().ToString()! };
+                    }
+                    if (reader.CurrentDepth == 1 && reader.ValueTextEquals("stream"))
+                    {
+                        // Query response
+                        reader.Read();
+                        streamId = reader.GetString();
+                    }
+                    else if (reader.CurrentDepth == 2 && reader.ValueTextEquals("e"))
+                    {
+                        // Event
+                        reader.Read();
+
+                        var type = 
+                            reader.ValueTextEquals("trade") ? typeof(BinanceCombinedStream<BinanceStreamTrade>) :
+                            reader.ValueTextEquals("aggTrade") ? typeof(BinanceCombinedStream<BinanceStreamAggregatedTrade>) :
+                            null;
+
+                        return new MessageType { Type = type, Identifier = streamId };
+                    }
+                }
+            }
+
+            return new MessageType();
+        }
+    }
+
     /// <inheritdoc />
     internal partial class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
     {
@@ -114,7 +160,11 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(string url, string[] topics, Func<U, ValueTask> onData, CancellationToken ct) where T: BinanceCombinedStream<U>
+        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+            string url,
+            string[] topics,
+            Func<U, ValueTask> onData,            
+            CancellationToken ct) where T: BinanceCombinedStream<U>
         {
             var subscription = new BinanceHighPerfSubscription<T>(topics, x =>
             {
@@ -238,5 +288,7 @@ namespace Binance.Net.Clients.SpotApi
 
             return BinanceHelpers.ValidateTradeRules(_logger, ApiOptions.TradeRulesBehaviour, _exchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
         }
+
+        public override IMessageConverter CreateMessageConverter() => new BinanceMessageConverter();
     }
 }

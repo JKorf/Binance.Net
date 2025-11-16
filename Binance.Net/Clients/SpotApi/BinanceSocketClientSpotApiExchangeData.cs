@@ -248,10 +248,10 @@ namespace Binance.Net.Clients.SpotApi
         public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Func<BinanceStreamTrade, ValueTask> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@trade"));
-            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamTrade>, BinanceStreamTrade>(_client.BaseAddress, topics.ToArray(), callback, ct);
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamTrade>, BinanceStreamTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
         }
 
-#endregion
+        #endregion
 
         #region Aggregate Trade Streams
 

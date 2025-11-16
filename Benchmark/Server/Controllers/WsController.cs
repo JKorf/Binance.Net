@@ -10,7 +10,7 @@ namespace Binance.Net.Benchmark.Controllers
     [Route("stream")]
     public class WsController : ControllerBase
     {
-        private const int _sendTarget = 1000; // Should match the number in the client
+        private const int _sendTarget = 10000; // Should match the number in the client
 
         [HttpGet]
         public async Task Get()
@@ -43,12 +43,12 @@ namespace Binance.Net.Benchmark.Controllers
 
                         if (webSocket.State == WebSocketState.CloseReceived)
                         {
-                            Console.WriteLine("Closed received, sending close response");
+                            //Console.WriteLine("Closed received, sending close response");
                             await webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Closing", default).ConfigureAwait(false);
                         }
                         else
                         {
-                            Console.WriteLine("Closed received as answer on close request");
+                            //Console.WriteLine("Closed received as answer on close request");
                         }
                     }
                 }
@@ -66,12 +66,12 @@ namespace Binance.Net.Benchmark.Controllers
 
             if (!cts.IsCancellationRequested)
             {
-                Console.WriteLine("Writing done, closing output");
+                //Console.WriteLine("Writing done, closing output");
                 await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "done", CancellationToken.None);
             }
             else
             {
-                Console.WriteLine("Writing done, cancellation already requested");
+                //Console.WriteLine("Writing done, cancellation already requested");
             }
 
             try
@@ -80,7 +80,7 @@ namespace Binance.Net.Benchmark.Controllers
             }
             catch (Exception) { }
 
-            Console.WriteLine("Finished");
+            //Console.WriteLine("Finished");
         }
         private async Task SendAsync(WebSocket webSocket, string message)
         {
