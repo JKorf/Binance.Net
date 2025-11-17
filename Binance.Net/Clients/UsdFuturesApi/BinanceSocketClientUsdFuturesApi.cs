@@ -62,8 +62,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public IBinanceSocketClientUsdFuturesApiTrading Trading { get; }
 
-        public override JsonSerializerOptions JsonSerializerOptions => SerializerOptions.WithConverters(BinanceExchange._serializerContext);
-
         #region constructor/destructor
 
         /// <summary>
@@ -166,6 +164,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         /// <inheritdoc />
         protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
-        public override IMessageConverter CreateMessageConverter() => throw new NotImplementedException();
+        public override IMessageConverter CreateMessageConverter(WebSocketMessageType type) => throw new NotImplementedException();
     }
 }

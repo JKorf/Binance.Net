@@ -563,7 +563,32 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-#endregion
+        #region Average Price Stream
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(string symbol,
+            Action<DataEvent<BinanceStreamAveragePrice>> onMessage, CancellationToken ct = default) =>
+            await SubscribeToAveragePriceUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(
+            IEnumerable<string> symbols, Action<DataEvent<BinanceStreamAveragePrice>> onMessage, CancellationToken ct = default)
+        {
+            symbols.ValidateNotNull(nameof(symbols));
+
+            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAveragePrice>>>(data =>
+                onMessage(data.As(data.Data.Data)
+                .WithStreamId(data.Data.Stream)
+                .WithSymbol(data.Data.Data.Symbol)
+                .WithDataTimestamp(data.Data.Data.EventTime)));
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@avgPrice")
+                .ToArray();
+
+            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+        #endregion
 
     }
 }
