@@ -101,7 +101,7 @@ namespace Binance.Net.Benchmark.Client
             Client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
-                EnabledNewDeserialization = enableNewDeserialization,
+                UseUpdatedDeserialization = enableNewDeserialization,
                 RateLimiterEnabled = false,
                 Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:5034", "", "", "", "", "", "", "", "")
             }), logger);

@@ -27,7 +27,7 @@ namespace Binance.Net.UnitTests
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
-                EnabledNewDeserialization = newDeserialization
+                UseUpdatedDeserialization = newDeserialization
             }), logger);
             var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "https://api.binance.com", "data");
             await tester.ValidateAsync<BinanceStreamTrade>((client, handler) => client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");

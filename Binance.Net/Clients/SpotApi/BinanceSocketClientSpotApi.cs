@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
                     {
                         // Query response
                         reader.Read();
-                        return new MessageInfo { Type = typeof(BinanceSocketQueryResponse), Identifier = reader.GetInt32().ToString()! };
+                        return new MessageInfo { DeserializationType = typeof(BinanceSocketQueryResponse), Identifier = reader.GetInt32().ToString()! };
                     }
                     if (reader.CurrentDepth == 1 && reader.ValueTextEquals("stream"))
                     {
@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.SpotApi
                             }
                         }
 
-                        return new MessageInfo { Type = deserializationType, Identifier = streamId };
+                        return new MessageInfo { DeserializationType = deserializationType, Identifier = streamId };
                     }
                 }
             }
@@ -226,7 +226,7 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeHighPerfAsync<T>(
                 url.AppendPath("stream"),
                 subscription,
-                _highPerfConnectionFactory ??= new HighPerfJsonConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
+                _highPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
                 ct);
         }
 
