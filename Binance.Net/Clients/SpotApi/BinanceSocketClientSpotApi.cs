@@ -16,7 +16,9 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Net.WebSockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
@@ -25,6 +27,12 @@ namespace Binance.Net.Clients.SpotApi
     public class BinanceMessageConverter : DynamicConverter
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BinanceExchange._serializerContext);
+
+        private Dictionary<byte[], Type> _deserializationTypeMap = new Dictionary<byte[], Type>()
+        {
+            { Encoding.UTF8.GetBytes("trade"), typeof(BinanceCombinedStream<BinanceStreamTrade>) },
+            { Encoding.UTF8.GetBytes("aggTrade"), typeof(BinanceCombinedStream<BinanceStreamTrade>) },
+        };
 
         public override MessageType GetMessageType(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
         {
@@ -51,12 +59,17 @@ namespace Binance.Net.Clients.SpotApi
                         // Event
                         reader.Read();
 
-                        var type = 
-                            reader.ValueTextEquals("trade") ? typeof(BinanceCombinedStream<BinanceStreamTrade>) :
-                            reader.ValueTextEquals("aggTrade") ? typeof(BinanceCombinedStream<BinanceStreamAggregatedTrade>) :
-                            null;
+                        Type? deserializationType = null;
+                        foreach(var item in _deserializationTypeMap)
+                        {
+                            if (reader.ValueSpan.SequenceEqual(item.Key))
+                            {
+                                deserializationType = item.Value;
+                                break;
+                            }
+                        }
 
-                        return new MessageType { Type = type, Identifier = streamId };
+                        return new MessageType { Type = deserializationType, Identifier = streamId };
                     }
                 }
             }
