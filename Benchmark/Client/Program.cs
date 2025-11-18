@@ -103,7 +103,7 @@ namespace Binance.Net.Benchmark.Client
                 ReconnectPolicy = ReconnectPolicy.Disabled,
                 UseUpdatedDeserialization = enableNewDeserialization,
                 RateLimiterEnabled = false,
-                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:5034", "", "", "", "", "", "", "", "")
+                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:57589", "", "", "", "", "", "", "", "")
             }), logger);
         }
     }
