@@ -116,9 +116,9 @@ namespace Binance.Net.Benchmark.Client
 
             //var test = new SocketTests();
             //test.GlobalSetupNew();
-            ////Console.ReadLine();
+            //Console.ReadLine();
             //Console.WriteLine("Starting");
-            //for (var i = 0; i < 2; i++)
+            //for (var i = 0; i < 10; i++)
             //{
             //    test.NormalNew().Wait();
             //}

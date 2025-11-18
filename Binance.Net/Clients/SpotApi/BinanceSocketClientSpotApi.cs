@@ -25,90 +25,6 @@ using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    public class BinanceMessageConverter : DynamicJsonConverter
-    {
-        public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BinanceExchange._serializerContext);
-
-        // Streams without clear identifier:
-        // Partial book stream
-        // book ticker stream
-
-        private Dictionary<byte[], Type> _deserializationTypeMap = new Dictionary<byte[], Type>()
-        {
-            { Encoding.UTF8.GetBytes("trade"), typeof(BinanceCombinedStream<BinanceStreamTrade>) },
-            { Encoding.UTF8.GetBytes("aggTrade"), typeof(BinanceCombinedStream<BinanceStreamAggregatedTrade>) },
-            { Encoding.UTF8.GetBytes("kline"), typeof(BinanceCombinedStream<BinanceStreamKlineData>) },
-            { Encoding.UTF8.GetBytes("24hrMiniTicker"), typeof(BinanceCombinedStream<BinanceStreamMiniTick>) },
-            { Encoding.UTF8.GetBytes("24hrTicker"), typeof(BinanceCombinedStream<BinanceStreamTick>) },
-            { Encoding.UTF8.GetBytes("1hTicker"), typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick>) },
-            { Encoding.UTF8.GetBytes("4hTicker"), typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick>) },
-            { Encoding.UTF8.GetBytes("1dTicker"), typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick>) },
-            { Encoding.UTF8.GetBytes("depthUpdate"), typeof(BinanceCombinedStream<BinanceEventOrderBook>) },
-            { Encoding.UTF8.GetBytes("avgPrice"), typeof(BinanceCombinedStream<BinanceStreamAveragePrice>) },
-        };
-
-        private Dictionary<byte[], Type> _arrayDeserializationTypeMap = new Dictionary<byte[], Type>()
-        {
-            { Encoding.UTF8.GetBytes("24hrMiniTicker"), typeof(BinanceCombinedStream<BinanceStreamMiniTick[]>) },
-            { Encoding.UTF8.GetBytes("24hrTicker"), typeof(BinanceCombinedStream<BinanceStreamTick[]>) },
-            { Encoding.UTF8.GetBytes("1hTicker"), typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick[]>) },
-            { Encoding.UTF8.GetBytes("4hTicker"), typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick[]>) },
-            { Encoding.UTF8.GetBytes("1dTicker"), typeof(BinanceCombinedStream<BinanceStreamRollingWindowTick[]>) },
-        };
-
-        public override MessageInfo GetMessageInfo(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
-        {
-            var reader = new Utf8JsonReader(data);
-            string? streamId = null;
-            bool arrayMessage = false;
-            while (reader.Read())
-            {
-                if (reader.CurrentDepth == 1 && reader.TokenType == JsonTokenType.StartArray)
-                {
-                    arrayMessage = true;
-                    continue;
-                }
-
-                if (reader.TokenType == JsonTokenType.PropertyName)
-                {
-                    if (reader.CurrentDepth == 1 && reader.ValueTextEquals("id"))
-                    {
-                        // Query response
-                        reader.Read();
-                        return new MessageInfo { DeserializationType = typeof(BinanceSocketQueryResponse), Identifier = reader.GetInt32().ToString()! };
-                    }
-                    if (reader.CurrentDepth == 1 && reader.ValueTextEquals("stream"))
-                    {
-                        // Query response
-                        reader.Read();
-                        streamId = reader.GetString();
-                    }
-                    else if (
-                        (reader.CurrentDepth == 2 || reader.CurrentDepth == 3) // 2 for individual messages, 3 for arrays
-                        && reader.ValueTextEquals("e"))
-                    {
-                        // Event
-                        reader.Read();
-
-                        Type? deserializationType = null;
-                        foreach(var item in arrayMessage ? _arrayDeserializationTypeMap : _deserializationTypeMap)
-                        {
-                            if (reader.ValueSpan.SequenceEqual(item.Key))
-                            {
-                                deserializationType = item.Value;
-                                break;
-                            }
-                        }
-
-                        return new MessageInfo { DeserializationType = deserializationType, Identifier = streamId };
-                    }
-                }
-            }
-
-            return new MessageInfo() { Identifier = streamId };
-        }
-    }
-
     /// <inheritdoc />
     internal partial class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
     {
@@ -337,6 +253,6 @@ namespace Binance.Net.Clients.SpotApi
             return BinanceHelpers.ValidateTradeRules(_logger, ApiOptions.TradeRulesBehaviour, _exchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
         }
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BinanceMessageConverter();
+        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BinanceSocketClientSpotApiMessageConverter();
     }
 }
