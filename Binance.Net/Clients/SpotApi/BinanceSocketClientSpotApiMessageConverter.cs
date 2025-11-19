@@ -11,19 +11,18 @@ namespace Binance.Net.Clients.SpotApi
             new MessageEvaluator {
                 Priority = 1,
                 Fields = [
-                    new MessageFieldReference { Depth = 1, PropertyName = "stream", ValueType = typeof(string)  },
-                    new MessageFieldReference { MaxDepth = 3, PropertyName = "e", ValueType = typeof(string)  }, // Can be either depth 2 or 3
+                    new PropertyFieldReference("stream"),
                 ],
-                MessageIdentifier = x => x["stream"],
+                IdentifyMessageCallback = x => x.FieldValue("stream"),
             },
 
             new MessageEvaluator {
                 Priority = 2,
                 ForceIfFound = true,
                 Fields = [
-                    new MessageFieldReference { Depth = 1, PropertyName = "id", ValueType = typeof(int) }
+                    new PropertyFieldReference("id"),
                 ],
-                MessageIdentifier = x => x["id"]
+                IdentifyMessageCallback = x => x.FieldValue("id"),
             }
         ];
     }
