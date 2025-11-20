@@ -16,43 +16,43 @@ namespace Binance.Net.Objects.Sockets
             MessageMatcher = MessageMatcher.Create<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
         }
 
-        public CallResult<BinanceResponse<BinanceReplaceOrderResult>> HandleMessage(SocketConnection connection, DataEvent<BinanceResponse<BinanceReplaceOrderResult>> message)
+        public CallResult<BinanceResponse<BinanceReplaceOrderResult>> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceResponse<BinanceReplaceOrderResult> message)
         {
-            if (message.Data.Status != 200)
+            if (message.Status != 200)
             {
-                if (message.Data.Status == 418 || message.Data.Status == 429)
+                if (message.Status == 418 || message.Status == 429)
                 {
                     // Rate limit error 
-                    return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new BinanceRateLimitError(message.Data.Error!.Code, message.Data.Error!.Message)
+                    return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new BinanceRateLimitError(message.Error!.Code, message.Error!.Message)
                     {
-                        RetryAfter = message.Data.Error.Data!.RetryAfter
-                    }, message.OriginalData);
+                        RetryAfter = message.Error.Data!.RetryAfter
+                    }, originalData);
                 }
 
-                if (message.Data.Status == 400)
+                if (message.Status == 400)
                 {
-                    if (message.Data.Error!.Data == null)
-                        return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Data.Error.Code, _client.GetErrorInfo(message.Data.Error.Code, message.Data.Error.Message)));
+                    if (message.Error!.Data == null)
+                        return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Error.Code, _client.GetErrorInfo(message.Error.Code, message.Error.Message)));
 
                     return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new BinanceResponse<BinanceReplaceOrderResult>()
                     {
-                        Id = message.Data.Id,
-                        Status = message.Data.Status,
-                        Ratelimits = message.Data.Ratelimits,
+                        Id = message.Id,
+                        Status = message.Status,
+                        Ratelimits = message.Ratelimits,
                         Result = new BinanceReplaceOrderResult
                         {
-                            CancelResponse = message.Data.Error.Data!.CancelResponse,
-                            CancelResult = message.Data.Error.Data.CancelResult,
-                            NewOrderResponse = message.Data.Error.Data.NewOrderResponse,
-                            NewOrderResult = message.Data.Error.Data.NewOrderResult,
+                            CancelResponse = message.Error.Data!.CancelResponse,
+                            CancelResult = message.Error.Data.CancelResult,
+                            NewOrderResponse = message.Error.Data.NewOrderResponse,
+                            NewOrderResult = message.Error.Data.NewOrderResult,
                         }
                     });
                 }
 
-                return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Data.Error!.Code.ToString(), _client.GetErrorInfo(message.Data.Error!.Code, message.Data.Error!.Message)), message.OriginalData);
+                return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
             }
 
-            return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(message.Data, message.OriginalData, null);
+            return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(message, originalData, null);
         }
     }
 }

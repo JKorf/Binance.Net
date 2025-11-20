@@ -38962,10 +38962,10 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">
@@ -38980,31 +38980,28 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent}})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}})">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean)">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{System.DateTime,System.String,`0},System.Boolean)">
             <summary>
             ctor
             </summary>
@@ -39019,7 +39016,7 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{`0})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,`0)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.BinanceUsdFuturesUserDataSubscription">

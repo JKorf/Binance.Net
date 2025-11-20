@@ -121,11 +121,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
             symbols.ValidateNotNull(nameof(symbols));
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesUsdtStreamMarkPrice>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -139,10 +143,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             updateInterval?.ValidateIntValues(nameof(updateInterval), 1000, 3000);
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice[]>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice[]>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesUsdtStreamMarkPrice[]>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                    );
+            });
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
         }
 
@@ -167,11 +175,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (premiumIndex && priceIndex)
                 throw new ArgumentException("Either premiumIndex or priceIndex can be set true but not both");
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamKlineData>>>(data =>
-                onMessage(data.As<IBinanceStreamKlineData>(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamKlineData>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinanceStreamKlineData>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.SelectMany(a => intervals.Select(i => 
             (premiumIndex 
             ? "p" + a.ToUpper(CultureInfo.InvariantCulture) 
@@ -192,11 +204,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToContinuousContractKlineUpdatesAsync(IEnumerable<string> pairs, ContractType contractType, KlineInterval interval, Action<DataEvent<BinanceStreamContinuousKlineData>> onMessage, CancellationToken ct = default)
         {
             pairs.ValidateNotNull(nameof(pairs));
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamContinuousKlineData>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamContinuousKlineData>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceStreamContinuousKlineData>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
+
             pairs = pairs.Select(a => a.ToLower(CultureInfo.InvariantCulture) +
                                       "_" +
                                       EnumConverter.GetString(contractType).ToLower() +
@@ -218,11 +236,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamMiniTick>>>(data =>
-                onMessage(data.As<IBinanceMiniTick>(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinanceMiniTick>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _symbolMiniTickerStreamEndpoint).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -233,10 +255,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(Action<DataEvent<IBinanceMiniTick[]>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamMiniTick[]>>>(data =>
-                onMessage(data.As<IBinanceMiniTick[]>(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick[]>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinanceMiniTick[]>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                    );
+            });
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
         #endregion
@@ -251,11 +277,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTick>>>(data =>
-                onMessage(data.As<IBinance24HPrice>(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinance24HPrice>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _symbolTickerStreamEndpoint).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -267,14 +297,16 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToCompositeIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamCompositeIndex>> onMessage, CancellationToken ct = default)
         {
-            var action = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamCompositeIndex>>>(data =>
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamCompositeIndex>>((receiveTime, originalData, data) =>
             {
-                onMessage(data.As(data.Data.Data)
-                    .WithStreamId(data.Data.Stream)
-                    .WithSymbol(data.Data.Data.Symbol)
-                    .WithDataTimestamp(data.Data.Data.EventTime));
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamCompositeIndex>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { symbol.ToLower(CultureInfo.InvariantCulture) + _compositeIndexEndpoint }, action, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, new[] { symbol.ToLower(CultureInfo.InvariantCulture) + _compositeIndexEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -284,10 +316,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IBinance24HPrice[]>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTick[]>>>(data =>
-                onMessage(data.As<IBinance24HPrice[]>(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick[]>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinance24HPrice[]>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                    );
+            });
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
@@ -303,11 +339,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamAggregatedTrade>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamAggregatedTrade>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceStreamAggregatedTrade>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _aggregatedTradesStreamEndpoint).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -326,15 +366,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceStreamTrade>>>(data =>
+
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTrade>>((receiveTime, originalData, data) =>
             {
-                if (filterOutNonTradeUpdates && data.Data.Data.Type != "MARKET")
+                if (filterOutNonTradeUpdates && data.Data.Type != "MARKET")
                     return;
 
-                onMessage(data.As(data.Data.Data)
-                    .WithStreamId(data.Data.Stream)
-                    .WithSymbol(data.Data.Data.Symbol)
-                    .WithDataTimestamp(data.Data.Data.EventTime));
+                onMessage(
+                    new DataEvent<BinanceStreamTrade>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _tradesStreamEndpoint).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
@@ -352,11 +395,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamBookPrice>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamBookPrice>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _bookTickerStreamEndpoint).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -368,11 +415,16 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllBookTickerUpdatesAsync(Action<DataEvent<BinanceFuturesStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamBookPrice>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamBookPrice>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamBookPrice>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
+
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
@@ -388,11 +440,16 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data =>
-                onMessage(data.As(data.Data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamLiquidation>(data.Data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
+
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _liquidationStreamEndpoint).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -404,11 +461,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAllLiquidationUpdatesAsync(Action<DataEvent<BinanceFuturesStreamLiquidation>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>>(data =>
-                onMessage(data.As(data.Data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamLiquidation>(data.Data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
+
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
@@ -426,13 +489,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
             levels.ValidateIntValues(nameof(levels), 5, 10, 20);
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
 
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data =>
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>((receiveTime, originalData, data) =>
             {
-                data.Data.Data.Symbol = data.Data.Stream.Split('@')[0];
-                onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data)
-                    .WithStreamId(data.Data.Stream)
-                    .WithSymbol(data.Data.Data.Symbol)
-                    .WithDataTimestamp(data.Data.Data.EventTime));
+                onMessage(
+                    new DataEvent<IBinanceFuturesEventOrderBook>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
             });
 
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
@@ -450,13 +514,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
-
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 250, 500);
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>>(data =>
-                onMessage(data.As<IBinanceFuturesEventOrderBook>(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinanceFuturesEventOrderBook>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
         }
@@ -468,11 +536,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<BinanceFuturesStreamSymbolUpdate>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamSymbolUpdate>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamSymbolUpdate>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamSymbolUpdate>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { "!contractInfo" }, handler, ct).ConfigureAwait(false);
         }
 
@@ -483,21 +555,29 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate[]>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate[]>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithDataTimestamp(data.Data.Data.Max(x => x.EventTime))));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate[]>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamAssetIndexUpdate[]>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                    );
+            });
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { "!assetIndex@arr" }, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate>> onMessage, CancellationToken ct = default)
         {
-            var handler = new Action<DataEvent<BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate>>>(data =>
-                onMessage(data.As(data.Data.Data)
-                .WithStreamId(data.Data.Stream)
-                .WithSymbol(data.Data.Data.Symbol)
-                .WithDataTimestamp(data.Data.Data.EventTime)));
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceFuturesStreamAssetIndexUpdate>(data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
             return await _client.SubscribeAsync(_client.BaseAddress, new[] { symbol.ToLowerInvariant() + "@assetIndex" }, handler, ct).ConfigureAwait(false);
         }
 

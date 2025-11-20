@@ -78,49 +78,85 @@ namespace Binance.Net.Objects.Sockets
         }
 
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamConfigUpdate> message)
         {
-            message.Data.Data.ListenKey = message.Data.Stream;
-            _configHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            message.Data.ListenKey = message.Stream;
+            _configHandler?.Invoke(
+                new DataEvent<BinanceFuturesStreamConfigUpdate>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamMarginUpdate> message)
         {
-            message.Data.Data.ListenKey = message.Data.Stream;
-            _marginHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            message.Data.ListenKey = message.Stream;
+            _marginHandler?.Invoke(
+                new DataEvent<BinanceFuturesStreamMarginUpdate>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamAccountUpdate> message)
         {
-            message.Data.Data.ListenKey = message.Data.Stream;
-            _accountHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            message.Data.ListenKey = message.Stream;
+            _accountHandler?.Invoke(
+                new DataEvent<BinanceFuturesStreamAccountUpdate>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> message)
         {
-            message.Data.Data.ListenKey = message.Data.Stream;
-            _orderHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, message.Data.Data.UpdateData.Symbol, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            message.Data.ListenKey = message.Stream;
+            _orderHandler?.Invoke(
+                new DataEvent<BinanceFuturesStreamOrderUpdate>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithSymbol(message.Data.UpdateData.Symbol)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceStreamEvent>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceStreamEvent> message)
         {
-            _listenkeyHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            _listenkeyHandler?.Invoke(
+                new DataEvent<BinanceStreamEvent>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceStrategyUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceStrategyUpdate> message)
         {
-            _strategyHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            _strategyHandler?.Invoke(
+                new DataEvent<BinanceStrategyUpdate>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceGridUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceGridUpdate> message)
         {
-            _gridHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            _gridHandler?.Invoke(
+                new DataEvent<BinanceGridUpdate>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             return CallResult.SuccessResult;
         }
     }

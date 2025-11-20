@@ -15,23 +15,23 @@ namespace Binance.Net.Objects.Sockets
             MessageMatcher = MessageMatcher.Create<T>(request.Id.ToString(), HandleMessage);
         }
 
-        public CallResult<T> HandleMessage(SocketConnection connection, DataEvent<T> message)
+        public CallResult<T> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)
         {
-            if (message.Data.Status != 200)
+            if (message.Status != 200)
             {
-                if (message.Data.Status == 418 || message.Data.Status == 429)
+                if (message.Status == 418 || message.Status == 429)
                 {
                     // Rate limit error 
-                    return new CallResult<T>(new BinanceRateLimitError(message.Data.Error!.Code, message.Data.Error!.Message)
+                    return new CallResult<T>(new BinanceRateLimitError(message.Error!.Code, message.Error!.Message)
                     {
-                        RetryAfter = message.Data.Error.Data!.RetryAfter
-                    }, message.OriginalData);
+                        RetryAfter = message.Error.Data!.RetryAfter
+                    }, originalData);
                 }
 
-                return new CallResult<T>(new ServerError(message.Data.Error!.Code.ToString(), _client.GetErrorInfo(message.Data.Error!.Code, message.Data.Error!.Message)), message.OriginalData);
+                return new CallResult<T>(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
             }
 
-            return new CallResult<T>(message.Data, message.OriginalData, null);
+            return new CallResult<T>(message, originalData, null);
         }
     }
 }

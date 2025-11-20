@@ -97,7 +97,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
             var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);

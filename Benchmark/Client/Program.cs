@@ -96,14 +96,14 @@ namespace Binance.Net.Benchmark.Client
         private void CreateClient(bool enableNewDeserialization)
         {
             var logger = new LoggerFactory();
-            //logger.AddProvider(new TraceLoggerProvider());
+            logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
             Logger = logger.CreateLogger("Test");
             Client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
                 UseUpdatedDeserialization = enableNewDeserialization,
                 RateLimiterEnabled = false,
-                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:57589", "", "", "", "", "", "", "", "")
+                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:5034", "", "", "", "", "", "", "", "")
             }), logger);
         }
     }
@@ -114,19 +114,19 @@ namespace Binance.Net.Benchmark.Client
         {
             // For manual testing:
 
-            //var test = new SocketTests();
-            //test.GlobalSetupNew();
-            //Console.ReadLine();
-            //Console.WriteLine("Starting");
-            //for (var i = 0; i < 10; i++)
-            //{
-            //    test.NormalNew().Wait();
-            //}
-            //Console.WriteLine("Finished");
-            //Console.ReadLine();
-            //test.GlobalCleanup();
+            var test = new SocketTests();
+            test.GlobalSetupNew();
+            Console.ReadLine();
+            Console.WriteLine("Starting");
+            for (var i = 0; i < 10; i++)
+            {
+                test.NormalNew().Wait();
+            }
+            test.GlobalCleanup();
+            Console.WriteLine("Finished");
+            Console.ReadLine();
 
-            BenchmarkRunner.Run<SocketTests>();
+            //BenchmarkRunner.Run<SocketTests>();
         }
     }
 }
