@@ -3,19 +3,17 @@ using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
-    internal class BinanceSocketClientSpotApiMessageConverter : DynamicJsonConverter
+    internal class BinanceSocketClientCoinFuturesApiMessageConverter : DynamicJsonConverter
     {
         private static readonly HashSet<string> _userEvents = new HashSet<string>
         {
-            "outboundAccountPosition",
-            "balanceUpdate",
-            "executionReport",
-            "listStatus",
+            "ACCOUNT_CONFIG_UPDATE",
+            "MARGIN_CALL",
+            "ACCOUNT_UPDATE",
+            "ORDER_TRADE_UPDATE",
             "listenKeyExpired",
-            "eventStreamTerminated",
-            "externalLockUpdate",
-            "MARGIN_LEVEL_STATUS_CHANGE",
-            "USER_LIABILITY_CHANGE"
+            "STRATEGY_UPDATE",
+            "GRID_UPDATE"
         };
 
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BinanceExchange._serializerContext);
