@@ -1,9 +1,9 @@
 ﻿using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using System.Text.Json;
 
-namespace Binance.Net.Clients.SpotApi
+namespace Binance.Net.Clients.MessageHandlers
 {
-    internal class BinanceSocketClientCoinFuturesApiMessageConverter : DynamicJsonConverter
+    internal class BinanceSocketCoinFuturesMessageHandler : JsonSocketMessageHandler
     {
         private static readonly HashSet<string> _userEvents = new HashSet<string>
         {

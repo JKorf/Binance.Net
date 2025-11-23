@@ -29,6 +29,8 @@ namespace Binance.Net.Benchmark.Controllers
             await SendAsync(webSocket, response);
             totalWritter += response.Length;
 
+            Console.WriteLine("Subscribe");
+
             var cts = new CancellationTokenSource();
             // Apply cts to wait at end
 

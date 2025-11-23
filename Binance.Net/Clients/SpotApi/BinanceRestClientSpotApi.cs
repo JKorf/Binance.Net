@@ -1,15 +1,19 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
+using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
-using Binance.Net.Converters;
-using CryptoExchange.Net.Objects.Errors;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -23,6 +27,8 @@ namespace Binance.Net.Clients.SpotApi
         public new BinanceRestApiOptions ApiOptions => (BinanceRestApiOptions)base.ApiOptions;
         /// <inheritdoc />
         public new BinanceRestOptions ClientOptions => (BinanceRestOptions)base.ClientOptions;
+        /// <inheritdoc />
+        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
 
 
         internal BinanceExchangeInfo? _exchangeInfo;
@@ -211,7 +217,7 @@ namespace Binance.Net.Clients.SpotApi
         public IBinanceRestClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
                 return new ServerError(ErrorInfo.Unknown, exception: exception);
@@ -229,7 +235,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
         {
             var error = GetRateLimitError(accessor);
             var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));

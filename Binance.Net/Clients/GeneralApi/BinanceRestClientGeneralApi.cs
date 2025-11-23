@@ -1,12 +1,16 @@
-﻿using Binance.Net.Objects;
-using Binance.Net.Interfaces.Clients.GeneralApi;
+﻿using Binance.Net.Clients.MessageHandlers;
 using Binance.Net.Clients.SpotApi;
-using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.SharedApis;
 using Binance.Net.Converters;
+using Binance.Net.Interfaces.Clients.GeneralApi;
+using Binance.Net.Objects;
+using Binance.Net.Objects.Options;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {
@@ -19,6 +23,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public new BinanceRestOptions ClientOptions => (BinanceRestOptions)base.ClientOptions;
 
+        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
         private readonly BinanceRestClient _baseClient;
         #endregion
 
@@ -125,7 +130,7 @@ namespace Binance.Net.Clients.GeneralApi
             => BinanceRestClientSpotApi._timeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
                 return new ServerError(ErrorInfo.Unknown, exception: exception);
@@ -143,7 +148,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
         {
             var error = GetRateLimitError(accessor);
             var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));

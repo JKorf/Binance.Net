@@ -1,14 +1,19 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Clients.SpotApi;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
+using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Futures;
-using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.SharedApis;
-using Binance.Net.Converters;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -23,9 +28,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal BinanceFuturesCoinExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
+        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.FuturesErrors);
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Coin Futures Api");
-
         protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
 
         #endregion
@@ -254,7 +259,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public IBinanceRestClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
                 return new ServerError(ErrorInfo.Unknown, exception: exception);
@@ -272,7 +277,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         /// <inheritdoc />
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
         {
             var error = GetRateLimitError(accessor);
             var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));

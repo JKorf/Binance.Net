@@ -1,4 +1,5 @@
-﻿using Binance.Net.Converters;
+﻿using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
@@ -253,6 +254,6 @@ namespace Binance.Net.Clients.SpotApi
             return BinanceHelpers.ValidateTradeRules(_logger, ApiOptions.TradeRulesBehaviour, _exchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
         }
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BinanceSocketClientSpotApiMessageConverter();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BinanceSocketSpotMessageHandler();
     }
 }

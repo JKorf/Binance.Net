@@ -1,4 +1,5 @@
-﻿using Binance.Net.Clients.SpotApi;
+﻿using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Clients.SpotApi;
 using Binance.Net.Converters;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
@@ -92,7 +93,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType type) => new BinanceSocketClientUsdFuturesApiMessageConverter();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType type) => new BinanceSocketUsdFuturesMessageHandler();
 
         protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));

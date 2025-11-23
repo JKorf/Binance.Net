@@ -16,30 +16,31 @@ namespace Binance.Net.Benchmark.Client
     [SimpleJob(RuntimeMoniker.Net10_0)]
     public class SocketTests
     {
-        public BinanceSocketClient Client;
+        public BinanceSocketClient SocketClient;
+        public BinanceRestClient RestClient;
         public ILogger Logger;
 
         private const int _receiveTarget = 10000; // Should match the number in the server
 
 
-        [GlobalSetup(Target = nameof(NormalNew))]
+        [GlobalSetup(Targets = [nameof(NormalNew), nameof(RestNew)])]
         public void GlobalSetupNew()
         {
             CreateClient(true);
         }
 
-        [GlobalSetup(Targets = [nameof(Normal), nameof(HighPerf)])]
+        [GlobalSetup(Targets = [nameof(Normal), nameof(HighPerf), nameof(Rest)])]
         public void GlobalSetup()
         {
             CreateClient(false);
         }
 
-        [Benchmark()]
+        //[Benchmark()]
         public async Task HighPerf()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
-            var result = await Client.SpotApi.ExchangeData.SubscribeToTradeUpdatesPerfAsync(["ETHUSDT"], x =>
+            var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesPerfAsync(["ETHUSDT"], x =>
             {
                 received++;
                 
@@ -53,12 +54,12 @@ namespace Binance.Net.Benchmark.Client
             await result.Data.CloseAsync();
         }
 
-        [Benchmark()]
+        //[Benchmark()]
         public async Task NormalNew()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
-            var result = await Client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
+            var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
             {
                 received++;
                 if (received == _receiveTarget)
@@ -70,12 +71,12 @@ namespace Binance.Net.Benchmark.Client
             await result.Data.CloseAsync();
         }
 
-        [Benchmark()]
+        //[Benchmark()]
         public async Task Normal()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
-            var result = await Client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
+            var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
             {
                 received++;
                 if (received == _receiveTarget)
@@ -85,26 +86,54 @@ namespace Binance.Net.Benchmark.Client
 
             await waitEvent.WaitAsync();
             await result.Data.CloseAsync();
+        }
+
+
+        [Benchmark()]
+        public async Task Rest()
+        {
+            for(var i = 0; i < 1000; i++)
+            {
+                var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
+            }
+        }
+
+        [Benchmark()]
+        public async Task RestNew()
+        {
+            for (var i = 0; i < 1000; i++)
+            {
+                var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
+            }
         }
 
         [GlobalCleanup]
         public void GlobalCleanup()
         {
-            Client.Dispose();
+            SocketClient.Dispose();
+            RestClient.Dispose();
         }
 
         private void CreateClient(bool enableNewDeserialization)
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
-            Logger = logger.CreateLogger("Test");
-            Client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
+            //Logger = logger.CreateLogger("Test");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
+            SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
                 UseUpdatedDeserialization = enableNewDeserialization,
                 RateLimiterEnabled = false,
-                Environment = BinanceEnvironment.CreateCustom("Benchmark", "", "ws://localhost:5034", "", "", "", "", "", "", "", "")
+                Environment = env
             }), logger);
+            RestClient = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
+            {
+                UseUpdatedDeserialization = enableNewDeserialization,
+                RateLimiterEnabled = false,
+                Environment = env,
+                OutputOriginalData = true
+            }));
         }
     }
 
@@ -120,7 +149,7 @@ namespace Binance.Net.Benchmark.Client
             Console.WriteLine("Starting");
             for (var i = 0; i < 10; i++)
             {
-                test.NormalNew().Wait();
+                test.RestNew().Wait();
             }
             test.GlobalCleanup();
             Console.WriteLine("Finished");

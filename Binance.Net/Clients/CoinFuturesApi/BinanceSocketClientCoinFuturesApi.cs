@@ -153,6 +153,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType type) => throw new NotImplementedException();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType type) => throw new NotImplementedException();
     }
 }
