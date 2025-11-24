@@ -14,7 +14,7 @@ namespace Binance.Net.UnitTests
     [NonParallelizable]
     internal class BinanceSocketIntegrationTests : SocketIntegrationTest<BinanceSocketClient>
     {
-        public override bool Run { get; set; } = false;
+        public override bool Run { get; set; } = true;
 
         public BinanceSocketIntegrationTests()
         {

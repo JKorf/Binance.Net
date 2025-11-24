@@ -20,9 +20,9 @@ namespace Binance.Net.Clients.MessageHandlers
             _errorMapping = errorMapping;
         }
 
-        public override async Task<Error> ParseErrorResponse(
+        public override async ValueTask<Error> ParseErrorResponse(
             int httpStatusCode,
-            object state,
+            object? state,
             HttpResponseHeaders responseHeaders,
             Stream responseStream)
         {
@@ -42,9 +42,9 @@ namespace Binance.Net.Clients.MessageHandlers
             return new ServerError(code.Value.ToString(), errorInfo);
         }
 
-        public override async Task<ServerRateLimitError> ParseErrorRateLimitResponse(
+        public override async ValueTask<ServerRateLimitError> ParseErrorRateLimitResponse(
             int httpStatusCode,
-            object state,
+            object? state,
             HttpResponseHeaders responseHeaders, 
             Stream responseStream)
         {

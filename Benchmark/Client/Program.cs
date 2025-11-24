@@ -11,7 +11,7 @@ namespace Binance.Net.Benchmark.Client
 {
     [MemoryDiagnoser]
     //[ThreadingDiagnoser]
-    [SimpleJob(RuntimeMoniker.Net48)]
+    //[SimpleJob(RuntimeMoniker.Net48)]
     //[SimpleJob(RuntimeMoniker.Net90)]
     [SimpleJob(RuntimeMoniker.Net10_0)]
     public class SocketTests
@@ -23,27 +23,27 @@ namespace Binance.Net.Benchmark.Client
         private const int _receiveTarget = 10000; // Should match the number in the server
 
 
-        [GlobalSetup(Targets = [nameof(NormalNew), nameof(RestNew)])]
+        [GlobalSetup(Targets = [nameof(SocketUpdate), nameof(RestUpdate)])]
         public void GlobalSetupNew()
         {
             CreateClient(true);
         }
 
-        [GlobalSetup(Targets = [nameof(Normal), nameof(HighPerf), nameof(Rest)])]
+        [GlobalSetup(Targets = [nameof(Socket), nameof(SocketHighPerf), nameof(Rest)])]
         public void GlobalSetup()
         {
             CreateClient(false);
         }
 
         //[Benchmark()]
-        public async Task HighPerf()
+        public async Task SocketHighPerf()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
             var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesPerfAsync(["ETHUSDT"], x =>
             {
                 received++;
-                
+
                 if (received == _receiveTarget)
                     waitEvent.Set();
 
@@ -55,7 +55,7 @@ namespace Binance.Net.Benchmark.Client
         }
 
         //[Benchmark()]
-        public async Task NormalNew()
+        public async Task SocketUpdate()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
@@ -72,7 +72,7 @@ namespace Binance.Net.Benchmark.Client
         }
 
         //[Benchmark()]
-        public async Task Normal()
+        public async Task Socket()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
@@ -99,7 +99,7 @@ namespace Binance.Net.Benchmark.Client
         }
 
         [Benchmark()]
-        public async Task RestNew()
+        public async Task RestUpdate()
         {
             for (var i = 0; i < 1000; i++)
             {
@@ -119,7 +119,7 @@ namespace Binance.Net.Benchmark.Client
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
             //Logger = logger.CreateLogger("Test");
-            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
@@ -131,8 +131,7 @@ namespace Binance.Net.Benchmark.Client
             {
                 UseUpdatedDeserialization = enableNewDeserialization,
                 RateLimiterEnabled = false,
-                Environment = env,
-                OutputOriginalData = true
+                Environment = env
             }));
         }
     }
@@ -143,19 +142,19 @@ namespace Binance.Net.Benchmark.Client
         {
             // For manual testing:
 
-            var test = new SocketTests();
-            test.GlobalSetupNew();
-            Console.ReadLine();
-            Console.WriteLine("Starting");
-            for (var i = 0; i < 10; i++)
-            {
-                test.RestNew().Wait();
-            }
-            test.GlobalCleanup();
-            Console.WriteLine("Finished");
-            Console.ReadLine();
+            //var test = new SocketTests();
+            //test.GlobalSetupNew();
+            //Console.ReadLine();
+            //Console.WriteLine("Starting");
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    test.RestUpdate().Wait();
+            //}
+            //Console.WriteLine("Finished");
+            //Console.ReadLine();
+            //test.GlobalCleanup();
 
-            //BenchmarkRunner.Run<SocketTests>();
+            BenchmarkRunner.Run<SocketTests>();
         }
     }
 }

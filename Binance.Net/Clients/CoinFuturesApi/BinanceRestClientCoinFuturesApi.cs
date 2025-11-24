@@ -28,7 +28,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         internal BinanceFuturesCoinExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
-        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.FuturesErrors);
+        protected override IRestMessageHandler MessageHandler { get; } = new BinanceRestMessageHandler(BinanceErrors.FuturesErrors);
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Coin Futures Api");
         protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;

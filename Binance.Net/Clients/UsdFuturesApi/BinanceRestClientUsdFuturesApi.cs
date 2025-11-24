@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         internal DateTime? _lastExchangeInfoUpdate;
 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("USD Futures Api");
-        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.FuturesErrors);
+        protected override IRestMessageHandler MessageHandler { get; } = new BinanceRestMessageHandler(BinanceErrors.FuturesErrors);
 
         protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
         #endregion

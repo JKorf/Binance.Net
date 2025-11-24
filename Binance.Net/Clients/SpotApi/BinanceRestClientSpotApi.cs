@@ -28,7 +28,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public new BinanceRestOptions ClientOptions => (BinanceRestOptions)base.ClientOptions;
         /// <inheritdoc />
-        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
+        protected override IRestMessageHandler MessageHandler { get; } = new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
 
 
         internal BinanceExchangeInfo? _exchangeInfo;

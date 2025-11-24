@@ -23,7 +23,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public new BinanceRestOptions ClientOptions => (BinanceRestOptions)base.ClientOptions;
 
-        protected override IRestMessageHandler MessageHandler => new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
+        protected override IRestMessageHandler MessageHandler { get; } = new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
         private readonly BinanceRestClient _baseClient;
         #endregion
 
