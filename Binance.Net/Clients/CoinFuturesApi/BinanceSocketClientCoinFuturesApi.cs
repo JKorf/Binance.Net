@@ -2,6 +2,7 @@
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
+using Binance.Net.Clients.MessageHandlers;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
@@ -75,6 +76,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType type) => new BinanceSocketCoinFuturesMessageHandler();
         public IBinanceSocketClientCoinFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
@@ -153,6 +155,5 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         /// <inheritdoc />
         protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
-        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType type) => throw new NotImplementedException();
     }
 }
