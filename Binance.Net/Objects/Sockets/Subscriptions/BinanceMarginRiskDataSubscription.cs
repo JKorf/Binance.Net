@@ -27,6 +27,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _liabilityHandler = liabilityHandler;
             _lk = listenKey;
 
+            MessageRouter = MessageRouter.Create([
+                new MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>("MARGIN_LEVEL_STATUS_CHANGE", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>("USER_LIABILITY_CHANGE", _lk, DoHandleMessage)
+                ]);
+
             MessageMatcher = MessageMatcher.Create([
                 new MessageHandlerLink<BinanceCombinedStream<BinanceMarginCallUpdate>>(_lk + "MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
                 new MessageHandlerLink<BinanceCombinedStream<BinanceLiabilityUpdate>>(_lk + "USER_LIABILITY_CHANGE", DoHandleMessage)

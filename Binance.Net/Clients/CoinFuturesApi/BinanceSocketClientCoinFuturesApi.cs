@@ -141,9 +141,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return result;
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
-            var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
+            var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 

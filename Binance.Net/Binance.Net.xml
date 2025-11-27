@@ -2091,18 +2091,6 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAllTickerUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Interfaces.IBinanceTick[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToBlvtInfoUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToBlvtInfoUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToBlvtKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToBlvtKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiExchangeData.SubscribeToAveragePriceUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAveragePrice}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -18388,48 +18376,6 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToBlvtInfoUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to leveraged token info updates
-            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#blvt-info-streams" /></para>
-            </summary>
-            <param name="tokens">The tokens to subscribe to</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToBlvtInfoUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to leveraged token info updates
-            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#blvt-info-streams" /></para>
-            </summary>
-            <param name="token">The token to subscribe to</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToBlvtKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to leveraged token kline updates
-            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#blvt-nav-kline-candlestick-streams" /></para>
-            </summary>
-            <param name="tokens">The tokens to subscribe to</param>
-            <param name="interval">The kline interval</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToBlvtKlineUpdatesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamKlineData}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to leveraged token kline updates
-            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#blvt-nav-kline-candlestick-streams" /></para>
-            </summary>
-            <param name="token">The token to subscribe to</param>
-            <param name="interval">The kline interval</param>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData.SubscribeToBookTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBookPrice}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the book ticker update stream for the provided symbols
@@ -21506,6 +21452,11 @@
             The amount of trades made in the last 24 hours
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceCombinedStream.Stream">
+            <summary>
+            The stream combined
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.BinanceCombinedStream`1">
             <summary>
             Represents the binance result for combined data on a single socket connection
@@ -21513,11 +21464,6 @@
             Combined streams
             </summary>
             <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:Binance.Net.Objects.Models.BinanceCombinedStream`1.Stream">
-            <summary>
-            The stream combined
-            </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.BinanceCombinedStream`1.Data">
             <summary>
@@ -39004,14 +38950,10 @@
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.Collections.Generic.List{System.String},System.Action{System.DateTime,System.String,`0},System.Boolean)">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.Collections.Generic.List{System.String},System.Action{System.DateTime,System.String,`0},System.Boolean)">
             <summary>
             ctor
             </summary>
-            <param name="logger"></param>
-            <param name="topics"></param>
-            <param name="handler"></param>
-            <param name="auth"></param>
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />

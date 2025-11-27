@@ -115,9 +115,9 @@ namespace Binance.Net.Clients.SpotApi
             return stream;
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
-            var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
+            var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 

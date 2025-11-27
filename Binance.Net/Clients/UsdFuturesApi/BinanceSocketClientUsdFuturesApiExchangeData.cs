@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _markPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "")).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "markPriceUpdate", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -151,7 +151,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "markPriceUpdate", new[] { _allMarkPriceStreamEndpoint + (updateInterval == 1000 ? "@1s" : "") }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -190,7 +190,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             : priceIndex ? "i" + a.ToUpper(CultureInfo.InvariantCulture)
             : a.ToLower(CultureInfo.InvariantCulture)
             ) + _klineStreamEndpoint + "_" + EnumConverter.GetString(i))).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "kline", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -221,7 +221,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                                       _continuousContractKlineStreamEndpoint +
                                       "_" +
                                       EnumConverter.GetString(interval)).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, pairs, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "continuous_kline", pairs, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -246,7 +246,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _symbolMiniTickerStreamEndpoint).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "24hrMiniTicker", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -263,7 +263,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "24hrMiniTicker", new[] { _allMiniTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -287,7 +287,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _symbolTickerStreamEndpoint).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "24hrTicker", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -306,7 +306,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.EventTime)
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { symbol.ToLower(CultureInfo.InvariantCulture) + _compositeIndexEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "compositeIndex", new[] { symbol.ToLower(CultureInfo.InvariantCulture) + _compositeIndexEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -324,7 +324,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "24hrTicker", new[] { _allTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -349,7 +349,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _aggregatedTradesStreamEndpoint).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "aggTrade", symbols, handler, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -380,7 +380,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _tradesStreamEndpoint).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "trade", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -405,7 +405,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _bookTickerStreamEndpoint).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "bookTicker", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -425,7 +425,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
 
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "bookTicker", new[] { _allBookTickerStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -451,7 +451,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
 
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _liquidationStreamEndpoint).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "forceOrder", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -472,7 +472,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
 
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { _allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "forceOrder", new[] { _allLiquidationStreamEndpoint }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -500,7 +500,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             });
 
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _partialBookDepthStreamEndpoint + levels + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "depthUpdate", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -526,7 +526,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
-            return await _client.SubscribeAsync(_client.BaseAddress, symbols, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "depthUpdate", symbols, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -545,7 +545,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.EventTime)
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { "!contractInfo" }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "contractInfo", new[] { "!contractInfo" }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -563,7 +563,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { "!assetIndex@arr" }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "assetIndexUpdate", new[] { "!assetIndex@arr" }, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -578,7 +578,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithDataTimestamp(data.Data.EventTime)
                     );
             });
-            return await _client.SubscribeAsync(_client.BaseAddress, new[] { symbol.ToLowerInvariant() + "@assetIndex" }, handler, ct).ConfigureAwait(false);
+            return await _client.SubscribeAsync(_client.BaseAddress, "assetIndexUpdate", new[] { symbol.ToLowerInvariant() + "@assetIndex" }, handler, ct).ConfigureAwait(false);
         }
 
         #endregion

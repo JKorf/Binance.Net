@@ -42,6 +42,16 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _balanceLockHandler = lockHandler;
             _lk = listenKey;
 
+            MessageRouter = MessageRouter.Create([
+                new MessageRoute<BinanceCombinedStream<BinanceStreamPositionsUpdate>>("outboundAccountPosition", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamBalanceUpdate>>("balanceUpdate", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamOrderUpdate>>("executionReport", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamOrderList>>("listStatus", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>("listenKeyExpired", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>("eventStreamTerminated", _lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamBalanceLockUpdate>>("externalLockUpdate", _lk, DoHandleMessage),
+                ]);
+
             MessageMatcher = MessageMatcher.Create([
                 new MessageHandlerLink<BinanceCombinedStream<BinanceStreamPositionsUpdate>>(_lk + "outboundAccountPosition", DoHandleMessage),
                 new MessageHandlerLink<BinanceCombinedStream<BinanceStreamBalanceUpdate>>(_lk + "balanceUpdate", DoHandleMessage),

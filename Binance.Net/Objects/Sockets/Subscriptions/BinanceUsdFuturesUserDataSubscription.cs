@@ -52,6 +52,19 @@ namespace Binance.Net.Objects.Sockets
 
             _lk = listenKey;
 
+            MessageRouter = MessageRouter.Create([
+                new MessageRoute<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>("ACCOUNT_CONFIG_UPDATE",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>("MARGIN_CALL",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>("ACCOUNT_UPDATE",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>("ORDER_TRADE_UPDATE",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceFuturesStreamTradeUpdate>>("TRADE_LITE", _lk,DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>("listenKeyExpired",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceStrategyUpdate>>("STRATEGY_UPDATE",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceGridUpdate>>("GRID_UPDATE", _lk,DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>>("CONDITIONAL_ORDER_TRIGGER_REJECT",_lk, DoHandleMessage),
+                new MessageRoute<BinanceCombinedStream<BinanceAlgoOrderUpdate>>("ALGO_UPDATE", _lk, DoHandleMessage),
+                ]);
+
             MessageMatcher = MessageMatcher.Create([
                 new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>(_lk + "ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
                 new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>(_lk + "MARGIN_CALL", DoHandleMessage),
