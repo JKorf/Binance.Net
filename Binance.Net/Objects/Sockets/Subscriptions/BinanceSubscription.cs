@@ -18,7 +18,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _handler = handler;
             _params = topics.ToArray();
 
-            MessageRouter = MessageRouter.Create<T>(dataType, topics, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<T>(topics, DoHandleMessage);
             MessageMatcher = MessageMatcher.Create<T>(topics, DoHandleMessage);
         }
 

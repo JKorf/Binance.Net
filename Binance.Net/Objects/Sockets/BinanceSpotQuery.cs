@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Sockets
         public BinanceSpotQuery(SocketApiClient client, BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _client = client;
-            MessageRouter = MessageRouter.Create<T>(request.Id.ToString(), HandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<T>(request.Id.ToString(), HandleMessage);
             MessageMatcher = MessageMatcher.Create<T>(request.Id.ToString(), HandleMessage);
         }
 

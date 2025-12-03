@@ -43,13 +43,13 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _lk = listenKey;
 
             MessageRouter = MessageRouter.Create([
-                new MessageRoute<BinanceCombinedStream<BinanceStreamPositionsUpdate>>("outboundAccountPosition", _lk, DoHandleMessage),
-                new MessageRoute<BinanceCombinedStream<BinanceStreamBalanceUpdate>>("balanceUpdate", _lk, DoHandleMessage),
-                new MessageRoute<BinanceCombinedStream<BinanceStreamOrderUpdate>>("executionReport", _lk, DoHandleMessage),
-                new MessageRoute<BinanceCombinedStream<BinanceStreamOrderList>>("listStatus", _lk, DoHandleMessage),
-                new MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>("listenKeyExpired", _lk, DoHandleMessage),
-                new MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>("eventStreamTerminated", _lk, DoHandleMessage),
-                new MessageRoute<BinanceCombinedStream<BinanceStreamBalanceLockUpdate>>("externalLockUpdate", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamPositionsUpdate>>.CreateWithTopicFilter("outboundAccountPosition", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamBalanceUpdate>>.CreateWithTopicFilter("balanceUpdate", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamOrderUpdate>>.CreateWithTopicFilter("executionReport", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamOrderList>>.CreateWithTopicFilter("listStatus", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>.CreateWithTopicFilter("listenKeyExpired", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>.CreateWithTopicFilter("eventStreamTerminated", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamBalanceLockUpdate>>.CreateWithTopicFilter("externalLockUpdate", _lk, DoHandleMessage),
                 ]);
 
             MessageMatcher = MessageMatcher.Create([

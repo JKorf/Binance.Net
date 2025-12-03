@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Sockets
         public BinanceSpotOrderReplaceQuery(SocketApiClient client, BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _client = client;
-            MessageRouter = MessageRouter.Create<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
             MessageMatcher = MessageMatcher.Create<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
         }
 

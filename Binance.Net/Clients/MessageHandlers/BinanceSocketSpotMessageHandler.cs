@@ -1,16 +1,36 @@
 ﻿using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using Binance.Net.Objects.Models;
 using System.Text.Json;
+using Binance.Net.Objects.Models.Spot.Socket;
 
 namespace Binance.Net.Clients.MessageHandlers
 {
     internal class BinanceSocketSpotMessageHandler : JsonSocketMessageHandler
     {
+        private static readonly HashSet<string> _userEvents = new HashSet<string>
+        {
+            "outboundAccountPosition",
+            "balanceUpdate",
+            "executionReport",
+            "listStatus",
+            "listenKeyExpired",
+            "eventStreamTerminated",
+            "externalLockUpdate",
+            "MARGIN_LEVEL_STATUS_CHANGE",
+            "USER_LIABILITY_CHANGE"
+        };
+
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BinanceExchange._serializerContext);
 
         public BinanceSocketSpotMessageHandler()
         {
-            AddTopicMapping<BinanceCombinedStream>(x => x.Stream);
+            // Stream == listen key
+            AddTopicMapping<BinanceCombinedStream<BinanceStreamPositionsUpdate>>(x => x.Stream);
+            AddTopicMapping<BinanceCombinedStream<BinanceStreamBalanceUpdate>>(x => x.Stream);
+            AddTopicMapping<BinanceCombinedStream<BinanceStreamOrderUpdate>>(x => x.Stream);
+            AddTopicMapping<BinanceCombinedStream<BinanceStreamOrderList>>(x => x.Stream);
+            AddTopicMapping<BinanceCombinedStream<BinanceStreamEvent>>(x => x.Stream);
+            AddTopicMapping<BinanceCombinedStream<BinanceStreamBalanceLockUpdate>>(x => x.Stream);
         }
 
         protected override MessageEvaluator[] TypeEvaluators { get; } = [
@@ -18,35 +38,21 @@ namespace Binance.Net.Clients.MessageHandlers
             new MessageEvaluator {
                 Priority = 1,
                 Fields = [
-                    new PropertyFieldReference("e") { Depth = 2 },
+                    new PropertyFieldReference("e") { Constraint = x => _userEvents.Contains(x!), Depth = 2 },
                 ],
                 IdentifyMessageCallback = x => x.FieldValue("e")!,
             },
 
-            // Book ticker doesn't push `e` field..
             new MessageEvaluator {
                 Priority = 2,
                 Fields = [
-                    new PropertyFieldReference("stream") { Constraint = x => x!.EndsWith("@bookTicker") },
+                    new PropertyFieldReference("stream"),
                 ],
-                StaticIdentifier = "bookTicker"
+                IdentifyMessageCallback = x => x.FieldValue("stream")!,
             },
 
-            // Partial book doesn't push `e` field..
             new MessageEvaluator {
                 Priority = 3,
-                Fields = [
-                    new PropertyFieldReference("stream") 
-                    { 
-                        Constraint = x => x!.EndsWith("depth5@100ms") || x!.EndsWith("depth10@100ms") || x!.EndsWith("depth20@100ms")
-                                        || x!.EndsWith("depth5") || x!.EndsWith("depth10") || x!.EndsWith("depth20")
-                    },
-                ],
-                StaticIdentifier = "depthUpdate"
-            },
-
-            new MessageEvaluator {
-                Priority = 4,
                 ForceIfFound = true,
                 Fields = [
                     new PropertyFieldReference("id"),
