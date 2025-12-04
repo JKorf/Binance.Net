@@ -100,7 +100,7 @@ namespace Binance.Net.Benchmark.Client
         [Benchmark()]
         public async Task RestUpdated()
         {
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 10; i++)
             {
                 var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
             }
@@ -118,7 +118,7 @@ namespace Binance.Net.Benchmark.Client
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
             //Logger = logger.CreateLogger("Test");
-            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
@@ -145,7 +145,7 @@ namespace Binance.Net.Benchmark.Client
             test.SetupUpdatedDeserialization();
             Console.ReadLine();
             Console.WriteLine("Starting");
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 1; i++)
             {
                 test.RestUpdated().Wait();
             }
@@ -153,7 +153,7 @@ namespace Binance.Net.Benchmark.Client
             Console.ReadLine();
             test.GlobalCleanup();
 
-            BenchmarkRunner.Run<Tester>();
+            //BenchmarkRunner.Run<Tester>();
         }
     }
 }

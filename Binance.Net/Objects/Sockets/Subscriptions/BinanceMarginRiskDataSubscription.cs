@@ -8,7 +8,7 @@ using CryptoExchange.Net.Sockets;
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class BinanceMarginRiskDataSubscription : Subscription<BinanceSocketQueryResponse, BinanceSocketQueryResponse>
+    internal class BinanceMarginRiskDataSubscription : Subscription
     {
         private readonly string _lk;
 

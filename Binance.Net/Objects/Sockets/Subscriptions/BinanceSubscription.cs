@@ -5,7 +5,7 @@ using CryptoExchange.Net.Sockets;
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class BinanceSubscription<T> : Subscription<BinanceSocketQueryResponse, BinanceSocketQueryResponse>
+    internal class BinanceSubscription<T> : Subscription
     {
         private readonly Action<DateTime, string?, T> _handler;
         private string[] _params;

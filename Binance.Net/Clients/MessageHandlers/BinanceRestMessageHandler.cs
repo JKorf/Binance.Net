@@ -22,11 +22,10 @@ namespace Binance.Net.Clients.MessageHandlers
 
         public override async ValueTask<Error> ParseErrorResponse(
             int httpStatusCode,
-            object? state,
             HttpResponseHeaders responseHeaders,
             Stream responseStream)
         {
-            var (error, document) = await GetJsonDocument(responseStream, state).ConfigureAwait(false);
+            var (error, document) = await GetJsonDocument(responseStream).ConfigureAwait(false);
             if (error != null)
                 return error;
 
@@ -44,11 +43,10 @@ namespace Binance.Net.Clients.MessageHandlers
 
         public override async ValueTask<ServerRateLimitError> ParseErrorRateLimitResponse(
             int httpStatusCode,
-            object? state,
             HttpResponseHeaders responseHeaders, 
             Stream responseStream)
         {
-            var (parseError, document) = await GetJsonDocument(responseStream, state).ConfigureAwait(false);
+            var (parseError, document) = await GetJsonDocument(responseStream).ConfigureAwait(false);
             if (parseError != null)
                 return _emptyRateLimitError;
 
