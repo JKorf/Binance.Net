@@ -19,6 +19,69 @@ namespace Binance.Net.UnitTests
     {
         [TestCase(false)]
         [TestCase(true)]
+        public async Task ValidateConcurrentSpotSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
+            {
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "https://api.binance.com", "data");
+            await tester.ValidateConcurrentAsync<IBinanceStreamKlineData>(
+                (client, handler) => client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.EightHour, handler),
+                (client, handler) => client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneHour, handler),
+                "Concurrent");
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateConcurrentCoinFuturesSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
+            {
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/CoinFutures", "https://api.binance.com", "data");
+            await tester.ValidateConcurrentAsync<IBinanceStreamKlineData>(
+                (client, handler) => client.CoinFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSD", Enums.KlineInterval.EightHour, handler),
+                (client, handler) => client.CoinFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSD", Enums.KlineInterval.OneHour, handler),
+                "Concurrent");
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateConcurrentUsdFuturesSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
+            {
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "https://api.binance.com", "data");
+            await tester.ValidateConcurrentAsync<IBinanceStreamKlineData>(
+                (client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.EightHour, handler),
+                (client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneHour, handler),
+                "Concurrent");
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
         public async Task ValidateSpotExchangeDataSubscriptions(bool newDeserialization)
         {
             var logger = new LoggerFactory();
