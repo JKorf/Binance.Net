@@ -42,7 +42,7 @@ namespace Binance.Net.Clients.SpotApi
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
         private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
 
-        private IHighPerfConnectionFactory _highPerfConnectionFactory;
+        private IHighPerfConnectionFactory? _highPerfConnectionFactory;
 
         protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
 

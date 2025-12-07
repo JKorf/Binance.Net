@@ -21452,6 +21452,11 @@
             The amount of trades made in the last 24 hours
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.BinanceCombinedStream">
+            <summary>
+            Base stream wrapper
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.BinanceCombinedStream.Stream">
             <summary>
             The stream combined

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 namespace Binance.Net.Benchmark.Client
 {
     [MemoryDiagnoser]
-    [SimpleJob(RuntimeMoniker.Net48)]
+    //[SimpleJob(RuntimeMoniker.Net48)]
     //[SimpleJob(RuntimeMoniker.Net90)]
     [SimpleJob(RuntimeMoniker.Net10_0)]
     public class Tester
@@ -34,7 +34,7 @@ namespace Binance.Net.Benchmark.Client
             CreateClient(false);
         }
 
-        [Benchmark()]
+        //[Benchmark()]
         public async Task SocketHighPerf()
         {
             var waitEvent = new AsyncResetEvent(false, false);
@@ -70,7 +70,7 @@ namespace Binance.Net.Benchmark.Client
             await result.Data.CloseAsync();
         }
 
-        [Benchmark()]
+        //[Benchmark()]
         public async Task SocketLegacy()
         {
             var waitEvent = new AsyncResetEvent(false, false);
@@ -88,19 +88,20 @@ namespace Binance.Net.Benchmark.Client
         }
 
 
-        [Benchmark()]
-        public async Task RestLegacy()
+        //[Benchmark()]
+        public async Task RestUpdated()
         {
-            for(var i = 0; i < 1000; i++)
+            for (var i = 0; i < 1000; i++)
             {
                 var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
             }
         }
 
-        [Benchmark()]
-        public async Task RestUpdated()
+
+        //[Benchmark()]
+        public async Task RestLegacy()
         {
-            for (var i = 0; i < 10; i++)
+            for(var i = 0; i < 1000; i++)
             {
                 var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
             }
@@ -118,7 +119,7 @@ namespace Binance.Net.Benchmark.Client
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
             //Logger = logger.CreateLogger("Test");
-            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
@@ -141,19 +142,19 @@ namespace Binance.Net.Benchmark.Client
         {
             // For manual testing:
 
-            var test = new Tester();
-            test.SetupUpdatedDeserialization();
-            Console.ReadLine();
-            Console.WriteLine("Starting");
-            for (var i = 0; i < 1; i++)
-            {
-                test.RestUpdated().Wait();
-            }
-            Console.WriteLine("Finished");
-            Console.ReadLine();
-            test.GlobalCleanup();
+            //var test = new Tester();
+            //test.SetupUpdatedDeserialization();
+            //Console.ReadLine();
+            //Console.WriteLine("Starting");
+            //for (var i = 0; i < 1; i++)
+            //{
+            //    test.RestUpdated().Wait();
+            //}
+            //Console.WriteLine("Finished");
+            //Console.ReadLine();
+            //test.GlobalCleanup();
 
-            //BenchmarkRunner.Run<Tester>();
+            BenchmarkRunner.Run<Tester>();
         }
     }
 }

@@ -3,6 +3,9 @@ using Binance.Net.Objects.Models;
 
 namespace Binance.Net.Objects.Models
 {
+    /// <summary>
+    /// Base stream wrapper
+    /// </summary>
     public record BinanceCombinedStream
     {
         /// <summary>

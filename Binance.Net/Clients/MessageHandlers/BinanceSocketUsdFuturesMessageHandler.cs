@@ -6,7 +6,7 @@ namespace Binance.Net.Clients.MessageHandlers
 {
     internal class BinanceSocketUsdFuturesMessageHandler : JsonSocketMessageHandler
     {
-        private static readonly HashSet<string> _userEvents = new HashSet<string>
+        private static readonly HashSet<string?> _userEvents = new HashSet<string?>
         {
             "ACCOUNT_CONFIG_UPDATE",
             "MARGIN_CALL",
@@ -26,31 +26,28 @@ namespace Binance.Net.Clients.MessageHandlers
         {
         }
 
-        protected override MessageEvaluator[] TypeEvaluators { get; } = [
+        protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
 
-            new MessageEvaluator {
-                Priority = 1,
+            new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("e") { Constraint = x => _userEvents.Contains(x!), Depth = 2 },
+                    new PropertyFieldReference("e") { Depth = 2 }.WithFilterContstraint(_userEvents),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("e")!,
+                TypeIdentifierCallback = x => x.FieldValue("e")!,
             },
 
-            new MessageEvaluator {
-                Priority = 2,
+            new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("stream"),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("stream")!,
+                TypeIdentifierCallback = x => x.FieldValue("stream")!,
             },
 
-            new MessageEvaluator {
-                Priority = 3,
+            new MessageTypeDefinition {
                 ForceIfFound = true,
                 Fields = [
                     new PropertyFieldReference("id"),
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("id")!,
+                TypeIdentifierCallback = x => x.FieldValue("id")!,
             }
         ];
     }
