@@ -45,8 +45,6 @@ namespace Binance.Net.Benchmark.Client
 
                 if (received == _socketUpdateReceiveTarget)
                     waitEvent.Set();
-
-                return new ValueTask();
             }, CancellationToken.None);
 
             await waitEvent.WaitAsync();

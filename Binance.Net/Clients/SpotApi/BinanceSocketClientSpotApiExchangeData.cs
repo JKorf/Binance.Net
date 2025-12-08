@@ -3,9 +3,7 @@ using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Models;
-using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Socket;
 using CryptoExchange.Net.Objects.Sockets;
 
@@ -251,7 +249,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "trade", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Func<BinanceStreamTrade, ValueTask> callback, CancellationToken ct)
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamTrade> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@trade"));
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamTrade>, BinanceStreamTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
@@ -286,7 +284,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "aggTrade", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Func<BinanceStreamAggregatedTrade, ValueTask> callback, CancellationToken ct)
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> callback, CancellationToken ct)
         {
             var topics = symbols.Select(x => x.ToLowerInvariant() + "@aggTrade");
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamAggregatedTrade>, BinanceStreamAggregatedTrade>(_client.BaseAddress, topics.ToArray(), callback, ct);
@@ -450,7 +448,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "bookTicker", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToBookTickerUpdatesPerfAsync(IEnumerable<string> symbols, Func<BinanceStreamBookPrice, ValueTask> callback, CancellationToken ct)
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToBookTickerUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamBookPrice> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@bookTicker"));
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamBookPrice>, BinanceStreamBookPrice>(_client.BaseAddress, topics.ToArray(), callback, ct);

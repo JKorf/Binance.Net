@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Clients.MessageHandlers;
-using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
@@ -13,7 +12,6 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using System.Net.Http.Headers;
-using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {

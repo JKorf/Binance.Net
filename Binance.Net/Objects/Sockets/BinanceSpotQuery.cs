@@ -1,7 +1,7 @@
 ﻿using Binance.Net.Objects.Internal;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Binance.Net.Objects.Sockets
 {

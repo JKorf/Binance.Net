@@ -1,6 +1,4 @@
-﻿using Binance.Net.Enums;
-
-namespace Binance.Net.Objects.Models.Spot.VipLoans
+﻿namespace Binance.Net.Objects.Models.Spot.VipLoans
 {
     /// <summary>
     /// VIP Loan accured interest

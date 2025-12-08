@@ -1,7 +1,4 @@
-﻿using Binance.Net.Enums;
-using Binance.Net.Interfaces.Clients.GeneralApi;
-using Binance.Net.Objects.Models;
-using Binance.Net.Objects.Models.Spot.GiftCard;
+﻿using Binance.Net.Objects.Models.Spot.GiftCard;
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {

@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Attributes;
-using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Enums
 {

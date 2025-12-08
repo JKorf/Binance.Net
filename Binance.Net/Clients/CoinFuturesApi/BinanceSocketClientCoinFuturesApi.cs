@@ -1,5 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Clients.MessageHandlers;
@@ -13,9 +12,8 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
-using System.IO;
 using System.Net.WebSockets;
-using System.Text.Json;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {

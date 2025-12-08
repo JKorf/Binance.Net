@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Objects.Internal;
-using CryptoExchange.Net.Objects.Sockets;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.HighPerf;
 
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
@@ -12,7 +11,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public BinanceHighPerfSubscription(string[] topics, Func<T, ValueTask> handler) : base(handler)
+        public BinanceHighPerfSubscription(string[] topics, Action<T> handler) : base(handler)
         {
             _params = topics;
         }

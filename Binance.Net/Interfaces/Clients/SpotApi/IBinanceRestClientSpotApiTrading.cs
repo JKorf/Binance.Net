@@ -2,7 +2,6 @@
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Objects.Models.Spot.Blvt;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.Margin;
 

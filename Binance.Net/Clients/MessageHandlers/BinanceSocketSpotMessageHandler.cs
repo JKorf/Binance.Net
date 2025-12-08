@@ -2,6 +2,7 @@
 using Binance.Net.Objects.Models;
 using System.Text.Json;
 using Binance.Net.Objects.Models.Spot.Socket;
+using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
 
 namespace Binance.Net.Clients.MessageHandlers
 {

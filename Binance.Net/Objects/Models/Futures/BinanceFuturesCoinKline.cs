@@ -1,5 +1,4 @@
-﻿using Binance.Net.Converters;
-using CryptoExchange.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures
 {

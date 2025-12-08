@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Interfaces.Clients.GeneralApi
+﻿using CryptoExchange.Net.Interfaces.Clients;
+
+namespace Binance.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// Binance general API endpoints

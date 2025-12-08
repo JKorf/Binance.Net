@@ -1,6 +1,4 @@
-﻿using Binance.Net.Converters;
-
-namespace Binance.Net.Enums
+﻿namespace Binance.Net.Enums
 {
     /// <summary>
     /// Rate limit on what unit

@@ -1,6 +1,31 @@
->1 { "method": "SUBSCRIBE", "params": [ "btcusdt@kline_8h" ], "id": |*| }
->2 { "method": "SUBSCRIBE", "params": [ "btcusdt@kline_1h" ], "id": |*| }
-<1 { "result": null, "id": |id| }
-<2 { "result": null, "id": |id| }
-=1 { "stream": "btcusdt@kline_8h", "data": {"e": "kline","E": 1672515782136, "s": "BTCUSDT", "k": { "t": 123400000 } } }
-=2 { "stream": "btcusdt@kline_1h", "data": {"e": "kline","E": 1672515782136, "s": "BTCUSDT", "k": { "t": 123400000 } } }
+> { "method": "SUBSCRIBE", "params": [ "btcusdt@kline_1M" ], "id": "|1|" }
+< { "result": null, "id": |1| }
+= 
+{ 
+	"stream": "btcusdt@kline_1M",
+	"data": 
+       {
+          "e": "kline",     
+          "E": 1638747660000,  
+          "s": "BTCUSDT",    
+          "k": {
+            "t": 1638747660000,
+            "T": 1638747719999, 
+            "s": "BTCUSDT", 
+            "i": "1m",      
+            "f": 100,      
+            "L": 200,      
+            "o": "0.0010",
+            "c": "0.0020", 
+            "h": "0.0025", 
+            "l": "0.0015", 
+            "v": "1000",   
+            "n": 100,      
+            "x": false,     
+            "q": "1.0000",  
+            "V": "500",    
+            "Q": "0.500",  
+            "B": "123456"   
+          }
+        }
+}

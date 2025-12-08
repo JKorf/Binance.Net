@@ -1,12 +1,10 @@
 ﻿using Binance.Net.Clients.MessageHandlers;
-using Binance.Net.Converters;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Objects.Models.Spot.Socket;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
@@ -17,12 +15,9 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using CryptoExchange.Net.Sockets.HighPerf;
-using System;
 using System.Net.WebSockets;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -42,7 +37,6 @@ namespace Binance.Net.Clients.SpotApi
         private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
         private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
 
-        private IHighPerfConnectionFactory? _highPerfConnectionFactory;
 
         protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
 
@@ -124,7 +118,7 @@ namespace Binance.Net.Clients.SpotApi
         internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
             string url,
             string[] topics,
-            Func<U, ValueTask> onData,            
+            Action<U> onData,            
             CancellationToken ct) where T: BinanceCombinedStream<U>
         {
             var subscription = new BinanceHighPerfSubscription<T>(topics, x =>
@@ -132,18 +126,16 @@ namespace Binance.Net.Clients.SpotApi
                 if (x.Data == null)
                 {
                     // It's probably a different message (sub confirm for instance), ignore
-                    return new ValueTask();
+                    return;
                 }
 
-                if (!topics.Contains(x.Stream))
-                    return new ValueTask();
-
-                return onData(x.Data);
+                onData(x.Data);
             });
+
             return base.SubscribeHighPerfAsync<T>(
                 url.AppendPath("stream"),
                 subscription,
-                _highPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
+                HighPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
                 ct);
         }
 

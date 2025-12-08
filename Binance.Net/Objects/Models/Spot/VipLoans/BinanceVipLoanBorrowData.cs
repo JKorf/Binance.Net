@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-
-namespace Binance.Net.Objects.Models.Spot.VipLoans
+﻿namespace Binance.Net.Objects.Models.Spot.VipLoans
 {
     /// <summary>
     /// VIP Loan borrow data

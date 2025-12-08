@@ -1,9 +1,9 @@
 ﻿using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models;
-using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {

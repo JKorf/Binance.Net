@@ -1,7 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Objects.Models;
-
-namespace Binance.Net.Objects.Models
+﻿namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Base stream wrapper

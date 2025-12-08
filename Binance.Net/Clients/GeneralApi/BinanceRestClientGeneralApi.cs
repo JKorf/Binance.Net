@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Clients.MessageHandlers;
 using Binance.Net.Clients.SpotApi;
-using Binance.Net.Converters;
 using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
@@ -10,7 +9,6 @@ using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using System.Net.Http.Headers;
-using System.Text.Json;
 
 namespace Binance.Net.Clients.GeneralApi
 {

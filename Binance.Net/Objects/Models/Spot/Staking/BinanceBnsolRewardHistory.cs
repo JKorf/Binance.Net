@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Binance.Net.Objects.Models.Spot.Staking
+﻿namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// SOL rewards history

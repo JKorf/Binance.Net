@@ -1,7 +1,5 @@
 ﻿using Binance.Net.Objects;
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.MessageParsing;
-using CryptoExchange.Net.Converters.SystemTextJson.MessageConverters;
+using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
 using CryptoExchange.Net.Objects.Errors;
 using System.IO;
 using System.Net.Http.Headers;

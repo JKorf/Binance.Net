@@ -1,6 +1,6 @@
 ﻿using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using System.Text.Json;
-using Binance.Net.Objects.Models;
+using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
 
 namespace Binance.Net.Clients.MessageHandlers
 {
