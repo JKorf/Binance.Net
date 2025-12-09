@@ -14,6 +14,8 @@ using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using System.Net.WebSockets;
 using CryptoExchange.Net.Sockets.Default;
+using Binance.Net.Objects.Models;
+using CryptoExchange.Net.Sockets.HighPerf;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -143,6 +145,30 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
+        }
+
+        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+            string url,
+            string[] topics,
+            Action<U> onData,
+            CancellationToken ct) where T : BinanceCombinedStream<U>
+        {
+            var subscription = new BinanceHighPerfSubscription<T>(topics, x =>
+            {
+                if (x.Data == null)
+                {
+                    // It's probably a different message (sub confirm for instance), ignore
+                    return;
+                }
+
+                onData(x.Data);
+            });
+
+            return base.SubscribeHighPerfAsync(
+                url.AppendPath("stream"),
+                subscription,
+                HighPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
+                ct);
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)

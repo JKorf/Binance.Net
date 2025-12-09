@@ -132,7 +132,7 @@ namespace Binance.Net.Clients.SpotApi
                 onData(x.Data);
             });
 
-            return base.SubscribeHighPerfAsync<T>(
+            return base.SubscribeHighPerfAsync(
                 url.AppendPath("stream"),
                 subscription,
                 HighPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),

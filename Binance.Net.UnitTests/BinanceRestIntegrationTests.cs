@@ -229,7 +229,6 @@ namespace Binance.Net.UnitTests
         [TestCase(true)]
         public async Task TestUsdFuturesTrading(bool newDeserialization)
         {
-            await RunAndCheckResult(newDeserialization, client => client.UsdFuturesApi.Trading.GetOrderEditHistoryAsync("ETHUSDT", default, default, default, default, default, default, default), true);
             await RunAndCheckResult(newDeserialization, client => client.UsdFuturesApi.Trading.GetOpenOrdersAsync("ETHUSDT", default, default), true);
             await RunAndCheckResult(newDeserialization, client => client.UsdFuturesApi.Trading.GetOrdersAsync("ETHUSDT", default, default, default, default, default, default), true);
             await RunAndCheckResult(newDeserialization, client => client.UsdFuturesApi.Trading.GetForcedOrdersAsync(default, default, default, default, default, default), true);

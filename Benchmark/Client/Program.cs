@@ -34,7 +34,7 @@ namespace Binance.Net.Benchmark.Client
             CreateClient(false);
         }
 
-        //[Benchmark()]
+        [Benchmark()]
         public async Task SocketHighPerf()
         {
             var waitEvent = new AsyncResetEvent(false, false);
@@ -117,7 +117,7 @@ namespace Binance.Net.Benchmark.Client
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
             //Logger = logger.CreateLogger("Test");
-            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,

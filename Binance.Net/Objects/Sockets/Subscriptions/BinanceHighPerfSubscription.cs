@@ -26,16 +26,5 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 Id = ExchangeHelpers.NextId()
             };
         }
-
-        /// <inheritdoc />
-        protected override object? GetUnsubQuery(HighPerfSocketConnection connection)
-        {
-            return new BinanceSocketRequest
-            {
-                Method = "UNSUBSCRIBE",
-                Params = _params,
-                Id = ExchangeHelpers.NextId()
-            };
-        }
     }
 }

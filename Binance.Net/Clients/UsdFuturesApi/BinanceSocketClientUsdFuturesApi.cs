@@ -2,6 +2,7 @@
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
@@ -14,6 +15,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Sockets.Default;
+using CryptoExchange.Net.Sockets.HighPerf;
 using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.UsdFuturesApi
@@ -101,6 +103,30 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
+        }
+
+        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+            string url,
+            string[] topics,
+            Action<U> onData,
+            CancellationToken ct) where T : BinanceCombinedStream<U>
+        {
+            var subscription = new BinanceHighPerfSubscription<T>(topics, x =>
+            {
+                if (x.Data == null)
+                {
+                    // It's probably a different message (sub confirm for instance), ignore
+                    return;
+                }
+
+                onData(x.Data);
+            });
+
+            return base.SubscribeHighPerfAsync(
+                url.AppendPath("stream"),
+                subscription,
+                HighPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
+                ct);
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)

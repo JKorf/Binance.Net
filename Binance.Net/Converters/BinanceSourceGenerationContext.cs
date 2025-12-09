@@ -17,6 +17,10 @@ using Binance.Net.Objects.Models.Spot.Staking;
 
 namespace Binance.Net.Converters
 {
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceStreamMinimalTrade>))]
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceFuturesStreamMinimalBookUpdate>))]
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceStreamMinimalTick>))]
+
     [JsonSerializable(typeof(BinanceResponse<BinanceFuturesConditionalOrder>))]
     [JsonSerializable(typeof(BinanceFuturesConditionalOrder))]
     [JsonSerializable(typeof(BinanceFuturesConditionalOrder[]))]

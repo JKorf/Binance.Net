@@ -249,10 +249,10 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "trade", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamTrade> callback, CancellationToken ct)
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@trade"));
-            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamTrade>, BinanceStreamTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamMinimalTrade>, BinanceStreamMinimalTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
         }
 
         #endregion
@@ -284,10 +284,10 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "aggTrade", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamAggregatedTrade> callback, CancellationToken ct)
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> callback, CancellationToken ct)
         {
-            var topics = symbols.Select(x => x.ToLowerInvariant() + "@aggTrade");
-            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamAggregatedTrade>, BinanceStreamAggregatedTrade>(_client.BaseAddress, topics.ToArray(), callback, ct);
+            var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@aggTrade"));
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamMinimalTrade>, BinanceStreamMinimalTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
         }
 
         #endregion
@@ -359,6 +359,12 @@ namespace Binance.Net.Clients.SpotApi
                 .ToArray();
 
             return await _client.SubscribeAsync(_client.BaseAddress, "24hrMiniTicker", symbols, handler, ct).ConfigureAwait(false);
+        }
+
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToMiniTickerUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTick> onMessage, CancellationToken ct)
+        {
+            var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@miniTicker"));
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamMinimalTick>, BinanceStreamMinimalTick>(_client.BaseAddress, topics.ToArray(), onMessage, ct: ct);
         }
 
         #endregion
@@ -489,6 +495,13 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "depthUpdate", symbols, handler, ct).ConfigureAwait(false);
         }
 
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToPartialOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage, CancellationToken ct)
+        {
+            var topics = new HashSet<string>(symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@depth" + levels +
+                (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")));
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceOrderBook>, BinanceOrderBook>(_client.BaseAddress, topics.ToArray(), onMessage, ct: ct);
+        }
+
         #endregion
 
         #region Diff. Depth Stream
@@ -519,6 +532,13 @@ namespace Binance.Net.Clients.SpotApi
                 a.ToLower(CultureInfo.InvariantCulture) + "@depth" +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();
             return await _client.SubscribeAsync(_client.BaseAddress, "depthUpdate", symbols, handler, ct).ConfigureAwait(false);
+        }
+
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceEventOrderBook> callback, CancellationToken ct)
+        {
+            var topics = new HashSet<string>(symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@depth" +
+                (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")));
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceEventOrderBook>, BinanceEventOrderBook>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
         }
 
         #endregion
