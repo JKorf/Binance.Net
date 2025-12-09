@@ -5,6 +5,7 @@ namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider
     {
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.RsaPem, ApiCredentialsType.RsaXml];
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
