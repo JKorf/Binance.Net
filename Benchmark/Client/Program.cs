@@ -6,29 +6,63 @@ using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 
 namespace Binance.Net.Benchmark.Client
 {
     [MemoryDiagnoser]
-    //[SimpleJob(RuntimeMoniker.Net48)]
-    //[SimpleJob(RuntimeMoniker.Net90)]
+    [SimpleJob(RuntimeMoniker.Net48)]
     [SimpleJob(RuntimeMoniker.Net10_0)]
-    public class Tester
+    public class RestTester
+    {
+        public BinanceRestClient RestClient;
+
+        [GlobalSetup(Targets = [nameof(RestUpdated)])]
+        public void SetupUpdatedDeserialization()
+        {
+            CreateClient();
+        }
+
+        [Benchmark()]
+        public async Task RestUpdated()
+        {
+            for (var i = 0; i < 1000; i++)
+            {
+                var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
+            }
+        }
+
+        private void CreateClient()
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
+            RestClient = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
+            {
+                RateLimiterEnabled = false,
+                Environment = env
+            }));
+        }
+    }
+
+    [MemoryDiagnoser]
+    [SimpleJob(RuntimeMoniker.Net48)]
+    [SimpleJob(RuntimeMoniker.Net10_0)]
+    public class SocketTester
     {
         public BinanceSocketClient SocketClient;
-        public BinanceRestClient RestClient;
         public ILogger Logger;
 
         private const int _socketUpdateReceiveTarget = 10000; // Should match the number in the server
 
 
-        [GlobalSetup(Targets = [nameof(SocketUpdated), nameof(RestUpdated)])]
+        [GlobalSetup(Targets = [nameof(SocketUpdated)])]
         public void SetupUpdatedDeserialization()
         {
             CreateClient(true);
         }
 
-        [GlobalSetup(Targets = [nameof(SocketLegacy), nameof(SocketHighPerf), nameof(RestLegacy)])]
+        [GlobalSetup(Targets = [nameof(SocketLegacy), nameof(SocketHighPerf)])]
         public void SetupLegacyDeserialization()
         {
             CreateClient(false);
@@ -68,7 +102,7 @@ namespace Binance.Net.Benchmark.Client
             await result.Data.CloseAsync();
         }
 
-        //[Benchmark()]
+        [Benchmark()]
         public async Task SocketLegacy()
         {
             var waitEvent = new AsyncResetEvent(false, false);
@@ -85,38 +119,16 @@ namespace Binance.Net.Benchmark.Client
             await result.Data.CloseAsync();
         }
 
-
-        //[Benchmark()]
-        public async Task RestUpdated()
-        {
-            for (var i = 0; i < 1000; i++)
-            {
-                var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
-            }
-        }
-
-
-        //[Benchmark()]
-        public async Task RestLegacy()
-        {
-            for(var i = 0; i < 1000; i++)
-            {
-                var result = await RestClient.SpotApi.ExchangeData.GetServerTimeAsync();
-            }
-        }
-
         [GlobalCleanup]
         public void GlobalCleanup()
         {
             SocketClient.Dispose();
-            RestClient.Dispose();
         }
 
         private void CreateClient(bool enableNewDeserialization)
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
-            //Logger = logger.CreateLogger("Test");
             var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
@@ -125,12 +137,6 @@ namespace Binance.Net.Benchmark.Client
                 RateLimiterEnabled = false,
                 Environment = env
             }), logger);
-            RestClient = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
-            {
-                UseUpdatedDeserialization = enableNewDeserialization,
-                RateLimiterEnabled = false,
-                Environment = env
-            }));
         }
     }
 
@@ -144,15 +150,17 @@ namespace Binance.Net.Benchmark.Client
             //test.SetupUpdatedDeserialization();
             //Console.ReadLine();
             //Console.WriteLine("Starting");
-            //for (var i = 0; i < 1; i++)
+            //var sw = Stopwatch.StartNew();
+            //for (var i = 0; i < 100; i++)
             //{
-            //    test.RestUpdated().Wait();
+            //    test.SocketHighPerf().Wait();
             //}
-            //Console.WriteLine("Finished");
+            //sw.Stop();
+            //Console.WriteLine($"Finished in {sw.ElapsedMilliseconds} ms");
             //Console.ReadLine();
             //test.GlobalCleanup();
 
-            BenchmarkRunner.Run<Tester>();
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
         }
     }
 }

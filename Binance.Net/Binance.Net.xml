@@ -381,12 +381,6 @@
         <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.GetTimeOffset">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApi.ParseRateLimitResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor)">
-            <inheritdoc />
-        </member>
         <member name="T:Binance.Net.Clients.CoinFuturesApi.BinanceRestClientCoinFuturesApiAccount">
             <inheritdoc />
         </member>
@@ -793,12 +787,6 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApi.ParseRateLimitResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.GeneralApi.BinanceRestClientGeneralApiAutoInvest">
@@ -1426,12 +1414,6 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApi.ParseRateLimitResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount">
@@ -2185,12 +2167,6 @@
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApi.ParseRateLimitResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiAccount">

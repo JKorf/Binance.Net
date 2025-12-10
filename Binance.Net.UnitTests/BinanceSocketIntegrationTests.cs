@@ -34,7 +34,7 @@ namespace Binance.Net.UnitTests
             }), loggerFactory);
         }
 
-        private BinanceRestClient GetRestClient(bool newDeserialization)
+        private BinanceRestClient GetRestClient()
         {
             var key = Environment.GetEnvironmentVariable("APIKEY");
             var sec = Environment.GetEnvironmentVariable("APISECRET");
@@ -42,7 +42,6 @@ namespace Binance.Net.UnitTests
             Authenticated = key != null && sec != null;
             return new BinanceRestClient(x =>
             {
-                x.UseUpdatedDeserialization = newDeserialization;
                 x.ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null;
             });
         }
@@ -52,15 +51,15 @@ namespace Binance.Net.UnitTests
         [TestCase(true)]
         public async Task TestSubscriptions(bool newDeserialization)
         {
-            var listenKey = await GetRestClient(newDeserialization).SpotApi.Account.StartUserStreamAsync();
+            var listenKey = await GetRestClient().SpotApi.Account.StartUserStreamAsync();
             await RunAndCheckUpdate<IBinanceTick>(newDeserialization , (client, updateHandler) => client.SpotApi.Account.SubscribeToUserDataUpdatesAsync(listenKey.Data, default, default, default, default, default, default, default, default), false, true);
             await RunAndCheckUpdate<IBinanceTick>(newDeserialization, (client, updateHandler) => client.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
 
-            listenKey = await GetRestClient(newDeserialization).UsdFuturesApi.Account.StartUserStreamAsync();
+            listenKey = await GetRestClient().UsdFuturesApi.Account.StartUserStreamAsync();
             await RunAndCheckUpdate<IBinanceTick>(newDeserialization, (client, updateHandler) => client.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync(listenKey.Data, default, default, default, default, default, default, default, default, default, default, default), false, true);
             await RunAndCheckUpdate<IBinance24HPrice>(newDeserialization, (client, updateHandler) => client.UsdFuturesApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
 
-            listenKey = await GetRestClient(newDeserialization).CoinFuturesApi.Account.StartUserStreamAsync();
+            listenKey = await GetRestClient().CoinFuturesApi.Account.StartUserStreamAsync();
             await RunAndCheckUpdate<IBinanceTick>(newDeserialization, (client, updateHandler) => client.CoinFuturesApi.Account.SubscribeToUserDataUpdatesAsync(listenKey.Data, default, default, default, default, default, default, default, default), false, true);
             await RunAndCheckUpdate<IBinance24HPrice>(newDeserialization, (client, updateHandler) => client.CoinFuturesApi.ExchangeData.SubscribeToTickerUpdatesAsync("ETHUSD_PERP", updateHandler, default), true, false);
         } 
