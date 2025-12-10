@@ -11052,6 +11052,11 @@
             Trade group 40
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.PermissionType.TradeGroup238">
+            <summary>
+            Trade group 40
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.PortfolioMarginAccountStatus">
             <summary>
             Account status
