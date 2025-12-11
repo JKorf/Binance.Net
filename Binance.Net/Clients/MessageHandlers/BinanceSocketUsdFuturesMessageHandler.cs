@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.MessageHandlers
 
             new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("e") { Depth = 2 }.WithFilterContstraint(_userEvents),
+                    new PropertyFieldReference("e") { Depth = 2 }.WithFilterConstraint(_userEvents),
                 ],
                 TypeIdentifierCallback = x => x.FieldValue("e")!,
             },
