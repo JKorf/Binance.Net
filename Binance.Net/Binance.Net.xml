@@ -9608,6 +9608,11 @@
             Unknown
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.ContractType.PerpetualTradFi">
+            <summary>
+            Traditional finance perp contract
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.ConvertOrderStatus">
             <summary>
             Convert Order status
@@ -11906,6 +11911,11 @@
         <member name="F:Binance.Net.Enums.UnderlyingType.PreMarket">
             <summary>
             Pre-market
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.Commodity">
+            <summary>
+            Commodity
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.UniversalTransferType">

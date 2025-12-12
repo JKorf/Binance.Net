@@ -22,6 +22,11 @@ namespace Binance.Net.Enums
         /// Pre-market
         /// </summary>
         [Map("PREMARKET")]
-        PreMarket
+        PreMarket,
+        /// <summary>
+        /// Commodity
+        /// </summary>
+        [Map("COMMODITY")]
+        Commodity
     }
 }
