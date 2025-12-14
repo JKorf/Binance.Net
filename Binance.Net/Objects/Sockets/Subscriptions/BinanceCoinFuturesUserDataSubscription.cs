@@ -92,7 +92,7 @@ namespace Binance.Net.Objects.Sockets
         {
             message.Data.ListenKey = message.Stream;
             _configHandler?.Invoke(
-                new DataEvent<BinanceFuturesStreamConfigUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceFuturesStreamConfigUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -104,7 +104,7 @@ namespace Binance.Net.Objects.Sockets
         {
             message.Data.ListenKey = message.Stream;
             _marginHandler?.Invoke(
-                new DataEvent<BinanceFuturesStreamMarginUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceFuturesStreamMarginUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -116,7 +116,7 @@ namespace Binance.Net.Objects.Sockets
         {
             message.Data.ListenKey = message.Stream;
             _accountHandler?.Invoke(
-                new DataEvent<BinanceFuturesStreamAccountUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceFuturesStreamAccountUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -128,7 +128,7 @@ namespace Binance.Net.Objects.Sockets
         {
             message.Data.ListenKey = message.Stream;
             _orderHandler?.Invoke(
-                new DataEvent<BinanceFuturesStreamOrderUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceFuturesStreamOrderUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithSymbol(message.Data.UpdateData.Symbol)
@@ -140,7 +140,7 @@ namespace Binance.Net.Objects.Sockets
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceStreamEvent> message)
         {
             _listenkeyHandler?.Invoke(
-                new DataEvent<BinanceStreamEvent>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStreamEvent>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -151,7 +151,7 @@ namespace Binance.Net.Objects.Sockets
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceStrategyUpdate> message)
         {
             _strategyHandler?.Invoke(
-                new DataEvent<BinanceStrategyUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStrategyUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -162,7 +162,7 @@ namespace Binance.Net.Objects.Sockets
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceGridUpdate> message)
         {
             _gridHandler?.Invoke(
-                new DataEvent<BinanceGridUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceGridUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)

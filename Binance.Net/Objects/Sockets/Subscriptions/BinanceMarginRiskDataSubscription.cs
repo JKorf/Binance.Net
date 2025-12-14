@@ -66,7 +66,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             message.Data.ListenKey = message.Stream;
 
             _marginCallHandler?.Invoke(
-                new DataEvent<BinanceMarginCallUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceMarginCallUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -80,7 +80,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             message.Data.ListenKey = message.Stream;
             _liabilityHandler?.Invoke(
-                new DataEvent<BinanceLiabilityUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceLiabilityUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)

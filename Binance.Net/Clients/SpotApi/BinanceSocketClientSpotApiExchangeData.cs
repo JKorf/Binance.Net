@@ -238,7 +238,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTrade>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamTrade>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamTrade>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -273,7 +273,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamAggregatedTrade>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamAggregatedTrade>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamAggregatedTrade>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -318,7 +318,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamKlineData>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceStreamKlineData>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceStreamKlineData>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -349,7 +349,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceMiniTick>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceMiniTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -378,7 +378,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceMiniTick[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceMiniTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -397,7 +397,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamRollingWindowTick>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamRollingWindowTick>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamRollingWindowTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -418,7 +418,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamRollingWindowTick[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamRollingWindowTick[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamRollingWindowTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -445,7 +445,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamBookPrice>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamBookPrice>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamBookPrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                     );
@@ -483,7 +483,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 data.Data.Symbol = data.Stream.Split('@')[0];
                 onMessage(
-                    new DataEvent<IBinanceOrderBook>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceOrderBook>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                     );
@@ -522,7 +522,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceEventOrderBook>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceEventOrderBook>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceEventOrderBook>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -556,7 +556,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceTick>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -576,7 +576,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceTick[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -602,7 +602,7 @@ namespace Binance.Net.Clients.SpotApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamAveragePrice>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamAveragePrice>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamAveragePrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)

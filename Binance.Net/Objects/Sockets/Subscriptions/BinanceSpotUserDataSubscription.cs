@@ -90,7 +90,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             message.Data.ListenKey = message.Stream;
             _positionHandler?.Invoke(
-                new DataEvent<BinanceStreamPositionsUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStreamPositionsUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)                 
@@ -104,7 +104,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             message.Data.ListenKey = message.Stream;
             _balanceHandler?.Invoke(
-                new DataEvent<BinanceStreamBalanceUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStreamBalanceUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)
@@ -118,7 +118,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             message.Data.ListenKey = message.Stream;
             _orderHandler?.Invoke(
-                new DataEvent<BinanceStreamOrderUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStreamOrderUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithSymbol(message.Data.Symbol)
@@ -133,7 +133,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             message.Data.ListenKey = message.Stream;
             _orderListHandler?.Invoke(
-                new DataEvent<BinanceStreamOrderList>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStreamOrderList>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithSymbol(message.Data.Symbol)
@@ -150,7 +150,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             if (message.Data.Event.Equals("listenKeyExpired"))
             {
                 _listenKeyExpiredHandler?.Invoke(
-                    new DataEvent<BinanceStreamEvent>(message.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamEvent>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId(message.Stream)
                         .WithDataTimestamp(message.Data.EventTime)
@@ -159,7 +159,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             else
             {
                 _listenKeyExpiredHandler?.Invoke(
-                    new DataEvent<BinanceStreamEvent>(message.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamEvent>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId(message.Stream)
                         .WithDataTimestamp(message.Data.EventTime)
@@ -175,7 +175,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             message.Data.ListenKey = message.Stream;
             _balanceLockHandler?.Invoke(
-                new DataEvent<BinanceStreamBalanceLockUpdate>(message.Data, receiveTime, originalData)
+                new DataEvent<BinanceStreamBalanceLockUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime)

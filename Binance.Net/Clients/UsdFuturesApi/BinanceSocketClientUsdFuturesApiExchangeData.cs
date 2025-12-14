@@ -124,7 +124,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesUsdtStreamMarkPrice>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesUsdtStreamMarkPrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -146,7 +146,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesUsdtStreamMarkPrice[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesUsdtStreamMarkPrice[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesUsdtStreamMarkPrice[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -178,7 +178,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamKlineData>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceStreamKlineData>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceStreamKlineData>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -208,7 +208,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamContinuousKlineData>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamContinuousKlineData>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamContinuousKlineData>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -239,7 +239,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceMiniTick>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceMiniTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -263,7 +263,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceMiniTick[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceMiniTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -285,7 +285,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinance24HPrice>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinance24HPrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -305,7 +305,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamCompositeIndex>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamCompositeIndex>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamCompositeIndex>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -324,7 +324,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinance24HPrice[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinance24HPrice[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -347,7 +347,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamAggregatedTrade>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceStreamAggregatedTrade>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamAggregatedTrade>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -384,7 +384,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     return;
 
                 onMessage(
-                    new DataEvent<BinanceStreamTrade>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceStreamTrade>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -414,7 +414,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamBookPrice>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamBookPrice>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamBookPrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -440,7 +440,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamBookPrice>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamBookPrice>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamBookPrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -465,7 +465,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamLiquidation>(data.Data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamLiquidation>(_client.Exchange, data.Data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -487,7 +487,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamLiquidationData>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamLiquidation>(data.Data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamLiquidation>(_client.Exchange, data.Data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -514,7 +514,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceFuturesEventOrderBook>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceFuturesEventOrderBook>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -547,7 +547,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<IBinanceFuturesEventOrderBook>(data.Data, receiveTime, originalData)
+                    new DataEvent<IBinanceFuturesEventOrderBook>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -572,7 +572,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamSymbolUpdate>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamSymbolUpdate>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamSymbolUpdate>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)
@@ -591,7 +591,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate[]>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamAssetIndexUpdate[]>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamAssetIndexUpdate[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithDataTimestamp(data.Data.Max(x => x.EventTime))
                     );
@@ -605,7 +605,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamAssetIndexUpdate>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<BinanceFuturesStreamAssetIndexUpdate>(data.Data, receiveTime, originalData)
+                    new DataEvent<BinanceFuturesStreamAssetIndexUpdate>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime)

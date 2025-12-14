@@ -36,7 +36,7 @@ namespace Binance.Net.Benchmark.Client
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
-            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
             RestClient = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
                 RateLimiterEnabled = false,
@@ -129,7 +129,7 @@ namespace Binance.Net.Benchmark.Client
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
-            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:5034", "ws://localhost:5034", "", "", "", "", "", "", "", "");
+            var env = BinanceEnvironment.CreateCustom("Benchmark", "http://localhost:57589", "ws://localhost:57589", "", "", "", "", "", "", "", "");
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
