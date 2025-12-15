@@ -390,6 +390,37 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<HighPerfUpdateSubscription>> SubscribeToPartialOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceFuturesStreamMinimalBookUpdate> onMessage, CancellationToken ct);
 
         /// <summary>
+        /// Subscribes to the RPI (Retail Price Improvement) depth updates for the provided symbol
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams-RPI" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe on, for example `ETHUSDT`</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToPartialRpiOrderBookUpdatesAsync(string symbol, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to the RPI (Retail Price Improvement) depth updates for the provided symbols
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams-RPI" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols to subscribe on, for example `ETHUSDT`</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToPartialRpiOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to the RPI (Retail Price Improvement) depth updates stream in high-performance mode<br />
+        /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams-RPI" /></para>
+        /// </summary>
+        /// <param name="symbols">Symbols to subscribe</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected</returns>
+        Task<CallResult<HighPerfUpdateSubscription>> SubscribeToPartialRpiOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceFuturesStreamMinimalBookUpdate> onMessage, CancellationToken ct);
+
+        /// <summary>
         /// Subscribes to the order book updates for the provided symbol
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /></para>
         /// </summary>

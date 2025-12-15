@@ -85,6 +85,23 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region RPI Order Book
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesOrderBook>> GetRpiOrderBookAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection { { "symbol", symbol } };
+            parameters.AddOptionalParameter("limit", 1000);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/rpiDepth", BinanceExchange.RateLimiter.FuturesRest, 20);
+            var result = await _baseClient.SendAsync<BinanceFuturesOrderBook>(request, parameters, ct).ConfigureAwait(false);
+            if (result && string.IsNullOrEmpty(result.Data.Symbol))
+                result.Data.Symbol = symbol;
+            return result.As(result.Data);
+        }
+
+        #endregion
+
         #region Compressed/Aggregate Trades List
 
         /// <inheritdoc />

@@ -533,6 +533,39 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Partial Book Depth Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialRpiOrderBookUpdatesAsync(string symbol, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default) 
+            => await SubscribeToPartialRpiOrderBookUpdatesAsync(new[] { symbol },  onMessage, ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialRpiOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default)
+        {
+            symbols.ValidateNotNull(nameof(symbols));
+
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceFuturesStreamOrderBookDepth>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<IBinanceFuturesEventOrderBook>(_client.Exchange, data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithSymbol(data.Data.Symbol)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
+
+            symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@rpiDepth@500ms").ToArray();
+            return await _client.SubscribeAsync(_client.BaseAddress, "depthUpdate", symbols, handler, ct).ConfigureAwait(false);
+        }
+
+        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToPartialRpiOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceFuturesStreamMinimalBookUpdate> onMessage, CancellationToken ct)
+        {
+            var topics = new HashSet<string>(symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@rpiDepth@500ms"));
+            return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceFuturesStreamMinimalBookUpdate>, BinanceFuturesStreamMinimalBookUpdate>(_client.BaseAddress, topics.ToArray(), onMessage, ct: ct);
+        }
+
+        #endregion
+
         #region Diff. Book Depth Streams
 
         /// <inheritdoc />
