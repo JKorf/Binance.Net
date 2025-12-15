@@ -2379,6 +2379,12 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -2695,6 +2701,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.AccountUpdateReason">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.AdlRisk">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -3270,6 +3281,16 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinancePositionV3Array">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceSymbolAdlRateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceResponseBinanceSymbolAdlRate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -4960,6 +4981,16 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinancePositionV3Array">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolAdlRate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolAdlRateArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -9018,6 +9049,26 @@
             Reduced
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.AdlRisk">
+            <summary>
+            ADL risk rate
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AdlRisk.High">
+            <summary>
+            High risk
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AdlRisk.Middle">
+            <summary>
+            Medium risk
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.AdlRisk.Low">
+            <summary>
+            Low risk
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.AlgoOrderStatus">
             <summary>
             Status of an algo order
@@ -11796,6 +11847,11 @@
         <member name="F:Binance.Net.Enums.TimeInForce.GoodTillDate">
             <summary>
             Good til date
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.Rpi">
+            <summary>
+            Retail price improvement, is post-only and can only be matched by APP/web orders
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.TradeRulesBehaviour">
@@ -19737,6 +19793,21 @@
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get ADL risk rating for a symbol
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all symbols ADL risk ratings
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="T:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiShared">
             <summary>
             Shared interface for USD-M Futures rest API usage
@@ -21274,6 +21345,11 @@
         <member name="P:Binance.Net.Interfaces.IBinanceRecentTrade.BuyerIsMaker">
             <summary>
             Whether the buyer is maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceRecentTrade.IsRpiTrade">
+            <summary>
+            Whether this was a Retail Price Improvement trade
             </summary>
         </member>
         <member name="P:Binance.Net.Interfaces.IBinanceRecentTrade.IsBestMatch">
@@ -26040,6 +26116,11 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRecentTrade.BuyerIsMaker">
             <summary>
             Whether the buyer is maker
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceRecentTrade.IsRpiTrade">
+            <summary>
+            Whether this was a Retail Price Improvement trade
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRecentTrade.IsBestMatch">
@@ -37591,6 +37672,26 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.IsAutoAddMargin">
             <summary>
             Is auto add margin enabled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolAdlRate">
+            <summary>
+            Symbol ADL risk rate
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolAdlRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolAdlRate.AdlRisk">
+            <summary>
+            ADL risk
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolAdlRate.UpdateTime">
+            <summary>
+            Update time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration">
