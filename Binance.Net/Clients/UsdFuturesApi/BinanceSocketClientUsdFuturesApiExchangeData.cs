@@ -649,6 +649,23 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Trading Session Streams
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradingSessionUpdatesAsync(Action<DataEvent<BinanceTradingSessionUpdate>> onMessage, CancellationToken ct = default)
+        {
+            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceTradingSessionUpdate>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<BinanceTradingSessionUpdate>(_client.Exchange, data.Data, receiveTime, originalData)
+                        .WithStreamId(data.Stream)
+                        .WithDataTimestamp(data.Data.EventTime)
+                    );
+            });
+            return await _client.SubscribeAsync(_client.BaseAddress, "tradingSession", new[] { "tradingSession" }, handler, ct).ConfigureAwait(false);
+        }
+
+        #endregion
         #endregion
 
     }
