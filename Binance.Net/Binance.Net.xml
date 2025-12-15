@@ -35272,6 +35272,11 @@
             Taker commission rate
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAccountUserCommissionRate.RpiCommissionRate">
+            <summary>
+            RPI commission rate
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesAssetIndex">
             <summary>
             Futures asset index

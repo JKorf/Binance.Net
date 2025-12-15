@@ -21,5 +21,10 @@
         /// </summary>
         [JsonPropertyName("takerCommissionRate")]
         public decimal TakerCommissionRate { get; set; }
+        /// <summary>
+        /// RPI commission rate
+        /// </summary>
+        [JsonPropertyName("rpiCommissionRate")]
+        public decimal RpiCommissionRate { get; set; }
     }
 }
