@@ -37,6 +37,11 @@ namespace Binance.Net.Enums
         /// Good til date
         /// </summary>
         [Map("GTD")]
-        GoodTillDate
+        GoodTillDate,
+        /// <summary>
+        /// Retail price improvement, is post-only and can only be matched by APP/web orders
+        /// </summary>
+        [Map("RPI")]
+        Rpi
     }
 }

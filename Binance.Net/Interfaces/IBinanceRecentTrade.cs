@@ -35,6 +35,11 @@
         bool BuyerIsMaker { get; set; }
 
         /// <summary>
+        /// Whether this was a Retail Price Improvement trade
+        /// </summary>
+        bool? IsRpiTrade { get; set; }
+
+        /// <summary>
         /// Whether the trade was made at the best match
         /// </summary>
         bool IsBestMatch { get; set; }
