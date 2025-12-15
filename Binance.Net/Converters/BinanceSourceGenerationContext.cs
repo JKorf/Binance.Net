@@ -19,6 +19,7 @@ namespace Binance.Net.Converters
 {
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate[]>))]
+    [JsonSerializable(typeof(BinanceTradingSchedule))]
 
     [JsonSerializable(typeof(BinanceCombinedStream<BinanceStreamMinimalTrade>))]
     [JsonSerializable(typeof(BinanceCombinedStream<BinanceFuturesStreamMinimalBookUpdate>))]

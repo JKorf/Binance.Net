@@ -2388,6 +2388,9 @@
         <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingsAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiExchangeData.GetTradingScheduleAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.UsdFuturesApi.BinanceRestClientUsdFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -3100,6 +3103,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SelfTradePreventionModeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.SessionType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -4914,6 +4922,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceMarketSchedule">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinancePositionBase">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -4994,6 +5007,21 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSchedule">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceScheduleArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSessionSchedules">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolAdlRate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -5010,6 +5038,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceSymbolConfigurationArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTradingSchedule">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -11396,6 +11429,36 @@
         <member name="F:Binance.Net.Enums.SelfTradePreventionMode.None">
             <summary>
             None
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.SessionType">
+            <summary>
+            TradFi session type
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SessionType.PreMarket">
+            <summary>
+            Pre-market
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SessionType.Regular">
+            <summary>
+            Regular
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SessionType.AfterMarket">
+            <summary>
+            After market
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SessionType.Overnight">
+            <summary>
+            Overnight
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.SessionType.NoTrading">
+            <summary>
+            No trading
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.SideEffectType">
@@ -19823,6 +19886,13 @@
             <summary>
             Get all symbols ADL risk ratings
             <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTradingScheduleAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get trading schedule for TradFi perps
+            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
@@ -37776,6 +37846,66 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.MaxNotionalValue">
             <summary>
             Max notional value
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceTradingSchedule">
+            <summary>
+            TradFi perps trading schedule
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceTradingSchedule.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceTradingSchedule.Schedules">
+            <summary>
+            Schedules
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceMarketSchedule">
+            <summary>
+            Schedule info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceMarketSchedule.Equity">
+            <summary>
+            Equity sessions
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceMarketSchedule.Commodity">
+            <summary>
+            Commodity sessions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSessionSchedules">
+            <summary>
+            Sessions schedule
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSessionSchedules.Sessions">
+            <summary>
+            Sessions
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Futures.BinanceSchedule">
+            <summary>
+            Schedule
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSchedule.StartTime">
+            <summary>
+            Start time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSchedule.EndTime">
+            <summary>
+            End time
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Futures.BinanceSchedule.Type">
+            <summary>
+            Session type
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate">

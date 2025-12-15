@@ -646,5 +646,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return result;
         }
         #endregion
+
+        #region Get Trading Schedule
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/tradingSchedule", BinanceExchange.RateLimiter.FuturesRest, 5, false);
+            var result = await _baseClient.SendAsync<BinanceTradingSchedule>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
     }
 }

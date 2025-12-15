@@ -403,5 +403,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceSymbolAdlRate[]>> GetSymbolAdlRiskRatingsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get trading schedule for TradFi perps
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default);
     }
 }
