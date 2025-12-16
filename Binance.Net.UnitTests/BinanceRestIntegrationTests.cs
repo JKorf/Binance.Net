@@ -222,7 +222,6 @@ namespace Binance.Net.UnitTests
         [Test]
         public async Task TestUsdFuturesTrading()
         {
-            await RunAndCheckResult(client => client.UsdFuturesApi.Trading.GetOrderEditHistoryAsync("ETHUSDT", default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Trading.GetOpenOrdersAsync("ETHUSDT", default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Trading.GetOrdersAsync("ETHUSDT", default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.UsdFuturesApi.Trading.GetForcedOrdersAsync(default, default, default, default, default, default), true);

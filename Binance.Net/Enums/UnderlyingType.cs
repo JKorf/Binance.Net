@@ -1,5 +1,4 @@
-﻿using Binance.Net.Converters;
-using CryptoExchange.Net.Attributes;
+﻿using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -23,6 +22,11 @@ namespace Binance.Net.Enums
         /// Pre-market
         /// </summary>
         [Map("PREMARKET")]
-        PreMarket
+        PreMarket,
+        /// <summary>
+        /// Commodity
+        /// </summary>
+        [Map("COMMODITY")]
+        Commodity
     }
 }

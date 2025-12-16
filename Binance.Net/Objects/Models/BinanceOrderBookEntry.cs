@@ -1,6 +1,4 @@
-﻿using Binance.Net.Converters;
-using Binance.Net.Objects.Models;
-using CryptoExchange.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models
 {

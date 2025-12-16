@@ -1,18 +1,21 @@
-﻿using Binance.Net.Converters;
+﻿using Binance.Net.Clients.MessageHandlers;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
+using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
-using System.IO;
+using CryptoExchange.Net.Sockets.Default;
+using CryptoExchange.Net.Sockets.HighPerf;
 using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.UsdFuturesApi
@@ -89,16 +92,41 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType type) => new BinanceSocketUsdFuturesMessageHandler();
 
         protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, IEnumerable<string> topics, Action<DataEvent<T>> onData, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
-            var subscription = new BinanceSubscription<T>(_logger, topics.ToList(), onData, false);
+            var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
+        }
+
+        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+            string url,
+            string[] topics,
+            Action<U> onData,
+            CancellationToken ct) where T : BinanceCombinedStream<U>
+        {
+            var subscription = new BinanceHighPerfSubscription<T>(topics, x =>
+            {
+                if (x.Data == null)
+                {
+                    // It's probably a different message (sub confirm for instance), ignore
+                    return;
+                }
+
+                onData(x.Data);
+            });
+
+            return base.SubscribeHighPerfAsync(
+                url.AppendPath("stream"),
+                subscription,
+                HighPerfConnectionFactory ??= new HighPerfJsonSocketConnectionFactory(SerializerOptions.WithConverters(BinanceExchange._serializerContext)),
+                ct);
         }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)

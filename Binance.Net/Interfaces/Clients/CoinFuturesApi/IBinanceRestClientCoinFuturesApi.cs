@@ -1,4 +1,5 @@
-﻿namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
+﻿using CryptoExchange.Net.Interfaces.Clients;
+namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     /// <summary>
     /// Binance Coin futures API endpoints

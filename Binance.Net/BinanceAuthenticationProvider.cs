@@ -1,23 +1,30 @@
 ﻿using CryptoExchange.Net.Clients;
+using System.Net;
 using System.Text;
 
 namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider
     {
+        public override ApiCredentialsType[] SupportedCredentialTypes => 
+            [ApiCredentialsType.Hmac,
+            ApiCredentialsType.RsaPem,
+            ApiCredentialsType.RsaXml,
+            ApiCredentialsType.Ed25519];
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
+            request.Headers ??= new Dictionary<string, string>();
             request.Headers.Add("X-MBX-APIKEY", ApiKey);
 
             if (!request.Authenticated)
                 return;
 
             var timestamp = GetMillisecondTimestamp(apiClient);
-            var parameters = request.GetPositionParameters();
+            var parameters = request.GetPositionParameters() ?? new Dictionary<string, object>();
             parameters.Add("timestamp", timestamp);
 
             if (request.ParameterPosition == HttpMethodParameterPosition.InUri)
@@ -25,14 +32,14 @@ namespace Binance.Net
                 var queryString = request.GetQueryString();
                 var signature = Sign(queryString);
                 parameters.Add("signature", signature);
-                request.SetQueryString($"{queryString}&signature={signature}");
+                request.SetQueryString($"{queryString}&signature={WebUtility.UrlEncode(signature)}");
             }
             else
             {
-                var parameterData = request.BodyParameters.ToFormData();
+                var parameterData = request.BodyParameters?.ToFormData() ?? string.Empty;
                 var signature = Sign(parameterData);
                 parameters.Add("signature", signature);
-                request.SetBodyContent($"{parameterData}&signature={signature}");
+                request.SetBodyContent($"{parameterData}&signature={WebUtility.UrlEncode(signature)}");
             }
         }
 
@@ -40,6 +47,8 @@ namespace Binance.Net
         {
             if (_credentials.CredentialType == ApiCredentialsType.Hmac)
                 return SignHMACSHA256(data);
+            else if (_credentials.CredentialType == ApiCredentialsType.Ed25519)
+                return SignEd25519(data, SignOutputType.Base64);
             else
                 return SignRSASHA256(Encoding.ASCII.GetBytes(data), SignOutputType.Base64);
         }

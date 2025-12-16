@@ -68,7 +68,7 @@ namespace Binance.Net.Clients.SpotApi
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.Reverse().Select(x => 
+            return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
                 new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
@@ -548,7 +548,9 @@ namespace Binance.Net.Clients.SpotApi
                 || status == OrderStatus.New
                 || status == OrderStatus.PendingNew
                 || status == OrderStatus.PendingCancel)
+            {
                 return SharedOrderStatus.Open;
+            }
 
             return SharedOrderStatus.Canceled;
         }

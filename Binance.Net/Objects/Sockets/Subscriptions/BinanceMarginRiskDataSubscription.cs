@@ -3,11 +3,12 @@ using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Margin;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Binance.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class BinanceMarginRiskDataSubscription : Subscription<BinanceSocketQueryResponse, BinanceSocketQueryResponse>
+    internal class BinanceMarginRiskDataSubscription : Subscription
     {
         private readonly string _lk;
 
@@ -25,6 +26,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _marginCallHandler = marginCallHandler;
             _liabilityHandler = liabilityHandler;
             _lk = listenKey;
+
+            MessageRouter = MessageRouter.Create([
+                MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>.CreateWithTopicFilter("MARGIN_LEVEL_STATUS_CHANGE", _lk, DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>.CreateWithTopicFilter("USER_LIABILITY_CHANGE", _lk, DoHandleMessage)
+                ]);
 
             MessageMatcher = MessageMatcher.Create([
                 new MessageHandlerLink<BinanceCombinedStream<BinanceMarginCallUpdate>>(_lk + "MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
@@ -55,19 +61,30 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceMarginCallUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceMarginCallUpdate> message)
         {
-            message.Data.Data.ListenKey = message.Data.Stream;
-            _marginCallHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            message.Data.ListenKey = message.Stream;
+
+            _marginCallHandler?.Invoke(
+                new DataEvent<BinanceMarginCallUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             
             return CallResult.SuccessResult;
         }
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BinanceCombinedStream<BinanceLiabilityUpdate>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceLiabilityUpdate> message)
         {
-            message.Data.Data.ListenKey = message.Data.Stream;
-            _liabilityHandler?.Invoke(message.As(message.Data.Data, message.Data.Stream, null, SocketUpdateType.Update).WithDataTimestamp(message.Data.Data.EventTime));
+            message.Data.ListenKey = message.Stream;
+            _liabilityHandler?.Invoke(
+                new DataEvent<BinanceLiabilityUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithStreamId(message.Stream)
+                    .WithDataTimestamp(message.Data.EventTime)
+                );
             
             return CallResult.SuccessResult;
         }

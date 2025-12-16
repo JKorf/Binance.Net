@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Attributes;
-using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Enums
 {
@@ -228,6 +227,11 @@ namespace Binance.Net.Enums
         /// Trade group 40
         /// </summary>
         [Map("TRD_GRP_040")]
-        TradeGroup040
+        TradeGroup040,
+        /// <summary>
+        /// Trade group 40
+        /// </summary>
+        [Map("TRD_GRP_238")]
+        TradeGroup238
     }
 }

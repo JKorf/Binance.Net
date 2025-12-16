@@ -24,11 +24,11 @@
         /// Principle quantity
         /// </summary>
         [JsonPropertyName("p")]
-        public string Principle { get; set; } = string.Empty;
+        public decimal? Principle { get; set; }
         /// <summary>
         /// Interest quantity
         /// </summary>
         [JsonPropertyName("i")]
-        public decimal Interest { get; set; }
+        public decimal? Interest { get; set; }
     }
 }

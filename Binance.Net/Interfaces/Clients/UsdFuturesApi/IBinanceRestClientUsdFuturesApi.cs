@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
+﻿using CryptoExchange.Net.Interfaces.Clients;
+
+namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
     /// Binance USD futures API endpoints

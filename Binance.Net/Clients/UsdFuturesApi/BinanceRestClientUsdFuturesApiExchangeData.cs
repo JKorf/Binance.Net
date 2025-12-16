@@ -85,6 +85,23 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region RPI Order Book
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceFuturesOrderBook>> GetRpiOrderBookAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection { { "symbol", symbol } };
+            parameters.AddOptionalParameter("limit", 1000);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/rpiDepth", BinanceExchange.RateLimiter.FuturesRest, 20);
+            var result = await _baseClient.SendAsync<BinanceFuturesOrderBook>(request, parameters, ct).ConfigureAwait(false);
+            if (result && string.IsNullOrEmpty(result.Data.Symbol))
+                result.Data.Symbol = symbol;
+            return result.As(result.Data);
+        }
+
+        #endregion
+
         #region Compressed/Aggregate Trades List
 
         /// <inheritdoc />
@@ -603,6 +620,41 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/insuranceBalance", BinanceExchange.RateLimiter.FuturesRest, 1, false);
             var result = await _baseClient.SendAsync<BinanceInsuranceFundBalance[]>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Symbol ADL ratings
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceSymbolAdlRate>> GetSymbolAdlRiskRatingAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/symbolAdlRisk", BinanceExchange.RateLimiter.FuturesRest, 1, false);
+            var result = await _baseClient.SendAsync<BinanceSymbolAdlRate>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceSymbolAdlRate[]>> GetSymbolAdlRiskRatingsAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/symbolAdlRisk", BinanceExchange.RateLimiter.FuturesRest, 1, false);
+            var result = await _baseClient.SendAsync<BinanceSymbolAdlRate[]>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+        #endregion
+
+        #region Get Trading Schedule
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/tradingSchedule", BinanceExchange.RateLimiter.FuturesRest, 5, false);
+            var result = await _baseClient.SendAsync<BinanceTradingSchedule>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 

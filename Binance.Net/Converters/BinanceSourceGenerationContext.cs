@@ -17,6 +17,15 @@ using Binance.Net.Objects.Models.Spot.Staking;
 
 namespace Binance.Net.Converters
 {
+    [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate[]>))]
+    [JsonSerializable(typeof(BinanceTradingSchedule))]
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceTradingSessionUpdate>))]
+
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceStreamMinimalTrade>))]
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceFuturesStreamMinimalBookUpdate>))]
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceStreamMinimalTick>))]
+
     [JsonSerializable(typeof(BinanceResponse<BinanceFuturesConditionalOrder>))]
     [JsonSerializable(typeof(BinanceFuturesConditionalOrder))]
     [JsonSerializable(typeof(BinanceFuturesConditionalOrder[]))]
@@ -28,6 +37,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>))]
     [JsonSerializable(typeof(BinanceGiftCardResponse<string>))]
 
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceStreamAveragePrice>))]
     [JsonSerializable(typeof(BinanceResult<BinanceReplaceOrderResult>))]
     [JsonSerializable(typeof(Dictionary<string, BinanceAssetDetails>))]
     [JsonSerializable(typeof(Dictionary<string, object>))]

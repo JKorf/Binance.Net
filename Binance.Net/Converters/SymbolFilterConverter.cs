@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Enums;
-using System.Diagnostics;
 using Binance.Net.Objects.Models.Spot;
 using System.Text.Json;
 using System.Diagnostics.CodeAnalysis;

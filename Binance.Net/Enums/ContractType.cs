@@ -1,5 +1,4 @@
-﻿using Binance.Net.Converters;
-using CryptoExchange.Net.Attributes;
+﻿using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -53,6 +52,11 @@ namespace Binance.Net.Enums
         /// Unknown
         /// </summary>
         [Map("")]
-        Unknown
+        Unknown,
+        /// <summary>
+        /// Traditional finance perp contract
+        /// </summary>
+        [Map("TRADIFI_PERPETUAL")]
+        PerpetualTradFi
     }
 }

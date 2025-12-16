@@ -511,5 +511,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
+        #region Sign TradFi Agreement
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SignTradFiAgreementAsync(long? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/fapi/v1/stock/contract", BinanceExchange.RateLimiter.FuturesRest, 50, true);
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }

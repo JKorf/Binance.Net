@@ -1,15 +1,17 @@
-﻿using Binance.Net.Enums;
+﻿using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Enums;
+using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Options;
-using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
-using Binance.Net.Converters;
-using CryptoExchange.Net.Objects.Errors;
+using System.Net.Http.Headers;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -23,6 +25,8 @@ namespace Binance.Net.Clients.SpotApi
         public new BinanceRestApiOptions ApiOptions => (BinanceRestApiOptions)base.ApiOptions;
         /// <inheritdoc />
         public new BinanceRestOptions ClientOptions => (BinanceRestOptions)base.ClientOptions;
+        /// <inheritdoc />
+        protected override IRestMessageHandler MessageHandler { get; } = new BinanceRestMessageHandler(BinanceErrors.SpotErrors);
 
 
         internal BinanceExchangeInfo? _exchangeInfo;
@@ -209,61 +213,5 @@ namespace Binance.Net.Clients.SpotApi
             => _timeSyncState.TimeOffset;
 
         public IBinanceRestClientSpotApiShared SharedClient => this;
-
-        /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
-            if (msg == null)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            if (code == null)
-                return new ServerError(new ErrorInfo(ErrorType.Unknown, false, msg));
-
-            var errorInfo = GetErrorInfo(code.Value, msg);
-            return new ServerError(code.Value.ToString(), errorInfo, exception);
-        }
-
-        /// <inheritdoc />
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
-        {
-            var error = GetRateLimitError(accessor);
-            var retryAfterHeader = responseHeaders.SingleOrDefault(r => r.Key.Equals("Retry-After", StringComparison.InvariantCultureIgnoreCase));
-            if (retryAfterHeader.Value?.Any() != true)
-                return error;
-
-            var value = retryAfterHeader.Value.First();
-            if (!int.TryParse(value, out var seconds))
-                return error;
-
-            if (seconds == 0)
-            {
-                var now = DateTime.UtcNow;
-                seconds = (int)(new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 0, DateTimeKind.Utc).AddMinutes(1) - now).TotalSeconds + 1;
-            }
-
-            error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
-            return error;
-        }
-
-        private BinanceRateLimitError GetRateLimitError(IMessageAccessor accessor)
-        {
-            if (!accessor.IsValid)
-                return new BinanceRateLimitError(accessor.GetOriginalString());
-
-            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
-            if (msg == null)
-                return new BinanceRateLimitError(accessor.GetOriginalString());
-
-            if (code == null)
-                return new BinanceRateLimitError(msg);
-
-            return new BinanceRateLimitError(code.Value, msg);
-        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Binance.Net.Converters;
 using Binance.Net.Enums;
-using CryptoExchange.Net.Converters;
 
 namespace Binance.Net.Objects.Models
 {
@@ -38,7 +37,7 @@ namespace Binance.Net.Objects.Models
         /// The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("clientOrderId")]
-        [JsonConverter(typeof(ClientOrderIdReplaceConverter))] // TODO TEST
+        [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
 
         private decimal _price;

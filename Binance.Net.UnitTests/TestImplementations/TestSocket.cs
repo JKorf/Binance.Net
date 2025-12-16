@@ -8,8 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Binance.Net.Converters;
 using CryptoExchange.Net.Converters.SystemTextJson;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Sockets.Default.Interfaces;
+using CryptoExchange.Net.Sockets.Interfaces;
 
 namespace Binance.Net.UnitTests.TestImplementations
 {

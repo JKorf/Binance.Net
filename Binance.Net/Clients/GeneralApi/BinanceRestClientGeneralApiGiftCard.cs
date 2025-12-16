@@ -1,8 +1,5 @@
-﻿using Binance.Net.Enums;
-using Binance.Net.Interfaces.Clients.GeneralApi;
-using Binance.Net.Objects.Models;
+﻿using Binance.Net.Interfaces.Clients.GeneralApi;
 using Binance.Net.Objects.Models.Spot.GiftCard;
-using CryptoExchange.Net.RateLimiting.Guards;
 using System.Security.Cryptography;
 using System.Text;
 

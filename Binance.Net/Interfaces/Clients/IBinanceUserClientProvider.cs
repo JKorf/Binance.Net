@@ -1,6 +1,4 @@
-﻿using CryptoExchange.Net.Authentication;
-
-namespace Binance.Net.Interfaces.Clients
+﻿namespace Binance.Net.Interfaces.Clients
 {
     /// <summary>
     /// Provider for clients with credentials for specific users
