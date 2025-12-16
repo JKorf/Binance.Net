@@ -199,6 +199,30 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.0.0 - 16 Dec 2025
+    * Added Net10.0 target framework
+    * Updated CryptoExchange.Net version to 10.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Improved performance across the board, biggest gains in websocket message processing
+    * Updated REST message response handling
+    * Updated WebSocket message handling
+    * Added support for Ed25519 credentials when using Net8.0 and newer
+    * Added UseUpdatedDeserialization socket client options to toggle by new and old message handling
+    * Added various Performance websocket subscriptions for public streams
+    * Added SocketIndividualSubscriptionCombineTarget socket client option
+    * Added RPI support for futures orders
+    * Added restClient.UsdFuturesApi.ExchangeData.GetSymbolAdlRiskRatingAsync endpoint
+    * Added restClient.UsdFuturesApi.ExchangeData.GetSymbolAdlRiskRatingsAsync endpoint
+    * Added RpiCommissionRate to restClient.UsdFuturesApi.Account.GetUserCommissionRateAsync response
+    * Added socketClient.UsdFuturesApi.ExchangeData.SubscribeToPartialRpiOrderBookUpdatesAsync stream
+    * Added restClient.UsdFuturesApi.ExchangeData.GetRpiOrderBookAsync endpoint
+    * Added restClient.UsdFuturesApi.ExchangeData.GetTradingScheduleAsync endpoint
+    * Added restClient.UsdFuturesApi.Account.SignTradFiAgreementAsync endpoint
+    * Added socketClient.UsdFuturesApi.ExchangeData.SubscribeToTradingSessionUpdatesAsync stream
+    * Updated Shared API's subscription update types from ExchangeEvent to DataEvent
+    * Updated BinanceLiabilityUpdate Principle and Interest property types to decimal?
+    * Fixed RSA request signing issue
+    * Removed deprecated BLVT streams/endpoints
+
 * Version 11.11.0 - 11 Nov 2025
     * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added new conditional orders REST endpoints for UsdFutures API
