@@ -20477,7 +20477,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Boolean,System.Threading.CancellationToken)">
             <summary>
-            Subscribe to individual trade updates. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+            Subscribe to individual trade updates. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice
             </summary>
             <param name="symbol">Symbol to subscribe, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -20487,7 +20487,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade}},System.Boolean,System.Threading.CancellationToken)">
             <summary>
-            Subscribe to individual trade updates. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+            Subscribe to individual trade updates. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice
             </summary>
             <param name="symbols">Symbols to subscribe, for example `ETHUSDT`</param>
             <param name="onMessage">The event handler for the received data</param>
@@ -20497,7 +20497,7 @@
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceSocketClientUsdFuturesApiExchangeData.SubscribeToTradeUpdatesPerfAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTrade},System.Threading.CancellationToken)">
             <summary>
-            Subscribe to the trades updates stream in high-performance mode. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice<br />
+            Subscribe to the trades updates stream in high-performance mode. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice<br />
             More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
             </summary>
             <param name="symbols">Symbols to subscribe</param>
@@ -22677,7 +22677,12 @@
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTrade">
             <summary>
-            Aggregated information about trades for a symbol
+            Information about trades for a symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTrade.Symbol">
+            <summary>
+            Symbol
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTrade.Price">

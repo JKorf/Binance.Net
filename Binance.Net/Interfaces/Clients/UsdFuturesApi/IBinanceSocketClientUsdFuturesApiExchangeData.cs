@@ -77,7 +77,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> onMessage, CancellationToken ct);
 
         /// <summary>
-        /// Subscribe to individual trade updates. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+        /// Subscribe to individual trade updates. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice
         /// </summary>
         /// <param name="symbol">Symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -88,7 +88,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceStreamTrade>> onMessage, bool filterOutNonTradeUpdates = true, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to individual trade updates. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice
+        /// Subscribe to individual trade updates. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice
         /// </summary>
         /// <param name="symbols">Symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -98,7 +98,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
             Action<DataEvent<BinanceStreamTrade>> onMessage, bool filterOutNonTradeUpdates = true, CancellationToken ct = default);
         /// <summary>
-        /// Subscribe to the trades updates stream in high-performance mode. NOTE: This endpoint stream isn't document and therefor might be changed or removed without prior notice<br />
+        /// Subscribe to the trades updates stream in high-performance mode. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>

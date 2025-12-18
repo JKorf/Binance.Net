@@ -3,10 +3,15 @@
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
     /// <summary>
-    /// Aggregated information about trades for a symbol
+    /// Information about trades for a symbol
     /// </summary>
     public record BinanceStreamMinimalTrade
     {
+        /// <summary>
+        /// Symbol
+        /// </summary>
+        [JsonPropertyName("s")]
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price of the trades
         /// </summary>
