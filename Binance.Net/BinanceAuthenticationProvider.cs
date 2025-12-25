@@ -62,27 +62,15 @@ namespace Binance.Net
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
 
-            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
+            string sign = _credentials.CredentialType switch
             {
-                var sign = SignHMACSHA256(paramString);
-                var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
-                result.Add("signature", sign);
-                return result;
-            }
-            else if (_credentials.CredentialType == ApiCredentialsType.Ed25519)
-            {
-                var sign = SignEd25519(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64);
-                var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
-                result.Add("signature", sign);
-                return result;
-            }
-            else
-            {
-                var sign = SignRSASHA256(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64);
-                var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
-                result.Add("signature", sign);
-                return result;
-            }
+                ApiCredentialsType.Hmac => SignHMACSHA256(paramString),
+                ApiCredentialsType.Ed25519 => SignEd25519(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64),
+                _ => SignRSASHA256(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64),
+            };
+            var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
+            result.Add("signature", sign);
+            return result;
         }
     }
 }
