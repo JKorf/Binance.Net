@@ -69,6 +69,13 @@ namespace Binance.Net
                 result.Add("signature", sign);
                 return result;
             }
+            else if (_credentials.CredentialType == ApiCredentialsType.Ed25519)
+            {
+                var sign = SignEd25519(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64);
+                var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
+                result.Add("signature", sign);
+                return result;
+            }
             else
             {
                 var sign = SignRSASHA256(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64);
