@@ -85,6 +85,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var subscription = new BinanceUsdFuturesUserDataSubscription(
                 _logger,
+                _client,
                 listenKey,
                 onOrderUpdate,
                 onTradeUpdate,

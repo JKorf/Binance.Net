@@ -109,15 +109,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 if (AuthenticationProvider == null)
                     throw new InvalidOperationException("No credentials provided for authenticated endpoint");
 
-                var authProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
                 if (sign)
-                {
-                    parameters = authProvider.AuthenticateSocketParameters(parameters);
-                }
+                    parameters = (Dictionary<string, object>)AuthenticationProvider.ProcessRequest(this, parameters);
                 else
-                {
-                    parameters.Add("apiKey", authProvider.ApiKey);
-                }
+                    parameters.Add("apiKey", AuthenticationProvider.ApiKey);
             }
 
             var request = new BinanceSocketQuery
@@ -175,9 +170,5 @@ namespace Binance.Net.Clients.CoinFuturesApi
         {
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
-
-
-        /// <inheritdoc />
-        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
     }
 }

@@ -115,7 +115,7 @@ namespace Binance.Net.Clients.SpotApi
             CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
-            var subscription = new BinanceSpotUserDataSubscription(_logger, listenKey, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onListenKeyExpired, onUserDataStreamTerminated, onBalanceLockUpdate, false);
+            var subscription = new BinanceSpotUserDataSubscription(_logger, _client, listenKey, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onListenKeyExpired, onUserDataStreamTerminated, onBalanceLockUpdate, false);
             return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
         #endregion
@@ -133,7 +133,7 @@ namespace Binance.Net.Clients.SpotApi
                 throw new NotSupportedException("RiskData base address not configured");
 
             listenKey.ValidateNotNull(nameof(listenKey));
-            var subscription = new BinanceMarginRiskDataSubscription(_logger, listenKey, onMarginCallUpdate, onLiabilityUpdate, false);
+            var subscription = new BinanceMarginRiskDataSubscription(_logger, _client, listenKey, onMarginCallUpdate, onLiabilityUpdate, false);
             return await _client.SubscribeInternalAsync(_riskDataBaseAddress, subscription, ct).ConfigureAwait(false);
         }
         #endregion

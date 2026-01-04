@@ -64,7 +64,7 @@ namespace Binance.Net.UnitTests
                     { "price", "0.1" },
                     { "recvWindow", "5000" },
                 },
-                DateTimeConverter.ParseFromString("1499827319559", null),
+                DateTimeConverter.ParseFromString("1499827320559", null),
                 true,
                 false);
         }
@@ -95,7 +95,7 @@ namespace Binance.Net.UnitTests
                     { "price", "0.1" },
                     { "recvWindow", "5000" },
                 },
-                DateTimeConverter.ParseFromString("1499827319559", null),
+                DateTimeConverter.ParseFromString("1499827320559", null),
                 true,
                 false);
         }

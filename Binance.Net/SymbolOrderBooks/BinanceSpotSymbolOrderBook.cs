@@ -87,7 +87,7 @@ namespace Binance.Net.SymbolOrderBooks
                 var bookResult = await _restClient.SpotApi.ExchangeData.GetOrderBookAsync(Symbol, Levels ?? 5000).ConfigureAwait(false);
                 if (!bookResult)
                 {
-                    _logger.Log(Microsoft.Extensions.Logging.LogLevel.Debug, $"{Api} order book {Symbol} failed to retrieve initial order book");
+                    _logger.Log(LogLevel.Debug, $"{Api} order book {Symbol} failed to retrieve initial order book");
                     await _socketClient.UnsubscribeAsync(subResult.Data).ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(bookResult.Error!);
                 }
@@ -106,18 +106,18 @@ namespace Binance.Net.SymbolOrderBooks
         private void HandleUpdate(DataEvent<IBinanceEventOrderBook> data)
         {
             if (data.Data.FirstUpdateId != null)
-                UpdateOrderBook(data.Data.FirstUpdateId.Value, data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+                UpdateOrderBook(data.Data.FirstUpdateId.Value, data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
             else
-                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks, data.DataTime);
         }
 
 
         private void HandleUpdate(DataEvent<IBinanceOrderBook> data)
         {
             if (Levels == null)
-                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+                UpdateOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks, data.DataTime);
             else
-                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks);
+                SetInitialOrderBook(data.Data.LastUpdateId, data.Data.Bids, data.Data.Asks, data.DataTime);
         }
 
         /// <inheritdoc />
