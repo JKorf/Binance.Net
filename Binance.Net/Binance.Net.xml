@@ -1629,6 +1629,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetIsolatedMarginFeeDataAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetMarginCapitalFlowDataAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.CapitalTransactionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetCrossMarginSmallLiabilityExchangeAssetsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -2804,6 +2807,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.C2COrderStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.CapitalTransactionType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -7443,6 +7451,16 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceMarginCapitalFlowData">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceMarginCapitalFlowDataArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceMarginDelistSchedule">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -9620,6 +9638,91 @@
         <member name="F:Binance.Net.Enums.CancelRestriction.OnlyPartiallyFilled">
             <summary>
             Cancel will succeed if order status is PartiallyFilled
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Enums.CapitalTransactionType">
+            <summary>
+            Types of capital flow transactions
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.Transfer">
+            <summary>
+            Transfer
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.Borrow">
+            <summary>
+            Borrow
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.Repay">
+            <summary>
+            Repay
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.BuyTradingIncome">
+            <summary>
+            Buy-Trading Income
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.BuyTradingExpense">
+            <summary>
+            Buy-Trading Expense
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.SellTradingIncome">
+            <summary>
+            Sell-Trading Income
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.SellTradingExpense">
+            <summary>
+            Sell-Trading Expense
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.TradingCommission">
+            <summary>
+            Trading Commission
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.BuyLiquidation">
+            <summary>
+            Buy by Liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.SellLiquidation">
+            <summary>
+            Sell by Liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.RepayLiquidation">
+            <summary>
+            Repay by Liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.OtherLiquidation">
+            <summary>
+            Other Liquidation
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.LiquidationFee">
+            <summary>
+            Liquidation Fee
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.SmallBalanceConvert">
+            <summary>
+            Small Balance Convert
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.CommissionReturn">
+            <summary>
+            Commission Return
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.CapitalTransactionType.SmallConvert">
+            <summary>
+            Small Convert
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.CloudMiningPaymentStatus">
@@ -17100,6 +17203,22 @@
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="vipLevel">User's current specific margin data will be returned if vipLevel is omitted</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetMarginCapitalFlowDataAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.CapitalTransactionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get cross and isolated margin capital flow data records of the last 90 days
+            <para><a href="https://developers.binance.com/docs/margin_trading/account/Query-Cross-Isolated-Margin-Capital-Flow" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="type">Filter by transaction type</param>
+            <param name="startTime">Filter by startTime</param>
+            <param name="endTime">Filter by endTime</param>
+            <param name="fromId">If set, data with 'Id' greater than 'fromId' will be returned. Otherwise, the latest data will be returned</param>
+            <param name="limit">Number of records to retrieve. Default: 500, Max: 1000</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -30542,6 +30661,46 @@
         <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate.MarginCallStatus">
             <summary>
             Margin call status
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData">
+            <summary>
+            Margin capital flow data
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.Type">
+            <summary>
+            Transaction type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Margin.BinanceMarginDelistSchedule">

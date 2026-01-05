@@ -1,0 +1,5 @@
+GET
+/sapi/v1/margin/capital-flow
+true
+[
+]

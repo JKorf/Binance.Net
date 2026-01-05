@@ -470,6 +470,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceTransaction[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceLoan[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceRepay[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginCapitalFlowData[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceSmallLiabilityAsset[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceSmallLiabilityHistory[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceTransferHistory[]))]
