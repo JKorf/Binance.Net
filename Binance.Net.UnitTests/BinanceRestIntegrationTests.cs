@@ -85,6 +85,7 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApi.Account.GetBusdConvertHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetCloudMiningHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetIsolatedMarginFeeDataAsync(default, default, default, default), true);
+            await RunAndCheckResult(client => client.SpotApi.Account.GetMarginCapitalFlowDataAsync(default, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetTradeFeeAsync(default, default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetAccountVipLevelAndStatusAsync(default, default), true);
             await RunAndCheckResult(client => client.SpotApi.Account.GetCommissionRatesAsync("ETHUSDT", default, default), true);

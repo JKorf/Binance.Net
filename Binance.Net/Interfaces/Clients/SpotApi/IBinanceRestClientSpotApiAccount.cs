@@ -785,6 +785,22 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceIsolatedMarginFeeData[]>> GetIsolatedMarginFeeDataAsync(string? symbol = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get cross and isolated margin capital flow data records of the last 90 days
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/account/Query-Cross-Isolated-Margin-Capital-Flow" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="type">Filter by transaction type</param>
+        /// <param name="startTime">Filter by startTime</param>
+        /// <param name="endTime">Filter by endTime</param>
+        /// <param name="fromId">If set, data with 'Id' greater than 'fromId' will be returned. Otherwise, the latest data will be returned</param>
+        /// <param name="limit">Number of records to retrieve. Default: 500, Max: 1000</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BinanceMarginCapitalFlowData[]>> GetMarginCapitalFlowDataAsync(string? asset = null, string? symbol = null, CapitalTransactionType? type = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Query the coins which can be small liability exchange
         /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Get-Small-Liability-Exchange-Coin-List" /></para>
         /// </summary>

@@ -1262,6 +1262,27 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Get Cross Isolated Margin Capital Flow Records
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceMarginCapitalFlowData[]>> GetMarginCapitalFlowDataAsync(string? asset = null, string? symbol = null, CapitalTransactionType? type = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("asset", asset);
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalEnum("type", type);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("fromId", fromId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/capital-flow", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
+            return await _baseClient.SendAsync<BinanceMarginCapitalFlowData[]>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Small Liability Exchange Assets
 
         /// <inheritdoc />
