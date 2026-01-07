@@ -1,4 +1,6 @@
 ﻿using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using System.Net;
 using System.Text;
 
@@ -11,6 +13,7 @@ namespace Binance.Net
             ApiCredentialsType.RsaPem,
             ApiCredentialsType.RsaXml,
             ApiCredentialsType.Ed25519];
+
         public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
@@ -43,6 +46,21 @@ namespace Binance.Net
             }
         }
 
+        public Dictionary<string, object> ProcessRequest(SocketApiClient apiClient, Dictionary<string, object> providedParameters)
+        {
+            var sortedParameters = new SortedDictionary<string, object>(providedParameters)
+            {
+                { "apiKey", ApiKey },
+                { "timestamp", GetMillisecondTimestampLong(apiClient) }
+            };
+            var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
+
+            string sign = Sign(paramString);
+            var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
+            result.Add("signature", sign);
+            return result;
+        }
+
         private string Sign(string data)
         {
             if (_credentials.CredentialType == ApiCredentialsType.Hmac)
@@ -53,24 +71,5 @@ namespace Binance.Net
                 return SignRSASHA256(Encoding.ASCII.GetBytes(data), SignOutputType.Base64);
         }
 
-        public Dictionary<string, object> AuthenticateSocketParameters(Dictionary<string, object> providedParameters)
-        {
-            var sortedParameters = new SortedDictionary<string, object>(providedParameters)
-            {
-                { "apiKey", ApiKey },
-                { "timestamp", DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow) }
-            };
-            var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
-
-            string sign = _credentials.CredentialType switch
-            {
-                ApiCredentialsType.Hmac => SignHMACSHA256(paramString),
-                ApiCredentialsType.Ed25519 => SignEd25519(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64),
-                _ => SignRSASHA256(Encoding.ASCII.GetBytes(paramString), SignOutputType.Base64),
-            };
-            var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
-            result.Add("signature", sign);
-            return result;
-        }
     }
 }

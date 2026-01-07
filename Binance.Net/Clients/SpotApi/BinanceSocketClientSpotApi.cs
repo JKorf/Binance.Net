@@ -151,15 +151,11 @@ namespace Binance.Net.Clients.SpotApi
                 if (AuthenticationProvider == null)
                     throw new InvalidOperationException("No credentials provided for authenticated endpoint");
 
-                var authProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
+                var binanceAuthProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
                 if (sign)
-                {
-                    parameters = authProvider.AuthenticateSocketParameters(parameters);
-                }
+                    parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
-                {
-                    parameters.Add("apiKey", authProvider.ApiKey);
-                }
+                    parameters.Add("apiKey", AuthenticationProvider.ApiKey);
             }
 
             var request = new BinanceSocketQuery
@@ -197,15 +193,11 @@ namespace Binance.Net.Clients.SpotApi
                 if (AuthenticationProvider == null)
                     throw new InvalidOperationException("No credentials provided for authenticated endpoint");
 
-                var authProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
+                var binanceAuthProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
                 if (sign)
-                {
-                    parameters = authProvider.AuthenticateSocketParameters(parameters);
-                }
+                    parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
-                {
-                    parameters.Add("apiKey", authProvider.ApiKey);
-                }
+                    parameters.Add("apiKey", AuthenticationProvider.ApiKey);
             }
 
             var request = new BinanceSocketQuery
@@ -228,9 +220,6 @@ namespace Binance.Net.Clients.SpotApi
 
             return result;
         }
-
-        /// <inheritdoc />
-        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
 
         internal async Task<BinanceTradeRuleResult> CheckTradeRules(string symbol, decimal? quantity, decimal? quoteQuantity, decimal? price, decimal? stopPrice, SpotOrderType? type)
         {

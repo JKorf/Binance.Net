@@ -96,7 +96,7 @@ namespace Binance.Net.Clients.GeneralApi
             if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
-                BinanceRestClientSpotApi._timeSyncState.LastSyncTime = DateTime.MinValue;
+                TimeOffsetManager.ResetRestUpdateTime(ClientName);
             }
             return result;
         }
@@ -110,7 +110,7 @@ namespace Binance.Net.Clients.GeneralApi
             if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
-                BinanceRestClientSpotApi._timeSyncState.LastSyncTime = DateTime.MinValue;
+                TimeOffsetManager.ResetRestUpdateTime(ClientName);
             }
             return result;
         }
@@ -118,14 +118,6 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => _baseClient.SpotApi.ExchangeData.GetServerTimeAsync();
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp), (ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval), BinanceRestClientSpotApi._timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => BinanceRestClientSpotApi._timeSyncState.TimeOffset;
         
     }
 }
