@@ -798,23 +798,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Get Isolated margin tier data
-        /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIsolatedMarginTierData[]>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, long? receiveWindow = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                { "symbol", symbol }
-            };
-            parameters.AddOptionalParameter("tier", tier);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/isolatedMarginTier", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
-            return await _baseClient.SendAsync<BinanceIsolatedMarginTierData[]>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Query Margin Account Details
 
         /// <inheritdoc />

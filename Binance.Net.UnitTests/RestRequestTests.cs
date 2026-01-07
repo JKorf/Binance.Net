@@ -72,7 +72,6 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginInterestHistoryAsync("ETH"), "GetMarginInterestHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginInterestRateHistoryAsync("ETH"), "GetMarginInterestRateHistory");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginForcedLiquidationHistoryAsync(), "GetMarginForcedLiquidationHistory");
-            await tester.ValidateAsync(client => client.SpotApi.Account.GetIsolatedMarginTierDataAsync("ETHUSDT"), "GetIsolatedMarginTierData");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginAccountInfoAsync(), "GetMarginAccountInfo");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginMaxBorrowAmountAsync("ETH"), "GetMarginMaxBorrowAmount");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginMaxTransferAmountAsync("ETH"), "GetMarginMaxTransferAmount", "amount");
@@ -140,6 +139,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetIsolatedMarginSymbolsAsync("ETHUSDT"), "GetIsolatedMarginSymbols");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync(), "GetCrossMarginCollateralRatio");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(new[] { "ETHUSDT" }, false), "GetFutureHourlyInterestRate");
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetIsolatedMarginTierDataAsync("ETHUSDT"), "GetIsolatedMarginTierData");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(), "GetMarginDelistSchedule");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetConvertListAllPairsAsync(), "GetConvertListAllPairs");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetConvertQuantityPrecisionPerAssetAsync(), "GetConvertQuantityPrecisionPerAsset");

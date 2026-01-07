@@ -7,7 +7,7 @@
     public record BinanceIsolatedMarginTierData
     {
         /// <summary>
-        /// Average price
+        /// Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
