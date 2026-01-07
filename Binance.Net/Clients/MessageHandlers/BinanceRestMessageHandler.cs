@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.MessageHandlers
                 return _emptyRateLimitError;
 
             int? code = document!.RootElement.TryGetProperty("code", out var codeProp) ? codeProp.GetInt32() : null;
-            string? msg = document.RootElement.TryGetProperty("msg", out var msgProp) ? codeProp.GetString() : null;
+            string? msg = document.RootElement.TryGetProperty("msg", out var msgProp) ? msgProp.GetString() : null;
             if (msg == null)
                 return new BinanceRateLimitError("No details");
 

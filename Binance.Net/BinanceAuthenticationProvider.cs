@@ -1,4 +1,6 @@
 ﻿using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using System.Net;
 using System.Text;
 
@@ -44,11 +46,8 @@ namespace Binance.Net
             }
         }
 
-        public override object ProcessRequest(SocketApiClient apiClient, object parameters)
+        public Dictionary<string, object> ProcessRequest(SocketApiClient apiClient, Dictionary<string, object> providedParameters)
         {
-            if (parameters is not Dictionary<string, object> providedParameters)
-                throw new ArgumentException();
-
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {
                 { "apiKey", ApiKey },

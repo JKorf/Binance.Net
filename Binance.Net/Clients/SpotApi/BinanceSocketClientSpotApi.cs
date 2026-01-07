@@ -151,8 +151,9 @@ namespace Binance.Net.Clients.SpotApi
                 if (AuthenticationProvider == null)
                     throw new InvalidOperationException("No credentials provided for authenticated endpoint");
 
+                var binanceAuthProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
                 if (sign)
-                    parameters = (Dictionary<string, object>)AuthenticationProvider.ProcessRequest(this, parameters);
+                    parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
                     parameters.Add("apiKey", AuthenticationProvider.ApiKey);
             }
@@ -192,8 +193,9 @@ namespace Binance.Net.Clients.SpotApi
                 if (AuthenticationProvider == null)
                     throw new InvalidOperationException("No credentials provided for authenticated endpoint");
 
+                var binanceAuthProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
                 if (sign)
-                    parameters = (Dictionary<string, object>)AuthenticationProvider.ProcessRequest(this, parameters);
+                    parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
                     parameters.Add("apiKey", AuthenticationProvider.ApiKey);
             }

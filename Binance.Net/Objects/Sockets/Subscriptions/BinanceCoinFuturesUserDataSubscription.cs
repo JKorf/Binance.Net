@@ -102,7 +102,7 @@ namespace Binance.Net.Objects.Sockets
                 new DataEvent<BinanceFuturesStreamConfigUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
@@ -116,7 +116,7 @@ namespace Binance.Net.Objects.Sockets
                 new DataEvent<BinanceFuturesStreamMarginUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
@@ -130,7 +130,7 @@ namespace Binance.Net.Objects.Sockets
                 new DataEvent<BinanceFuturesStreamAccountUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
@@ -145,7 +145,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
                     .WithSymbol(message.Data.UpdateData.Symbol)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
@@ -158,7 +158,7 @@ namespace Binance.Net.Objects.Sockets
                 new DataEvent<BinanceStreamEvent>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
@@ -171,7 +171,7 @@ namespace Binance.Net.Objects.Sockets
                 new DataEvent<BinanceStrategyUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }
@@ -184,7 +184,7 @@ namespace Binance.Net.Objects.Sockets
                 new DataEvent<BinanceGridUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }

@@ -75,7 +75,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 new DataEvent<BinanceMarginCallUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             
             return CallResult.SuccessResult;
@@ -91,7 +91,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 new DataEvent<BinanceLiabilityUpdate>(BinanceExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithStreamId(message.Stream)
-                    .WithDataTimestamp(message.Data.EventTime)
+                    .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             
             return CallResult.SuccessResult;

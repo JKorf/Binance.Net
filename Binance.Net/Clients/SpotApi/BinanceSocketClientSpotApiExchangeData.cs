@@ -282,7 +282,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<BinanceStreamAggregatedTrade>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Data.EventTime)
+                        .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@aggTrade")
@@ -329,7 +329,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<IBinanceStreamKlineData>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Data.EventTime)
+                        .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
                     );
             });
             symbols = symbols.SelectMany(a =>
@@ -362,7 +362,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<IBinanceMiniTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Data.EventTime)
+                        .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@miniTicker")
@@ -387,10 +387,13 @@ namespace Binance.Net.Clients.SpotApi
         {
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick[]>>((receiveTime, originalData, data) =>
             {
+                var timestamp = data.Data.Max(x => x.EventTime);
+                _client.UpdateTimeOffset(timestamp);
+
                 onMessage(
                     new DataEvent<IBinanceMiniTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
-                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                        .WithDataTimestamp(timestamp, _client.GetTimeOffset())
                     );
             });
             return await _client.SubscribeAsync(_client.BaseAddress, "24hrMiniTicker", new[] { "!miniTicker@arr" }, handler, ct).ConfigureAwait(false);
@@ -412,7 +415,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<BinanceStreamRollingWindowTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Data.EventTime)
+                        .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
                     );
             });
             var windowString = windowSize < TimeSpan.FromDays(1) ? windowSize.TotalHours + "h" : windowSize.TotalDays + "d";
@@ -429,10 +432,13 @@ namespace Binance.Net.Clients.SpotApi
         {
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamRollingWindowTick[]>>((receiveTime, originalData, data) =>
             {
+                var timestamp = data.Data.Max(x => x.EventTime);
+                _client.UpdateTimeOffset(timestamp);
+
                 onMessage(
                     new DataEvent<BinanceStreamRollingWindowTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
-                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                        .WithDataTimestamp(timestamp, _client.GetTimeOffset())
                     );
             });
             var windowString = windowSize < TimeSpan.FromDays(1) ? windowSize.TotalHours + "h" : windowSize.TotalDays + "d";
@@ -577,7 +583,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<IBinanceTick>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Data.EventTime)
+                        .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@ticker").ToArray();
@@ -593,10 +599,13 @@ namespace Binance.Net.Clients.SpotApi
         {
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick[]>>((receiveTime, originalData, data) =>
             {
+                var timestamp = data.Data.Max(x => x.EventTime);
+                _client.UpdateTimeOffset(timestamp);
+
                 onMessage(
                     new DataEvent<IBinanceTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
-                        .WithDataTimestamp(data.Data.Max(x => x.EventTime))
+                        .WithDataTimestamp(timestamp, _client.GetTimeOffset())
                     );
             });
             return await _client.SubscribeAsync(_client.BaseAddress, "24hrTicker", new[] { "!ticker@arr" }, handler, ct).ConfigureAwait(false);
@@ -625,7 +634,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<BinanceStreamAveragePrice>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
-                        .WithDataTimestamp(data.Data.EventTime)
+                        .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@avgPrice")
