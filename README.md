@@ -199,6 +199,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.1.0 - 07 Jan 2026
+    * Updated CryptoExchange.Net version to 10.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added DataTimeLocal and DataAge properties to DataEvent object
+    * Added UpdateServerTime, UpdateLocalTime and DataAge properties to (I)SymbolOrderBook
+    * Added support for Ed25519 signing for websocket API
+    * Added restClient.SpotApi.Account.GetMarginCapitalFlowDataAsync endpoint
+    * Fixed error response parsing on rate limit response
+
 * Version 12.0.1 - 30 Dec 2025
     * Updated CryptoExchange.Net version to 10.0.2, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added Symbol property to BinanceStreamMinimalTrade model
