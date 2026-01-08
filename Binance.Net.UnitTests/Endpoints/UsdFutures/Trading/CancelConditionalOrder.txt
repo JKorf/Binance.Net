@@ -2,8 +2,27 @@ DELETE
 /fapi/v1/algoOrder
 true
 {
-   "algoId": 2146760,
-   "clientAlgoId": "6B2I9XVcJpCjqPAJ4YoFX7",
-   "code": "200",
-   "msg": "success"
+    "algoId": 3000000000003505,
+    "clientAlgoId": "0Xkl1p621E4EryvufmYre1",
+    "algoType": "CONDITIONAL",
+    "orderType": "TAKE_PROFIT",
+    "symbol": "BTCUSDT",
+    "side": "SELL",
+    "positionSide": "SHORT",
+    "timeInForce": "GTC",
+    "quantity": "1.000",
+    "algoStatus": "CANCELED",
+    "triggerPrice": "120000.00",
+    "price": "160000.00",
+    "icebergQuantity": null,
+    "selfTradePreventionMode": "EXPIRE_MAKER",
+    "workingType": "CONTRACT_PRICE",
+    "priceMatch": "NONE",
+    "closePosition": false,
+    "priceProtect": false,
+    "reduceOnly": false,
+    "createTime": 1762507264142,
+    "updateTime": 1762507264143,
+    "triggerTime": 0,
+    "goodTillDate": 0
 }
