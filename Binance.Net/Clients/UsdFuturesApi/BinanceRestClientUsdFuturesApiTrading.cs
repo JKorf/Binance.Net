@@ -857,7 +857,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Cancel Conditional Order
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoResult>> CancelConditionalOrderAsync(
+        public async Task<WebCallResult<BinanceFuturesConditionalOrder>> CancelConditionalOrderAsync(
             long? orderId = null, 
             string? clientOrderId = null,
             long? receiveWindow = null,
@@ -878,7 +878,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Delete, "/fapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<BinanceAlgoResult>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
 
