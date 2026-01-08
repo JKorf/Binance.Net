@@ -432,7 +432,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BinanceAlgoResult>> CancelConditionalOrderAsync(
+        Task<WebCallResult<BinanceFuturesConditionalOrder>> CancelConditionalOrderAsync(
             long? orderId = null,
             string? clientOrderId = null,
             long? receiveWindow = null,
