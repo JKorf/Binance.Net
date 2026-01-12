@@ -553,6 +553,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
+                        .WithSequenceNumber(data.Data.LastUpdateId)
                     );
             });
 
@@ -588,6 +589,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
+                        .WithSequenceNumber(data.Data.LastUpdateId)
                     );
             });
 
@@ -623,6 +625,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
+                        .WithSequenceNumber(data.Data.LastUpdateId)
                     );
             });
             symbols = symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + _depthStreamEndpoint + (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")).ToArray();

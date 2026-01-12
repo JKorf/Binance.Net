@@ -504,6 +504,7 @@ namespace Binance.Net.Clients.SpotApi
                     new DataEvent<IBinanceOrderBook>(_client.Exchange, data.Data, receiveTime, originalData)
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
+                        .WithSequenceNumber(data.Data.LastUpdateId)
                     );
             });
 
@@ -547,6 +548,7 @@ namespace Binance.Net.Clients.SpotApi
                         .WithStreamId(data.Stream)
                         .WithSymbol(data.Data.Symbol)
                         .WithDataTimestamp(data.Data.EventTime, _client.GetTimeOffset())
+                        .WithSequenceNumber(data.Data.LastUpdateId)
                     );
             });
             symbols = symbols.Select(a =>
