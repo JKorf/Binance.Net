@@ -29,6 +29,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
         /// <summary>
+        /// The quantity without trades involving RPI orders
+        /// </summary>
+        [JsonPropertyName("nq")]
+        public decimal? QuantityWithoutRpi { get; set; }
+        /// <summary>
         /// The first trade id in this aggregation
         /// </summary>
         [JsonPropertyName("f")]
