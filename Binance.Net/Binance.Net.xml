@@ -22458,6 +22458,11 @@
             The combined quantity of the trades
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade.QuantityWithoutRpi">
+            <summary>
+            The quantity without trades involving RPI orders
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade.FirstTradeId">
             <summary>
             The first trade id in this aggregation
