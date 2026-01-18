@@ -88,8 +88,8 @@ namespace Binance.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
             if (_limit == null)
             {
-                // Small delay to make sure the snapshot is from after our first stream update
-                await Task.Delay(200).ConfigureAwait(false);
+                // Wait up to 250ms until the first update has been received
+                await WaitUntilFirstUpdateBufferedAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(250), ct).ConfigureAwait(false);
 
                 var bookResult = await _restClient.CoinFuturesApi.ExchangeData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult)
@@ -128,8 +128,8 @@ namespace Binance.Net.SymbolOrderBooks
             if (_limit != null)
                 return await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
 
-            // Small delay to make sure the snapshot is from after our first stream update
-            await Task.Delay(200).ConfigureAwait(false);
+            // Wait up to 250ms until the first update has been received
+            await WaitUntilFirstUpdateBufferedAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(250), ct).ConfigureAwait(false);
 
             var bookResult = await _restClient.CoinFuturesApi.ExchangeData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
             if (!bookResult)
