@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>12.2.2</PackageVersion>
-    <AssemblyVersion>12.2.2</AssemblyVersion>
-    <FileVersion>12.2.2</FileVersion>
+    <PackageVersion>12.3.0</PackageVersion>
+    <AssemblyVersion>12.3.0</AssemblyVersion>
+    <FileVersion>12.3.0</FileVersion>
     <Description>Binance.Net is a high performance client library for accessing the Binance REST and Websocket API. All data is mapped to readable models and enum values. Additional features include automatic websocket (re)connection management, client side rate limiting, an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance;Binance.Net;Binance.com;Binance Client;Binance API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net</PackageTags>
