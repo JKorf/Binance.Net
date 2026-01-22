@@ -39912,6 +39912,16 @@
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
+        <member name="F:Binance.Net.UpdateSource.Poll">
+            <summary>
+            Polling result
+            </summary>
+        </member>
+        <member name="F:Binance.Net.UpdateSource.Push">
+            <summary>
+            Websocket push
+            </summary>
+        </member>
         <member name="T:CryptoExchange.Net.Interfaces.CryptoClientExtensions">
             <summary>
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
