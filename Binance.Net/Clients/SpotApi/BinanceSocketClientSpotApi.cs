@@ -33,25 +33,8 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceExchangeInfo? _exchangeInfo;
         internal DateTime? _lastExchangeInfoUpdate;
 
-        private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
-        private static readonly MessagePath _streamPath = MessagePath.Get().Property("stream");
-        private static readonly MessagePath _ePath = MessagePath.Get().Property("data").Property("e");
-
-
         protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
 
-        private readonly HashSet<string> _userEvents = new HashSet<string>
-        {
-            "outboundAccountPosition",
-            "balanceUpdate",
-            "executionReport",
-            "listStatus",
-            "listenKeyExpired",
-            "eventStreamTerminated",
-            "externalLockUpdate",
-            "MARGIN_LEVEL_STATUS_CHANGE",
-            "USER_LIABILITY_CHANGE"
-        };
         #endregion
 
         /// <inheritdoc />
@@ -91,24 +74,8 @@ namespace Binance.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
-                
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var id = message.GetValue<int?>(_idPath);
-            if (id != null)
-                return id.ToString();
-
-            var stream = message.GetValue<string>(_streamPath); ;
-            var e = message.GetValue<string>(_ePath);
-            if (e != null && _userEvents.Contains(e))
-                return stream + e;
-
-            return stream;
-        }
-
+        
         internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);

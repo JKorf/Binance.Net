@@ -56,16 +56,10 @@ namespace Binance.Net.Benchmark.Client
         private const int _socketUpdateReceiveTarget = 10000; // Should match the number in the server
 
 
-        [GlobalSetup(Targets = [nameof(SocketUpdated)])]
+        [GlobalSetup]
         public void SetupUpdatedDeserialization()
         {
-            CreateClient(true);
-        }
-
-        [GlobalSetup(Targets = [nameof(SocketLegacy), nameof(SocketHighPerf)])]
-        public void SetupLegacyDeserialization()
-        {
-            CreateClient(false);
+            CreateClient();
         }
 
         [Benchmark()]
@@ -86,24 +80,7 @@ namespace Binance.Net.Benchmark.Client
         }
 
         [Benchmark()]
-        public async Task SocketUpdated()
-        {
-            var waitEvent = new AsyncResetEvent(false, false);
-            var received = 0;
-            var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
-            {
-                received++;
-                if (received == _socketUpdateReceiveTarget)
-                    waitEvent.Set();
-
-            }, CancellationToken.None);
-
-            await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
-        }
-
-        [Benchmark()]
-        public async Task SocketLegacy()
+        public async Task Socket()
         {
             var waitEvent = new AsyncResetEvent(false, false);
             var received = 0;
@@ -125,7 +102,7 @@ namespace Binance.Net.Benchmark.Client
             SocketClient.Dispose();
         }
 
-        private void CreateClient(bool enableNewDeserialization)
+        private void CreateClient()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
@@ -133,7 +110,6 @@ namespace Binance.Net.Benchmark.Client
             SocketClient = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 ReconnectPolicy = ReconnectPolicy.Disabled,
-                UseUpdatedDeserialization = enableNewDeserialization,
                 RateLimiterEnabled = false,
                 Environment = env
             }), logger);

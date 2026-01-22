@@ -13,7 +13,6 @@ namespace Binance.Net.Objects.Sockets
         {
             _client = client;
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<T>(request.Id.ToString(), HandleMessage);
-            MessageMatcher = MessageMatcher.Create<T>(request.Id.ToString(), HandleMessage);
         }
 
         public CallResult<T> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)

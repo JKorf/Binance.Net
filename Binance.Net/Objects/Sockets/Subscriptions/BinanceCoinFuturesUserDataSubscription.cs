@@ -58,16 +58,6 @@ namespace Binance.Net.Objects.Sockets
                 MessageRoute<BinanceCombinedStream<BinanceStrategyUpdate>>.CreateWithTopicFilter("STRATEGY_UPDATE", _lk, DoHandleMessage),
                 MessageRoute<BinanceCombinedStream<BinanceGridUpdate>>.CreateWithTopicFilter("GRID_UPDATE", _lk, DoHandleMessage)
                 ]);
-
-            MessageMatcher = MessageMatcher.Create([
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>(_lk + "ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>(_lk + "MARGIN_CALL", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>(_lk + "ACCOUNT_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>(_lk + "ORDER_TRADE_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceStreamEvent>>(_lk + "listenKeyExpired", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceStrategyUpdate>>(_lk + "STRATEGY_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceGridUpdate>>(_lk + "GRID_UPDATE", DoHandleMessage)
-                ]);
         }
 
         /// <inheritdoc />

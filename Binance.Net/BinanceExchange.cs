@@ -14,6 +14,19 @@ namespace Binance.Net
     public static class BinanceExchange
     {
         /// <summary>
+        /// Platform metadata
+        /// </summary>
+        public static PlatformInfo Metadata { get; } = new PlatformInfo(
+                "Binance",
+                "Binance",
+                "https://raw.githubusercontent.com/JKorf/Binance.Net/master/Binance.Net/Icon/icon.png",
+                "https://www.binance.com",
+                ["https://binance-docs.github.io/apidocs/spot/en/#change-log"],
+                PlatformType.CryptoCurrencyExchange,
+                CentralizationType.Centralized
+                );
+
+        /// <summary>
         /// Exchange name
         /// </summary>
         public static string ExchangeName => "Binance";

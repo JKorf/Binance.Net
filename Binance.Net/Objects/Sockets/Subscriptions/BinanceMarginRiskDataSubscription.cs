@@ -35,11 +35,6 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>.CreateWithTopicFilter("MARGIN_LEVEL_STATUS_CHANGE", _lk, DoHandleMessage),
                 MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>.CreateWithTopicFilter("USER_LIABILITY_CHANGE", _lk, DoHandleMessage)
                 ]);
-
-            MessageMatcher = MessageMatcher.Create([
-                new MessageHandlerLink<BinanceCombinedStream<BinanceMarginCallUpdate>>(_lk + "MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceLiabilityUpdate>>(_lk + "USER_LIABILITY_CHANGE", DoHandleMessage)
-                ]);
         }
 
         /// <inheritdoc />

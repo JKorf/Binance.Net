@@ -14,7 +14,6 @@ namespace Binance.Net.Objects.Sockets
         {
             _client = client;
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
-            MessageMatcher = MessageMatcher.Create<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
         }
 
         public CallResult<BinanceResponse<BinanceReplaceOrderResult>> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceResponse<BinanceReplaceOrderResult> message)

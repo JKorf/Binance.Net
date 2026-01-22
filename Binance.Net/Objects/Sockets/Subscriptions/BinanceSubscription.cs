@@ -21,7 +21,6 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             IndividualSubscriptionCount = topics.Count;
 
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<T>(topics, DoHandleMessage);
-            MessageMatcher = MessageMatcher.Create<T>(topics, DoHandleMessage);
         }
 
         /// <inheritdoc />

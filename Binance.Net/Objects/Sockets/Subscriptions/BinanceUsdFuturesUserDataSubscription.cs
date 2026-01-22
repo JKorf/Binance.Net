@@ -70,19 +70,6 @@ namespace Binance.Net.Objects.Sockets
                 MessageRoute<BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>>.CreateWithTopicFilter("CONDITIONAL_ORDER_TRIGGER_REJECT",_lk, DoHandleMessage),
                 MessageRoute<BinanceCombinedStream<BinanceAlgoOrderUpdate>>.CreateWithTopicFilter("ALGO_UPDATE", _lk, DoHandleMessage),
                 ]);
-
-            MessageMatcher = MessageMatcher.Create([
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>(_lk + "ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>(_lk + "MARGIN_CALL", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>(_lk + "ACCOUNT_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>(_lk + "ORDER_TRADE_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceFuturesStreamTradeUpdate>>(_lk + "TRADE_LITE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceStreamEvent>>(_lk + "listenKeyExpired", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceStrategyUpdate>>(_lk + "STRATEGY_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceGridUpdate>>(_lk + "GRID_UPDATE", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceConditionOrderTriggerRejectUpdate>>(_lk + "CONDITIONAL_ORDER_TRIGGER_REJECT", DoHandleMessage),
-                new MessageHandlerLink<BinanceCombinedStream<BinanceAlgoOrderUpdate>>(_lk + "ALGO_UPDATE", DoHandleMessage),
-                ]);
         }
 
         /// <inheritdoc />
