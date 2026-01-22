@@ -614,7 +614,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceInsuranceFundBalance))]
     [JsonSerializable(typeof(BinanceInsuranceFundBalance[]))]
     [JsonSerializable(typeof(BinanceMarginAvailableInventory))]
-    [JsonSerializable(typeof(BinanceCrossMarginProLiabilityCoinLeverageBracket))]
+    [JsonSerializable(typeof(BinanceCrossMarginProLiabilityCoinLeverageBracket[]))]
     [JsonSerializable(typeof(BinanceListRecords<BinanceNftDeposit>))]
     [JsonSerializable(typeof(BinanceListRecords<BinanceNftWithdraw>))]
     [JsonSerializable(typeof(BinanceListRecords<BinanceNftTransaction>))]
