@@ -240,6 +240,12 @@
         <member name="M:Binance.Net.BinanceTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserDataTracker(CryptoExchange.Net.Trackers.UserData.UserDataTrackerConfig)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.UserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.BinanceRestClient">
             <inheritdoc cref="T:Binance.Net.Interfaces.Clients.IBinanceRestClient" />
         </member>
@@ -39911,16 +39917,6 @@
         </member>
         <member name="M:Binance.Net.SymbolOrderBooks.BinanceSpotSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
-        </member>
-        <member name="F:Binance.Net.UpdateSource.Poll">
-            <summary>
-            Polling result
-            </summary>
-        </member>
-        <member name="F:Binance.Net.UpdateSource.Push">
-            <summary>
-            Websocket push
-            </summary>
         </member>
         <member name="T:CryptoExchange.Net.Interfaces.CryptoClientExtensions">
             <summary>
