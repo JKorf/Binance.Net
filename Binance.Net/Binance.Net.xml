@@ -24971,6 +24971,11 @@
             Time the deposit was added to Binance
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.CompleteTime">
+            <summary>
+            Time the deposit was completed
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.Quantity">
             <summary>
             The quantity deposited
