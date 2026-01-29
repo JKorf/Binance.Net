@@ -12130,6 +12130,11 @@
             Commodity
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.UnderlyingType.Equity">
+            <summary>
+            Equity
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.UniversalTransferType">
             <summary>
             Universal transfer type
