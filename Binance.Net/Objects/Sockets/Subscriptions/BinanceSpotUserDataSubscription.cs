@@ -11,7 +11,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class BinanceSpotUserDataSubscription : Subscription
     {
-        private readonly string _lk;
+        private readonly string? _lk;
         private readonly BinanceSocketClientSpotApi _client;
 
         private readonly Action<DataEvent<BinanceStreamOrderUpdate>>? _orderHandler;
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public BinanceSpotUserDataSubscription(
             ILogger logger,
             BinanceSocketClientSpotApi client,
-            string listenKey,
+            string? listenKey,
             Action<DataEvent<BinanceStreamOrderUpdate>>? orderHandler,
             Action<DataEvent<BinanceStreamOrderList>>? orderListHandler,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? positionHandler,
@@ -60,23 +60,50 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
-            return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
+            if (_lk != null)
             {
-                Method = "SUBSCRIBE",
-                Params = [_lk],
-                Id = ExchangeHelpers.NextId()
-            }, false);
+                return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
+                {
+                    Method = "SUBSCRIBE",
+                    Params = [_lk],
+                    Id = ExchangeHelpers.NextId()
+                }, false);
+            }
+            else
+            {
+                var signParameters = ((BinanceAuthenticationProvider)_client.AuthenticationProvider!).ProcessRequest(_client, new Dictionary<string, object>());
+                return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
+                {
+                    Method = "userDataStream.subscribe.signature",
+                    Params = signParameters,
+                    Id = ExchangeHelpers.NextId()
+                }, false);
+            }
         }
 
         /// <inheritdoc />
         protected override Query? GetUnsubQuery(SocketConnection connection)
         {
-            return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
+            if (_lk != null)
             {
-                Method = "UNSUBSCRIBE",
-                Params = [_lk],
-                Id = ExchangeHelpers.NextId()
-            }, false);
+                return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
+                {
+                    Method = "UNSUBSCRIBE",
+                    Params = [_lk],
+                    Id = ExchangeHelpers.NextId()
+                }, false);
+            }
+            else
+            {
+                var signParameters = ((BinanceAuthenticationProvider)_client.AuthenticationProvider!).ProcessRequest(_client, new Dictionary<string, object>());
+                signParameters.Remove("signature");
+                return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
+                {
+                    Method = "userDataStream.unsubscribe",
+                    Params = [],// signParameters,
+                    Id = ExchangeHelpers.NextId()
+                }, false);
+            }
         }
 
         /// <inheritdoc />
