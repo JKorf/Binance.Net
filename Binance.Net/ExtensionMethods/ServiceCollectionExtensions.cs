@@ -104,7 +104,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
             services.AddTransient<IBinanceTrackerFactory, BinanceTrackerFactory>();
             services.AddTransient<ITrackerFactory, BinanceTrackerFactory>();
-            services.AddTransient<BinanceUserDataTracker>();
             services.AddSingleton<IBinanceUserClientProvider, BinanceUserClientProvider>(x =>
             new BinanceUserClientProvider(
                 x.GetRequiredService<HttpClient>(),

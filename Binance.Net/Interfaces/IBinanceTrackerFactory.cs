@@ -7,8 +7,11 @@ namespace Binance.Net.Interfaces
     /// </summary>
     public interface IBinanceTrackerFactory : ITrackerFactory
     {
-        IUserDataTracker CreateUserDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
-
-        IUserDataTracker CreateUserDataTracker(UserDataTrackerConfig config);
+        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
+        IUserSpotDataTracker CreateUserSpotDataTracker(UserDataTrackerConfig config);
+        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(UserDataTrackerConfig config);
+        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(UserDataTrackerConfig config);
     }
 }
