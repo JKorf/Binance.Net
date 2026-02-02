@@ -15,6 +15,12 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("insertTime")]
         public DateTime InsertTime { get; set; }
         /// <summary>
+        /// Time the deposit was completed
+        /// </summary>
+        [JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("completeTime")]
+        public DateTime? CompleteTime { get; set; }
+        /// <summary>
         /// The quantity deposited
         /// </summary>
         [JsonPropertyName("amount")]

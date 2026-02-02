@@ -120,6 +120,24 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        #region User Data Stream
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
+            Action<DataEvent<BinanceStreamBalanceLockUpdate>>? onBalanceLockUpdate = null,
+            CancellationToken ct = default)
+        {
+            var subscription = new BinanceSpotUserDataSubscription(_logger, _client, null, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onListenKeyExpired, onUserDataStreamTerminated, onBalanceLockUpdate, false);
+            return await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
+        }
+        #endregion
+
         #region Risk User Data Stream
 
         /// <inheritdoc />

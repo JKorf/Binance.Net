@@ -27,6 +27,11 @@ namespace Binance.Net.Enums
         /// Commodity
         /// </summary>
         [Map("COMMODITY")]
-        Commodity
+        Commodity,
+        /// <summary>
+        /// Equity
+        /// </summary>
+        [Map("EQUITY")]
+        Equity
     }
 }
