@@ -161,9 +161,9 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("g")]
         public long OrderListId { get; set; }
         /// <summary>
-        /// The listen key for which the update was
+        /// API key this update was for
         /// </summary>
-        public string ListenKey { get; set; } = string.Empty;
+        public string ApiKey { get; set; } = string.Empty;
 
         // These are unused properties, but are mapped to prevent mapping error of lower/upper case
         /// <summary>

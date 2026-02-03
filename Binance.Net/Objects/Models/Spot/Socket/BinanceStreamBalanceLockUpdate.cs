@@ -17,9 +17,9 @@
         [JsonPropertyName("d")]
         public decimal BalanceDelta { get; set; }
         /// <summary>
-        /// The listen key the update was for
+        /// API key this update was for
         /// </summary>
-        public string ListenKey { get; set; } = string.Empty;
+        public string ApiKey { get; set; } = string.Empty;
         /// <summary>
         /// The time the deposit/withdrawal was cleared
         /// </summary>

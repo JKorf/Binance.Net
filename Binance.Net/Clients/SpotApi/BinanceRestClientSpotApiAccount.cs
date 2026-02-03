@@ -493,52 +493,6 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
-        #region Create a ListenKey 
-        /// <inheritdoc />
-        public async Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default)
-        {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2);
-            var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ListenKey!);
-        }
-
-        #endregion
-
-        #region Ping/Keep-alive a ListenKey
-
-        /// <inheritdoc />
-        public async Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
-        {
-            listenKey.ValidateNotNull(nameof(listenKey));
-
-            var parameters = new ParameterCollection
-            {
-                { "listenKey", listenKey }
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Invalidate a ListenKey
-        /// <inheritdoc />
-        public async Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
-        {
-            listenKey.ValidateNotNull(nameof(listenKey));
-
-            var parameters = new ParameterCollection
-            {
-                { "listenKey", listenKey }
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "api/v3/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 2);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Margin Level Information
 
         /// <inheritdoc />

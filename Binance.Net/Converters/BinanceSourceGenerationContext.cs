@@ -105,7 +105,14 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Internal.BinanceSnapshotWrapper<BinanceFuturesAccountSnapshot[]>))]
     [JsonSerializable(typeof(Objects.Internal.BinanceSocketRequest[]))]
     [JsonSerializable(typeof(Objects.Internal.BinanceSocketQuery[]))]
-    
+
+    [JsonSerializable(typeof(Objects.Models.BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceWebsocketApiWrapper<BinanceStreamOrderList>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceWebsocketApiWrapper<BinanceStreamEvent>))]
+    [JsonSerializable(typeof(Objects.Models.BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>))]
+
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceMarginCallUpdate>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceLiabilityUpdate>))]
     [JsonSerializable(typeof(Objects.Models.BinanceCombinedStream<BinanceFuturesStreamCoinKlineData>))]

@@ -1532,15 +1532,6 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTransfersAsync(Binance.Net.Enums.UniversalTransferType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetMarginLevelInformationAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1982,10 +1973,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApiAccount.SubscribeToUserRiskDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}},System.Threading.CancellationToken)">
@@ -4168,6 +4156,36 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceStreamEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWebsocketApiWrapperBinanceStreamEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWebsocketApiWrapperBinanceStreamBalanceLockUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWebsocketApiWrapperBinanceStreamBalanceUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWebsocketApiWrapperBinanceStreamOrderList">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWebsocketApiWrapperBinanceStreamOrderUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWebsocketApiWrapperBinanceStreamPositionsUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -16715,32 +16733,6 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
-            <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#create-a-listenkey-user_stream" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns>Listen key</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#pingkeep-alive-a-listenkey-user_stream" /></para>
-            </summary>
-            <param name="listenKey">The listen key to keep alive</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Stops the current user stream
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#close-a-listenkey-user_stream" /></para>
-            </summary>
-            <param name="listenKey">The listen key to keep alive</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.WalletType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Withdraw assets from Binance to an address
@@ -18502,60 +18494,17 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
             <summary>
-            Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#ping-user-data-stream-user_stream" /></para>
-            </summary>
-            <param name="listenKey">Listen key</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
-            <summary>
-            Starts a user stream by requesting a listen key. This listen key can be used in a subsequent request to <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">SubscribeToUserDataUpdatesAsync</see>. The stream will close after 60 minutes unless <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">KeepAliveUserStreamAsync</see> is called.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#start-user-data-stream-user_stream" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Stops the current user stream
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/user-data-stream-requests#stop-user-data-stream-user_stream" /></para>
-            </summary>
-            <param name="listenKey">Listen key</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
-            <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#web-socket-payloads" /></para>
-            </summary>
-            <param name="listenKey">Listen key retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">StartUserStreamAsync</see> method</param>
-            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
-            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
-            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onListenKeyExpired">The event handler for when the listen key has expired. No events will be send anymore after this</param>
-            <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped. For example, after you call <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)" /></param>
-            <param name="onBalanceLockUpdate">The event handler for when the part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral. </param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserDataUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribes to the account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
+            Subscribes to the account update stream
             <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#web-socket-payloads" /></para>
             </summary>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
             <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
-            <param name="onListenKeyExpired">The event handler for when the listen key has expired. No events will be send anymore after this</param>
-            <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped. For example, after you call <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)" /></param>
-            <param name="onBalanceLockUpdate">The event handler for when the part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral. </param>
+            <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped</param>
+            <param name="onBalanceLockUpdate">The event handler for when the part of your spot wallet balance is locked/unlocked by an external system, for example when used as margin collateral.</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
@@ -22631,9 +22580,9 @@
             The balance delta
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate.ListenKey">
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate.ApiKey">
             <summary>
-            The listen key the update was for
+            API key this update was for
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate.ClearTime">
@@ -22656,9 +22605,9 @@
             The balance delta
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ListenKey">
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ApiKey">
             <summary>
-            The listen key the update was for
+            API key this update was for
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ClearTime">
@@ -23011,9 +22960,9 @@
             The order in this list
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList.ListenKey">
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList.ApiKey">
             <summary>
-            The listen key the update was for
+            API key this update was for
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderId">
@@ -23191,9 +23140,9 @@
             This id of the corresponding order list. (-1 if not part of an order list)
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.ListenKey">
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.ApiKey">
             <summary>
-            The listen key for which the update was
+            API key this update was for
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.I">
@@ -23251,9 +23200,9 @@
             Time of last account update
             </summary>
         </member>
-        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.ListenKey">
+        <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.ApiKey">
             <summary>
-            The listen key the update was for
+            API key this update was for
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.Balances">
@@ -34893,6 +34842,29 @@
             The time the event happened
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.BinanceWebsocketApiWrapper">
+            <summary>
+            Websocket API event wrapper
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceWebsocketApiWrapper.SubscriptionId">
+            <summary>
+            Subscription id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.BinanceWebsocketApiWrapper`1">
+            <summary>
+            Represents the binance result for combined data on a single socket connection
+            See on https://github.com/binance-exchange/binance-official-api-docs/blob/master/web-socket-streams.md
+            Combined streams
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.BinanceWebsocketApiWrapper`1.Event">
+            <summary>
+            The data of stream
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Futures.AlgoOrders.BinanceAlgoOrders">
             <summary>
             Algo orders
@@ -39835,7 +39807,7 @@
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Boolean)">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.#ctor(Microsoft.Extensions.Logging.ILogger,Binance.Net.Clients.SpotApi.BinanceSocketClientSpotApi,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate}},System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetSubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
@@ -39844,22 +39816,22 @@
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceWebsocketApiWrapper{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceWebsocketApiWrapper{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceWebsocketApiWrapper{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceWebsocketApiWrapper{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.BinanceStreamEvent})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceWebsocketApiWrapper{Binance.Net.Objects.Models.BinanceStreamEvent})">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate})">
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceWebsocketApiWrapper{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate})">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSubscription`1">

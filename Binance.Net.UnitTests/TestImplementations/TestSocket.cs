@@ -35,6 +35,7 @@ namespace Binance.Net.UnitTests.TestImplementations
         public bool ShouldReconnect { get; set; }
         public Func<string, string> DataInterpreterString { get; set; }
         public Func<byte[], string> DataInterpreterBytes { get; set; }
+        public DateTime? LastReceiveTime { get; set; }
         public DateTime? DisconnectTime { get; set; }
         public string Url { get; }
         public bool IsClosed => !Connected;

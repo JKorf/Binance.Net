@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.SpotApi
             return resultData;
         }
 
-        public async Task<ExchangeResult<SharedSymbol[]>> GetSpotSymbolsForBaseAssetAsync(string baseAsset)
+        async Task<ExchangeResult<SharedSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsForBaseAssetAsync(string baseAsset)
         {
             if (!ExchangeSymbolCache.HasCached(_topicId))
             {
@@ -112,7 +112,7 @@ namespace Binance.Net.Clients.SpotApi
             return new ExchangeResult<SharedSymbol[]>(Exchange, ExchangeSymbolCache.GetSymbolsForBaseAsset(_topicId, baseAsset));
         }
 
-        public async Task<ExchangeResult<bool>> SupportsSpotSymbolAsync(SharedSymbol symbol)
+        async Task<ExchangeResult<bool>> ISpotSymbolRestClient.SupportsSpotSymbolAsync(SharedSymbol symbol)
         {
             if (symbol.TradingMode != TradingMode.Spot)
                 throw new ArgumentException(nameof(symbol), "Only Spot symbols allowed");
@@ -127,7 +127,7 @@ namespace Binance.Net.Clients.SpotApi
             return new ExchangeResult<bool>(Exchange, ExchangeSymbolCache.SupportsSymbol(_topicId, symbol));
         }
 
-        public async Task<ExchangeResult<bool>> SupportsSpotSymbolAsync(string symbolName)
+        async Task<ExchangeResult<bool>> ISpotSymbolRestClient.SupportsSpotSymbolAsync(string symbolName)
         {
             if (!ExchangeSymbolCache.HasCached(_topicId))
             {
@@ -852,53 +852,6 @@ namespace Binance.Net.Clients.SpotApi
             return withdrawal.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(withdrawal.Data.Id));
         }
 
-        #endregion
-
-        #region Listen Key client
-
-        EndpointOptions<StartListenKeyRequest> IListenKeyRestClient.StartOptions { get; } = new EndpointOptions<StartListenKeyRequest>(true);
-        async Task<ExchangeWebResult<string>> IListenKeyRestClient.StartListenKeyAsync(StartListenKeyRequest request, CancellationToken ct)
-        {
-            var validationError = ((IListenKeyRestClient)this).StartOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
-            if (validationError != null)
-                return new ExchangeWebResult<string>(Exchange, validationError);
-
-            // Get data
-            var result = await Account.StartUserStreamAsync(ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<string>(Exchange, null, default);
-
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data);
-        }
-        EndpointOptions<KeepAliveListenKeyRequest> IListenKeyRestClient.KeepAliveOptions { get; } = new EndpointOptions<KeepAliveListenKeyRequest>(true);
-        async Task<ExchangeWebResult<string>> IListenKeyRestClient.KeepAliveListenKeyAsync(KeepAliveListenKeyRequest request, CancellationToken ct)
-        {
-            var validationError = ((IListenKeyRestClient)this).KeepAliveOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
-            if (validationError != null)
-                return new ExchangeWebResult<string>(Exchange, validationError);
-
-            // Get data
-            var result = await Account.KeepAliveUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<string>(Exchange, null, default);
-
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, request.ListenKey);
-        }
-
-        EndpointOptions<StopListenKeyRequest> IListenKeyRestClient.StopOptions { get; } = new EndpointOptions<StopListenKeyRequest>(true);
-        async Task<ExchangeWebResult<string>> IListenKeyRestClient.StopListenKeyAsync(StopListenKeyRequest request, CancellationToken ct)
-        {
-            var validationError = ((IListenKeyRestClient)this).StopOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
-            if (validationError != null)
-                return new ExchangeWebResult<string>(Exchange, validationError);
-
-            // Get data
-            var result = await Account.StopUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsExchangeResult<string>(Exchange, null, default);
-
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, request.ListenKey);
-        }
         #endregion
 
         #region Fee Client

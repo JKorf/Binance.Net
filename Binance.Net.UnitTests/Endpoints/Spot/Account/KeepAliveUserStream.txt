@@ -1,5 +1,0 @@
-PUT
-/api/v3/userDataStream
-false
-{
-}

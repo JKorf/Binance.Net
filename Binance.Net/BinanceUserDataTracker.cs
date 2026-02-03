@@ -18,7 +18,7 @@ namespace Binance.Net
             SpotUserDataTrackerConfig config) : base(
                 logger,
                 restClient.SpotApi.SharedClient,
-                restClient.SpotApi.SharedClient,
+                null,
                 restClient.SpotApi.SharedClient,
                 socketClient.SpotApi.SharedClient,
                 restClient.SpotApi.SharedClient,
