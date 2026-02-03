@@ -4,7 +4,8 @@ using Binance.Net.Interfaces.Clients;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Trackers.Klines;
 using CryptoExchange.Net.Trackers.Trades;
-using CryptoExchange.Net.Trackers.UserData;
+using CryptoExchange.Net.Trackers.UserData.Interfaces;
+using CryptoExchange.Net.Trackers.UserData.Objects;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -107,7 +108,8 @@ namespace Binance.Net
                 );
         }
 
-        public IUserSpotDataTracker CreateUserSpotDataTracker(UserDataTrackerConfig config)
+        /// <inheritdoc />
+        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig config)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
@@ -121,7 +123,7 @@ namespace Binance.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, SpotUserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBinanceUserClientProvider>() ?? new BinanceUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -135,7 +137,8 @@ namespace Binance.Net
                 );
         }
 
-        public IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(UserDataTrackerConfig config)
+        /// <inheritdoc />
+        public IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(FuturesUserDataTrackerConfig config)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
@@ -149,7 +152,7 @@ namespace Binance.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBinanceUserClientProvider>() ?? new BinanceUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -163,7 +166,8 @@ namespace Binance.Net
                 );
         }
 
-        public IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(UserDataTrackerConfig config)
+        /// <inheritdoc />
+        public IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(FuturesUserDataTrackerConfig config)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
@@ -177,7 +181,7 @@ namespace Binance.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, UserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBinanceUserClientProvider>() ?? new BinanceUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
