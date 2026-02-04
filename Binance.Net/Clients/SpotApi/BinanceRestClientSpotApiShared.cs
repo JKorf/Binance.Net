@@ -774,7 +774,15 @@ namespace Binance.Net.Clients.SpotApi
             if (deposits.Data.Count() == (request.Limit ?? 100))
                 nextToken = new OffsetToken((offset ?? 0) + deposits.Data.Count());
 
-            return deposits.AsExchangeResult(Exchange, TradingMode.Spot, deposits.Data.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == DepositStatus.Success, x.InsertTime)
+            return deposits.AsExchangeResult(Exchange, TradingMode.Spot, deposits.Data.Select(x => 
+            new SharedDeposit(
+                x.Asset,
+                x.Quantity,
+                x.Status == DepositStatus.Success,
+                x.InsertTime,
+                x.Status == DepositStatus.Success ? SharedTransferStatus.Completed 
+                        : x.Status == DepositStatus.Pending || x.Status == DepositStatus.Completed ? SharedTransferStatus.InProgress
+                        : SharedTransferStatus.Failed)
             {
                 Confirmations = x.Confirmations.Contains("/") ? int.Parse(x.Confirmations.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0]) : null,
                 Network = x.Network,

@@ -9899,9 +9899,24 @@
             Success
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.DepositStatus.Rejected">
+            <summary>
+            Rejected
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.DepositStatus.Completed">
             <summary>
             Completed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DepositStatus.WrongDeposit">
+            <summary>
+            Rejected
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.DepositStatus.WaitingUserConfirm">
+            <summary>
+            Rejected
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.DownloadStatus">
