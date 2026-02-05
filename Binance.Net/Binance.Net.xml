@@ -243,19 +243,19 @@
         <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Binance.Net.BinanceEnvironment)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserUsdFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserUsdFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserUsdFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Binance.Net.BinanceEnvironment)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserCoinFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserCoinFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+        <member name="M:Binance.Net.BinanceTrackerFactory.CreateUserCoinFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Binance.Net.BinanceEnvironment)">
             <inheritdoc />
         </member>
         <member name="T:Binance.Net.BinanceUserSpotDataTracker">
@@ -21692,7 +21692,7 @@
             Tracker factory
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Binance.Net.BinanceEnvironment)">
             <summary>
             Create a new Spot user data tracker
             </summary>
@@ -21707,7 +21707,7 @@
             </summary>
             <param name="config">Configuration</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateUserUsdFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateUserUsdFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Binance.Net.BinanceEnvironment)">
             <summary>
             Create a new linear futures user data tracker
             </summary>
@@ -21722,7 +21722,7 @@
             </summary>
             <param name="config">Configuration</param>
         </member>
-        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateUserCoinFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Binance.Net.BinanceEnvironment)">
+        <member name="M:Binance.Net.Interfaces.IBinanceTrackerFactory.CreateUserCoinFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Binance.Net.BinanceEnvironment)">
             <summary>
             Create a new inverse futures user data tracker
             </summary>

@@ -15,12 +15,12 @@ namespace Binance.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, SpotUserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
+        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
         /// <summary>
         /// Create a new spot user data tracker
         /// </summary>
         /// <param name="config">Configuration</param>
-        IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig config);
+        IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig? config = null);
 
         /// <summary>
         /// Create a new linear futures user data tracker
@@ -29,12 +29,12 @@ namespace Binance.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
         /// <summary>
         /// Create a new linear futures user data tracker
         /// </summary>
         /// <param name="config">Configuration</param>
-        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(FuturesUserDataTrackerConfig config);
+        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(FuturesUserDataTrackerConfig? config = null);
 
         /// <summary>
         /// Create a new inverse futures user data tracker
@@ -43,11 +43,11 @@ namespace Binance.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BinanceEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
         /// <summary>
         /// Create a new inverse futures user data tracker
         /// </summary>
         /// <param name="config">Configuration</param>
-        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(FuturesUserDataTrackerConfig config);
+        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(FuturesUserDataTrackerConfig? config = null);
     }
 }

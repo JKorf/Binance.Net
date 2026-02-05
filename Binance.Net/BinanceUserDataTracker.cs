@@ -15,7 +15,7 @@ namespace Binance.Net
             IBinanceRestClient restClient,
             IBinanceSocketClient socketClient,
             string? userIdentifier,
-            SpotUserDataTrackerConfig config) : base(
+            SpotUserDataTrackerConfig? config = null) : base(
                 logger,
                 restClient.SpotApi.SharedClient,
                 null,
@@ -25,7 +25,7 @@ namespace Binance.Net
                 socketClient.SpotApi.SharedClient,
                 null,
                 userIdentifier, 
-                config)
+                config ?? new SpotUserDataTrackerConfig())
         {
 
         }
@@ -45,7 +45,7 @@ namespace Binance.Net
             IBinanceRestClient restClient,
             IBinanceSocketClient socketClient,
             string? userIdentifier,
-            FuturesUserDataTrackerConfig config) : 
+            FuturesUserDataTrackerConfig? config = null) : 
             base(logger,
                 restClient.UsdFuturesApi.SharedClient,
                 restClient.UsdFuturesApi.SharedClient,
@@ -56,7 +56,7 @@ namespace Binance.Net
                 null,
                 socketClient.UsdFuturesApi.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new FuturesUserDataTrackerConfig())
         {
 
         }
@@ -76,7 +76,7 @@ namespace Binance.Net
             IBinanceRestClient restClient,
             IBinanceSocketClient socketClient,
             string? userIdentifier,
-            FuturesUserDataTrackerConfig config) : base(logger,
+            FuturesUserDataTrackerConfig? config = null) : base(logger,
                 restClient.CoinFuturesApi.SharedClient,
                 restClient.CoinFuturesApi.SharedClient,
                 restClient.CoinFuturesApi.SharedClient,
@@ -86,7 +86,7 @@ namespace Binance.Net
                 null,
                 socketClient.CoinFuturesApi.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new FuturesUserDataTrackerConfig())
         {
 
         }
