@@ -240,7 +240,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalEnum("timeInForce", timeInForce);
             parameters.AddOptionalEnum("positionSide", positionSide);
             parameters.AddOptionalParameter("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("activationPrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("activatePrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalEnum("workingType", workingType);
             parameters.AddOptionalParameter("reduceOnly", reduceOnly?.ToString().ToLower());
