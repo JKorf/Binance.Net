@@ -57,9 +57,9 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("O")]
         public BinanceStreamOrderId[] Orders { get; set; } = Array.Empty<BinanceStreamOrderId>();
         /// <summary>
-        /// The listen key the update was for
+        /// API key this update was for
         /// </summary>
-        public string ListenKey { get; set; } = string.Empty;
+        public string ApiKey { get; set; } = string.Empty;
     }
 
     /// <summary>

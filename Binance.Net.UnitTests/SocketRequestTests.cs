@@ -70,9 +70,6 @@ namespace Binance.Net.UnitTests
             var tester = new SocketRequestValidator<BinanceSocketClient>("Socket/Spot/Account");
             await tester.ValidateAsync(CreateClient(), client => client.SpotApi.Account.GetAccountInfoAsync(), "GetAccountInfo", responseMapper: x => x.Result, nestedJsonProperty: "result", ignoreProperties: new List<string> { "commissionRates" });
             await tester.ValidateAsync(CreateClient(), client => client.SpotApi.Account.GetOrderRateLimitsAsync(), "GetOrderRateLimits", responseMapper: x => x.Result, nestedJsonProperty: "result");
-            await tester.ValidateAsync(CreateClient(), client => client.SpotApi.Account.StartUserStreamAsync(), "StartUserStream", responseMapper: x => x.Result, nestedJsonProperty: "result.listenKey");
-            await tester.ValidateAsync(CreateClient(), client => client.SpotApi.Account.KeepAliveUserStreamAsync("123"), "KeepAliveUserStream", responseMapper: x => x.Result, nestedJsonProperty: "response");
-            await tester.ValidateAsync(CreateClient(), client => client.SpotApi.Account.StopUserStreamAsync("123"), "StopUserStream", responseMapper: x => x.Result, nestedJsonProperty: "response");
 
         }
 

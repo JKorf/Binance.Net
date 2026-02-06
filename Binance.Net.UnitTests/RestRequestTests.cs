@@ -58,9 +58,6 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.SetBnbBurnStatusAsync(true), "SetBnbBurnStatus");
             await tester.ValidateAsync(client => client.SpotApi.Account.TransferAsync(Enums.UniversalTransferType.CoinFuturesToFunding, "ETH", 1), "Transfer");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetTransfersAsync(Enums.UniversalTransferType.CoinFuturesToFunding), "GetTransfers");
-            await tester.ValidateAsync(client => client.SpotApi.Account.StartUserStreamAsync(), "StartUserStream", "listenKey");
-            await tester.ValidateAsync(client => client.SpotApi.Account.KeepAliveUserStreamAsync("123"), "KeepAliveUserStream");
-            await tester.ValidateAsync(client => client.SpotApi.Account.StopUserStreamAsync("123"), "StopUserStream");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginLevelInformationAsync(), "GetMarginLevelInformation");
             await tester.ValidateAsync(client => client.SpotApi.Account.MarginBorrowAsync("ETH", 1), "MarginBorrow");
             await tester.ValidateAsync(client => client.SpotApi.Account.MarginRepayAsync("ETH", 1), "MarginRepay");

@@ -1,10 +1,10 @@
-> { "method": "SUBSCRIBE", "params": [ "123" ], "id": "|1|" }
-< { "result": null, "id": |1| }
+> {"params":{"apiKey":"123","timestamp":1770146786002,"signature":"123"},"method":"userDataStream.subscribe.signature","id":"|1|"}
+< {"id":|1|,"status":200,"result":{"subscriptionId":0},"rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000,"count":4}]}
 = 
-{ 
-	"stream": "123",
-	"data": 
-     {
+{
+    "subscriptionId":0,
+    "event":
+    {
       "e": "outboundAccountPosition", 
       "E": 1564034571105,             
       "u": 1564034571073,             

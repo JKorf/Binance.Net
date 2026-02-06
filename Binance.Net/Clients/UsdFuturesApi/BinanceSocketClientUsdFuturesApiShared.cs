@@ -262,6 +262,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 onAccountUpdate: update => handler(update.ToType(update.Data.UpdateData.Positions.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, Math.Abs(x.Quantity), update.Data.EventTime)
                 {
                     AverageOpenPrice = x.EntryPrice,
+                    PositionMode = x.PositionSide == PositionSide.Both ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
                     PositionSide = x.PositionSide == Enums.PositionSide.Both ? (x.Quantity > 0 ? SharedPositionSide.Long : SharedPositionSide.Short) : x.PositionSide == Enums.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                     UnrealizedPnl = x.UnrealizedPnl
                 }).ToArray())),

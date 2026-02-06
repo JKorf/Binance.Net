@@ -18,7 +18,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         ITradeHistoryRestClient,
         IWithdrawalRestClient,
         IWithdrawRestClient,
-        IListenKeyRestClient,
         IFeeRestClient,
         ISpotOrderClientIdRestClient,
         ISpotTriggerOrderRestClient,

@@ -28,6 +28,12 @@ namespace Binance.Net.Objects.Sockets
                     }, originalData);
                 }
 
+                if (message.Error!.Code == -2035)
+                {
+                    // Duplicate subscription, treat as success as it handled correctly internally
+                    return new CallResult<T>(message, originalData, null);
+                }
+
                 return new CallResult<T>(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
             }
 

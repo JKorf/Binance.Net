@@ -269,32 +269,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceFiatWithdrawDeposit[]>> GetFiatDepositWithdrawHistoryAsync(TransactionType side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#create-a-listenkey-user_stream" /></para>
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Listen key</returns>
-        Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default);
-
-        /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#pingkeep-alive-a-listenkey-user_stream" /></para>
-        /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
-
-        /// <summary>
-        /// Stops the current user stream
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#close-a-listenkey-user_stream" /></para>
-        /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
-
-        /// <summary>
         /// Withdraw assets from Binance to an address
         /// <para><a href="https://developers.binance.com/docs/wallet/capital/withdraw" /></para>
         /// </summary>
@@ -876,5 +850,138 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns></returns>
         Task<WebCallResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
 
+        /// <summary>
+        /// Submit a withdraw request with questionnaire required for certain regions
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/withdraw" /></para>
+        /// </summary>
+        /// <param name="asset">The asset to withdraw, for example `ETH`</param>
+        /// <param name="address">The address to send the funds to</param>
+        /// <param name="addressTag">Secondary address identifier for assets like XRP,XMR etc.</param>
+        /// <param name="withdrawOrderId">Custom client order id</param>
+        /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
+        /// <param name="quantity">The quantity to withdraw</param>
+        /// <param name="questionnaire">Questionnaire answers. Use BinanceWithdrawQuestionnaire to create the question list, for example <code>var questionnaire = BinanceWithdrawQuestionnaire.Eu;</code></param>
+        /// <param name="network">The network to use</param>
+        /// <param name="walletType">The wallet type for withdraw</param>
+        /// <param name="name">Description of the address</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Withdrawal confirmation</returns>
+        Task<WebCallResult<BinanceTravelWithdrawalResponse>> TravelRuleWithdrawAsync(
+            string asset,
+            string address,
+            decimal quantity,
+            BinanceWithdrawQuestionnaire questionnaire,
+            string? withdrawOrderId = null,
+            string? network = null,
+            string? addressTag = null,
+            string? name = null,
+            bool? transactionFeeFlag = null,
+            WalletType? walletType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get travel rule withdrawal history
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/withdraw-history-v2" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
+        /// <param name="withdrawOrderId">Filter by withdraw order id</param>
+        /// <param name="status">Filter by status</param>
+        /// <param name="network">Filter by network</param>
+        /// <param name="startTime">Filter start time from</param>
+        /// <param name="endTime">Filter end time till</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">Add offset</param>
+        /// <param name="travelRuleIds">Filter by travel rule ids</param>
+        /// <param name="transactionIds">Filter by transaction ids</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>List of withdrawals</returns>
+        Task<WebCallResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
+            string? asset = null,
+            string? withdrawOrderId = null,
+            TravelRuleApproveStatus? status = null,
+            string? network = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            int? offset = null,
+            IEnumerable<string>? travelRuleIds = null,
+            IEnumerable<string>? transactionIds = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get travel rule requirement
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceTravelRuleRequirement>> GetTravelRuleRequirementAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get travel rule address verification list
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/address-verification-list" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceTravelRuleAddress[]>> GetTravelRuleAddressVerificationListAsync(
+           int? receiveWindow = null,
+           CancellationToken ct = default);
+
+        /// <summary>
+        /// Get VASP list
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceTravelRuleVasp[]>> GetTravelRuleVaspListAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get Travel Rule deposit history
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/deposit-history-v2" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="depositIds">Filter by deposit ids</param>
+        /// <param name="transactionIds">Filter by transaction ids</param>
+        /// <param name="network">Filter by network</param>
+        /// <param name="retrieveQuestionnaire">Whether to return questionnaire answers</param>
+        /// <param name="startTime">Filter start time from</param>
+        /// <param name="endTime">Filter end time till</param>
+        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">Add offset</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceTravelRuleDeposit[]>> GetTravelRuleDepositHistoryAsync(
+            string? asset = null,
+            IEnumerable<string>? depositIds = null,
+            IEnumerable<string>? transactionIds = null,
+            string? network = null,
+            bool? retrieveQuestionnaire = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            int? offset = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Submit deposit travel rule questionnaire
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info-v2" /></para>
+        /// </summary>
+        /// <param name="depositId">Deposit id</param>
+        /// <param name="questionnaire">Questionnaire answers. Use BinanceDepositQuestionnaire to create the question list, for example <code>var questionnaire = BinanceDepositQuestionnaire.Eu;</code></param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceTravelRuleSubmitResult>> SubmitTravelRuleQuestionnaireAsync(
+            long depositId,
+            BinanceDepositQuestionnaire questionnaire,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
     }
 }

@@ -111,6 +111,11 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternal2Async(string url, Subscription subscription, CancellationToken ct)
+        {
+            return base.SubscribeAsync(url, subscription, ct);
+        }
+
         internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
