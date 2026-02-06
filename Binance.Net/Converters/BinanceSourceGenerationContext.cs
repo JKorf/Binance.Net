@@ -17,6 +17,30 @@ using Binance.Net.Objects.Models.Spot.Staking;
 
 namespace Binance.Net.Converters
 {
+    [JsonSerializable(typeof(BinanceTravelWithdrawalResponse))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireJapan))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireKazakhstan))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireNewZealand))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireBahrain))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireUae))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireIndia))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireEu))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireSouthAfrica))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireJapan))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireKazakhstan))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireBahrain))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireUae))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireIndia))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireEu))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireSouthAfrica))]
+
+    [JsonSerializable(typeof(BinanceTravelRuleDeposit[]))]
+    [JsonSerializable(typeof(BinanceTravelRuleWithdrawal[]))]
+    [JsonSerializable(typeof(BinanceTravelRuleRequirement))]
+    [JsonSerializable(typeof(BinanceTravelRuleAddressWrapper))]
+    [JsonSerializable(typeof(BinanceTravelRuleVasp[]))]
+    [JsonSerializable(typeof(BinanceTravelRuleSubmitResult))]
+
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate[]>))]
     [JsonSerializable(typeof(BinanceTradingSchedule))]

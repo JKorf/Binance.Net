@@ -1667,6 +1667,27 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetCommissionRatesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.TravelRuleWithdrawAsync(System.String,System.String,System.Decimal,Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.WalletType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTravelRuleWithdrawalHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.TravelRuleApproveStatus},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTravelRuleDepositHistoryAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTravelRuleRequirementAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTravelRuleAddressVerificationListAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetTravelRuleVaspListAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.SubmitTravelRuleQuestionnaireAsync(System.Int64,Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAgent">
             <inheritdoc />
         </member>
@@ -3196,6 +3217,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.TransferDirection">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.TravelRuleApproveStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -5925,6 +5951,41 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireBahrain">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireEu">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireIndia">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireJapan">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireKazakhstan">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireSouthAfrica">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDepositQuestionnaireUae">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceDiscount">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -6510,6 +6571,66 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleAddress">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleAddressArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleAddressWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleDeposit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleDepositArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleRequirement">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleSubmitResult">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleVasp">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleVaspArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleWithdrawal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelRuleWithdrawalArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceTravelWithdrawalResponse">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceUserAsset">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -6576,6 +6697,46 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawalPlacedArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireBahrain">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireEu">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireIndia">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireJapan">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireKazakhstan">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireNewZealand">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireSouthAfrica">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceWithdrawQuestionnaireUae">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -12174,6 +12335,26 @@
             Roll-out
             </summary>
         </member>
+        <member name="T:Binance.Net.Enums.TravelRuleApproveStatus">
+            <summary>
+            Travel rule approval status
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TravelRuleApproveStatus.Completed">
+            <summary>
+            Completed
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TravelRuleApproveStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TravelRuleApproveStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.TravelRuleStatus">
             <summary>
             Travel rule status
@@ -17326,6 +17507,95 @@
             <param name="listenKey">The listen key to keep alive</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.TravelRuleWithdrawAsync(System.String,System.String,System.Decimal,Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.WalletType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Submit a withdraw request with questionnaire required for certain regions
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/withdraw" /></para>
+            </summary>
+            <param name="asset">The asset to withdraw, for example `ETH`</param>
+            <param name="address">The address to send the funds to</param>
+            <param name="addressTag">Secondary address identifier for assets like XRP,XMR etc.</param>
+            <param name="withdrawOrderId">Custom client order id</param>
+            <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
+            <param name="quantity">The quantity to withdraw</param>
+            <param name="questionnaire">Questionnaire answers. Use BinanceWithdrawQuestionnaire to create the question list, for example <code>var questionnaire = BinanceWithdrawQuestionnaire.Eu;</code></param>
+            <param name="network">The network to use</param>
+            <param name="walletType">The wallet type for withdraw</param>
+            <param name="name">Description of the address</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Withdrawal confirmation</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetTravelRuleWithdrawalHistoryAsync(System.String,System.String,System.Nullable{Binance.Net.Enums.TravelRuleApproveStatus},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get travel rule withdrawal history
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/withdraw-history-v2" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="withdrawOrderId">Filter by withdraw order id</param>
+            <param name="status">Filter by status</param>
+            <param name="network">Filter by network</param>
+            <param name="startTime">Filter start time from</param>
+            <param name="endTime">Filter end time till</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
+            <param name="travelRuleIds">Filter by travel rule ids</param>
+            <param name="transactionIds">Filter by transaction ids</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of withdrawals</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetTravelRuleRequirementAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get travel rule requirement
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/questionnaire-requirements" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetTravelRuleAddressVerificationListAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get travel rule address verification list
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/address-verification-list" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetTravelRuleVaspListAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get VASP list
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/onboarded-vasp-list" /></para>
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetTravelRuleDepositHistoryAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get Travel Rule deposit history
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/deposit-history-v2" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="depositIds">Filter by deposit ids</param>
+            <param name="transactionIds">Filter by transaction ids</param>
+            <param name="network">Filter by network</param>
+            <param name="retrieveQuestionnaire">Whether to return questionnaire answers</param>
+            <param name="startTime">Filter start time from</param>
+            <param name="endTime">Filter end time till</param>
+            <param name="limit">Add limit. Default: 1000, Max: 1000</param>
+            <param name="offset">Add offset</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.SubmitTravelRuleQuestionnaireAsync(System.Int64,Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Submit deposit travel rule questionnaire
+            <para><a href="https://developers.binance.com/docs/wallet/travel-rule/deposit-provide-info-v2" /></para>
+            </summary>
+            <param name="depositId">Deposit id</param>
+            <param name="questionnaire">Questionnaire answers. Use BinanceDepositQuestionnaire to create the question list, for example <code>var questionnaire = BinanceDepositQuestionnaire.Eu;</code></param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAgent">
             <summary>
@@ -25126,6 +25396,406 @@
             Travel rule status
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire">
+            <summary>
+            Deposit questionnaire base
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.Japan">
+            <summary>
+            Create a questionnaire for a deposit for Japan
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.Kazakhstan">
+            <summary>
+            Create a questionnaire for a deposit for Kazakhstan
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.Bahrain">
+            <summary>
+            Create a questionnaire for a deposit for Bahrain
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.UAE">
+            <summary>
+            Create a questionnaire for a deposit for UAE
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.India">
+            <summary>
+            Create a questionnaire for a deposit for India
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.Eu">
+            <summary>
+            Create a questionnaire for a deposit for EU
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaire.SouthAfrica">
+            <summary>
+            Create a questionnaire for a deposit for South Africa
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan">
+            <summary>
+            Japan Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.DepositOriginator">
+            <summary>
+            0:Myself, 1:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.Country">
+            <summary>
+            Originator country, required when DepositOriginator is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.Region">
+            <summary>
+            Originator region, required when country is cn(China) or ua(Ukraine). > 1. If country is cn(China), region must be notNortheasternProvinces (Jilin, Liaoning and Heilongjiang) or other. 2. If country is ua(Ukraine), region should not be crimea, donetsk or luhansk，should be other.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.City">
+            <summary>
+            Originator city, required when DepositOriginator is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.KanjiName">
+            <summary>
+            Kanji name, required when DepositOriginator is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.KanaName">
+            <summary>
+            Kana name, required when DepositOriginator is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.LatinName">
+            <summary>
+            Latin name, required when DepositOriginator is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.VaspName">
+            <summary>
+            VASP name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireJapan.IsAttested">
+            <summary>
+            Is attested
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireKazakhstan">
+            <summary>
+            Kazakhstan Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireKazakhstan.DepositOriginator">
+            <summary>
+            0:Myself, 1:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireKazakhstan.Country">
+            <summary>
+            Originator country
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireKazakhstan.City">
+            <summary>
+            Originator city
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireKazakhstan.TxnPurpose">
+            <summary>
+            Value: service, goods, p2p, charity, others
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireKazakhstan.TxnPurposeOthers">
+            <summary>
+            Required when TxnPurpose is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain">
+            <summary>
+            Bahrain Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.DepositOriginator">
+            <summary>
+            1:Myself, 2:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.OrgType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.OrgFirstName">
+            <summary>
+            Originator's first name, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.OrgLastName">
+            <summary>
+            Originator's last name, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.Country">
+            <summary>
+            Originator's country, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.City">
+            <summary>
+            Originator's city, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.ReceiveFrom">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.Vasp">
+            <summary>
+            VASP, received when ReceiveFrom is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireBahrain.VaspName">
+            <summary>
+            VASP name, received when Vasp is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae">
+            <summary>
+            UAE Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.DepositOriginator">
+            <summary>
+            1:Myself, 2:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.OrgType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.OrgName">
+            <summary>
+            Originator's name, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.Country">
+            <summary>
+            Originator's country, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.City">
+            <summary>
+            Originator's city, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.ReceiveFrom">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.Vasp">
+            <summary>
+            VASP, received when ReceiveFrom is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireUae.VaspName">
+            <summary>
+            VASP name, received when Vasp is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia">
+            <summary>
+            India Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.DepositOriginator">
+            <summary>
+            1:Myself, 2:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.OrgType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.OrgName">
+            <summary>
+            Originator's name, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.Pan">
+            <summary>
+            Permanent Account Number (PAN) or National ID Number, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.Country">
+            <summary>
+            Originator's country, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.State">
+            <summary>
+            Originator's state, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.City">
+            <summary>
+            Originator's city, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.PinCode">
+            <summary>
+            Pin code, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.Address">
+            <summary>
+            Address, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.ReceiveFrom">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.Vasp">
+            <summary>
+            VASP, received when ReceiveFrom is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireIndia.VaspName">
+            <summary>
+            VASP name, received when Vasp is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu">
+            <summary>
+            EU Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.DepositOriginator">
+            <summary>
+            1:Myself, 2:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.OrgType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.OrgFirstName">
+            <summary>
+            Originator's first name, required when OrgType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.OrgLastName">
+            <summary>
+            Originator's last name, required when OrgType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.Country">
+            <summary>
+            Originator's country, required when OrgType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.CorpName">
+            <summary>
+            Originator's (corporation) Name, required when OrgType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.CorpCountry">
+            <summary>
+            Originator's (corporation) nationality code, required when OrgType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.ReceiveFrom">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.Vasp">
+            <summary>
+            VASP, received when ReceiveFrom is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.VaspName">
+            <summary>
+            VASP name, received when Vasp is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireEu.Declaration">
+            <summary>
+            Declaration
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica">
+            <summary>
+            South Africa Deposit questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.DepositOriginator">
+            <summary>
+            1:Myself, 2:Not Myself
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.OrgType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required when DepositOriginator is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.OrgName">
+            <summary>
+            Originator's name, required when OrgType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.Country">
+            <summary>
+            Originator's country, required when OrgType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.CorpName">
+            <summary>
+            Originator's (corporation) Name, required when OrgType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.CorpCountry">
+            <summary>
+            Originator's (corporation) nationality code, required when OrgType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.ReceiveFrom">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.Vasp">
+            <summary>
+            VASP, received when ReceiveFrom is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.VaspName">
+            <summary>
+            VASP name, received when Vasp is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositQuestionnaireSouthAfrica.Declaration">
+            <summary>
+            Declaration
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDividendRecord">
             <summary>
             Dividend record
@@ -27450,6 +28120,271 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress">
+            <summary>
+            Travel rule address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.WalletAddress">
+            <summary>
+            Wallet address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.AddressQuestionnaire">
+            <summary>
+            Address questionnaire answers
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit">
+            <summary>
+            Travel rule deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.InsertTime">
+            <summary>
+            Time the deposit was added to Binance
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Quantity">
+            <summary>
+            The quantity deposited
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Asset">
+            <summary>
+            The asset deposited
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Address">
+            <summary>
+            The address of the deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.AddressTag">
+            <summary>
+            The tag of the address of the deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Network">
+            <summary>
+            The network
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Id">
+            <summary>
+            The  id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.TransactionId">
+            <summary>
+            The transaction id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Status">
+            <summary>
+            The status of the deposit
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.TransferType">
+            <summary>
+            The transfer type
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Confirmations">
+            <summary>
+            Confirmations
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.RequireQuestionnaire">
+            <summary>
+            Requires questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Questionnaire">
+            <summary>
+            Questionnaire answers
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleRequirement">
+            <summary>
+            Travel rule requirement
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleRequirement.QuestionnaireCountryCode">
+            <summary>
+            Country code of the questionnaire required. NIL if not required.    
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleSubmitResult">
+            <summary>
+            Submit result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleSubmitResult.Accepted">
+            <summary>
+            Accepted
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleSubmitResult.Info">
+            <summary>
+            Info
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleVasp">
+            <summary>
+            Travel rule VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleVasp.VaspName">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleVasp.VaspCode">
+            <summary>
+            Code
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal">
+            <summary>
+            Information about a withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Id">
+            <summary>
+            The id of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.WithdrawOrderId">
+            <summary>
+            Withdraw order id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.ApplyTime">
+            <summary>
+            The time the withdrawal was applied for
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Quantity">
+            <summary>
+            The quantity of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Address">
+            <summary>
+            The address the asset was withdrawn to
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.AddressTag">
+            <summary>
+            Tag for the address
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.TransactionId">
+            <summary>
+            The transaction id of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.TransactionFee">
+            <summary>
+            Transaction fee for the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Asset">
+            <summary>
+            The asset that was withdrawn
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Network">
+            <summary>
+            Network that was used
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.ConfirmTimes">
+            <summary>
+            Confirm times for withdraw
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Status">
+            <summary>
+            The status of the withdrawal
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.TravelRuleStatus">
+            <summary>
+            The status of the travel rule approval
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.TransferType">
+            <summary>
+            Transfer type: 1 for internal transfer, 0 for external transfer 
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.TransactionKey">
+            <summary>
+            Transaction key
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Info">
+            <summary>
+            Info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.WalletType">
+            <summary>
+            The wallet type the withdrawal was from
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.CompleteTime">
+            <summary>
+            The time the withdrawal was completed
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Questionnaire">
+            <summary>
+            Travel rule questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.TravelRuleId">
+            <summary>
+            Travel rule id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelWithdrawalResponse">
+            <summary>
+            Travel rule withdrawal response
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelWithdrawalResponse.TravelRuleId">
+            <summary>
+            Travel rule id
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelWithdrawalResponse.Accepted">
+            <summary>
+            Accepted
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelWithdrawalResponse.Info">
+            <summary>
+            Info
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceUserAsset">
             <summary>
             Information about an asset for a user
@@ -27903,6 +28838,491 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawalPlaced.Id">
             <summary>
             The id
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire">
+            <summary>
+            Withdrawal questionnaire base
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.Japan">
+            <summary>
+            Create a questionnaire for a withdrawal for Japan
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.Kazakhstan">
+            <summary>
+            Create a questionnaire for a withdrawal for Kazakhstan
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.NewZealand">
+            <summary>
+            Create a questionnaire for a withdrawal for New Zealand
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.Bahrain">
+            <summary>
+            Create a questionnaire for a withdrawal for Bahrain
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.UAE">
+            <summary>
+            Create a questionnaire for a withdrawal for UAE
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.India">
+            <summary>
+            Create a questionnaire for a withdrawal for India
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.Eu">
+            <summary>
+            Create a questionnaire for a withdrawal for EU
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaire.SouthAfrica">
+            <summary>
+            Create a questionnaire for a withdrawal for South Africa
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan">
+            <summary>
+            Japan withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.KanjiName">
+            <summary>
+            Kanji name, required when isAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.KanaName">
+            <summary>
+            Kana name, required when isAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.LatinName">
+            <summary>
+            Latin name, required when isAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.City">
+            <summary>
+            City
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.SendTo">
+            <summary>
+            1:Crypto-asset services provider, 2:Unhosted Wallet
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.VaspCountry">
+            <summary>
+            VASP country code, ISO 2 digit, lower case, required when SendTo is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.VaspRegion">
+            <summary>
+            VASP region. required when VaspCountry is cn(China) or ua(Ukraine). > 1. If VaspCountry is cn(China), VaspRegion must be notNortheasternProvinces (Jilin, Liaoning and Heilongjiang) or other. 2. If VaspCountry is ua(Ukraine), VaspRegion should not be crimea, donetsk or luhansk, should be other.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.TxnPurpose">
+            <summary>
+            1:Purchase of goods within Japan, 2:Inheritance, gift or living expenses, 3:Cross border trade, 4:Investment, 5:Use of services provided by the beneficiary VASP, 6:Loan repayment, 7:Gifts and Donations
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireJapan.IsAttested">
+            <summary>
+            Is attested
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan">
+            <summary>
+            Kazakhstan withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.IsAddressOwner">
+            <summary>
+            Is address owner
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = false
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.BeneficiaryName">
+            <summary>
+            Beneficiary name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.BeneficiaryCountry">
+            <summary>
+            Beneficiary country, ISO 2 digit, lower case.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.BeneficiaryCity">
+            <summary>
+            Beneficiary city
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.TxnPurpose">
+            <summary>
+            Value: service, goods, p2p, charity, others
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.TxnPurposeOthers">
+            <summary>
+            Required info when TxnPurpose is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.SendTo">
+            <summary>
+            2:Exchange, 1:Unhosted Wallet
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireKazakhstan.IsAttested">
+            <summary>
+            Is attested
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand">
+            <summary>
+            New Zealand withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.BeneficiaryName">
+            <summary>
+            Beneficiary name, required when bnfType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case. Required when bnfType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.BnfCorpName">
+            <summary>
+            Beneficiary corporation name. Required when bnfType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.BnfCorpCountry">
+            <summary>
+            Beneficiary corporation country code, ISO 2 digit, lower case. Required when bnfType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.SendTo">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireNewZealand.Declaration">
+            <summary>
+            Declaration confirmation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain">
+            <summary>
+            Bahrain withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.BeneficiaryFirstName">
+            <summary>
+            Beneficiary first name, required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.BeneficiaryLastName">
+            <summary>
+            Beneficiary last name, required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case. Required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.City">
+            <summary>
+            City. Required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.SendTo">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireBahrain.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae">
+            <summary>
+            UAE withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.BnfName">
+            <summary>
+            Beneficiary name, required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case. Required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.City">
+            <summary>
+            City. Required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.SendTo">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireUae.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia">
+            <summary>
+            India withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.BnfName">
+            <summary>
+            Beneficiary name, required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case. Required when IsAddressOwner is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.City">
+            <summary>
+            City
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.SendTo">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireIndia.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu">
+            <summary>
+            EU withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.BeneficiaryFirstName">
+            <summary>
+            Beneficiary first name, required when BnfType = 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.BeneficiaryLastName">
+            <summary>
+            Beneficiary last name, required when BnfType = 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case. Required when BnfType = 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.BnfCorpName">
+            <summary>
+            Beneficiary corporation name. Required when bnfType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.BnfCorpCountry">
+            <summary>
+            Beneficiary corporation country code, ISO 2 digit, lower case. Required when bnfType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.SendTo">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireEu.Declaration">
+            <summary>
+            Declaration confirmation
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica">
+            <summary>
+            South Africa withdraw questionnaire
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.IsAddressOwner">
+            <summary>
+            1:Send to myself, 2:Send to another beneficiary
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.BnfType">
+            <summary>
+            0:Individual, 1:Corporate/Entity, required if IsAddressOwner = 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.BnfName">
+            <summary>
+            Beneficiary name, required when BnfType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.Country">
+            <summary>
+            Beneficiary country code, ISO 2 digit, lower case. Required if BnfType is 0
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.BnfCorpName">
+            <summary>
+            Beneficiary corporation name. Required when bnfType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.BnfCorpCountry">
+            <summary>
+            Beneficiary corporation country code, ISO 2 digit, lower case. Required when bnfType is 1
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.SendTo">
+            <summary>
+            1:Private Wallet, 2:Another VASP
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.Vasp">
+            <summary>
+            Vasp CODE of the beneficiary, required when SendTo is 2
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.VaspName">
+            <summary>
+            VASP name, required when Vasp is `others`
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceWithdrawQuestionnaireSouthAfrica.Declaration">
+            <summary>
+            Declaration confirmation
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate">

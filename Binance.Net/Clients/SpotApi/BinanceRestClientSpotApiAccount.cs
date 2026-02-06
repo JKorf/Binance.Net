@@ -8,6 +8,7 @@ using Binance.Net.Objects.Models.Spot.Margin;
 using Binance.Net.Objects.Models.Spot.PortfolioMargin;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Guards;
+using System.Text.Json;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -1047,7 +1048,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-
         #region Trading status
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
@@ -1313,6 +1313,175 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/account/commission", BinanceExchange.RateLimiter.SpotRestIp, 20, true);
             return await _baseClient.SendAsync<BinanceCommissions>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Travel Rule Withdraw
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelWithdrawalResponse>> TravelRuleWithdrawAsync(
+            string asset,
+            string address,
+            decimal quantity,
+            BinanceWithdrawQuestionnaire questionnaire,
+            string? withdrawOrderId = null,
+            string? network = null,
+            string? addressTag = null,
+            string? name = null,
+            bool? transactionFeeFlag = null,
+            WalletType? walletType = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            asset.ValidateNotNull(nameof(asset));
+            address.ValidateNotNull(nameof(address));
+
+            var parameters = new ParameterCollection
+            {
+                { "coin", asset },
+                { "address", address },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "questionnaire", questionnaire.Serialize() }
+            };
+            parameters.AddOptionalParameter("name", name);
+            parameters.AddOptionalParameter("withdrawOrderId", withdrawOrderId);
+            parameters.AddOptionalParameter("network", network);
+            parameters.AddOptionalParameter("transactionFeeFlag", transactionFeeFlag);
+            parameters.AddOptionalParameter("addressTag", addressTag);
+            parameters.AddOptionalEnum("walletType", walletType);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/localentity/withdraw/apply", BinanceExchange.RateLimiter.SpotRestUid, 600, true, parameterPosition: HttpMethodParameterPosition.InUri);
+            return await _baseClient.SendAsync<BinanceTravelWithdrawalResponse>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Travel Rule Withdraw History
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
+            string? asset = null,
+            string? withdrawOrderId = null, 
+            TravelRuleApproveStatus? status = null,
+            string? network = null, 
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            int? offset = null,
+            IEnumerable<string>? travelRuleIds = null,
+            IEnumerable<string>? transactionIds = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("withdrawOrderId", withdrawOrderId);
+            parameters.AddOptionalParameter("network", network);
+            parameters.AddOptionalEnum("travelRuleStatus", status);
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("offset", offset);
+            parameters.AddOptionalParameter("trId", travelRuleIds == null ? null : string.Join(",", travelRuleIds));
+            parameters.AddOptionalParameter("txId", transactionIds == null ? null : string.Join(",", transactionIds));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/localentity/withdraw/history", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            return await _baseClient.SendAsync<BinanceTravelRuleWithdrawal[]>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Travel Rule Deposit History
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelRuleDeposit[]>> GetTravelRuleDepositHistoryAsync(
+            string? asset = null,
+            IEnumerable<string>? depositIds = null,
+            IEnumerable<string>? transactionIds = null,
+            string? network = null,
+            bool? retrieveQuestionnaire = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            int? offset = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalParameter("retrieveQuestionnaire", retrieveQuestionnaire);
+            parameters.AddOptionalParameter("coin", asset);
+            parameters.AddOptionalParameter("network", network);
+            parameters.AddOptionalParameter("depositId", depositIds == null ? null : string.Join(",", depositIds));
+            parameters.AddOptionalParameter("txId", transactionIds == null ? null : string.Join(",", transactionIds));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("limit", limit);
+            parameters.AddOptionalParameter("offset", offset);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v2/localentity/deposit/history", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            return await _baseClient.SendAsync<BinanceTravelRuleDeposit[]>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Travel Rule Requirement
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelRuleRequirement>> GetTravelRuleRequirementAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/localentity/questionnaire-requirements", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            return await _baseClient.SendAsync<BinanceTravelRuleRequirement>(request, null, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Get Travel Rule Address Verification List
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelRuleAddress[]>> GetTravelRuleAddressVerificationListAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/addressVerify/list", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            var result = await _baseClient.SendAsync<BinanceTravelRuleAddressWrapper>(request, null, ct).ConfigureAwait(false);
+            return result.As<BinanceTravelRuleAddress[]>(result.Data?.Addresses);
+        }
+
+        #endregion
+
+        #region Get Travel Rule VASP list
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelRuleVasp[]>> GetTravelRuleVaspListAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/localentity/vasp", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            return await _baseClient.SendAsync<BinanceTravelRuleVasp[]>(request, null, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Submit Travel Rule Questionnaire
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceTravelRuleSubmitResult>> SubmitTravelRuleQuestionnaireAsync(
+            long depositId,
+            BinanceDepositQuestionnaire questionnaire,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("depositId", depositId);
+            parameters.Add("questionnaire", questionnaire.Serialize());
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v2/localentity/deposit/provide-info", BinanceExchange.RateLimiter.SpotRestUid, 600, true, parameterPosition: HttpMethodParameterPosition.InUri);
+            var result = await _baseClient.SendAsync<BinanceTravelRuleSubmitResult>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            if (!result.Data.Accepted)
+                return result.AsError<BinanceTravelRuleSubmitResult>(new ServerError(ErrorInfo.Unknown with { Message = result.Data.Info }));
+
+            return result;
         }
 
         #endregion
