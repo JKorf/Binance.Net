@@ -200,6 +200,21 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.4.0 - 06 Feb 2026
+    * Updated CryptoExchange.Net to version 10.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added BinanceUserSpotDataTracker, BinanceUserUsdFuturesDataTracker and BinanceUserCoinFuturesDataTracker
+    * Added Travel Rule withdrawal/deposit endpoints
+    * Added Status mapping for SharedDeposit models
+    * Added additional methods for requesting supported symbols to Shared ISpotSymbolRestClient/IFuturesSymbolRestClient interfaces
+    * Added PositionMode mapping on SharedPosition models
+    * Updated Spot websocket logic to support authentication via the websocket instead of via listen key
+    * Updated DepositStatus enum
+    * Updated websocket rate limit for futures to 9 requests per second to accomedate for ping frames from the websocket client
+    * Removed deprecated Spot listen key endpoints
+    * Removed onListenKeyExpired event from user data stream
+    * Fixed disposed clients getting returned from UserClientProvider
+    * Fixed activationPrice parameter mapping in socketClient.UsdFuturesApi.Trading.PlaceConditionalOrderAsync endpoint
+
 * Version 12.3.1 - 29 Jan 2026
     * Added CompleteTime property to BinanceDeposit model
     * Added Equity value for UnderlyingType enum
