@@ -50,13 +50,13 @@ namespace Binance.Net.Objects.Sockets
             _lk = listenKey;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>.CreateWithTopicFilter("ACCOUNT_CONFIG_UPDATE", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>.CreateWithTopicFilter("MARGIN_CALL", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>.CreateWithTopicFilter("ACCOUNT_UPDATE", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>.CreateWithTopicFilter("ORDER_TRADE_UPDATE", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>.CreateWithTopicFilter("listenKeyExpired", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceStrategyUpdate>>.CreateWithTopicFilter("STRATEGY_UPDATE", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceGridUpdate>>.CreateWithTopicFilter("GRID_UPDATE", _lk, DoHandleMessage)
+                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>.CreateWithoutTopicFilter("ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>.CreateWithoutTopicFilter("MARGIN_CALL", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>.CreateWithoutTopicFilter("ACCOUNT_UPDATE", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>.CreateWithoutTopicFilter("ORDER_TRADE_UPDATE", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>.CreateWithoutTopicFilter("listenKeyExpired", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceStrategyUpdate>>.CreateWithoutTopicFilter("STRATEGY_UPDATE", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceGridUpdate>>.CreateWithoutTopicFilter("GRID_UPDATE", DoHandleMessage)
                 ]);
         }
 

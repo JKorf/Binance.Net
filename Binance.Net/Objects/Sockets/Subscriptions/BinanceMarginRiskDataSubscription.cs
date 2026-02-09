@@ -32,8 +32,8 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _lk = listenKey;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>.CreateWithTopicFilter("MARGIN_LEVEL_STATUS_CHANGE", _lk, DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>.CreateWithTopicFilter("USER_LIABILITY_CHANGE", _lk, DoHandleMessage)
+                MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>.CreateWithoutTopicFilter("MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
+                MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>.CreateWithoutTopicFilter("USER_LIABILITY_CHANGE", DoHandleMessage)
                 ]);
         }
 
