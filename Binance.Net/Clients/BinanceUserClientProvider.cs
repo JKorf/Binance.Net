@@ -8,8 +8,8 @@ namespace Binance.Net.Clients
     /// <inheritdoc />
     public class BinanceUserClientProvider : IBinanceUserClientProvider
     {
-        private static ConcurrentDictionary<string, IBinanceRestClient> _restClients = new ConcurrentDictionary<string, IBinanceRestClient>();
-        private static ConcurrentDictionary<string, IBinanceSocketClient> _socketClients = new ConcurrentDictionary<string, IBinanceSocketClient>();
+        private ConcurrentDictionary<string, IBinanceRestClient> _restClients = new ConcurrentDictionary<string, IBinanceRestClient>();
+        private ConcurrentDictionary<string, IBinanceSocketClient> _socketClients = new ConcurrentDictionary<string, IBinanceSocketClient>();
 
         private readonly IOptions<BinanceRestOptions> _restOptions;
         private readonly IOptions<BinanceSocketOptions> _socketOptions;
