@@ -1,0 +1,47 @@
+GET
+/sapi/v2/localentity/withdraw/history
+true
+[
+    {
+        "id": "XXXXXXXXXXXXXXXXXXXXXX",
+        "trId": 99999999,
+        "amount": "0.004985",
+        "transactionFee": "0.000015",
+        "network": "BTC",
+        "coin": "BTC",
+        "withdrawalStatus": 6,
+        "travelRuleStatus": 4,
+        "address": "XXXXXXXXXXXXXXXXXXXXXX",
+        "txId": "XXXXXXXXXXXXXXXXXXXXXX",
+        "applyTime": 1770737268000,
+        "transferType": 0,
+        "info": "XXXXXXXXXXXXXXXXXXXXXX",
+        "confirmNo": 1,
+        "walletType": 0,
+        "txKey": "",
+        "questionnaire": {
+            "vaspName": "Bitfinex",
+            "sendTo": 2,
+            "isAddressOwner": 1,
+            "bnfCorpName": "XXXXXXXXXXXXXXXXXXXXXX",
+            "bnfType": 1,
+            "bnfCorpCountry": "za",
+            "vaspCode": "Bitfinex",
+            "declaration": true,
+            "vasp": "Bitfinex"
+        },
+        "completeTime": 1770738871000
+    },
+    {
+        "trId": 999999999,
+        "amount": "1500",
+        "network": "XRP",
+        "coin": "XRP",
+        "travelRuleStatus": 2,
+        "address": "XXXXXXXXXXXXXXXXXXXXXX",
+        "addressTag": "XXXXXXXXXXXXXXXXXXXXXX",
+        "applyTime": 1769789480000,
+        "questionnaire": {},
+        "completeTime": 1769789480000
+    }
+]

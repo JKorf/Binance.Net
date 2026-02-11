@@ -12355,6 +12355,11 @@
             Failed
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.TravelRuleApproveStatus.Unknown">
+            <summary>
+            Currently unknown what this status represents
+            </summary>
+        </member>
         <member name="T:Binance.Net.Enums.TravelRuleStatus">
             <summary>
             Travel rule status

@@ -22,6 +22,12 @@ namespace Binance.Net.Enums
         /// Failed
         /// </summary>
         [Map("2")]
-        Failed
+        Failed,
+
+        /// <summary>
+        /// Currently unknown what this status represents
+        /// </summary>
+        [Map("4")]
+        Unknown
     }
 }

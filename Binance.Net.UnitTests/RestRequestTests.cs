@@ -99,6 +99,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.GetTradeFeeAsync(), "GetTradeFee");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetAccountVipLevelAndStatusAsync(), "GetAccountVipLevelAndStatus");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetCommissionRatesAsync("ETHUSDT"), "GetCommissionRates");
+            await tester.ValidateAsync(client => client.SpotApi.Account.GetTravelRuleWithdrawalHistoryAsync(), "GetTravelRuleWithdrawalHistory");
         }
 
         [Test]

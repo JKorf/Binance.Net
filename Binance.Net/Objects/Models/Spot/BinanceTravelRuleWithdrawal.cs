@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about a withdrawal
     /// </summary>
-    public record BinanceTravelRuleWithdrawal
+    public record  BinanceTravelRuleWithdrawal
     {
         /// <summary>
         /// The id of the withdrawal
@@ -103,7 +103,7 @@ namespace Binance.Net.Objects.Models.Spot
         /// Travel rule questionnaire
         /// </summary>
         [JsonPropertyName("questionnaire")]
-        public string Questionnaire { get; set; } = string.Empty;
+        public Dictionary<string, object> Questionnaire { get; set; } = new();
         /// <summary>
         /// Travel rule id
         /// </summary>
