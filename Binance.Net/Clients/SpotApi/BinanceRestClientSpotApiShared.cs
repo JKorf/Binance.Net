@@ -746,7 +746,13 @@ namespace Binance.Net.Clients.SpotApi
             });
         }
 
-        GetDepositsOptions IDepositRestClient.GetDepositsOptions { get; } = new GetDepositsOptions(SharedPaginationSupport.Descending, true, 1000);
+        GetDepositsOptions IDepositRestClient.GetDepositsOptions { get; } = new GetDepositsOptions(SharedPaginationSupport.Descending, true, 1000)
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("TravelRuleEndpoint", typeof(bool), "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
+            }
+        };
         async Task<ExchangeWebResult<SharedDeposit[]>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IDepositRestClient)this).GetDepositsOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
@@ -758,45 +764,90 @@ namespace Binance.Net.Clients.SpotApi
             if (pageToken is OffsetToken offsetToken)
                 offset = offsetToken.Offset;
 
-            // Get data
-            var deposits = await Account.GetDepositHistoryAsync(
-                request.Asset,
-                startTime: request.StartTime,
-                endTime: request.EndTime,
-                limit: request.Limit ?? 100,
-                offset: offset,
-                ct: ct).ConfigureAwait(false);
-            if (!deposits)
-                return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, null, default);
-
-            // Determine next token
-            OffsetToken? nextToken = null;
-            if (deposits.Data.Count() == (request.Limit ?? 100))
-                nextToken = new OffsetToken((offset ?? 0) + deposits.Data.Count());
-
-            return deposits.AsExchangeResult(Exchange, TradingMode.Spot, deposits.Data.Select(x => 
-            new SharedDeposit(
-                x.Asset,
-                x.Quantity,
-                x.Status == DepositStatus.Success,
-                x.InsertTime,
-                x.Status == DepositStatus.Success ? SharedTransferStatus.Completed 
-                        : x.Status == DepositStatus.Pending || x.Status == DepositStatus.Completed ? SharedTransferStatus.InProgress
-                        : SharedTransferStatus.Failed)
+            var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
+            if (traveRule == true)
             {
-                Confirmations = x.Confirmations.Contains("/") ? int.Parse(x.Confirmations.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0]) : null,
-                Network = x.Network,
-                TransactionId = x.TransactionId,
-                Tag = x.AddressTag,
-                Id = x.Id
-            }).ToArray(), nextToken);
+                // Get data
+                var deposits = await Account.GetTravelRuleDepositHistoryAsync(
+                        request.Asset,
+                        startTime: request.StartTime,
+                        endTime: request.EndTime,
+                        limit: request.Limit ?? 100,
+                        offset: offset,
+                        ct: ct).ConfigureAwait(false);
+                if (!deposits)
+                    return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, null, default);
+
+                // Determine next token
+                OffsetToken? nextToken = null;
+                if (deposits.Data.Count() == (request.Limit ?? 100))
+                    nextToken = new OffsetToken((offset ?? 0) + deposits.Data.Count());
+
+                return deposits.AsExchangeResult(Exchange, TradingMode.Spot, deposits.Data.Select(x =>
+                new SharedDeposit(
+                    x.Asset,
+                    x.Quantity,
+                    x.Status == DepositStatus.Success,
+                    x.InsertTime,
+                    x.Status == DepositStatus.Success ? SharedTransferStatus.Completed
+                            : x.Status == DepositStatus.Pending || x.Status == DepositStatus.Completed ? SharedTransferStatus.InProgress
+                            : SharedTransferStatus.Failed)
+                {
+                    Confirmations = x.Confirmations.Contains("/") ? int.Parse(x.Confirmations.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0]) : null,
+                    Network = x.Network,
+                    TransactionId = x.TransactionId,
+                    Tag = x.AddressTag,
+                    Id = x.Id
+                }).ToArray(), nextToken);
+            }
+            else
+            {
+                // Get data
+                var deposits = await Account.GetDepositHistoryAsync(
+                        request.Asset,
+                        startTime: request.StartTime,
+                        endTime: request.EndTime,
+                        limit: request.Limit ?? 100,
+                        offset: offset,
+                        ct: ct).ConfigureAwait(false);
+                if (!deposits)
+                    return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, null, default);
+
+                // Determine next token
+                OffsetToken? nextToken = null;
+                if (deposits.Data.Count() == (request.Limit ?? 100))
+                    nextToken = new OffsetToken((offset ?? 0) + deposits.Data.Count());
+
+                return deposits.AsExchangeResult(Exchange, TradingMode.Spot, deposits.Data.Select(x =>
+                new SharedDeposit(
+                    x.Asset,
+                    x.Quantity,
+                    x.Status == DepositStatus.Success,
+                    x.InsertTime,
+                    x.Status == DepositStatus.Success ? SharedTransferStatus.Completed
+                            : x.Status == DepositStatus.Pending || x.Status == DepositStatus.Completed ? SharedTransferStatus.InProgress
+                            : SharedTransferStatus.Failed)
+                {
+                    Confirmations = x.Confirmations.Contains("/") ? int.Parse(x.Confirmations.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0]) : null,
+                    Network = x.Network,
+                    TransactionId = x.TransactionId,
+                    Tag = x.AddressTag,
+                    Id = x.Id
+                }).ToArray(), nextToken);
+            }
         }
 
         #endregion
 
         #region Withdrawal client
 
-        GetWithdrawalsOptions IWithdrawalRestClient.GetWithdrawalsOptions { get; } = new GetWithdrawalsOptions(SharedPaginationSupport.Descending, true, 1000);
+        GetWithdrawalsOptions IWithdrawalRestClient.GetWithdrawalsOptions { get; } = new GetWithdrawalsOptions(SharedPaginationSupport.Descending, true, 1000)
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("TravelRuleEndpoint", typeof(bool), "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
+            }
+        };
         async Task<ExchangeWebResult<SharedWithdrawal[]>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IWithdrawalRestClient)this).GetWithdrawalsOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
@@ -808,56 +859,112 @@ namespace Binance.Net.Clients.SpotApi
             if (pageToken is OffsetToken offsetToken)
                 offset = offsetToken.Offset;
 
-            // Get data
-            var withdrawals = await Account.GetWithdrawalHistoryAsync(
-                request.Asset,
-                startTime: request.StartTime,
-                endTime: request.EndTime,
-                limit: request.Limit ?? 100,
-                offset: offset,
-                ct: ct).ConfigureAwait(false);
-            if (!withdrawals)
-                return withdrawals.AsExchangeResult<SharedWithdrawal[]>(Exchange, null, default);
-
-            // Determine next token
-            OffsetToken? nextToken = null;
-            if (withdrawals.Data.Count() == (request.Limit ?? 100))
-                nextToken = new OffsetToken((offset ?? 0) + withdrawals.Data.Count());
-
-            return withdrawals.AsExchangeResult(Exchange, TradingMode.Spot, withdrawals.Data.Select(x => new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
+            var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
+            if (traveRule == true)
             {
-                Confirmations = x.ConfirmTimes,
-                Network = x.Network,
-                Tag = x.AddressTag,
-                TransactionId = x.TransactionId,
-                Fee = x.TransactionFee,
-                Id = x.Id
-            }).ToArray(), nextToken);
+                // Get data
+                var withdrawals = await Account.GetTravelRuleWithdrawalHistoryAsync(
+                    request.Asset,
+                    startTime: request.StartTime,
+                    endTime: request.EndTime,
+                    limit: request.Limit ?? 100,
+                    offset: offset,
+                    ct: ct).ConfigureAwait(false);
+                if (!withdrawals)
+                    return withdrawals.AsExchangeResult<SharedWithdrawal[]>(Exchange, null, default);
+
+                // Determine next token
+                OffsetToken? nextToken = null;
+                if (withdrawals.Data.Count() == (request.Limit ?? 100))
+                    nextToken = new OffsetToken((offset ?? 0) + withdrawals.Data.Count());
+
+                return withdrawals.AsExchangeResult(Exchange, TradingMode.Spot, withdrawals.Data.Select(x => new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
+                {
+                    Confirmations = x.ConfirmTimes,
+                    Network = x.Network,
+                    Tag = x.AddressTag,
+                    TransactionId = x.TransactionId,
+                    Fee = x.TransactionFee,
+                    Id = x.TravelRuleId.ToString()
+                }).ToArray(), nextToken);
+            }
+            else
+            {
+                // Get data
+                var withdrawals = await Account.GetWithdrawalHistoryAsync(
+                    request.Asset,
+                    startTime: request.StartTime,
+                    endTime: request.EndTime,
+                    limit: request.Limit ?? 100,
+                    offset: offset,
+                    ct: ct).ConfigureAwait(false);
+                if (!withdrawals)
+                    return withdrawals.AsExchangeResult<SharedWithdrawal[]>(Exchange, null, default);
+
+                // Determine next token
+                OffsetToken? nextToken = null;
+                if (withdrawals.Data.Count() == (request.Limit ?? 100))
+                    nextToken = new OffsetToken((offset ?? 0) + withdrawals.Data.Count());
+
+                return withdrawals.AsExchangeResult(Exchange, TradingMode.Spot, withdrawals.Data.Select(x => new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
+                {
+                    Confirmations = x.ConfirmTimes,
+                    Network = x.Network,
+                    Tag = x.AddressTag,
+                    TransactionId = x.TransactionId,
+                    Fee = x.TransactionFee,
+                    Id = x.Id
+                }).ToArray(), nextToken);
+            }
         }
 
         #endregion
 
         #region Withdraw client
 
-        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions();
+        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions()
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("TravelRuleQuestionnaire", typeof(BinanceWithdrawQuestionnaire), "Travel rule questionnaire", new BinanceWithdrawQuestionnaireEu())
+            }
+        };
         async Task<ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
         {
             var validationError = ((IWithdrawRestClient)this).WithdrawOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            // Get data
-            var withdrawal = await Account.WithdrawAsync(
-                request.Asset,
-                request.Address,
-                request.Quantity,
-                network: request.Network,
-                addressTag: request.AddressTag,
-                ct: ct).ConfigureAwait(false);
-            if (!withdrawal)
-                return withdrawal.AsExchangeResult<SharedId>(Exchange, null, default);
+            var questionnaire = ExchangeParameters.GetValue<BinanceWithdrawQuestionnaire?>(request.ExchangeParameters, Exchange, "TravelRuleQuestionnaire");
+            if (questionnaire == null)
+            {
+                var withdrawal = await Account.WithdrawAsync(
+                    request.Asset,
+                    request.Address,
+                    request.Quantity,
+                    network: request.Network,
+                    addressTag: request.AddressTag,
+                    ct: ct).ConfigureAwait(false);
+                if (!withdrawal)
+                    return withdrawal.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return withdrawal.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(withdrawal.Data.Id));
+                return withdrawal.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(withdrawal.Data.Id));
+            }
+            else
+            {
+                var withdrawal = await Account.TravelRuleWithdrawAsync(
+                    request.Asset,
+                    request.Address,
+                    request.Quantity,
+                    questionnaire,
+                    network: request.Network,
+                    addressTag: request.AddressTag,
+                    ct: ct).ConfigureAwait(false);
+                if (!withdrawal)
+                    return withdrawal.AsExchangeResult<SharedId>(Exchange, null, default);
+
+                return withdrawal.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(withdrawal.Data.TravelRuleId.ToString()));
+            }
         }
 
         #endregion
