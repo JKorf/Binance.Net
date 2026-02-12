@@ -200,6 +200,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.5.2 - 12 Feb 2026
+    * Updated CryptoExchange.Net to version 10.5.4, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added support for travel rule ExchangeParameters in Shared withdrawal/deposit endpoints
+
 * Version 12.5.1 - 11 Feb 2026
     * Updated CryptoExchange.Net to version 10.5.3, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Fixed restClient.SpotApi.Account.GetTravelRuleWithdrawalHistoryAsync deserialization if questionnaire has value
