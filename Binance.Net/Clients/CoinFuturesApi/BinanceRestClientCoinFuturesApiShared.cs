@@ -828,6 +828,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var (startTime, endTime, fromId) = ExchangeHelpers.ApplyPaginationRequestFilters(
                 ExchangeHelpers.PaginationFilterType.FromId,
                 ExchangeHelpers.PaginationFilterType.Time,
+                PageDirection.Descending,
                 direction, 
                 request.StartTime,
                 request.EndTime,
@@ -835,9 +836,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 pageRequest?.NextEndTime,
                 TimeSpan.FromHours(1),
                 pageRequest?.NextFromId);
-
-            // TODO can we apply the above logic automatically?
-            // Also need to be able to apply a max range between start/endTime. For example this one has a max limit of 1 hour between start/end
 
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
                 symbol,
