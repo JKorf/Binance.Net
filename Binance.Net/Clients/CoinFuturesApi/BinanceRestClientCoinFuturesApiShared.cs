@@ -401,7 +401,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true, 100, true);
+        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(true, 100, true);
         async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
@@ -482,7 +482,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true, 1000, true);
+        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(true, 1000, true);
         async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
@@ -806,40 +806,71 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion
 
         #region Trade History client
-        GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(SharedPaginationSupport.Ascending, true, 500, false);
+        GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(true, 1000, false)
+        {
+            SupportsAscendingPagination = true,
+            SupportsDescendingPagination = true,
+            MaxAge = TimeSpan.FromDays(365)
+        };
 
-        async Task<ExchangeWebResult<SharedTrade[]>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedTrade[]>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((ITradeHistoryRestClient)this).GetTradeHistoryOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedTrade[]>(Exchange, validationError);
 
-            long? fromId = null;
-            if (pageToken is FromIdToken token)
-                fromId = long.Parse(token.FromToken);
-
-            // Get data
+            // If ascending we use FromId to just continuously poll
+            // If descending we use the endTime without startTime to return the x trades before the end time
+            var direction = request.Direction ?? PageDirection.Ascending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
+            var limit = request.Limit ?? 1000;
+
+            var (startTime, endTime, fromId) = ExchangeHelpers.ApplyPaginationRequestFilters(
+                ExchangeHelpers.PaginationFilterType.FromId,
+                ExchangeHelpers.PaginationFilterType.Time,
+                direction, 
+                request.StartTime,
+                request.EndTime,
+                pageRequest?.NextStartTime,
+                pageRequest?.NextEndTime,
+                TimeSpan.FromHours(1),
+                pageRequest?.NextFromId);
+
+            // TODO can we apply the above logic automatically?
+            // Also need to be able to apply a max range between start/endTime. For example this one has a max limit of 1 hour between start/end
+
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
                 symbol,
-                startTime: fromId != null ? null : request.StartTime,
-                endTime: fromId != null ? null : request.EndTime,
-                limit: request.Limit ?? 500,
+                startTime: startTime,
+                endTime: endTime,
                 fromId: fromId,
+                limit: limit,
                 ct: ct).ConfigureAwait(false);
+
             if (!result)
                 return result.AsExchangeResult<SharedTrade[]>(Exchange, null, default);
 
-            FromIdToken? nextToken = null;
-            if (result.Data.Any() && result.Data.Last().TradeTime < request.EndTime)
-                nextToken = new FromIdToken((result.Data.Max(x => x.Id) + 1).ToString());
+            PageRequest? nextPageRequest = null;
+            if (ExchangeHelpers.CheckForNextPage(result.Data.Length, result.Data.Select(x => x.TradeTime), request.StartTime, request.EndTime, request.Limit ?? 1000, direction))
+            {
+                // Data might be available on next page
+                if (direction == PageDirection.Ascending)
+                    nextPageRequest = PageRequest.FromNextFromIdAsc(result.Data.Select(x => x.Id));
+                else
+                    nextPageRequest = PageRequest.FromNextEndTimeDesc(result.Data.Select(x => x.TradeTime));
+            }
 
             // Return
-            return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.Where(x => x.TradeTime < request.EndTime).Select(x =>
-                new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.TradeTime)
-                {
-                    Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
-                }).ToArray(), nextToken);
+            return result.AsExchangeResult(
+                Exchange,
+                TradingMode.Spot,
+                ExchangeHelpers.ApplyFilter(result.Data, x => x.TradeTime, request.StartTime, request.EndTime, direction)
+                    .Select(x =>
+                        new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.TradeTime)
+                        {
+                            Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
+                        }).ToArray(),
+                nextPageRequest);
         }
         #endregion
 
