@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region Klines client
 
-        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 1500, false,
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(false, false, true, 1500, false,
                 SharedKlineInterval.OneMinute,
                 SharedKlineInterval.FiveMinutes,
                 SharedKlineInterval.FifteenMinutes,
@@ -32,7 +32,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 SharedKlineInterval.OneMonth
             );
 
-        async Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageToken, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
@@ -46,8 +46,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
             DateTime endTime = request.EndTime ?? DateTime.UtcNow;
             DateTime? startTime = request.StartTime;
-            if (pageToken is DateTimeToken dateTimeToken)
-                endTime = dateTimeToken.LastTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    endTime = dateTimeToken.LastTime;
 
             var limit = request.Limit ?? 1000;
             if (startTime == null || startTime < endTime)
@@ -72,16 +72,16 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return result.AsExchangeResult<SharedKline[]>(Exchange, null, default);
 
             // Get next token
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == limit)
-            {
-                var minOpenTime = result.Data.Min(x => x.OpenTime);
-                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)interval));
-            }
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == limit)
+            //{
+            //    var minOpenTime = result.Data.Min(x => x.OpenTime);
+            //    if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+            //        nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)interval));
+            //}
 
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
-                new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+                new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray()/*, nextToken*/);
         }
 
         #endregion
@@ -401,8 +401,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(true, 100, true);
-        async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
+        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(false, false, true, 100, true);
+        async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageToken, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -410,8 +410,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // Determine page token
             DateTime? fromTimestamp = null;
-            if (pageToken is DateTimeToken dateTimeToken)
-                fromTimestamp = dateTimeToken.LastTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    fromTimestamp = dateTimeToken.LastTime;
 
             // Get data
             var orders = await Trading.GetOrdersAsync(request.Symbol!.GetSymbol(FormatSymbol),
@@ -423,9 +423,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
             // Get next token
-            DateTimeToken? nextToken = null;
-            if (orders.Data.Count() == (request.Limit ?? 100))
-                nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
+            //DateTimeToken? nextToken = null;
+            //if (orders.Data.Count() == (request.Limit ?? 100))
+            //    nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
 
             return orders.AsExchangeResult(Exchange, SupportedTradingModes, orders.Data.Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired).Select(x => new SharedFuturesOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
@@ -447,7 +447,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ReduceOnly = x.ReduceOnly,
                 TriggerPrice = x.StopPrice,
                 IsTriggerOrder = x.StopPrice > 0
-            }).ToArray());
+            }).ToArray()/*, nextToken*/);
         }
 
         EndpointOptions<GetOrderTradesRequest> IFuturesOrderRestClient.GetFuturesOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
@@ -482,8 +482,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(true, 1000, true);
-        async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(false, false,true, 1000, true);
+        async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, PageRequest? pageToken, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -491,8 +491,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // Determine page token
             long? fromId = null;
-            if (pageToken is FromIdToken fromIdToken)
-                fromId = long.Parse(fromIdToken.FromToken);
+            //if (pageToken is FromIdToken fromIdToken)
+            //    fromId = long.Parse(fromIdToken.FromToken);
 
             // Get data
             var orders = await Trading.GetUserTradesAsync(request.Symbol!.GetSymbol(FormatSymbol),
@@ -506,9 +506,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             // Get next token
-            FromIdToken? nextToken = null;
-            if (orders.Data.Count() == (request.Limit ?? 500))
-                nextToken = new FromIdToken(orders.Data.Max(o => o.Id).ToString());
+            //FromIdToken? nextToken = null;
+            //if (orders.Data.Count() == (request.Limit ?? 500))
+            //    nextToken = new FromIdToken(orders.Data.Max(o => o.Id).ToString());
 
             return orders.AsExchangeResult(Exchange, request.Symbol!.TradingMode, orders.Data.Select(x => new SharedUserTrade(
                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
@@ -525,7 +525,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 Fee = x.Fee,
                 FeeAsset = x.FeeAsset,
                 Role = x.Maker ? SharedRole.Maker : SharedRole.Taker
-            }).ToArray(), nextToken);
+            }).ToArray()/*, nextToken*/);
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesOrderRestClient.CancelFuturesOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -729,9 +729,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 1000, false);
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(false, false, true, 1000, false);
 
-        async Task<ExchangeWebResult<SharedFuturesKline[]>> IMarkPriceKlineRestClient.GetMarkPriceKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesKline[]>> IMarkPriceKlineRestClient.GetMarkPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageToken, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
@@ -745,8 +745,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
             DateTime endTime = request.EndTime ?? DateTime.UtcNow;
             DateTime? startTime = request.StartTime;
-            if (pageToken is DateTimeToken dateTimeToken)
-                endTime = dateTimeToken.LastTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    endTime = dateTimeToken.LastTime;
 
             var limit = request.Limit ?? 1000;
             if (startTime == null || startTime < endTime)
@@ -771,16 +771,16 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, null, default);
 
             // Get next token
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == limit)
-            {
-                var minOpenTime = result.Data.Min(x => x.OpenTime);
-                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
-            }
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == limit)
+            //{
+            //    var minOpenTime = result.Data.Min(x => x.OpenTime);
+            //    if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+            //        nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
+            //}
 
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
-                new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+                new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray()/*, nextToken*/);
         }
 
         #endregion
@@ -806,10 +806,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion
 
         #region Trade History client
-        GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(true, 1000, false)
+        GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(true, true, true, 1000, false)
         {
-            SupportsAscendingPagination = true,
-            SupportsDescendingPagination = true,
             MaxAge = TimeSpan.FromDays(365)
         };
 
@@ -821,21 +819,21 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             // If ascending we use FromId to just continuously poll
             // If descending we use the endTime without startTime to return the x trades before the end time
-            var direction = request.Direction ?? PageDirection.Ascending;
+            var direction = request.Direction ?? DataDirection.Ascending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
 
             var (startTime, endTime, fromId) = ExchangeHelpers.ApplyPaginationRequestFilters(
                 ExchangeHelpers.PaginationFilterType.FromId,
                 ExchangeHelpers.PaginationFilterType.Time,
-                PageDirection.Descending,
+                DataDirection.Descending,
                 direction, 
                 request.StartTime,
                 request.EndTime,
-                pageRequest?.NextStartTime,
-                pageRequest?.NextEndTime,
+                pageRequest?.StartTime,
+                pageRequest?.EndTime,
                 TimeSpan.FromHours(1),
-                pageRequest?.NextFromId);
+                pageRequest?.FromId);
 
             var result = await ExchangeData.GetAggregatedTradeHistoryAsync(
                 symbol,
@@ -852,10 +850,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (ExchangeHelpers.CheckForNextPage(result.Data.Length, result.Data.Select(x => x.TradeTime), request.StartTime, request.EndTime, request.Limit ?? 1000, direction))
             {
                 // Data might be available on next page
-                if (direction == PageDirection.Ascending)
-                    nextPageRequest = PageRequest.FromNextFromIdAsc(result.Data.Select(x => x.Id));
+                if (direction == DataDirection.Ascending)
+                    nextPageRequest = PageRequest.NextFromIdAsc(result.Data.Select(x => x.Id));
                 else
-                    nextPageRequest = PageRequest.FromNextEndTimeDesc(result.Data.Select(x => x.TradeTime));
+                    nextPageRequest = PageRequest.NextEndTimeDesc(result.Data.Select(x => x.TradeTime));
             }
 
             // Return
@@ -874,9 +872,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 1000, false);
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(false, false, true, 1000, false);
 
-        async Task<ExchangeWebResult<SharedFuturesKline[]>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesKline[]>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageToken, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
@@ -890,8 +888,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
             DateTime endTime = request.EndTime ?? DateTime.UtcNow;
             DateTime? startTime = request.StartTime;
-            if (pageToken is DateTimeToken dateTimeToken)
-                endTime = dateTimeToken.LastTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    endTime = dateTimeToken.LastTime;
 
             var limit = request.Limit ?? 1000;
             if (startTime == null || startTime < endTime)
@@ -916,16 +914,16 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, null, default);
 
             // Get next token
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == limit)
-            {
-                var minOpenTime = result.Data.Min(x => x.OpenTime);
-                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
-            }
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == limit)
+            //{
+            //    var minOpenTime = result.Data.Min(x => x.OpenTime);
+            //    if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+            //        nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
+            //}
 
             return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
-            new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray()/*, nextToken*/);
         }
 
         #endregion
@@ -949,17 +947,17 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion
 
         #region Funding Rate client
-        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(SharedPaginationSupport.Ascending, true, 1000, false);
+        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(false, false, true, 1000, false);
 
-        async Task<ExchangeWebResult<SharedFundingRate[]>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFundingRate[]>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, PageRequest? pageToken, CancellationToken ct)
         {
             var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFundingRate[]>(Exchange, validationError);
 
             DateTime? fromTime = null;
-            if (pageToken is DateTimeToken token)
-                fromTime = token.LastTime;
+            //if (pageToken is DateTimeToken token)
+            //    fromTime = token.LastTime;
 
             // Get data
             var result = await ExchangeData.GetFundingRatesAsync(
@@ -971,12 +969,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result)
                 return result.AsExchangeResult<SharedFundingRate[]>(Exchange, null, default);
 
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == (request.Limit ?? 1000))
-                nextToken = new DateTimeToken(result.Data.Max(x => x.FundingTime).AddSeconds(1));
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == (request.Limit ?? 1000))
+            //    nextToken = new DateTimeToken(result.Data.Max(x => x.FundingTime).AddSeconds(1));
 
             // Return
-            return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime)).ToArray(), nextToken);
+            return result.AsExchangeResult(Exchange, request.Symbol!.TradingMode, result.Data.Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime)).ToArray()/*, nextToken*/);
         }
         #endregion
 
