@@ -931,8 +931,6 @@ namespace Binance.Net.Clients.SpotApi
             if (validationError != null)
                 return new ExchangeWebResult<SharedWithdrawal[]>(Exchange, validationError);
 
-#warning validate allowed directions
-
             var limit = request.Limit ?? 100; 
             var direction = DataDirection.Descending;
             var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
@@ -940,7 +938,6 @@ namespace Binance.Net.Clients.SpotApi
             var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
             if (traveRule == true)
             {
-                // Get data
                 var result = await Account.GetTravelRuleWithdrawalHistoryAsync(
                     request.Asset,
                     startTime: pageParams.StartTime,
