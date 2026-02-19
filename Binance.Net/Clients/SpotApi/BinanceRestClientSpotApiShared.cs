@@ -31,7 +31,7 @@ namespace Binance.Net.Clients.SpotApi
             var direction = request.Direction ?? DataDirection.Ascending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
 
             // Get data
             var result = await ExchangeData.GetKlinesAsync(
@@ -53,8 +53,6 @@ namespace Binance.Net.Clients.SpotApi
                     result.Data.Select(x => x.OpenTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams);
 
             // Return
@@ -236,7 +234,7 @@ namespace Binance.Net.Clients.SpotApi
             var direction = request.Direction ?? DataDirection.Ascending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
             if (pageParams.FromId != null)
                 pageParams.StartTime = null; // If filtering using FromId no timestamps should be set
 
@@ -259,8 +257,6 @@ namespace Binance.Net.Clients.SpotApi
                 result.Data.Select(x => x.TradeTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams);
 
             // Return
@@ -450,7 +446,7 @@ namespace Binance.Net.Clients.SpotApi
             var limit = request.Limit ?? 1000;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var pageParams = Pagination.GetPaginationParameters(
-                direction, request.StartTime,
+                direction, limit, request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
                 pageRequest,
                 direction == DataDirection.Ascending,
@@ -475,8 +471,6 @@ namespace Binance.Net.Clients.SpotApi
                    result.Data.Select(x => x.CreateTime),
                    request.StartTime,
                    request.EndTime ?? DateTime.UtcNow,
-                   limit,
-                   direction,
                    pageParams,
                    pageRequest?.FromId != null ? null : TimeSpan.FromDays(1));
 
@@ -548,7 +542,7 @@ namespace Binance.Net.Clients.SpotApi
             var limit = request.Limit ?? 1000;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var pageParams = Pagination.GetPaginationParameters(
-                direction, request.StartTime,
+                direction, limit, request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
                 pageRequest,
                 direction == DataDirection.Ascending,
@@ -574,8 +568,6 @@ namespace Binance.Net.Clients.SpotApi
                 result.Data.Select(x => x.Timestamp),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 pageRequest?.FromId != null ? null : TimeSpan.FromDays(1));
 
@@ -812,7 +804,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var limit = request.Limit ?? 100;
             var direction = DataDirection.Descending;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
 
             var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
             if (traveRule == true)
@@ -834,8 +826,6 @@ namespace Binance.Net.Clients.SpotApi
                     result.Data.Select(x => x.InsertTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams,
                     TimeSpan.FromDays(90));
 
@@ -880,8 +870,6 @@ namespace Binance.Net.Clients.SpotApi
                     result.Data.Select(x => x.InsertTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams,
                     TimeSpan.FromDays(90));
 
@@ -927,7 +915,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var limit = request.Limit ?? 100; 
             var direction = DataDirection.Descending;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
 
             var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
             if (traveRule == true)
@@ -950,8 +938,6 @@ namespace Binance.Net.Clients.SpotApi
                     result.Data.Select(x => x.ApplyTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams,
                     TimeSpan.FromDays(90));
 
@@ -991,8 +977,6 @@ namespace Binance.Net.Clients.SpotApi
                     result.Data.Select(x => x.ApplyTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams,
                     TimeSpan.FromDays(90));
 
