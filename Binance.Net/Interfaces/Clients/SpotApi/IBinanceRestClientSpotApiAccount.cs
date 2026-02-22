@@ -579,6 +579,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Creates a listenToken for subscribing to the cross margin user data stream.
+        /// The token is valid for up to 24 hours.
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>ListenToken and expiration time</returns>
+        Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(CancellationToken ct = default);
+
+        /// <summary>
         /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
         /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Margin-User-Data-Stream" /></para>
         /// </summary>
