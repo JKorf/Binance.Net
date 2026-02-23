@@ -867,7 +867,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 result.Data.Select(x => x.TradeTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                pageParams);
+                pageParams,
+                maxAge: TimeSpan.FromDays(365));
 
             // Return
             return result.AsExchangeResult(
@@ -885,7 +886,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(false, false, true, 1000, false);
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(true, true, true, 1000, false);
 
         async Task<ExchangeWebResult<SharedFuturesKline[]>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
