@@ -200,6 +200,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.7.0 - 24 Feb 2026
+    * Updated CryptoExchange.Net to version 10.7.0
+    * Added additional Http settings to client options
+    * Updated Shared REST interfaces pagination logic
+    * Updated HttpClient registration, fixing issue of DNS changes not getting processed
+    * Fixed UserClientProvider using unconfigured HttpClient
+
 * Version 12.6.0 - 16 Feb 2026
     * Updated CryptoExchange.Net to version 10.6.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Fixed SymbolOrderBook websocket subscription not getting closed if when waiting for initial data times out
