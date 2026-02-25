@@ -136,11 +136,6 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Margin User Data Stream
-        /// <inheritdoc />
-        /// 
-        /// // Store last created margin subscription for renewal
-        internal BinanceMarginUserDataSubscription? LastMarginUserDataSubscription { get; private set; }
-
         public async Task<CallResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
             string listenToken,
             Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
@@ -151,17 +146,23 @@ namespace Binance.Net.Clients.SpotApi
             CancellationToken ct = default)
         {
             var subscription = new BinanceMarginUserDataSubscription(_logger, _client, listenToken, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onUserDataStreamTerminated);
-            LastMarginUserDataSubscription = subscription; //store here so we can renew it
 
             return await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
         }
 
         public async Task<CallResult> RenewMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)
         {
-            if (LastMarginUserDataSubscription == null)
-                return new CallResult(new WebError("No active margin user data subscription"));
+            var marginSubscriptions = _client.GetMarginUserDataSubscriptions();
+            var tasks = new List<Task<CallResult>>();
+            foreach (var marginSubscription in marginSubscriptions)
+                tasks.Add(marginSubscription.RenewTokenAsync(newListenToken));
 
-            return await LastMarginUserDataSubscription.RenewTokenAsync(newListenToken, ct).ConfigureAwait(false);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+            var error = tasks.FirstOrDefault(x => x.Result.Error != null);
+            if (error != null)
+                return new CallResult(error.Result.Error);
+
+            return CallResult.SuccessResult;
         }
 
         #endregion

@@ -916,10 +916,14 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Create a Margin listenToken
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userListenToken", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync<BinanceListenToken>(request, null, ct).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptionalBoolString("isIsolated", symbol != null ? true : null);
+            parameters.AddOptional("validity", validity == null ? null : Math.Round(validity.Value.TotalMilliseconds));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userListenToken", BinanceExchange.RateLimiter.SpotRestUid, 1);
+            return await _baseClient.SendAsync<BinanceListenToken>(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

@@ -208,5 +208,10 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BinanceSocketSpotMessageHandler();
+
+        internal BinanceMarginUserDataSubscription[] GetMarginUserDataSubscriptions()
+        {
+            return _socketConnections.Values.SelectMany(x => x.Subscriptions.OfType<BinanceMarginUserDataSubscription>()).ToArray();
+        }
     }
 }

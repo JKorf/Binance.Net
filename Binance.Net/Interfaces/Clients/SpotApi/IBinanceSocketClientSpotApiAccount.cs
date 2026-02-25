@@ -57,7 +57,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to the cross margin account update stream using a listenToken
         /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
         /// </summary>
-        /// <param name="listenToken">The listenToken obtained from StartMarginUserListenTokenAsync</param>
+        /// <param name="listenToken">The listenToken obtained from <see cref="IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(string?, TimeSpan?, CancellationToken)">StartMarginUserListenTokenAsync</see></param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
         /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
@@ -89,11 +89,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Seamlessly renew the margin user data stream listen token on the existing
-        /// connection without disconnecting. Call every ~12 hours before expiry.
+        /// Seamlessly renew the margin user data stream listen token on the existing connection without disconnecting. Call every ~12 hours before expiry.
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
         /// </summary>
-        Task<CallResult> RenewMarginUserDataTokenAsync(
-            string newListenToken,
-            CancellationToken ct = default);
+        /// <param name="newListenToken">Listen token retrieved by the <see cref="IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(string?, TimeSpan?, CancellationToken)">StartMarginUserListenTokenAsync</see> method</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<CallResult> RenewMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default);
     }
 }

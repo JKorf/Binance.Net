@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Binance.Net.Objects.Models.Spot;
 
-namespace Binance.Net.Objects.Models.Spot;
-
+/// <summary>
+/// Listen token
+/// </summary>
 public class BinanceListenToken
 {
+    /// <summary>
+    /// Token
+    /// </summary>
     [JsonPropertyName("token")]
     public string Token { get; set; } = string.Empty;
-
+    /// <summary>
+    /// Expiration time
+    /// </summary>
     [JsonPropertyName("expirationTime")]
-    public long ExpirationTime { get; set; }
+    public DateTime ExpirationTime { get; set; }
 }
