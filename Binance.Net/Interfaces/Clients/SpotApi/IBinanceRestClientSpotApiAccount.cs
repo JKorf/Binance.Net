@@ -571,14 +571,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BinanceCurrentRateLimit[]>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Starts a user stream by requesting a listen key. This listen key can be used in subsequent requests to BinanceSocketClient.SpotApi.Account..SubscribeToUserDataUpdates. The stream will close after 60 minutes unless a keep alive is send.
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Margin-User-Data-Stream" /></para>
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Listen key</returns>
-        Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = default);
-
-        /// <summary>
         /// Creates a listenToken for subscribing to the cross margin user data stream.
         /// The token is valid for up to 24 hours.
         /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
@@ -588,56 +580,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns>ListenToken and expiration time</returns>
         Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default);
-
-        /// <summary>
-        /// Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Margin-User-Data-Stream" /></para>
-        /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default);
-
-        /// <summary>
-        /// Stops the current user stream
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Margin-User-Data-Stream" /></para>
-        /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> StopMarginUserStreamAsync(string listenKey, CancellationToken ct = default);
-
-        /// <summary>
-        /// Starts a user stream  for margin account by requesting a listen key. 
-        /// This listen key can be used in subsequent requests to  BinanceSocketClient.SpotApi.Account.SubscribeToUserDataUpdates  
-        /// The stream will close after 60 minutes unless a keep alive is send.
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Start-Isolated-Margin-User-Data-Stream" /></para>
-        /// </summary>
-        /// <param name="symbol">The isolated symbol, for example `ETHUSDT`</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns>Listen key</returns>
-        Task<WebCallResult<string>> StartIsolatedMarginUserStreamAsync(string symbol, CancellationToken ct = default);
-
-        /// <summary>
-        /// Sends a keep alive for the current user stream for margin account listen key to keep the stream from closing. 
-        /// Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Keepalive-Isolated-Margin-User-Data-Stream" /></para>
-        /// </summary>
-        /// <param name="symbol">The isolated symbol, for example `ETHUSDT`</param>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default);
-
-        /// <summary>
-        /// Close the user stream for margin account
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream/Close-Isolated-Margin-User-Data-Stream" /></para>
-        /// </summary>
-        /// <param name="symbol">The isolated symbol, for example `ETHUSDT`</param>
-        /// <param name="listenKey">The listen key to keep alive</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the trading status for the current account

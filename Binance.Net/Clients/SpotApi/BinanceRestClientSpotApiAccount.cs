@@ -902,18 +902,6 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
-        #region Create a ListenKey
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<string>> StartMarginUserStreamAsync(CancellationToken ct = default)
-        {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ListenKey!);
-        }
-
-        #endregion
-
         #region Create a Margin listenToken
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default)
@@ -924,93 +912,6 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptional("validity", validity == null ? null : Math.Round(validity.Value.TotalMilliseconds));
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userListenToken", BinanceExchange.RateLimiter.SpotRestUid, 1);
             return await _baseClient.SendAsync<BinanceListenToken>(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Ping/Keep-alive a ListenKey
-
-        /// <inheritdoc />
-        public async Task<WebCallResult> KeepAliveMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
-        {
-            listenKey.ValidateNotNull(nameof(listenKey));
-
-            var parameters = new ParameterCollection
-            {
-                { "listenKey", listenKey },
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Invalidate a ListenKey
-
-        /// <inheritdoc />
-        public async Task<WebCallResult> StopMarginUserStreamAsync(string listenKey, CancellationToken ct = default)
-        {
-            listenKey.ValidateNotNull(nameof(listenKey));
-            var parameters = new ParameterCollection
-            {
-                { "listenKey", listenKey }
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/userDataStream", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Create a ListenKey
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<string>> StartIsolatedMarginUserStreamAsync(string symbol, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection()
-            {
-                {"symbol", symbol}
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            var result = await _baseClient.SendAsync<BinanceListenKey>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ListenKey!);
-        }
-
-        #endregion
-
-        #region Ping/Keep-alive a ListenKey
-
-        /// <inheritdoc />
-        public async Task<WebCallResult> KeepAliveIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
-        {
-            listenKey.ValidateNotNull(nameof(listenKey));
-            var parameters = new ParameterCollection
-            {
-                { "listenKey", listenKey },
-                {"symbol", symbol}
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Invalidate a ListenKey
-        /// <inheritdoc />
-        public async Task<WebCallResult> CloseIsolatedMarginUserStreamAsync(string symbol, string listenKey, CancellationToken ct = default)
-        {
-            listenKey.ValidateNotNull(nameof(listenKey));
-            var parameters = new ParameterCollection
-            {
-                { "listenKey", listenKey },
-                {"symbol", symbol}
-            };
-
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "sapi/v1/userDataStream/isolated", BinanceExchange.RateLimiter.SpotRestIp, 1);
-            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
         #endregion

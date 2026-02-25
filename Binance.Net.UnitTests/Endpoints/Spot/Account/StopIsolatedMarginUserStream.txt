@@ -1,5 +1,0 @@
-DELETE
-/sapi/v1/userDataStream/isolated
-false
-{
-}

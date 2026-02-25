@@ -77,12 +77,6 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Account.EnableIsolatedMarginAccountAsync("ETHUSDT"), "EnableIsolatedMarginAccount");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetEnabledIsolatedMarginAccountLimitAsync(), "GetEnabledIsolatedMarginAccountLimit");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetMarginOrderRateLimitStatusAsync(), "GetMarginOrderRateLimitStatus");
-            await tester.ValidateAsync(client => client.SpotApi.Account.StartMarginUserStreamAsync(), "StartMarginUserStream", "listenKey");
-            await tester.ValidateAsync(client => client.SpotApi.Account.KeepAliveMarginUserStreamAsync("123"), "KeepAliveMarginUserStream");
-            await tester.ValidateAsync(client => client.SpotApi.Account.StopMarginUserStreamAsync("123"), "StopMarginUserStream");
-            await tester.ValidateAsync(client => client.SpotApi.Account.StartIsolatedMarginUserStreamAsync("ETHUSDT"), "StartIsolatedMarginUserStream", "listenKey");
-            await tester.ValidateAsync(client => client.SpotApi.Account.KeepAliveIsolatedMarginUserStreamAsync("ETHUSDT", "123"), "KeepAliveIsolatedMarginUserStream");
-            await tester.ValidateAsync(client => client.SpotApi.Account.CloseIsolatedMarginUserStreamAsync("ETHUSDT", "123"), "StopIsolatedMarginUserStream");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetTradingStatusAsync(), "GetTradingStatus", "data");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetOrderRateLimitStatusAsync(), "GetOrderRateLimitStatus");
             await tester.ValidateAsync(client => client.SpotApi.Account.GetRebateHistoryAsync(), "GetRebateHistory", "data");
