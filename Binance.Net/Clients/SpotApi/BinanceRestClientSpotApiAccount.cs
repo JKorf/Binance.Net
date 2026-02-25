@@ -902,9 +902,9 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
-        #region Create a Margin listenToken
+        #region Get Margin User Listen Token
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("symbol", symbol);

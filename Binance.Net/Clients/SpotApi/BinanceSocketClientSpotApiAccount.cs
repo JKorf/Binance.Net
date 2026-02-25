@@ -150,7 +150,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
         }
 
-        public async Task<CallResult> RenewMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)
+        public async Task<CallResult> UpdateMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)
         {
             var marginSubscriptions = _client.GetMarginUserDataSubscriptions();
             var tasks = new List<Task<CallResult>>();

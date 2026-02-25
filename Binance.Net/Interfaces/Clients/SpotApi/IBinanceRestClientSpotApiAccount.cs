@@ -579,7 +579,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="validity">Validity of the token, max 24 hours</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>ListenToken and expiration time</returns>
-        Task<WebCallResult<BinanceListenToken>> StartMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the trading status for the current account
