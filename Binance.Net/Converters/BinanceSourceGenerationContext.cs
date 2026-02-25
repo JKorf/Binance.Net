@@ -650,6 +650,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceListRecords<BinanceNftWithdraw>))]
     [JsonSerializable(typeof(BinanceListRecords<BinanceNftTransaction>))]
     [JsonSerializable(typeof(BinanceListRecords<BinanceNftAsset>))]
+    [JsonSerializable(typeof(BinanceListenToken))]
     internal partial class BinanceSourceGenerationContext : JsonSerializerContext
     {
     }

@@ -135,6 +135,38 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        #region Margin User Data Stream
+        public async Task<CallResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
+            string listenToken,
+            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
+            CancellationToken ct = default)
+        {
+            var subscription = new BinanceMarginUserDataSubscription(_logger, _client, listenToken, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onUserDataStreamTerminated);
+
+            return await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
+        }
+
+        public async Task<CallResult> RenewMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)
+        {
+            var marginSubscriptions = _client.GetMarginUserDataSubscriptions();
+            var tasks = new List<Task<CallResult>>();
+            foreach (var marginSubscription in marginSubscriptions)
+                tasks.Add(marginSubscription.RenewTokenAsync(newListenToken));
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+            var error = tasks.FirstOrDefault(x => x.Result.Error != null);
+            if (error != null)
+                return new CallResult(error.Result.Error);
+
+            return CallResult.SuccessResult;
+        }
+
+        #endregion
+
         #endregion
     }
 }

@@ -1592,6 +1592,9 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StartMarginUserStreamAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.KeepAliveMarginUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -6212,6 +6215,11 @@
             </summary>
         </member>
         <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceListenKeyArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Converters.BinanceSourceGenerationContext.BinanceListenToken">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -17241,6 +17249,17 @@
             <param name="ct">Cancellation token</param>
             <returns>Listen key</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <summary>
+            Creates a listenToken for subscribing to the cross margin user data stream.
+            The token is valid for up to 24 hours.
+            <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
+            </summary>
+            <param name="symbol">Symbol for isolated margin, null for cross margin</param>
+            <param name="validity">Validity of the token, max 24 hours</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ListenToken and expiration time</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.KeepAliveMarginUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Sends a keep alive for the current user stream listen key to keep the stream from closing. Stream auto closes after 60 minutes if no keep alive is send. 30 minute interval for keep alive is recommended.
@@ -18798,6 +18817,20 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToMarginUserDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.BinanceStreamEvent}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to the cross margin account update stream using a listenToken
+            <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
+            </summary>
+            <param name="listenToken">The listenToken obtained from <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">StartMarginUserListenTokenAsync</see></param>
+            <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+            <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+            <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
+            <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+            <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.SubscribeToUserRiskDataUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceMarginCallUpdate}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to the risk data account update stream. Prior to using this, the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(System.Threading.CancellationToken)">StartRiskDataUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
@@ -18807,6 +18840,14 @@
             <param name="onLiabilityUpdate">Event handler for liability updates</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.RenewMarginUserDataTokenAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Seamlessly renew the margin user data stream listen token on the existing connection without disconnecting. Call every ~12 hours before expiry.
+            <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
+            </summary>
+            <param name="newListenToken">Listen token retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">StartMarginUserListenTokenAsync</see> method</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData">
             <summary>
@@ -26404,6 +26445,21 @@
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIpRestriction.ApiKey">
             <summary>
             The API key
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Models.Spot.BinanceListenToken">
+            <summary>
+            Listen token
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceListenToken.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceListenToken.ExpirationTime">
+            <summary>
+            Expiration time
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceListResult`1">
@@ -41243,6 +41299,12 @@
         </member>
         <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginRiskDataSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Binance.Net.Objects.Models.BinanceCombinedStream{Binance.Net.Objects.Models.Spot.Margin.BinanceLiabilityUpdate})">
             <inheritdoc />
+        </member>
+        <member name="M:Binance.Net.Objects.Sockets.Subscriptions.BinanceMarginUserDataSubscription.RenewTokenAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Seamlessly renew the listen token on the existing connection without
+            disconnecting. Also updates the stored token so reconnects use the new value.
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Sockets.Subscriptions.BinanceSpotUserDataSubscription">
             <inheritdoc />
