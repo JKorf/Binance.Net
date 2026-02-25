@@ -1589,7 +1589,7 @@
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetMarginOrderRateLimitStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Binance.Net.Clients.SpotApi.BinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(System.Threading.CancellationToken)">
@@ -17223,7 +17223,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
             <summary>
             Creates a listenToken for subscribing to the cross margin user data stream.
             The token is valid for up to 24 hours.
@@ -18746,7 +18746,7 @@
             Subscribes to the cross margin account update stream using a listenToken
             <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
             </summary>
-            <param name="listenToken">The listenToken obtained from <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">StartMarginUserListenTokenAsync</see></param>
+            <param name="listenToken">The listenToken obtained from <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">GetMarginUserListenTokenAsync</see></param>
             <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
             <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
             <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
@@ -18765,12 +18765,12 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.RenewMarginUserDataTokenAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiAccount.UpdateMarginUserDataTokenAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Seamlessly renew the margin user data stream listen token on the existing connection without disconnecting. Call every ~12 hours before expiry.
             <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
             </summary>
-            <param name="newListenToken">Listen token retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.StartMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">StartMarginUserListenTokenAsync</see> method</param>
+            <param name="newListenToken">Listen token retrieved by the <see cref="M:Binance.Net.Interfaces.Clients.SpotApi.IBinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(System.String,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">GetMarginUserListenTokenAsync</see> method</param>
             <param name="ct">Cancellation token for closing this subscription</param>
         </member>
         <member name="T:Binance.Net.Interfaces.Clients.SpotApi.IBinanceSocketClientSpotApiExchangeData">
