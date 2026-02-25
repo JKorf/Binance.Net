@@ -200,6 +200,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.8.0 - 25 Feb 2026
+    * Updated CryptoExchange.Net to version 10.7.1
+    * Added restClient.SpotApi.Account.GetMarginUserListenTokenAsync endpoint for starting/maintaining margin user data subscription
+    * Added socketClient.SpotApi.Account.SubscribeToMarginUserDataUpdatesAsync subscription for margin user data stream
+    * Added socketClient.SpotApi.Account.UpdateMarginUserDataTokenAsync for keeping alive the margin user data stream
+    * Removed deprecated margin stream endpoints
+
 * Version 12.7.0 - 24 Feb 2026
     * Updated CryptoExchange.Net to version 10.7.0
     * Added additional Http settings to client options
