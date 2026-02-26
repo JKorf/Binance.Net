@@ -147,7 +147,111 @@ namespace Binance.Net.Converters
 #endif
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
         {
-            JsonSerializer.Serialize<T>(writer, value, SerializerOptions.WithConverters(BinanceExchange._serializerContext));
+            writer.WriteStartObject();
+            if (value is BinanceSymbolPriceFilter priceFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(priceFilter.FilterType));
+                writer.WriteString("minPrice", priceFilter.MinPrice.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("maxPrice", priceFilter.MaxPrice.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("tickSize", priceFilter.TickSize.ToString(CultureInfo.InvariantCulture));
+            }
+            else if (value is BinanceSymbolPercentPriceFilter pricePercentFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(pricePercentFilter.FilterType));
+                writer.WriteString("multiplierUp", pricePercentFilter.MultiplierUp.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("multiplierDown", pricePercentFilter.MultiplierDown.ToString(CultureInfo.InvariantCulture));
+                if (pricePercentFilter.AveragePriceMinutes != null)
+                    writer.WriteNumber("avgPriceMins", pricePercentFilter.AveragePriceMinutes.Value);
+                if (pricePercentFilter.MultiplierDecimal != null)
+                    writer.WriteNumber("multiplierDecimal", pricePercentFilter.MultiplierDecimal.Value);
+            }
+            else if (value is BinanceSymbolPercentPriceBySideFilter pricePercentSideFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(pricePercentSideFilter.FilterType));
+                writer.WriteString("askMultiplierUp", pricePercentSideFilter.AskMultiplierUp.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("askMultiplierDown", pricePercentSideFilter.AskMultiplierDown.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("bidMultiplierUp", pricePercentSideFilter.BidMultiplierUp.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("bidMultiplierDown", pricePercentSideFilter.BidMultiplierDown.ToString(CultureInfo.InvariantCulture));
+                writer.WriteNumber("avgPriceMins", pricePercentSideFilter.AveragePriceMinutes);
+            }
+            else if (value is BinanceSymbolLotSizeFilter lotSizeFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(lotSizeFilter.FilterType));
+                writer.WriteString("maxQty", lotSizeFilter.MaxQuantity.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("minQty", lotSizeFilter.MinQuantity.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("stepSize", lotSizeFilter.StepSize.ToString(CultureInfo.InvariantCulture));
+            }
+            else if (value is BinanceSymbolMarketLotSizeFilter marketLotSizeFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(marketLotSizeFilter.FilterType));
+                writer.WriteString("maxQty", marketLotSizeFilter.MaxQuantity.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("minQty", marketLotSizeFilter.MinQuantity.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("stepSize", marketLotSizeFilter.StepSize.ToString(CultureInfo.InvariantCulture));
+            }
+            else if (value is BinanceSymbolMinNotionalFilter minNotionalFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(minNotionalFilter.FilterType));
+                writer.WriteString("minNotional", minNotionalFilter.MinNotional.ToString(CultureInfo.InvariantCulture));
+                if (minNotionalFilter.ApplyToMarketOrders != null)
+                    writer.WriteBoolean("applyToMarket", minNotionalFilter.ApplyToMarketOrders.Value);
+                if (minNotionalFilter.AveragePriceMinutes != null)
+                    writer.WriteNumber("avgPriceMins", minNotionalFilter.AveragePriceMinutes.Value);
+            }
+            else if (value is BinanceSymbolNotionalFilter notionalFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(notionalFilter.FilterType));
+                writer.WriteString("minNotional", notionalFilter.MinNotional.ToString(CultureInfo.InvariantCulture));
+                writer.WriteString("maxNotional", notionalFilter.MaxNotional.ToString(CultureInfo.InvariantCulture));
+                writer.WriteBoolean("applyMinToMarket", notionalFilter.ApplyMinToMarketOrders);
+                writer.WriteBoolean("applyMaxToMarket", notionalFilter.ApplyMaxToMarketOrders);
+                writer.WriteNumber("avgPriceMins", notionalFilter.AveragePriceMinutes);
+            }
+            else if (value is BinanceSymbolMaxOrdersFilter maxOrdersFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(maxOrdersFilter.FilterType));
+                writer.WriteNumber("maxNumOrders", maxOrdersFilter.MaxNumberOrders);
+            }
+            else if (value is BinanceSymbolMaxAlgorithmicOrdersFilter maxAlgoOrdersFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(maxAlgoOrdersFilter.FilterType));
+                writer.WriteNumber("maxNumAlgoOrders", maxAlgoOrdersFilter.MaxNumberAlgorithmicOrders);                
+            }
+            else if (value is BinanceSymbolIcebergPartsFilter icebergPartsFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(icebergPartsFilter.FilterType));
+                writer.WriteNumber("limit", icebergPartsFilter.Limit);
+            }
+            else if (value is BinanceSymbolMaxPositionFilter positionFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(positionFilter.FilterType));
+                writer.WriteString("maxPosition", positionFilter.MaxPosition.ToString(CultureInfo.InvariantCulture));                
+            }
+            else if (value is BinanceSymbolTrailingDeltaFilter trailingDeltaFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(trailingDeltaFilter.FilterType));
+                writer.WriteNumber("maxTrailingBelowDelta", trailingDeltaFilter.MaxTrailingBelowDelta);
+                writer.WriteNumber("maxTrailingAboveDelta", trailingDeltaFilter.MaxTrailingAboveDelta);
+                writer.WriteNumber("minTrailingBelowDelta", trailingDeltaFilter.MinTrailingBelowDelta);
+                writer.WriteNumber("minTrailingAboveDelta", trailingDeltaFilter.MinTrailingAboveDelta);
+                
+            }
+            else if (value is BinanceMaxNumberOfIcebergOrdersFilter icebergOrdersFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(icebergOrdersFilter.FilterType));
+                writer.WriteNumber("maxNumIcebergOrders", icebergOrdersFilter.MaxNumIcebergOrders);                
+            }
+            else if (value is BinanceMaxNumberOfOrderAmendsFilter amendsFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(amendsFilter.FilterType));
+                writer.WriteNumber("maxNumOrderAmends", amendsFilter.MaxNumOrderAmends);               
+
+            }
+            else if (value is BinanceMaxNumberOfOrderListsFilter orderListsFilter)
+            {
+                writer.WriteString("filterType", EnumConverter.GetString(orderListsFilter.FilterType));
+                writer.WriteNumber("maxNumOrderLists", orderListsFilter.MaxNumOrderLists);                
+            }
+            writer.WriteEndObject();
         }
     }
 }
