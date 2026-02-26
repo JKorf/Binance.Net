@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Sockets
                     }, originalData);
                 }
 
-                if (message.Status == 400)
+                if (message.Status == 400 || message.Status == 409)
                 {
                     if (message.Error!.Data == null)
                         return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Error.Code, _client.GetErrorInfo(message.Error.Code, message.Error.Message)));
