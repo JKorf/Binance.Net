@@ -21409,7 +21409,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetPositionInformationAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             DEPRECATED; USE Trading.GetPositionsAsync INSTEAD
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2" /><br />
+            Endpoint:<br />
+            GET /fapi/v2/positionRisk
+            </para>
             </summary>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21419,7 +21424,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.ModifyPositionModeAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/positionSide/dual
+            </para>
             </summary>
             <param name="dualPositionSide">User position mode</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21429,7 +21439,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetPositionModeAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/positionSide/dual
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21438,7 +21453,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.ChangeInitialLeverageAsync(System.String,System.Int32,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Requests to change the initial leverage of the given symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Initial-Leverage" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/leverage
+            </para>
             </summary>
             <param name="symbol">Symbol to change the initial leverage for, for example `ETHUSDT`</param>
             <param name="leverage">The amount of initial leverage to change to</param>
@@ -21449,7 +21469,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.ChangeMarginTypeAsync(System.String,Binance.Net.Enums.FuturesMarginType,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin type for an open position
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Margin-Type" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/marginType
+            </para>
             </summary>
             <param name="symbol">Symbol to change the position type for, for example `ETHUSDT`</param>
             <param name="marginType">The type of margin to use</param>
@@ -21460,7 +21485,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.ModifyPositionMarginAsync(System.String,System.Decimal,Binance.Net.Enums.FuturesMarginChangeDirectionType,System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Change the margin on an open position
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/positionMargin
+            </para>
             </summary>
             <param name="symbol">Symbol to adjust the position margin for, for example `ETHUSDT`</param>
             <param name="amount">The amount of margin to be used</param>
@@ -21473,7 +21503,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetMarginChangeHistoryAsync(System.String,System.Nullable{Binance.Net.Enums.FuturesMarginChangeDirectionType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Requests the margin change history for a specific symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Position-Margin-Change-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/positionMargin/history
+            </para>
             </summary>
             <param name="symbol">Symbol to get margin history for, for example `ETHUSDT`</param>
             <param name="type">Filter the history by the direction of margin change</param>
@@ -21487,7 +21522,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetIncomeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets the income history for the futures account
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Income-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/income
+            </para>
             </summary>
             <param name="symbol">The symbol to get income history from, for example `ETHUSDT`</param>
             <param name="incomeType">The income type filter to apply to the request</param>
@@ -21502,7 +21542,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetBracketsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets Notional and Leverage Brackets.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Notional-and-Leverage-Brackets" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/leverageBracket
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21512,7 +21557,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetPositionAdlQuantileEstimationAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get position ADL quantile estimations
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/adlQuantile
+            </para>
             </summary>
             <param name="symbol">Only get for this symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21522,7 +21572,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetAccountInfoV2Async(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get account information, including position and balances
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2" /><br />
+            Endpoint:<br />
+            GET /fapi/v2/account
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21531,7 +21586,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetAccountInfoV3Async(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get account information, including position and balances
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /><br />
+            Endpoint:<br />
+            GET /fapi/v3/account
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21539,7 +21599,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetBalancesAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account balances
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Account-Balance-V2" /><br />
+            Endpoint:<br />
+            GET /fapi/v3/balance
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21548,7 +21613,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetMultiAssetsModeAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/multiAssetsMargin
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21557,7 +21627,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.SetMultiAssetsModeAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/multiAssetsMargin
+            </para>
             </summary>
             <param name="enabled">Enabled or not</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21567,7 +21642,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetTradingStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the current status of the trading rules for the account
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Futures-Trading-Quantitative-Rules-Indicators" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/apiTradingStatus
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21576,7 +21656,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetUserCommissionRateAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets account commission rates
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/User-Commission-Rate" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/commissionRate
+            </para>
             </summary>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21586,7 +21671,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(System.Threading.CancellationToken)">
             <summary>
             Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client. The stream will close after 60 minutes unless <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">KeepAliveUserStreamAsync</see> is called.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Start-User-Data-Stream" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/listenKey
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -21594,7 +21684,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.KeepAliveUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream" /><br />
+            Endpoint:<br />
+            PUT /fapi/v1/listenKey
+            </para>
             </summary>
             <param name="listenKey">The listen key to keep alive</param>
             <param name="ct">Cancellation token</param>
@@ -21603,7 +21698,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.StopUserStreamAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Stop the user stream, no updates will be send anymore
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream" /><br />
+            Endpoint:<br />
+            DELETE /fapi/v1/listenKey
+            </para>
             </summary>
             <param name="listenKey">The listen key to stop</param>
             <param name="ct">Cancellation token</param>
@@ -21612,7 +21712,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForTransactionHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get download id for downloading transaction history
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/income/asyn
+            </para>
             </summary>
             <param name="startTime">Start time of the data to download</param>
             <param name="endTime">End time of the data to download</param>
@@ -21623,7 +21728,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadLinkForTransactionHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get the download link for transaction history by download id
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/income/asyn/id
+            </para>
             </summary>
             <param name="downloadId">The download id as requested by <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForTransactionHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)" /></param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21633,7 +21743,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForOrderHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get download id for downloading order history
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/order/asyn
+            </para>
             </summary>
             <param name="startTime">Start time of the data to download</param>
             <param name="endTime">End time of the data to download</param>
@@ -21644,7 +21759,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadLinkForOrderHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get the download link for order history by download id
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/order/asyn/id
+            </para>
             </summary>
             <param name="downloadId">The download id as requested by <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForOrderHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)" /></param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21654,7 +21774,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForTradeHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get download id for downloading trade history
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/trade/asyn
+            </para>
             </summary>
             <param name="startTime">Start time of the data to download</param>
             <param name="endTime">End time of the data to download</param>
@@ -21665,7 +21790,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadLinkForTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get the download link for order history by download id
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/trade/asyn/id
+            </para>
             </summary>
             <param name="downloadId">The download id as requested by <see cref="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetDownloadIdForTradeHistoryAsync(System.DateTime,System.DateTime,System.Nullable{System.Int64},System.Threading.CancellationToken)" /></param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21675,7 +21805,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetOrderRateLimitAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get the order rate limits
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/rateLimit/order
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21684,7 +21819,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetBnbBurnStatusAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get BNB burn for fee discount status
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/feeBurn
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21693,7 +21833,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.SetBnbBurnStatusAsync(System.Boolean,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Set BNB burn for fee discount status
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/feeBurn
+            </para>
             </summary>
             <param name="feeBurn">Fee burn status</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21703,7 +21848,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetSymbolConfigurationAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get user symbol configuration
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/symbolConfig
+            </para>
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21712,7 +21862,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.GetAccountConfigurationAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get user account configuration
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/accountConfig
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21720,7 +21875,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiAccount.SignTradFiAgreementAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Sign the TradFi agreement
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/TradFi-Perps" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/TradFi-Perps" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/stock/contract
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -21749,7 +21909,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.PingAsync(System.Threading.CancellationToken)">
             <summary>
             Pings the Binance Futures API
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/ping
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>True if successful ping, false if no response</returns>
@@ -21757,7 +21922,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetServerTimeAsync(System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/time
+            </para>
             </summary>
             <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
             <param name="ct">Cancellation token</param>
@@ -21766,7 +21936,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetExchangeInfoAsync(System.Threading.CancellationToken)">
             <summary>
             Get's information about the exchange including rate limits and symbol list
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/exchangeInfo
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Exchange info</returns>
@@ -21774,7 +21949,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get klines for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/klines
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">The kline interval</param>
@@ -21787,7 +21967,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetPremiumIndexKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get premium index klines for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/premiumIndexKlines
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">The kline interval</param>
@@ -21800,7 +21985,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetFundingInfoAsync(System.Threading.CancellationToken)">
             <summary>
             Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/fundingInfo
+            </para>
             </summary>
             <param name="ct"></param>
             <returns></returns>
@@ -21808,7 +21998,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get funding rate history for the provided symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/fundingRate
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="startTime">Start time to get funding rate history</param>
@@ -21820,7 +22015,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTopLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Top Trader Long/Short Ratio (Accounts)
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio" /><br />
+            Endpoint:<br />
+            GET /futures/data/topLongShortAccountRatio
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
@@ -21833,7 +22033,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTopLongShortPositionRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Top Trader Long/Short Ratio (Positions)
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio" /><br />
+            Endpoint:<br />
+            GET /futures/data/topLongShortPositionRatio
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
@@ -21846,7 +22051,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetGlobalLongShortAccountRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Global Long/Short Ratio (Accounts)
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio" /><br />
+            Endpoint:<br />
+            GET /futures/data/globalLongShortAccountRatio
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
@@ -21859,7 +22069,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetMarkPriceKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Kline/candlestick bars for the mark price of a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/markPriceKlines
+            </para>
             </summary>
             <param name="symbol">The symbol get the data for, for example `ETHUSDT`</param>
             <param name="interval">The interval of the klines</param>
@@ -21872,7 +22087,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets the order book for the provided symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/depth
+            </para>
             </summary>
             <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
             <param name="limit">Max number of results</param>
@@ -21882,7 +22102,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetRpiOrderBookAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the RPI (Retail Price Improvement) order book for the provided symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/rpiDepth
+            </para>
             </summary>
             <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -21891,7 +22116,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get the most recent trades for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/trades
+            </para>
             </summary>
             <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">Max amount of results</param>
@@ -21901,7 +22131,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get trade history for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/historicalTrades
+            </para>
             </summary>
             <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">The max amount of results, max 500</param>
@@ -21912,7 +22147,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetMarkPriceAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get Mark Price and Funding Rate for the provided symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/premiumIndex
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -21921,7 +22161,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetMarkPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Get Mark Price and Funding Rate for all symbols
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/premiumIndex
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
@@ -21929,7 +22174,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours change
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/ticker/24hr
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -21938,7 +22188,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
             <summary>
             Get data regarding the last 24 hours change
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/ticker/24hr
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>Data over the last 24 hours</returns>
@@ -21946,7 +22201,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetBookPriceAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book for a symbol.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/ticker/bookTicker
+            </para>
             </summary>
             <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -21955,7 +22215,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetBookPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Gets the best price/quantity on the order book.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/ticker/bookTicker
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of book prices</returns>
@@ -21963,7 +22228,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get present open interest of a specific symbol.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/openInterest
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -21972,7 +22242,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetOpenInterestHistoryAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Open Interest History
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics" /><br />
+            Endpoint:<br />
+            GET /futures/data/openInterestHist
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
@@ -21985,7 +22260,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTakerBuySellVolumeRatioAsync(System.String,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Gets Taker Buy/Sell Volume Ratio
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume" /><br />
+            Endpoint:<br />
+            GET /futures/data/takerlongshortRatio
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="period">The period timespan</param>
@@ -21998,7 +22278,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetCompositeIndexInfoAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets composite index info
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/indexInfo
+            </para>
             </summary>
             <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -22007,7 +22292,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetPriceAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Gets the price of a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
+            Endpoint:<br />
+            GET /fapi/v2/ticker/price
+            </para>
             </summary>
             <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -22016,7 +22306,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetPricesAsync(System.Threading.CancellationToken)">
             <summary>
             Get a list of the prices of all symbols
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
+            Endpoint:<br />
+            GET /fapi/v2/ticker/price
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns>List of prices</returns>
@@ -22024,7 +22319,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetContinuousContractKlinesAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get candlestick data for the provided pair
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/continuousKlines
+            </para>
             </summary>
             <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="contractType">The contract type</param>
@@ -22038,7 +22338,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetIndexPriceKlinesAsync(System.String,Binance.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get Kline/candlestick data for the index price of a pair.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/indexPriceKlines
+            </para>
             </summary>
             <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
             <param name="interval">The candlestick timespan</param>
@@ -22051,7 +22356,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetAssetIndexesAsync(System.Threading.CancellationToken)">
             <summary>
             Get asset indexes for Multi-Assets mode for all symbols
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/assetIndex
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -22059,7 +22369,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetAssetIndexAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get asset index for Multi-Assets mode for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/assetIndex
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
@@ -22068,7 +22383,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetAggregatedTradeHistoryAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/aggTrades
+            </para>
             </summary>
             <param name="symbol">The symbol to get the trades for, for example `ETHUSDT`</param>
             <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
@@ -22081,7 +22401,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetBasisAsync(System.String,Binance.Net.Enums.ContractType,Binance.Net.Enums.PeriodInterval,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Get basis data
-            <para><a href="https://binance-docs.github.io/apidocs/futures/en/#basis" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://binance-docs.github.io/apidocs/futures/en/#basis" /><br />
+            Endpoint:<br />
+            GET /futures/data/basis
+            </para>
             </summary>
             <param name="symbol">The pair to get the data for, for example `ETHUSDT`</param>
             <param name="contractType">The contract type</param>
@@ -22095,7 +22420,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetConvertSymbolsAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get list of convert symbols
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/convert/exchangeInfo
+            </para>
             </summary>
             <param name="fromAsset">From asset</param>
             <param name="toAsset">To asset</param>
@@ -22104,7 +22434,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetIndexPriceConstituentsAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get index price constituents for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/constituents
+            </para>
             </summary>
             <param name="symbol">Symbol name</param>
             <param name="ct">Cancellation token</param>
@@ -22112,7 +22447,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get insurance fund balances snapshot
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/insuranceBalance
+            </para>
             </summary>
             <param name="symbol">Symbol name</param>
             <param name="ct">Cancellation token</param>
@@ -22120,14 +22460,24 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetInsuranceFundBalancesAsync(System.Threading.CancellationToken)">
             <summary>
             Get insurance fund balances snapshot
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/insuranceBalance
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get ADL risk rating for a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/symbolAdlRisk
+            </para>
             </summary>
             <param name="symbol">The symbol</param>
             <param name="ct">Cancellation token</param>
@@ -22135,14 +22485,24 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetSymbolAdlRiskRatingsAsync(System.Threading.CancellationToken)">
             <summary>
             Get all symbols ADL risk ratings
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/symbolAdlRisk
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiExchangeData.GetTradingScheduleAsync(System.Threading.CancellationToken)">
             <summary>
             Get trading schedule for TradFi perps
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/tradingSchedule
+            </para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
@@ -22159,7 +22519,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.FuturesOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/order
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -22187,7 +22552,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.BinanceFuturesBatchOrder},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Place multiple orders in one call
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/batchOrders
+            </para>
             </summary>
             <param name="orders">The orders to place</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22197,7 +22567,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Order" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/order
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
@@ -22209,7 +22584,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels a pending order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Order" /><br />
+            Endpoint:<br />
+            DELETE /fapi/v1/order
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
@@ -22221,7 +22601,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelAllOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels all open orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Open-Orders" /><br />
+            Endpoint:<br />
+            DELETE /fapi/v1/allOpenOrders
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22232,7 +22617,12 @@
             <summary>
             Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
             so that the existing countdown time can be canceled and replaced by a new one.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Auto-Cancel-All-Open-Orders" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/countdownCancelAll
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
@@ -22243,7 +22633,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.List{System.Int64},System.Collections.Generic.List{System.String},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancels multiple orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Multiple-Orders" /><br />
+            Endpoint:<br />
+            DELETE /fapi/v1/batchOrders
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderIdList">The list of order ids to cancel</param>
@@ -22255,7 +22650,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.EditOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Edit an existing order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Order" /><br />
+            Endpoint:<br />
+            PUT /fapi/v1/order
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
@@ -22271,7 +22671,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.EditMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Binance.Net.Objects.Models.Futures.BinanceFuturesBatchEditOrder},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Edit multiple existing orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Modify-Multiple-Orders" /><br />
+            Endpoint:<br />
+            PUT /fapi/v1/batchOrders
+            </para>
             </summary>
             <param name="orders">The order info</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22281,7 +22686,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOrderEditHistoryAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get order edit history
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/orderAmendment
+            </para>
             </summary>
             <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
@@ -22296,7 +22706,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOpenOrderAsync(System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Retrieves data for a specific open order. Either orderId or origClientOrderId should be provided.
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Current-Open-Order" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/openOrder
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="orderId">The order id of the order</param>
@@ -22308,7 +22723,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOpenOrdersAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of open orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Open-Orders" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/openOrders
+            </para>
             </summary>
             <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22318,7 +22738,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets all orders for the provided symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/All-Orders" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/allOrders
+            </para>
             </summary>
             <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
             <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
@@ -22332,7 +22757,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetForcedOrdersAsync(System.String,System.Nullable{Binance.Net.Enums.AutoCloseType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Gets a list of users forced orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Users-Force-Orders" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/forceOrders
+            </para>
             </summary>
             <param name="symbol">The symbol to get forced orders for, for example `ETHUSDT`</param>
             <param name="closeType">Filter by reason for close</param>
@@ -22345,7 +22775,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetUserTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Gets all user trades for provided symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Account-Trade-List" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/userTrades
+            </para>
             </summary>
             <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
             <param name="limit">The max number of results</param>
@@ -22360,7 +22795,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceVolumeParticipationOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,Binance.Net.Enums.OrderUrgency,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Place a new Volume Participation order
-            <para><a href="https://developers.binance.com/docs/algo/future-algo" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/algo/future-algo" /><br />
+            Endpoint:<br />
+            POST /sapi/v1/algo/futures/newOrderVp
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
@@ -22377,7 +22817,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceTimeWeightedAveragePriceOrderAsync(System.String,Binance.Net.Enums.OrderSide,System.Decimal,System.Int32,System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Place a new Time Weighted Average Price order
-            <para><a href="https://developers.binance.com/docs/algo/future-algo/Time-Weighted-Average-Price-New-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/algo/future-algo/Time-Weighted-Average-Price-New-Order" /><br />
+            Endpoint:<br />
+            POST /sapi/v1/algo/futures/newOrderTwap
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
@@ -22394,7 +22839,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelAlgoOrderAsync(System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel an algo order
-            <para><a href="https://developers.binance.com/docs/algo/future-algo/Cancel-Algo-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/algo/future-algo/Cancel-Algo-Order" /><br />
+            Endpoint:<br />
+            DELETE /sapi/v1/algo/futures/order
+            </para>
             </summary>
             <param name="algoOrderId">Algo id to cancel</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22404,7 +22854,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOpenAlgoOrdersAsync(System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get list of open algo orders
-            <para><a href="https://developers.binance.com/docs/algo/future-algo/Query-Current-Algo-Open-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/algo/future-algo/Query-Current-Algo-Open-Orders" /><br />
+            Endpoint:<br />
+            GET /sapi/v1/algo/futures/openOrders
+            </para>
             </summary>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -22413,7 +22868,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetClosedAlgoOrdersAsync(System.String,System.Nullable{Binance.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get list of closed algo orders
-            <para><a href="https://developers.binance.com/docs/algo/future-algo/Query-Historical-Algo-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/algo/future-algo/Query-Historical-Algo-Orders" /><br />
+            Endpoint:<br />
+            GET /sapi/v1/algo/futures/historicalOrders
+            </para>
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="side">Filter by side</param>
@@ -22428,7 +22888,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetAlgoSubOrdersAsync(System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get algo sub orders overview
-            <para><a href="https://developers.binance.com/docs/algo/future-algo/Query-Sub-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/algo/future-algo/Query-Sub-Orders" /><br />
+            Endpoint:<br />
+            GET /sapi/v1/algo/futures/subOrders
+            </para>
             </summary>
             <param name="algoId">Algo id</param>
             <param name="page">Page</param>
@@ -22440,7 +22905,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetPositionsAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get position information
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3" /><br />
+            Endpoint:<br />
+            GET /fapi/v3/positionRisk
+            </para>
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22449,7 +22919,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.ConvertQuoteRequestAsync(System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.ValidTime},System.Threading.CancellationToken)">
             <summary>
             Get a convert quote
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Send-quote-request" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Send-quote-request" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/convert/getQuote
+            </para>
             </summary>
             <param name="fromAsset">The from asset, for example `ETH`</param>
             <param name="toAsset">The to asset, for example `USD`</param>
@@ -22461,7 +22936,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.ConvertAcceptQuoteAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Accept a convert quote
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Accept-Quote" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Accept-Quote" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/convert/acceptQuote
+            </para>
             </summary>
             <param name="quoteId">Quote id previously requested</param>
             <param name="ct">Cancellation token</param>
@@ -22469,7 +22949,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetConvertOrderStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get status of a convert order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Order-Status" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Order-Status" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/convert/orderStatus
+            </para>
             </summary>
             <param name="quoteId">The quote id. Either this or orderId should be provided</param>
             <param name="orderId">The order id. Either this or quoteId should be provided</param>
@@ -22478,7 +22963,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.PlaceConditionalOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.ConditionalOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.PriceMatch},System.Nullable{Binance.Net.Enums.SelfTradePreventionMode},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Place a new conditional order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order" /><br />
+            Endpoint:<br />
+            POST /fapi/v1/algoOrder
+            </para>
             </summary>
             <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
             <param name="side">The order side (buy/sell)</param>
@@ -22504,7 +22994,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel an active conditional order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order" /><br />
+            Endpoint:<br />
+            DELETE /fapi/v1/algoOrder
+            </para>
             </summary>
             <param name="orderId">Id of the order to cancel. Either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
@@ -22514,7 +23009,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.CancelAllConditionalOrdersAsync(System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Cancel all open conditional orders on a symbol
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders" /><br />
+            Endpoint:<br />
+            DELETE /fapi/v1/algoOpenOrders
+            </para>
             </summary>
             <param name="symbol">Symbol to close conditional orders on, for example `ETHUSDT`</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22523,7 +23023,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetOpenConditionalOrdersAsync(System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get all open conditional orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/openAlgoOrders
+            </para>
             </summary>
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="algoType">Filter by algo type</param>
@@ -22534,7 +23039,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetConditionalOrderAsync(System.Nullable{System.Int64},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get info on a specific conditional order
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/algoOrder
+            </para>
             </summary>
             <param name="orderId">Id of the order to retrieve. Either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id of the order to retrieve. Either this or orderId should be provided</param>
@@ -22544,7 +23054,12 @@
         <member name="M:Binance.Net.Interfaces.Clients.UsdFuturesApi.IBinanceRestClientUsdFuturesApiTrading.GetConditionalOrdersAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get all conditional orders
-            <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders" /></para>
+            <para>
+            Docs:<br />
+            <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders" /><br />
+            Endpoint:<br />
+            GET /fapi/v1/allAlgoOrders
+            </para>
             </summary>
             <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id</param>
