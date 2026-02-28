@@ -92,7 +92,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @kline_<interval>
+        /// @kline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
@@ -108,7 +108,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @kline_<interval>
+        /// @kline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
@@ -124,7 +124,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @kline_<interval>
+        /// @kline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
@@ -140,7 +140,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @kline_<interval>
+        /// @kline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
@@ -363,7 +363,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /><br />
         /// Endpoint:<br />
-        /// @depth<levels>
+        /// @depth&lt;levels&gt;
         /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on, for example `BTCUSD_PERP`</param>
@@ -380,7 +380,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /><br />
         /// Endpoint:<br />
-        /// @depth<levels>
+        /// @depth&lt;levels&gt;
         /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on, for example `BTCUSD_PERP`</param>
@@ -397,7 +397,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /><br />
         /// Endpoint:<br />
-        /// @depth<levels>
+        /// @depth&lt;levels&gt;
         /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
@@ -541,7 +541,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @continuousKline_<interval>
+        /// @continuousKline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="pair">The pair, for example `BTCUSD`</param>
@@ -558,7 +558,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @continuousKline_<interval>
+        /// @continuousKline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="pairs">The pairs, for example `BTCUSD`</param>
@@ -575,7 +575,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @indexPriceKline_<interval>
+        /// @indexPriceKline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="pair">The pair, for example `BTCUSD`</param>
@@ -591,7 +591,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @indexPriceKline_<interval>
+        /// @indexPriceKline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="pairs">The pairs, for example `BTCUSD`</param>
@@ -607,7 +607,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @markPriceKline_<interval>
+        /// @markPriceKline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
@@ -623,7 +623,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams" /><br />
         /// Endpoint:<br />
-        /// @markPriceKline_<interval>
+        /// @markPriceKline_&lt;interval&gt;
         /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
