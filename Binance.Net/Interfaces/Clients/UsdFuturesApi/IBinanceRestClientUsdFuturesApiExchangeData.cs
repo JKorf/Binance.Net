@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     {
         /// <summary>
         /// Pings the Binance Futures API
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/ping
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
@@ -19,7 +24,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/time
+        /// </para>
         /// </summary>
         /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
@@ -28,7 +38,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
@@ -36,7 +51,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get klines for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/klines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">The kline interval</param>
@@ -49,7 +69,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get premium index klines for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/premiumIndexKlines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">The kline interval</param>
@@ -62,7 +87,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/fundingInfo
+        /// </para>
         /// </summary>
         /// <param name="ct"></param>
         /// <returns></returns>
@@ -70,7 +100,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get funding rate history for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/fundingRate
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="startTime">Start time to get funding rate history</param>
@@ -82,7 +117,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Accounts)
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/topLongShortAccountRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="period">The period timespan</param>
@@ -95,7 +135,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Positions)
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/topLongShortPositionRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="period">The period timespan</param>
@@ -108,7 +153,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets Global Long/Short Ratio (Accounts)
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Long-Short-Ratio" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/globalLongShortAccountRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="period">The period timespan</param>
@@ -121,7 +171,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Kline/candlestick bars for the mark price of a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/markPriceKlines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol get the data for, for example `ETHUSDT`</param>
         /// <param name="interval">The interval of the klines</param>
@@ -134,7 +189,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the order book for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/depth
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
         /// <param name="limit">Max number of results</param>
@@ -144,7 +204,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the RPI (Retail Price Improvement) order book for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Order-Book-RPI" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/rpiDepth
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -153,7 +218,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get the most recent trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/trades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="limit">Max amount of results</param>
@@ -163,7 +233,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get trade history for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/historicalTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="limit">The max amount of results, max 500</param>
@@ -175,7 +250,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get Mark Price and Funding Rate for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/premiumIndex
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -184,7 +264,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get Mark Price and Funding Rate for all symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/premiumIndex
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
@@ -192,7 +277,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get data regarding the last 24 hours change
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/ticker/24hr
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -201,7 +291,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get data regarding the last 24 hours change
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/ticker/24hr
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
@@ -209,7 +304,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/ticker/bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -218,7 +318,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/ticker/bookTicker
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
@@ -226,7 +331,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get present open interest of a specific symbol.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/openInterest
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -235,7 +345,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets Open Interest History
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest-Statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/openInterestHist
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="period">The period timespan</param>
@@ -248,7 +363,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets Taker Buy/Sell Volume Ratio
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Taker-BuySell-Volume" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/takerlongshortRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="period">The period timespan</param>
@@ -261,7 +381,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets composite index info
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Composite-Index-Symbol-Information" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/indexInfo
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -271,7 +396,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets the price of a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v2/ticker/price
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -280,7 +410,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get a list of the prices of all symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v2/ticker/price
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
@@ -288,7 +423,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get candlestick data for the provided pair
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/continuousKlines
+        /// </para>
         /// </summary>
         /// <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="contractType">The contract type</param>
@@ -302,7 +442,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get Kline/candlestick data for the index price of a pair.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/indexPriceKlines
+        /// </para>
         /// </summary>
         /// <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -315,7 +460,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get asset indexes for Multi-Assets mode for all symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/assetIndex
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -323,7 +473,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get asset index for Multi-Assets mode for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/assetIndex
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -332,7 +487,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/aggTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the trades for, for example `ETHUSDT`</param>
         /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
@@ -345,7 +505,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get basis data
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#basis" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/futures/en/#basis" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/basis
+        /// </para>
         /// </summary>
         /// <param name="symbol">The pair to get the data for, for example `ETHUSDT`</param>
         /// <param name="contractType">The contract type</param>
@@ -359,7 +524,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get list of convert symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/convert/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="fromAsset">From asset</param>
         /// <param name="toAsset">To asset</param>
@@ -368,7 +538,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get index price constituents for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/constituents
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
@@ -376,7 +551,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get insurance fund balances snapshot
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/insuranceBalance
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
@@ -384,14 +564,24 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get insurance fund balances snapshot
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/insuranceBalance
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceInsuranceFundBalance[]>> GetInsuranceFundBalancesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get ADL risk rating for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/symbolAdlRisk
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -399,14 +589,24 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 
         /// <summary>
         /// Get all symbols ADL risk ratings
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/symbolAdlRisk
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceSymbolAdlRate[]>> GetSymbolAdlRiskRatingsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get trading schedule for TradFi perps
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/tradingSchedule
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default);

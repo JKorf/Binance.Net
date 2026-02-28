@@ -10,7 +10,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Gets mining coins info
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#acquiring-coinname-market_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#acquiring-coinname-market_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/pub/coinList
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Coins info</returns>
@@ -18,7 +23,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets mining algorithms info
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#acquiring-algorithm-market_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#acquiring-algorithm-market_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/pub/algoList
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algorithms info</returns>
@@ -26,7 +36,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets miner details
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#request-for-detail-miner-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#request-for-detail-miner-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/worker/detail
+        /// </para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -37,7 +52,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets miner list
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#request-for-miner-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#request-for-miner-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/worker/list
+        /// </para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -51,7 +71,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets revenue list
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#earnings-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#earnings-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/payment/list
+        /// </para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -66,7 +91,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get other revenue list
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#extra-bonus-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#extra-bonus-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/payment/other
+        /// </para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
@@ -81,7 +111,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get mining statistics
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#statistic-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#statistic-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/statistics/user/status
+        /// </para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">User name</param>
@@ -91,7 +126,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets mining account list
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#account-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#account-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/statistics/user/list
+        /// </para>
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account user name</param>
@@ -101,7 +141,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets hash rate resale list
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/hash-transfer/config/details/list
+        /// </para>
         /// </summary>
         /// <param name="page">Page</param>
         /// <param name="pageSize">Results per page</param>
@@ -111,7 +156,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Gets hash rate resale details
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-detail-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-detail-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/hash-transfer/profit/details
+        /// </para>
         /// </summary>
         /// <param name="configId">The mining id</param>
         /// <param name="userName">Mining account</param>
@@ -123,7 +173,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Hashrate resale request
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-request-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-request-user_data" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/mining/hash-transfer/config
+        /// </para>
         /// </summary>
         /// <param name="userName">Mining account</param>
         /// <param name="algorithm">Transfer algorithm</param>
@@ -137,7 +192,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Cancel Hashrate Resale Configuration
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-hashrate-resale-configuration-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-hashrate-resale-configuration-user_data" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/mining/hash-transfer/config/cancel
+        /// </para>
         /// </summary>
         /// <param name="configId">Mining id</param>
         /// <param name="userName">Mining account</param>
@@ -147,7 +207,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get mining account earnings
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#mining-account-earning-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#mining-account-earning-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/mining/payment/uid
+        /// </para>
         /// </summary>
         /// <param name="algo">Algorithm</param>
         /// <param name="startTime">Filter by start time</param>

@@ -9,7 +9,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Create a single-token gift card
-        /// <para><a href="https://developers.binance.com/docs/gift_card/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/gift_card/market-data" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/giftcard/createCode
+        /// </para>
         /// </summary>
         /// <param name="token">The token type contained in the Binance Gift Card</param>
         /// <param name="amount">The amount of the token contained in the Binance Gift Card</param>
@@ -20,7 +25,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         
         /// <summary>
         /// Create a dual-token gift card
-        /// <para><a href="https://developers.binance.com/docs/gift_card/market-data/Create-a-dual-token-gift-card" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/gift_card/market-data/Create-a-dual-token-gift-card" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/giftcard/buyCode
+        /// </para>
         /// </summary>
         /// <param name="baseToken">The token you want to pay, example: BUSD</param>
         /// <param name="faceToken">The token you want to buy, example: BNB</param>
@@ -32,7 +42,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Redeem a Binance Gift Card
-        /// <para><a href="https://developers.binance.com/docs/gift_card/market-data/Redeem-a-Binance-Gift-Card" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/gift_card/market-data/Redeem-a-Binance-Gift-Card" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/giftcard/redeemCode
+        /// </para>
         /// </summary>
         /// <param name="code">Redemption code of Binance Gift Card to be redeemed, supports both Plaintext and Encrypted code.</param>
         /// <param name="externalUid">External UID</param>
@@ -44,7 +59,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Verify Binance Gift Card by Gift Card Number
-        /// <para><a href="https://developers.binance.com/docs/gift_card/market-data/Verify-Binance-Gift-Card-by-Gift-Card-Number" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/gift_card/market-data/Verify-Binance-Gift-Card-by-Gift-Card-Number" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/giftcard/verify
+        /// </para>
         /// </summary>
         /// <param name="referenceNumber">The Gift Card Number</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -54,7 +74,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         
         /// <summary>
         /// Get Token Limit
-        /// <para><a href="https://developers.binance.com/docs/gift_card/market-data/Fetch-Token-Limit" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/gift_card/market-data/Fetch-Token-Limit" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/giftcard/buyCode/token-limit
+        /// </para>
         /// </summary>
         /// <param name="baseToken">The token you want to pay, example: BUSD</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -65,7 +90,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         
         /// <summary>
         /// Get RSA public key
-        /// <para><a href="https://developers.binance.com/docs/gift_card/market-data/Fetch-RSA-Public-Key" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/gift_card/market-data/Fetch-RSA-Public-Key" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/giftcard/cryptography/rsa-public-key
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

@@ -12,7 +12,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan borrow interest rate
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/market-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/request/interestRate
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filler by loan asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -22,7 +27,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan interest rate History
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/market-data/Get-VIP-Loan-Interest-Rate-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/interestRateHistory
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filler by loan asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -36,7 +46,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         
         /// <summary>
         /// Get loanable asset data
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/market-data/Get-Loanable-Assets-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/market-data/Get-Loanable-Assets-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/loanable/data
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filler by loan asset</param>
         /// <param name="vipLevel">User's vip level</param>
@@ -47,7 +62,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get collateral asset data
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/market-data/Get-Collateral-Asset-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/market-data/Get-Collateral-Asset-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/collateral/data
+        /// </para>
         /// </summary>
         /// <param name="collateralAsset">Filler by collateral asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -61,7 +81,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan ongoing orders
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/user-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/user-information" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/ongoing/orders
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="collateralAccountId">Collateral account id</param>
@@ -76,7 +101,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan repayment history
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Repayment-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Repayment-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/repay/history
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="loanAsset">Asset to loan</param>
@@ -91,7 +121,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan accrued interest
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/user-information/Get-VIP-Loan-Accrued-Interest" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/accruedInterest
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="loanAsset">Asset to loan</param>
@@ -106,7 +141,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan Collateral Account
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Check-Locked-Value-of-VIP-Collateral-Account" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/user-information/Check-Locked-Value-of-VIP-Collateral-Account" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/collateral/account
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="collateralAccountId">Collateral account id</param>
@@ -117,7 +157,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get VIP Loan application status
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/user-information/Query-Application-Status" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/user-information/Query-Application-Status" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/request/data
+        /// </para>
         /// </summary>
         /// <param name="page">Current page</param>
         /// <param name="limit">Page size limit</param>
@@ -132,7 +177,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Renew VIP Loan
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/trade" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/renew
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="loanTerm">Loan term in days, 30/60</param>
@@ -143,7 +193,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Repay VIP Loan
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Repay" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/repay
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="quantity">Quantity to repay</param>
@@ -154,7 +209,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Borrow VIP Loan
-        /// <para><a href="https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Borrow" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/vip_loan/trade/VIP-Loan-Borrow" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/vip/borrow
+        /// </para>
         /// </summary>
         /// <param name="loanAccountId">Loan account id</param>
         /// <param name="loanAsset">Asset to loan</param>

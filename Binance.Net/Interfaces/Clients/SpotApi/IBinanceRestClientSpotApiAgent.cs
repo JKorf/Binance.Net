@@ -9,8 +9,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Query Client If The New User.
-        /// <para><a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_spot_EN/" /></para>
-        /// <para><a href="https://binance-docs.github.io/apiAgent-API-CN/api_rebate_endpoints_spot_CN/" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apiAgent-API-EN/api_rebate_endpoints_spot_EN/" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/apiReferral/ifNewUser
+        /// </para>
         /// </summary>
         /// <param name="apiAgentCode">Api Agent Code</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

@@ -10,14 +10,24 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Get auto invest source and target assets
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/market-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/all/asset
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceAutoInvestAssets>> GetSourceAndTargetAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get source assets info
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Query-source-asset-list" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/market-data/Query-source-asset-list" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/source-asset/list
+        /// </para>
         /// </summary>
         /// <param name="targetAsset">Filter by target asset</param>
         /// <param name="usageType">Usage type, "RECURRING" or "ONE_TIME"</param>
@@ -28,7 +38,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get target assets info
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Get-target-asset-list" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/market-data/Get-target-asset-list" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/target-asset/list
+        /// </para>
         /// </summary>
         /// <param name="targetAsset">Filter by target asset</param>
         /// <param name="page">Current page</param>
@@ -38,7 +53,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<BinanceAutoInvestTargetAssets>> GetTargetAssetsAsync(string? targetAsset = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
         /// <summary>
         /// Get target asset ROIs
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Get-target-asset-ROI-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/market-data/Get-target-asset-ROI-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/target-asset/roi/list
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="roiType">ROI type</param>
@@ -46,14 +66,24 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default);
         /// <summary>
         /// Get index info
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Query-Index-Details" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/market-data/Query-Index-Details" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/index/info
+        /// </para>
         /// </summary>
         /// <param name="indexId">The id</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BinanceAutoInvestIndex>> GetIndexInfoAsync(string indexId, CancellationToken ct = default);
         /// <summary>
         /// Get auto invest plans
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/market-data/Get-list-of-plans" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/market-data/Get-list-of-plans" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/plan/list
+        /// </para>
         /// </summary>
         /// <param name="planType">Type of plans</param>
         /// <param name="ct">Cancellation token</param>
@@ -61,7 +91,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Make a one time transaction
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/lending/auto-invest/one-off
+        /// </para>
         /// </summary>
         /// <param name="sourceType">The source type, "MAIN_SITE" for normal, "TR" for Turkey users</param>
         /// <param name="requestId">Request id</param>
@@ -75,7 +110,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Edit the status of a plan
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Change-Plan-Status" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Change-Plan-Status" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/lending/auto-invest/plan/edit-status
+        /// </para>
         /// </summary>
         /// <param name="planId">The plan id</param>
         /// <param name="status">New status</param>
@@ -84,7 +124,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Edit a plan
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Investment-plan-adjustment" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Investment-plan-adjustment" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/lending/auto-invest/plan/edit
+        /// </para>
         /// </summary>
         /// <param name="planId">The plan id</param>
         /// <param name="subscriptionQuantity">The quantity</param>
@@ -100,7 +145,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Redeem index linked plan
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Redemption" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Redemption" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/lending/auto-invest/redeem
+        /// </para>
         /// </summary>
         /// <param name="indexId">The index id</param>
         /// <param name="requestId">Request id</param>
@@ -110,7 +160,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get subscription transaction history
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-subscription-transaction-history" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Query-subscription-transaction-history" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/history/list
+        /// </para>
         /// </summary>
         /// <param name="planId">Filter by plan id</param>
         /// <param name="startTime">Filter by start time</param>
@@ -124,7 +179,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get one time transaction status
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-One-Time-Transaction-Status" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Query-One-Time-Transaction-Status" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/one-off/status
+        /// </para>
         /// </summary>
         /// <param name="transactionId">Transaction id</param>
         /// <param name="requestId">Request id</param>
@@ -133,7 +193,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Create new investment plan
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Investment-plan-creation" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Investment-plan-creation" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/lending/auto-invest/plan/add
+        /// </para>
         /// </summary>
         /// <param name="sourceType">Source type, "MAIN_SITE" for normal, "TR" for Turkey users</param>
         /// <param name="requestId">Request id</param>
@@ -151,7 +216,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get index linked plan redemption history
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-Index-Linked-Plan-Redemption" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Query-Index-Linked-Plan-Redemption" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/redeem/history
+        /// </para>
         /// </summary>
         /// <param name="requestId">Request id</param>
         /// <param name="startTime">Filter by start time</param>
@@ -164,7 +234,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get holding details of a plan
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-holding-details-of-the-plan" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Query-holding-details-of-the-plan" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/plan/id
+        /// </para>
         /// </summary>
         /// <param name="planId">Filter by plan id</param>
         /// <param name="requestId">Request id</param>
@@ -173,7 +248,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get index linked plan position details
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Query-Index-Linked-Plan-Position-Details" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Query-Index-Linked-Plan-Position-Details" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/index/user-summary
+        /// </para>
         /// </summary>
         /// <param name="indexId">The index id</param>
         /// <param name="ct">Cancellation token</param>
@@ -181,7 +261,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get index linked plan rebalance history
-        /// <para><a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Rebalance-Details" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/auto_invest/trade/Index-Linked-Plan-Rebalance-Details" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/lending/auto-invest/rebalance/history
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>

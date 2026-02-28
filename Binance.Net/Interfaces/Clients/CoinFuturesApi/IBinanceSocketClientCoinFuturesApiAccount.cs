@@ -13,7 +13,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     {
         /// <summary>
         /// Gets account balances
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api" /><br />
+        /// Endpoint:<br />
+        /// account.balance
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -22,7 +27,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get account information, including position and balances
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information" /><br />
+        /// Endpoint:<br />
+        /// account.status
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -30,7 +40,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams" /><br />
+        /// Endpoint:<br />
+        /// listenKey
+        /// </para>
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method</param>
         /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>

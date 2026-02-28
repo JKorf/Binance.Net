@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Get LTV information and collateral limit of collateral assets. The collateral limit is shown in USD value.
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/collateral/data
+        /// </para>
         /// </summary>
         /// <param name="collateralAsset">Filter by collateral asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21,7 +26,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get interest rate and borrow limit of loanable assets. The borrow limit is shown in USD value.
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Assets-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/market-data/Get-Flexible-Loan-Assets-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/loanable/data
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filter by loan asset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -31,7 +41,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Borrow flexible loan
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v2/loan/flexible/borrow
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Asset to loan</param>
         /// <param name="collateralAsset">Collateral asset</param>
@@ -44,7 +59,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Repay flexible loan
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Repay" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v2/loan/flexible/repay
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Asset to loan</param>
         /// <param name="collateralAsset">Collateral asset</param>
@@ -58,7 +78,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Repay collateral flexible loan
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Collateral-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Collateral-Repay" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v2/loan/flexible/repay/collateral
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Asset to loan</param>
         /// <param name="collateralAsset">Collateral asset</param>
@@ -72,7 +97,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Adjust LTV for a loan
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Adjust-LTV" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/trade/Flexible-Loan-Adjust-LTV" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v2/loan/flexible/adjust/ltv
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Asset to loan</param>
         /// <param name="collateralAsset">Collateral asset</param>
@@ -85,7 +115,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible loan LTV adjustment history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/ltv/adjustment/history
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Asset to loan</param>
         /// <param name="collateralAsset">Collateral asset</param>
@@ -100,7 +135,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get the latest rate of collateral coin/loan coin when using collateral repay.
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Check-Collateral-Repay-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Check-Collateral-Repay-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/repay/rate
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Loan asset</param>
         /// <param name="collateralAsset">Collateral asset</param>
@@ -111,7 +151,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible borrow order history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Borrow-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Borrow-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/borrow/history
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filter by loan asset</param>
         /// <param name="collateralAsset">Filter by collateral asset</param>
@@ -126,7 +171,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get ongoing flexible loan orders
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Ongoing-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Ongoing-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/ongoing/orders
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filter by loan asset</param>
         /// <param name="collateralAsset">Filter by collateral asset</param>
@@ -139,7 +189,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible loan liquidation history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Liquidation-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Liquidation-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/liquidation/history
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filter by loan asset</param>
         /// <param name="collateralAsset">Filter by collateral asset</param>
@@ -154,7 +209,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible loan repayment history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Repayment-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/flexible-rate/user-information/Get-Flexible-Loan-Repayment-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v2/loan/flexible/repay/history
+        /// </para>
         /// </summary>
         /// <param name="loanAsset">Filter by loan asset</param>
         /// <param name="collateralAsset">Filter by collateral asset</param>
@@ -169,7 +229,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get income history from stable crypto loans
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/stable-rate/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/stable-rate/market-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/income
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset</param>
         /// <param name="type">Filter by type of incoming</param>
@@ -183,7 +248,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get stable borrow order history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/stable-rate/user-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/stable-rate/user-information" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/borrow/history
+        /// </para>
         /// </summary>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="loanAsset">Filter by loan asset</param>
@@ -199,7 +269,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get LTV adjustment history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-LTV-Adjustment-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-LTV-Adjustment-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/ltv/adjustment/history
+        /// </para>
         /// </summary>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="loanAsset">Filter by loan asset</param>
@@ -215,7 +290,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get stable loan repayment history
-        /// <para><a href="https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Repayment-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/crypto_loan/stable-rate/user-information/Get-Loan-Repayment-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/loan/repay/history
+        /// </para>
         /// </summary>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="loanAsset">Filter by loan asset</param>

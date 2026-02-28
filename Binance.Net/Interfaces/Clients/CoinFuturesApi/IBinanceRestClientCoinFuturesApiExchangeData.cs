@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     {
         /// <summary>
         /// Pings the Binance Futures API
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/ping
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
@@ -19,7 +24,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/time
+        /// </para>
         /// </summary>
         /// <param name="resetAutoTimestamp">Whether the response should be used for a new auto timestamp calculation</param>
         /// <param name="ct">Cancellation token</param>
@@ -28,7 +38,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get's information about the exchange including rate limits and symbol list
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Exchange-Information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Exchange-Information" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
@@ -36,7 +51,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets the recent trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Recent-Trades-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Recent-Trades-List" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/trades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
         /// <param name="limit">Result limit</param>
@@ -46,7 +66,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets the historical  trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Old-Trades-Lookup" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Old-Trades-Lookup" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/historicalTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
         /// <param name="limit">Max amount of results, max 500</param>
@@ -57,7 +82,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/aggTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the trades for, for example `BTCUSD_PERP`</param>
         /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
@@ -70,7 +100,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get candlestick data for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/klines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -84,7 +119,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get premium index kline data for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/premiumIndexKlines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -98,7 +138,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Infoo" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Infoo" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/fundingInfo
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -106,7 +151,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get funding rate history for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/fundingRate
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="startTime">Start time to get funding rate history</param>
@@ -118,7 +168,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Accounts)
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Long-Short-Account-Ratio" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/topLongShortAccountRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="period">The period timespan</param>
@@ -131,7 +186,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Positions)
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Top-Trader-Long-Short-Ratio" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/topLongShortPositionRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="period">The period timespan</param>
@@ -144,7 +204,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets Global Long/Short Ratio (Accounts)
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Long-Short-Ratio" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/globalLongShortAccountRatio
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="period">The period timespan</param>
@@ -157,7 +222,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Kline/candlestick bars for the mark price of a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Mark-Price-Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/markPriceKlines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The interval of the klines</param>
@@ -170,7 +240,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets the order book for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Order-Book" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Order-Book" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/depth
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the order book for, for example `BTCUSD_PERP`</param>
         /// <param name="limit">Max number of results</param>
@@ -180,7 +255,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get Mark Price and Funding Rate for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/premiumIndex
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
@@ -190,7 +270,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get candlestick data for the provided pair
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/continuousKlines
+        /// </para>
         /// </summary>
         /// <param name="pair">The symbol to get the data for, for example `BTCUSD`</param>
         /// <param name="contractType">The contract type</param>
@@ -204,7 +289,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get candlestick data for the provided pair
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/indexPriceKlines
+        /// </para>
         /// </summary>
         /// <param name="pair">The symbol to get the data for, for example `BTCUSD`</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -217,7 +307,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get data regarding the last 24 hours change
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/ticker/24hr
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
@@ -227,7 +322,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Order-Book-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/ticker/bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get book price for, for example `BTCUSD_PERP`</param>
         /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
@@ -237,7 +337,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get present open interest of a specific symbol.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/openInterest
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="ct">Cancellation token</param>
@@ -246,7 +351,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets Open Interest History
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest-Statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest-Statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/openInterestHist
+        /// </para>
         /// </summary>
         /// <param name="pair">The pair to get the data for, for example `BTCUSD`</param>
         /// <param name="contractType">The contract type</param>
@@ -260,7 +370,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets Taker Buy/Sell Volume Ratio
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Taker-Buy-Sell-Volume" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/takerBuySellVol
+        /// </para>
         /// </summary>
         /// <param name="pair">The pair to get the data for, for example `BTCUSD`</param>
         /// <param name="contractType">The contract type</param>
@@ -274,7 +389,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets basis
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Basis" /><br />
+        /// Endpoint:<br />
+        /// GET /futures/data/basis
+        /// </para>
         /// </summary>
         /// <param name="pair">The pair to get the data for, for example `BTCUSD`</param>
         /// <param name="contractType">The contract type</param>
@@ -288,7 +408,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get a list of the prices of all symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/ticker/price
+        /// </para>
         /// </summary>
         /// <param name="symbol">Retrieve for a symbol, for example `BTCUSD_PERP`</param>
         /// <param name="pair">Retrieve prices for a specific pair, for example `BTCUSD`</param>
@@ -298,7 +423,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get index price constituents for a symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/constituents
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>

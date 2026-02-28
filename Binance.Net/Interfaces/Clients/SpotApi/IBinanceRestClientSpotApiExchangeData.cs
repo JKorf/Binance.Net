@@ -14,7 +14,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Gets the withdraw/deposit details for an asset
-        /// <para><a href="https://developers.binance.com/docs/wallet/asset" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/wallet/asset" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/asset/assetDetail
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -31,7 +36,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Pings the Binance API
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#test-connectivity" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ping
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
@@ -39,7 +49,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Requests the server for the local time
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#check-server-time" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/time
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
@@ -47,7 +62,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets information about the exchange including rate limits and symbol list
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
         /// <param name="symbolStatus">Filter by symbol status, Trading, Halt or Break</param>
@@ -57,7 +77,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get data for, for example `ETHUSDT`</param>
         /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
@@ -67,7 +92,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to get data for, for example `ETHUSDT`</param>
         /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
@@ -78,7 +108,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbol based on an account permission
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="permission">account type</param>
         /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
@@ -89,7 +124,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbols based on account permissions
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#exchange-information" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="permissions">account type</param>
         /// <param name="returnPermissionSets">Whether or not permission sets should be returned</param>
@@ -100,7 +140,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the status of the Binance platform
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#system-status-system" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#system-status-system" /><br />
+        /// Endpoint:<br />
+        /// /sapi/v1/system/status
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The system status</returns>
@@ -108,7 +153,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the recent trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#recent-trades-list" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/trades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for, for example `ETHUSDT`</param>
         /// <param name="limit">Result limit</param>
@@ -118,7 +168,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the historical trades for a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#old-trade-lookup" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/historicalTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get recent trades for, for example `ETHUSDT`</param>
         /// <param name="limit">Result limit</param>
@@ -129,7 +184,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#compressedaggregate-trades-list" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/aggTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the trades for, for example `ETHUSDT`</param>
         /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
@@ -142,7 +202,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get candlestick data for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#klinecandlestick-data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/klines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -156,7 +221,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get candlestick data for the provided symbol. Returns modified kline data, optimized for the presentation of candlestick charts
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#uiklines" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/uiKlines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="interval">The candlestick timespan</param>
@@ -170,7 +240,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the order book for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#order-book" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/depth
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
         /// <param name="limit">Max number of results</param>
@@ -180,7 +255,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets current average price for a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#current-average-price" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/avgPrice
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -189,7 +269,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/24hr
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -199,7 +284,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data regarding the last 24 hours for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/24hr
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to get the data for, for example `ETHUSDT`</param>
         /// <param name="symbolStatus">Filter by symbol status</param>
@@ -211,7 +301,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data regarding the last 24 hours for all symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#24hr-ticker-price-change-statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/24hr
+        /// </para>
         /// </summary>
         /// <param name="symbolStatus">Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
@@ -220,7 +315,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get price change stats for a trading day
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/tradingDay
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
@@ -230,7 +330,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get price change stats for a trading day
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#trading-day-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/tradingDay
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="timeZone">The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
@@ -241,7 +346,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics" /><br />
+        /// Endpoint:<br />
+        /// /api/v3/ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get data for, for example `ETHUSDT`</param>
         /// <param name="windowSize">The window size to use</param>
@@ -251,7 +361,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get data based on the last x time, specified as windowSize
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#rolling-window-price-change-statistics" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to get data for, for example `ETHUSDT`</param>
         /// <param name="windowSize">The window size to use</param>
@@ -262,7 +377,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -271,7 +391,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to get book price for, for example `ETHUSDT`</param>
         /// <param name="symbolStatus">Filter by symbol status</param>
@@ -281,7 +406,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-order-book-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbolStatus">Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
@@ -290,7 +420,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets the price of a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/price
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -299,7 +434,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         ///  Gets the prices of symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/price
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to get the price for, for example `ETHUSDT`</param>
         /// <param name="symbolStatus">Filter by symbol status</param>
@@ -309,7 +449,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get a list of the prices of all symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#symbol-price-ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/ticker/price
+        /// </para>
         /// </summary>
         /// <param name="symbolStatus">Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
@@ -318,7 +463,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get all assets available for margin trading
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-margin-assets-market_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-all-margin-assets-market_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/allAssets
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -327,7 +477,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get all asset pairs available for margin trading
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Get-All-Cross-Margin-Pairs" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Get-All-Cross-Margin-Pairs" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/allPairs
+        /// </para>
         /// </summary>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -336,7 +491,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get margin price index
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Margin-PriceIndex" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Margin-PriceIndex" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/priceIndex
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -345,7 +505,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Isolated margin symbol info
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Get-All-Isolated-Margin-Symbol" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Get-All-Isolated-Margin-Symbol" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/isolated/allPairs
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
@@ -355,7 +520,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get's historical klines
-        /// <para><a href="https://binance-docs.github.io/apidocs/futures/en/#historical-blvt-nav-kline-candlestick" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/futures/en/#historical-blvt-nav-kline-candlestick" /><br />
+        /// Endpoint:<br />
+        /// GET /fapi/v1/lvtKlines
+        /// </para>
         /// </summary>
         /// <param name="symbol">The token</param>
         /// <param name="interval">Kline interval</param>
@@ -369,7 +539,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get cross margin collateral ratio
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/crossMarginCollateralRatio
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -378,7 +553,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get futures hourly interest rate
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-a-future-hourly-interest-rate-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-a-future-hourly-interest-rate-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/next-hourly-interest-rate
+        /// </para>
         /// </summary>
         /// <param name="assets">Assets, for example `ETH`</param>
         /// <param name="isolated">Isolated or cross</param>
@@ -389,7 +569,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get cross and isolated delist schedule
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Get-Delist-Schedule" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Get-Delist-Schedule" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/delist-schedule
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -398,7 +583,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get Isolated Margin Tier Data
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Isolated-Margin-Tier-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Isolated-Margin-Tier-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/isolatedMarginTier
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get, for example `ETHUSDT`</param>
         /// <param name="tier">Tier level</param>
@@ -409,7 +599,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get Margin Available Inventory
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Query-margin-avaliable-inventory" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/available-inventory
+        /// </para>
         /// </summary>
         /// <param name="type">The margin type to query for</param>
         /// <param name="ct">Cancellation token</param>
@@ -418,7 +613,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get Liability Coin Leverage Bracket in Cross Margin Pro Mode
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Liability-Coin-Leverage-Bracket-in-Cross-Margin-Pro-Mode" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Query-Liability-Coin-Leverage-Bracket-in-Cross-Margin-Pro-Mode" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/leverageBracket
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -426,7 +626,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get list all convert pairs
-        /// <para><a href="https://developers.binance.com/docs/convert/market-data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/convert/market-data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/convert/exchangeInfo
+        /// </para>
         /// </summary>
         /// <param name="quoteAsset">Quote asset, for example `ETH`</param>
         /// <param name="baseAsset">Base asset, for example `ETH`</param>
@@ -436,7 +641,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get quantity precision per asset
-        /// <para><a href="https://developers.binance.com/docs/convert/market-data/Query-order-quantity-precision-per-asset" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/convert/market-data/Query-order-quantity-precision-per-asset" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/convert/assetInfo
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -445,7 +655,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get spot symbols delist schedule
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-symbols-delist-schedule-for-spot-market_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-symbols-delist-schedule-for-spot-market_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/spot/delist-schedule
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

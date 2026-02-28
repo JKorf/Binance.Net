@@ -14,7 +14,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
     {
         /// <summary>
         /// Places a new test order. Test orders are not actually being executed and just test the functionality.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#test-new-order-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/order/test
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -56,7 +61,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Places a new order
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -102,7 +112,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancels a pending order
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-order-trade" /><br />
+        /// Endpoint:<br />
+        /// DELETE /api/v3/order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderId">The order id of the order</param>
@@ -116,7 +131,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancels all open orders on a symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-all-open-orders-on-a-symbol-trade" /><br />
+        /// Endpoint:<br />
+        /// DELETE /api/v3/openOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -126,7 +146,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancel an existing order and place a new order on the same symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-an-existing-order-and-send-a-new-order-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#cancel-an-existing-order-and-send-a-new-order-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/order/cancelReplace
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -174,7 +199,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#query-order-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderId">The order id of the order</param>
@@ -186,7 +216,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets a list of open orders
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#current-open-orders-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/openOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -196,7 +231,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets all orders for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#all-orders-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#all-orders-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/allOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
         /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
@@ -210,7 +250,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// DEPRECATED, USE PlaceOcoOrderListAsync INSTEAD
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/order/oco
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -256,7 +301,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Place a new OCO order. An OCO has 2 legs called the above leg and below leg. One of the legs must be a LimitMaker order and the other leg must be StopLoss or StopLossLimit order.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/orderList/oco
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -316,7 +366,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancels a pending oco order
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// DELETE /api/v3/orderList
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderListId">The id of the order list to cancel</param>
@@ -329,7 +384,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves data for a specific oco order. Either orderListId or listClientOrderId should be provided.
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/orderList
+        /// </para>
         /// </summary>
         /// <param name="orderListId">The list order id of the order</param>
         /// <param name="listClientOrderId">The client order id of the list order</param>
@@ -340,7 +400,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves a list of oco orders matching the parameters
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/allOrderList
+        /// </para>
         /// </summary>
         /// <param name="fromId">Only return oco orders with id higher than this</param>
         /// <param name="startTime">Only return oco orders placed later than this. Only valid if fromId isn't provided</param>
@@ -353,7 +418,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves a list of open oco orders
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/openOrderList
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -362,7 +432,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Place a new OTOCO (One Triggers Other) order
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/orderList/oto
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
@@ -419,7 +494,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Place a new OTOCO (One Triggers One Cancels The Other) order
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-lists" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/orderList/otoco
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="workingOrderType">Working order type, either Limit or LimitMaker</param>
@@ -495,7 +575,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets user trades for provided symbol
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#account-trade-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/myTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="orderId">Get trades for this order id</param>
@@ -510,7 +595,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Margin account new order
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/margin/order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -550,7 +640,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancel an active order for margin account
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-Order" /><br />
+        /// Endpoint:<br />
+        /// DELETE /sapi/v1/margin/order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="orderId">The order id of the order</param>
@@ -564,7 +659,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancel all active orders for a symbol
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-All-Open-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-All-Open-Orders" /><br />
+        /// Endpoint:<br />
+        /// DELETE /sapi/v1/margin/openOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the to cancel orders for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -575,7 +675,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves data for a specific margin account order. Either orderId or origClientOrderId should be provided.
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Order" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -588,7 +693,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets a list of open margin account orders
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/openOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -599,7 +709,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets all margin account orders for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-All-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-All-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/allOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -614,7 +729,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Gets all user margin account trades for provided symbol
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Trade-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Trade-List" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/myTrades
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="orderId">Trades associated with orderId</param>
@@ -631,7 +751,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Places a new margin OCO(One cancels other) order
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-New-OCO" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/margin/order/oco
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="side">The order side (buy/sell)</param>
@@ -675,7 +800,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancels a pending margin oco order
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-OCO" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Margin-Account-Cancel-OCO" /><br />
+        /// Endpoint:<br />
+        /// DELETE /sapi/v1/margin/orderList
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -689,7 +819,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves data for a specific margin oco order. Either orderListId or listClientOrderId should be provided.
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-OCO" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-OCO" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/orderList
+        /// </para>
         /// </summary>
         /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -702,7 +837,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves a list of margin oco orders matching the parameters
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-All-OCO" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-All-OCO" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/allOrderList
+        /// </para>
         /// </summary>
         /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -717,7 +857,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Retrieves a list of open margin oco orders
-        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-OCO" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/trade/Query-Margin-Account-Open-OCO" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/openOrderList
+        /// </para>
         /// </summary>
         /// <param name="symbol">Mandatory for isolated margin, not supported for cross margin, for example `ETHUSDT`</param>
         /// <param name="isIsolated">For isolated margin or not</param>
@@ -728,7 +873,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get Customer to Customer trade history
-        /// <para><a href="https://developers.binance.com/docs/c2c/rest-api" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/c2c/rest-api" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/c2c/orderMatch/listUserOrderHistory
+        /// </para>
         /// </summary>
         /// <param name="side">Trade side</param>
         /// <param name="startTime">Filter by start time</param>
@@ -742,7 +892,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get pay trade history
-        /// <para><a href="https://developers.binance.com/docs/pay/rest-api" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/pay/rest-api" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/pay/transactions
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -754,7 +909,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Request a quote for convert asset (selling asset) for base asset (buying asset)
-        /// <para><a href="https://developers.binance.com/docs/convert/trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/convert/trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/convert/getQuote
+        /// </para>
         /// </summary>
         /// <param name="quoteAsset">Quote asset, for example `ETH`</param>
         /// <param name="baseAsset">Base asset, for example `ETH`</param>
@@ -769,7 +929,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Accept the previously requested quote
-        /// <para><a href="https://developers.binance.com/docs/convert/trade/Accept-Quote" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/convert/trade/Accept-Quote" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/convert/acceptQuote
+        /// </para>
         /// </summary>
         /// <param name="quoteId">The quote id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -779,7 +944,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get convert order status
-        /// <para><a href="https://developers.binance.com/docs/convert/trade/Order-Status" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/convert/trade/Order-Status" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/convert/orderStatus
+        /// </para>
         /// </summary>
         /// <param name="orderId">The order id of the order</param>
         /// <param name="quoteId">The quote id of the order</param>
@@ -790,7 +960,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get convert trade history
-        /// <para><a href="https://developers.binance.com/docs/convert/trade/Get-Convert-Trade-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/convert/trade/Get-Convert-Trade-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/convert/tradeFlow
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -802,7 +977,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get prevented matches because of self trade prevention
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-prevented-matches-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/account-endpoints#query-prevented-matches-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/myPreventedMatches
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="preventedMatchId">Filter by prevented match id</param>
@@ -816,7 +996,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Place a new spot time weighted average price order
-        /// <para><a href="https://developers.binance.com/docs/algo/spot-algo/Time-Weighted-Average-Price-New-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/algo/spot-algo/Time-Weighted-Average-Price-New-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/algo/spot/newOrderTwap
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>
@@ -839,7 +1024,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Cancel a spot algo order
-        /// <para><a href="https://developers.binance.com/docs/algo/spot-algo/Cancel-Algo-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/algo/spot-algo/Cancel-Algo-Order" /><br />
+        /// Endpoint:<br />
+        /// DELETE /sapi/v1/algo/spot/order
+        /// </para>
         /// </summary>
         /// <param name="algoOrderId">Algo order id to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -849,7 +1039,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get all open spot algo orders
-        /// <para><a href="https://developers.binance.com/docs/algo/spot-algo/Query-Current-Algo-Open-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/algo/spot-algo/Query-Current-Algo-Open-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/algo/spot/openOrders
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -858,7 +1053,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get list of closed algo orders
-        /// <para><a href="https://developers.binance.com/docs/algo/spot-algo/Query-Historical-Algo-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/algo/spot-algo/Query-Historical-Algo-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/algo/spot/historicalOrders
+        /// </para>
         /// </summary>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="side">Filter by side</param>
@@ -873,7 +1073,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get algo sub orders overview
-        /// <para><a href="https://developers.binance.com/docs/algo/spot-algo/Query-Sub-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/algo/spot-algo/Query-Sub-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/algo/spot/subOrders
+        /// </para>
         /// </summary>
         /// <param name="algoId">Algo id</param>
         /// <param name="page">Page</param>

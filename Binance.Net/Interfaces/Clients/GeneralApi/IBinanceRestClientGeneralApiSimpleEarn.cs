@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Get a list of simple earn flexible products
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-simple-earn-flexible-product-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-simple-earn-flexible-product-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/list
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="page">Current page</param>
@@ -23,7 +28,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get a list of simple earn locked products
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-simple-earn-locked-product-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-simple-earn-locked-product-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/list
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="page">Current page</param>
@@ -35,7 +45,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Subscribe to flexible product
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-flexible-product-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-flexible-product-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/flexible/subscribe
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="quantity">Quantity</param>
@@ -48,7 +63,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Subscribe to locked product
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-locked-product-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-locked-product-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/locked/subscribe
+        /// </para>
         /// </summary>
         /// <param name="projectId">Project id</param>
         /// <param name="quantity">Quantity</param>
@@ -62,7 +82,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Redeem flexible product
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/flexible/redeem
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="redeemAll">Whether to redeem all. If not then quantity should be specified</param>
@@ -75,7 +100,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Redeem locked product
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-locked-product-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-locked-product-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/locked/redeem
+        /// </para>
         /// </summary>
         /// <param name="positionId">Position id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -85,7 +115,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible product position info
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/position
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="productId">Filter by product id</param>
@@ -98,7 +133,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get locked product position info
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-product-position-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-product-position-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/position
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="positionId">Filter by position id</param>
@@ -112,7 +152,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn account info
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#simple-account-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#simple-account-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/account
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -121,7 +166,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn flexible product subscription records 
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-record-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-record-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/history/subscriptionRecord
+        /// </para>
         /// </summary>
         /// <param name="productId">Filter by product id</param>
         /// <param name="purchaseId">Filter by purchase id</param>
@@ -137,7 +187,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn locked product subscription records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-record-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-record-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/history/subscriptionRecord
+        /// </para>
         /// </summary>
         /// <param name="purchaseId">Filter by purchase id</param>
         /// <param name="asset">Filler by asset</param>
@@ -152,7 +207,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn flexible product redemption records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-redemption-record-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-redemption-record-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/history/redemptionRecord
+        /// </para>
         /// </summary>
         /// <param name="productId">Filter by product id</param>
         /// <param name="redeemId">Filler by redeem id</param>
@@ -168,7 +228,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn locked product redemption records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-redemption-record-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-redemption-record-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/history/redemptionRecord
+        /// </para>
         /// </summary>
         /// <param name="positionId">Filter by position id</param>
         /// <param name="redeemId">Filler by redeem id</param>
@@ -184,7 +249,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn flexible product reward records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-rewards-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-rewards-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/history/rewardsRecord
+        /// </para>
         /// </summary>
         /// <param name="type">Type or rewards</param>
         /// <param name="productId">Filter by product id</param>
@@ -200,7 +270,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Simple Earn locked product reward records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-rewards-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-rewards-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/history/rewardsRecord
+        /// </para>
         /// </summary>
         /// <param name="positionId">Position id</param>
         /// <param name="asset">Filler by asset</param>
@@ -215,7 +290,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Set flexible product auto subscribe toggle
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-flexible-auto-subscribe-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#set-flexible-auto-subscribe-user_data" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/flexible/setAutoSubscribe
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="autoSubscribe">Auto subscribe enabled or not</param>
@@ -226,7 +306,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Set locked product auto subscribe toggle
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-auto-subscribe-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-auto-subscribe-user_data" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/locked/setAutoSubscribe
+        /// </para>
         /// </summary>
         /// <param name="positionId">Position id</param>
         /// <param name="autoSubscribe">Auto subscribe enabled or not</param>
@@ -237,7 +322,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible product personal quota left
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-personal-left-quota-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-personal-left-quota-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/personalLeftQuota
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -247,7 +337,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get locked product personal quota left
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-personal-left-quota-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-personal-left-quota-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/personalLeftQuota
+        /// </para>
         /// </summary>
         /// <param name="projectId">Project id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -257,7 +352,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get flexible subscription preview
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-preview-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-preview-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/subscriptionPreview
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="quantity">Quantity</param>
@@ -268,7 +368,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get locked subscription preview
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-preview-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-preview-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/locked/subscriptionPreview
+        /// </para>
         /// </summary>
         /// <param name="projectId">Project id</param>
         /// <param name="quantity">Quantity</param>
@@ -280,7 +385,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Set locked redeem option 
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-product-redeem-option" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-product-redeem-option" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/simple-earn/locked/setRedeemOption
+        /// </para>
         /// </summary>
         /// <param name="positionId">Position id</param>
         /// <param name="redeemDestination">Account for redemption, SPOT or FLEXIBLE</param>
@@ -291,7 +401,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get rate history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/history/rateHistory
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="aprPeriod">APR period</param>
@@ -306,7 +421,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get collateral records
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/simple-earn/flexible/history/collateralRecord
+        /// </para>
         /// </summary>
         /// <param name="productId">Product id</param>
         /// <param name="startTime">Filter by start time</param>

@@ -12,7 +12,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Execute a transfer between the spot account and a futures account
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#new-future-account-transfer-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#new-future-account-transfer-user_data" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/futures/transfer
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset to transfer</param>
         /// <param name="quantity">Quantity to transfer</param>
@@ -24,7 +29,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get history of transfers between spot and futures account
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-future-account-transaction-history-list-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-future-account-transaction-history-list-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/futures/transfer
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset to get history for</param>
         /// <param name="startTime">Filter by start time</param>

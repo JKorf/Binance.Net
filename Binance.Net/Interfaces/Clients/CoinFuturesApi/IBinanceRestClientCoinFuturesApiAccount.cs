@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     {
         /// <summary>
         /// Gets account position information
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Position-Information" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/positionRisk
+        /// </para>
         /// </summary>
         /// <param name="marginAsset">Filter by margin asset, for example `ETH`</param>
         /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
@@ -23,7 +28,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets account information, including balances
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Account-Information" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/account
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -32,7 +42,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>.
         /// Gets account balances
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Futures-Account-Balance" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/balance
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -41,7 +56,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Position-Mode" /><br />
+        /// Endpoint:<br />
+        /// POST /dapi/v1/positionSide/dual
+        /// </para>
         /// </summary>
         /// <param name="dualPositionSide">User position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -51,7 +71,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Current-Position-Mode" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/positionSide/dual
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -60,7 +85,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Requests to change the initial leverage of the given symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Initial-Leverage" /><br />
+        /// Endpoint:<br />
+        /// POST /dapi/v1/leverage
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to change the initial leverage for, for example `BTCUSD_PERP`</param>
         /// <param name="leverage">The amount of initial leverage to change to</param>
@@ -71,7 +101,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Change the margin type for an open position
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Change-Margin-Type" /><br />
+        /// Endpoint:<br />
+        /// POST /dapi/v1/marginType
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to change the position type for, for example `BTCUSD_PERP`</param>
         /// <param name="marginType">The type of margin to use</param>
@@ -82,7 +117,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Change the margin on an open position
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Modify-Isolated-Position-Margin" /><br />
+        /// Endpoint:<br />
+        /// POST /dapi/v1/positionMargin
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to adjust the position margin for, for example `BTCUSD_PERP`</param>
         /// <param name="amount">The amount of margin to be used</param>
@@ -95,7 +135,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Requests the margin change history for a specific symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Get-Position-Margin-Change-History" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/positionMargin/history
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to get margin history for, for example `BTCUSD_PERP`</param>
         /// <param name="type">Filter the history by the direction of margin change</param>
@@ -109,7 +154,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets the income history for the futures account
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Income-History" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/income
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to get income history from, for example `BTCUSD_PERP`</param>
         /// <param name="incomeType">The income type filter to apply to the request</param>
@@ -124,7 +174,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets Notional and Leverage Brackets.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Notional-Bracket-for-Pair" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v2/leverageBracket
+        /// </para>
         /// </summary>
         /// <param name="symbolOrPair">The symbol or pair to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -134,7 +189,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get position ADL quantile estimations
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/adlQuantile
+        /// </para>
         /// </summary>
         /// <param name="symbol">Only get for this symbol, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -145,7 +205,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Gets account commission rates
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/User-Commission-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/commissionRate
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -155,7 +220,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Start a user stream. The resulting listen key can be used to subscribe to the user stream using the socket client.The stream will close after 60 minutes unless <see cref="KeepAliveUserStreamAsync">KeepAliveUserStreamAsync</see> is called.
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Start-User-Data-Stream" /><br />
+        /// Endpoint:<br />
+        /// POST /dapi/v1/listenKey
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -163,7 +233,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Keepalive-User-Data-Stream" /><br />
+        /// Endpoint:<br />
+        /// PUT /dapi/v1/listenKey
+        /// </para>
         /// </summary>
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
@@ -172,7 +247,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Stop the user stream, no updates will be send anymore
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams/Close-User-Data-Stream" /><br />
+        /// Endpoint:<br />
+        /// DELETE /dapi/v1/listenKey
+        /// </para>
         /// </summary>
         /// <param name="listenKey">The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
@@ -181,7 +261,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get download id for downloading transaction history
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/income/asyn
+        /// </para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -192,7 +277,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get the download link for transaction history by download id
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/income/asyn/id
+        /// </para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTransactionHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -202,7 +292,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get download id for downloading order history
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/order/asyn
+        /// </para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -213,7 +308,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get the download link for order history by download id
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/order/asyn/id
+        /// </para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForOrderHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -223,7 +323,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get download id for downloading trade history
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/trade/asyn
+        /// </para>
         /// </summary>
         /// <param name="startTime">Start time of the data to download</param>
         /// <param name="endTime">End time of the data to download</param>
@@ -234,7 +339,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Get the download link for order history by download id
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id" /><br />
+        /// Endpoint:<br />
+        /// GET /dapi/v1/trade/asyn/id
+        /// </para>
         /// </summary>
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTradeHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>

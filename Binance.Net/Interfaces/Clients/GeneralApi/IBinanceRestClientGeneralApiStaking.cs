@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Subscribe to ETH staking
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-eth-staking-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-eth-staking-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/eth-staking/eth/stake
+        /// </para>
         /// </summary>
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -21,7 +26,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Redeem from ETH staking
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-eth-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-eth-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/eth-staking/eth/redeem
+        /// </para>
         /// </summary>
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -31,7 +41,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get ETH staking history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-staking-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-staking-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/eth/history/stakingHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -44,7 +59,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get ETH redemption history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-redemption-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-redemption-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/eth/history/redemptionHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -57,7 +77,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get ETH rewards history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-rewards-distribution-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-rewards-distribution-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/eth/history/rewardsHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -70,7 +95,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get ETH staking quotas
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-current-eth-staking-quota-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-current-eth-staking-quota-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/eth/quota
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -79,7 +109,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get Beth rate history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-beth-rate-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-beth-rate-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/eth/history/rateHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -92,7 +127,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get eth staking account
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#eth-staking-account-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#eth-staking-account-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/account
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -101,7 +141,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Wrap Beth
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#wrap-beth-trade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#wrap-beth-trade" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/eth-staking/wbeth/wrap
+        /// </para>
         /// </summary>
         /// <param name="quantity">Quantity to wrap</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -111,7 +156,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get wrap history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-wbeth-wrap-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-wbeth-wrap-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/wbeth/history/wrapHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -124,7 +174,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get unwrap history
-        /// <para><a href="https://binance-docs.github.io/apidocs/spot/en/#get-wbeth-unwrap-history-user_data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-wbeth-unwrap-history-user_data" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/eth-staking/wbeth/history/unwrapHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -137,7 +192,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get SOL staking account info
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/account" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/account" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/account
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -146,7 +206,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get SOL staking quotas
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/quota
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -155,7 +220,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Subscribe to SOL staking
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/staking" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/staking" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/sol-staking/sol/stake
+        /// </para>
         /// </summary>
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -165,7 +235,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Redeem from SOL staking
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/sol-staking/sol/redeem
+        /// </para>
         /// </summary>
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
@@ -175,7 +250,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Claim Boost APR Airdrop rewards
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/staking/Claim-Boost-rewards" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/staking/Claim-Boost-rewards" /><br />
+        /// Endpoint:<br />
+        /// POST /sapi/v1/sol-staking/sol/claim
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
@@ -184,7 +264,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get SOL staking history
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/history" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/history" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/history/stakingHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -197,7 +282,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get SOL redemption history
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/history/redemptionHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -210,7 +300,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get BN SOL rewards history
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/history/bnsolRewardsHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -223,7 +318,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get BN SOL rate history
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/history/rateHistory
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -236,7 +336,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get SOL boost reward history
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-rewards-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-rewards-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/history/boostRewardsHistory
+        /// </para>
         /// </summary>
         /// <param name="type">Filter by type</param>
         /// <param name="startTime">Filter by start time</param>
@@ -250,7 +355,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get SOL unclaimed rewards
-        /// <para><a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-rewards" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-rewards" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/sol-staking/sol/history/unclaimedRewards
+        /// </para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>

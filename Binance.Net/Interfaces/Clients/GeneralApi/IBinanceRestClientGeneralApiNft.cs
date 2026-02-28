@@ -11,7 +11,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     {
         /// <summary>
         /// Get NFT deposit history
-        /// <para><a href="https://developers.binance.com/docs/nft/rest-api" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/nft/rest-api" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/nft/history/deposit
+        /// </para>
         /// </summary>
         /// <param name="startTime">Time to start getting deposit records from</param>
         /// <param name="endTime">Time to stop getting deposit records from</param>
@@ -24,7 +29,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get NFT withdraw history
-        /// <para><a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Withdraw-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Withdraw-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/nft/history/withdraw
+        /// </para>
         /// </summary>
         /// <param name="startTime">Time to start getting withdraw records from</param>
         /// <param name="endTime">Time to stop getting withdraw records from</param>
@@ -37,7 +47,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get NFT transaction history
-        /// <para><a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Transaction-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Transaction-History" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/nft/history/transactions
+        /// </para>
         /// </summary>
         /// <param name="orderType">Order type</param>
         /// <param name="startTime">Time to start getting transaction from</param>
@@ -51,7 +66,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
 
         /// <summary>
         /// Get NFT Asset
-        /// <para><a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Asset" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/nft/rest-api/Get-NFT-Asset" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/nft/user/getAsset
+        /// </para>
         /// </summary>
         /// <param name="limit">Max number of results</param>
         /// <param name="page">Page number of the results to fetch</param>

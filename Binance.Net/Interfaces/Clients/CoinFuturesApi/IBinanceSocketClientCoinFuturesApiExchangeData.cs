@@ -12,7 +12,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     {
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /><br />
+        /// Endpoint:<br />
+        /// @aggTrade
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -22,7 +27,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /><br />
+        /// Endpoint:<br />
+        /// @aggTrade
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -33,7 +43,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <summary>
         /// Subscribe to the aggregated trades update stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /><br />
+        /// Endpoint:<br />
+        /// @aggTrade
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -73,7 +88,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @kline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -84,7 +104,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbol and intervals
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @kline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="intervals">The intervals of the candlesticks</param>
@@ -95,7 +120,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @kline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -106,7 +136,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the candlestick update stream for the provided symbols and intervals
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @kline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="intervals">The intervals of the candlesticks</param>
@@ -117,7 +152,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a specific symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /><br />
+        /// Endpoint:<br />
+        /// @miniTicker
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -127,7 +167,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for a list of symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /><br />
+        /// Endpoint:<br />
+        /// @miniTicker
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -138,7 +183,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <summary>
         /// Subscribes to mini ticker updates stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /><br />
+        /// Endpoint:<br />
+        /// @miniTicker
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -148,7 +198,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to mini ticker updates stream for all symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Mini-Tickers-Stream" /><br />
+        /// Endpoint:<br />
+        /// !miniTicker@arr
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -157,7 +212,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams" /><br />
+        /// Endpoint:<br />
+        /// @ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -167,7 +227,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for a specific symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Ticker-Streams" /><br />
+        /// Endpoint:<br />
+        /// @ticker
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe to, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -177,7 +242,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to ticker updates stream for all symbols
-        /// <para><a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-tickers-streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://binance-docs.github.io/apidocs/delivery/en/#all-market-tickers-streams" /><br />
+        /// Endpoint:<br />
+        /// !ticker@arr
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -186,7 +256,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to all book ticker update streams
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Tickers-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Tickers-Streams" /><br />
+        /// Endpoint:<br />
+        /// !bookTicker
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -195,7 +270,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /><br />
+        /// Endpoint:<br />
+        /// @bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -205,7 +285,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /><br />
+        /// Endpoint:<br />
+        /// @bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -215,7 +300,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <summary>
         /// Subscribe to the book ticker update stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /><br />
+        /// Endpoint:<br />
+        /// @bookTicker
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -225,7 +315,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to specific symbol forced liquidations stream
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Liquidation-Order-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Liquidation-Order-Streams" /><br />
+        /// Endpoint:<br />
+        /// @forceOrder
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -235,7 +330,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to list of symbol forced liquidations stream
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Liquidation-Order-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Liquidation-Order-Streams" /><br />
+        /// Endpoint:<br />
+        /// @forceOrder
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -245,7 +345,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to all forced liquidations stream
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/All-Market-Liquidation-Order-Streams" /><br />
+        /// Endpoint:<br />
+        /// !forceOrder@arr
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -254,7 +359,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /><br />
+        /// Endpoint:<br />
+        /// @depth<levels>
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe on, for example `BTCUSD_PERP`</param>
         /// <param name="levels">The amount of entries to be returned in the update</param>
@@ -266,7 +376,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the depth updates for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /><br />
+        /// Endpoint:<br />
+        /// @depth<levels>
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe on, for example `BTCUSD_PERP`</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
@@ -278,7 +393,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <summary>
         /// Subscribes to the depth updates stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Partial-Book-Depth-Streams" /><br />
+        /// Endpoint:<br />
+        /// @depth<levels>
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="levels">The amount of entries to be returned in the update of each symbol</param>
@@ -290,7 +410,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the order book updates for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /><br />
+        /// Endpoint:<br />
+        /// @depth
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
@@ -301,7 +426,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the depth update stream for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /><br />
+        /// Endpoint:<br />
+        /// @depth
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 0 or 100, 500 or 1000, depending on endpoint</param>
@@ -312,7 +442,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <summary>
         /// Subscribe to the depth update stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /><br />
+        /// Endpoint:<br />
+        /// @depth
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 100 or 1000</param>
@@ -323,7 +458,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the Index price update stream for a single pair
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Price-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Price-Stream" /><br />
+        /// Endpoint:<br />
+        /// @indexPrice
+        /// </para>
         /// </summary>
         /// <param name="pair">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
@@ -334,7 +474,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the Index price update stream for a list of pairs
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Price-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Price-Stream" /><br />
+        /// Endpoint:<br />
+        /// @indexPrice
+        /// </para>
         /// </summary>
         /// <param name="pairs">The pairs, for example `BTCUSD`</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
@@ -345,7 +490,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a single symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Stream" /><br />
+        /// Endpoint:<br />
+        /// @markPrice
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
@@ -356,7 +506,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         ///Subscribe to the Mark price update stream for all symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-of-All-Symbols-of-a-Pair" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-of-All-Symbols-of-a-Pair" /><br />
+        /// Endpoint:<br />
+        /// !markPrice@arr
+        /// </para>
         /// </summary>
         /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -366,7 +521,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the Mark price update stream for a list of symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-of-All-Symbols-of-a-Pair" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-of-All-Symbols-of-a-Pair" /><br />
+        /// Endpoint:<br />
+        /// @markPrice
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
@@ -377,7 +537,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the continuous contract candlestick update stream for the provided pair
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @continuousKline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="pair">The pair, for example `BTCUSD`</param>
         /// <param name="contractType">The contract type</param>
@@ -389,7 +554,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the continuous contract candlestick update stream for the provided pairs
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Continuous-Contract-Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @continuousKline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="pairs">The pairs, for example `BTCUSD`</param>
         /// <param name="contractType">The contract type</param>
@@ -401,7 +571,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the index candlestick update stream for the provided pair
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @indexPriceKline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="pair">The pair, for example `BTCUSD`</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -412,7 +587,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the index candlestick update stream for the provided pairs
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Index-Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @indexPriceKline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="pairs">The pairs, for example `BTCUSD`</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -423,7 +603,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the mark price candlestick update stream for the provided symbol
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @markPriceKline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -434,7 +619,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribes to the mark price candlestick update stream for the provided symbols
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Mark-Price-Kline-Candlestick-Streams" /><br />
+        /// Endpoint:<br />
+        /// @markPriceKline_<interval>
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The interval of the candlesticks</param>
@@ -445,7 +635,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
         /// <summary>
         /// Subscribe to contract/symbol updates
-        /// <para><a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Contract-Info-Stream" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/websocket-market-streams/Contract-Info-Stream" /><br />
+        /// Endpoint:<br />
+        /// !contractInfo
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
