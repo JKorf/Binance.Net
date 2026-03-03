@@ -23,7 +23,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+        /// Gets the server time. This method can also determine the offset between server and local time for subsequent API calls
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Check-Server-Time" /><br />
@@ -37,7 +37,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
 
         /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
+        /// Gets information about the exchange including rate limits and symbol list
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Exchange-Information" /><br />
@@ -50,7 +50,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesUsdtExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get klines for a symbol
+        /// Gets klines for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /><br />
@@ -64,11 +64,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Kline data for the symbol</returns>
         Task<WebCallResult<IBinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get premium index klines for a symbol
+        /// Gets premium index klines for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /><br />
@@ -82,11 +82,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Premium index kline data for the symbol</returns>
         Task<WebCallResult<BinanceMarkIndexKline[]>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
+        /// Gets funding rate info for symbols that had FundingRateCap/FundingRateFloor/fundingIntervalHours adjustments
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-Info" /><br />
@@ -94,8 +94,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/fundingInfo
         /// </para>
         /// </summary>
-        /// <param name="ct"></param>
-        /// <returns></returns>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Funding rate info</returns>
         Task<WebCallResult<BinanceFuturesFundingInfo[]>> GetFundingInfoAsync(CancellationToken ct = default);
 
         /// <summary>
@@ -178,13 +178,13 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/markPriceKlines
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol get the data for, for example `ETHUSDT`</param>
+        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="startTime">Start time</param>
         /// <param name="endTime">End time</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Mark price kline data</returns>
         Task<WebCallResult<BinanceMarkIndexKline[]>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesOrderBook>> GetRpiOrderBookAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get the most recent trades for a symbol
+        /// Gets the most recent trades for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Recent-Trades-List" /><br />
@@ -228,11 +228,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
         /// <param name="limit">Max amount of results</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Recent trades for the symbol</returns>
         Task<WebCallResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get trade history for a symbol
+        /// Gets trade history for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Old-Trades-Lookup" /><br />
@@ -244,12 +244,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="limit">The max amount of results, max 500</param>
         /// <param name="fromId">Return trades after this trade id</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Trade history for the symbol</returns>
         Task<WebCallResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
             CancellationToken ct = default);
 
         /// <summary>
-        /// Get Mark Price and Funding Rate for the provided symbol
+        /// Gets mark price and funding rate for the provided symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /><br />
@@ -259,11 +259,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Data over the last 24 hours</returns>
+        /// <returns>Mark price and funding rate data</returns>
         Task<WebCallResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Mark Price and Funding Rate for all symbols
+        /// Gets mark price and funding rate for all symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Mark-Price" /><br />
@@ -272,11 +272,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Data over the last 24 hours</returns>
+        /// <returns>Mark price and funding rate data</returns>
         Task<WebCallResult<BinanceFuturesMarkPrice[]>> GetMarkPricesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get data regarding the last 24 hours change
+        /// Gets 24-hour ticker statistics
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
@@ -290,7 +290,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<IBinance24HPrice>> GetTickerAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get data regarding the last 24 hours change
+        /// Gets 24-hour ticker statistics
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
@@ -313,7 +313,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
+        /// <returns>Book price for the symbol</returns>
         Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceBookPrice[]>> GetBookPricesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get present open interest of a specific symbol.
+        /// Gets present open interest for a specific symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Open-Interest" /><br />
@@ -409,7 +409,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get a list of the prices of all symbols
+        /// Gets the prices for all symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
@@ -422,7 +422,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinancePrice[]>> GetPricesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get candlestick data for the provided pair
+        /// Gets candlestick data for the provided pair
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /><br />
@@ -441,7 +441,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<IBinanceKline[]>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Kline/candlestick data for the index price of a pair.
+        /// Gets kline/candlestick data for the index price of a pair
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /><br />
@@ -459,7 +459,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<IBinanceKline[]>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get asset indexes for Multi-Assets mode for all symbols
+        /// Gets asset indexes for Multi-Assets mode for all symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /><br />
@@ -468,11 +468,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Asset indexes</returns>
         Task<WebCallResult<BinanceFuturesAssetIndex[]>> GetAssetIndexesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get asset index for Multi-Assets mode for a symbol
+        /// Gets asset index for Multi-Assets mode for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Multi-Assets-Mode-Asset-Index" /><br />
@@ -482,11 +482,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Asset index for the symbol</returns>
         Task<WebCallResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+        /// Gets compressed aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /><br />
@@ -504,7 +504,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get basis data
+        /// Gets basis data
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/futures/en/#basis" /><br />
@@ -519,11 +519,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="startTime">Start time</param>
         /// <param name="endTime">End time</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Basis data</returns>
         Task<WebCallResult<BinanceFuturesBasis[]>> GetBasisAsync(string symbol, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get list of convert symbols
+        /// Gets convert symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert" /><br />
@@ -534,10 +534,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="fromAsset">From asset</param>
         /// <param name="toAsset">To asset</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Convert symbols</returns>
         Task<WebCallResult<BinanceFuturesConvertSymbol[]>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get index price constituents for a symbol
+        /// Gets index price constituents for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /><br />
@@ -547,10 +548,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Index price constituents</returns>
         Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get insurance fund balances snapshot
+        /// Gets insurance fund balance snapshot for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /><br />
@@ -560,10 +562,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Insurance fund balance snapshot</returns>
         Task<WebCallResult<BinanceInsuranceFundBalance>> GetInsuranceFundBalancesAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get insurance fund balances snapshot
+        /// Gets insurance fund balance snapshots for all symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Insurance-Fund-Balance" /><br />
@@ -572,10 +575,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Insurance fund balance snapshots</returns>
         Task<WebCallResult<BinanceInsuranceFundBalance[]>> GetInsuranceFundBalancesAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get ADL risk rating for a symbol
+        /// Gets ADL risk rating for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /><br />
@@ -585,10 +589,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>ADL risk rating</returns>
         Task<WebCallResult<BinanceSymbolAdlRate>> GetSymbolAdlRiskRatingAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
-        /// Get all symbols ADL risk ratings
+        /// Gets ADL risk ratings for all symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/ADL-Risk" /><br />
@@ -597,10 +602,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>ADL risk ratings</returns>
         Task<WebCallResult<BinanceSymbolAdlRate[]>> GetSymbolAdlRiskRatingsAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get trading schedule for TradFi perps
+        /// Gets trading schedule for TradFi perps
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Trading-Schedule" /><br />
@@ -609,6 +615,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Trading schedule</returns>
         Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default);
     }
 }

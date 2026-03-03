@@ -5,12 +5,12 @@ using Binance.Net.Objects.Models.Futures;
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
-    /// Binance USD-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// Binance USD-M futures account endpoints. Account endpoints include balance info, withdraw/deposit info, and account settings.
     /// </summary>
     public interface IBinanceRestClientUsdFuturesApiAccount
     {
         /// <summary>
-        /// DEPRECATED; USE Trading.GetPositionsAsync INSTEAD
+        /// Deprecated. Use <c>Trading.GetPositionsAsync</c> instead.
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V2" /><br />
@@ -21,12 +21,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of Positions</returns>
+        /// <returns>List of positions</returns>
         Task<WebCallResult<BinancePositionDetailsUsdt[]>> GetPositionInformationAsync(string? symbol = null,
             long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Change user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// Changes user position mode (Hedge Mode or One-way Mode) for every symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Position-Mode" /><br />
@@ -41,7 +41,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceResult>> ModifyPositionModeAsync(bool dualPositionSide, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get user's position mode (Hedge Mode or One-way Mode ) on EVERY symbol
+        /// Gets user position mode (Hedge Mode or One-way Mode) for every symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Position-Mode" /><br />
@@ -159,7 +159,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesSymbolBracket[]>> GetBracketsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get position ADL quantile estimations
+        /// Gets position ADL quantile estimations
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-ADL-Quantile-Estimation" /><br />
@@ -170,12 +170,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Only get for this symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Position ADL quantile estimations</returns>
         Task<WebCallResult<BinanceFuturesQuantileEstimation[]>> GetPositionAdlQuantileEstimationAsync(
             string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get account information, including position and balances
+        /// Gets account information, including positions and balances
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V2" /><br />
@@ -185,11 +185,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Account information</returns>
         Task<WebCallResult<BinanceFuturesAccountInfo>> GetAccountInfoV2Async(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get account information, including position and balances
+        /// Gets account information, including positions and balances
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Information-V3" /><br />
@@ -199,6 +199,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Account information</returns>
         Task<WebCallResult<BinanceFuturesAccountInfoV3>> GetAccountInfoV3Async(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -216,7 +217,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceUsdFuturesAccountBalance[]>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
+        /// Gets user multi-assets mode (Multi-Assets Mode or Single-Asset Mode) for every symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Current-Multi-Assets-Mode" /><br />
@@ -230,7 +231,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesMultiAssetMode>> GetMultiAssetsModeAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Set user's Multi-Assets mode (Multi-Assets Mode or Single-Asset Mode) on Every symbol
+        /// Sets user multi-assets mode (Multi-Assets Mode or Single-Asset Mode) for every symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Change-Multi-Assets-Mode" /><br />
@@ -241,7 +242,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="enabled">Enabled or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Success</returns>
+        /// <returns>Whether the request was successful</returns>
         Task<WebCallResult<BinanceResult>> SetMultiAssetsModeAsync(bool enabled, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -283,11 +284,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Listen key for the user stream</returns>
         Task<WebCallResult<string>> StartUserStreamAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Keep alive the user stream. This should be called every 30 minutes to prevent the user stream being stopped
+        /// Keeps the user stream alive. This should be called every 30 minutes to prevent the user stream from being stopped
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Keepalive-User-Data-Stream" /><br />
@@ -297,11 +298,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="listenKey">The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>A successful response</returns>
         Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
-        /// Stop the user stream, no updates will be send anymore
+        /// Stops the user stream; no updates will be sent anymore
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams/Close-User-Data-Stream" /><br />
@@ -311,11 +312,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="listenKey">The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>A successful response</returns>
         Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
-        /// Get download id for downloading transaction history
+        /// Gets download id for downloading transaction history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Transaction-History" /><br />
@@ -327,11 +328,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">End time of the data to download</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Download id information</returns>
         Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForTransactionHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get the download link for transaction history by download id
+        /// Gets the download link for transaction history by download id
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Transaction-History-Download-Link-by-Id" /><br />
@@ -342,11 +343,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTransactionHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Download link information</returns>
         Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForTransactionHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get download id for downloading order history
+        /// Gets download id for downloading order history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Order-History" /><br />
@@ -358,11 +359,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">End time of the data to download</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Download id information</returns>
         Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForOrderHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get the download link for order history by download id
+        /// Gets the download link for order history by download id
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Order-History-Download-Link-by-Id" /><br />
@@ -373,11 +374,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForOrderHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Download link information</returns>
         Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForOrderHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get download id for downloading trade history
+        /// Gets download id for downloading trade history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Download-Id-For-Futures-Trade-History" /><br />
@@ -389,11 +390,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="endTime">End time of the data to download</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Download id information</returns>
         Task<WebCallResult<BinanceFuturesDownloadIdInfo>> GetDownloadIdForTradeHistoryAsync(DateTime startTime, DateTime endTime, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get the download link for order history by download id
+        /// Gets the download link for trade history by download id
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-Futures-Trade-Download-Link-by-Id" /><br />
@@ -404,11 +405,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTradeHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Download link information</returns>
         Task<WebCallResult<BinanceFuturesDownloadLink>> GetDownloadLinkForTradeHistoryAsync(string downloadId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get the order rate limits
+        /// Gets the order rate limits
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Query-Rate-Limit" /><br />
@@ -418,11 +419,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Order rate limits</returns>
         Task<WebCallResult<BinanceRateLimit[]>> GetOrderRateLimitAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get BNB burn for fee discount status
+        /// Gets BNB burn fee discount status
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Get-BNB-Burn-Status" /><br />
@@ -432,11 +433,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>BNB burn fee discount status</returns>
         Task<WebCallResult<BinanceFuturesBnbBurnStatus>> GetBnbBurnStatusAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Set BNB burn for fee discount status
+        /// Sets BNB burn fee discount status
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Toggle-BNB-Burn-On-Futures-Trade" /><br />
@@ -447,11 +448,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="feeBurn">Fee burn status</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>A successful response</returns>
         Task<WebCallResult> SetBnbBurnStatusAsync(bool feeBurn, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get user symbol configuration
+        /// Gets user symbol configuration
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Symbol-Config" /><br />
@@ -462,10 +463,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Symbol configuration</returns>
         Task<WebCallResult<BinanceSymbolConfiguration[]>> GetSymbolConfigurationAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get user account configuration
+        /// Gets user account configuration
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/rest-api/Account-Config" /><br />
@@ -475,10 +477,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Account configuration</returns>
         Task<WebCallResult<BinanceFuturesAccountConfiguration>> GetAccountConfigurationAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Sign the TradFi agreement
+        /// Signs the TradFi agreement
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/TradFi-Perps" /><br />
@@ -488,6 +491,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>A successful response</returns>
         Task<WebCallResult> SignTradFiAgreementAsync(long? receiveWindow = null, CancellationToken ct = default);
     }
 }

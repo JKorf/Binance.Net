@@ -40,7 +40,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for the placed order</returns>
+        /// <returns>Details of the placed order</returns>
         Task<WebCallResult<BinanceUsdFuturesOrder>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
@@ -65,7 +65,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Place multiple orders in one call
+        /// Places multiple orders in one call
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Place-Multiple-Orders" /><br />
@@ -113,7 +113,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for canceled order</returns>
+        /// <returns>Details of the canceled order</returns>
         Task<WebCallResult<BinanceUsdFuturesOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -128,11 +128,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for canceled order</returns>
+        /// <returns>Result of canceling all open orders</returns>
         Task<WebCallResult<BinanceFuturesCancelAllOrders>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
+        /// Cancels all open orders of the specified symbol at the end of the specified countdown. This REST endpoint helps ensure open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeat.
         /// so that the existing countdown time can be canceled and replaced by a new one.
         /// <para>
         /// Docs:<br />
@@ -162,7 +162,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for canceled order</returns>
+        /// <returns>Results of canceling each order</returns>
         Task<WebCallResult<CallResult<BinanceUsdFuturesOrder>[]>> CancelMultipleOrdersAsync(string symbol, List<long>? orderIdList = null, List<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="origClientOrderId">Client order id of the order to edit</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Details of the edited order</returns>
         Task<WebCallResult<BinanceUsdFuturesOrder>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -198,14 +198,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="orders">The order info</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Results of editing each order</returns>
         Task<WebCallResult<CallResult<BinanceUsdFuturesOrder>[]>> EditMultipleOrdersAsync(
             IEnumerable<BinanceFuturesBatchEditOrder> orders,
             int? receiveWindow = null,
             CancellationToken ct = default);
 
         /// <summary>
-        /// Get order edit history
+        /// Gets order edit history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Get-Order-Modify-History" /><br />
@@ -221,7 +221,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="limit">Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Order edit history</returns>
         Task<WebCallResult<BinanceFuturesOrderEditHistory[]>> GetOrderEditHistoryAsync(string symbol, long? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesUsdtTrade[]>> GetUserTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? orderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Place a new Volume Participation order
+        /// Places a new Volume Participation order
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/algo/future-algo" /><br />
@@ -334,7 +334,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="positionSide">Position side</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Algo order result</returns>
         Task<WebCallResult<BinanceAlgoOrderResult>> PlaceVolumeParticipationOrderAsync(
             string symbol,
             OrderSide side,
@@ -348,7 +348,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Place a new Time Weighted Average Price order
+        /// Places a new Time Weighted Average Price order
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/algo/future-algo/Time-Weighted-Average-Price-New-Order" /><br />
@@ -366,7 +366,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="positionSide">Position side</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Algo order result</returns>
         Task<WebCallResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(
             string symbol,
             OrderSide side,
@@ -391,11 +391,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="algoOrderId">Algo id to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Algo cancel result</returns>
         Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get list of open algo orders
+        /// Gets list of open algo orders
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/algo/future-algo/Query-Current-Algo-Open-Orders" /><br />
@@ -405,11 +405,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Open algo orders</returns>
         Task<WebCallResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get list of closed algo orders
+        /// Gets list of closed algo orders
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/algo/future-algo/Query-Historical-Algo-Orders" /><br />
@@ -425,11 +425,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="limit">Max results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Closed algo orders</returns>
         Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = null, OrderSide? side = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get algo sub orders overview
+        /// Gets algo sub orders overview
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/algo/future-algo/Query-Sub-Orders" /><br />
@@ -442,11 +442,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="limit">Max results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Algo sub order list</returns>
         Task<WebCallResult<BinanceAlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get position information
+        /// Gets position information
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Position-Information-V3" /><br />
@@ -457,10 +457,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Position information</returns>
         Task<WebCallResult<BinancePositionV3[]>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get a convert quote
+        /// Gets a convert quote
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Send-quote-request" /><br />
@@ -474,10 +475,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="toQuantity">The to asset quantity, either this or fromQuantity should be provided</param>
         /// <param name="validTime">The time the quote should be valid for</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Convert quote details</returns>
         Task<WebCallResult<BinanceFuturesConvertQuote>> ConvertQuoteRequestAsync(string fromAsset, string toAsset, decimal? fromQuantity = null, decimal? toQuantity = null, ValidTime? validTime = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Accept a convert quote
+        /// Accepts a convert quote
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Accept-Quote" /><br />
@@ -487,10 +489,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="quoteId">Quote id previously requested</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Convert quote accept result</returns>
         Task<WebCallResult<BinanceFuturesQuoteResult>> ConvertAcceptQuoteAsync(string quoteId, CancellationToken ct = default);
 
         /// <summary>
-        /// Get status of a convert order
+        /// Gets status of a convert order
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/convert/Order-Status" /><br />
@@ -501,10 +504,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="quoteId">The quote id. Either this or orderId should be provided</param>
         /// <param name="orderId">The order id. Either this or quoteId should be provided</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Convert order status</returns>
         Task<WebCallResult<BinanceFuturesConvertStatus>> GetConvertOrderStatusAsync(string? quoteId = null, string? orderId = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Place a new conditional order
+        /// Places a new conditional order
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order" /><br />
@@ -532,6 +536,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Placed conditional order details</returns>
         Task<WebCallResult<BinanceFuturesConditionalOrder>> PlaceConditionalOrderAsync(
             string symbol,
             Enums.OrderSide side,
@@ -555,7 +560,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel an active conditional order
+        /// Cancels an active conditional order
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order" /><br />
@@ -567,6 +572,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Canceled conditional order details</returns>
         Task<WebCallResult<BinanceFuturesConditionalOrder>> CancelConditionalOrderAsync(
             long? orderId = null,
             string? clientOrderId = null,
@@ -574,7 +580,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel all open conditional orders on a symbol
+        /// Cancels all open conditional orders on a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders" /><br />
@@ -585,13 +591,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Symbol to close conditional orders on, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Whether the request was successful</returns>
         Task<WebCallResult<BinanceResult>> CancelAllConditionalOrdersAsync(
             string symbol,
             long? receiveWindow = null,
             CancellationToken ct = default);
 
         /// <summary>
-        /// Get all open conditional orders
+        /// Gets all open conditional orders
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders" /><br />
@@ -604,6 +611,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="orderId">Filter by order id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Open conditional orders</returns>
         Task<WebCallResult<BinanceFuturesConditionalOrder[]>> GetOpenConditionalOrdersAsync(
             string? symbol = null,
             string? algoType = null,
@@ -612,7 +620,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Get info on a specific conditional order
+        /// Gets info on a specific conditional order
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order" /><br />
@@ -624,6 +632,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="clientOrderId">Client order id of the order to retrieve. Either this or orderId should be provided</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Conditional order details</returns>
         Task<WebCallResult<BinanceFuturesConditionalOrder>> GetConditionalOrderAsync(
             long? orderId = null,
             string? clientOrderId = null,
@@ -631,7 +640,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Get all conditional orders
+        /// Gets all conditional orders
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders" /><br />
@@ -647,6 +656,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="limit">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Conditional orders</returns>
         Task<WebCallResult<BinanceFuturesConditionalOrder[]>> GetConditionalOrdersAsync(
             string symbol,
             long? orderId = null,

@@ -22,11 +22,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>The account information</returns>
+        /// <returns>Account balances</returns>
         Task<CallResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get account information, including position and balances
+        /// Gets account information, including positions and balances
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/account/websocket-api/Account-Information" /><br />
@@ -36,10 +36,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Account information</returns>
         Task<CallResult<BinanceResponse<BinanceFuturesCoinAccountInfo>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
+        /// Subscribes to the account update stream. Before using this method, call <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> to start the stream and obtain a listen key.
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams" /><br />
