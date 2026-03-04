@@ -7,18 +7,18 @@
     public record BinanceFuturesCompositeIndexInfo
     {
         /// <summary>
-        /// The symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Component asset
+        /// The component asset.
         /// </summary>
         [JsonPropertyName("component")]
         public string Component { get; set; } = string.Empty;

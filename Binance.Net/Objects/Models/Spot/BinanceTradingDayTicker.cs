@@ -47,7 +47,7 @@
         [JsonPropertyName("lowPrice")]
         public decimal LowPrice { get; set; }
         /// <summary>
-        /// Volume in base asset
+        /// Volume in the base asset.
         /// </summary>
         [JsonPropertyName("volume")]
         public decimal Volume { get; set; }

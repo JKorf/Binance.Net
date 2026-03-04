@@ -6,12 +6,12 @@
     public record BinanceVipLoanRenewData
     {
         /// <summary>
-        /// Loan account id
+        /// The loan account identifier.
         /// </summary>
         [JsonPropertyName("loanAccountId")]
         public string LoanAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
@@ -21,17 +21,17 @@
         [JsonPropertyName("loanAmount")]
         public decimal LoanQuantity { get; set; }
         /// <summary>
-        /// Collateral account id separated by `,`
+        /// Comma-separated collateral account identifiers.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral assets separated by `,`
+        /// Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// LoanTerm
+        /// The renewed loan term in days.
         /// </summary>
         [JsonPropertyName("loanTerm")]
         public decimal LoanTerm { get; set; }

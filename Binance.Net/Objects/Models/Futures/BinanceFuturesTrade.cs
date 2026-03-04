@@ -15,7 +15,7 @@ namespace Binance.Net.Objects.Models.Futures
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Is buyer
+        /// Whether the user was the buyer.
         /// </summary>
         [JsonPropertyName("buyer")]
         public bool Buyer { get; set; }
@@ -36,7 +36,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
-        /// Is maker
+        /// Whether the user was the maker.
         /// </summary>
         [JsonPropertyName("maker")]
         public bool Maker { get; set; }

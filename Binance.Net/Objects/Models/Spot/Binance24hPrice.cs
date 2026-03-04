@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record Binance24HPrice : Binance24HPriceBase, IBinanceTick
     {
         /// <summary>
-        /// The close price 24 hours ago
+        /// The close price 24 hours ago.
         /// </summary>
         [JsonPropertyName("prevClosePrice")]
         public decimal PrevDayClosePrice { get; set; }

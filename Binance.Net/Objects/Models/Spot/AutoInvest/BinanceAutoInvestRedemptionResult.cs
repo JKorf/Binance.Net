@@ -7,7 +7,7 @@
     public record BinanceAutoInvestRedemptionResult
     {
         /// <summary>
-        /// Redemption id
+        /// The redemption identifier.
         /// </summary>
         [JsonPropertyName("redemptionId")]
         public long RedemptionId { get; set; }

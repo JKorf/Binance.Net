@@ -22,13 +22,13 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamLiquidation : IBinanceFuturesLiquidation
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Liquidation Sided
+        /// Liquidation side.
         /// </summary>
         [JsonPropertyName("S")]
         public OrderSide Side { get; set; }

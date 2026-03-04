@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceSubAccountFuturesPositionRiskCoin
     {
         /// <summary>
-        /// The entry price
+        /// The position entry price.
         /// </summary>
         [JsonPropertyName("entryPrice")]
         public decimal EntryPrice { get; set; }

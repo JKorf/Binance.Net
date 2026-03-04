@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinancePreventedTrade
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Match id
+        /// The prevented match identifier.
         /// </summary>
         [JsonPropertyName("preventedMatchId")]
         public long PreventedMatchId { get; set; }

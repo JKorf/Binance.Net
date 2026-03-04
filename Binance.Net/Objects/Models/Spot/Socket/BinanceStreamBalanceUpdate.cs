@@ -17,7 +17,7 @@
         [JsonPropertyName("d")]
         public decimal BalanceDelta { get; set; }
         /// <summary>
-        /// API key this update was for
+        /// API key this update was for.
         /// </summary>
         public string ApiKey { get; set; } = string.Empty;
         /// <summary>

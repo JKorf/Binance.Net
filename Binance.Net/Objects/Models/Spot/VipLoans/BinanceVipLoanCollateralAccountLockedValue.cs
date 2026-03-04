@@ -6,12 +6,12 @@
     public record BinanceVipLoanCollateralAccountLockedValue
     {
         /// <summary>
-        /// Collateral account id
+        /// The collateral account identifier.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral assets separated by `,`
+        /// Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;

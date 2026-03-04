@@ -17,19 +17,19 @@
         [JsonPropertyName("taxRate")]
         public decimal TaxRate { get; set; }
         /// <summary>
-        /// Source assets
+        /// Available source assets.
         /// </summary>
         [JsonPropertyName("sourceAssets")]
         public BinanceAutoInvestSourceAssetInfo[] SourceAssets { get; set; } = Array.Empty<BinanceAutoInvestSourceAssetInfo>();
     }
 
     /// <summary>
-    /// 
+    /// Source asset constraints and configuration.
     /// </summary>
     public record BinanceAutoInvestSourceAssetInfo
     {
         /// <summary>
-        /// Source asset
+        /// The source asset.
         /// </summary>
         [JsonPropertyName("sourceAsset")]
         public string SourceAsset { get; set; } = string.Empty;
@@ -44,7 +44,7 @@
         [JsonPropertyName("assetMaxAmount")]
         public decimal AssetMaxQuantity { get; set; }
         /// <summary>
-        /// Scale
+        /// The quantity precision scale.
         /// </summary>
         [JsonPropertyName("scale")]
         public decimal Scale { get; set; }

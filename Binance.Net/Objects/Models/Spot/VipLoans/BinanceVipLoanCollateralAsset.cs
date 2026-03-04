@@ -6,7 +6,7 @@
     public record BinanceVipLoanCollateralAsset
     {
         /// <summary>
-        /// Collateral asset
+        /// The collateral asset.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
@@ -46,7 +46,7 @@
         [JsonPropertyName("_4thCollateralRatio")]
         public string FourthCollateralRatio { get; set; } = string.Empty;
         /// <summary>
-        /// Fourth collateral range
+        /// Fourth collateral ratio range.
         /// </summary>
         [JsonPropertyName("_4thCollateralRange")]
         public string FourthCollateralRange { get; set; } = string.Empty;

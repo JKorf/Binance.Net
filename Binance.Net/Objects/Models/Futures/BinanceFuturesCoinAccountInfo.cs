@@ -7,17 +7,17 @@
     public record BinanceFuturesCoinAccountInfo
     {
         /// <summary>
-        /// Can deposit
+        /// Whether deposits are allowed.
         /// </summary>
         [JsonPropertyName("canDeposit")]
         public bool CanDeposit { get; set; }
         /// <summary>
-        /// Can trade
+        /// Whether trading is allowed.
         /// </summary>
         [JsonPropertyName("canTrade")]
         public bool CanTrade { get; set; }
         /// <summary>
-        /// Can withdraw
+        /// Whether withdrawals are allowed.
         /// </summary>
         [JsonPropertyName("canWithdraw")]
         public bool CanWithdraw { get; set; }
@@ -43,7 +43,7 @@
         [JsonPropertyName("positions")]
         public BinancePositionInfoCoin[] Positions { get; set; } = Array.Empty<BinancePositionInfoCoin>();
         /// <summary>
-        /// Update time
+        /// The account update time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updateTime")]

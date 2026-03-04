@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("interestRate")]
         public decimal? InterestRate { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]

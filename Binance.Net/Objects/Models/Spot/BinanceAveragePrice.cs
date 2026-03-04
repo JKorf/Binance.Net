@@ -7,7 +7,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceAveragePrice
     {
         /// <summary>
-        /// Duration in minutes
+        /// Averaging duration in minutes.
         /// </summary>
         [JsonPropertyName("mins")]
         public int Minutes { get; set; }

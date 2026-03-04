@@ -7,7 +7,7 @@
     public record BinanceSubAccountsFuturesSummary
     {
         /// <summary>
-        /// Asset
+        /// The asset these totals are reported in.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -48,7 +48,7 @@
         public decimal TotalWalletBalance { get; set; }
 
         /// <summary>
-        /// Sub accounts info
+        /// Futures summary information per sub account.
         /// </summary>
         [JsonPropertyName("subAccountList")]
         public BinanceSubAccountFuturesInfo[] SubAccounts { get; set; } = Array.Empty<BinanceSubAccountFuturesInfo>();
@@ -60,7 +60,7 @@
     public record BinanceSubAccountFuturesInfo
     {
         /// <summary>
-        /// Email of the sub account
+        /// The sub account email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
@@ -100,7 +100,7 @@
         [JsonPropertyName("totalWalletBalance")]
         public decimal TotalWalletBalance { get; set; }
         /// <summary>
-        /// Asset
+        /// The asset these totals are reported in.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

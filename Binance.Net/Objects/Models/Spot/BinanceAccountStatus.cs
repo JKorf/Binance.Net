@@ -7,7 +7,7 @@
     public record BinanceAccountStatus
     {
         /// <summary>
-        /// The result status
+        /// The account status result value.
         /// </summary>
         [JsonPropertyName("data")]
         public string? Data { get; set; }

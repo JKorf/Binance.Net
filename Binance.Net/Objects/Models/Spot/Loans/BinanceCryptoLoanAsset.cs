@@ -7,12 +7,12 @@
     public record BinanceCryptoLoanAsset
     {
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Interest rate
+        /// The flexible interest rate.
         /// </summary>
         [JsonPropertyName("flexibleInterestRate")]
         public decimal InterestRate{ get; set; }

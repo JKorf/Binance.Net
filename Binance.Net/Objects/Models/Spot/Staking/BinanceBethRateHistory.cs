@@ -17,7 +17,7 @@
         [JsonPropertyName("annualPercentageRate")]
         public decimal AnnualPercentageRate { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]

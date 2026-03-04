@@ -7,7 +7,7 @@
     public record BinanceStakingResult
     {
         /// <summary>
-        /// Successful
+        /// Whether the request succeeded.
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }

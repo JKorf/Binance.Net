@@ -25416,7 +25416,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade.QuantityWithoutRpi">
             <summary>
-            The quantity without trades involving RPI orders
+            The quantity without trades involving RPI orders.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAggregatedTrade.FirstTradeId">
@@ -25451,12 +25451,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAveragePrice.Interval">
             <summary>
-            Duration
+            The averaging interval.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAveragePrice.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamAveragePrice.Price">
@@ -25486,7 +25486,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate.ApiKey">
             <summary>
-            API key this update was for
+            API key this update was for.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceLockUpdate.ClearTime">
@@ -25511,7 +25511,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ApiKey">
             <summary>
-            API key this update was for
+            API key this update was for.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBalanceUpdate.ClearTime">
@@ -25526,7 +25526,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBookPrice.UpdateId">
             <summary>
-            Update id
+            The update identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamBookPrice.Symbol">
@@ -25664,7 +25664,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalCoinTick.OpenPrice">
             <summary>
-            Todays open price
+            Today's open price.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalCoinTick.HighPrice">
@@ -25699,7 +25699,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTick.OpenPrice">
             <summary>
-            Todays open price
+            Today's open price.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTick.HighPrice">
@@ -25729,7 +25729,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTrade.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMinimalTrade.Price">
@@ -25764,7 +25764,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMiniTickBase.OpenPrice">
             <summary>
-            Todays open price
+            Today's open price.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamMiniTickBase.HighPrice">
@@ -25821,7 +25821,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList.Id">
             <summary>
-            The id of the order list
+            The order list identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList.ContingencyType">
@@ -25866,7 +25866,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderList.ApiKey">
             <summary>
-            API key this update was for
+            API key this update was for.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderId">
@@ -26046,7 +26046,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.ApiKey">
             <summary>
-            API key this update was for
+            API key this update was for.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.I">
@@ -26086,7 +26086,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.SelfTradePreventionMode">
             <summary>
-            Prevented match id
+            Self-trade prevention mode.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamOrderUpdate.WorkingTime">
@@ -26106,7 +26106,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.ApiKey">
             <summary>
-            API key this update was for
+            API key this update was for.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamPositionsUpdate.Balances">
@@ -26196,7 +26196,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.TotalTrades">
             <summary>
-            The total trades of id
+            The total number of trades.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamRollingWindowTick.OpenTime">
@@ -26281,7 +26281,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTickBase.OpenPrice">
             <summary>
-            Todays open price
+            Today's open price.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTickBase.HighPrice">
@@ -26316,7 +26316,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTickBase.TotalTrades">
             <summary>
-            The total trades of id
+            The total number of trades.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTickBase.OpenTime">
@@ -26391,7 +26391,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade.SellerOrderId">
             <summary>
-            The sell order id
+            The seller order id.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Socket.BinanceStreamTrade.TradeTime">
@@ -26421,12 +26421,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssets.TargetAssets">
             <summary>
-            Target assets
+            Supported target assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssets.SourceAssets">
             <summary>
-            Source assets
+            Supported source assets.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditResult">
@@ -26436,7 +26436,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditResult.PlanId">
             <summary>
-            Plan id
+            The plan identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditResult.NextExecutionTime">
@@ -26451,7 +26451,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult.PlanId">
             <summary>
-            Plan id
+            The plan identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult.NextExecutionTime">
@@ -26461,7 +26461,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestEditStatusResult.Status">
             <summary>
-            Status
+            The plan status.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex">
@@ -26471,7 +26471,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.IndexId">
             <summary>
-            Index id
+            The index identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.IndexName">
@@ -26481,7 +26481,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.Status">
             <summary>
-            Status
+            The index status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndex.AssetAllocation">
@@ -26501,7 +26501,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestAssetIndex.Allocation">
             <summary>
-            Allocation
+            Allocation percentage.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition">
@@ -26511,7 +26511,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.IndexId">
             <summary>
-            Index id
+            The index identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.TotalInvestedInUsd">
@@ -26531,7 +26531,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.Roi">
             <summary>
-            Roi
+            Return on investment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPosition.AssetAllocation">
@@ -26596,7 +26596,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.Roi">
             <summary>
-            Roi
+            Return on investment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestIndexPlanPositionDetails.Percentage">
@@ -26626,12 +26626,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestOneTimeTransactionStatus.TransactionId">
             <summary>
-            Transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestOneTimeTransactionStatus.Status">
             <summary>
-            Status
+            The transaction status.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan">
@@ -26656,7 +26656,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.Roi">
             <summary>
-            Roi
+            Return on investment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlan.Plans">
@@ -26671,7 +26671,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.PlanId">
             <summary>
-            Plan id
+            The plan identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.PlanType">
@@ -26776,7 +26776,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanDetails.Roi">
             <summary>
-            Roi
+            Return on investment.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings">
@@ -26786,7 +26786,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.PlanId">
             <summary>
-            Plan id
+            The plan identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.PlanType">
@@ -26846,7 +26846,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.Roi">
             <summary>
-            Roi
+            Return on investment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldings.TotalInvestedInUsd">
@@ -26896,7 +26896,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.Roi">
             <summary>
-            Roi
+            Return on investment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanHoldingDetails.Percentage">
@@ -26941,12 +26941,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransactions.Total">
             <summary>
-            Total
+            The total number of transactions.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransactions.List">
             <summary>
-            Results
+            The returned transactions.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction">
@@ -26956,7 +26956,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.Id">
             <summary>
-            Id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.TargetAsset">
@@ -26976,7 +26976,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.PlanId">
             <summary>
-            Plan id
+            The plan identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestPlanTransaction.TransactionTime">
@@ -27051,7 +27051,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.IndexId">
             <summary>
-            Index id
+            The index identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.IndexName">
@@ -27061,7 +27061,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.RebalanceId">
             <summary>
-            Rebalance id
+            The rebalance identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceInfo.Status">
@@ -27086,12 +27086,12 @@
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails">
             <summary>
-            
+            Rebalance transaction details.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails.Asset">
             <summary>
-            Asset
+            The asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRebalanceDetails.TransactionTime">
@@ -27116,7 +27116,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.IndexId">
             <summary>
-            Index id
+            The index identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.IndexName">
@@ -27126,7 +27126,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.RedemptionId">
             <summary>
-            Redemption id
+            The redemption identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Status">
@@ -27136,7 +27136,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Asset">
             <summary>
-            Asset
+            The redeemed asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemption.Quantity">
@@ -27166,7 +27166,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRedemptionResult.RedemptionId">
             <summary>
-            Redemption id
+            The redemption identifier.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRoi">
@@ -27176,12 +27176,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRoi.Date">
             <summary>
-            Date
+            The ROI date.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestRoi.SimulateRoi">
             <summary>
-            Simulate roi
+            Simulated return on investment.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssets">
@@ -27201,17 +27201,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssets.SourceAssets">
             <summary>
-            Source assets
+            Available source assets.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo">
             <summary>
-            
+            Source asset constraints and configuration.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.SourceAsset">
             <summary>
-            Source asset
+            The source asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.AssetMinQuantity">
@@ -27226,7 +27226,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.Scale">
             <summary>
-            Scale
+            The quantity precision scale.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestSourceAssetInfo.FlexibleQuantity">
@@ -27241,7 +27241,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssets.TargetAssets">
             <summary>
-            Target assets
+            Available target assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssets.Assets">
@@ -27261,7 +27261,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAsset.Assets">
             <summary>
-            Target asset list
+            ROI and dimension data for the target asset.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTargetAssetRoi">
@@ -27291,7 +27291,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTradeResult.TransactionId">
             <summary>
-            Transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.AutoInvest.BinanceAutoInvestTradeResult.WaitSecond">
@@ -27306,7 +27306,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Binance24HPrice.PrevDayClosePrice">
             <summary>
-            The close price 24 hours ago
+            The close price 24 hours ago.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Binance24HPrice.BestBidPrice">
@@ -27392,7 +27392,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.UserId">
             <summary>
-            User id
+            The user identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountInfo.UpdateTime">
@@ -27447,7 +27447,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAccountStatus.Data">
             <summary>
-            The result status
+            The account status result value.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAggregatedTrade">
@@ -27482,7 +27482,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAggregatedTrade.TradeTime">
             <summary>
-            The timestamp of the trades
+            The trade timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAggregatedTrade.BuyerIsMaker">
@@ -27502,7 +27502,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.IpRestrict">
             <summary>
-            Whether the key is restricted to certain IP's or not
+            Whether the key is restricted to specific IP addresses.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.CreateTime">
@@ -27562,12 +27562,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.EnableFixApiTrade">
             <summary>
-            Authorizes FIX api trading
+            Authorizes FIX API trading.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAPIKeyPermissions.EnableFixReadOnly">
             <summary>
-            Authorizes FIX data reading
+            Authorizes FIX data reading.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceAveragePrice">
@@ -27577,7 +27577,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAveragePrice.Minutes">
             <summary>
-            Duration in minutes
+            Averaging duration in minutes.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceAveragePrice.Price">
@@ -27597,12 +27597,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBnbBurnStatus.SpotBnbBurn">
             <summary>
-            If spot trading BNB burn is enabled
+            Whether spot trading BNB burn is enabled.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBnbBurnStatus.InterestBnbBurn">
             <summary>
-            If margin interest BNB burn is enabled
+            Whether margin interest BNB burn is enabled.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceBookPrice">
@@ -27642,7 +27642,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBookPrice.Timestamp">
             <summary>
-            Timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceBusdHistory">
@@ -27652,17 +27652,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.TransactionId">
             <summary>
-            Transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.Type">
             <summary>
-            Type
+            The conversion type.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.Timestamp">
             <summary>
-            Timestamp
+            The conversion timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceBusdHistory.DeductedAsset">
@@ -27702,12 +27702,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceC2CUserTrade.OrderNumber">
             <summary>
-            Order number
+            The order number.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceC2CUserTrade.AdvertNumber">
             <summary>
-            Advert number
+            The advertisement number.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceC2CUserTrade.TradeType">
@@ -27777,12 +27777,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.CreateTime">
             <summary>
-            Creation time
+            The creation time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.TransactionId">
             <summary>
-            Transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Type">
@@ -27792,7 +27792,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Asset">
             <summary>
-            Asset
+            The asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCloudMiningHistory.Quantity">
@@ -27812,7 +27812,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.Symbol">
             <summary>
-            Symbol name
+            The symbol name.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCommissions.StandardCommissions">
@@ -27852,7 +27852,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.EnabledForSymbol">
             <summary>
-            Enabled for symbol
+            Whether the discount is enabled for this symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscountInfo.DiscountAsset">
@@ -27892,7 +27892,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDelistSchedule.DelistTime">
             <summary>
-            Delist time
+            The delisting time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDelistSchedule.Symbols">
@@ -27912,7 +27912,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositAddress.Url">
             <summary>
-            Url
+            The address URL.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositAddress.Tag">
@@ -27927,7 +27927,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDepositAddress.IsDefault">
             <summary>
-            Is default address
+            Whether this is the default address.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDeposit">
@@ -27972,7 +27972,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.Id">
             <summary>
-            The  id
+            The deposit identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDeposit.TransactionId">
@@ -28422,7 +28422,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDividendRecord.Id">
             <summary>
-            Id
+            The dividend record identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDividendRecord.Quantity">
@@ -28432,7 +28432,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDividendRecord.Asset">
             <summary>
-            Asset
+            The asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDividendRecord.Timestamp">
@@ -28447,7 +28447,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDividendRecord.Info">
             <summary>
-            Info
+            Additional info.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDustLogList">
@@ -28462,7 +28462,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDustLogList.UserAssetDribblets">
             <summary>
-            Rows
+            Dust conversion logs.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceDustLog">
@@ -28487,7 +28487,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDustLog.Logs">
             <summary>
-            Detail logs
+            Detailed conversion entries.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDustLog.OperateTime">
@@ -28562,7 +28562,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDustTransferResultEntry.FromAsset">
             <summary>
-            Asset
+            The source asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDustTransferResultEntry.Timestamp">
@@ -28607,7 +28607,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceEligibleDusts.Details">
             <summary>
-            Assets
+            Assets eligible for conversion.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceEligibleDust">
@@ -28717,7 +28717,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceExchangeInfo.ExchangeFilters">
             <summary>
-            Filters
+            Exchange-level filters.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceExchangeInfo.SmartOrderRoutings">
@@ -28747,7 +28747,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.OrderNumber">
             <summary>
-            Order number
+            The order number.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.SourceQuantity">
@@ -28792,7 +28792,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.CreateTime">
             <summary>
-            Creation time
+            The creation time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatPayment.UpdateTime">
@@ -28807,7 +28807,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatWithdrawDeposit.OrderNumber">
             <summary>
-            Order number
+            The order number.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatWithdrawDeposit.FiatAsset">
@@ -28842,7 +28842,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatWithdrawDeposit.CreateTime">
             <summary>
-            Creation time
+            The creation time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFiatWithdrawDeposit.UpdateTime">
@@ -28882,7 +28882,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFundingAsset.BtcValuation">
             <summary>
-            Value in btc
+            Value in BTC.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceFuturesAccountSnapshot">
@@ -28927,7 +28927,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesAsset.Asset">
             <summary>
-            Name of the asset
+            The asset name.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesAsset.MarginBalance">
@@ -28957,7 +28957,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesSnapshotPosition.MarkPrice">
             <summary>
-            Mark price
+            The mark price.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceFuturesSnapshotPosition.PositionAmt">
@@ -28977,17 +28977,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.ApiAgentCode">
             <summary>
-            Api Agent Code
+            The API agent code.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.RebateWorking">
             <summary>
-            If the apiAgentCode is working
+            Whether the API agent code rebate is active.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.IfNewUser">
             <summary>
-            If new user
+            Whether the account is a new user account.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIfNewUser.ReferrerId">
@@ -29007,7 +29007,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIpRestriction.IpList">
             <summary>
-            Ip whitelist
+            IP whitelist.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceIpRestriction.UpdateTime">
@@ -29020,6 +29020,11 @@
             The API key
             </summary>
         </member>
+        <member name="P:Binance.Net.Objects.Models.Spot.BinanceListenKey.ListenKey">
+            <summary>
+            The listen key.
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceListenToken">
             <summary>
             Listen token
@@ -29027,7 +29032,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceListenToken.Token">
             <summary>
-            Token
+            The listen token.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceListenToken.ExpirationTime">
@@ -29048,7 +29053,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceListResult`1.EndTime">
             <summary>
-            Emd to,e
+            Data end time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceListResult`1.Limit">
@@ -29103,7 +29108,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceMarkIndexKline.BasicDataCount">
             <summary>
-            Number of basic data
+            Number of data points in the candle.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceOrder">
@@ -29113,7 +29118,7 @@
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceOrderBook">
             <summary>
-            The order book for a asset
+            The order book for an asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderBook.Symbol">
@@ -29143,7 +29148,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderOcoList.Id">
             <summary>
-            The id of the order list
+            The order list identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderOcoList.ContingencyType">
@@ -29198,7 +29203,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderId.OrderId">
             <summary>
-            The id of the order
+            The order identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderId.ClientOrderId">
@@ -29218,7 +29223,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceCurrentRateLimit.Count">
             <summary>
-            The current used amount
+            The currently used amount.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceOrderTrade">
@@ -29228,7 +29233,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderTrade.Id">
             <summary>
-            The id of the trade
+            The trade identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderTrade.Price">
@@ -29248,7 +29253,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceOrderTrade.FeeAsset">
             <summary>
-            The asset the fee is paid in
+            The asset the fee is paid in.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinancePayTrade">
@@ -29258,12 +29263,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.Uid">
             <summary>
-            Uid
+            The user identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.CounterPartyId">
             <summary>
-            Counter party id
+            The counterparty identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.OrderId">
@@ -29288,7 +29293,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.TransactionTime">
             <summary>
-            Transaction time
+            The transaction time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePayTrade.Quantity">
@@ -29403,12 +29408,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOrder.MarginBuyBorrowQuantity">
             <summary>
-            Only present if a margin trade happened
+            Borrowed quantity, only present for margin trades.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePlacedOrder.MarginBuyBorrowAsset">
             <summary>
-            Only present if a margin trade happened
+            Borrowed asset, only present for margin trades.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinancePreventedTrade">
@@ -29418,12 +29423,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePreventedTrade.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePreventedTrade.PreventedMatchId">
             <summary>
-            Match id
+            The prevented match identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePreventedTrade.TakerOrderId">
@@ -29483,7 +29488,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinancePrice.Timestamp">
             <summary>
-            Timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceFuturesCoinPrice">
@@ -29588,77 +29593,77 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.I">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Ts">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Y">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.As">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pn">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pm">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pom">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Pomt">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Lc">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.G">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Sd">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.R">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Hd">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Rb">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceProduct.Ks">
             <summary>
-            
+            Additional product metadata field returned by the API.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceRebateWrapper">
@@ -29708,7 +29713,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRebate.UpdateTime">
             <summary>
-            Last update time
+            The last update time.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceRecentTrade">
@@ -29718,7 +29723,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRecentTrade.OrderId">
             <summary>
-            The id of the trade
+            The trade identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceRecentTrade.Price">
@@ -29791,7 +29796,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.CancelResponse">
             <summary>
-            Cancel order response. Make sure to check that the CancelResult is Success, else the CancelResponse.Message will contain more info
+            Cancel order response. Check <see cref="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.CancelResult"/> for success; otherwise <see cref="P:Binance.Net.Objects.Models.Spot.BinanceReplaceCancelOrder.Message"/> contains additional information.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceReplaceOrderResult.NewOrderResponse">
@@ -29871,7 +29876,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSpotAccountSnapshotData.TotalAssetOfBtc">
             <summary>
-            The total value of assets in btc
+            The total value of assets in BTC.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSpotAccountSnapshotData.Balances">
@@ -29906,7 +29911,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSpotFuturesTransfer.Timestamp">
             <summary>
-            Timestamp
+            The transfer timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSpotFuturesTransfer.Status">
@@ -29941,7 +29946,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSpotKline.Ignore">
             <summary>
-            Ignore
+            Unused field returned by the API.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceSymbol">
@@ -29996,7 +30001,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.AllowAmend">
             <summary>
-            Allow amend
+            Whether order amendments are allowed.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.IsSpotTradingAllowed">
@@ -30056,7 +30061,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.Filters">
             <summary>
-            Filters for order on this symbol
+            Filters for orders on this symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbol.DefaultSelfTradePreventionMode">
@@ -30376,7 +30381,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSymbolTrailingDeltaFilter.MaxTrailingBelowDelta">
             <summary>
-            The MaxTrailingBelowDelta filter defines the minimum amount in Basis Point or BIPS below the price to activate the order.
+            The MaxTrailingBelowDelta filter defines the maximum amount in Basis Point or BIPS below the price to activate the order.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceMaxNumberOfIcebergOrdersFilter">
@@ -30416,7 +30421,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSystemStatus.Status">
             <summary>
-            Status
+            The system status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceSystemStatus.Message">
@@ -30471,12 +30476,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscount.EnabledForAccount">
             <summary>
-            Is discount enabled for the account
+            Whether discount is enabled for the account.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscount.EnabledForSymbol">
             <summary>
-            Is discount enabled for the symbol
+            Whether discount is enabled for the symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceDiscount.DiscountAsset">
@@ -30491,7 +30496,7 @@
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceTrade">
             <summary>
-            Information about a trade
+            Represents information about a trade
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTrade.Symbol">
@@ -30501,7 +30506,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTrade.Id">
             <summary>
-            The id of the trade
+            The trade identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTrade.OrderId">
@@ -30631,7 +30636,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.Volume">
             <summary>
-            Volume in base asset
+            Volume in the base asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingDayTicker.QuoteVolume">
@@ -30671,7 +30676,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingStatus.IsLocked">
             <summary>
-            Is locked
+            Whether trading is locked.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingStatus.PlannedRecoverTime">
@@ -30681,7 +30686,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingStatus.TriggerConditions">
             <summary>
-            Conditions
+            Trigger conditions.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTradingStatus.Indicators">
@@ -30746,12 +30751,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTransfer.Id">
             <summary>
-            Id
+            The transfer identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTransfer.Timestamp">
             <summary>
-            Timestamp
+            The transfer timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress">
@@ -30761,12 +30766,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.Status">
             <summary>
-            Status
+            The address verification status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.Token">
             <summary>
-            Token
+            The asset token.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleAddress.Network">
@@ -30821,7 +30826,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.Id">
             <summary>
-            The  id
+            The deposit identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleDeposit.TransactionId">
@@ -30861,7 +30866,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleRequirement.QuestionnaireCountryCode">
             <summary>
-            Country code of the questionnaire required. NIL if not required.    
+            Country code of the required questionnaire, or `NIL` if not required.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleSubmitResult">
@@ -30871,12 +30876,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleSubmitResult.Accepted">
             <summary>
-            Accepted
+            Whether the submission was accepted.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleSubmitResult.Info">
             <summary>
-            Info
+            Additional submission info.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleVasp">
@@ -30886,12 +30891,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleVasp.VaspName">
             <summary>
-            Name
+            The VASP name.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleVasp.VaspCode">
             <summary>
-            Code
+            The VASP code.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal">
@@ -30901,7 +30906,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.Id">
             <summary>
-            The id of the withdrawal
+            The withdrawal identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.BinanceTravelRuleWithdrawal.WithdrawOrderId">
@@ -31986,12 +31991,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate.RealLeverage">
             <summary>
-            Token issued
+            Real leverage.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate.TargetLeverage">
             <summary>
-            Token issued
+            Target leverage.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtInfoUpdate.FundingRatio">
@@ -32051,7 +32056,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtKline.CloseTime">
             <summary>
-            The time this candlestick closed
+            The time this candlestick closed.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Blvt.BinanceBlvtKline.NavUpdates">
@@ -33513,12 +33518,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanAsset.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanAsset.InterestRate">
             <summary>
-            Interest rate
+            The flexible interest rate.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanAsset.MinLimit">
@@ -33558,7 +33563,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrow.Status">
             <summary>
-            Status
+            The borrow status.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord">
@@ -33598,7 +33603,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.OrderId">
             <summary>
-            Borrow order id
+            The borrow order identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanBorrowRecord.BorrowTime">
@@ -33618,7 +33623,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanCollateralAsset.CollateralAsset">
             <summary>
-            Collateral asset
+            The collateral asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanCollateralAsset.InitialLtv">
@@ -33638,7 +33643,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanCollateralAsset.MaxLimit">
             <summary>
-            Max limit
+            The maximum collateral limit.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleBorrowRecord">
@@ -33673,7 +33678,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleBorrowRecord.Status">
             <summary>
-            Status of the order
+            The borrow record status.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleLtvAdjustRecord">
@@ -33703,17 +33708,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleLtvAdjustRecord.PreLtv">
             <summary>
-            Pre adjust ltv
+            LTV before adjustment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleLtvAdjustRecord.AfterLtv">
             <summary>
-            Post adjust ltv
+            LTV after adjustment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleLtvAdjustRecord.AdjustTime">
             <summary>
-            Adjust time
+            The adjustment time.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleRepayRecord">
@@ -33748,7 +33753,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanFlexibleRepayRecord.RepayTime">
             <summary>
-            Repay timestamp
+            The repayment timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome">
@@ -33758,7 +33763,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Asset">
             <summary>
-            Asset
+            The income asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Type">
@@ -33773,7 +33778,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.Timestamp">
             <summary>
-            Timestamp
+            The income timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanIncome.TransactionId">
@@ -33793,7 +33798,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLiquidationRecord.Debt">
             <summary>
-            The liquidation dept
+            The liquidation debt.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLiquidationRecord.CollateralAsset">
@@ -33858,7 +33863,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.CurrentLtv">
             <summary>
-            Current ltv
+            Current LTV.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjust.Status">
@@ -33893,12 +33898,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.PreLtv">
             <summary>
-            Pre adjust ltv
+            LTV before adjustment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.AfterLtv">
             <summary>
-            Post adjust ltv
+            LTV after adjustment.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanLtvAdjustRecord.AdjustTime">
@@ -33918,7 +33923,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanMarginCallResult.OrderId">
             <summary>
-            Order id
+            The order identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanMarginCallResult.CollateralAsset">
@@ -33938,7 +33943,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanMarginCallResult.Timestamp">
             <summary>
-            Timestamp
+            The customization timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder">
@@ -33968,7 +33973,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanOpenBorrowOrder.CurrentLTV">
             <summary>
-            Current LTV
+            Current LTV.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay">
@@ -33998,7 +34003,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.FullRepayment">
             <summary>
-            Fully repaid
+            Whether the loan is fully repaid.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepay.CurrentLTV">
@@ -34018,12 +34023,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRate.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRate.CollateralAsset">
             <summary>
-            Collateral asset
+            The collateral asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRate.Rate">
@@ -34058,7 +34063,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.RepayStatus">
             <summary>
-            Status of the repay
+            The repayment status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Loans.BinanceCryptoLoanRepayRecord.CollateralReturn">
@@ -36023,7 +36028,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.ProductId">
             <summary>
-            Product Id
+            Product identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.Asset">
@@ -36033,7 +36038,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.CreateTime">
             <summary>
-            Create time
+            Create time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnCollateralRecord.Type">
@@ -36058,7 +36063,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.LatestAnnualPercentageRate">
@@ -36078,7 +36083,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.ProductId">
             <summary>
-            product id
+            Product identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePosition.TotalQuantity">
@@ -36143,7 +36148,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.TotalQuantity">
             <summary>
-            Total amount
+            Total amount.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexiblePreview.EstimatedDailyBonusRewards">
@@ -36168,7 +36173,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.LatestAnnualPercentageRate">
@@ -36213,7 +36218,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.ProductId">
             <summary>
-            product id
+            Product identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleProduct.SubscriptionStartTime">
@@ -36233,12 +36238,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Quantity">
             <summary>
-            Quantity
+            Subscribed quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRecord.Timestamp">
@@ -36288,12 +36293,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Quantity">
             <summary>
-            Quantity
+            Redeemed quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRedemptionRecord.Timestamp">
@@ -36328,7 +36333,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.Asset">
             <summary>
-            Asset
+            Reward asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.ProjectId">
@@ -36348,7 +36353,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnFlexibleRewardRecord.Timestamp">
             <summary>
-            Timestamp
+            Reward timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition">
@@ -36358,7 +36363,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.PositionId">
@@ -36368,7 +36373,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ParentPositionId">
             <summary>
-            Parent Position id
+            Parent position identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPosition.ProjectId">
@@ -36563,7 +36568,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.NextPay">
             <summary>
-            Next pay
+            Next pay amount.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedPreview.NextPayDate">
@@ -36608,7 +36613,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct.ProjectId">
             <summary>
-            Project id
+            Project identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProduct.Details">
@@ -36628,7 +36633,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedProjectDetails.RewardAsset">
@@ -36713,32 +36718,32 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Quantity">
             <summary>
-            Quantity
+            Subscribed quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.PositionId">
             <summary>
-            Position id
+            Position identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Timestamp">
             <summary>
-            Timestamp
+            Subscription timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.PurchaseId">
             <summary>
-            Purchase id
+            Purchase identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.ProjectId">
             <summary>
-            Purchase id
+            Project identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.Type">
@@ -36768,7 +36773,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRecord.LockPeriod">
             <summary>
-            Lock period
+            Lock period in days.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord">
@@ -36778,7 +36783,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Quantity">
             <summary>
-            Quantity
+            Redeemed quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.OriginalQuantity">
@@ -36798,7 +36803,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRedemptionRecord.RewardAsset">
@@ -36863,7 +36868,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Asset">
             <summary>
-            Asset
+            Reward asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.PositionId">
@@ -36883,7 +36888,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Timestamp">
             <summary>
-            Timestamp
+            Reward timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnLockedRewardRecord.Type">
@@ -36898,7 +36903,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPersonalQuotaLeft.PersonalQuotaLeft">
             <summary>
-            Personal quota left
+            Remaining personal quota.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase">
@@ -36908,7 +36913,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase.Success">
             <summary>
-            Success
+            Whether the request succeeded.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnPurchase.PurchaseId">
@@ -36928,12 +36933,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.ProductId">
             <summary>
-            Product id
+            Product identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.Asset">
             <summary>
-            Asset
+            Product asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRateRecord.AnnualPercentageRate">
@@ -36953,12 +36958,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRedemption.Success">
             <summary>
-            Success
+            Whether the request succeeded.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnRedemption.RedeemId">
             <summary>
-            Redeem id
+            Redemption identifier.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnResult">
@@ -36968,7 +36973,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SimpleEarn.BinanceSimpleEarnResult.Success">
             <summary>
-            Result
+            Whether the request succeeded.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBethRateHistory">
@@ -36988,7 +36993,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBethRateHistory.Timestamp">
             <summary>
-            Timestamp
+            The timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBethWrapHistory">
@@ -37013,7 +37018,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBethWrapHistory.Timestamp">
             <summary>
-            Timestamp
+            The timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBethWrapHistory.FromAsset">
@@ -37053,7 +37058,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRateHistory.Timestamp">
             <summary>
-            Timestamp
+            The timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolReward">
@@ -37078,7 +37083,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.Timestamp">
             <summary>
-            Timestamp
+            The timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceBnsolRewardHistory.Asset">
@@ -37108,7 +37113,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRewardsHistory.Asset">
             <summary>
-            Asset
+            The reward asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRewardsHistory.Quantity">
@@ -37123,7 +37128,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRewardsHistory.Timestamp">
             <summary>
-            Timestamp
+            The timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthRewardsHistory.Holding">
@@ -37143,12 +37148,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingAccount.TotalProfitInBeth">
             <summary>
-            Total profit in Beth
+            Total profit in BETH.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingAccount.LastDayProfitInBeth">
             <summary>
-            Last day profit in Beth
+            Last day profit in BETH.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingQuota">
@@ -37158,12 +37163,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingQuota.LeftStakingPersonalQuota">
             <summary>
-            Staking quota left
+            Remaining staking quota.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceEthStakingQuota.LeftRedemptionPersonalQuota">
             <summary>
-            Redemption quota left
+            Remaining redemption quota.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory">
@@ -37173,7 +37178,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Asset">
             <summary>
-            Asset
+            The redemption asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Quantity">
@@ -37188,7 +37193,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.Timestamp">
             <summary>
-            Timestamp
+            The redemption timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceRedemptionHistory.ArrivalTime">
@@ -37228,7 +37233,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.Timestamp">
             <summary>
-            Timestamp
+            The reward timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.AmountInSol">
@@ -37238,7 +37243,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.Holding">
             <summary>
-            Holding
+            Current holding.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.HoldingInSol">
@@ -37248,7 +37253,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolReward.AnnualPercentageRate">
             <summary>
-            Annual percetage ratge
+            Annual percentage rate.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount">
@@ -37258,7 +37263,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount.BnSolAmount">
             <summary>
-            BN SOL amount
+            BNSOL amount.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingAccount.HoldingInSOL">
@@ -37293,7 +37298,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.MinRedeemAmount">
             <summary>
-            Min redeem amount
+            Minimum redeem amount.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingQuota.RedeemPeriod">
@@ -37338,7 +37343,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult.Success">
             <summary>
-            Successful
+            Whether the request succeeded.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolStakingResult.BnSolAmount">
@@ -37363,7 +37368,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolUnclaimedReward.Amount">
             <summary>
-            Amount
+            Unclaimed reward amount.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceSolUnclaimedReward.RewardsAsset">
@@ -37378,7 +37383,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Asset">
             <summary>
-            Asset
+            The staking asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Quantity">
@@ -37393,7 +37398,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.Timestamp">
             <summary>
-            Timestamp
+            The staking timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingHistory.DistributedAsset">
@@ -37418,7 +37423,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.Staking.BinanceStakingResult.Success">
             <summary>
-            Successful
+            Whether the request succeeded.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccount">
@@ -37903,7 +37908,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountFuturesPositionRiskCoin.EntryPrice">
             <summary>
-            The entry price
+            The position entry price.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountFuturesPositionRiskCoin.MarkPrice">
@@ -37963,7 +37968,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginDetails.Email">
             <summary>
-            Email of the account
+            The account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginDetails.MarginLevel">
@@ -37983,7 +37988,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginDetails.TotalNetAssetOfBtc">
             <summary>
-            Total net asset
+            Total net asset value in BTC.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginDetails.MarginTradeCoeff">
@@ -38003,12 +38008,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceMarginTradeCoeff.ForceLiquidationBar">
             <summary>
-            Liquidation margin ratio
+            The forced liquidation margin ratio.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceMarginTradeCoeff.MarginCallBar">
             <summary>
-            Margin record margin ratio
+            The margin call ratio.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceMarginTradeCoeff.NormalBar">
@@ -38023,12 +38028,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginEnabled.Email">
             <summary>
-            Email of the account
+            The account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginEnabled.IsMarginEnabled">
             <summary>
-            Whether Margin trading is enabled
+            Whether margin trading is enabled.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsFuturesSummary">
@@ -38038,7 +38043,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsFuturesSummary.Asset">
             <summary>
-            Asset
+            The asset these totals are reported in.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsFuturesSummary.TotalInitialMargin">
@@ -38078,7 +38083,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsFuturesSummary.SubAccounts">
             <summary>
-            Sub accounts info
+            Futures summary information per sub account.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountFuturesInfo">
@@ -38088,7 +38093,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountFuturesInfo.Email">
             <summary>
-            Email of the sub account
+            The sub account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountFuturesInfo.TotalInitialMargin">
@@ -38128,7 +38133,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountFuturesInfo.Asset">
             <summary>
-            Asset
+            The asset these totals are reported in.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsMarginSummary">
@@ -38138,7 +38143,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsMarginSummary.TotalAssetOfBtc">
             <summary>
-            Total btc asset
+            The total asset value in BTC.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsMarginSummary.TotalLiabilityOfBtc">
@@ -38148,7 +38153,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsMarginSummary.TotalNetAssetOfBtc">
             <summary>
-            Total net btc
+            The total net asset value in BTC.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountsMarginSummary.SubAccounts">
@@ -38163,12 +38168,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginInfo.Email">
             <summary>
-            Sub account email
+            The sub account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginInfo.TotalAssetOfBtc">
             <summary>
-            Total btc asset
+            The total asset value in BTC.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginInfo.TotalLiabilityOfBtc">
@@ -38178,7 +38183,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountMarginInfo.TotalNetAssetOfBtc">
             <summary>
-            Total net btc
+            The total net asset value in BTC.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountSpotAssetsSummary">
@@ -38188,7 +38193,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountSpotAssetsSummary.TotalCount">
             <summary>
-            Total records
+            The total number of returned records.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountSpotAssetsSummary.MasterAccountTotalAsset">
@@ -38198,7 +38203,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountSpotAssetsSummary.SubAccountsBtcValues">
             <summary>
-            Sub account values
+            Spot asset values per sub account.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountBtcValue">
@@ -38208,12 +38213,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountBtcValue.Email">
             <summary>
-            Sub account email
+            The sub account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountBtcValue.TotalAsset">
             <summary>
-            Sub account total asset 
+            The total asset value of the sub account.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus">
@@ -38223,17 +38228,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.Email">
             <summary>
-            User email
+            The user email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.IsAccountEnabled">
             <summary>
-            Sub account user enabled
+            Whether the sub account user is enabled.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.IsActive">
             <summary>
-            Sub account user active
+            Whether the sub account user is active.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.CreateTime">
@@ -38243,17 +38248,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.IsMarginEnabled">
             <summary>
-            Is Margin enabled
+            Whether margin is enabled.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.IsFutureEnabled">
             <summary>
-            Is Futures enabled
+            Whether futures is enabled.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountStatus.MobileNumber">
             <summary>
-            User mobile number
+            The user mobile number.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransaction">
@@ -38263,7 +38268,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransaction.TransactionId">
             <summary>
-            The transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransfer">
@@ -38273,12 +38278,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransfer.From">
             <summary>
-            From which email the transfer originated
+            The source account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransfer.To">
             <summary>
-            To which email the transfer was to
+            The destination account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransfer.Asset">
@@ -38303,7 +38308,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransfer.TransactionId">
             <summary>
-            Transaction Id
+            The transaction identifier.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount">
@@ -38313,57 +38318,57 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.CounterParty">
             <summary>
-            Counter party of the transfer
+            The transfer counterparty.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Email">
             <summary>
-            Email of the account
+            The account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.FromAccountType">
             <summary>
-            From account type
+            The source account type.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.ToAccountType">
             <summary>
-            To account type
+            The destination account type.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Status">
             <summary>
-            Status
+            The transfer status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Type">
             <summary>
-            Transfer type
+            The transfer type.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Asset">
             <summary>
-            Asset
+            The transferred asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.TransactionId">
             <summary>
-            Transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Quantity">
             <summary>
-            Quantity
+            The transferred quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Timestamp">
             <summary>
-            Timestamp of the transfer
+            The transfer timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransfersList.Transactions">
             <summary>
-            Transactions
+            The returned transfer transactions.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction">
@@ -38373,17 +38378,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.TransactionId">
             <summary>
-            Transaction id
+            The transaction identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.FromEmail">
             <summary>
-            From email
+            The source account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.ToEmail">
             <summary>
-            To email
+            The destination account email address.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.FromAccountType">
@@ -38398,12 +38403,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Status">
             <summary>
-            Status
+            The transfer status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Asset">
             <summary>
-            Asset
+            The transferred asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.SubAccountData.BinanceSubAccountUniversalTransferTransaction.Quantity">
@@ -38423,7 +38428,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.PrincipalQuantity">
@@ -38438,7 +38443,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.AnnualInterestRate">
             <summary>
-            Annual interest rate
+            The annualized interest rate.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.AccrualTime">
@@ -38448,7 +38453,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAccuredInterest.OrderId">
             <summary>
-            Latest order ID for renewal order
+            The latest renewal order identifier.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus">
@@ -38458,52 +38463,52 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanAccountId">
             <summary>
-            ID of account receiving loan
+            The identifier of the account receiving the loan.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.OrderId">
             <summary>
-            Order id
+            The order identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.RequestId">
             <summary>
-            Request id
+            The request identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanQuantity">
             <summary>
-            Loan quantity 
+            The loan quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.CollateralAccountId">
             <summary>
-            Collateral account id separated by `,`
+            Comma-separated collateral account identifiers.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanTerm">
             <summary>
-            Loan term
+            The loan term.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.Status">
             <summary>
-            Application status
+            The current application status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanApplicationStatus.LoanDate">
             <summary>
-            Loan date
+            The loan creation date and time.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset">
@@ -38513,7 +38518,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.FlexibleDailyInterestRate">
@@ -38548,12 +38553,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.MinLimit">
             <summary>
-            Min limit
+            The minimum loan limit.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.MaxLimit">
             <summary>
-            Min limit
+            The maximum loan limit.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanAsset.VipLevel">
@@ -38568,42 +38573,42 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanAccountId">
             <summary>
-            Loan account id
+            The loan account identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.RequestId">
             <summary>
-            Request Id
+            The unique request identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanAsset">
             <summary>
-            Loan asset
+            The asset that was borrowed.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.IsFlexibleRate">
             <summary>
-            Is flexible rate
+            Whether a flexible interest rate was selected.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanQuantity">
             <summary>
-            Loan quantity 
+            The borrowed quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.CollateralAccountId">
             <summary>
-            Collateral accounts id separated by `,`
+            Comma-separated collateral account identifiers.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowData.LoanTerm">
             <summary>
-            Loan term
+            The loan term in days, when applicable.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate">
@@ -38613,7 +38618,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.FlexibleDailyInterestRate">
@@ -38628,7 +38633,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanBorrowInterestRate.Time">
             <summary>
-            Time
+            The timestamp of the interest rate snapshot.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue">
@@ -38638,12 +38643,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue.CollateralAccountId">
             <summary>
-            Collateral account id
+            The collateral account identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAccountLockedValue.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset">
@@ -38653,7 +38658,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.CollateralAsset">
             <summary>
-            Collateral asset
+            The collateral asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.FirstCollateralRatio">
@@ -38693,7 +38698,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanCollateralAsset.FourthCollateralRange">
             <summary>
-            Fourth collateral range
+            Fourth collateral ratio range.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate">
@@ -38703,7 +38708,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate.AnnualizedInterestRate">
@@ -38713,7 +38718,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanInterestRate.Time">
             <summary>
-            Time
+            The timestamp of the interest rate snapshot.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData">
@@ -38723,12 +38728,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.OrderId">
             <summary>
-            Order id
+            The order identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanTotalDebt">
@@ -38743,17 +38748,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.CollateralAccountId">
             <summary>
-            Collateral account id separated by `,`
+            Comma-separated collateral account identifiers.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.TotalCollateralValueAfterHaircur">
             <summary>
-            Total collateral value after haircur
+            Total collateral value after haircut.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LockedCollateralValue">
@@ -38763,7 +38768,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LTV">
             <summary>
-            Current LTV
+            The current loan-to-value ratio.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.ExpirationTime">
@@ -38773,12 +38778,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanDate">
             <summary>
-            Loan date
+            The loan creation date and time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanOngoingOrderData.LoanTerm">
             <summary>
-            Loan term
+            The loan term.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData">
@@ -38788,12 +38793,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanAccountId">
             <summary>
-            Loan account id
+            The loan account identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanAsset">
             <summary>
-            Loan asset
+            The loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanQuantity">
@@ -38803,17 +38808,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.CollateralAccountId">
             <summary>
-            Collateral account id separated by `,`
+            Comma-separated collateral account identifiers.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRenewData.LoanTerm">
             <summary>
-            LoanTerm
+            The renewed loan term in days.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData">
@@ -38823,12 +38828,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.LoanAsset">
             <summary>
-            Loan asset
+            The repaid loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RepayQuantity">
             <summary>
-            Repay quantity
+            The repaid quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RemainingPrincipal">
@@ -38843,17 +38848,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.LTV">
             <summary>
-            Current LTV
+            The current loan-to-value ratio.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayData.RepayStatus">
             <summary>
-            Repay status
+            The repayment status.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData">
@@ -38863,37 +38868,37 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.LoanAsset">
             <summary>
-            Loan asset
+            The repaid loan asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.RepayQuantity">
             <summary>
-            Repay quantity
+            The repaid quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.CollateralAsset">
             <summary>
-            Collateral assets separated by `,`
+            Comma-separated collateral assets.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.RepayStatus">
             <summary>
-            Repay status
+            The repayment status.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.LoanDate">
             <summary>
-            Loan date
+            The loan creation date and time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.RepayTime">
             <summary>
-            Repay time
+            The repayment date and time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Spot.VipLoans.BinanceVipLoanRepayHistoryData.OrderId">
             <summary>
-            Order id
+            The order identifier.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.BinanceStreamEvent">
@@ -40026,7 +40031,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoin24HPrice.Pair">
             <summary>
-            The pair the price is for
+            The pair the price is for.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoin24HPrice.Volume">
@@ -40042,17 +40047,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountInfo.CanDeposit">
             <summary>
-            Can deposit
+            Whether deposits are allowed.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountInfo.CanTrade">
             <summary>
-            Can trade
+            Whether trading is allowed.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountInfo.CanWithdraw">
             <summary>
-            Can withdraw
+            Whether withdrawals are allowed.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountInfo.FeeTier">
@@ -40077,7 +40082,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinAccountInfo.UpdateTime">
             <summary>
-            Update time
+            The account update time.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinBuySellVolumeRatio">
@@ -40087,7 +40092,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinBuySellVolumeRatio.Pair">
             <summary>
-            The pair
+            The futures pair.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinBuySellVolumeRatio.ContractType">
@@ -40117,7 +40122,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinBuySellVolumeRatio.Timestamp">
             <summary>
-            Data timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinKline">
@@ -40174,17 +40179,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCompositeIndexInfo.Symbol">
             <summary>
-            The symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCompositeIndexInfo.Timestamp">
             <summary>
-            Timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCompositeIndexInfo.Component">
             <summary>
-            Component asset
+            The component asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCompositeIndexInfo.BaseAssets">
@@ -40504,7 +40509,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCountDownResult.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesCountDownResult.CountDownTime">
@@ -40629,7 +40634,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesFundingInfo.FundingIntervalHours">
             <summary>
-            Funding interval in hours
+            Funding interval in hours.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesFundingRateHistory">
@@ -40644,7 +40649,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesFundingRateHistory.FundingRate">
             <summary>
-            The finding rate for the given symbol and time
+            The funding rate for the given symbol and time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesFundingRateHistory.FundingTime">
@@ -40664,17 +40669,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesIfNewUser.BrokerId">
             <summary>
-            Broker Id
+            The broker identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesIfNewUser.RebateWorking">
             <summary>
-            If the apiAgentCode is working
+            Whether the API agent code rebate is active.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesIfNewUser.IfNewUser">
             <summary>
-            If new user
+            Whether the account is a new user account.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesIncomeHistory">
@@ -40790,17 +40795,17 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.Quantity">
             <summary>
-            Request quantity of margin used
+            The requested margin change quantity.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.Asset">
             <summary>
-            Base asset used for margin
+            The margin asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.Symbol">
             <summary>
-            Symbol margin is placed on
+            The symbol the margin change applies to.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.DeltaType">
@@ -40810,12 +40815,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.Timestamp">
             <summary>
-            Time of the margin change request
+            The margin change request time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.Type">
             <summary>
-            Direction of the margin change request
+            The margin change direction.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarginChangeHistoryResult.PositionSide">
@@ -40865,7 +40870,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMarkPrice.Timestamp">
             <summary>
-            Timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinMarkPrice">
@@ -40885,7 +40890,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesMultiAssetMode.MultiAssetMode">
             <summary>
-            Is multi assets mode enabled
+            Whether multi-asset mode is enabled.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesMultipleOrderCancelResult">
@@ -40920,12 +40925,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOpenInterest.OpenInterest">
             <summary>
-            Open Interest info
+            The open interest value.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOpenInterest.Timestamp">
             <summary>
-            Timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesCoinOpenInterest">
@@ -40965,7 +40970,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesOpenInterestHistory.Timestamp">
             <summary>
-            Timestamp
+            The data timestamp.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesOrder">
@@ -41250,12 +41255,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMarginResult.Amount">
             <summary>
-            New margin amount
+            The updated margin amount.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMarginResult.Code">
             <summary>
-            Request response code
+            The request response code.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMarginResult.Message">
@@ -41266,7 +41271,7 @@
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMarginResult.MaxNotionalValue">
             <summary>
             Maximum margin value
-            NOTE: string type, because the value van be 'inf' (infinite)
+            NOTE: string type, because the value can be 'inf' (infinite)
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMarginResult.Type">
@@ -41281,7 +41286,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesPositionMode.IsHedgeMode">
             <summary>
-            true": Hedge Mode mode; "false": One-way Mode
+            Whether hedge mode is enabled (`true`) or one-way mode is used (`false`).
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesQuantileEstimation">
@@ -41291,7 +41296,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuantileEstimation.Symbol">
             <summary>
-            The symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuantileEstimation.AdlQuantile">
@@ -41321,7 +41326,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesAdlQuantile.Both">
             <summary>
-            Hedge
+            Both-side position quantile.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult">
@@ -41331,12 +41336,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult.OrderId">
             <summary>
-            Order id
+            The order identifier.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult.CreateTime">
             <summary>
-            Create time
+            The order creation time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesQuoteResult.Status">
@@ -41596,7 +41601,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesTrade.Buyer">
             <summary>
-            Is buyer
+            Whether the user was the buyer.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesTrade.Fee">
@@ -41616,7 +41621,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesTrade.Maker">
             <summary>
-            Is maker
+            Whether the user was the maker.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesTrade.OrderId">
@@ -41736,7 +41741,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesUsdtAsset.Asset">
             <summary>
-            Name of the asset
+            The asset name.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceFuturesUsdtAsset.MarginAvailable">
@@ -41773,12 +41778,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundBalance.Symbols">
             <summary>
-            Symbols
+            The symbols covered by the insurance fund data.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundBalance.Assets">
             <summary>
-            Assets
+            Insurance fund asset balances.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset">
@@ -41788,7 +41793,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset.Asset">
             <summary>
-            Asset name
+            The asset name.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset.MarginBalance">
@@ -41798,7 +41803,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceInsuranceFundAsset.UpdateTime">
             <summary>
-            Update time
+            The last update time.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.BinancePositionBase">
@@ -41808,7 +41813,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionBase.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionBase.EntryPrice">
@@ -41918,7 +41923,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.IsAutoAddMargin">
             <summary>
-            Is auto add margin
+            Whether auto add margin is enabled.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionDetailsBase.IsolatedMargin">
@@ -41998,7 +42003,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.PositionSide">
@@ -42108,7 +42113,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.MarginType">
             <summary>
-            Max notional value of the position
+            The margin type.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinancePositionV3.IsAutoAddMargin">
@@ -42123,7 +42128,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolAdlRate.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolAdlRate.AdlRisk">
@@ -42143,7 +42148,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.MarginType">
@@ -42153,7 +42158,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.IsAutoAddMargin">
             <summary>
-            Is auto add margin
+            Whether auto add margin is enabled.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSymbolConfiguration.Leverage">
@@ -42173,7 +42178,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceTradingSchedule.UpdateTime">
             <summary>
-            Update time
+            The last update time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceTradingSchedule.Schedules">
@@ -42213,12 +42218,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSchedule.StartTime">
             <summary>
-            Start time
+            The session start time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSchedule.EndTime">
             <summary>
-            End time
+            The session end time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.BinanceSchedule.Type">
@@ -42233,7 +42238,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate.Timestamp">
             <summary>
-            Timestamp
+            The event timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceAlgoOrderUpdate.Order">
@@ -42368,7 +42373,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate.Timestamp">
             <summary>
-            Timestamp
+            The event timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceConditionOrderTriggerRejectUpdate.RejectInfo">
@@ -42508,7 +42513,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamPosition.PositionSide">
             <summary>
-            Position Side
+            Position side.
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate">
@@ -42518,7 +42523,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamAssetIndexUpdate.IndexPrice">
@@ -42573,7 +42578,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice.TransactionTime">
             <summary>
-            Timestamp
+            The transaction timestamp.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamBookPrice.EventTime">
@@ -42701,7 +42706,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCompositeIndex.BaseAsset">
             <summary>
-            Base asset
+            The base asset.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamCompositeIndex.Composition">
@@ -42746,12 +42751,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate.LeverageUpdateData">
             <summary>
-            Leverage Update data
+            Leverage update data.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate.ConfigUpdateData">
             <summary>
-            Position mode Update data
+            Position mode update data.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamConfigUpdate.TransactionTime">
@@ -42886,7 +42891,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexKline.NumberOfBasicData">
             <summary>
-            Number of basic data
+            Number of data points in the candle.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexKline.Closed">
@@ -42921,7 +42926,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice.Pair">
             <summary>
-            The pair
+            The pair.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamIndexPrice.IndexPrice">
@@ -42946,12 +42951,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation.Side">
             <summary>
-            Liquidation Sided
+            Liquidation side.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamLiquidation.Type">
@@ -43306,7 +43311,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.BuyerIsMaker">
             <summary>
-            Whether the buyer is the maker
+            Whether the buyer is the maker.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamOrderUpdateData.IsReduce">
@@ -43381,12 +43386,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.Pair">
             <summary>
-            Pair
+            The pair.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamSymbolUpdate.ContractType">
@@ -43461,7 +43466,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate.TransactionTime">
             <summary>
-            Transaction time
+            The transaction time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceFuturesStreamTradeUpdate.Symbol">
@@ -43557,7 +43562,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceGridInfo.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceGridInfo.UpdateTime">
@@ -43627,7 +43632,7 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyInfo.Symbol">
             <summary>
-            Symbol
+            The symbol.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceStrategyInfo.UpdateTime">
@@ -43647,12 +43652,12 @@
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceTradingSessionUpdate.StartTime">
             <summary>
-            Start time
+            Session start time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceTradingSessionUpdate.EndTime">
             <summary>
-            End time
+            Session end time.
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Models.Futures.Socket.BinanceTradingSessionUpdate.Type">

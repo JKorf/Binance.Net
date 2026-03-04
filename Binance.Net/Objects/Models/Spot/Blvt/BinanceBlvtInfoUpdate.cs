@@ -28,12 +28,12 @@
         [JsonPropertyName("b")]
         public BlvtBasket[] Baskets { get; set; } = Array.Empty<BlvtBasket>();
         /// <summary>
-        /// Token issued
+        /// Real leverage.
         /// </summary>
         [JsonPropertyName("l")]
         public decimal RealLeverage { get; set; }
         /// <summary>
-        /// Token issued
+        /// Target leverage.
         /// </summary>
         [JsonPropertyName("t")]
         public decimal TargetLeverage { get; set; }

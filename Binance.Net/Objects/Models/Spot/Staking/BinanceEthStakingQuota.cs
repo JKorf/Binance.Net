@@ -7,12 +7,12 @@
     public record BinanceEthStakingQuota
     {
         /// <summary>
-        /// Staking quota left
+        /// Remaining staking quota.
         /// </summary>
         [JsonPropertyName("leftStakingPersonalQuota")]
         public decimal LeftStakingPersonalQuota { get; set; }
         /// <summary>
-        /// Redemption quota left
+        /// Remaining redemption quota.
         /// </summary>
         [JsonPropertyName("leftRedemptionPersonalQuota")]
         public decimal LeftRedemptionPersonalQuota { get; set; }

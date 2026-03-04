@@ -7,7 +7,7 @@
     public record BinanceCryptoLoanMarginCallResult
     {
         /// <summary>
-        /// Order id
+        /// The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
@@ -27,7 +27,7 @@
         [JsonPropertyName("afterMarginCall")]
         public decimal AfterMarginCall { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The customization timestamp.
         /// </summary>
         [JsonPropertyName("customizeTime")]
         [JsonConverter(typeof(DateTimeConverter))]

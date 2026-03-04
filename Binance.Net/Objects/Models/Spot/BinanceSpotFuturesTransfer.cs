@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("type")]
         public FuturesTransferType Type { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The transfer timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]

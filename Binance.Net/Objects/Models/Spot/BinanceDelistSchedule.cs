@@ -7,7 +7,7 @@
     public record BinanceDelistSchedule
     {
         /// <summary>
-        /// Delist time
+        /// The delisting time.
         /// </summary>
         [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime DelistTime { get; set; }

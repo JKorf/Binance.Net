@@ -6,12 +6,12 @@
     public record BinanceVipLoanOngoingOrderData
     {
         /// <summary>
-        /// Order id
+        /// The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
@@ -26,17 +26,17 @@
         [JsonPropertyName("residualInterest")]
         public decimal ResidualInterest { get; set; }
         /// <summary>
-        /// Collateral account id separated by `,`
+        /// Comma-separated collateral account identifiers.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral assets separated by `,`
+        /// Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Total collateral value after haircur
+        /// Total collateral value after haircut.
         /// </summary>
         [JsonPropertyName("totalCollateralValueAfterHaircut")]
         public decimal TotalCollateralValueAfterHaircur { get; set; }
@@ -46,7 +46,7 @@
         [JsonPropertyName("lockedCollateralValue")]
         public decimal LockedCollateralValue { get; set; }
         /// <summary>
-        /// Current LTV
+        /// The current loan-to-value ratio.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal LTV { get; set; }
@@ -56,12 +56,12 @@
         [JsonPropertyName("expirationTime")]
         public DateTime ExpirationTime { get; set; }
         /// <summary>
-        /// Loan date
+        /// The loan creation date and time.
         /// </summary>
         [JsonPropertyName("loanDate")]
         public DateTime LoanDate { get; set; }
         /// <summary>
-        /// Loan term
+        /// The loan term.
         /// </summary>
         [JsonPropertyName("loanTerm")]
         public string LoanTerm { get; set; } = string.Empty;

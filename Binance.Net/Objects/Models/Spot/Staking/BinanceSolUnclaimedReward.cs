@@ -7,7 +7,7 @@
     public record BinanceSolUnclaimedReward
     {
         /// <summary>
-        /// Amount
+        /// Unclaimed reward amount.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Amount { get; set; }

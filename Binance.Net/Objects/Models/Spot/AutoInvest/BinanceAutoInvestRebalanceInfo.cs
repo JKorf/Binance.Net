@@ -7,7 +7,7 @@
     public record BinanceAutoInvestRebalanceInfo
     {
         /// <summary>
-        /// Index id
+        /// The index identifier.
         /// </summary>
         [JsonPropertyName("indexId")]
         public long IndexId { get; set; }
@@ -17,7 +17,7 @@
         [JsonPropertyName("indexName")]
         public string IndexName { get; set; } = string.Empty;
         /// <summary>
-        /// Rebalance id
+        /// The rebalance identifier.
         /// </summary>
         [JsonPropertyName("rebalanceId")]
         public long RebalanceId { get; set; }
@@ -44,12 +44,12 @@
     }
 
     /// <summary>
-    /// 
+    /// Rebalance transaction details.
     /// </summary>
     public record BinanceAutoInvestRebalanceDetails
     {
         /// <summary>
-        /// Asset
+        /// The asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

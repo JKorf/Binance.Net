@@ -12,7 +12,7 @@
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Product Id
+        /// Product identifier.
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
@@ -22,7 +22,7 @@
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Create time
+        /// Create time.
         /// </summary>
         [JsonPropertyName("createTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }

@@ -7,7 +7,7 @@
     public record BinanceFuturesPositionMode
     {
         /// <summary>
-        /// true": Hedge Mode mode; "false": One-way Mode
+        /// Whether hedge mode is enabled (`true`) or one-way mode is used (`false`).
         /// </summary>
         [JsonPropertyName("dualSidePosition")]
         public bool IsHedgeMode { get; set; }

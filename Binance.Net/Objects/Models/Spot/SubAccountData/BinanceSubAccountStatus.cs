@@ -7,19 +7,19 @@
     public record BinanceSubAccountStatus
     {
         /// <summary>
-        /// User email
+        /// The user email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
 
         /// <summary>
-        /// Sub account user enabled
+        /// Whether the sub account user is enabled.
         /// </summary>
         [JsonPropertyName("isSubUserEnabled")]
         public bool IsAccountEnabled { get; set; }
 
         /// <summary>
-        /// Sub account user active
+        /// Whether the sub account user is active.
         /// </summary>
         [JsonPropertyName("isUserActive")]
         public bool IsActive { get; set; }
@@ -31,19 +31,19 @@
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        /// Is Margin enabled
+        /// Whether margin is enabled.
         /// </summary>
         [JsonPropertyName("isMarginEnabled")]
         public bool IsMarginEnabled { get; set; }
 
         /// <summary>
-        /// Is Futures enabled
+        /// Whether futures is enabled.
         /// </summary>
         [JsonPropertyName("isFutureEnabled")]
         public bool IsFutureEnabled { get; set; }
 
         /// <summary>
-        /// User mobile number
+        /// The user mobile number.
         /// </summary>
         [JsonPropertyName("mobile")]
         public string? MobileNumber { get; set; }

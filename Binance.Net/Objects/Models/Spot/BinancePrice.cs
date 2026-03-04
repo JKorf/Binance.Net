@@ -17,7 +17,7 @@
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }

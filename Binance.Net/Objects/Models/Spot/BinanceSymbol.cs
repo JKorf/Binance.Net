@@ -56,7 +56,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("cancelReplaceAllowed")]
         public bool CancelReplaceAllowed { get; set; }
         /// <summary>
-        /// Allow amend
+        /// Whether order amendments are allowed.
         /// </summary>
         [JsonPropertyName("allowAmend")]
         public bool AllowAmend { get; set; }
@@ -117,7 +117,7 @@ namespace Binance.Net.Objects.Models.Spot
         public PermissionType[][] PermissionSets { get; set; } = Array.Empty<PermissionType[]>();
 
         /// <summary>
-        /// Filters for order on this symbol
+        /// Filters for orders on this symbol.
         /// </summary>
         [JsonPropertyName("filters")]
         public BinanceSymbolFilter[] Filters { get; set; } = Array.Empty<BinanceSymbolFilter>();

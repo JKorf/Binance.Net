@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestIndex
     {
         /// <summary>
-        /// Index id
+        /// The index identifier.
         /// </summary>
         [JsonPropertyName("indexId")]
         public long IndexId { get; set; }
@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("indexName")]
         public string IndexName { get; set; } = string.Empty;
         /// <summary>
-        /// Status
+        /// The index status.
         /// </summary>
         [JsonPropertyName("status")]
         public AutoInvestIndexStatus? Status { get; set; }
@@ -41,7 +41,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Allocation
+        /// Allocation percentage.
         /// </summary>
         [JsonPropertyName("allocation")]
         public decimal Allocation { get; set; }

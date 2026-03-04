@@ -7,7 +7,7 @@
     public record BinanceAutoInvestTradeResult
     {
         /// <summary>
-        /// Transaction id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("transactionId")]
         public long? TransactionId { get; set; }

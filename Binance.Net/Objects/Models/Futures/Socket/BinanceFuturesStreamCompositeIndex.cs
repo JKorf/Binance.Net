@@ -18,7 +18,7 @@
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Base asset
+        /// The base asset.
         /// </summary>
         [JsonPropertyName("C")]
         public string BaseAsset { get; set; } = string.Empty;

@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesCoinBuySellVolumeRatio
     {
         /// <summary>
-        /// The pair
+        /// The futures pair.
         /// </summary>
         [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
@@ -39,7 +39,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("takerSellVolValue")]
         public decimal TakerSellVolumeValue { get; set; }
         /// <summary>
-        /// Data timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]

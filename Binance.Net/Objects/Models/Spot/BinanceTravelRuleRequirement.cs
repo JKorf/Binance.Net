@@ -6,7 +6,7 @@
     public record BinanceTravelRuleRequirement
     {
         /// <summary>
-        /// Country code of the questionnaire required. NIL if not required.    
+        /// Country code of the required questionnaire, or `NIL` if not required.
         /// </summary>
         [JsonPropertyName("questionnaireCountryCode")]
         public string QuestionnaireCountryCode { get; set; } = string.Empty;

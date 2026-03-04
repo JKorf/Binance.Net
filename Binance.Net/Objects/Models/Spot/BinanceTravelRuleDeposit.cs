@@ -39,7 +39,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// The  id
+        /// The deposit identifier.
         /// </summary>
         [JsonPropertyName("depositId")]
         public string Id { get; set; } = string.Empty;

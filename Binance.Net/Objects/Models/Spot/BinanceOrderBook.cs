@@ -3,7 +3,7 @@
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
-    /// The order book for a asset
+    /// The order book for an asset.
     /// </summary>
     [SerializationModel]
     public record BinanceOrderBook : IBinanceOrderBook

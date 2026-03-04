@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The finding rate for the given symbol and time
+        /// The funding rate for the given symbol and time.
         /// </summary>
         [JsonPropertyName("fundingRate")]
         public decimal FundingRate { get; set; }

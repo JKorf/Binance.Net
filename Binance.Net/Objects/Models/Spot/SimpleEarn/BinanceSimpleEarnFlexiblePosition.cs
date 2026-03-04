@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnFlexiblePosition
     {
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -27,7 +27,7 @@
         [JsonPropertyName("canRedeem")]
         public bool CanRedeem { get; set; }
         /// <summary>
-        /// product id
+        /// Product identifier.
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;

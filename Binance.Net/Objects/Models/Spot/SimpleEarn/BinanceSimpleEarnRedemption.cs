@@ -7,12 +7,12 @@
     public record BinanceSimpleEarnRedemption
     {
         /// <summary>
-        /// Success
+        /// Whether the request succeeded.
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
         /// <summary>
-        /// Redeem id
+        /// Redemption identifier.
         /// </summary>
         [JsonPropertyName("redeemId")]
         public long RedeemId { get; set; }

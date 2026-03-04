@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     public abstract record BinanceRecentTrade : IBinanceRecentTrade
     {
         /// <summary>
-        /// The id of the trade
+        /// The trade identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public long OrderId { get; set; }

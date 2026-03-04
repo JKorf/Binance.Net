@@ -6,12 +6,12 @@
     public record BinanceInsuranceFundBalance
     {
         /// <summary>
-        /// Symbols
+        /// The symbols covered by the insurance fund data.
         /// </summary>
         [JsonPropertyName("symbols")]
         public string[] Symbols { get; set; } = [];
         /// <summary>
-        /// Assets
+        /// Insurance fund asset balances.
         /// </summary>
         [JsonPropertyName("assets")]
         public BinanceInsuranceFundAsset[] Assets { get; set; } = [];
@@ -23,7 +23,7 @@
     public record BinanceInsuranceFundAsset
     {
         /// <summary>
-        /// Asset name
+        /// The asset name.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -33,7 +33,7 @@
         [JsonPropertyName("marginBalance")]
         public decimal MarginBalance { get; set; }
         /// <summary>
-        /// Update time
+        /// The last update time.
         /// </summary>
         [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }

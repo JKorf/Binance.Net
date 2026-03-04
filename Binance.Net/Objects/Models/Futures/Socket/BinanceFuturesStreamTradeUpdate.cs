@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamTradeUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Transaction time
+        /// The transaction time.
         /// </summary>
         [JsonPropertyName("T")]
         public DateTime TransactionTime { get; set; }

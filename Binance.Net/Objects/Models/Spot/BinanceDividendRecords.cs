@@ -7,7 +7,7 @@
     public record BinanceDividendRecord
     {
         /// <summary>
-        /// Id
+        /// The dividend record identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public long Id { get; set; }
@@ -17,7 +17,7 @@
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Asset
+        /// The asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -32,7 +32,7 @@
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Info
+        /// Additional info.
         /// </summary>
         [JsonPropertyName("enInfo")]
         public string? Info { get; set; }

@@ -14,7 +14,7 @@
         [JsonPropertyName("startTime")]
         public DateTime StartTime { get; set; }
         /// <summary>
-        /// Emd to,e
+        /// Data end time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("endTime")]

@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     public record BinanceStreamMinimalTrade
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;

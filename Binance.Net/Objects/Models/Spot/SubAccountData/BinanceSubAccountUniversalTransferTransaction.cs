@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     internal record BinanceSubAccountUniversalTransfersList
     {
         /// <summary>
-        /// Transactions
+        /// The returned transfer transactions.
         /// </summary>
         [JsonPropertyName("result")]
         public BinanceSubAccountUniversalTransferTransaction[] Transactions { get; set; } = [];
@@ -19,19 +19,19 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceSubAccountUniversalTransferTransaction
     {
         /// <summary>
-        /// Transaction id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
 
         /// <summary>
-        /// From email
+        /// The source account email address.
         /// </summary>
         [JsonPropertyName("fromEmail")]
         public string FromEmail { get; set; } = string.Empty;
 
         /// <summary>
-        /// To email
+        /// The destination account email address.
         /// </summary>
         [JsonPropertyName("toEmail")]
         public string ToEmail { get; set; } = string.Empty;
@@ -49,13 +49,13 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         public TransferAccountType ToAccountType { get; set; }
 
         /// <summary>
-        /// Status
+        /// The transfer status.
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
 
         /// <summary>
-        /// Asset
+        /// The transferred asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

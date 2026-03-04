@@ -1,7 +1,7 @@
 ﻿namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
-    /// Information about a trade
+    /// Represents information about a trade
     /// </summary>
     [SerializationModel]
     public record BinanceTrade
@@ -12,9 +12,9 @@
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The id of the trade
+        /// The trade identifier.
         /// </summary>
-        [JsonPropertyName("id")]
+        [JsonPropertyName("id")]        
         public long Id { get; set; }
         /// <summary>
         /// The order id the trade belongs to
@@ -76,7 +76,7 @@
         /// <summary>
         /// If isolated margin (for margin account orders)
         /// </summary>
-        [JsonPropertyName("isIsolated")]
+        [JsonPropertyName("isIsolated")]        
         public bool? IsIsolated { get; set; }
     }
 }

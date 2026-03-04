@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesPositionMarginResult
     {
         /// <summary>
-        /// New margin amount
+        /// The updated margin amount.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Amount { get; set; }
         /// <summary>
-        /// Request response code
+        /// The request response code.
         /// </summary>
         [JsonPropertyName("code")]
         public int Code { get; set; }
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Futures
 
         /// <summary>
         /// Maximum margin value
-        /// NOTE: string type, because the value van be 'inf' (infinite)
+        /// NOTE: string type, because the value can be 'inf' (infinite)
         /// </summary>
         [JsonPropertyName("maxNotionalValue")]
         public string MaxNotionalValue { get; set; } = string.Empty;

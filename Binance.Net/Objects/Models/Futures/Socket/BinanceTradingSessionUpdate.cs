@@ -8,12 +8,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceTradingSessionUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Start time
+        /// Session start time.
         /// </summary>
         [JsonPropertyName("t")]
         public DateTime StartTime { get; set; }
         /// <summary>
-        /// End time
+        /// Session end time.
         /// </summary>
         [JsonPropertyName("T")]
         public DateTime EndTime { get; set; }

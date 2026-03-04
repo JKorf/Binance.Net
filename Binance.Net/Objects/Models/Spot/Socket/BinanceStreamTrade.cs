@@ -34,7 +34,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("b")]
         public long BuyerOrderId { get; set; }
         /// <summary>
-        /// The sell order id
+        /// The seller order id.
         /// </summary>
         [JsonPropertyName("a")]
         public long SellerOrderId { get; set; }

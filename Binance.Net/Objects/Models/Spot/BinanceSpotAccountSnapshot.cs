@@ -31,7 +31,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceSpotAccountSnapshotData
     {
         /// <summary>
-        /// The total value of assets in btc
+        /// The total value of assets in BTC.
         /// </summary>
         [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }

@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceTradingStatus
     {
         /// <summary>
-        /// Is locked
+        /// Whether trading is locked.
         /// </summary>
         [JsonPropertyName("isLocked")]
         public bool IsLocked { get; set; }
@@ -20,7 +20,7 @@ namespace Binance.Net.Objects.Models.Spot
         public int PlannedRecoverTime { get; set; }
 
         /// <summary>
-        /// Conditions
+        /// Trigger conditions.
         /// </summary>
         [JsonPropertyName("triggerCondition")]
         public Dictionary<string, int> TriggerConditions { get; set; } = new Dictionary<string, int>();

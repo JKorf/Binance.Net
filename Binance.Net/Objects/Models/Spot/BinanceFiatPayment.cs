@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceFiatPayment
     {
         /// <summary>
-        /// Order number
+        /// The order number.
         /// </summary>
         [JsonPropertyName("orderNo")]
         public string OrderNumber { get; set; } = string.Empty;
@@ -54,7 +54,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("paymentMethod")]
         public string PaymentMethod { get; set; } = string.Empty;
         /// <summary>
-        /// Creation time
+        /// The creation time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("createTime")]

@@ -7,7 +7,7 @@
     public record BinanceCommissions
     {
         /// <summary>
-        /// Symbol name
+        /// The symbol name.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
@@ -50,7 +50,7 @@
         [JsonPropertyName("enabledForAccount")]
         public bool EnabledForAccount { get; set; }
         /// <summary>
-        /// Enabled for symbol
+        /// Whether the discount is enabled for this symbol.
         /// </summary>
         [JsonPropertyName("enabledForSymbol")]
         public bool EnabledForSymbol { get; set; }

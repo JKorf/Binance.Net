@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestEditStatusResult
     {
         /// <summary>
-        /// Plan id
+        /// The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }
@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("nextExecutionDateTime")]
         public DateTime? NextExecutionTime { get; set; }
         /// <summary>
-        /// Status
+        /// The plan status.
         /// </summary>
         [JsonPropertyName("status")]
         public AutoInvestPlanStatus Status { get; set; }

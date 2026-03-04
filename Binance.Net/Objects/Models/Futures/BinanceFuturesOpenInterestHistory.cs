@@ -25,7 +25,7 @@
         public decimal SumOpenInterestValue { get; set; }
 
         /// <summary>
-        /// Timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonPropertyName("timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }

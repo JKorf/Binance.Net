@@ -29,7 +29,7 @@
         [JsonPropertyName("symbols")]
         public BinanceSymbol[] Symbols { get; set; } = Array.Empty<BinanceSymbol>();
         /// <summary>
-        /// Filters
+        /// Exchange-level filters.
         /// </summary>
         [JsonPropertyName("exchangeFilters")]
         public object[] ExchangeFilters { get; set; } = Array.Empty<object>();

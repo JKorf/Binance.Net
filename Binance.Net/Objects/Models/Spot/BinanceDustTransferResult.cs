@@ -34,7 +34,7 @@
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Asset
+        /// The source asset.
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;

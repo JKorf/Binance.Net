@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     public record BinanceCryptoLoanIncome
     {
         /// <summary>
-        /// Asset
+        /// The income asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The income timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]

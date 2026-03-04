@@ -64,7 +64,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("A")]
         public decimal BestAskQuantity { get; set; }
         /// <summary>
-        /// Todays open price
+        /// Today's open price.
         /// </summary>
         [JsonPropertyName("o")]
         public decimal OpenPrice { get; set; }
@@ -97,7 +97,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("L")]
         public long LastTradeId { get; set; }
         /// <summary>
-        /// The total trades of id
+        /// The total number of trades.
         /// </summary>
         [JsonPropertyName("n")]
         public long TotalTrades { get; set; }

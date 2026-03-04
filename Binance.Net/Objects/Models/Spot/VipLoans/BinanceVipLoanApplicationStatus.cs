@@ -8,52 +8,52 @@ namespace Binance.Net.Objects.Models.Spot.VipLoans
     public record BinanceVipLoanApplicationStatus
     {
         /// <summary>
-        /// ID of account receiving loan
+        /// The identifier of the account receiving the loan.
         /// </summary>
         [JsonPropertyName("loanAccountId")]
         public string LoanAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Order id
+        /// The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Request id
+        /// The request identifier.
         /// </summary>
         [JsonPropertyName("requestId")]
         public string RequestId { get; set; } = string.Empty;
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Loan quantity 
+        /// The loan quantity.
         /// </summary>
         [JsonPropertyName("loanAmount")]
         public decimal LoanQuantity { get; set; }
         /// <summary>
-        /// Collateral account id separated by `,`
+        /// Comma-separated collateral account identifiers.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral assets separated by `,`
+        /// Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Loan term
+        /// The loan term.
         /// </summary>
         [JsonPropertyName("loanTerm")]
         public string LoanTerm { get; set; } = string.Empty;
         /// <summary>
-        /// Application status
+        /// The current application status.
         /// </summary>
         [JsonPropertyName("status")]
         public VipLoanApplicationStatus Status { get; set; }
         /// <summary>
-        /// Loan date
+        /// The loan creation date and time.
         /// </summary>
         [JsonPropertyName("loanDate")]
         public DateTime LoanDate { get; set; }

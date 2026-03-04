@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The quantity without trades involving RPI orders
+        /// The quantity without trades involving RPI orders.
         /// </summary>
         [JsonPropertyName("nq")]
         public decimal? QuantityWithoutRpi { get; set; }

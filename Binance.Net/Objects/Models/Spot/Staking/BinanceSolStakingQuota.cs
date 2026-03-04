@@ -22,7 +22,7 @@
         [JsonPropertyName("minStakeAmount")]
         public decimal MinStakeAmount { get; set; }
         /// <summary>
-        /// Min redeem amount
+        /// Minimum redeem amount.
         /// </summary>
         [JsonPropertyName("minRedeemAmount")]
         public decimal MinRedeemAmount { get; set; }

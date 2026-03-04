@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamSymbolUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Pair
+        /// The pair.
         /// </summary>
         [JsonPropertyName("ps")]
         public string Pair { get; set; } = string.Empty;

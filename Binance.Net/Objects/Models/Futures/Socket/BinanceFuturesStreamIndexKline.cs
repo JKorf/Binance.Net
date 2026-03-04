@@ -89,7 +89,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         public string Ignore4 { get; set; } = string.Empty;
 
         /// <summary>
-        /// Number of basic data
+        /// Number of data points in the candle.
         /// </summary>
         [JsonPropertyName("n")]
         public int NumberOfBasicData { get; set; }

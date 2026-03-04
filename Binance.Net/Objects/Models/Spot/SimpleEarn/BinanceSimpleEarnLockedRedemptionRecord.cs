@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnLockedRedemptionRecord
     {
         /// <summary>
-        /// Quantity
+        /// Redeemed quantity.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         [JsonPropertyName("isComplete")]
         public bool Complete { get; set; }
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

@@ -39,7 +39,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("askQty")]
         public decimal BestAskQuantity { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }

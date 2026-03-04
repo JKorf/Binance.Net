@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanHoldings
     {
         /// <summary>
-        /// Plan id
+        /// The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }
@@ -69,7 +69,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Roi
+        /// Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }
@@ -121,7 +121,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Roi
+        /// Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }

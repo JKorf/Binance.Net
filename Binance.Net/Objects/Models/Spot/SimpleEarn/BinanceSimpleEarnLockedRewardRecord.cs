@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnLockedRewardRecord
     {
         /// <summary>
-        /// Asset
+        /// Reward asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -27,7 +27,7 @@
         [JsonPropertyName("lockPeriod")]
         public int LockPeriod { get; set; }
         /// <summary>
-        /// Timestamp
+        /// Reward timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }

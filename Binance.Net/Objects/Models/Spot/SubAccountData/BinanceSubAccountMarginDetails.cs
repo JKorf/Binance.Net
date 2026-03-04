@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceSubAccountMarginDetails
     {
         /// <summary>
-        /// Email of the account
+        /// The account email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
-        /// Total net asset
+        /// Total net asset value in BTC.
         /// </summary>
         [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
@@ -51,12 +51,12 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceMarginTradeCoeff
     {
         /// <summary>
-        /// Liquidation margin ratio
+        /// The forced liquidation margin ratio.
         /// </summary>
         [JsonPropertyName("forceLiquidationBar")]
         public decimal ForceLiquidationBar { get; set; }
         /// <summary>
-        /// Margin record margin ratio
+        /// The margin call ratio.
         /// </summary>
         [JsonPropertyName("marginCallBar")]
         public decimal MarginCallBar { get; set; }

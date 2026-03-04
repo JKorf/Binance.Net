@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnResult
     {
         /// <summary>
-        /// Result
+        /// Whether the request succeeded.
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }

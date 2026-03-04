@@ -6,7 +6,7 @@
     public record BinanceVipLoanBorrowInterestRate
     {
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string LoanAsset { get; set; } = string.Empty;
@@ -21,7 +21,7 @@
         [JsonPropertyName("flexibleYearlyInterestRate")]
         public decimal FlexibleYearlyInterestRate { get; set; }
         /// <summary>
-        /// Time
+        /// The timestamp of the interest rate snapshot.
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime Time { get; set; }

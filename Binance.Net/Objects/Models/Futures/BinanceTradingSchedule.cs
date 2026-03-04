@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceTradingSchedule
     {
         /// <summary>
-        /// Update time
+        /// The last update time.
         /// </summary>
         [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
@@ -55,12 +55,12 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceSchedule
     {
         /// <summary>
-        /// Start time
+        /// The session start time.
         /// </summary>
         [JsonPropertyName("startTime")]
         public DateTime StartTime { get; set; }
         /// <summary>
-        /// End time
+        /// The session end time.
         /// </summary>
         [JsonPropertyName("endTime")]
         public DateTime EndTime { get; set; }

@@ -6,12 +6,12 @@
     public record BinanceTravelRuleSubmitResult
     {
         /// <summary>
-        /// Accepted
+        /// Whether the submission was accepted.
         /// </summary>
         [JsonPropertyName("accepted")]
         public bool Accepted { get; set; }
         /// <summary>
-        /// Info
+        /// Additional submission info.
         /// </summary>
         [JsonPropertyName("info")]
         public string Info { get; set; } = string.Empty;
