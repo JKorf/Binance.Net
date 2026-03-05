@@ -7,12 +7,12 @@
     public record BinanceEthStakingAccount
     {
         /// <summary>
-        /// Total profit in Beth
+        /// Total profit in BETH.
         /// </summary>
         [JsonPropertyName("cumulativeProfitInBETH")]
         public decimal TotalProfitInBeth { get; set; }
         /// <summary>
-        /// Last day profit in Beth
+        /// Last day profit in BETH.
         /// </summary>
         [JsonPropertyName("lastDayProfitInBETH")]
         public decimal LastDayProfitInBeth { get; set; }

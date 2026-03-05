@@ -19,16 +19,16 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Account information response</returns>
         Task<CallResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get order rate limit status
+        /// Gets order rate limit status
         /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/account-requests#unfilled-order-count-user_data" /></para>
         /// </summary>
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Order rate limit status response</returns>
         Task<CallResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/user-data-stream#web-socket-payloads" /></para>
         /// </summary>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an OCO order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received. Account position updates are a list of changed funds</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
         /// <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped</param>
@@ -54,12 +54,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
 
 
         /// <summary>
-        /// Subscribes to the cross margin account update stream using a listenToken
+        /// Subscribes to the cross margin account update stream using a listen token
         /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
         /// </summary>
-        /// <param name="listenToken">The listenToken obtained from <see cref="IBinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(string?, TimeSpan?, CancellationToken)">GetMarginUserListenTokenAsync</see></param>
+        /// <param name="listenToken">The listen token obtained from <see cref="IBinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(string?, TimeSpan?, CancellationToken)">GetMarginUserListenTokenAsync</see></param>
         /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
-        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an oco order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an OCO order status update is received</param>
         /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
         /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
         /// <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped</param>
@@ -75,7 +75,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the risk data account update stream. Prior to using this, the <see cref="IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(CancellationToken)">StartRiskDataUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
+        /// Subscribes to the risk data account update stream. Before using this method, call <see cref="IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(CancellationToken)">StartRiskDataUserStreamAsync</see> to start the stream and obtain a listen key.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientSpotApiAccount.StartRiskDataUserStreamAsync(CancellationToken)">StartRiskDataUserStreamAsync</see> method</param>
         /// <param name="onMarginCallUpdate">Event handler for margin call status updates</param>
@@ -89,11 +89,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Seamlessly renew the margin user data stream listen token on the existing connection without disconnecting. Call every ~12 hours before expiry.
+        /// Seamlessly renews the margin user data stream listen token on the existing connection without disconnecting. Call every ~12 hours before expiry.
         /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
         /// </summary>
         /// <param name="newListenToken">Listen token retrieved by the <see cref="IBinanceRestClientSpotApiAccount.GetMarginUserListenTokenAsync(string?, TimeSpan?, CancellationToken)">GetMarginUserListenTokenAsync</see> method</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A successful response</returns>
         Task<CallResult> UpdateMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default);
     }
 }

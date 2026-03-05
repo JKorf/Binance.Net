@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinancePositionV3
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
@@ -126,7 +126,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("maxNotionalValue")]
         public decimal? MaxNotionalValue { get; set; }
         /// <summary>
-        /// Max notional value of the position
+        /// The margin type.
         /// </summary>
         [JsonPropertyName("marginType")]
         public FuturesMarginType? MarginType { get; set; }

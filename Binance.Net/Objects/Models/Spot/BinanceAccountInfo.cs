@@ -60,7 +60,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("preventSor")]
         public bool PreventSmartOrderRouting { get; set; }
         /// <summary>
-        /// User id
+        /// The user identifier.
         /// </summary>
         [JsonPropertyName("uid")]
         public long UserId { get; set; }

@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinancePositionBase
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
@@ -143,7 +143,7 @@ namespace Binance.Net.Objects.Models.Futures
         public FuturesMarginType MarginType { get; set; }
 
         /// <summary>
-        /// Is auto add margin
+        /// Whether auto add margin is enabled.
         /// </summary>
         [JsonPropertyName("isAutoAddMargin")]
         public bool IsAutoAddMargin { get; set; }

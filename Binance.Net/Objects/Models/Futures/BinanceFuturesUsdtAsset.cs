@@ -7,7 +7,7 @@
     public record BinanceFuturesUsdtAsset
     {
         /// <summary>
-        /// Name of the asset
+        /// The asset name.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

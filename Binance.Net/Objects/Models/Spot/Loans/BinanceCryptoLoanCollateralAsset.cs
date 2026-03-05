@@ -7,7 +7,7 @@
     public record BinanceCryptoLoanCollateralAsset
     {
         /// <summary>
-        /// Collateral asset
+        /// The collateral asset.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
@@ -27,7 +27,7 @@
         [JsonPropertyName("liquidationLTV")]
         public decimal LiquidationLtv { get; set; }
         /// <summary>
-        /// Max limit
+        /// The maximum collateral limit.
         /// </summary>
         [JsonPropertyName("maxLimit")]
         public decimal MaxLimit { get; set; }

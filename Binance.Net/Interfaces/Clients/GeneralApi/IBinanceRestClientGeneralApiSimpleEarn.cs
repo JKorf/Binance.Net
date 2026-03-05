@@ -23,7 +23,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Flexible product list</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnFlexibleProduct>>> GetFlexibleProductsAsync(string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -40,11 +40,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Locked product list</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnLockedProduct>>> GetLockedProductsAsync(string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to flexible product
+        /// Subscribes to a flexible product
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-flexible-product-trade" /><br />
@@ -58,11 +58,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="sourceAccount">Source account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Subscription result</returns>
         Task<WebCallResult<BinanceSimpleEarnPurchase>> SubscribeFlexibleProductAsync(string productId, decimal quantity, bool? autoSubscribe = null, AccountSource? sourceAccount = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to locked product
+        /// Subscribes to a locked product
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-locked-product-trade" /><br />
@@ -77,11 +77,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="redeemDestination">Redeem destination, default "Flexible"</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Subscription result</returns>
         Task<WebCallResult<BinanceSimpleEarnPurchase>> SubscribeLockedProductAsync(string projectId, decimal quantity, bool? autoSubscribe = null, AccountSource? sourceAccount = null, RedeemDestination? redeemDestination = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Redeem flexible product
+        /// Redeems a flexible product
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-flexible-product-trade" /><br />
@@ -95,11 +95,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="destinationAccount">Destination account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Redemption result</returns>
         Task<WebCallResult<BinanceSimpleEarnRedemption>> RedeemFlexibleProductAsync(string productId, bool? redeemAll = null, decimal? quantity = null, AccountSource? destinationAccount = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Redeem locked product
+        /// Redeems a locked product
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-locked-product-trade" /><br />
@@ -110,11 +110,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="positionId">Position id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Redemption result</returns>
         Task<WebCallResult<BinanceSimpleEarnRedemption>> RedeemLockedProductAsync(string positionId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get flexible product position info
+        /// Gets flexible product position info
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-product-position-user_data" /><br />
@@ -128,11 +128,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Flexible product positions</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnFlexiblePosition>>> GetFlexibleProductPositionsAsync(string? asset = null, string? productId = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get locked product position info
+        /// Gets locked product position info
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-product-position-user_data" /><br />
@@ -147,11 +147,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Locked product positions</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnLockedPosition>>> GetLockedProductPositionsAsync(string? asset = null, string? positionId = null, string? projectId = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn account info
+        /// Gets Simple Earn account info
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#simple-account-user_data" /><br />
@@ -161,11 +161,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Simple Earn account information</returns>
         Task<WebCallResult<BinanceSimpleEarnAccount>> GetAccountAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn flexible product subscription records 
+        /// Gets Simple Earn flexible product subscription records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-record-user_data" /><br />
@@ -175,18 +175,18 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="productId">Filter by product id</param>
         /// <param name="purchaseId">Filter by purchase id</param>
-        /// <param name="asset">Filler by asset</param>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Flexible product subscription records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnFlexibleRecord>>> GetFlexibleSubscriptionRecordsAsync(string? productId = null, string? purchaseId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn locked product subscription records
+        /// Gets Simple Earn locked product subscription records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-record-user_data" /><br />
@@ -195,18 +195,18 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </para>
         /// </summary>
         /// <param name="purchaseId">Filter by purchase id</param>
-        /// <param name="asset">Filler by asset</param>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Locked product subscription records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnLockedRecord>>> GetLockedSubscriptionRecordsAsync(string? purchaseId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn flexible product redemption records
+        /// Gets Simple Earn flexible product redemption records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-redemption-record-user_data" /><br />
@@ -215,19 +215,19 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </para>
         /// </summary>
         /// <param name="productId">Filter by product id</param>
-        /// <param name="redeemId">Filler by redeem id</param>
-        /// <param name="asset">Filler by asset</param>
+        /// <param name="redeemId">Filter by redeem id</param>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Flexible product redemption records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnFlexibleRedemptionRecord>>> GetFlexibleRedemptionRecordsAsync(string? productId = null, string? redeemId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn locked product redemption records
+        /// Gets Simple Earn locked product redemption records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-redemption-record-user_data" /><br />
@@ -236,19 +236,19 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </para>
         /// </summary>
         /// <param name="positionId">Filter by position id</param>
-        /// <param name="redeemId">Filler by redeem id</param>
-        /// <param name="asset">Filler by asset</param>
+        /// <param name="redeemId">Filter by redeem id</param>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Locked product redemption records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnLockedRedemptionRecord>>> GetLockedRedemptionRecordsAsync(string? positionId = null, string? redeemId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn flexible product reward records
+        /// Gets Simple Earn flexible product reward records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-rewards-history-user_data" /><br />
@@ -256,20 +256,20 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// GET /sapi/v1/simple-earn/flexible/history/rewardsRecord
         /// </para>
         /// </summary>
-        /// <param name="type">Type or rewards</param>
+        /// <param name="type">Type of rewards</param>
         /// <param name="productId">Filter by product id</param>
-        /// <param name="asset">Filler by asset</param>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Flexible product reward records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnFlexibleRewardRecord>>> GetFlexibleRewardRecordsAsync(RewardType type, string? productId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Simple Earn locked product reward records
+        /// Gets Simple Earn locked product reward records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-rewards-history-user_data" /><br />
@@ -278,18 +278,18 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </para>
         /// </summary>
         /// <param name="positionId">Position id</param>
-        /// <param name="asset">Filler by asset</param>
+        /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="page">Current page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Locked product reward records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnLockedRewardRecord>>> GetLockedRewardRecordsAsync(string? positionId = null, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Set flexible product auto subscribe toggle
+        /// Sets flexible product auto-subscribe toggle
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#set-flexible-auto-subscribe-user_data" /><br />
@@ -301,11 +301,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="autoSubscribe">Auto subscribe enabled or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Operation result</returns>
         Task<WebCallResult<BinanceSimpleEarnResult>> SetFlexibleAutoSubscribeAsync(string productId, bool autoSubscribe, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Set locked product auto subscribe toggle
+        /// Sets locked product auto-subscribe toggle
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-auto-subscribe-user_data" /><br />
@@ -317,11 +317,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="autoSubscribe">Auto subscribe enabled or not</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Operation result</returns>
         Task<WebCallResult<BinanceSimpleEarnResult>> SetLockedAutoSubscribeAsync(string positionId, bool autoSubscribe, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get flexible product personal quota left
+        /// Gets flexible product personal quota left
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-personal-left-quota-user_data" /><br />
@@ -332,11 +332,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="productId">Product id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Remaining personal quota</returns>
         Task<WebCallResult<BinanceSimpleEarnPersonalQuotaLeft>> GetFlexiblePersonalQuotaLeftAsync(string productId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get locked product personal quota left
+        /// Gets locked product personal quota left
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-personal-left-quota-user_data" /><br />
@@ -347,11 +347,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="projectId">Project id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Remaining personal quota</returns>
         Task<WebCallResult<BinanceSimpleEarnPersonalQuotaLeft>> GetLockedPersonalQuotaLeftAsync(string projectId, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get flexible subscription preview
+        /// Gets flexible subscription preview
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-flexible-subscription-preview-user_data" /><br />
@@ -363,11 +363,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="quantity">Quantity</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Flexible subscription preview</returns>
         Task<WebCallResult<BinanceSimpleEarnFlexiblePreview>> GetFlexibleSubscriptionPreviewAsync(string productId, decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get locked subscription preview
+        /// Gets locked subscription preview
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-locked-subscription-preview-user_data" /><br />
@@ -380,11 +380,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="autoSubscribe">Auto subscribe</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Locked subscription preview</returns>
         Task<WebCallResult<BinanceSimpleEarnLockedPreview[]>> GetLockedSubscriptionPreviewAsync(string projectId, decimal quantity, bool? autoSubscribe = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Set locked redeem option 
+        /// Sets locked redeem option
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#set-locked-product-redeem-option" /><br />
@@ -396,11 +396,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="redeemDestination">Account for redemption, SPOT or FLEXIBLE</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Operation result</returns>
         Task<WebCallResult<BinanceSimpleEarnResult>> SetLockedRedeemOptionAsync(string positionId, RedeemDestination redeemDestination, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get rate history
+        /// Gets rate history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /><br />
@@ -416,11 +416,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Rate history records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnRateRecord>>> GetRateHistoryAsync(string productId, AprPeriod? aprPeriod = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get collateral records
+        /// Gets collateral records
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-rate-history-user_data" /><br />
@@ -435,7 +435,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Collateral records</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceSimpleEarnCollateralRecord>>> GetCollateralRecordsAsync(string productId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }

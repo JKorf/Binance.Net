@@ -6,7 +6,7 @@
     public record BinanceVipLoanAccuredInterest
     {
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
@@ -21,7 +21,7 @@
         [JsonPropertyName("interestAmount")]
         public decimal InterestQuantity { get; set; }
         /// <summary>
-        /// Annual interest rate
+        /// The annualized interest rate.
         /// </summary>
         [JsonPropertyName("annualInterestRate")]
         public decimal AnnualInterestRate { get; set; }
@@ -31,7 +31,7 @@
         [JsonPropertyName("accrualTime")]
         public DateTime AccrualTime { get; set; }
         /// <summary>
-        /// Latest order ID for renewal order
+        /// The latest renewal order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;

@@ -14,12 +14,12 @@
         public BinanceOrderTrade[]? Trades { get; set; }
 
         /// <summary>
-        /// Only present if a margin trade happened
+        /// Borrowed quantity, only present for margin trades.
         /// </summary>
         [JsonPropertyName("marginBuyBorrowAmount")]
         public decimal? MarginBuyBorrowQuantity { get; set; }
         /// <summary>
-        /// Only present if a margin trade happened
+        /// Borrowed asset, only present for margin trades.
         /// </summary>
         [JsonPropertyName("marginBuyBorrowAsset")]
         public string? MarginBuyBorrowAsset { get; set; }

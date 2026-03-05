@@ -9,32 +9,32 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnLockedRecord
     {
         /// <summary>
-        /// Quantity
+        /// Subscribed quantity.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Position id
+        /// Position identifier.
         /// </summary>
         [JsonPropertyName("positionId"), JsonConverter(typeof(NumberStringConverter))]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// Subscription timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Purchase id
+        /// Purchase identifier.
         /// </summary>
         [JsonPropertyName("purchaseId")]
         public long PurchaseId { get; set; }
         /// <summary>
-        /// Purchase id
+        /// Project identifier.
         /// </summary>
         [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
@@ -64,7 +64,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         [JsonPropertyName("status")]
         public Enums.SubscriptionStatus Status { get; set; }
         /// <summary>
-        /// Lock period
+        /// Lock period in days.
         /// </summary>
         [JsonPropertyName("lockPeriod")]
         public int LockPeriod { get; set; }

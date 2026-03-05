@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The liquidation dept
+        /// The liquidation debt.
         /// </summary>
         [JsonPropertyName("liquidationDebt")]
         public decimal Debt { get; set; }

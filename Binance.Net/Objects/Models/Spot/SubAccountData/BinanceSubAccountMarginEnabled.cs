@@ -7,12 +7,12 @@
     public record BinanceSubAccountMarginEnabled
     {
         /// <summary>
-        /// Email of the account
+        /// The account email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Whether Margin trading is enabled
+        /// Whether margin trading is enabled.
         /// </summary>
         [JsonPropertyName("isMarginEnabled")]
         public bool IsMarginEnabled { get; set; }

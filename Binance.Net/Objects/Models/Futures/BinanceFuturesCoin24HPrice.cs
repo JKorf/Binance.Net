@@ -7,7 +7,7 @@
     public record BinanceFuturesCoin24HPrice : Binance24HPriceBase
     {
         /// <summary>
-        /// The pair the price is for
+        /// The pair the price is for.
         /// </summary>
         [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;

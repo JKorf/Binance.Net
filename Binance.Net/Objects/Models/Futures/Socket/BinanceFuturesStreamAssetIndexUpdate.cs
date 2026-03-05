@@ -7,7 +7,7 @@
     public record BinanceFuturesStreamAssetIndexUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;

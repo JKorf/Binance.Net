@@ -34,7 +34,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("l")]
         public long LastTradeId { get; set; }
         /// <summary>
-        /// The timestamp of the trades
+        /// The trade timestamp.
         /// </summary>
         [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TradeTime { get; set; }

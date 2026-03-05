@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamBookPrice : BinanceStreamBookPrice
     {
         /// <summary>
-        /// Timestamp
+        /// The transaction timestamp.
         /// </summary>
         [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? TransactionTime { get; set; }

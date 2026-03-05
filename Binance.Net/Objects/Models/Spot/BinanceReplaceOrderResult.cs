@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("newOrderResult")]
         public OrderOperationResult NewOrderResult { get; set; }
         /// <summary>
-        /// Cancel order response. Make sure to check that the CancelResult is Success, else the CancelResponse.Message will contain more info
+        /// Cancel order response. Check <see cref="CancelResult"/> for success; otherwise <see cref="BinanceReplaceCancelOrder.Message"/> contains additional information.
         /// </summary>
         [JsonPropertyName("cancelResponse")]
         public BinanceReplaceCancelOrder? CancelResponse { get; set; }

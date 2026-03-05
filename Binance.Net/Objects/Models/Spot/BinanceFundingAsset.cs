@@ -32,7 +32,7 @@
         [JsonPropertyName("withdrawing")]
         public decimal Withdrawing { get; set; }
         /// <summary>
-        /// Value in btc
+        /// Value in BTC.
         /// </summary>
         [JsonPropertyName("btcValuation")]
         public decimal BtcValuation { get; set; }

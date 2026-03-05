@@ -8,7 +8,7 @@
     public record BinanceConditionOrderTriggerRejectUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Timestamp
+        /// The event timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("T")]

@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceSymbolAdlRate
     {
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;

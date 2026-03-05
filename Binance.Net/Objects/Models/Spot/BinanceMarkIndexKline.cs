@@ -44,7 +44,7 @@ namespace Binance.Net.Objects.Models.Spot
 
         [ArrayProperty(7)] internal string? Ignore2 { get; set; } = string.Empty;
         /// <summary>
-        /// Number of basic data
+        /// Number of data points in the candle.
         /// </summary>
         [ArrayProperty(8)]
         public int BasicDataCount { get; set; }

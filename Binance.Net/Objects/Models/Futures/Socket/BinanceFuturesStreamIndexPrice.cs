@@ -7,7 +7,7 @@
     public record BinanceFuturesStreamIndexPrice : BinanceStreamEvent
     {
         /// <summary>
-        /// The pair
+        /// The pair.
         /// </summary>
         [JsonPropertyName("i")]
         public string Pair { get; set; } = string.Empty;

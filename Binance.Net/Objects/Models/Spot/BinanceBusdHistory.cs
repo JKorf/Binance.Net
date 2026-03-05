@@ -9,17 +9,17 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceBusdHistory
     {
         /// <summary>
-        /// Transaction id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Type
+        /// The conversion type.
         /// </summary>
         [JsonPropertyName("type")]
         public BusdConvertType Type { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The conversion timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]

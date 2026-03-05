@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnLockedProduct
     {
         /// <summary>
-        /// Project id
+        /// Project identifier.
         /// </summary>
         [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
@@ -29,7 +29,7 @@
     public record BinanceSimpleEarnLockedProjectDetails
     {
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

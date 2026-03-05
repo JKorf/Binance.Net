@@ -37,7 +37,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for the placed order</returns>
+        /// <returns>Details of the placed order</returns>
         Task<WebCallResult<BinanceFuturesOrder>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
@@ -61,7 +61,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Place multiple orders in one call
+        /// Places multiple orders in one call
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/trade/rest-api/Place-Multiple-Orders" /><br />
@@ -109,7 +109,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="origClientOrderId">The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for canceled order</returns>
+        /// <returns>Details of the canceled order</returns>
         Task<WebCallResult<BinanceFuturesOrder>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -124,11 +124,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for canceled order</returns>
+        /// <returns>Result of canceling all open orders</returns>
         Task<WebCallResult<BinanceFuturesCancelAllOrders>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel all open orders of the specified symbol at the end of the specified countdown. This rest endpoint means to ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeats
+        /// Cancels all open orders of the specified symbol at the end of the specified countdown. This REST endpoint helps ensure your open orders are canceled in case of an outage. The endpoint should be called repeatedly as heartbeat
         /// so that the existing countdown time can be canceled and replaced by a new one.
         /// <para>
         /// Docs:<br />
@@ -158,7 +158,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Id's for canceled order</returns>
+        /// <returns>Results of canceling each order</returns>
         Task<WebCallResult<CallResult<BinanceFuturesOrder>[]>> CancelMultipleOrdersAsync(string symbol, IEnumerable<long>? orderIdList = null, IEnumerable<string>? origClientOrderIdList = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>

@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinancePayTrade
     {
         /// <summary>
-        /// Uid
+        /// The user identifier.
         /// </summary>
         [JsonPropertyName("uid")]
         public long? Uid { get; set; }
         /// <summary>
-        /// Counter party id
+        /// The counterparty identifier.
         /// </summary>
         [JsonPropertyName("counterpartyId")]
         public long? CounterPartyId { get; set; }
@@ -39,7 +39,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("transactionId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
-        /// Transaction time
+        /// The transaction time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("transactionTime")]

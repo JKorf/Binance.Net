@@ -7,12 +7,12 @@
     public record BinanceSubAccountTransfer
     {
         /// <summary>
-        /// From which email the transfer originated
+        /// The source account email address.
         /// </summary>
         [JsonPropertyName("from")]
         public string From { get; set; } = string.Empty;
         /// <summary>
-        /// To which email the transfer was to
+        /// The destination account email address.
         /// </summary>
         [JsonPropertyName("to")]
         public string To { get; set; } = string.Empty;
@@ -37,7 +37,7 @@
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Transaction Id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }

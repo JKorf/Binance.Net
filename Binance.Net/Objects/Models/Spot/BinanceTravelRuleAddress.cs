@@ -12,12 +12,12 @@
     public record BinanceTravelRuleAddress
     {
         /// <summary>
-        /// Status
+        /// The address verification status.
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Token
+        /// The asset token.
         /// </summary>
         [JsonPropertyName("token")]
         public string Token { get; set; } = string.Empty;

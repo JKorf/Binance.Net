@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("adjustmentAmount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Current ltv
+        /// Current LTV.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal CurrentLtv { get; set; }

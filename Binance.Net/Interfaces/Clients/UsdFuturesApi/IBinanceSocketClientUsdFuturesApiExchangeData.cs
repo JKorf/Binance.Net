@@ -20,6 +20,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Order book response</returns>
         Task<CallResult<BinanceResponse<BinanceFuturesOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/websocket-api/Symbol-Price-Ticker" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Price of symbol</returns>
+        /// <returns>Price for all symbols</returns>
         Task<CallResult<BinanceResponse<BinancePrice[]>>> GetPricesAsync(CancellationToken ct = default);
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
+        /// <returns>Book price for the symbol</returns>
         Task<CallResult<BinanceResponse<BinanceBookPrice>>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage, CancellationToken ct = default);
         /// <summary>
-        /// Subscribe to the aggregated trades update stream in high-performance mode<br />
+        /// Subscribes to the aggregated trade update stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Aggregate-Trade-Streams" /></para>
         /// </summary>
@@ -77,28 +78,28 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> onMessage, CancellationToken ct);
 
         /// <summary>
-        /// Subscribe to individual trade updates. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice
+        /// Subscribes to individual trade updates. NOTE: This endpoint stream isn't documented and therefore might be changed or removed without prior notice
         /// </summary>
         /// <param name="symbol">Symbol to subscribe, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns></returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
             Action<DataEvent<BinanceStreamTrade>> onMessage, bool filterOutNonTradeUpdates = true, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to individual trade updates. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice
+        /// Subscribes to individual trade updates. NOTE: This endpoint stream isn't documented and therefore might be changed or removed without prior notice
         /// </summary>
         /// <param name="symbols">Symbols to subscribe, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="filterOutNonTradeUpdates">Filter out any update which isn't a trade. Occasionally different updates (like INSURANCE_FUND updates) will occur on this stream. By default these are ignored</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns></returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
             Action<DataEvent<BinanceStreamTrade>> onMessage, bool filterOutNonTradeUpdates = true, CancellationToken ct = default);
         /// <summary>
-        /// Subscribe to the trades updates stream in high-performance mode. NOTE: This endpoint stream isn't documented and therefor might be changed or removed without prior notice<br />
+        /// Subscribes to the trade updates stream in high-performance mode. NOTE: This endpoint stream isn't documented and therefore might be changed or removed without prior notice<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
@@ -226,7 +227,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceMiniTick>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to mini ticker updates stream for a list of symbol
+        /// Subscribes to mini ticker updates stream for a list of symbols
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Mini-Ticker-Stream" /></para>
         /// </summary>
         /// <param name="symbols">The symbols to subscribe to, for example `ETHUSDT`</param>
@@ -313,7 +314,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BinanceFuturesStreamBookPrice>> onMessage, CancellationToken ct = default);
         /// <summary>
-        /// Subscribe to the book ticker update stream in high-performance mode<br />
+        /// Subscribes to the book ticker update stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Individual-Symbol-Book-Ticker-Streams" /></para>
         /// </summary>
@@ -334,7 +335,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamLiquidation>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to list of symbol forced liquidations stream
+        /// Subscribes to a list of symbol forced liquidation streams
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Liquidation-Order-Streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
@@ -442,7 +443,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? updateInterval, Action<DataEvent<IBinanceFuturesEventOrderBook>> onMessage, CancellationToken ct = default);
         /// <summary>
-        /// Subscribe to the depth update stream in high-performance mode<br />
+        /// Subscribes to the depth update stream in high-performance mode<br />
         /// More info about high-performance mode can be found here: <a href="https://cryptoexchange.jkorf.dev/client-libs/features/performance" />
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Diff-Book-Depth-Streams" /></para>
         /// </summary>
@@ -454,16 +455,16 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<HighPerfUpdateSubscription>> SubscribeToOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceFuturesStreamMinimalBookUpdate> onMessage, CancellationToken ct);
 
         /// <summary>
-        /// Subscribe to contract/symbol updates
+        /// Subscribes to contract/symbol updates
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Contract-Info-Stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns></returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<BinanceFuturesStreamSymbolUpdate>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the Mark price update stream for a all symbols
+        /// Subscribes to the mark price update stream for all symbols
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Mark-Price-Stream-for-All-market" /></para>
         /// </summary>
         /// <param name="updateInterval">Update interval in milliseconds, either 1000 or 3000. Defaults to 3000</param>
@@ -484,31 +485,31 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             Action<DataEvent<BinanceFuturesStreamCompositeIndex>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to asset index updates stream
+        /// Subscribes to asset index updates stream
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns></returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate[]>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to asset index updates for a single
+        /// Subscribes to asset index updates for a single symbol
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Multi-Assets-Mode-Asset-Index" /></para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns></returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAssetIndexUpdatesAsync(string symbol, Action<DataEvent<BinanceFuturesStreamAssetIndexUpdate>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to TradFi trading session updates
+        /// Subscribes to TradFi trading session updates
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/Trading-Session-Stream" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns></returns>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToTradingSessionUpdatesAsync(Action<DataEvent<BinanceTradingSessionUpdate>> onMessage, CancellationToken ct = default);
     }
 }

@@ -7,7 +7,7 @@
     public record BinanceAutoInvestEditResult
     {
         /// <summary>
-        /// Plan id
+        /// The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }

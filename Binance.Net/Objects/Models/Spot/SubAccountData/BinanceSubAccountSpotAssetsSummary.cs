@@ -7,7 +7,7 @@
     public record BinanceSubAccountSpotAssetsSummary
     {
         /// <summary>
-        /// Total records
+        /// The total number of returned records.
         /// </summary>
         [JsonPropertyName("totalCount")]
         public int TotalCount { get; set; }
@@ -17,7 +17,7 @@
         [JsonPropertyName("masterAccountTotalAsset")]
         public decimal MasterAccountTotalAsset { get; set; }
         /// <summary>
-        /// Sub account values
+        /// Spot asset values per sub account.
         /// </summary>
         [JsonPropertyName("spotSubUserAssetBtcVoList")]
         public BinanceSubAccountBtcValue[] SubAccountsBtcValues { get; set; } = Array.Empty<BinanceSubAccountBtcValue>();
@@ -29,12 +29,12 @@
     public record BinanceSubAccountBtcValue
     {
         /// <summary>
-        /// Sub account email
+        /// The sub account email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Sub account total asset 
+        /// The total asset value of the sub account.
         /// </summary>
         [JsonPropertyName("totalAsset")]
         public decimal TotalAsset { get; set; }

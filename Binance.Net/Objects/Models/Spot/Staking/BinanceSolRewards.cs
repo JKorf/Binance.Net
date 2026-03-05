@@ -20,7 +20,7 @@
     public record BinanceSolReward
     {
         /// <summary>
-        /// Timestamp
+        /// The reward timestamp.
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
@@ -30,7 +30,7 @@
         [JsonPropertyName("amountInSOL")]
         public decimal AmountInSol { get; set; }
         /// <summary>
-        /// Holding
+        /// Current holding.
         /// </summary>
         [JsonPropertyName("holding")]
         public decimal Holding { get; set; }
@@ -40,7 +40,7 @@
         [JsonPropertyName("holdingInSOL")]
         public decimal HoldingInSol { get; set; }
         /// <summary>
-        /// Annual percetage ratge
+        /// Annual percentage rate.
         /// </summary>
         [JsonPropertyName("annualPercentageRate")]
         public decimal AnnualPercentageRate { get; set; }

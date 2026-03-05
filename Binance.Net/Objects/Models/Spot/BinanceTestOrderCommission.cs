@@ -51,12 +51,12 @@
     public record BinanceDiscount
     {
         /// <summary>
-        /// Is discount enabled for the account
+        /// Whether discount is enabled for the account.
         /// </summary>
         [JsonPropertyName("enabledForAccount")]
         public bool EnabledForAccount { get; set; }
         /// <summary>
-        /// Is discount enabled for the symbol
+        /// Whether discount is enabled for the symbol.
         /// </summary>
         [JsonPropertyName("enabledForSymbol")]
         public bool EnabledForSymbol { get; set; }

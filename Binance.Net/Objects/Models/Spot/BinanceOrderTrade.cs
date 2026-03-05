@@ -7,7 +7,7 @@
     public record BinanceOrderTrade
     {
         /// <summary>
-        /// The id of the trade
+        /// The trade identifier.
         /// </summary>
         [JsonPropertyName("tradeId")]
         public long Id { get; set; }
@@ -27,7 +27,7 @@
         [JsonPropertyName("commission")]
         public decimal Fee { get; set; }
         /// <summary>
-        /// The asset the fee is paid in
+        /// The asset the fee is paid in.
         /// </summary>
         [JsonPropertyName("commissionAsset")]
         public string FeeAsset { get; set; } = string.Empty;

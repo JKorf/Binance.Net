@@ -7,7 +7,7 @@
     public record BinanceSolStakingAccount
     {
         /// <summary>
-        /// BN SOL amount
+        /// BNSOL amount.
         /// </summary>
         [JsonPropertyName("bnsolAmount")]
         public decimal BnSolAmount { get; set; }

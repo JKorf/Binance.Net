@@ -7,12 +7,12 @@
     public record BinanceAutoInvestRoi
     {
         /// <summary>
-        /// Date
+        /// The ROI date.
         /// </summary>
         [JsonPropertyName("date")]
         public DateTime Date { get; set; }
         /// <summary>
-        /// Simulate roi
+        /// Simulated return on investment.
         /// </summary>
         [JsonPropertyName("simulateRoi")]
         public decimal SimulateRoi { get; set; }

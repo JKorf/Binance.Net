@@ -6,43 +6,43 @@
     public record BinanceVipLoanBorrowData
     {
         /// <summary>
-        /// Loan account id
+        /// The loan account identifier.
         /// </summary>
         [JsonPropertyName("loanAccountId")]
         public string LoanAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Request Id
+        /// The unique request identifier.
         /// </summary>
         [JsonPropertyName("requestId")]
         public string RequestId { get; set; } = string.Empty;
         /// <summary>
-        /// Loan asset
+        /// The asset that was borrowed.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Is flexible rate
+        /// Whether a flexible interest rate was selected.
         /// </summary>
         [JsonConverter(typeof(BoolConverter))]
         [JsonPropertyName("isFlexibleRate")]
         public bool IsFlexibleRate { get; set; }
         /// <summary>
-        /// Loan quantity 
+        /// The borrowed quantity.
         /// </summary>
         [JsonPropertyName("loanAmount")]
         public decimal LoanQuantity { get; set; }
         /// <summary>
-        /// Collateral accounts id separated by `,`
+        /// Comma-separated collateral account identifiers.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral assets separated by `,`
+        /// Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Loan term
+        /// The loan term in days, when applicable.
         /// </summary>
         [JsonPropertyName("loanTerm")]
         public decimal? LoanTerm { get; set; } = null;

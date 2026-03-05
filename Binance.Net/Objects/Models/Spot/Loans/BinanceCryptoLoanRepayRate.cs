@@ -7,12 +7,12 @@
     public record BinanceCryptoLoanRepayRate
     {
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral asset
+        /// The collateral asset.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;

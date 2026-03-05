@@ -17,7 +17,7 @@
         [JsonPropertyName("airDropAsset")]
         public string AirDropAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Total amount
+        /// Total amount.
         /// </summary>
         [JsonPropertyName("totalAmount")]
         public decimal TotalQuantity { get; set; }

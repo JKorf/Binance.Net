@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceAlgoOrderUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Timestamp
+        /// The event timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("T")]

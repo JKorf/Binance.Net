@@ -22,7 +22,7 @@
         [JsonPropertyName("fromAmount")]
         public decimal FromQuantity { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]

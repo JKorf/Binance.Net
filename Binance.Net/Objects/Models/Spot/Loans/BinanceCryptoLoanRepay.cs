@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("remainingCollateral")]
         public decimal? RemainingCollateral { get; set; }
         /// <summary>
-        /// Fully repaid
+        /// Whether the loan is fully repaid.
         /// </summary>
         [JsonPropertyName("fullRepayment")]
         public bool FullRepayment{ get; set; }

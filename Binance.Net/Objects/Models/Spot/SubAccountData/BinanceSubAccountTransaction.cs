@@ -7,7 +7,7 @@
     public record BinanceSubAccountTransaction
     {
         /// <summary>
-        /// The transaction id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("txnId"), JsonConverter(typeof(NumberStringConverter))]
         public string TransactionId { get; set; } = string.Empty;

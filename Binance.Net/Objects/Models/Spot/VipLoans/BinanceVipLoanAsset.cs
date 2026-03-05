@@ -6,7 +6,7 @@
     public record BinanceVipLoanAsset
     {
         /// <summary>
-        /// Loan asset
+        /// The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
@@ -41,12 +41,12 @@
         [JsonPropertyName("_60dYearlyInterestRate")]
         public decimal YearlyInterestRate60Days { get; set; }
         /// <summary>
-        /// Min limit
+        /// The minimum loan limit.
         /// </summary>
         [JsonPropertyName("minLimit")]
         public decimal MinLimit { get; set; }
         /// <summary>
-        /// Min limit
+        /// The maximum loan limit.
         /// </summary>
         [JsonPropertyName("maxLimit")]
         public decimal MaxLimit { get; set; }

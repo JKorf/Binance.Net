@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanTransactions
     {
         /// <summary>
-        /// Total
+        /// The total number of transactions.
         /// </summary>
         [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
-        /// Results
+        /// The returned transactions.
         /// </summary>
         [JsonPropertyName("list")]
         public BinanceAutoInvestPlanTransaction[] List { get; set; } = Array.Empty<BinanceAutoInvestPlanTransaction>();
@@ -26,7 +26,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanTransaction
     {
         /// <summary>
-        /// Id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public long Id { get; set; }
@@ -46,7 +46,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("planName")]
         public string PlanName { get; set; } = string.Empty;
         /// <summary>
-        /// Plan id
+        /// The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }

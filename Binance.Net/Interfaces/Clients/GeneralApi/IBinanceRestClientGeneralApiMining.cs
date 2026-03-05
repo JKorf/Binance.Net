@@ -45,7 +45,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account</param>
-        /// <param name="workerName">Miners name</param>
+        /// <param name="workerName">Miner name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Miner details</returns>
         Task<WebCallResult<BinanceMinerDetails[]>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default);
@@ -90,7 +90,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get other revenue list
+        /// Gets other revenue list
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#extra-bonus-list-user_data" /><br />
@@ -110,7 +110,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<BinanceOtherRevenueList>> GetMiningOtherRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get mining statistics
+        /// Gets mining statistics
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#statistic-list-user_data" /><br />
@@ -136,7 +136,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="algorithm">Algorithm</param>
         /// <param name="userName">Mining account user name</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Revenue list</returns>
+        /// <returns>Mining account list</returns>
         Task<WebCallResult<BinanceMiningAccount[]>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<BinanceHashrateResaleDetails>> GetHashrateResaleDetailsAsync(int configId, string userName, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Hashrate resale request
+        /// Places a hashrate resale request
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#hashrate-resale-request-user_data" /><br />
@@ -187,11 +187,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="toUser">To mining account</param>
         /// <param name="hashRate">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>Mining account</returns>
+        /// <returns>Created resale configuration id</returns>
         Task<WebCallResult<int>> PlaceHashrateResaleRequestAsync(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel Hashrate Resale Configuration
+        /// Cancels hashrate resale configuration
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#cancel-hashrate-resale-configuration-user_data" /><br />
@@ -206,7 +206,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         Task<WebCallResult<bool>> CancelHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default);
 
         /// <summary>
-        /// Get mining account earnings
+        /// Gets mining account earnings
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#mining-account-earning-user_data" /><br />
@@ -220,7 +220,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="page">Page</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Mining account earnings</returns>
         Task<WebCallResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
     }
 }

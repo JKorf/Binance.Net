@@ -7,12 +7,12 @@
     public record BinanceAutoInvestAssets
     {
         /// <summary>
-        /// Target assets
+        /// Supported target assets.
         /// </summary>
         [JsonPropertyName("targetAssets")]
         public string[] TargetAssets { get; set; } = Array.Empty<string>();
         /// <summary>
-        /// Source assets
+        /// Supported source assets.
         /// </summary>
         [JsonPropertyName("sourceAssets")]
         public string[] SourceAssets { get; set; } = Array.Empty<string>();

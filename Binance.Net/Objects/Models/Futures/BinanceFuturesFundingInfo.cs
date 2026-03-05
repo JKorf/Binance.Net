@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("adjustedFundingRateFloor")]
         public decimal AdjustedFundingRateFloor { get; set; }
         /// <summary>
-        /// Funding interval in hours
+        /// Funding interval in hours.
         /// </summary>
         [JsonPropertyName("fundingIntervalHours")]
         public int FundingIntervalHours { get; set; }

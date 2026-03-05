@@ -7,7 +7,7 @@
     public record BinanceFuturesMultiAssetMode
     {
         /// <summary>
-        /// Is multi assets mode enabled
+        /// Whether multi-asset mode is enabled.
         /// </summary>
         [JsonPropertyName("multiAssetsMargin")]
         public bool MultiAssetMode { get; set; }

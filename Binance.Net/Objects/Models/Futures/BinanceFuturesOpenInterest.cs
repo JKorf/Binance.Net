@@ -15,13 +15,13 @@ namespace Binance.Net.Objects.Models.Futures
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Open Interest info
+        /// The open interest value.
         /// </summary>
         [JsonPropertyName("openInterest")]
         public decimal OpenInterest { get; set; }
 
         /// <summary>
-        /// Timestamp
+        /// The data timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }

@@ -12,7 +12,7 @@
         [JsonPropertyName("ipRestrict")]
         public bool IpRestricted { get; set; }
         /// <summary>
-        /// Ip whitelist
+        /// IP whitelist.
         /// </summary>
         [JsonPropertyName("ipList")]
         public string[] IpList { get; set; } = Array.Empty<string>();

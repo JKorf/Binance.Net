@@ -5,10 +5,10 @@ namespace Binance.Net.Objects.Models.Spot
     /// <summary>
     /// Information about a withdrawal
     /// </summary>
-    public record  BinanceTravelRuleWithdrawal
+    public record BinanceTravelRuleWithdrawal
     {
         /// <summary>
-        /// The id of the withdrawal
+        /// The withdrawal identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;

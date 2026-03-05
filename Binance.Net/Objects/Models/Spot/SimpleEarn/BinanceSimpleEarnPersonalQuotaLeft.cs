@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnPersonalQuotaLeft
     {
         /// <summary>
-        /// Personal quota left
+        /// Remaining personal quota.
         /// </summary>
         [JsonPropertyName("leftPersonalQuota")]
         public decimal PersonalQuotaLeft { get; set; }

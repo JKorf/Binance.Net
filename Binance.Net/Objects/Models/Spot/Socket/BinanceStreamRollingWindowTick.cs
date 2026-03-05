@@ -57,7 +57,7 @@
         [JsonPropertyName("L")]
         public long LastTradeId { get; set; }
         /// <summary>
-        /// The total trades of id
+        /// The total number of trades.
         /// </summary>
         [JsonPropertyName("n")]
         public long TotalTrades { get; set; }

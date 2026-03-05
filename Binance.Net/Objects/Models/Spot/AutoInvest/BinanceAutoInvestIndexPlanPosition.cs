@@ -7,7 +7,7 @@
     public record BinanceAutoInvestIndexPlanPosition
     {
         /// <summary>
-        /// Index id
+        /// The index identifier.
         /// </summary>
         [JsonPropertyName("indexId")]
         public long IndexId { get; set; }
@@ -27,7 +27,7 @@
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Roi
+        /// Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }
@@ -96,7 +96,7 @@
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Roi
+        /// Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }

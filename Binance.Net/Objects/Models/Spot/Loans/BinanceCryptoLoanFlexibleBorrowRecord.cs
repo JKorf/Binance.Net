@@ -34,7 +34,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("borrowTime")]
         public DateTime BorrowTime { get; set; }
         /// <summary>
-        /// Status of the order
+        /// The borrow record status.
         /// </summary>
         [JsonPropertyName("status")]
         public FlexibleBorrowRecordStatus Status { get; set; }

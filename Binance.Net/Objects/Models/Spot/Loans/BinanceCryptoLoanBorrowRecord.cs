@@ -39,7 +39,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("loanTerm")]
         public int LoanTerm { get; set; }
         /// <summary>
-        /// Borrow order id
+        /// The borrow order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public long OrderId { get; set; }

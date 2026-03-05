@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("c")]
         public decimal LastPrice { get; set; }
         /// <summary>
-        /// Todays open price
+        /// Today's open price.
         /// </summary>
         [JsonPropertyName("o")]
         public decimal OpenPrice { get; set; }

@@ -7,7 +7,7 @@
     public record BinanceAutoInvestTargetAssets
     {
         /// <summary>
-        /// Target assets
+        /// Available target assets.
         /// </summary>
         [JsonPropertyName("targetAssets")]
         public string[] TargetAssets { get; set; } = Array.Empty<string>();
@@ -29,7 +29,7 @@
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Target asset list
+        /// ROI and dimension data for the target asset.
         /// </summary>
         [JsonPropertyName("roiAndDimensionTypeList")]
         public BinanceAutoInvestTargetAssetRoi[] Assets { get; set; } = Array.Empty<BinanceAutoInvestTargetAssetRoi>();

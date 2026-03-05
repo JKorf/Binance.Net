@@ -125,7 +125,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         public decimal IsolatedMargin { get; set; }
 
         /// <summary>
-        /// Position Side
+        /// Position side.
         /// </summary>
         [JsonPropertyName("ps")]
         public PositionSide PositionSide { get; set; }

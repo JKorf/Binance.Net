@@ -7,7 +7,7 @@
     public record BinanceSubAccountsMarginSummary
     {
         /// <summary>
-        /// Total btc asset
+        /// The total asset value in BTC.
         /// </summary>
         [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
@@ -17,7 +17,7 @@
         [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
-        /// Total net btc
+        /// The total net asset value in BTC.
         /// </summary>
         [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
@@ -34,12 +34,12 @@
     public record BinanceSubAccountMarginInfo
     {
         /// <summary>
-        /// Sub account email
+        /// The sub account email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Total btc asset
+        /// The total asset value in BTC.
         /// </summary>
         [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
@@ -49,7 +49,7 @@
         [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
-        /// Total net btc
+        /// The total net asset value in BTC.
         /// </summary>
         [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }

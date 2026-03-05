@@ -29,12 +29,12 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Id
+        /// The transfer identifier.
         /// </summary>
         [JsonPropertyName("tranId")]
         public long Id { get; set; }
         /// <summary>
-        /// Timestamp
+        /// The transfer timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]

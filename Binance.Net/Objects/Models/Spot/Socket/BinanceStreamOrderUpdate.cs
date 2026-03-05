@@ -161,7 +161,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("g")]
         public long OrderListId { get; set; }
         /// <summary>
-        /// API key this update was for
+        /// API key this update was for.
         /// </summary>
         public string ApiKey { get; set; } = string.Empty;
 
@@ -202,7 +202,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         [JsonPropertyName("B")]
         public decimal? LastPreventedQuantity { get; set; }
         /// <summary>
-        /// Prevented match id
+        /// Self-trade prevention mode.
         /// </summary>
         [JsonPropertyName("V")]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }

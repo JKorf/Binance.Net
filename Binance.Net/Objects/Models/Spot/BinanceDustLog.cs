@@ -12,7 +12,7 @@
         [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
-        /// Rows
+        /// Dust conversion logs.
         /// </summary>
         [JsonPropertyName("userAssetDribblets")]
         public BinanceDustLog[] UserAssetDribblets { get; set; } = Array.Empty<BinanceDustLog>();
@@ -39,7 +39,7 @@
         [JsonPropertyName("transId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Detail logs
+        /// Detailed conversion entries.
         /// </summary>
         [JsonPropertyName("userAssetDribbletDetails")]
         public BinanceDustLogDetails[] Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();

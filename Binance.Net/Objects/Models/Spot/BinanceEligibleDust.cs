@@ -22,7 +22,7 @@
         [JsonPropertyName("dribbletPercentage")]
         public decimal FeePercentage { get; set; }
         /// <summary>
-        /// Assets
+        /// Assets eligible for conversion.
         /// </summary>
         [JsonPropertyName("details")]
         public BinanceEligibleDust[] Details { get; set; } = Array.Empty<BinanceEligibleDust>();

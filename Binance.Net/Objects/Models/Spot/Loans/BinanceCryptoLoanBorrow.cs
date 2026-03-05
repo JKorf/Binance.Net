@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
-        /// Status
+        /// The borrow status.
         /// </summary>
         [JsonPropertyName("status")]
         public FlexibleBorrowStatus Status { get; set; }

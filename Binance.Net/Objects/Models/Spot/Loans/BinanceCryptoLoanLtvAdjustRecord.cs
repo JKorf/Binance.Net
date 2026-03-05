@@ -27,12 +27,12 @@
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Pre adjust ltv
+        /// LTV before adjustment.
         /// </summary>
         [JsonPropertyName("preLTV")]
         public decimal PreLtv { get; set; }
         /// <summary>
-        /// Post adjust ltv
+        /// LTV after adjustment.
         /// </summary>
         [JsonPropertyName("afterLTV")]
         public decimal AfterLtv { get; set; }

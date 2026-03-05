@@ -6,12 +6,12 @@
     public record BinanceStreamAveragePrice : BinanceStreamEvent
     {
         /// <summary>
-        /// Duration
+        /// The averaging interval.
         /// </summary>
         [JsonPropertyName("i")]
         public string Interval { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;

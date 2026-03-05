@@ -7,12 +7,12 @@
     public record BinanceSimpleEarnRateRecord
     {
         /// <summary>
-        /// Product id
+        /// Product identifier.
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

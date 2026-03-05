@@ -9,13 +9,13 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceCloudMiningHistory
     {
         /// <summary>
-        /// Creation time
+        /// The creation time.
         /// </summary>
         [JsonPropertyName("createTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Transaction id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
@@ -27,7 +27,7 @@ namespace Binance.Net.Objects.Models.Spot
         public CloudMiningPaymentStatus Type { get; set; }
 
         /// <summary>
-        /// Asset
+        /// The asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

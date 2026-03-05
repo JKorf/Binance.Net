@@ -7,7 +7,7 @@
     public record BinanceRedemptionHistory
     {
         /// <summary>
-        /// Asset
+        /// The redemption asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -22,7 +22,7 @@
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// The redemption timestamp.
         /// </summary>
         [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]

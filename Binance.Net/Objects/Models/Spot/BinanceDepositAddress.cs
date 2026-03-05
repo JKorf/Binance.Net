@@ -12,7 +12,7 @@
         [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
-        /// Url
+        /// The address URL.
         /// </summary>
         [JsonPropertyName("url")]
         public string? Url { get; set; }
@@ -27,7 +27,7 @@
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Is default address
+        /// Whether this is the default address.
         /// </summary>
         [JsonPropertyName("isDefault")]
         public bool? IsDefault { get; set; }

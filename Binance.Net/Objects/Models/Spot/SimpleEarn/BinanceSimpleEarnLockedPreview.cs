@@ -27,7 +27,7 @@
         [JsonPropertyName("estTotalExtraRewardAmt")]
         public decimal EstimatedTotalExtraRewardQuantity { get; set; }
         /// <summary>
-        /// Next pay
+        /// Next pay amount.
         /// </summary>
         [JsonPropertyName("nextPay")]
         public decimal NextPay { get; set; }

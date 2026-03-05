@@ -8,12 +8,12 @@ namespace Binance.Net.Objects.Models.Spot.VipLoans
     public record BinanceVipLoanRepayData
     {
         /// <summary>
-        /// Loan asset
+        /// The repaid loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Repay quantity
+        /// The repaid quantity.
         /// </summary>
         [JsonPropertyName("repayAmount")]
         public decimal RepayQuantity { get; set; }
@@ -28,17 +28,17 @@ namespace Binance.Net.Objects.Models.Spot.VipLoans
         [JsonPropertyName("remainingInterest")]
         public decimal RemainingInterest { get; set; }
         /// <summary>
-        /// Collateral assets separated by `,`
+        /// Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Current LTV
+        /// The current loan-to-value ratio.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal LTV { get; set; }
         /// <summary>
-        /// Repay status
+        /// The repayment status.
         /// </summary>
         [JsonPropertyName("repayStatus")]
         public VipLoanRepayStatus RepayStatus { get; set; }

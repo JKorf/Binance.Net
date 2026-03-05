@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     public record BinanceStreamBookPrice : IBinanceBookPrice
     {
         /// <summary>
-        /// Update id
+        /// The update identifier.
         /// </summary>
         [JsonPropertyName("u")]
         public long UpdateId { get; set; }

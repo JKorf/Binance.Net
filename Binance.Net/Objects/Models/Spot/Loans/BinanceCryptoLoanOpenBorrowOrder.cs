@@ -27,7 +27,7 @@
         [JsonPropertyName("totalDebt")]
         public decimal TotalDebt { get; set; }
         /// <summary>
-        /// Current LTV
+        /// Current LTV.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal CurrentLTV { get; set; }

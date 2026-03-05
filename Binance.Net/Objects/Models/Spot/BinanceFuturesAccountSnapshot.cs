@@ -52,7 +52,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceFuturesAsset
     {
         /// <summary>
-        /// Name of the asset
+        /// The asset name.
         /// </summary>
         [JsonPropertyName("asset")]
         public string? Asset { get; set; }
@@ -84,7 +84,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("entryPrice")]
         public decimal EntryPrice { get; set; }
         /// <summary>
-        /// Mark price
+        /// The mark price.
         /// </summary>
         [JsonPropertyName("markPrice")]
         public decimal? MarkPrice { get; set; }

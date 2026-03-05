@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestOneTimeTransactionStatus
     {
         /// <summary>
-        /// Transaction id
+        /// The transaction identifier.
         /// </summary>
         [JsonPropertyName("transactionId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Status
+        /// The transaction status.
         /// </summary>
         [JsonPropertyName("status")]
         public AutoInvestOneTimeTransactionStatus Status { get; set; }

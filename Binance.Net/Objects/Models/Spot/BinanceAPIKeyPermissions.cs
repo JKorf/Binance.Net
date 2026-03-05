@@ -7,7 +7,7 @@
     public record BinanceAPIKeyPermissions
     {
         /// <summary>
-        /// Whether the key is restricted to certain IP's or not
+        /// Whether the key is restricted to specific IP addresses.
         /// </summary>
         [JsonPropertyName("ipRestrict")]
         public bool IpRestrict { get; set; }
@@ -69,12 +69,12 @@
         [JsonPropertyName("tradingAuthorityExpirationTime")]
         public DateTime? TradingAuthorityExpirationTime { get; set; }
         /// <summary>
-        /// Authorizes FIX api trading
+        /// Authorizes FIX API trading.
         /// </summary>
         [JsonPropertyName("enableFixApiTrade")]
         public bool EnableFixApiTrade { get; set; }
         /// <summary>
-        /// Authorizes FIX data reading
+        /// Authorizes FIX data reading.
         /// </summary>
         [JsonPropertyName("enableFixReadOnly")]
         public bool EnableFixReadOnly { get; set; }

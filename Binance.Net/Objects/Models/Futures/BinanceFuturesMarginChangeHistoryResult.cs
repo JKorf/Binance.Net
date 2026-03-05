@@ -9,17 +9,17 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesMarginChangeHistoryResult
     {
         /// <summary>
-        /// Request quantity of margin used
+        /// The requested margin change quantity.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Base asset used for margin
+        /// The margin asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string? Asset { get; set; }
         /// <summary>
-        /// Symbol margin is placed on
+        /// The symbol the margin change applies to.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string? Symbol { get; set; }
@@ -29,13 +29,13 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("deltaType")]
         public string? DeltaType { get; set; }
         /// <summary>
-        /// Time of the margin change request
+        /// The margin change request time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Direction of the margin change request
+        /// The margin change direction.
         /// </summary>
         [JsonPropertyName("type")]
         public FuturesMarginChangeDirectionType Type { get; set; }

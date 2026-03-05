@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceSystemStatus
     {
         /// <summary>
-        /// Status
+        /// The system status.
         /// </summary>
         [JsonPropertyName("status")]
         public SystemStatus Status { get; set; }

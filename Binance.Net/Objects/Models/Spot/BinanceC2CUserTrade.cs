@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceC2CUserTrade
     {
         /// <summary>
-        /// Order number
+        /// The order number.
         /// </summary>
         [JsonPropertyName("orderNumber")]
         public string OrderNumber { get; set; } = string.Empty;
         /// <summary>
-        /// Advert number
+        /// The advertisement number.
         /// </summary>
         [JsonPropertyName("advNo")]
         public string AdvertNumber { get; set; } = string.Empty;

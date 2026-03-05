@@ -23,7 +23,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Requests the server for the local time. This function also determines the offset between server and local time and uses this for subsequent API calls
+        /// Gets the server time. This method can also determine the offset between server and local time for subsequent API calls
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Check-Server-time" /><br />
@@ -37,7 +37,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default);
 
         /// <summary>
-        /// Get's information about the exchange including rate limits and symbol list
+        /// Gets information about the exchange including rate limits and symbol list
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Exchange-Information" /><br />
@@ -65,7 +65,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets the historical  trades for a symbol
+        /// Gets historical trades for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Old-Trades-Lookup" /><br />
@@ -73,7 +73,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/historicalTrades
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get recent trades for, for example `BTCUSD_PERP`</param>
+        /// <param name="symbol">The symbol to get historical trades for, for example `BTCUSD_PERP`</param>
         /// <param name="limit">Max amount of results, max 500</param>
         /// <param name="fromId">From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
@@ -81,7 +81,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Gets compressed, aggregate trades. Trades that fill at the time, from the same order, with the same price will have the quantity aggregated.
+        /// Gets compressed aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Compressed-Aggregate-Trades-List" /><br />
@@ -99,7 +99,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get candlestick data for the provided symbol
+        /// Gets candlestick data for the provided symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Kline-Candlestick-Data" /><br />
@@ -118,7 +118,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get premium index kline data for the provided symbol
+        /// Gets premium index kline data for the provided symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Premium-Index-Kline-Data" /><br />
@@ -137,7 +137,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get funding rate info for symbols that had FundingRateCap/ FundingRateFloor / fundingIntervalHours adjustment
+        /// Gets funding rate info for symbols that had FundingRateCap/FundingRateFloor/fundingIntervalHours adjustments
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Infoo" /><br />
@@ -146,11 +146,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Funding rate info</returns>
         Task<WebCallResult<BinanceFuturesFundingInfo[]>> GetFundingInfoAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get funding rate history for the provided symbol
+        /// Gets funding rate history for the provided symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Get-Funding-Rate-History-of-Perpetual-Futures" /><br />
@@ -229,13 +229,13 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/markPriceKlines
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol get the data for, for example `BTCUSD_PERP`</param>
+        /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="interval">The interval of the klines</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="startTime">Start time</param>
         /// <param name="endTime">End time</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Mark price kline data</returns>
         Task<WebCallResult<BinanceMarkIndexKline[]>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Mark Price and Funding Rate for the provided symbol
+        /// Gets mark price and funding rate for the provided symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-and-Mark-Price" /><br />
@@ -265,11 +265,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="symbol">The symbol to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Mark price and funding rate data</returns>
         Task<WebCallResult<BinanceFuturesCoinMarkPrice[]>> GetMarkPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get candlestick data for the provided pair
+        /// Gets candlestick data for the provided pair
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Continuous-Contract-Kline-Candlestick-Data" /><br />
@@ -288,7 +288,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<IBinanceKline[]>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get candlestick data for the provided pair
+        /// Gets candlestick data for the provided pair
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Index-Price-Kline-Candlestick-Data" /><br />
@@ -306,7 +306,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceMarkIndexKline[]>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get data regarding the last 24 hours change
+        /// Gets 24-hour ticker statistics
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/24hr-Ticker-Price-Change-Statistics" /><br />
@@ -332,11 +332,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="symbol">Symbol to get book price for, for example `BTCUSD_PERP`</param>
         /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns>List of book prices</returns>
+        /// <returns>Book prices</returns>
         Task<WebCallResult<BinanceFuturesBookPrice[]>> GetBookPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get present open interest of a specific symbol.
+        /// Gets present open interest of a specific symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Open-Interest" /><br />
@@ -407,7 +407,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceFuturesBasis[]>> GetBasisAsync(string pair, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get a list of the prices of all symbols
+        /// Gets prices for symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/market-data/rest-api/Symbol-Price-Ticker" /><br />
@@ -422,7 +422,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<WebCallResult<BinanceFuturesCoinPrice[]>> GetPricesAsync(string? symbol = null, string? pair = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get index price constituents for a symbol
+        /// Gets index price constituents for a symbol
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Index-Constituents" /><br />
@@ -432,6 +432,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Index price constituents</returns>
         Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default);
     }
 }

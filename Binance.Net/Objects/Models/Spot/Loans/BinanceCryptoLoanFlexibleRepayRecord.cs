@@ -33,7 +33,7 @@ namespace Binance.Net.Objects.Models.Spot.Loans
         [JsonPropertyName("repayStatus")]
         public RepayStatus RepayStatus { get; set; }
         /// <summary>
-        /// Repay timestamp
+        /// The repayment timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("repayTime")]

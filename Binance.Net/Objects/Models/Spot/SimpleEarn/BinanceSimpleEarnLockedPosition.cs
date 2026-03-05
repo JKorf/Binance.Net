@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnLockedPosition
     {
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -17,7 +17,7 @@
         [JsonPropertyName("positionId"), JsonConverter(typeof(NumberStringConverter))]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
-        /// Parent Position id
+        /// Parent position identifier.
         /// </summary>
         [JsonPropertyName("parentPositionId"), JsonConverter(typeof(NumberStringConverter))]
         public string ParentPositionId { get; set; } = string.Empty;

@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestRedemption
     {
         /// <summary>
-        /// Index id
+        /// The index identifier.
         /// </summary>
         [JsonPropertyName("indexId")]
         public long IndexId { get; set; }
@@ -19,7 +19,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("indexName")]
         public string IndexName { get; set; } = string.Empty;
         /// <summary>
-        /// Redemption id
+        /// The redemption identifier.
         /// </summary>
         [JsonPropertyName("redemptionId")]
         public long RedemptionId { get; set; }
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
         [JsonPropertyName("status")]
         public AutoInvestRedemptionStatus Status { get; set; }
         /// <summary>
-        /// Asset
+        /// The redeemed asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

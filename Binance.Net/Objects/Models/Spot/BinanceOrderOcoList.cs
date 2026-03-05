@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceOrderOcoList
     {
         /// <summary>
-        /// The id of the order list
+        /// The order list identifier.
         /// </summary>
         [JsonPropertyName("orderListId")]
         public long Id { get; set; }
@@ -69,7 +69,7 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The id of the order
+        /// The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public long OrderId { get; set; }

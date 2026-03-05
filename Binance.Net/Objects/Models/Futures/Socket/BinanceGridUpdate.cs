@@ -40,7 +40,7 @@
         [JsonPropertyName("ss")]
         public string StrategyStatus { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol
+        /// The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;

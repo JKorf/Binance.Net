@@ -21,23 +21,25 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<CallResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get account information, including position and balances
+        /// Gets account information, including positions and balances
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information-V2" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Account information</returns>
         Task<CallResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get account information, including position and balances
+        /// Gets account information, including positions and balances
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/account/websocket-api/Account-Information" /></para>
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
+        /// <returns>Account information</returns>
         Task<CallResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the account update stream. Prior to using this, the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method should be called to start the stream and obtaining a listen key.
+        /// Subscribes to the account update stream. Before using this method, call <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> to start the stream and obtain a listen key.
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams" /></para>
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> method</param>
@@ -45,7 +47,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
-        /// <param name="onTradeUpdate">The event handler for whenever an trade status update is received</param>
+        /// <param name="onTradeUpdate">The event handler for whenever a trade status update is received</param>
         /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
         /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
         /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>

@@ -7,7 +7,7 @@
     public record BinanceEthRewardsHistory
     {
         /// <summary>
-        /// Asset
+        /// The reward asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -22,7 +22,7 @@
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// The timestamp.
         /// </summary>
         [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]

@@ -7,7 +7,7 @@
     public record BinanceSimpleEarnFlexibleProduct
     {
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -52,7 +52,7 @@
         [JsonPropertyName("minPurchaseAmount")]
         public decimal MinPurchaseQuantity { get; set; }
         /// <summary>
-        /// product id
+        /// Product identifier.
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;

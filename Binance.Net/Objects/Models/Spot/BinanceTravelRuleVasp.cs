@@ -6,12 +6,12 @@
     public record BinanceTravelRuleVasp
     {
         /// <summary>
-        /// Name
+        /// The VASP name.
         /// </summary>
         [JsonPropertyName("vaspName")]
         public string VaspName { get; set; } = string.Empty;
         /// <summary>
-        /// Code
+        /// The VASP code.
         /// </summary>
         [JsonPropertyName("vaspCode")]
         public string VaspCode { get; set; } = string.Empty;

@@ -10,7 +10,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
     public interface IBinanceRestClientGeneralApiStaking
     {
         /// <summary>
-        /// Subscribe to ETH staking
+        /// Subscribes to ETH staking
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#subscribe-eth-staking-trade" /><br />
@@ -21,11 +21,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Subscription result</returns>
         Task<WebCallResult<BinanceStakingResult>> SubscribeEthStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Redeem from ETH staking
+        /// Redeems ETH staking
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#redeem-eth-trade" /><br />
@@ -36,11 +36,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Redemption result</returns>
         Task<WebCallResult<BinanceStakingResult>> RedeemEthStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get ETH staking history
+        /// Gets ETH staking history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-staking-history-user_data" /><br />
@@ -54,11 +54,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>ETH staking history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceStakingHistory>>> GetEthStakingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get ETH redemption history
+        /// Gets ETH redemption history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-redemption-history-user_data" /><br />
@@ -72,11 +72,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>ETH redemption history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceRedemptionHistory>>> GetEthRedemptionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get ETH rewards history
+        /// Gets ETH rewards history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-eth-rewards-distribution-history-user_data" /><br />
@@ -90,11 +90,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>ETH rewards history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceEthRewardsHistory>>> GetEthRewardsHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get ETH staking quotas
+        /// Gets ETH staking quotas
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-current-eth-staking-quota-user_data" /><br />
@@ -104,11 +104,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>ETH staking quota details</returns>
         Task<WebCallResult<BinanceEthStakingQuota>> GetEthStakingQuotaAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get Beth rate history
+        /// Gets BETH rate history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-beth-rate-history-user_data" /><br />
@@ -122,11 +122,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>BETH rate history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceBethRateHistory>>> GetBethRateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get eth staking account
+        /// Gets ETH staking account
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#eth-staking-account-user_data" /><br />
@@ -136,11 +136,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>ETH staking account information</returns>
         Task<WebCallResult<BinanceEthStakingAccount>> GetEthStakingAccountAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Wrap Beth
+        /// Wraps BETH
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#wrap-beth-trade" /><br />
@@ -151,11 +151,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="quantity">Quantity to wrap</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Wrap result</returns>
         Task<WebCallResult<BinanceStakingResult>> WrapBethAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get wrap history
+        /// Gets wrap history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-wbeth-wrap-history-user_data" /><br />
@@ -169,11 +169,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Wrap history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceBethWrapHistory>>> GetBethWrapHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get unwrap history
+        /// Gets unwrap history
         /// <para>
         /// Docs:<br />
         /// <a href="https://binance-docs.github.io/apidocs/spot/en/#get-wbeth-unwrap-history-user_data" /><br />
@@ -187,11 +187,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Unwrap history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceBethWrapHistory>>> GetBethUnwrapHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get SOL staking account info
+        /// Gets SOL staking account info
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/account" /><br />
@@ -201,11 +201,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>SOL staking account information</returns>
         Task<WebCallResult<BinanceSolStakingAccount>> GetSolStakingAccountAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get SOL staking quotas
+        /// Gets SOL staking quotas
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/account/Get-SOL-staking-quota-details" /><br />
@@ -215,11 +215,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>SOL staking quota details</returns>
         Task<WebCallResult<BinanceSolStakingQuota>> GetSolStakingQuotaAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribe to SOL staking
+        /// Subscribes to SOL staking
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/staking" /><br />
@@ -230,11 +230,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Subscription result</returns>
         Task<WebCallResult<BinanceSolStakingResult>> SubscribeSolStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Redeem from SOL staking
+        /// Redeems SOL staking
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/staking/Redeem-SOL" /><br />
@@ -245,7 +245,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="quantity">Amount</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Redemption result</returns>
         Task<WebCallResult<BinanceSolStakingResult>> RedeemSolStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -259,11 +259,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Claim result</returns>
         Task<WebCallResult<BinanceStakingResult>> ClaimSolBoostRewardsAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get SOL staking history
+        /// Gets SOL staking history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/history" /><br />
@@ -277,11 +277,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>SOL staking history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceStakingHistory>>> GetSolStakingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get SOL redemption history
+        /// Gets SOL redemption history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-SOL-redemption-history" /><br />
@@ -295,11 +295,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>SOL redemption history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceRedemptionHistory>>> GetSolRedemptionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get BN SOL rewards history
+        /// Gets BNSOL rewards history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-rewards-history" /><br />
@@ -313,11 +313,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>BNSOL rewards history</returns>
         Task<WebCallResult<BinanceSolRewards>> GetBnSolRewardsHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get BN SOL rate history
+        /// Gets BNSOL rate history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-BNSOL-Rate-History" /><br />
@@ -331,11 +331,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>BNSOL rate history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceBnsolRateHistory>>> GetBnSolRateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get SOL boost reward history
+        /// Gets SOL boost reward history
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Boost-rewards-History" /><br />
@@ -350,11 +350,11 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>SOL boost reward history</returns>
         Task<WebCallResult<BinanceQueryRecords<BinanceBnsolRewardHistory>>> GetSolBoostRewardsHistoryAsync(SolRewardType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get SOL unclaimed rewards
+        /// Gets SOL unclaimed rewards
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/staking/sol-staking/history/Get-Unclaimed-rewards" /><br />
@@ -364,7 +364,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <returns>Unclaimed SOL rewards</returns>
         Task<WebCallResult<BinanceSolUnclaimedReward[]>> GetSolUnclaimedRewardsAsync(long? receiveWindow = null, CancellationToken ct = default);
     }
 }

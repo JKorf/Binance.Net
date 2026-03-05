@@ -6,7 +6,7 @@
 public class BinanceListenToken
 {
     /// <summary>
-    /// Token
+    /// The listen token.
     /// </summary>
     [JsonPropertyName("token")]
     public string Token { get; set; } = string.Empty;

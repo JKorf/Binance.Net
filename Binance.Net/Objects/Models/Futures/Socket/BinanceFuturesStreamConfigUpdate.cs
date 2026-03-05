@@ -7,13 +7,13 @@
     public record BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Leverage Update data
+        /// Leverage update data.
         /// </summary>
         [JsonPropertyName("ac")]
         public BinanceFuturesStreamLeverageUpdateData? LeverageUpdateData { get; set; }
 
         /// <summary>
-        /// Position mode Update data
+        /// Position mode update data.
         /// </summary>
         [JsonPropertyName("ai")]
         public BinanceFuturesStreamConfigUpdateData? ConfigUpdateData { get; set; }

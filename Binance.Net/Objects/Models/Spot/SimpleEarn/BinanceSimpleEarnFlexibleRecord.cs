@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnFlexibleRecord
     {
         /// <summary>
-        /// Quantity
+        /// Subscribed quantity.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Asset
+        /// Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;

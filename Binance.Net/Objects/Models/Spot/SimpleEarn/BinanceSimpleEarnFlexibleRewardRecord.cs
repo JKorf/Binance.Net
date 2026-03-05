@@ -9,7 +9,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnFlexibleRewardRecord
     {
         /// <summary>
-        /// Asset
+        /// Reward asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
@@ -29,7 +29,7 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
         [JsonPropertyName("type")]
         public RewardType Type { get; set; }
         /// <summary>
-        /// Timestamp
+        /// Reward timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }

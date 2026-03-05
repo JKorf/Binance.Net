@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesQuoteResult
     {
         /// <summary>
-        /// Order id
+        /// The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Create time
+        /// The order creation time.
         /// </summary>
         [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }

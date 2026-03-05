@@ -7,7 +7,7 @@
     public record BinanceCurrentRateLimit : BinanceRateLimit
     {
         /// <summary>
-        /// The current used amount
+        /// The currently used amount.
         /// </summary>
         [JsonPropertyName("count")]
         public int Count { get; set; }

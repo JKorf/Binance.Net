@@ -138,7 +138,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         [JsonPropertyName("a")]
         public decimal AskNotional { get; set; }
         /// <summary>
-        /// Whether the buyer is the maker
+        /// Whether the buyer is the maker.
         /// </summary>
         [JsonPropertyName("m")]
         public bool BuyerIsMaker { get; set; }

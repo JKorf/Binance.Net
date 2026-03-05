@@ -7,7 +7,7 @@
     public record BinanceBnsolRewardHistory
     {
         /// <summary>
-        /// Timestamp
+        /// The timestamp.
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
