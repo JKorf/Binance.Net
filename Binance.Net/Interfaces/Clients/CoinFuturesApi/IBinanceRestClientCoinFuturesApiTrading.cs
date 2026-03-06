@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
@@ -17,24 +17,24 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
-        /// <param name="side">The order side (buy/sell)</param>
-        /// <param name="type">The order type</param>
-        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The quantity of the base symbol</param>
-        /// <param name="positionSide">The position side</param>
-        /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
-        /// <param name="price">The price to use</param>
-        /// <param name="newClientOrderId">Unique id for order</param>
-        /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
-        /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
-        /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
-        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
-        /// <param name="orderResponseType">The response type. Default Acknowledge</param>
-        /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
-        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `BTCUSD_PERP`</param>
+        /// <param name="side">["<c>side</c>"] The order side (buy/sell)</param>
+        /// <param name="type">["<c>type</c>"] The order type</param>
+        /// <param name="timeInForce">["<c>timeInForce</c>"] Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">["<c>quantity</c>"] The quantity of the base symbol</param>
+        /// <param name="positionSide">["<c>positionSide</c>"] The position side</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Specify as true if the order is intended to only reduce the position</param>
+        /// <param name="price">["<c>price</c>"] The price to use</param>
+        /// <param name="newClientOrderId">["<c>newClientOrderId</c>"] Unique id for order</param>
+        /// <param name="stopPrice">["<c>stopPrice</c>"] Used for stop orders</param>
+        /// <param name="activationPrice">["<c>activationPrice</c>"] Used with TRAILING_STOP_MARKET orders, default as the latest price(supporting different workingType)</param>
+        /// <param name="callbackRate">["<c>callbackRate</c>"] Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="workingType">["<c>workingType</c>"] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">["<c>closePosition</c>"] Close-All,used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+        /// <param name="orderResponseType">["<c>newOrderRespType</c>"] The response type. Default Acknowledge</param>
+        /// <param name="priceProtect">["<c>priceProtect</c>"] If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+        /// <param name="priceMatch">["<c>priceMatch</c>"] Only available for Limit/Stop/TakeProfit order</param>
+        /// <param name="selfTradePreventionMode">["<c>selfTradePreventionMode</c>"] Self trade prevention mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Details of the placed order</returns>
@@ -69,7 +69,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/batchOrders
         /// </para>
         /// </summary>
-        /// <param name="orders">The orders to place</param>
+        /// <param name="orders">["<c>batchOrders</c>"] The orders to place</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
@@ -87,9 +87,9 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
-        /// <param name="orderId">The order id of the order</param>
-        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `BTCUSD_PERP`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
@@ -104,9 +104,9 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// DELETE /dapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
-        /// <param name="orderId">The order id of the order</param>
-        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `BTCUSD_PERP`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Details of the canceled order</returns>
@@ -121,7 +121,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// DELETE /dapi/v1/allOpenOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result of canceling all open orders</returns>
@@ -137,8 +137,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/countdownCancelAll
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `BTCUSD_PERP`</param>
-        /// <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `BTCUSD_PERP`</param>
+        /// <param name="countDownTime">["<c>countdownTime</c>"] The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Countdown result</returns>
@@ -153,9 +153,9 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// DELETE /dapi/v1/batchOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
-        /// <param name="orderIdList">The list of order ids to cancel</param>
-        /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `BTCUSD_PERP`</param>
+        /// <param name="orderIdList">["<c>orderIdList</c>"] The list of order ids to cancel</param>
+        /// <param name="origClientOrderIdList">["<c>origClientOrderIdList</c>"] The list of client order ids to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Results of canceling each order</returns>
@@ -170,9 +170,9 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/openOrder
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `BTCUSD_PERP`</param>
-        /// <param name="orderId">The order id of the order</param>
-        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `BTCUSD_PERP`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
@@ -187,7 +187,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/openOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for, for example `BTCUSD_PERP`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get open orders for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
@@ -202,11 +202,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/allOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get orders for, for example `BTCUSD_PERP`</param>
-        /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
-        /// <param name="startTime">If set, only orders placed after this time will be returned</param>
-        /// <param name="endTime">If set, only orders placed before this time will be returned</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get orders for, for example `BTCUSD_PERP`</param>
+        /// <param name="orderId">["<c>orderId</c>"] If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="startTime">["<c>startTime</c>"] If set, only orders placed after this time will be returned</param>
+        /// <param name="endTime">["<c>endTime</c>"] If set, only orders placed before this time will be returned</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
@@ -221,10 +221,10 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/forceOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get forced orders for, for example `BTCUSD_PERP`</param>
-        /// <param name="closeType">Filter by reason for close</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get forced orders for, for example `BTCUSD_PERP`</param>
+        /// <param name="closeType">["<c>autoCloseType</c>"] Filter by reason for close</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of forced orders</returns>
@@ -241,16 +241,17 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/userTrades
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for, for example `BTCUSD_PERP`</param>
-        /// <param name="pair">Symbol to get trades for, for example `BTCUSD`</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
-        /// <param name="orderId">Get the trades for a specific order</param>
-        /// <param name="startTime">Orders newer than this date will be retrieved</param>
-        /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to get trades for, for example `BTCUSD_PERP`</param>
+        /// <param name="pair">["<c>pair</c>"] Symbol to get trades for, for example `BTCUSD`</param>
+        /// <param name="limit">["<c>limit</c>"] The max number of results</param>
+        /// <param name="fromId">["<c>fromId</c>"] TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="orderId">["<c>orderId</c>"] Get the trades for a specific order</param>
+        /// <param name="startTime">["<c>startTime</c>"] Orders newer than this date will be retrieved</param>
+        /// <param name="endTime">["<c>endTime</c>"] Orders older than this date will be retrieved</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of trades</returns>
         Task<WebCallResult<BinanceFuturesCoinTrade[]>> GetUserTradesAsync(string? symbol = null, string? pair = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? orderId = null, long? receiveWindow = null, CancellationToken ct = default);
     }
 }
+

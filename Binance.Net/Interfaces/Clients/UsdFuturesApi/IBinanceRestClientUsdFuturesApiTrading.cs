@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.AlgoOrders;
@@ -19,25 +19,25 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /fapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
-        /// <param name="side">The order side (buy/sell)</param>
-        /// <param name="type">The order type</param>
-        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The quantity of the base symbol</param>
-        /// <param name="positionSide">The position side</param>
-        /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
-        /// <param name="price">The price to use</param>
-        /// <param name="newClientOrderId">Unique id for order</param>
-        /// <param name="stopPrice">Used for stop orders</param>
-        /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
-        /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
-        /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
-        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
-        /// <param name="orderResponseType">The response type. Default Acknowledge</param>
-        /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
-        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
-        /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] The order side (buy/sell)</param>
+        /// <param name="type">["<c>type</c>"] The order type</param>
+        /// <param name="timeInForce">["<c>timeInForce</c>"] Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">["<c>quantity</c>"] The quantity of the base symbol</param>
+        /// <param name="positionSide">["<c>positionSide</c>"] The position side</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Specify as true if the order is intended to only reduce the position</param>
+        /// <param name="price">["<c>price</c>"] The price to use</param>
+        /// <param name="newClientOrderId">["<c>newClientOrderId</c>"] Unique id for order</param>
+        /// <param name="stopPrice">["<c>stopPrice</c>"] Used for stop orders</param>
+        /// <param name="activationPrice">["<c>activationPrice</c>"] Used with TRAILING_STOP_MARKET orders, default as the latest price(supporting different workingType)</param>
+        /// <param name="callbackRate">["<c>callbackRate</c>"] Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="workingType">["<c>workingType</c>"] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">["<c>closePosition</c>"] Close-All,used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+        /// <param name="orderResponseType">["<c>newOrderRespType</c>"] The response type. Default Acknowledge</param>
+        /// <param name="priceProtect">["<c>priceProtect</c>"] If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+        /// <param name="priceMatch">["<c>priceMatch</c>"] Only available for Limit/Stop/TakeProfit order</param>
+        /// <param name="selfTradePreventionMode">["<c>selfTradePreventionMode</c>"] Self trade prevention mode</param>
+        /// <param name="goodTillDate">["<c>goodTillDate</c>"] Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Details of the placed order</returns>
@@ -73,7 +73,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /fapi/v1/batchOrders
         /// </para>
         /// </summary>
-        /// <param name="orders">The orders to place</param>
+        /// <param name="orders">["<c>batchOrders</c>"] The orders to place</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Returns a list of call results, one for each order. The order the results are in is the order the orders were sent</returns>
@@ -91,9 +91,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
-        /// <param name="orderId">The order id of the order</param>
-        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
@@ -108,9 +108,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// DELETE /fapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
-        /// <param name="orderId">The order id of the order</param>
-        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Details of the canceled order</returns>
@@ -125,7 +125,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// DELETE /fapi/v1/allOpenOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result of canceling all open orders</returns>
@@ -141,8 +141,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /fapi/v1/countdownCancelAll
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="countDownTime">The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="countDownTime">["<c>countdownTime</c>"] The time after which all open orders should cancel, or 0 to cancel an existing timer</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Countdown result</returns>
@@ -157,9 +157,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// DELETE /fapi/v1/batchOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
-        /// <param name="orderIdList">The list of order ids to cancel</param>
-        /// <param name="origClientOrderIdList">The list of client order ids to cancel</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="orderIdList">["<c>orderIdList</c>"] The list of order ids to cancel</param>
+        /// <param name="origClientOrderIdList">["<c>origClientOrderIdList</c>"] The list of client order ids to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Results of canceling each order</returns>
@@ -174,13 +174,13 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// PUT /fapi/v1/order
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Order side</param>
-        /// <param name="quantity">New quantity</param>
-        /// <param name="price">New price</param>
-        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
-        /// <param name="orderId">Order id of the order to edit</param>
-        /// <param name="origClientOrderId">Client order id of the order to edit</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="quantity">["<c>quantity</c>"] New quantity</param>
+        /// <param name="price">["<c>price</c>"] New price</param>
+        /// <param name="priceMatch">["<c>priceMatch</c>"] Only available for Limit/Stop/TakeProfit order</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id of the order to edit</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] Client order id of the order to edit</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Details of the edited order</returns>
@@ -195,7 +195,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// PUT /fapi/v1/batchOrders
         /// </para>
         /// </summary>
-        /// <param name="orders">The order info</param>
+        /// <param name="orders">["<c>batchOrders</c>"] The order info</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Results of editing each order</returns>
@@ -213,12 +213,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/orderAmendment
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="startTime">If set, only orders edited after this time will be returned</param>
-        /// <param name="endTime">If set, only orders edited before this time will be returned</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get orders for, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="clientOrderId">["<c>origClientOrderId</c>"] Filter by client order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] If set, only orders edited after this time will be returned</param>
+        /// <param name="endTime">["<c>endTime</c>"] If set, only orders edited before this time will be returned</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order edit history</returns>
@@ -233,9 +233,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/openOrder
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
-        /// <param name="orderId">The order id of the order</param>
-        /// <param name="origClientOrderId">The client order id of the order</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
@@ -250,7 +250,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/openOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get open orders for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get open orders for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of open orders</returns>
@@ -265,11 +265,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/allOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get orders for, for example `ETHUSDT`</param>
-        /// <param name="orderId">If set, only orders with an order id higher than the provided will be returned</param>
-        /// <param name="startTime">If set, only orders placed after this time will be returned</param>
-        /// <param name="endTime">If set, only orders placed before this time will be returned</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get orders for, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] If set, only orders with an order id higher than the provided will be returned</param>
+        /// <param name="startTime">["<c>startTime</c>"] If set, only orders placed after this time will be returned</param>
+        /// <param name="endTime">["<c>endTime</c>"] If set, only orders placed before this time will be returned</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of orders</returns>
@@ -284,10 +284,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/forceOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get forced orders for, for example `ETHUSDT`</param>
-        /// <param name="closeType">Filter by reason for close</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get forced orders for, for example `ETHUSDT`</param>
+        /// <param name="closeType">["<c>autoCloseType</c>"] Filter by reason for close</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of forced orders</returns>
@@ -304,12 +304,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/userTrades
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for, for example `ETHUSDT`</param>
-        /// <param name="limit">The max number of results</param>
-        /// <param name="orderId">Get the trades for a specific order</param>
-        /// <param name="fromId">TradeId to fetch from. Default gets most recent trades</param>
-        /// <param name="startTime">Orders newer than this date will be retrieved</param>
-        /// <param name="endTime">Orders older than this date will be retrieved</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to get trades for, for example `ETHUSDT`</param>
+        /// <param name="limit">["<c>limit</c>"] The max number of results</param>
+        /// <param name="orderId">["<c>orderId</c>"] Get the trades for a specific order</param>
+        /// <param name="fromId">["<c>fromId</c>"] TradeId to fetch from. Default gets most recent trades</param>
+        /// <param name="startTime">["<c>startTime</c>"] Orders newer than this date will be retrieved</param>
+        /// <param name="endTime">["<c>endTime</c>"] Orders older than this date will be retrieved</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of trades</returns>
@@ -324,14 +324,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /sapi/v1/algo/futures/newOrderVp
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Order side</param>
-        /// <param name="quantity">Order quantity</param>
-        /// <param name="urgency">Represent the relative speed of the current execution</param>
-        /// <param name="clientOrderId">Client order id</param>
-        /// <param name="reduceOnly">Reduce only</param>
-        /// <param name="limitPrice">Limit price of the order. If null will use market price</param>
-        /// <param name="positionSide">Position side</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="quantity">["<c>quantity</c>"] Order quantity</param>
+        /// <param name="urgency">["<c>urgency</c>"] Represent the relative speed of the current execution</param>
+        /// <param name="clientOrderId">["<c>clientAlgoId</c>"] Client order id</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Reduce only</param>
+        /// <param name="limitPrice">["<c>limitPrice</c>"] Limit price of the order. If null will use market price</param>
+        /// <param name="positionSide">["<c>positionSide</c>"] Position side</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algo order result</returns>
@@ -356,14 +356,14 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /sapi/v1/algo/futures/newOrderTwap
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Order side</param>
-        /// <param name="quantity">Order quantity</param>
-        /// <param name="duration">Duration in seconds. Less than 5 minutes will be defaulted to 5 minutes, more than 24 hours will be defaulted to 24 hours.</param>
-        /// <param name="clientOrderId">Client order id</param>
-        /// <param name="reduceOnly">Reduce only</param>
-        /// <param name="limitPrice">Limit price of the order. If null will use market price</param>
-        /// <param name="positionSide">Position side</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="quantity">["<c>quantity</c>"] Order quantity</param>
+        /// <param name="duration">["<c>duration</c>"] Duration in seconds. Less than 5 minutes will be defaulted to 5 minutes, more than 24 hours will be defaulted to 24 hours.</param>
+        /// <param name="clientOrderId">["<c>clientAlgoId</c>"] Client order id</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Reduce only</param>
+        /// <param name="limitPrice">["<c>limitPrice</c>"] Limit price of the order. If null will use market price</param>
+        /// <param name="positionSide">["<c>positionSide</c>"] Position side</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algo order result</returns>
@@ -388,7 +388,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// DELETE /sapi/v1/algo/futures/order
         /// </para>
         /// </summary>
-        /// <param name="algoOrderId">Algo id to cancel</param>
+        /// <param name="algoOrderId">["<c>algoId</c>"] Algo id to cancel</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algo cancel result</returns>
@@ -417,12 +417,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /sapi/v1/algo/futures/historicalOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Filter by side</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Page</param>
-        /// <param name="limit">Max results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] Filter by side</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>page</c>"] Page</param>
+        /// <param name="limit">["<c>pageSize</c>"] Max results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Closed algo orders</returns>
@@ -437,9 +437,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /sapi/v1/algo/futures/subOrders
         /// </para>
         /// </summary>
-        /// <param name="algoId">Algo id</param>
-        /// <param name="page">Page</param>
-        /// <param name="limit">Max results</param>
+        /// <param name="algoId">["<c>algoId</c>"] Algo id</param>
+        /// <param name="page">["<c>page</c>"] Page</param>
+        /// <param name="limit">["<c>pageSize</c>"] Max results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algo sub order list</returns>
@@ -454,7 +454,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v3/positionRisk
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Position information</returns>
@@ -469,11 +469,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /fapi/v1/convert/getQuote
         /// </para>
         /// </summary>
-        /// <param name="fromAsset">The from asset, for example `ETH`</param>
-        /// <param name="toAsset">The to asset, for example `USD`</param>
-        /// <param name="fromQuantity">The from asset quantity, either this or toQuantity should be provided</param>
-        /// <param name="toQuantity">The to asset quantity, either this or fromQuantity should be provided</param>
-        /// <param name="validTime">The time the quote should be valid for</param>
+        /// <param name="fromAsset">["<c>fromAsset</c>"] The from asset, for example `ETH`</param>
+        /// <param name="toAsset">["<c>toAsset</c>"] The to asset, for example `USD`</param>
+        /// <param name="fromQuantity">["<c>fromAmount</c>"] The from asset quantity, either this or toQuantity should be provided</param>
+        /// <param name="toQuantity">["<c>toAmount</c>"] The to asset quantity, either this or fromQuantity should be provided</param>
+        /// <param name="validTime">["<c>validTime</c>"] The time the quote should be valid for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Convert quote details</returns>
         Task<WebCallResult<BinanceFuturesConvertQuote>> ConvertQuoteRequestAsync(string fromAsset, string toAsset, decimal? fromQuantity = null, decimal? toQuantity = null, ValidTime? validTime = null, CancellationToken ct = default);
@@ -487,7 +487,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /fapi/v1/convert/acceptQuote
         /// </para>
         /// </summary>
-        /// <param name="quoteId">Quote id previously requested</param>
+        /// <param name="quoteId">["<c>quoteId</c>"] Quote id previously requested</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Convert quote accept result</returns>
         Task<WebCallResult<BinanceFuturesQuoteResult>> ConvertAcceptQuoteAsync(string quoteId, CancellationToken ct = default);
@@ -501,8 +501,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/convert/orderStatus
         /// </para>
         /// </summary>
-        /// <param name="quoteId">The quote id. Either this or orderId should be provided</param>
-        /// <param name="orderId">The order id. Either this or quoteId should be provided</param>
+        /// <param name="quoteId">["<c>quoteId</c>"] The quote id. Either this or orderId should be provided</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id. Either this or quoteId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Convert order status</returns>
         Task<WebCallResult<BinanceFuturesConvertStatus>> GetConvertOrderStatusAsync(string? quoteId = null, string? orderId = null, CancellationToken ct = default);
@@ -516,24 +516,24 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// POST /fapi/v1/algoOrder
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
-        /// <param name="side">The order side (buy/sell)</param>
-        /// <param name="type">The order type</param>
-        /// <param name="timeInForce">Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
-        /// <param name="quantity">The quantity of the base symbol</param>
-        /// <param name="positionSide">The position side</param>
-        /// <param name="reduceOnly">Specify as true if the order is intended to only reduce the position</param>
-        /// <param name="price">The price to use</param>
-        /// <param name="clientOrderId">Unique id for order</param>
-        /// <param name="triggerPrice">Trigger price</param>
-        /// <param name="activationPrice">Used with TRAILING_STOP_MARKET orders, default as the latest price（supporting different workingType)</param>
-        /// <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
-        /// <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
-        /// <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
-        /// <param name="priceProtect">If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
-        /// <param name="priceMatch">Only available for Limit/Stop/TakeProfit order</param>
-        /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
-        /// <param name="goodTillDate">Order cancel time for timeInForce GoodTillDate</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] The order side (buy/sell)</param>
+        /// <param name="type">["<c>type</c>"] The order type</param>
+        /// <param name="timeInForce">["<c>timeInForce</c>"] Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        /// <param name="quantity">["<c>quantity</c>"] The quantity of the base symbol</param>
+        /// <param name="positionSide">["<c>positionSide</c>"] The position side</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Specify as true if the order is intended to only reduce the position</param>
+        /// <param name="price">["<c>price</c>"] The price to use</param>
+        /// <param name="clientOrderId">["<c>clientAlgoId</c>"] Unique id for order</param>
+        /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        /// <param name="activationPrice">["<c>activatePrice</c>"] Used with TRAILING_STOP_MARKET orders, default as the latest price(supporting different workingType)</param>
+        /// <param name="callbackRate">["<c>callbackRate</c>"] Used with TRAILING_STOP_MARKET orders</param>
+        /// <param name="workingType">["<c>workingType</c>"] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        /// <param name="closePosition">["<c>closePosition</c>"] Close-All,used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+        /// <param name="priceProtect">["<c>priceProtect</c>"] If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+        /// <param name="priceMatch">["<c>priceMatch</c>"] Only available for Limit/Stop/TakeProfit order</param>
+        /// <param name="selfTradePreventionMode">["<c>selfTradePreventionMode</c>"] Self trade prevention mode</param>
+        /// <param name="goodTillDate">["<c>goodTillDate</c>"] Order cancel time for timeInForce GoodTillDate</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Placed conditional order details</returns>
@@ -568,8 +568,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// DELETE /fapi/v1/algoOrder
         /// </para>
         /// </summary>
-        /// <param name="orderId">Id of the order to cancel. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id of the order to cancel. Either this or orderId should be provided</param>
+        /// <param name="orderId">["<c>algoId</c>"] Id of the order to cancel. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientAlgoId</c>"] Client order id of the order to cancel. Either this or orderId should be provided</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Canceled conditional order details</returns>
@@ -588,7 +588,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// DELETE /fapi/v1/algoOpenOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to close conditional orders on, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to close conditional orders on, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
@@ -606,9 +606,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/openAlgoOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="algoType">Filter by algo type</param>
-        /// <param name="orderId">Filter by order id</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="algoType">["<c>algoType</c>"] Filter by algo type</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open conditional orders</returns>
@@ -628,8 +628,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/algoOrder
         /// </para>
         /// </summary>
-        /// <param name="orderId">Id of the order to retrieve. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id of the order to retrieve. Either this or orderId should be provided</param>
+        /// <param name="orderId">["<c>algoId</c>"] Id of the order to retrieve. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientAlgoId</c>"] Client order id of the order to retrieve. Either this or orderId should be provided</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Conditional order details</returns>
@@ -648,12 +648,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/allAlgoOrders
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Page number</param>
-        /// <param name="limit">Page size</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>page</c>"] Page number</param>
+        /// <param name="limit">["<c>limit</c>"] Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Conditional orders</returns>
@@ -668,3 +668,4 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
     }
 }
+

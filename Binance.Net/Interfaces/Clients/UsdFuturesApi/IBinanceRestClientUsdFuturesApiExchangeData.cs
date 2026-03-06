@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Spot;
 
@@ -58,11 +58,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/klines
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">The kline interval</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>interval</c>"] The kline interval</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Kline data for the symbol</returns>
         Task<WebCallResult<IBinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -76,11 +76,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/premiumIndexKlines
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">The kline interval</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>interval</c>"] The kline interval</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Premium index kline data for the symbol</returns>
         Task<WebCallResult<BinanceMarkIndexKline[]>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -107,10 +107,10 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/fundingRate
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="startTime">Start time to get funding rate history</param>
-        /// <param name="endTime">End time to get funding rate history</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get funding rate history</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get funding rate history</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
         Task<WebCallResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -124,11 +124,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /futures/data/topLongShortAccountRatio
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get top trader long/short ratio (accounts)</param>
-        /// <param name="endTime">End time to get top trader long/short ratio (accounts)</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="period">["<c>period</c>"] The period timespan</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get top trader long/short ratio (accounts)</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get top trader long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Accounts) info</returns>
         Task<WebCallResult<BinanceFuturesLongShortRatio[]>> GetTopLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -142,11 +142,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /futures/data/topLongShortPositionRatio
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get top trader long/short ratio (positions)</param>
-        /// <param name="endTime">End time to get top trader long/short ratio (positions)</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="period">["<c>period</c>"] The period timespan</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get top trader long/short ratio (positions)</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get top trader long/short ratio (positions)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Top Trader Long/Short Ratio (Positions) info</returns>
         Task<WebCallResult<BinanceFuturesLongShortRatio[]>> GetTopLongShortPositionRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -160,11 +160,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /futures/data/globalLongShortAccountRatio
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get global long/short ratio (accounts)</param>
-        /// <param name="endTime">End time to get global long/short ratio (accounts)</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="period">["<c>period</c>"] The period timespan</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get global long/short ratio (accounts)</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get global long/short ratio (accounts)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Global Long/Short Ratio (Accounts) info</returns>
         Task<WebCallResult<BinanceFuturesLongShortRatio[]>> GetGlobalLongShortAccountRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -178,11 +178,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/markPriceKlines
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="interval">The interval of the klines</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time</param>
-        /// <param name="endTime">End time</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>interval</c>"] The interval of the klines</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Mark price kline data</returns>
         Task<WebCallResult<BinanceMarkIndexKline[]>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -196,8 +196,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/depth
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the order book for, for example `ETHUSDT`</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The order book for the symbol</returns>
         Task<WebCallResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
@@ -211,7 +211,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/rpiDepth
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the order book for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the order book for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The order book for the symbol</returns>
         Task<WebCallResult<BinanceFuturesOrderBook>> GetRpiOrderBookAsync(string symbol, CancellationToken ct = default);
@@ -225,8 +225,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/trades
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
-        /// <param name="limit">Max amount of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get trades for, for example `ETHUSDT`</param>
+        /// <param name="limit">["<c>limit</c>"] Max amount of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Recent trades for the symbol</returns>
         Task<WebCallResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
@@ -240,9 +240,9 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/historicalTrades
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get trades for, for example `ETHUSDT`</param>
-        /// <param name="limit">The max amount of results, max 500</param>
-        /// <param name="fromId">Return trades after this trade id</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get trades for, for example `ETHUSDT`</param>
+        /// <param name="limit">["<c>limit</c>"] The max amount of results, max 500</param>
+        /// <param name="fromId">["<c>fromId</c>"] Return trades after this trade id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Trade history for the symbol</returns>
         Task<WebCallResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
@@ -257,7 +257,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/premiumIndex
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Mark price and funding rate data</returns>
         Task<WebCallResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default);
@@ -284,7 +284,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/ticker/24hr
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
         Task<WebCallResult<IBinance24HPrice>> GetTickerAsync(string symbol, CancellationToken ct = default);
@@ -311,7 +311,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/ticker/bookTicker
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Book price for the symbol</returns>
         Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
@@ -338,7 +338,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/openInterest
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open Interest info</returns>
         Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default);
@@ -352,11 +352,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /futures/data/openInterestHist
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get open interest history</param>
-        /// <param name="endTime">End time to get open interest history</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="period">["<c>period</c>"] The period timespan</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get open interest history</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get open interest history</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Open Interest History info</returns>
         Task<WebCallResult<BinanceFuturesOpenInterestHistory[]>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -370,11 +370,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /futures/data/takerlongshortRatio
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time to get taker buy/sell volume ratio</param>
-        /// <param name="endTime">End time to get taker buy/sell volume ratio</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="period">["<c>period</c>"] The period timespan</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get taker buy/sell volume ratio</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get taker buy/sell volume ratio</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Taker Buy/Sell Volume Ratio info</returns>
         Task<WebCallResult<BinanceFuturesBuySellVolumeRatio[]>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -388,7 +388,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/indexInfo
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BinanceFuturesCompositeIndexInfo[]>> GetCompositeIndexInfoAsync(
@@ -403,7 +403,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v2/ticker/price
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Price of symbol</returns>
         Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
@@ -430,12 +430,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/continuousKlines
         /// </para>
         /// </summary>
-        /// <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="pair">["<c>pair</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="contractType">["<c>contractType</c>"] The contract type</param>
+        /// <param name="interval">["<c>interval</c>"] The candlestick timespan</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get candlestick data</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get candlestick data</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
         Task<WebCallResult<IBinanceKline[]>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -449,11 +449,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/indexPriceKlines
         /// </para>
         /// </summary>
-        /// <param name="pair">The symbol to get the data for, for example `ETHUSDT`</param>
-        /// <param name="interval">The candlestick timespan</param>
-        /// <param name="startTime">Start time to get candlestick data</param>
-        /// <param name="endTime">End time to get candlestick data</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="pair">["<c>pair</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>interval</c>"] The candlestick timespan</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time to get candlestick data</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time to get candlestick data</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
         Task<WebCallResult<IBinanceKline[]>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -480,7 +480,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/assetIndex
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Asset index for the symbol</returns>
         Task<WebCallResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, CancellationToken ct = default);
@@ -494,11 +494,11 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/aggTrades
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get the trades for, for example `ETHUSDT`</param>
-        /// <param name="fromId">ID to get aggregate trades from INCLUSIVE.</param>
-        /// <param name="startTime">Time to start getting trades from</param>
-        /// <param name="endTime">Time to stop getting trades from</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the trades for, for example `ETHUSDT`</param>
+        /// <param name="fromId">["<c>fromId</c>"] ID to get aggregate trades from INCLUSIVE.</param>
+        /// <param name="startTime">["<c>startTime</c>"] Time to start getting trades from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Time to stop getting trades from</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
         Task<WebCallResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -512,12 +512,12 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /futures/data/basis
         /// </para>
         /// </summary>
-        /// <param name="symbol">The pair to get the data for, for example `ETHUSDT`</param>
-        /// <param name="contractType">The contract type</param>
-        /// <param name="period">The period timespan</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="startTime">Start time</param>
-        /// <param name="endTime">End time</param>
+        /// <param name="symbol">["<c>pair</c>"] The pair to get the data for, for example `ETHUSDT`</param>
+        /// <param name="contractType">["<c>contractType</c>"] The contract type</param>
+        /// <param name="period">["<c>period</c>"] The period timespan</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Basis data</returns>
         Task<WebCallResult<BinanceFuturesBasis[]>> GetBasisAsync(string symbol, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
@@ -531,8 +531,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/convert/exchangeInfo
         /// </para>
         /// </summary>
-        /// <param name="fromAsset">From asset</param>
-        /// <param name="toAsset">To asset</param>
+        /// <param name="fromAsset">["<c>fromAsset</c>"] From asset</param>
+        /// <param name="toAsset">["<c>toAsset</c>"] To asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Convert symbols</returns>
         Task<WebCallResult<BinanceFuturesConvertSymbol[]>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default);
@@ -546,7 +546,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/constituents
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol name</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Index price constituents</returns>
         Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default);
@@ -560,7 +560,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/insuranceBalance
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol name</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Insurance fund balance snapshot</returns>
         Task<WebCallResult<BinanceInsuranceFundBalance>> GetInsuranceFundBalancesAsync(string symbol, CancellationToken ct = default);
@@ -587,7 +587,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/symbolAdlRisk
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>ADL risk rating</returns>
         Task<WebCallResult<BinanceSymbolAdlRate>> GetSymbolAdlRiskRatingAsync(string symbol, CancellationToken ct = default);
@@ -619,3 +619,4 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default);
     }
 }
+

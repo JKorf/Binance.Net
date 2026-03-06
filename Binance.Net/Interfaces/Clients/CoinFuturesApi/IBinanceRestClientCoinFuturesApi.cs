@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.Interfaces.Clients;
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 {
     /// <summary>
@@ -37,3 +37,4 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
     }
 }
+

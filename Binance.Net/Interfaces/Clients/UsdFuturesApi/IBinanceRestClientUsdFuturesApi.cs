@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
@@ -37,3 +37,4 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         public IBinanceRestClientUsdFuturesApiAgent Agent { get; }
     }
 }
+

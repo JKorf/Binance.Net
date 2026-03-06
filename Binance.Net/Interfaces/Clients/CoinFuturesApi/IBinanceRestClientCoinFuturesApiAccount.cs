@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 
@@ -18,8 +18,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/positionRisk
         /// </para>
         /// </summary>
-        /// <param name="marginAsset">Filter by margin asset, for example `ETH`</param>
-        /// <param name="pair">Filter by pair, for example `BTCUSD`</param>
+        /// <param name="marginAsset">["<c>marginAsset</c>"] Filter by margin asset, for example `ETH`</param>
+        /// <param name="pair">["<c>pair</c>"] Filter by pair, for example `BTCUSD`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of positions</returns>
@@ -63,7 +63,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/positionSide/dual
         /// </para>
         /// </summary>
-        /// <param name="dualPositionSide">User position mode</param>
+        /// <param name="dualPositionSide">["<c>dualSidePosition</c>"] User position mode</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
@@ -92,8 +92,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/leverage
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to change the initial leverage for, for example `BTCUSD_PERP`</param>
-        /// <param name="leverage">The amount of initial leverage to change to</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to change the initial leverage for, for example `BTCUSD_PERP`</param>
+        /// <param name="leverage">["<c>leverage</c>"] The amount of initial leverage to change to</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Result of the initial leverage change request</returns>
@@ -108,8 +108,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/marginType
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to change the position type for, for example `BTCUSD_PERP`</param>
-        /// <param name="marginType">The type of margin to use</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to change the position type for, for example `BTCUSD_PERP`</param>
+        /// <param name="marginType">["<c>marginType</c>"] The type of margin to use</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Whether the request was successful</returns>
@@ -124,10 +124,10 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// POST /dapi/v1/positionMargin
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to adjust the position margin for, for example `BTCUSD_PERP`</param>
-        /// <param name="amount">The amount of margin to be used</param>
-        /// <param name="type">Whether to reduce or add margin to the position</param>
-        /// <param name="positionSide">Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to adjust the position margin for, for example `BTCUSD_PERP`</param>
+        /// <param name="amount">["<c>amount</c>"] The amount of margin to be used</param>
+        /// <param name="type">["<c>type</c>"] Whether to reduce or add margin to the position</param>
+        /// <param name="positionSide">["<c>positionSide</c>"] Default BOTH for One-way Mode ; LONG or SHORT for Hedge Mode. It must be sent with Hedge Mode.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The new position margin</returns>
@@ -142,11 +142,11 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/positionMargin/history
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to get margin history for, for example `BTCUSD_PERP`</param>
-        /// <param name="type">Filter the history by the direction of margin change</param>
-        /// <param name="startTime">Margin changes newer than this date will be retrieved</param>
-        /// <param name="endTime">Margin changes older than this date will be retrieved</param>
-        /// <param name="limit">The max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to get margin history for, for example `BTCUSD_PERP`</param>
+        /// <param name="type">["<c>type</c>"] Filter the history by the direction of margin change</param>
+        /// <param name="startTime">["<c>startTime</c>"] Margin changes newer than this date will be retrieved</param>
+        /// <param name="endTime">["<c>endTime</c>"] Margin changes older than this date will be retrieved</param>
+        /// <param name="limit">["<c>limit</c>"] The max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of all margin changes for the symbol</returns>
@@ -161,12 +161,12 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/income
         /// </para>
         /// </summary>
-        /// <param name="symbol">The symbol to get income history from, for example `BTCUSD_PERP`</param>
-        /// <param name="incomeType">The income type filter to apply to the request</param>
-        /// <param name="startTime">Time to start getting income history from</param>
-        /// <param name="endTime">Time to stop getting income history from</param>
-        /// <param name="page">Page number</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get income history from, for example `BTCUSD_PERP`</param>
+        /// <param name="incomeType">["<c>incomeType</c>"] The income type filter to apply to the request</param>
+        /// <param name="startTime">["<c>startTime</c>"] Time to start getting income history from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Time to stop getting income history from</param>
+        /// <param name="page">["<c>page</c>"] Page number</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The income history for the futures account</returns>
@@ -181,7 +181,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v2/leverageBracket
         /// </para>
         /// </summary>
-        /// <param name="symbolOrPair">The symbol or pair to get the data for, for example `BTCUSD_PERP`</param>
+        /// <param name="symbolOrPair">["<c>pair</c>"] The symbol or pair to get the data for, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Notional and Leverage Brackets</returns>
@@ -196,7 +196,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/adlQuantile
         /// </para>
         /// </summary>
-        /// <param name="symbol">Only get for this symbol, for example `BTCUSD_PERP`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Only get for this symbol, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Position ADL quantile estimations</returns>
@@ -212,7 +212,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/commissionRate
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `BTCUSD_PERP`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `BTCUSD_PERP`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>User commission rate information</returns>
@@ -240,7 +240,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// PUT /dapi/v1/listenKey
         /// </para>
         /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="listenKey">["<c>listenKey</c>"] The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
         Task<WebCallResult> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default);
@@ -254,7 +254,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// DELETE /dapi/v1/listenKey
         /// </para>
         /// </summary>
-        /// <param name="listenKey">The listen key to stop</param>
+        /// <param name="listenKey">["<c>listenKey</c>"] The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
         Task<WebCallResult> StopUserStreamAsync(string listenKey, CancellationToken ct = default);
@@ -268,8 +268,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/income/asyn
         /// </para>
         /// </summary>
-        /// <param name="startTime">Start time of the data to download</param>
-        /// <param name="endTime">End time of the data to download</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time of the data to download</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time of the data to download</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Download id information</returns>
@@ -284,7 +284,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/income/asyn/id
         /// </para>
         /// </summary>
-        /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTransactionHistoryAsync" /></param>
+        /// <param name="downloadId">["<c>downloadId</c>"] The download id as requested by <see cref="GetDownloadIdForTransactionHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Download link information</returns>
@@ -299,8 +299,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/order/asyn
         /// </para>
         /// </summary>
-        /// <param name="startTime">Start time of the data to download</param>
-        /// <param name="endTime">End time of the data to download</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time of the data to download</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time of the data to download</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Download id information</returns>
@@ -315,7 +315,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/order/asyn/id
         /// </para>
         /// </summary>
-        /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForOrderHistoryAsync" /></param>
+        /// <param name="downloadId">["<c>downloadId</c>"] The download id as requested by <see cref="GetDownloadIdForOrderHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Download link information</returns>
@@ -330,8 +330,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/trade/asyn
         /// </para>
         /// </summary>
-        /// <param name="startTime">Start time of the data to download</param>
-        /// <param name="endTime">End time of the data to download</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time of the data to download</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time of the data to download</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Download id information</returns>
@@ -346,7 +346,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// GET /dapi/v1/trade/asyn/id
         /// </para>
         /// </summary>
-        /// <param name="downloadId">The download id as requested by <see cref="GetDownloadIdForTradeHistoryAsync" /></param>
+        /// <param name="downloadId">["<c>downloadId</c>"] The download id as requested by <see cref="GetDownloadIdForTradeHistoryAsync" /></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Download link information</returns>
@@ -354,3 +354,4 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
 
     }
 }
+

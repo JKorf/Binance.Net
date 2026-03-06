@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.IsolatedMargin;
@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /api/v3/account
         /// </para>
         /// </summary>
-        /// <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
+        /// <param name="omitZeroBalances">["<c>omitZeroBalances</c>"] When true only return non-zero balances in the account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
@@ -36,9 +36,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/accountSnapshot
         /// </para>
         /// </summary>
-        /// <param name="startTime">The start time</param>
-        /// <param name="endTime">The end time</param>
-        /// <param name="limit">The amount of days to retrieve</param>
+        /// <param name="startTime">["<c>startTime</c>"] The start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] The end time</param>
+        /// <param name="limit">["<c>limit</c>"] The amount of days to retrieve</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Daily spot account snapshots</returns>
@@ -55,9 +55,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/accountSnapshot
         /// </para>
         /// </summary>
-        /// <param name="startTime">The start time</param>
-        /// <param name="endTime">The end time</param>
-        /// <param name="limit">The amount of days to retrieve</param>
+        /// <param name="startTime">["<c>startTime</c>"] The start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] The end time</param>
+        /// <param name="limit">["<c>limit</c>"] The amount of days to retrieve</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Daily margin account snapshots</returns>
@@ -74,9 +74,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/accountSnapshot
         /// </para>
         /// </summary>
-        /// <param name="startTime">The start time</param>
-        /// <param name="endTime">The end time</param>
-        /// <param name="limit">The amount of days to retrieve</param>
+        /// <param name="startTime">["<c>startTime</c>"] The start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] The end time</param>
+        /// <param name="limit">["<c>limit</c>"] The amount of days to retrieve</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Daily futures account snapshots</returns>
@@ -107,8 +107,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/asset/get-funding-asset
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="needBtcValuation">Return BTC valuation</param>
+        /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="needBtcValuation">["<c>needBtcValuation</c>"] Return BTC valuation</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of assets</returns>
@@ -151,8 +151,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v3/asset/getUserAsset
         /// </para>
         /// </summary>
-        /// <param name="asset">Return for this asset, for example `ETH`</param>
-        /// <param name="needBtcValuation">Whether the response should include the BtcValuation. If false (default) BtcValuation will be 0.</param>
+        /// <param name="asset">["<c>asset</c>"] Return for this asset, for example `ETH`</param>
+        /// <param name="needBtcValuation">["<c>needBtcValuation</c>"] Whether the response should include the BtcValuation. If false (default) BtcValuation will be 0.</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>User balances</returns>
@@ -167,7 +167,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/wallet/balance
         /// </para>
         /// </summary>
-        /// <param name="quoteAsset">Quote asset, for example `USDT`, `ETH`, `USDC`, `BNB`, etc. default `BTC`</param>
+        /// <param name="quoteAsset">["<c>quoteAsset</c>"] Quote asset, for example `USDT`, `ETH`, `USDC`, `BNB`, etc. default `BTC`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Wallet balances</returns>
@@ -182,10 +182,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/assetDividend
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="startTime">Filter by start time from</param>
-        /// <param name="endTime">Filter by end time till</param>
-        /// <param name="limit">Page size</param>
+        /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time till</param>
+        /// <param name="limit">["<c>limit</c>"] Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
@@ -233,9 +233,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/dribblet
         /// </para>
         /// </summary>
-        /// <param name="startTime">The start time</param>
-        /// <param name="endTime">The end time</param>
-        /// <param name="accountType">Spot or Margin account</param>
+        /// <param name="startTime">["<c>startTime</c>"] The start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] The end time</param>
+        /// <param name="accountType">["<c>accountType</c>"] Spot or Margin account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The history of dust conversions</returns>
@@ -250,7 +250,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/asset/dust-btc
         /// </para>
         /// </summary>
-        /// <param name="accountType">Spot or Margin account</param>
+        /// <param name="accountType">["<c>accountType</c>"] Spot or Margin account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Eligible dust assets</returns>
@@ -265,8 +265,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/asset/dust
         /// </para>
         /// </summary>
-        /// <param name="assets">The assets to convert to BNB, for example `ETH`</param>
-        /// <param name="accountType">Spot or Margin account</param>
+        /// <param name="assets">["<c>asset</c>"] The assets to convert to BNB, for example `ETH`</param>
+        /// <param name="accountType">["<c>accountType</c>"] Spot or Margin account</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dust transfer result</returns>
@@ -295,8 +295,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/bnbBurn
         /// </para>
         /// </summary>
-        /// <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
-        /// <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+        /// <param name="spotTrading">["<c>spotBNBBurn</c>"] If BNB burning should be enabled for spot trading</param>
+        /// <param name="marginInterest">["<c>interestBNBBurn</c>"] If BNB burning should be enabled for margin interest</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Updated BNB burn switch status</returns>
@@ -311,11 +311,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/asset/transfer
         /// </para>
         /// </summary>
-        /// <param name="type">The type of transfer</param>
-        /// <param name="asset">The asset to transfer, for example `ETH`</param>
-        /// <param name="quantity">The quantity to transfer</param>
-        /// <param name="fromSymbol">From symbol when transferring from/to isolated margin</param>
-        /// <param name="toSymbol">To symbol when transferring from/to isolated margin</param>
+        /// <param name="type">["<c>type</c>"] The type of transfer</param>
+        /// <param name="asset">["<c>asset</c>"] The asset to transfer, for example `ETH`</param>
+        /// <param name="quantity">["<c>amount</c>"] The quantity to transfer</param>
+        /// <param name="fromSymbol">["<c>fromSymbol</c>"] From symbol when transferring from/to isolated margin</param>
+        /// <param name="toSymbol">["<c>toSymbol</c>"] To symbol when transferring from/to isolated margin</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer transaction details</returns>
@@ -330,11 +330,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/transfer
         /// </para>
         /// </summary>
-        /// <param name="type">The type of transfer</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">The page</param>
-        /// <param name="pageSize">Results per page</param>
+        /// <param name="type">["<c>type</c>"] The type of transfer</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>current</c>"] The page</param>
+        /// <param name="pageSize">["<c>size</c>"] Results per page</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
@@ -349,11 +349,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/fiat/payments
         /// </para>
         /// </summary>
-        /// <param name="side">Filter by side</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Return a specific page</param>
-        /// <param name="limit">The page size</param>
+        /// <param name="side">["<c>transactionType</c>"] Filter by side</param>
+        /// <param name="startTime">["<c>beginTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>page</c>"] Return a specific page</param>
+        /// <param name="limit">["<c>limit</c>"] The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Fiat payment history</returns>
@@ -368,11 +368,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/fiat/orders
         /// </para>
         /// </summary>
-        /// <param name="side">Filter by side</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Return a specific page</param>
-        /// <param name="limit">The page size</param>
+        /// <param name="side">["<c>transactionType</c>"] Filter by side</param>
+        /// <param name="startTime">["<c>beginTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>page</c>"] Return a specific page</param>
+        /// <param name="limit">["<c>limit</c>"] The page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Fiat deposit and withdrawal history</returns>
@@ -387,15 +387,15 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/capital/withdraw/apply
         /// </para>
         /// </summary>
-        /// <param name="asset">The asset to withdraw, for example `ETH`</param>
-        /// <param name="address">The address to send the funds to</param>
-        /// <param name="addressTag">Secondary address identifier for assets like XRP,XMR etc.</param>
-        /// <param name="withdrawOrderId">Custom client order id</param>
-        /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
-        /// <param name="quantity">The quantity to withdraw</param>
-        /// <param name="network">The network to use</param>
-        /// <param name="walletType">The wallet type for withdraw</param>
-        /// <param name="name">Description of the address</param>
+        /// <param name="asset">["<c>coin</c>"] The asset to withdraw, for example `ETH`</param>
+        /// <param name="address">["<c>address</c>"] The address to send the funds to</param>
+        /// <param name="addressTag">["<c>addressTag</c>"] Secondary address identifier for assets like XRP,XMR etc.</param>
+        /// <param name="withdrawOrderId">["<c>withdrawOrderId</c>"] Custom client order id</param>
+        /// <param name="transactionFeeFlag">["<c>transactionFeeFlag</c>"] When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
+        /// <param name="quantity">["<c>amount</c>"] The quantity to withdraw</param>
+        /// <param name="network">["<c>network</c>"] The network to use</param>
+        /// <param name="walletType">["<c>walletType</c>"] The wallet type for withdraw</param>
+        /// <param name="name">["<c>name</c>"] Description of the address</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
@@ -410,16 +410,16 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/capital/withdraw/history
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="withdrawOrderId">Filter by withdraw order id</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="startTime">Filter start time from</param>
-        /// <param name="endTime">Filter end time till</param>
+        /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="withdrawOrderId">["<c>withdrawOrderId</c>"] Filter by withdraw order id</param>
+        /// <param name="status">["<c>status</c>"] Filter by status</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
-        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
-        /// <param name="offset">Add offset</param>
-        /// <param name="ids">Filter by withdrawal ids</param>
+        /// <param name="limit">["<c>limit</c>"] Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">["<c>offset</c>"] Add offset</param>
+        /// <param name="ids">["<c>idList</c>"] Filter by withdrawal ids</param>
         /// <returns>List of withdrawals</returns>
         Task<WebCallResult<BinanceWithdrawal[]>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, IEnumerable<string>? ids = null, CancellationToken ct = default);
 
@@ -446,14 +446,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/capital/deposit/hisrec
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="limit">Amount of results</param>
-        /// <param name="offset">Offset the results</param>
-        /// <param name="startTime">Filter start time from</param>
-        /// <param name="endTime">Filter end time till</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="status">["<c>status</c>"] Filter by status</param>
+        /// <param name="limit">["<c>limit</c>"] Amount of results</param>
+        /// <param name="offset">["<c>offset</c>"] Offset the results</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="includeSource">Include source address to response</param>
+        /// <param name="includeSource">["<c>includeSource</c>"] Include source address to response</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of deposits</returns>
         Task<WebCallResult<BinanceDeposit[]>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default);
@@ -467,8 +467,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/capital/deposit/address
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset to get address for, for example `ETH`</param>
-        /// <param name="network">Network</param>
+        /// <param name="asset">["<c>coin</c>"] Asset to get address for, for example `ETH`</param>
+        /// <param name="network">["<c>network</c>"] Network</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Deposit address</returns>
@@ -483,8 +483,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/capital/deposit/address/list
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset to get address for, for example `ETH`</param>
-        /// <param name="network">Filter by network</param>
+        /// <param name="asset">["<c>coin</c>"] Asset to get address for, for example `ETH`</param>
+        /// <param name="network">["<c>network</c>"] Filter by network</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Deposit addresses</returns>
@@ -513,10 +513,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/margin/borrow-repay
         /// </para>
         /// </summary>
-        /// <param name="asset">The asset to borrow, for example `ETH`</param>
-        /// <param name="quantity">The quantity to borrow</param>
-        /// <param name="isIsolated">Whether to use isolated margin</param>
-        /// <param name="symbol">The isolated symbol</param>
+        /// <param name="asset">["<c>asset</c>"] The asset to borrow, for example `ETH`</param>
+        /// <param name="quantity">["<c>amount</c>"] The quantity to borrow</param>
+        /// <param name="isIsolated">["<c>isIsolated</c>"] Whether to use isolated margin</param>
+        /// <param name="symbol">["<c>symbol</c>"] The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Borrow transaction details</returns>
@@ -531,10 +531,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/margin/borrow-repay
         /// </para>
         /// </summary>
-        /// <param name="asset">The asset to repay, for example `ETH`</param>
-        /// <param name="quantity">The quantity to repay</param>
-        /// <param name="isIsolated">Whether to use isolated margin</param>
-        /// <param name="symbol">The isolated symbol</param>
+        /// <param name="asset">["<c>asset</c>"] The asset to repay, for example `ETH`</param>
+        /// <param name="quantity">["<c>amount</c>"] The quantity to repay</param>
+        /// <param name="isIsolated">["<c>isIsolated</c>"] Whether to use isolated margin</param>
+        /// <param name="symbol">["<c>symbol</c>"] The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay transaction details</returns>
@@ -549,12 +549,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/transfer
         /// </para>
         /// </summary>
-        /// <param name="direction">The transfer direction to retrieve</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by start time from</param>
-        /// <param name="endTime">Filter by end time from</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
+        /// <param name="direction">["<c>direction</c>"] The transfer direction to retrieve</param>
+        /// <param name="page">["<c>current</c>"] Results page</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time from</param>
+        /// <param name="limit">["<c>size</c>"] Limit of the amount of results</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] Filter by isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of transfers</returns>
@@ -569,14 +569,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/borrow-repay
         /// </para>
         /// </summary>
-        /// <param name="asset">The records asset, for example `ETH`</param>
-        /// <param name="transactionId">The loan transaction id</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Page number</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="limit">Number of records per page</param>
-        /// <param name="archived">Set to true for archived data from 6 months ago</param>
+        /// <param name="asset">["<c>asset</c>"] The records asset, for example `ETH`</param>
+        /// <param name="transactionId">["<c>txId</c>"] The loan transaction id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Time to start getting records from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Time to stop getting records to</param>
+        /// <param name="current">["<c>current</c>"] Page number</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] Filter by isolated symbol</param>
+        /// <param name="limit">["<c>size</c>"] Number of records per page</param>
+        /// <param name="archived">["<c>archived</c>"] Set to true for archived data from 6 months ago</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
@@ -591,14 +591,14 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/borrow-repay
         /// </para>
         /// </summary>
-        /// <param name="asset">The records asset, for example `ETH`</param>
-        /// <param name="transactionId">The repay transaction id</param>
-        /// <param name="startTime">Time to start getting records from</param>
-        /// <param name="endTime">Time to stop getting records to</param>
-        /// <param name="current">Filter by number</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="size">Number of records per page</param>
-        /// <param name="archived">Set to true for archived data from 6 months ago</param>
+        /// <param name="asset">["<c>asset</c>"] The records asset, for example `ETH`</param>
+        /// <param name="transactionId">["<c>txId</c>"] The repay transaction id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Time to start getting records from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Time to stop getting records to</param>
+        /// <param name="current">["<c>current</c>"] Filter by number</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] Filter by isolated symbol</param>
+        /// <param name="size">["<c>size</c>"] Number of records per page</param>
+        /// <param name="archived">["<c>archived</c>"] Set to true for archived data from 6 months ago</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay records</returns>
@@ -613,13 +613,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/interestHistory
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by start time from</param>
-        /// <param name="endTime">Filter by end time from</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="limit">Limit of the amount of results</param>
-        /// <param name="archived">Set to true for archived data from 6 months ago</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="page">["<c>page</c>"] Results page</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time from</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] Filter by isolated symbol</param>
+        /// <param name="limit">["<c>limit</c>"] Limit of the amount of results</param>
+        /// <param name="archived">["<c>archived</c>"] Set to true for archived data from 6 months ago</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of interest events</returns>
@@ -634,11 +634,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/interestRateHistory
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="vipLevel">VIP level</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="vipLevel">["<c>vipLevel</c>"] VIP level</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by startTime from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by endTime from</param>
+        /// <param name="limit">["<c>limit</c>"] Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Interest rate history</returns>
@@ -653,8 +653,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/crossMarginData
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="vipLevel">VIP level</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="vipLevel">["<c>vipLevel</c>"] VIP level</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cross margin interest data</returns>
@@ -669,11 +669,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/forceLiquidationRec
         /// </para>
         /// </summary>
-        /// <param name="page">Results page</param>
-        /// <param name="startTime">Filter by startTime from</param>
-        /// <param name="endTime">Filter by endTime from</param>
-        /// <param name="isolatedSymbol">Filter by isolated symbol</param>
-        /// <param name="limit">Limit of the amount of results</param>
+        /// <param name="page">["<c>page</c>"] Results page</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by startTime from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by endTime from</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] Filter by isolated symbol</param>
+        /// <param name="limit">["<c>limit</c>"] Limit of the amount of results</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of forced liquidations</returns>
@@ -702,8 +702,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/maxBorrowable
         /// </para>
         /// </summary>
-        /// <param name="asset">The asset, for example `ETH`</param>
-        /// <param name="isolatedSymbol">The isolated symbol</param>
+        /// <param name="asset">["<c>asset</c>"] The asset, for example `ETH`</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Max quantity</returns>
@@ -718,8 +718,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/maxTransferable
         /// </para>
         /// </summary>
-        /// <param name="asset">The asset, for example `ETH`</param>
-        /// <param name="isolatedSymbol">The isolated symbol</param>
+        /// <param name="asset">["<c>asset</c>"] The asset, for example `ETH`</param>
+        /// <param name="isolatedSymbol">["<c>isolatedSymbol</c>"] The isolated symbol</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Max quantity</returns>
@@ -764,7 +764,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/margin/isolated/account
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to enable isolated margin account for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to enable isolated margin account for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Created isolated margin account details</returns>
@@ -779,7 +779,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// DELETE /sapi/v1/margin/isolated/account
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to disable isolated margin account for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to disable isolated margin account for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Disabled isolated margin account details</returns>
@@ -810,8 +810,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/userDataStream
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol for isolated margin, null for cross margin</param>
-        /// <param name="validity">Validity of the token, max 24 hours</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol for isolated margin, null for cross margin</param>
+        /// <param name="validity">["<c>validity</c>"] Validity of the token, max 24 hours</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>ListenToken and expiration time</returns>
         Task<WebCallResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default);
@@ -853,9 +853,9 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/rebate/taxQuery
         /// </para>
         /// </summary>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Results per page</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>page</c>"] Results per page</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebate history</returns>
@@ -926,13 +926,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/convert-transfer/queryByPage
         /// </para>
         /// </summary>
-        /// <param name="transferId">Filter by transferId</param>
-        /// <param name="clientTransferId">Filter by clientTransferId</param>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Page</param>
-        /// <param name="pageSize">Page size</param>
+        /// <param name="transferId">["<c>tranId</c>"] Filter by transferId</param>
+        /// <param name="clientTransferId">["<c>clientTranId</c>"] Filter by clientTransferId</param>
+        /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>current</c>"] Page</param>
+        /// <param name="pageSize">["<c>size</c>"] Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>BUSD convert history</returns>
@@ -947,13 +947,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/ledger-transfer/cloud-mining/queryByPage
         /// </para>
         /// </summary>
-        /// <param name="transferId">Filter by transferId</param>
-        /// <param name="clientTransferId">Filter by clientTransferId</param>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">Page</param>
-        /// <param name="pageSize">Page size</param>
+        /// <param name="transferId">["<c>tranId</c>"] Filter by transferId</param>
+        /// <param name="clientTransferId">["<c>clientTranId</c>"] Filter by clientTransferId</param>
+        /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>current</c>"] Page</param>
+        /// <param name="pageSize">["<c>size</c>"] Page size</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cloud mining payment and refund history</returns>
@@ -968,7 +968,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/margin/max-leverage
         /// </para>
         /// </summary>
-        /// <param name="maxLeverage">Max leverage, can only adjust 3 or 5</param>
+        /// <param name="maxLeverage">["<c>maxLeverage</c>"] Max leverage, can only adjust 3 or 5</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Updated cross margin leverage settings</returns>
@@ -983,8 +983,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/isolatedMarginData
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="vipLevel">VIP level to query. If omitted, current user margin data is returned</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="vipLevel">["<c>vipLevel</c>"] VIP level to query. If omitted, current user margin data is returned</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Isolated margin fee data</returns>
@@ -999,13 +999,13 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/capital-flow
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="type">Filter by transaction type</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="fromId">If set, data with 'Id' greater than 'fromId' will be returned. Otherwise, the latest data will be returned</param>
-        /// <param name="limit">Number of records to retrieve. Default: 500, Max: 1000</param>
+        /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="type">["<c>type</c>"] Filter by transaction type</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="fromId">["<c>fromId</c>"] If set, data with 'Id' greater than 'fromId' will be returned. Otherwise, the latest data will be returned</param>
+        /// <param name="limit">["<c>limit</c>"] Number of records to retrieve. Default: 500, Max: 1000</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Margin capital flow data</returns>
@@ -1034,7 +1034,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/margin/exchange-small-liability
         /// </para>
         /// </summary>
-        /// <param name="assets">Assets, for example `ETH`</param>
+        /// <param name="assets">["<c>assetNames</c>"] Assets, for example `ETH`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
@@ -1049,10 +1049,10 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/margin/exchange-small-liability-history
         /// </para>
         /// </summary>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="page">The page</param>
-        /// <param name="limit">Results per page</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="page">["<c>current</c>"] The page</param>
+        /// <param name="limit">["<c>size</c>"] Results per page</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Small liability exchange history</returns>
@@ -1067,7 +1067,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v1/asset/tradeFee
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol to get withdrawal fee for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol to get withdrawal fee for, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Trade fees</returns>
@@ -1096,7 +1096,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /api/v3/account/commission
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Commission rates for the symbol</returns>
@@ -1124,7 +1124,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// PUT /sapi/v1/margin/listen-key
         /// </para>
         /// </summary>
-        /// <param name="listenKey">The listen key to keep alive</param>
+        /// <param name="listenKey">["<c>listenKey</c>"] The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
         Task<WebCallResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
@@ -1138,7 +1138,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// DELETE /sapi/v1/margin/listen-key
         /// </para>
         /// </summary>
-        /// <param name="listenKey">The listen key to stop</param>
+        /// <param name="listenKey">["<c>listenKey</c>"] The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
         Task<WebCallResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
@@ -1152,16 +1152,16 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v1/localentity/withdraw/apply
         /// </para>
         /// </summary>
-        /// <param name="asset">The asset to withdraw, for example `ETH`</param>
-        /// <param name="address">The address to send the funds to</param>
-        /// <param name="addressTag">Secondary address identifier for assets like XRP,XMR etc.</param>
-        /// <param name="withdrawOrderId">Custom client order id</param>
-        /// <param name="transactionFeeFlag">When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
-        /// <param name="quantity">The quantity to withdraw</param>
-        /// <param name="questionnaire">Questionnaire answers. Use BinanceWithdrawQuestionnaire to create the question list, for example <code>var questionnaire = BinanceWithdrawQuestionnaire.Eu;</code></param>
-        /// <param name="network">The network to use</param>
-        /// <param name="walletType">The wallet type for withdraw</param>
-        /// <param name="name">Description of the address</param>
+        /// <param name="asset">["<c>coin</c>"] The asset to withdraw, for example `ETH`</param>
+        /// <param name="address">["<c>address</c>"] The address to send the funds to</param>
+        /// <param name="addressTag">["<c>addressTag</c>"] Secondary address identifier for assets like XRP,XMR etc.</param>
+        /// <param name="withdrawOrderId">["<c>withdrawOrderId</c>"] Custom client order id</param>
+        /// <param name="transactionFeeFlag">["<c>transactionFeeFlag</c>"] When making internal transfer, true for returning the fee to the destination account; false for returning the fee back to the departure account. Default false.</param>
+        /// <param name="quantity">["<c>amount</c>"] The quantity to withdraw</param>
+        /// <param name="questionnaire">["<c>questionnaire</c>"] Questionnaire answers. Use BinanceWithdrawQuestionnaire to create the question list, for example <code>var questionnaire = BinanceWithdrawQuestionnaire.Eu;</code></param>
+        /// <param name="network">["<c>network</c>"] The network to use</param>
+        /// <param name="walletType">["<c>walletType</c>"] The wallet type for withdraw</param>
+        /// <param name="name">["<c>name</c>"] Description of the address</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
@@ -1188,17 +1188,17 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v2/localentity/withdraw/history
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="withdrawOrderId">Filter by withdraw order id</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="network">Filter by network</param>
-        /// <param name="startTime">Filter start time from</param>
-        /// <param name="endTime">Filter end time till</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="withdrawOrderId">["<c>withdrawOrderId</c>"] Filter by withdraw order id</param>
+        /// <param name="status">["<c>travelRuleStatus</c>"] Filter by status</param>
+        /// <param name="network">["<c>network</c>"] Filter by network</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter end time till</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
-        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
-        /// <param name="offset">Add offset</param>
-        /// <param name="travelRuleIds">Filter by travel rule ids</param>
-        /// <param name="transactionIds">Filter by transaction ids</param>
+        /// <param name="limit">["<c>limit</c>"] Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">["<c>offset</c>"] Add offset</param>
+        /// <param name="travelRuleIds">["<c>trId</c>"] Filter by travel rule ids</param>
+        /// <param name="transactionIds">["<c>txId</c>"] Filter by transaction ids</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of withdrawals</returns>
         Task<WebCallResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
@@ -1272,15 +1272,15 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// GET /sapi/v2/localentity/deposit/history
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset</param>
-        /// <param name="depositIds">Filter by deposit ids</param>
-        /// <param name="transactionIds">Filter by transaction ids</param>
-        /// <param name="network">Filter by network</param>
-        /// <param name="retrieveQuestionnaire">Whether to return questionnaire answers</param>
-        /// <param name="startTime">Filter start time from</param>
-        /// <param name="endTime">Filter end time till</param>
-        /// <param name="limit">Add limit. Default: 1000, Max: 1000</param>
-        /// <param name="offset">Add offset</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset</param>
+        /// <param name="depositIds">["<c>depositId</c>"] Filter by deposit ids</param>
+        /// <param name="transactionIds">["<c>txId</c>"] Filter by transaction ids</param>
+        /// <param name="network">["<c>network</c>"] Filter by network</param>
+        /// <param name="retrieveQuestionnaire">["<c>retrieveQuestionnaire</c>"] Whether to return questionnaire answers</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter start time from</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter end time till</param>
+        /// <param name="limit">["<c>limit</c>"] Add limit. Default: 1000, Max: 1000</param>
+        /// <param name="offset">["<c>offset</c>"] Add offset</param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule deposit history</returns>
@@ -1306,8 +1306,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// POST /sapi/v2/localentity/deposit/provide-info
         /// </para>
         /// </summary>
-        /// <param name="depositId">Deposit id</param>
-        /// <param name="questionnaire">Questionnaire answers. Use BinanceDepositQuestionnaire to create the question list, for example <code>var questionnaire = BinanceDepositQuestionnaire.Eu;</code></param>
+        /// <param name="depositId">["<c>depositId</c>"] Deposit id</param>
+        /// <param name="questionnaire">["<c>questionnaire</c>"] Questionnaire answers. Use BinanceDepositQuestionnaire to create the question list, for example <code>var questionnaire = BinanceDepositQuestionnaire.Eu;</code></param>
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule questionnaire submission result</returns>
@@ -1318,3 +1318,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             CancellationToken ct = default);
     }
 }
+
+
+
+
+
