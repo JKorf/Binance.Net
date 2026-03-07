@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures.Socket
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
 
     /// <summary>
@@ -8,14 +8,14 @@
     public record BinanceConditionOrderTriggerRejectUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// The event timestamp.
+        /// ["<c>T</c>"] The event timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("T")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Reject info
+        /// ["<c>or</c>"] Reject info
         /// </summary>
         [JsonPropertyName("or")]
         public BinanceConditionOrderTriggerReject RejectInfo { get; set; } = null!;
@@ -27,19 +27,20 @@
     public record BinanceConditionOrderTriggerReject
     {
         /// <summary>
-        /// The symbol
+        /// ["<c>s</c>"] The symbol
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Order id
+        /// ["<c>i</c>"] Order id
         /// </summary>
         [JsonPropertyName("i")]
         public long OrderId { get; set; }
         /// <summary>
-        /// Reject reason
+        /// ["<c>r</c>"] Reject reason
         /// </summary>
         [JsonPropertyName("r")]
         public string Reason { get; set; } = string.Empty;
     }
 }
+

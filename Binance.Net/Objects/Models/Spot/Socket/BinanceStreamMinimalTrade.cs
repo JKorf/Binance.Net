@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
@@ -8,24 +8,25 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     public record BinanceStreamMinimalTrade
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>s</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The price of the trades
+        /// ["<c>p</c>"] The price of the trades
         /// </summary>
         [JsonPropertyName("p")]
         public decimal Price { get; set; }
         /// <summary>
-        /// The quantity of the trade
+        /// ["<c>q</c>"] The quantity of the trade
         /// </summary>
         [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The time of the trade
+        /// ["<c>T</c>"] The time of the trade
         /// </summary>
         [JsonPropertyName("T")]
         public DateTime TradeTime { get; set; }
     }
 }
+

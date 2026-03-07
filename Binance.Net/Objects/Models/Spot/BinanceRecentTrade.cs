@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot
     public abstract record BinanceRecentTrade : IBinanceRecentTrade
     {
         /// <summary>
-        /// The trade identifier.
+        /// ["<c>id</c>"] The trade identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public long OrderId { get; set; }
         /// <summary>
-        /// The price of the trade
+        /// ["<c>price</c>"] The price of the trade
         /// </summary>
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
@@ -23,22 +23,22 @@ namespace Binance.Net.Objects.Models.Spot
         /// <inheritdoc />
         public abstract decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// The timestamp of the trade
+        /// ["<c>time</c>"] The timestamp of the trade
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TradeTime { get; set; }
         /// <summary>
-        /// Whether the buyer is maker
+        /// ["<c>isBuyerMaker</c>"] Whether the buyer is maker
         /// </summary>
         [JsonPropertyName("isBuyerMaker")]
         public bool BuyerIsMaker { get; set; }
         /// <summary>
-        /// Whether this was a Retail Price Improvement trade
+        /// ["<c>IsRPITrade</c>"] Whether this was a Retail Price Improvement trade
         /// </summary>
         [JsonPropertyName("IsRPITrade")]
         public bool? IsRpiTrade { get; set; }
         /// <summary>
-        /// Whether the trade was made at the best match
+        /// ["<c>isBestMatch</c>"] Whether the trade was made at the best match
         /// </summary>
         [JsonPropertyName("isBestMatch")]
         public bool IsBestMatch { get; set; }
@@ -50,11 +50,11 @@ namespace Binance.Net.Objects.Models.Spot
     [SerializationModel]
     public record BinanceRecentTradeQuote : BinanceRecentTrade
     {
-        /// <inheritdoc />
+        /// ["<c>quoteQty</c>"] <inheritdoc />
         [JsonPropertyName("quoteQty")]
         public override decimal QuoteQuantity { get; set; }
 
-        /// <inheritdoc />
+        /// ["<c>qty</c>"] <inheritdoc />
         [JsonPropertyName("qty")]
         public override decimal BaseQuantity { get; set; }
     }
@@ -65,12 +65,13 @@ namespace Binance.Net.Objects.Models.Spot
     [SerializationModel]
     public record BinanceRecentTradeBase : BinanceRecentTrade
     {
-        /// <inheritdoc />
+        /// ["<c>qty</c>"] <inheritdoc />
         [JsonPropertyName("qty")]
         public override decimal QuoteQuantity { get; set; }
 
-        /// <inheritdoc />
+        /// ["<c>baseQty</c>"] <inheritdoc />
         [JsonPropertyName("baseQty")]
         public override decimal BaseQuantity { get; set; }
     }
 }
+

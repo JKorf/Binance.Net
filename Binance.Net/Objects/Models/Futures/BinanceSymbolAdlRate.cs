@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +13,20 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceSymbolAdlRate
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>symbol</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// ADL risk
+        /// ["<c>adlRisk</c>"] ADL risk
         /// </summary>
         [JsonPropertyName("adlRisk")]
         public AdlRisk AdlRisk { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>updateTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 }
+

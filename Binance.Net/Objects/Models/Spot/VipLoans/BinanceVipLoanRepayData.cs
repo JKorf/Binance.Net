@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.VipLoans
 {
@@ -8,39 +8,40 @@ namespace Binance.Net.Objects.Models.Spot.VipLoans
     public record BinanceVipLoanRepayData
     {
         /// <summary>
-        /// The repaid loan asset.
+        /// ["<c>loanCoin</c>"] The repaid loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The repaid quantity.
+        /// ["<c>repayAmount</c>"] The repaid quantity.
         /// </summary>
         [JsonPropertyName("repayAmount")]
         public decimal RepayQuantity { get; set; }
         /// <summary>
-        /// Remaining principal
+        /// ["<c>remainingPrincipal</c>"] Remaining principal
         /// </summary>
         [JsonPropertyName("remainingPrincipal")]
         public decimal RemainingPrincipal { get; set; }
         /// <summary>
-        /// Remaining interest
+        /// ["<c>remainingInterest</c>"] Remaining interest
         /// </summary>
         [JsonPropertyName("remainingInterest")]
         public decimal RemainingInterest { get; set; }
         /// <summary>
-        /// Comma-separated collateral assets.
+        /// ["<c>collateralCoin</c>"] Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The current loan-to-value ratio.
+        /// ["<c>currentLTV</c>"] The current loan-to-value ratio.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal LTV { get; set; }
         /// <summary>
-        /// The repayment status.
+        /// ["<c>repayStatus</c>"] The repayment status.
         /// </summary>
         [JsonPropertyName("repayStatus")]
         public VipLoanRepayStatus RepayStatus { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,39 +9,40 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceBookPrice : IBinanceBookPrice
     {
         /// <summary>
-        /// Last trade update id
+        /// ["<c>lastUpdateId</c>"] Last trade update id
         /// </summary>
         [JsonPropertyName("lastUpdateId")]
         public long LastUpdateId { get; set; }
         /// <summary>
-        /// The symbol the information is about
+        /// ["<c>symbol</c>"] The symbol the information is about
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The highest bid price for the symbol
+        /// ["<c>bidPrice</c>"] The highest bid price for the symbol
         /// </summary>
         [JsonPropertyName("bidPrice")]
         public decimal BestBidPrice { get; set; }
         /// <summary>
-        /// The quantity of the highest bid price currently in the order book
+        /// ["<c>bidQty</c>"] The quantity of the highest bid price currently in the order book
         /// </summary>
         [JsonPropertyName("bidQty")]
         public decimal BestBidQuantity { get; set; }
         /// <summary>
-        /// The lowest ask price for the symbol
+        /// ["<c>askPrice</c>"] The lowest ask price for the symbol
         /// </summary>
         [JsonPropertyName("askPrice")]
         public decimal BestAskPrice { get; set; }
         /// <summary>
-        /// The quantity of the lowest ask price currently in the order book
+        /// ["<c>askQty</c>"] The quantity of the lowest ask price currently in the order book
         /// </summary>
         [JsonPropertyName("askQty")]
         public decimal BestAskQuantity { get; set; }
         /// <summary>
-        /// The data timestamp.
+        /// ["<c>time</c>"] The data timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
     }
 }
+

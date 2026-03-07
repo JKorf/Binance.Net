@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.VipLoans
+namespace Binance.Net.Objects.Models.Spot.VipLoans
 {
     /// <summary>
     /// VIP Loan accured interest
@@ -6,34 +6,35 @@
     public record BinanceVipLoanAccuredInterest
     {
         /// <summary>
-        /// The loan asset.
+        /// ["<c>loanCoin</c>"] The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Principal quantity
+        /// ["<c>principalAmount</c>"] Principal quantity
         /// </summary>
         [JsonPropertyName("principalAmount")]
         public decimal PrincipalQuantity { get; set; }
         /// <summary>
-        /// Interest quantity
+        /// ["<c>interestAmount</c>"] Interest quantity
         /// </summary>
         [JsonPropertyName("interestAmount")]
         public decimal InterestQuantity { get; set; }
         /// <summary>
-        /// The annualized interest rate.
+        /// ["<c>annualInterestRate</c>"] The annualized interest rate.
         /// </summary>
         [JsonPropertyName("annualInterestRate")]
         public decimal AnnualInterestRate { get; set; }
         /// <summary>
-        /// Accrual time
+        /// ["<c>accrualTime</c>"] Accrual time
         /// </summary>
         [JsonPropertyName("accrualTime")]
         public DateTime AccrualTime { get; set; }
         /// <summary>
-        /// The latest renewal order identifier.
+        /// ["<c>orderId</c>"] The latest renewal order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
     }
 }
+

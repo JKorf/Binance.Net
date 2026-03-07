@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.GiftCard
+namespace Binance.Net.Objects.Models.Spot.GiftCard
 {
     /// <summary>
     /// Binance Gift Card redeem data
@@ -6,22 +6,22 @@
     public record BinanceGiftCardRedeemData
     {
         /// <summary>
-        /// Reference number
+        /// ["<c>referenceNo</c>"] Reference number
         /// </summary>
         [JsonPropertyName("referenceNo")]
         public string ReferenceNumber { get; set; } = string.Empty;
         /// <summary>
-        /// Identity Number
+        /// ["<c>identityNo</c>"] Identity Number
         /// </summary>
         [JsonPropertyName("identityNo")]
         public string IdentityNumber { get; set; } = string.Empty;
         /// <summary>
-        /// Token
+        /// ["<c>token</c>"] Token
         /// </summary>
         [JsonPropertyName("token")]
         public string Token { get; set; } = string.Empty;
         /// <summary>
-        /// Amount
+        /// ["<c>amount</c>"] Amount
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal? Amount { get; set; } = null;

@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
@@ -9,55 +9,55 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     public record BinanceBrokerageTransferTransactionUniversal
     {
         /// <summary>
-        /// Transaction Id
+        /// ["<c>txnId</c>"] Transaction Id
         /// </summary>
         [JsonPropertyName("txnId")]
         public string Id { get; set; } = string.Empty;
 
         /// <summary>
-        /// Client Transfer Id
+        /// ["<c>clientTranId</c>"] Client Transfer Id
         /// </summary>
         [JsonPropertyName("clientTranId")]
         public string ClientTransferId { get; set; } = string.Empty;
 
         /// <summary>
-        /// To id
+        /// ["<c>toId</c>"] To id
         /// </summary>
         [JsonPropertyName("toId")]
         public string ToId { get; set; } = string.Empty;
 
         /// <summary>
-        /// From account type
+        /// ["<c>fromAccountType</c>"] From account type
         /// </summary>
         [JsonPropertyName("fromAccountType")]
         public BrokerageAccountType FromAccountType { get; set; }
 
         /// <summary>
-        /// To account type
+        /// ["<c>toAccountType</c>"] To account type
         /// </summary>
         [JsonPropertyName("toAccountType")]
         public BrokerageAccountType ToAccountType { get; set; }
 
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Quantity
+        /// ["<c>qty</c>"] Quantity
         /// </summary>
         [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Date
+        /// ["<c>time</c>"] Date
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Date { get; set; }
 
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public BrokerageTransferTransactionStatus Status { get; set; }

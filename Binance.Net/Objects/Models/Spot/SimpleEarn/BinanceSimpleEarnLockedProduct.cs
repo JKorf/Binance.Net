@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Simple earn locked product info
@@ -7,17 +7,17 @@
     public record BinanceSimpleEarnLockedProduct
     {
         /// <summary>
-        /// Project identifier.
+        /// ["<c>projectId</c>"] Project identifier.
         /// </summary>
         [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         /// <summary>
-        /// Details
+        /// ["<c>detail</c>"] Details
         /// </summary>
         [JsonPropertyName("detail")]
         public BinanceSimpleEarnLockedProjectDetails Details { get; set; } = null!;
         /// <summary>
-        /// Quota
+        /// ["<c>quota</c>"] Quota
         /// </summary>
         [JsonPropertyName("quota")]
         public BinanceSimpleEarnLockedProjectQuota Quota { get; set; } = null!;
@@ -29,68 +29,68 @@
     public record BinanceSimpleEarnLockedProjectDetails
     {
         /// <summary>
-        /// Product asset.
+        /// ["<c>asset</c>"] Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Reward asset
+        /// ["<c>rewardAsset</c>"] Reward asset
         /// </summary>
         [JsonPropertyName("rewardAsset")]
         public string RewardAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Duration
+        /// ["<c>duration</c>"] Duration
         /// </summary>
         [JsonPropertyName("duration")]
         public int Duration { get; set; }
         /// <summary>
-        /// Renewable
+        /// ["<c>renewable</c>"] Renewable
         /// </summary>
         [JsonPropertyName("renewable")]
         public bool Renewable { get; set; }
         /// <summary>
-        /// Is sold out
+        /// ["<c>isSoldOut</c>"] Is sold out
         /// </summary>
         [JsonPropertyName("isSoldOut")]
         public bool IsSoldOut { get; set; }
         /// <summary>
-        /// Apr
+        /// ["<c>apr</c>"] Apr
         /// </summary>
         [JsonPropertyName("apr")]
         public decimal Apr { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Subscription start time
+        /// ["<c>subscriptionStartTime</c>"] Subscription start time
         /// </summary>
         [JsonPropertyName("subscriptionStartTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? SubscriptionStartTime { get; set; }
         /// <summary>
-        /// Extra reward asset
+        /// ["<c>extraRewardAsset</c>"] Extra reward asset
         /// </summary>
         [JsonPropertyName("extraRewardAsset")]
         public string ExtraRewardAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Extra reward apr
+        /// ["<c>extraRewardAPR</c>"] Extra reward apr
         /// </summary>
         [JsonPropertyName("extraRewardAPR")]
         public decimal ExtraRewardApr { get; set; }
 
         /// <summary>
-        /// Asset the boost reward is in
+        /// ["<c>boostRewardAsset</c>"] Asset the boost reward is in
         /// </summary>
         [JsonPropertyName("boostRewardAsset")]
         public string? BoostRewardAsset { get; set; }
         /// <summary>
-        /// Boost apr
+        /// ["<c>boostApr</c>"] Boost apr
         /// </summary>
         [JsonPropertyName("boostApr")]
         public decimal? BoostApr { get; set; }
         /// <summary>
-        /// Boost end time
+        /// ["<c>boostEndTime</c>"] Boost end time
         /// </summary>
         [JsonPropertyName("boostEndTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? BoostEndTime { get; set; }
@@ -102,14 +102,15 @@
     public record BinanceSimpleEarnLockedProjectQuota
     {
         /// <summary>
-        /// Total personal quota
+        /// ["<c>totalPersonalQuota</c>"] Total personal quota
         /// </summary>
         [JsonPropertyName("totalPersonalQuota")]
         public decimal TotalPersonalQuota { get; set; }
         /// <summary>
-        /// Minimum
+        /// ["<c>minimum</c>"] Minimum
         /// </summary>
         [JsonPropertyName("minimum")]
         public decimal Minimum { get; set; }
     }
 }
+

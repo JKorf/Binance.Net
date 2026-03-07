@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Query result
@@ -7,12 +7,12 @@
     public record BinanceResult
     {
         /// <summary>
-        /// Result code
+        /// ["<c>code</c>"] Result code
         /// </summary>
         [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
-        /// Message
+        /// ["<c>msg</c>"] Message
         /// </summary>
         [JsonPropertyName("msg")]
         public string Message { get; set; } = string.Empty;
@@ -26,9 +26,10 @@
     internal record BinanceResult<T> : BinanceResult
     {
         /// <summary>
-        /// The data
+        /// ["<c>data</c>"] The data
         /// </summary>
         [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
     }
 }
+

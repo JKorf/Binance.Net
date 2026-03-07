@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Result from a change margin type request
@@ -7,14 +7,15 @@
     public record BinanceFuturesChangeMarginTypeResult
     {
         /// <summary>
-        /// Response code
+        /// ["<c>code</c>"] Response code
         /// </summary>
         [JsonPropertyName("code")]
         public int Code { get; set; }
         /// <summary>
-        /// Response message
+        /// ["<c>msg</c>"] Response message
         /// </summary>
         [JsonPropertyName("msg")]
         public string? Message { get; set; }
     }
 }
+

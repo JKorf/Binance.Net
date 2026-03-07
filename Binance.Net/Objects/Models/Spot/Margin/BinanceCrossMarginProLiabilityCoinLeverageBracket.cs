@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Cross margin pro liability coin leverage bracket data
@@ -6,17 +6,17 @@
     public record BinanceCrossMarginProLiabilityCoinLeverageBracket
     {
         /// <summary>
-        /// Asset names
+        /// ["<c>assetNames</c>"] Asset names
         /// </summary>
         [JsonPropertyName("assetNames")]
         public string[] AssetNames { get; set; } = Array.Empty<string>();
         /// <summary>
-        /// Rank
+        /// ["<c>rank</c>"] Rank
         /// </summary>
         [JsonPropertyName("rank")]
         public int Rank { get; set; }
         /// <summary>
-        /// Brackets
+        /// ["<c>brackets</c>"] Brackets
         /// </summary>
         [JsonPropertyName("brackets")]
         public BinanceCrossMarginProBracket[] Brackets { get; set; } = Array.Empty<BinanceCrossMarginProBracket>();
@@ -28,27 +28,27 @@
     public record BinanceCrossMarginProBracket
     {
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public int Leverage { get; set; }
         /// <summary>
-        /// Max debt
+        /// ["<c>maxDebt</c>"] Max debt
         /// </summary>
         [JsonPropertyName("maxDebt")]
         public decimal MaxDebt { get; set; }
         /// <summary>
-        /// Maintenance margin rate
+        /// ["<c>maintenanceMarginRate</c>"] Maintenance margin rate
         /// </summary>
         [JsonPropertyName("maintenanceMarginRate")]
         public decimal MaintenanceMarginRate { get; set; }
         /// <summary>
-        /// Initial margin rate
+        /// ["<c>initialMarginRate</c>"] Initial margin rate
         /// </summary>
         [JsonPropertyName("initialMarginRate")]
         public decimal InitialMarginRate { get; set; }
         /// <summary>
-        /// Fast num
+        /// ["<c>fastNum</c>"] Fast num
         /// </summary>
         [JsonPropertyName("fastNum")]
         public decimal FastNum { get; set; }

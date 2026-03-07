@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Result of placing a withdrawal
@@ -7,9 +7,10 @@
     public record BinanceWithdrawalPlaced
     {
         /// <summary>
-        /// The id
+        /// ["<c>id</c>"] The id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
     }
 }
+

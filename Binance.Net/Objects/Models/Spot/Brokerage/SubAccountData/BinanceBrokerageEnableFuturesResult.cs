@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Enable Futures Result
@@ -7,19 +7,19 @@
     public record BinanceBrokerageEnableFuturesResult
     {
         /// <summary>
-        /// Sub Account Id
+        /// ["<c>subaccountId</c>"] Sub Account Id
         /// </summary>
         [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Is Futures Enabled
+        /// ["<c>enableFutures</c>"] Is Futures Enabled
         /// </summary>
         [JsonPropertyName("enableFutures")]
         public bool IsFuturesEnabled { get; set; }
 
         /// <summary>
-        /// Update Date
+        /// ["<c>updateTime</c>"] Update Date
         /// </summary>
         [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateDate { get; set; }

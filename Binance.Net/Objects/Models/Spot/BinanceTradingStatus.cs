@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,29 +9,29 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceTradingStatus
     {
         /// <summary>
-        /// Whether trading is locked.
+        /// ["<c>isLocked</c>"] Whether trading is locked.
         /// </summary>
         [JsonPropertyName("isLocked")]
         public bool IsLocked { get; set; }
         /// <summary>
-        /// Planned time of recovery
+        /// ["<c>plannedRecoverTime</c>"] Planned time of recovery
         /// </summary>
         [JsonPropertyName("plannedRecoverTime")]
         public int PlannedRecoverTime { get; set; }
 
         /// <summary>
-        /// Trigger conditions.
+        /// ["<c>triggerCondition</c>"] Trigger conditions.
         /// </summary>
         [JsonPropertyName("triggerCondition")]
         public Dictionary<string, int> TriggerConditions { get; set; } = new Dictionary<string, int>();
 
         /// <summary>
-        /// Dictionary of indicator lists for symbols
+        /// ["<c>indicators</c>"] Dictionary of indicator lists for symbols
         /// </summary>
         [JsonPropertyName("indicators")]
         public Dictionary<string, BinanceIndicator[]> Indicators { get; set; } = new Dictionary<string, BinanceIndicator[]>();
         /// <summary>
-        /// Last update time
+        /// ["<c>updateTime</c>"] Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updateTime")]
@@ -44,25 +44,26 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceIndicator
     {
         /// <summary>
-        /// Indicator name
+        /// ["<c>i</c>"] Indicator name
         /// </summary>
         [JsonPropertyName("i")]
         public IndicatorType IndicatorType { get; set; }
 
         /// <summary>
-        /// Count
+        /// ["<c>c</c>"] Count
         /// </summary>
         [JsonPropertyName("c")]
         public int Count { get; set; }
         /// <summary>
-        /// Current value
+        /// ["<c>v</c>"] Current value
         /// </summary>
         [JsonPropertyName("v")]
         public decimal CurrentValue { get; set; }
         /// <summary>
-        /// Trigger value
+        /// ["<c>t</c>"] Trigger value
         /// </summary>
         [JsonPropertyName("t")]
         public decimal TriggerValue { get; set; }
     }
 }
+

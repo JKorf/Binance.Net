@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     /// <summary>
     /// Transaction
@@ -7,9 +7,10 @@
     public record BinanceSubAccountTransaction
     {
         /// <summary>
-        /// The transaction identifier.
+        /// ["<c>txnId</c>"] The transaction identifier.
         /// </summary>
         [JsonPropertyName("txnId"), JsonConverter(typeof(NumberStringConverter))]
         public string TransactionId { get; set; } = string.Empty;
     }
 }
+

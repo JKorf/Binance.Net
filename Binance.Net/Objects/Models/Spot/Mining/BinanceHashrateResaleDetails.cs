@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Mining
+namespace Binance.Net.Objects.Models.Spot.Mining
 {
     /// <summary>
     /// Resale list
@@ -7,17 +7,17 @@
     public record BinanceHashrateResaleDetails
     {
         /// <summary>
-        /// Total number of results
+        /// ["<c>totalNum</c>"] Total number of results
         /// </summary>
         [JsonPropertyName("totalNum")]
         public int TotalNum { get; set; }
         /// <summary>
-        /// Page size
+        /// ["<c>pageSize</c>"] Page size
         /// </summary>
         [JsonPropertyName("pageSize")]
         public int PageSize { get; set; }
         /// <summary>
-        /// Transfer details
+        /// ["<c>profitTransferDetails</c>"] Transfer details
         /// </summary>
         [JsonPropertyName("profitTransferDetails")]
         public BinanceHashrateResaleDetailsItem[] ProfitTransferDetails { get; set; } = Array.Empty<BinanceHashrateResaleDetailsItem>();
@@ -29,45 +29,46 @@
     public record BinanceHashrateResaleDetailsItem
     {
         /// <summary>
-        /// Config id
+        /// ["<c>configId</c>"] Config id
         /// </summary>
         [JsonPropertyName("configId")]
         public long ConfigId { get; set; }
         /// <summary>
-        /// From user
+        /// ["<c>poolUsername</c>"] From user
         /// </summary>
         [JsonPropertyName("poolUsername")]
         public string PoolUserName { get; set; } = string.Empty;
         /// <summary>
-        /// To user
+        /// ["<c>toPoolUsername</c>"] To user
         /// </summary>
         [JsonPropertyName("toPoolUsername")]
         public string ToPoolUserName { get; set; } = string.Empty;
         /// <summary>
-        /// Algorithm
+        /// ["<c>algoName</c>"] Algorithm
         /// </summary>
         [JsonPropertyName("algoName")]
         public string AlgoName { get; set; } = string.Empty;
         /// <summary>
-        /// Hash rate
+        /// ["<c>hashRate</c>"] Hash rate
         /// </summary>
         [JsonPropertyName("hashRate")]
         public decimal Hashrate { get; set; }
         /// <summary>
-        /// Start day
+        /// ["<c>day</c>"] Start day
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("day")]
         public DateTime Day { get; set; }
         /// <summary>
-        /// Coin name
+        /// ["<c>coinName</c>"] Coin name
         /// </summary>
         [JsonPropertyName("coinName")]
         public string Coin { get; set; } = string.Empty;
         /// <summary>
-        /// Transferred income
+        /// ["<c>amount</c>"] Transferred income
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
     }
 }
+

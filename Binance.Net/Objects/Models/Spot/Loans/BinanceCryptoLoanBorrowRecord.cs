@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
@@ -9,50 +9,51 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     public record BinanceCryptoLoanBorrowRecord
     {
         /// <summary>
-        /// The loaning asset
+        /// ["<c>loanCoin</c>"] The loaning asset
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral asset
+        /// ["<c>collateralCoin</c>"] The collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The loan quantity
+        /// ["<c>initialLoanAmount</c>"] The loan quantity
         /// </summary>
         [JsonPropertyName("initialLoanAmount")]
         public decimal InitialLoanQuantity { get; set; }
         /// <summary>
-        /// The collateral quantity
+        /// ["<c>initialCollateralAmount</c>"] The collateral quantity
         /// </summary>
         [JsonPropertyName("initialCollateralAmount")]
         public decimal InitialCollateralQuantity { get; set; }
         /// <summary>
-        /// Hourly interest rate
+        /// ["<c>hourlyInterestRate</c>"] Hourly interest rate
         /// </summary>
         [JsonPropertyName("hourlyInterestRate")]
         public decimal HourlyInterestRate { get; set; }
         /// <summary>
-        /// Loan term
+        /// ["<c>loanTerm</c>"] Loan term
         /// </summary>
         [JsonPropertyName("loanTerm")]
         public int LoanTerm { get; set; }
         /// <summary>
-        /// The borrow order identifier.
+        /// ["<c>orderId</c>"] The borrow order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
-        /// Borrow timestamp
+        /// ["<c>borrowTime</c>"] Borrow timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("borrowTime")]
         public DateTime BorrowTime { get; set; }
         /// <summary>
-        /// Status of the order
+        /// ["<c>status</c>"] Status of the order
         /// </summary>
         [JsonPropertyName("status")]
         public BorrowStatus Status { get; set; }
     }
 }
+

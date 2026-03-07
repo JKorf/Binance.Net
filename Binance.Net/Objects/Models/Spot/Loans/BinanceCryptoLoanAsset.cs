@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Loanable asset info
@@ -7,24 +7,25 @@
     public record BinanceCryptoLoanAsset
     {
         /// <summary>
-        /// The loan asset.
+        /// ["<c>loanCoin</c>"] The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The flexible interest rate.
+        /// ["<c>flexibleInterestRate</c>"] The flexible interest rate.
         /// </summary>
         [JsonPropertyName("flexibleInterestRate")]
         public decimal InterestRate{ get; set; }
         /// <summary>
-        /// Min limit
+        /// ["<c>flexibleMinLimit</c>"] Min limit
         /// </summary>
         [JsonPropertyName("flexibleMinLimit")]
         public decimal MinLimit { get; set; }
         /// <summary>
-        /// Max limit
+        /// ["<c>flexibleMaxLimit</c>"] Max limit
         /// </summary>
         [JsonPropertyName("flexibleMaxLimit")]
         public decimal MaxLimit { get; set; }
     }
 }
+

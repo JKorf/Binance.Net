@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Dividend record
@@ -7,34 +7,35 @@
     public record BinanceDividendRecord
     {
         /// <summary>
-        /// The dividend record identifier.
+        /// ["<c>id</c>"] The dividend record identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The asset.
+        /// ["<c>asset</c>"] The asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp of the transaction
+        /// ["<c>divTime</c>"] Timestamp of the transaction
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("divTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Transaction id
+        /// ["<c>tranId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Additional info.
+        /// ["<c>enInfo</c>"] Additional info.
         /// </summary>
         [JsonPropertyName("enInfo")]
         public string? Info { get; set; }
     }
 }
+

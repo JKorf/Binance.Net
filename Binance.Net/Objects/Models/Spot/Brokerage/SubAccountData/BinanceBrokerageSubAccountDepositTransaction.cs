@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
@@ -9,67 +9,67 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     public record BinanceBrokerageSubAccountDepositTransaction
     {
         /// <summary>
-        /// Sub Account Id
+        /// ["<c>subAccountId</c>"] Sub Account Id
         /// </summary>
         [JsonPropertyName("subAccountId")]
         public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Address
+        /// ["<c>address</c>"] Address
         /// </summary>
         [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
 
         /// <summary>
-        /// Address Tag
+        /// ["<c>addressTag</c>"] Address Tag
         /// </summary>
         [JsonPropertyName("addressTag")]
         public string AddressTag { get; set; } = string.Empty;
 
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Date
+        /// ["<c>insertTime</c>"] Date
         /// </summary>
         [JsonPropertyName("insertTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Network
+        /// ["<c>network</c>"] Network
         /// </summary>
         [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
 
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public SubAccountDepositStatus Status { get; set; }
 
         /// <summary>
-        /// Transaction Id
+        /// ["<c>txId</c>"] Transaction Id
         /// </summary>
         [JsonPropertyName("txId")]
         public string TransactionId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Source Address
+        /// ["<c>sourceAddress</c>"] Source Address
         /// </summary>
         [JsonPropertyName("sourceAddress")]
         public string SourceAddress { get; set; } = string.Empty;
 
         /// <summary>
-        /// Confirm Times
+        /// ["<c>confirmTimes</c>"] Confirm Times
         /// </summary>
         [JsonPropertyName("confirmTimes")]
         public string ConfirmTimes { get; set; } = string.Empty;

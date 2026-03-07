@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
@@ -9,29 +9,30 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnFlexibleRewardRecord
     {
         /// <summary>
-        /// Reward asset.
+        /// ["<c>asset</c>"] Reward asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Project id
+        /// ["<c>projectId</c>"] Project id
         /// </summary>
         [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         /// <summary>
-        /// Rewards
+        /// ["<c>rewards</c>"] Rewards
         /// </summary>
         [JsonPropertyName("rewards")]
         public decimal Rewards { get; set; }
         /// <summary>
-        /// Reward type
+        /// ["<c>type</c>"] Reward type
         /// </summary>
         [JsonPropertyName("type")]
         public RewardType Type { get; set; }
         /// <summary>
-        /// Reward timestamp.
+        /// ["<c>time</c>"] Reward timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }
+

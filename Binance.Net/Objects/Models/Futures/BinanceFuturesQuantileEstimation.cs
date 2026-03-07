@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Quantile estimation
@@ -7,12 +7,12 @@
     public record BinanceFuturesQuantileEstimation
     {
         /// <summary>
-        /// The symbol
+        /// ["<c>symbol</c>"] The symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Quantile
+        /// ["<c>adlQuantile</c>"] Quantile
         /// </summary>
         [JsonPropertyName("adlQuantile")]
         public BinanceFuturesAdlQuantile? AdlQuantile { get; set; }
@@ -24,24 +24,25 @@
     public record BinanceFuturesAdlQuantile
     {
         /// <summary>
-        /// Long position
+        /// ["<c>LONG</c>"] Long position
         /// </summary>
         [JsonPropertyName("LONG")]
         public int Long { get; set; }
         /// <summary>
-        /// Short position
+        /// ["<c>SHORT</c>"] Short position
         /// </summary>
         [JsonPropertyName("SHORT")]
         public int Short { get; set; }
         /// <summary>
-        /// Hedge
+        /// ["<c>HEDGE</c>"] Hedge
         /// </summary>
         [JsonPropertyName("HEDGE")]
         public int Hedge { get; set; }
         /// <summary>
-        /// Hedge
+        /// ["<c>BOTH</c>"] Hedge
         /// </summary>
         [JsonPropertyName("BOTH")]
         public int Both { get; set; }
     }
 }
+

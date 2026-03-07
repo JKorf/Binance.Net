@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Flexible product position info
@@ -7,74 +7,75 @@
     public record BinanceSimpleEarnFlexiblePosition
     {
         /// <summary>
-        /// Product asset.
+        /// ["<c>asset</c>"] Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Latest annual percentage rate
+        /// ["<c>latestAnnualPercentageRate</c>"] Latest annual percentage rate
         /// </summary>
         [JsonPropertyName("latestAnnualPercentageRate")]
         public decimal LatestAnnualPercentageRate { get; set; }
         /// <summary>
-        /// Tier annual percentage rate
+        /// ["<c>tierAnnualPercentageRate</c>"] Tier annual percentage rate
         /// </summary>
         [JsonPropertyName("tierAnnualPercentageRate")]
         public Dictionary<string, decimal> TierAnnualPercentageRate { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
-        /// Can redeem product
+        /// ["<c>canRedeem</c>"] Can redeem product
         /// </summary>
         [JsonPropertyName("canRedeem")]
         public bool CanRedeem { get; set; }
         /// <summary>
-        /// Product identifier.
+        /// ["<c>productId</c>"] Product identifier.
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
-        /// Total quantity of position
+        /// ["<c>totalAmount</c>"] Total quantity of position
         /// </summary>
         [JsonPropertyName("totalAmount")]
         public decimal TotalQuantity { get; set; }
         /// <summary>
-        /// Air drop percentage rate of yesterday
+        /// ["<c>yesterdayAirdropPercentageRate</c>"] Air drop percentage rate of yesterday
         /// </summary>
         [JsonPropertyName("yesterdayAirdropPercentageRate")]
         public decimal YesterdayAirdropPercentageRate { get; set; }
         /// <summary>
-        /// Air drop asset
+        /// ["<c>airDropAsset</c>"] Air drop asset
         /// </summary>
         [JsonPropertyName("airDropAsset")]
         public string AirDropAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral quantity
+        /// ["<c>collateralAmount</c>"] Collateral quantity
         /// </summary>
         [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
-        /// Realtime rewards of yesterday
+        /// ["<c>yesterdayRealTimeRewards</c>"] Realtime rewards of yesterday
         /// </summary>
         [JsonPropertyName("yesterdayRealTimeRewards")]
         public decimal YesterdayRealTimeRewards { get; set; }
         /// <summary>
-        /// Cumulative bonus rewards
+        /// ["<c>cumulativeBonusRewards</c>"] Cumulative bonus rewards
         /// </summary>
         [JsonPropertyName("cumulativeBonusRewards")]
         public decimal CumulativeBonusRewards { get; set; }
         /// <summary>
-        /// Cumulative realtime rewards
+        /// ["<c>cumulativeRealTimeRewards</c>"] Cumulative realtime rewards
         /// </summary>
         [JsonPropertyName("cumulativeRealTimeRewards")]
         public decimal CumulativeRealTimeRewards { get; set; }
         /// <summary>
-        /// Cumulative total rewards
+        /// ["<c>cumulativeTotalRewards</c>"] Cumulative total rewards
         /// </summary>
         [JsonPropertyName("cumulativeTotalRewards")]
         public decimal CumulativeTotalRewards { get; set; }
         /// <summary>
-        /// Is auto subscribe enabled
+        /// ["<c>autoSubscribe</c>"] Is auto subscribe enabled
         /// </summary>
         [JsonPropertyName("autoSubscribe")]
         public bool AutoSubscribe { get; set; }
     }
 }
+

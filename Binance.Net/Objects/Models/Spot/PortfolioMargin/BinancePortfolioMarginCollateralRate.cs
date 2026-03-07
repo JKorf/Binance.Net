@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
+namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
 {
     /// <summary>
     /// Portfolio margin collateral rate info
@@ -7,15 +7,16 @@
     public record BinancePortfolioMarginCollateralRate
     {
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Collateral rate
+        /// ["<c>collateralRate</c>"] Collateral rate
         /// </summary>
         [JsonPropertyName("collateralRate")]
         public decimal CollateralRate { get; set; }
     }
 }
+

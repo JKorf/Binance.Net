@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Convert quote info
@@ -7,32 +7,32 @@
     public record BinanceFuturesConvertQuote
     {
         /// <summary>
-        /// Quote id
+        /// ["<c>quoteId</c>"] Quote id
         /// </summary>
         [JsonPropertyName("quoteId")]
         public string QuoteId { get; set; } = string.Empty;
         /// <summary>
-        /// Ratio
+        /// ["<c>ratio</c>"] Ratio
         /// </summary>
         [JsonPropertyName("ratio")]
         public decimal Ratio { get; set; }
         /// <summary>
-        /// Inverse ratio
+        /// ["<c>inverseRatio</c>"] Inverse ratio
         /// </summary>
         [JsonPropertyName("inverseRatio")]
         public decimal InverseRatio { get; set; }
         /// <summary>
-        /// Until when the quote is valid
+        /// ["<c>validTimestamp</c>"] Until when the quote is valid
         /// </summary>
         [JsonPropertyName("validTimestamp")]
         public DateTime ValidTimestamp { get; set; }
         /// <summary>
-        /// To quantity
+        /// ["<c>toAmount</c>"] To quantity
         /// </summary>
         [JsonPropertyName("toAmount")]
         public decimal ToQuantity { get; set; }
         /// <summary>
-        /// From quantity
+        /// ["<c>fromAmount</c>"] From quantity
         /// </summary>
         [JsonPropertyName("fromAmount")]
         public decimal FromQuantity { get; set; }
@@ -40,3 +40,4 @@
 
 
 }
+

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Staking
+namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// SOL rewards
@@ -7,7 +7,7 @@
     public record BinanceSolRewards : BinanceQueryRecords<BinanceSolReward>
     {
         /// <summary>
-        /// Estimated rewards in SOL
+        /// ["<c>estRewardsInSOL</c>"] Estimated rewards in SOL
         /// </summary>
         [JsonPropertyName("estRewardsInSOL")]
         public decimal EstimatedRewardsInSol { get; set; }
@@ -20,29 +20,30 @@
     public record BinanceSolReward
     {
         /// <summary>
-        /// The reward timestamp.
+        /// ["<c>time</c>"] The reward timestamp.
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Amount in SOL
+        /// ["<c>amountInSOL</c>"] Amount in SOL
         /// </summary>
         [JsonPropertyName("amountInSOL")]
         public decimal AmountInSol { get; set; }
         /// <summary>
-        /// Current holding.
+        /// ["<c>holding</c>"] Current holding.
         /// </summary>
         [JsonPropertyName("holding")]
         public decimal Holding { get; set; }
         /// <summary>
-        /// Holding in SOL
+        /// ["<c>holdingInSOL</c>"] Holding in SOL
         /// </summary>
         [JsonPropertyName("holdingInSOL")]
         public decimal HoldingInSol { get; set; }
         /// <summary>
-        /// Annual percentage rate.
+        /// ["<c>annualPercentageRate</c>"] Annual percentage rate.
         /// </summary>
         [JsonPropertyName("annualPercentageRate")]
         public decimal AnnualPercentageRate { get; set; }
     }
 }
+

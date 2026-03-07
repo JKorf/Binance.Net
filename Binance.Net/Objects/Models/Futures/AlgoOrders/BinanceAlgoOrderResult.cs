@@ -1,4 +1,4 @@
-﻿using Binance.Net.Converters;
+using Binance.Net.Converters;
 
 namespace Binance.Net.Objects.Models.Futures.AlgoOrders
 {
@@ -9,15 +9,16 @@ namespace Binance.Net.Objects.Models.Futures.AlgoOrders
     public record BinanceAlgoOrderResult : BinanceResult
     {
         /// <summary>
-        /// Order id
+        /// ["<c>clientAlgoId</c>"] Order id
         /// </summary>
         [JsonPropertyName("clientAlgoId")]
         [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientAlgoId { get; set; } = string.Empty;
         /// <summary>
-        /// Successful
+        /// ["<c>success</c>"] Successful
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
     }
 }
+

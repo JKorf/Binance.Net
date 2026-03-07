@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures.Socket
+namespace Binance.Net.Objects.Models.Futures.Socket
 {
     /// <summary>
     /// Information about leverage of symbol changed
@@ -7,19 +7,19 @@
     public record BinanceFuturesStreamConfigUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Leverage update data.
+        /// ["<c>ac</c>"] Leverage update data.
         /// </summary>
         [JsonPropertyName("ac")]
         public BinanceFuturesStreamLeverageUpdateData? LeverageUpdateData { get; set; }
 
         /// <summary>
-        /// Position mode update data.
+        /// ["<c>ai</c>"] Position mode update data.
         /// </summary>
         [JsonPropertyName("ai")]
         public BinanceFuturesStreamConfigUpdateData? ConfigUpdateData { get; set; }
 
         /// <summary>
-        /// Transaction time
+        /// ["<c>T</c>"] Transaction time
         /// </summary>
         [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime TransactionTime { get; set; }
@@ -35,13 +35,13 @@
     public record BinanceFuturesStreamLeverageUpdateData
     {
         /// <summary>
-        /// The symbol this balance is for
+        /// ["<c>s</c>"] The symbol this balance is for
         /// </summary>
         [JsonPropertyName("s")]
         public string? Symbol { get; set; }
 
         /// <summary>
-        /// The symbol this leverage is for
+        /// ["<c>l</c>"] The symbol this leverage is for
         /// </summary>
         [JsonPropertyName("l")]
         public int Leverage { get; set; }
@@ -53,9 +53,10 @@
     public record BinanceFuturesStreamConfigUpdateData
     {
         /// <summary>
-        /// Multi-Assets Mode
+        /// ["<c>j</c>"] Multi-Assets Mode
         /// </summary>
         [JsonPropertyName("j")]
         public bool MultiAssetMode { get; set; }
     }
 }
+

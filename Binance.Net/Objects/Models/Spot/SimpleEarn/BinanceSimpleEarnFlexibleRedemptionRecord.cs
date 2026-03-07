@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
@@ -9,39 +9,40 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnFlexibleRedemptionRecord
     {
         /// <summary>
-        /// Redeemed quantity.
+        /// ["<c>amount</c>"] Redeemed quantity.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Product asset.
+        /// ["<c>asset</c>"] Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// ["<c>time</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Project id
+        /// ["<c>projectId</c>"] Project id
         /// </summary>
         [JsonPropertyName("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         /// <summary>
-        /// Redeem id
+        /// ["<c>redeemId</c>"] Redeem id
         /// </summary>
         [JsonPropertyName("redeemId")]
         public long RedeemId { get; set; }
         /// <summary>
-        /// Destination account
+        /// ["<c>destAccount</c>"] Destination account
         /// </summary>
         [JsonPropertyName("destAccount")]
         public AccountSource DestinationAccount { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
     }
 }
+

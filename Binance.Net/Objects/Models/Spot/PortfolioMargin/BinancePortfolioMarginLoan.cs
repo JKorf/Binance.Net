@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
+namespace Binance.Net.Objects.Models.Spot.PortfolioMargin
 {
     /// <summary>
     /// Bankruptcy loan info
@@ -7,14 +7,15 @@
     public record BinancePortfolioMarginLoan
     {
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Loan amount
+        /// ["<c>amount</c>"] Loan amount
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
     }
 }
+

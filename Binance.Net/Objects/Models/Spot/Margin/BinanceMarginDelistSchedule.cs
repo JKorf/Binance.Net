@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Delist margin schedule
@@ -7,20 +7,21 @@
     public record BinanceMarginDelistSchedule
     {
         /// <summary>
-        /// Delist time
+        /// ["<c>delistTime</c>"] Delist time
         /// </summary>
         [JsonPropertyName("delistTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime DelistTime { get; set; }
         /// <summary>
-        /// Cross margin assets
+        /// ["<c>crossMarginAssets</c>"] Cross margin assets
         /// </summary>
         [JsonPropertyName("crossMarginAssets")]
         public string[] CrossMarginAssets { get; set; } = Array.Empty<string>();
         /// <summary>
-        /// Isolated margin symbols
+        /// ["<c>isolatedMarginSymbols</c>"] Isolated margin symbols
         /// </summary>
         [JsonPropertyName("isolatedMarginSymbols")]
         public string[] IsolatedMarginSymbols { get; set; } = Array.Empty<string>();
     }
 }
+

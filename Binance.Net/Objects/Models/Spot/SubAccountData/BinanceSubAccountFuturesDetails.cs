@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     /// <summary>
     /// Sub account futures details
@@ -7,82 +7,82 @@
     public record BinanceSubAccountFuturesDetails
     {
         /// <summary>
-        /// Email of the sub account
+        /// ["<c>email</c>"] Email of the sub account
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// List of asset details
+        /// ["<c>assets</c>"] List of asset details
         /// </summary>
         [JsonPropertyName("assets")]
         public BinanceSubAccountFuturesAsset[] Assets { get; set; } = Array.Empty<BinanceSubAccountFuturesAsset>();
         /// <summary>
-        /// Can deposit
+        /// ["<c>canDeposit</c>"] Can deposit
         /// </summary>
         [JsonPropertyName("canDeposit")]
         public bool CanDeposit { get; set; }
         /// <summary>
-        /// Can trade
+        /// ["<c>canTrade</c>"] Can trade
         /// </summary>
         [JsonPropertyName("canTrade")]
         public bool CanTrade { get; set; }
         /// <summary>
-        /// Can withdraw
+        /// ["<c>canWithdraw</c>"] Can withdraw
         /// </summary>
         [JsonPropertyName("canWithdraw")]
         public bool CanWithdraw { get; set; }
         /// <summary>
-        /// Fee tier
+        /// ["<c>feeTier</c>"] Fee tier
         /// </summary>
         [JsonPropertyName("feeTier")]
         public int FeeTier { get; set; }
         /// <summary>
-        /// Max quantity which can be withdrawn
+        /// ["<c>maxWithdrawAmount</c>"] Max quantity which can be withdrawn
         /// </summary>
         [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
-        /// Total initial margin
+        /// ["<c>totalInitialMargin</c>"] Total initial margin
         /// </summary>
         [JsonPropertyName("totalInitialMargin")]
         public decimal TotalInitialMargin { get; set; }
         /// <summary>
-        /// Total maintenance margin
+        /// ["<c>totalMaintenanceMargin</c>"] Total maintenance margin
         /// </summary>
         [JsonPropertyName("totalMaintenanceMargin")]
         public decimal TotalMaintenanceMargin { get; set; }
         /// <summary>
-        /// Total margin balance
+        /// ["<c>totalMarginBalance</c>"] Total margin balance
         /// </summary>
         [JsonPropertyName("totalMarginBalance")]
         public decimal TotalMarginBalance { get; set; }
         /// <summary>
-        /// Total open order initial margin
+        /// ["<c>totalOpenOrderInitialMargin</c>"] Total open order initial margin
         /// </summary>
         [JsonPropertyName("totalOpenOrderInitialMargin")]
         public decimal TotalOpenOrderInitialMargin { get; set; }
         /// <summary>
-        /// Total position initial margin
+        /// ["<c>totalPositionInitialMargin</c>"] Total position initial margin
         /// </summary>
         [JsonPropertyName("totalPositionInitialMargin")]
         public decimal TotalPositionInitialMargin { get; set; }
         /// <summary>
-        /// Total unrealized profit
+        /// ["<c>totalUnrealizedProfit</c>"] Total unrealized profit
         /// </summary>
         [JsonPropertyName("totalUnrealizedProfit")]
         public decimal TotalUnrealizedProfit { get; set; }
         /// <summary>
-        /// Total wallet balance
+        /// ["<c>totalWalletBalance</c>"] Total wallet balance
         /// </summary>
         [JsonPropertyName("totalWalletBalance")]
         public decimal TotalWalletBalance { get; set; }
         /// <summary>
-        /// Time of the data
+        /// ["<c>updateTime</c>"] Time of the data
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updateTime")]
@@ -95,49 +95,50 @@
     public record BinanceSubAccountFuturesAsset
     {
         /// <summary>
-        /// The asset
+        /// ["<c>asset</c>"] The asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Initial margin
+        /// ["<c>initialMargin</c>"] Initial margin
         /// </summary>
         [JsonPropertyName("initialMargin")]
         public decimal InitialMargin { get; set; }
         /// <summary>
-        /// Maintenance margin
+        /// ["<c>maintenanceMargin</c>"] Maintenance margin
         /// </summary>
         [JsonPropertyName("maintenanceMargin")]
         public decimal MaintenanceMargin { get; set; }
         /// <summary>
-        /// Margin balance
+        /// ["<c>marginBalance</c>"] Margin balance
         /// </summary>
         [JsonPropertyName("marginBalance")]
         public decimal MarginBalance { get; set; }
         /// <summary>
-        /// Max quantity which can be withdrawn
+        /// ["<c>maxWithdrawAmount</c>"] Max quantity which can be withdrawn
         /// </summary>
         [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
         /// <summary>
-        /// Open order initial margin
+        /// ["<c>openOrderInitialMargin</c>"] Open order initial margin
         /// </summary>
         [JsonPropertyName("openOrderInitialMargin")]
         public decimal OpenOrderInitialMargin { get; set; }
         /// <summary>
-        /// Position initial margin
+        /// ["<c>positionInitialMargin</c>"] Position initial margin
         /// </summary>
         [JsonPropertyName("positionInitialMargin")]
         public decimal PositionInitialMargin { get; set; }
         /// <summary>
-        /// Unrealized profit
+        /// ["<c>unrealizedProfit</c>"] Unrealized profit
         /// </summary>
         [JsonPropertyName("unrealizedProfit")]
         public decimal UnrealizedProfit { get; set; }
         /// <summary>
-        /// Wallet balance
+        /// ["<c>walletBalance</c>"] Wallet balance
         /// </summary>
         [JsonPropertyName("walletBalance")]
         public decimal WalletBalance { get; set; }
     }
 }
+

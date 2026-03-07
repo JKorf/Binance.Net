@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,55 +9,56 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinancePreventedTrade
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>symbol</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The prevented match identifier.
+        /// ["<c>preventedMatchId</c>"] The prevented match identifier.
         /// </summary>
         [JsonPropertyName("preventedMatchId")]
         public long PreventedMatchId { get; set; }
         /// <summary>
-        /// Taker order id
+        /// ["<c>takerOrderId</c>"] Taker order id
         /// </summary>
         [JsonPropertyName("takerOrderId")]
         public long TakerOrderId { get; set; }
         /// <summary>
-        /// Maker symbol
+        /// ["<c>makerSymbol</c>"] Maker symbol
         /// </summary>
         [JsonPropertyName("makerSymbol")]
         public string MakerSymbol { get; set; } = string.Empty;
         /// <summary>
-        /// Maker order id
+        /// ["<c>makerOrderId</c>"] Maker order id
         /// </summary>
         [JsonPropertyName("makerOrderId")]
         public long MakerOrderId { get; set; }
         /// <summary>
-        /// Trade group id
+        /// ["<c>tradeGroupId</c>"] Trade group id
         /// </summary>
         [JsonPropertyName("tradeGroupId")]
         public long TradeGroupId { get; set; }
         /// <summary>
-        /// Self trade prevention mode
+        /// ["<c>selfTradePreventionMode</c>"] Self trade prevention mode
         /// </summary>
         [JsonPropertyName("selfTradePreventionMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
         /// <summary>
-        /// Trade price
+        /// ["<c>price</c>"] Trade price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Prevented quantity
+        /// ["<c>makerPreventedQuantity</c>"] Prevented quantity
         /// </summary>
         [JsonPropertyName("makerPreventedQuantity")]
         public decimal MakerPreventedQuantity { get; set; }
         /// <summary>
-        /// Transaction time
+        /// ["<c>transactTime</c>"] Transaction time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("transactTime")]
         public DateTime TransactTime { get; set; }
     }
 }
+

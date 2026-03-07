@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
@@ -9,39 +9,39 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamSymbolUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>s</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The pair.
+        /// ["<c>ps</c>"] The pair.
         /// </summary>
         [JsonPropertyName("ps")]
         public string Pair { get; set; } = string.Empty;
         /// <summary>
-        /// Contract type
+        /// ["<c>ct</c>"] Contract type
         /// </summary>
         [JsonPropertyName("ct")]
         public ContractType ContractType { get; set; }
         /// <summary>
-        /// Delivery date
+        /// ["<c>dt</c>"] Delivery date
         /// </summary>
         [JsonPropertyName("dt")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? DeliveryDate { get; set; }
         /// <summary>
-        /// Onboard date
+        /// ["<c>ot</c>"] Onboard date
         /// </summary>
         [JsonPropertyName("ot")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime? OnboardDate { get; set; }
         /// <summary>
-        /// Symbol status
+        /// ["<c>cs</c>"] Symbol status
         /// </summary>
         [JsonPropertyName("cs")]
         public SymbolStatus Status { get; set; }
         /// <summary>
-        /// Brackets
+        /// ["<c>bks</c>"] Brackets
         /// </summary>
         [JsonPropertyName("bks")]
         public BinanceBracketUpdate[]? Brackets { get; set; }
@@ -53,39 +53,40 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceBracketUpdate
     {
         /// <summary>
-        /// Notional bracket
+        /// ["<c>bs</c>"] Notional bracket
         /// </summary>
         [JsonPropertyName("bs")]
         public int NotionalBracket { get; set; }
         /// <summary>
-        /// Floor notional
+        /// ["<c>bnf</c>"] Floor notional
         /// </summary>
         [JsonPropertyName("bnf")]
         public decimal FloorNotional { get; set; }
         /// <summary>
-        /// Max notional
+        /// ["<c>bnc</c>"] Max notional
         /// </summary>
         [JsonPropertyName("bnc")]
         public decimal MaxNotional { get; set; }
         /// <summary>
-        /// Maintenance ratio
+        /// ["<c>mmr</c>"] Maintenance ratio
         /// </summary>
         [JsonPropertyName("mmr")]
         public decimal MaintenanceRatio { get; set; }
         /// <summary>
-        /// Min leverage
+        /// ["<c>mi</c>"] Min leverage
         /// </summary>
         [JsonPropertyName("mi")]
         public decimal MinLeverage { get; set; }
         /// <summary>
-        /// Max leverage
+        /// ["<c>ma</c>"] Max leverage
         /// </summary>
         [JsonPropertyName("ma")]
         public decimal MaxLeverage { get; set; }
         /// <summary>
-        /// Auxiliary number for quick calculation
+        /// ["<c>cf</c>"] Auxiliary number for quick calculation
         /// </summary>
         [JsonPropertyName("cf")]
         public decimal Auxiliary { get; set; }
     }
 }
+

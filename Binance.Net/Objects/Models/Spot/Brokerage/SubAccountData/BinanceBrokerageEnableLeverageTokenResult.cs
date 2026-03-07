@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Enable Leverage Token Result
@@ -7,13 +7,13 @@
     public record BinanceBrokerageEnableLeverageTokenResult
     {
         /// <summary>
-        /// Sub Account Id
+        /// ["<c>subaccountId</c>"] Sub Account Id
         /// </summary>
         [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Is Leverage Token Enabled
+        /// ["<c>enableBlvt</c>"] Is Leverage Token Enabled
         /// </summary>
         [JsonPropertyName("enableBlvt")]
         public bool IsLeverageTokenEnabled { get; set; }

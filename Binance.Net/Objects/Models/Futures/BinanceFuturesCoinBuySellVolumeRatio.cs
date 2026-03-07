@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -9,40 +9,41 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesCoinBuySellVolumeRatio
     {
         /// <summary>
-        /// The futures pair.
+        /// ["<c>pair</c>"] The futures pair.
         /// </summary>
         [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
         /// <summary>
-        /// Contract type
+        /// ["<c>contractType</c>"] Contract type
         /// </summary>
         [JsonPropertyName("contractType")]
         public ContractType ContractType { get; set; }
         /// <summary>
-        /// The taker buy volume
+        /// ["<c>takerBuyVol</c>"] The taker buy volume
         /// </summary>
         [JsonPropertyName("takerBuyVol")]
         public decimal TakerBuyVolume { get; set; }
         /// <summary>
-        /// The taker sell volume
+        /// ["<c>takerSellVol</c>"] The taker sell volume
         /// </summary>
         [JsonPropertyName("takerSellVol")]
         public decimal TakerSellVolume { get; set; }
         /// <summary>
-        /// The taker buy value
+        /// ["<c>takerBuyVolValue</c>"] The taker buy value
         /// </summary>
         [JsonPropertyName("takerBuyVolValue")]
         public decimal TakerBuyVolumeValue { get; set; }
         /// <summary>
-        /// The taker sell value
+        /// ["<c>takerSellVolValue</c>"] The taker sell value
         /// </summary>
         [JsonPropertyName("takerSellVolValue")]
         public decimal TakerSellVolumeValue { get; set; }
         /// <summary>
-        /// The data timestamp.
+        /// ["<c>timestamp</c>"] The data timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Margin dust transfer info
@@ -7,17 +7,17 @@
     public record BinanceMarginDustTransfer
     {
         /// <summary>
-        /// Total service charge
+        /// ["<c>totalServiceCharge</c>"] Total service charge
         /// </summary>
         [JsonPropertyName("totalServiceCharge")]
         public decimal TotalServiceCharge { get; set; }
         /// <summary>
-        /// Total transferred
+        /// ["<c>totalTransfered</c>"] Total transferred
         /// </summary>
         [JsonPropertyName("totalTransfered")]
         public decimal TotalTransferred { get; set; }
         /// <summary>
-        /// Transfer results
+        /// ["<c>transferResult</c>"] Transfer results
         /// </summary>
         [JsonPropertyName("transferResult")]
         public BinanceMarginDustTransferResult[] TransferResults { get; set; } = Array.Empty<BinanceMarginDustTransferResult>();
@@ -29,35 +29,36 @@
     public record BinanceMarginDustTransferResult
     {
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Source asset
+        /// ["<c>fromAsset</c>"] Source asset
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// ["<c>operateTime</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("operateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
-        /// Service charge quantity
+        /// ["<c>serviceChargeAmount</c>"] Service charge quantity
         /// </summary>
         [JsonPropertyName("serviceChargeAmount")]
         public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
-        /// Transaction id
+        /// ["<c>tranId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Transferred quantity
+        /// ["<c>transferedAmount</c>"] Transferred quantity
         /// </summary>
         [JsonPropertyName("transferedAmount")]
         public decimal TransferredQuantity { get; set; }
     }
 }
+

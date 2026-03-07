@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot;
+namespace Binance.Net.Objects.Models.Spot;
 
 /// <summary>
 /// Listen token
@@ -6,12 +6,12 @@
 public class BinanceListenToken
 {
     /// <summary>
-    /// The listen token.
+    /// ["<c>token</c>"] The listen token.
     /// </summary>
     [JsonPropertyName("token")]
     public string Token { get; set; } = string.Empty;
     /// <summary>
-    /// Expiration time
+    /// ["<c>expirationTime</c>"] Expiration time
     /// </summary>
     [JsonPropertyName("expirationTime")]
     public DateTime ExpirationTime { get; set; }

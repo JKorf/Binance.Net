@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -9,27 +9,27 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceSymbolConfiguration
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>symbol</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Margin type
+        /// ["<c>marginType</c>"] Margin type
         /// </summary>
         [JsonPropertyName("marginType")]
         public FuturesMarginType? MarginType { get; set; }
         /// <summary>
-        /// Whether auto add margin is enabled.
+        /// ["<c>isAutoAddMargin</c>"] Whether auto add margin is enabled.
         /// </summary>
         [JsonPropertyName("isAutoAddMargin")]
         public bool IsAutoAddMargin { get; set; }
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
-        /// Max notional value
+        /// ["<c>maxNotionalValue</c>"] Max notional value
         /// </summary>
         [JsonPropertyName("maxNotionalValue")]
         public decimal MaxNotionalValue { get; set; }
@@ -37,3 +37,4 @@ namespace Binance.Net.Objects.Models.Futures
 
 
 }
+

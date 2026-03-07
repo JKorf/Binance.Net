@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Information about an account asset
@@ -7,87 +7,88 @@
     public record BinanceFuturesAccountAsset
     {
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Initial Margin
+        /// ["<c>initialMargin</c>"] Initial Margin
         /// </summary>
         [JsonPropertyName("initialMargin")]
         public decimal InitialMargin { get; set; }
 
         /// <summary>
-        /// Maintenance Margin
+        /// ["<c>maintMargin</c>"] Maintenance Margin
         /// </summary>
         [JsonPropertyName("maintMargin")]
         public decimal MaintMargin { get; set; }
 
         /// <summary>
-        /// Margin Balance
+        /// ["<c>marginBalance</c>"] Margin Balance
         /// </summary>
         [JsonPropertyName("marginBalance")]
         public decimal MarginBalance { get; set; }
 
         /// <summary>
-        /// Maximum Withdraw Quantity
+        /// ["<c>maxWithdrawAmount</c>"] Maximum Withdraw Quantity
         /// </summary>
         [JsonPropertyName("maxWithdrawAmount")]
         public decimal MaxWithdrawQuantity { get; set; }
 
         /// <summary>
-        /// Open Order Initial Margin
+        /// ["<c>openOrderInitialMargin</c>"] Open Order Initial Margin
         /// </summary>
         [JsonPropertyName("openOrderInitialMargin")]
         public decimal OpenOrderInitialMargin { get; set; }
 
         /// <summary>
-        /// Position Initial Margin
+        /// ["<c>positionInitialMargin</c>"] Position Initial Margin
         /// </summary>
         [JsonPropertyName("positionInitialMargin")]
         public decimal PositionInitialMargin { get; set; }
 
         /// <summary>
-        /// Unrealized Profit
+        /// ["<c>unrealizedProfit</c>"] Unrealized Profit
         /// </summary>
         [JsonPropertyName("unrealizedProfit")]
         public decimal UnrealizedPnl { get; set; }
 
         /// <summary>
-        /// Wallet Balance
+        /// ["<c>walletBalance</c>"] Wallet Balance
         /// </summary>
         [JsonPropertyName("walletBalance")]
         public decimal WalletBalance { get; set; }
 
         /// <summary>
-        /// Crossed Wallet Balance
+        /// ["<c>crossWalletBalance</c>"] Crossed Wallet Balance
         /// </summary>
         [JsonPropertyName("crossWalletBalance")]
         public decimal CrossWalletBalance { get; set; }
 
         /// <summary>
-        /// Unrealized profit of crossed positions
+        /// ["<c>crossUnPnl</c>"] Unrealized profit of crossed positions
         /// </summary>
         [JsonPropertyName("crossUnPnl")]
         public decimal CrossUnrealizedPnl { get; set; }
 
         /// <summary>
-        /// Available balance
+        /// ["<c>availableBalance</c>"] Available balance
         /// </summary>
         [JsonPropertyName("availableBalance")]
         public decimal AvailableBalance { get; set; }
 
         /// <summary>
-        /// Whether the asset can be used as margin in Multi-Assets mode
+        /// ["<c>marginAvailable</c>"] Whether the asset can be used as margin in Multi-Assets mode
         /// </summary>
         [JsonPropertyName("marginAvailable")]
         public bool? MarginAvailable { get; set; }
         /// <summary>
-        /// Last update time
+        /// ["<c>updateTime</c>"] Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updateTime")]
         public DateTime? UpdateTime { get; set; }
     }
 }
+

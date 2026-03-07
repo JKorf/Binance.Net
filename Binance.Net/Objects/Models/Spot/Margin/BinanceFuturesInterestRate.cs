@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Future hourly interest rate
@@ -7,14 +7,15 @@
     public record BinanceFuturesInterestRate
     {
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Next interest rate
+        /// ["<c>nextHourlyInterestRate</c>"] Next interest rate
         /// </summary>
         [JsonPropertyName("nextHourlyInterestRate")]
         public decimal NextHourlyInterestRate { get; set; }
     }
 }
+

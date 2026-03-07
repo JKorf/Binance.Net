@@ -1,4 +1,4 @@
-﻿using Binance.Net.Converters;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
@@ -10,14 +10,14 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceAlgoOrderUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// The event timestamp.
+        /// ["<c>T</c>"] The event timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("T")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Order info
+        /// ["<c>o</c>"] Order info
         /// </summary>
         [JsonPropertyName("o")]
         public BinanceAlgoOrderUpdateOrder Order { get; set; } = null!;
@@ -29,140 +29,141 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceAlgoOrderUpdateOrder
     {
         /// <summary>
-        /// The symbol the order is for
+        /// ["<c>s</c>"] The symbol the order is for
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Algo type
+        /// ["<c>at</c>"] Algo type
         /// </summary>
         [JsonPropertyName("at")]
         public string AlgoType { get; set; } = string.Empty;
 
         /// <summary>
-        /// The order id as assigned by Binance
+        /// ["<c>aid</c>"] The order id as assigned by Binance
         /// </summary>
         [JsonPropertyName("aid")]
         public long Id { get; set; }
 
         /// <summary>
-        /// Actual order id
+        /// ["<c>ai</c>"] Actual order id
         /// </summary>
         [JsonPropertyName("ai")]
         public long? ActualOrderId { get; set; }
 
         /// <summary>
-        /// The order id as assigned by the client
+        /// ["<c>caid</c>"] The order id as assigned by the client
         /// </summary>
         [JsonPropertyName("caid")]
         [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
 
         /// <summary>
-        /// The price of the order
+        /// ["<c>p</c>"] The price of the order
         /// </summary>
         [JsonPropertyName("p")]
         public decimal Price { get; set; }
 
         /// <summary>
-        /// The original quantity of the order
+        /// ["<c>q</c>"] The original quantity of the order
         /// </summary>
         [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// The average fill price of the triggered order
+        /// ["<c>ap</c>"] The average fill price of the triggered order
         /// </summary>
         [JsonPropertyName("ap")]
         public decimal? AverageFillPrice { get; set; }
 
         /// <summary>
-        /// The quantity filled of the triggered order
+        /// ["<c>aq</c>"] The quantity filled of the triggered order
         /// </summary>
         [JsonPropertyName("aq")]
         public decimal? QuantityFilled { get; set; }
         /// <summary>
-        /// Reduce Only
+        /// ["<c>R</c>"] Reduce Only
         /// </summary>
         [JsonPropertyName("R")]
         public bool ReduceOnly { get; set; }
 
         /// <summary>
-        /// If order is for closing a position
+        /// ["<c>cp</c>"] If order is for closing a position
         /// </summary>
         [JsonPropertyName("cp")]
         public bool ClosePosition { get; set; }
 
         /// <summary>
-        /// The side of the order
+        /// ["<c>S</c>"] The side of the order
         /// </summary>
         [JsonPropertyName("S")]
         public OrderSide Side { get; set; }
 
         /// <summary>
-        /// The current status of the order
+        /// ["<c>X</c>"] The current status of the order
         /// </summary>
         [JsonPropertyName("X")]
         public AlgoOrderStatus Status { get; set; }
 
         /// <summary>
-        /// Trigger price for the order
+        /// ["<c>tp</c>"] Trigger price for the order
         /// </summary>
         [JsonPropertyName("tp")]
         public decimal? TriggerPrice { get; set; }
 
         /// <summary>
-        /// For what time the order lasts
+        /// ["<c>f</c>"] For what time the order lasts
         /// </summary>
         [JsonPropertyName("f")]
         public TimeInForce TimeInForce { get; set; }
 
         /// <summary>
-        /// The type of the order
+        /// ["<c>o</c>"] The type of the order
         /// </summary>
         [JsonPropertyName("o")]
         public FuturesOrderType Type { get; set; }
 
         /// <summary>
-        /// The working type
+        /// ["<c>wt</c>"] The working type
         /// </summary>
         [JsonPropertyName("wt")]
         public WorkingType WorkingType { get; set; }
 
         /// <summary>
-        /// The position side of the order
+        /// ["<c>ps</c>"] The position side of the order
         /// </summary>
         [JsonPropertyName("ps")]
         public PositionSide PositionSide { get; set; }
 
         /// <summary>
-        /// Price protect
+        /// ["<c>pP</c>"] Price protect
         /// </summary>
         [JsonPropertyName("pP")]
         public bool PriceProtect { get; set; }
 
         /// <summary>
-        /// Price match type
+        /// ["<c>pm</c>"] Price match type
         /// </summary>
         [JsonPropertyName("pm")]
         public PriceMatch PriceMatch { get; set; }
 
         /// <summary>
-        /// Self trade prevention mode
+        /// ["<c>V</c>"] Self trade prevention mode
         /// </summary>
         [JsonPropertyName("V")]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
 
         /// <summary>
-        /// Auto cancel at this date
+        /// ["<c>gtd</c>"] Auto cancel at this date
         /// </summary>
         [JsonPropertyName("gtd"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? GoodTillDate { get; set; }
         /// <summary>
-        /// Trigger time
+        /// ["<c>tt</c>"] Trigger time
         /// </summary>
         [JsonPropertyName("tt"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? TriggerTime { get; set; }
     }
 }
+

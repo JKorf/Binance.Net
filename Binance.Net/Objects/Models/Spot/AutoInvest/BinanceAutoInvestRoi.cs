@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.AutoInvest
+namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
     /// <summary>
     /// Auto invest ROI
@@ -7,14 +7,15 @@
     public record BinanceAutoInvestRoi
     {
         /// <summary>
-        /// The ROI date.
+        /// ["<c>date</c>"] The ROI date.
         /// </summary>
         [JsonPropertyName("date")]
         public DateTime Date { get; set; }
         /// <summary>
-        /// Simulated return on investment.
+        /// ["<c>simulateRoi</c>"] Simulated return on investment.
         /// </summary>
         [JsonPropertyName("simulateRoi")]
         public decimal SimulateRoi { get; set; }
     }
 }
+

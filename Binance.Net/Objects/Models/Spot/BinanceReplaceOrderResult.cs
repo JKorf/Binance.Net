@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,22 +9,22 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceReplaceOrderResult : BinanceReplaceResult
     {
         /// <summary>
-        /// Cancel result
+        /// ["<c>cancelResult</c>"] Cancel result
         /// </summary>
         [JsonPropertyName("cancelResult")]
         public OrderOperationResult CancelResult { get; set; }
         /// <summary>
-        /// New order result
+        /// ["<c>newOrderResult</c>"] New order result
         /// </summary>
         [JsonPropertyName("newOrderResult")]
         public OrderOperationResult NewOrderResult { get; set; }
         /// <summary>
-        /// Cancel order response. Check <see cref="CancelResult"/> for success; otherwise <see cref="BinanceReplaceCancelOrder.Message"/> contains additional information.
+        /// ["<c>cancelResponse</c>"] Cancel order response. Check <see cref="CancelResult"/> for success; otherwise <see cref="BinanceReplaceCancelOrder.Message"/> contains additional information.
         /// </summary>
         [JsonPropertyName("cancelResponse")]
         public BinanceReplaceCancelOrder? CancelResponse { get; set; }
         /// <summary>
-        /// New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
+        /// ["<c>newOrderResponse</c>"] New order response. Make sure to check that the NewOrderResult is Success, else the NewOrderResponse.Message will contain more info
         /// </summary>
         [JsonPropertyName("newOrderResponse")]
         public BinanceReplaceOrder? NewOrderResponse { get; set; }
@@ -36,12 +36,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceReplaceOrder : BinancePlacedOrder
     {
         /// <summary>
-        /// Failure message
+        /// ["<c>msg</c>"] Failure message
         /// </summary>
         [JsonPropertyName("msg")]
         public string? Message { get; set; }
         /// <summary>
-        /// Error code if not successful
+        /// ["<c>code</c>"] Error code if not successful
         /// </summary>
         [JsonPropertyName("code")]
         public int? Code { get; set; }
@@ -53,12 +53,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceReplaceCancelOrder : BinanceOrderBase
     {
         /// <summary>
-        /// Failure message
+        /// ["<c>msg</c>"] Failure message
         /// </summary>
         [JsonPropertyName("msg")]
         public string? Message { get; set; }
         /// <summary>
-        /// Error code if not successful
+        /// ["<c>code</c>"] Error code if not successful
         /// </summary>
         [JsonPropertyName("code")]
         public int? Code { get; set; }
@@ -70,14 +70,15 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceReplaceResult
     {
         /// <summary>
-        /// Failure message
+        /// ["<c>msg</c>"] Failure message
         /// </summary>
         [JsonPropertyName("msg")]
         public string? Message { get; set; }
         /// <summary>
-        /// Error code if not successful
+        /// ["<c>code</c>"] Error code if not successful
         /// </summary>
         [JsonPropertyName("code")]
         public int? Code { get; set; }
     }
 }
+

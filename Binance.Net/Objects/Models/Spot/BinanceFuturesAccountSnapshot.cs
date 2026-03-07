@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -12,18 +12,18 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceFuturesAccountSnapshot
     {
         /// <summary>
-        /// Timestamp of the data
+        /// ["<c>updateTime</c>"] Timestamp of the data
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter)), JsonPropertyName("updateTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Account type the data is for
+        /// ["<c>type</c>"] Account type the data is for
         /// </summary>
         [JsonPropertyName("type")]
         public AccountType Type { get; set; }
 
         /// <summary>
-        /// Snapshot data
+        /// ["<c>data</c>"] Snapshot data
         /// </summary>
         [JsonPropertyName("data")]
         public BinanceFuturesAccountSnapshotData Data { get; set; } = default!;
@@ -35,12 +35,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceFuturesAccountSnapshotData
     {
         /// <summary>
-        /// List of assets
+        /// ["<c>assets</c>"] List of assets
         /// </summary>
         [JsonPropertyName("assets")]
         public BinanceFuturesAsset[] Assets { get; set; } = Array.Empty<BinanceFuturesAsset>();
         /// <summary>
-        /// List of positions
+        /// ["<c>position</c>"] List of positions
         /// </summary>
         [JsonPropertyName("position")]
         public BinanceFuturesSnapshotPosition[] Position { get; set; } = Array.Empty<BinanceFuturesSnapshotPosition>();
@@ -52,17 +52,17 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceFuturesAsset
     {
         /// <summary>
-        /// The asset name.
+        /// ["<c>asset</c>"] The asset name.
         /// </summary>
         [JsonPropertyName("asset")]
         public string? Asset { get; set; }
         /// <summary>
-        /// Margin balance
+        /// ["<c>marginBalance</c>"] Margin balance
         /// </summary>
         [JsonPropertyName("marginBalance")]
         public decimal MarginBalance { get; set; }
         /// <summary>
-        /// Wallet balance
+        /// ["<c>walletBalance</c>"] Wallet balance
         /// </summary>
         [JsonPropertyName("walletBalance")]
         public decimal? WalletBalance { get; set; }
@@ -74,29 +74,30 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceFuturesSnapshotPosition
     {
         /// <summary>
-        /// The symbol
+        /// ["<c>symbol</c>"] The symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string? Symbol { get; set; }
         /// <summary>
-        /// Entry price
+        /// ["<c>entryPrice</c>"] Entry price
         /// </summary>
         [JsonPropertyName("entryPrice")]
         public decimal EntryPrice { get; set; }
         /// <summary>
-        /// The mark price.
+        /// ["<c>markPrice</c>"] The mark price.
         /// </summary>
         [JsonPropertyName("markPrice")]
         public decimal? MarkPrice { get; set; }
         /// <summary>
-        /// Position amount
+        /// ["<c>positionAmt</c>"] Position amount
         /// </summary>
         [JsonPropertyName("positionAmt")]
         public decimal? PositionAmt { get; set; }
         /// <summary>
-        /// Unrealized profit
+        /// ["<c>unRealizedProfit</c>"] Unrealized profit
         /// </summary>
         [JsonPropertyName("unRealizedProfit")]
         public decimal? UnrealizedProfit { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Margin
 {
@@ -13,14 +13,15 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         [JsonIgnore]
         public string ListenKey { get; set; } = string.Empty;
         /// <summary>
-        /// Margin level
+        /// ["<c>l</c>"] Margin level
         /// </summary>
         [JsonPropertyName("l")]
         public decimal? MarginLevel { get; set; }
         /// <summary>
-        /// Margin call status
+        /// ["<c>s</c>"] Margin call status
         /// </summary>
         [JsonPropertyName("s")]
         public MarginLevelStatus MarginCallStatus { get; set; }
     }
 }
+

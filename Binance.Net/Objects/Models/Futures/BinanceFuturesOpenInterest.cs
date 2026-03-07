@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -9,19 +9,19 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesOpenInterest
     {
         /// <summary>
-        /// The symbol the information is about
+        /// ["<c>symbol</c>"] The symbol the information is about
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// The open interest value.
+        /// ["<c>openInterest</c>"] The open interest value.
         /// </summary>
         [JsonPropertyName("openInterest")]
         public decimal OpenInterest { get; set; }
 
         /// <summary>
-        /// The data timestamp.
+        /// ["<c>time</c>"] The data timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
@@ -34,12 +34,12 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesCoinOpenInterest : BinanceFuturesOpenInterest
     {
         /// <summary>
-        /// The pair
+        /// ["<c>pair</c>"] The pair
         /// </summary>
         [JsonPropertyName("pair")]
         public string Pair { get; set; } = string.Empty;
         /// <summary>
-        /// The contract type
+        /// ["<c>contractType</c>"] The contract type
         /// </summary>
         [JsonPropertyName("contractType")]
         public ContractType ContractType { get; set; }

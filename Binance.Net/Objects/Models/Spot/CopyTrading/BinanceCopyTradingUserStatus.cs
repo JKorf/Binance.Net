@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.CopyTrading
+namespace Binance.Net.Objects.Models.Spot.CopyTrading
 {
     /// <summary>
     /// Copy trading user status
@@ -7,14 +7,15 @@
     public record BinanceCopyTradingUserStatus
     {
         /// <summary>
-        /// Is lead trader
+        /// ["<c>isLeadTrader</c>"] Is lead trader
         /// </summary>
         [JsonPropertyName("isLeadTrader")]
         public bool IsLeadTrader { get; set; }
         /// <summary>
-        /// Time
+        /// ["<c>time</c>"] Time
         /// </summary>
         [JsonPropertyName("time")]
         public long Timestamp { get; set; }
     }
 }
+

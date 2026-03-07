@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Convert
 {
@@ -9,55 +9,56 @@ namespace Binance.Net.Objects.Models.Spot.Convert
     public record BinanceConvertTrade
     {
         /// <summary>
-        /// Quote id
+        /// ["<c>quoteId</c>"] Quote id
         /// </summary>
         [JsonPropertyName("quoteId")]
         public string QuoteId { get; set; } = string.Empty;
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
-        /// Order status
+        /// ["<c>orderStatus</c>"] Order status
         /// </summary>
         [JsonPropertyName("orderStatus")]
         public ConvertOrderStatus Status { get; set; }
         /// <summary>
-        /// Quote asset 
+        /// ["<c>fromAsset</c>"] Quote asset 
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote quantity
+        /// ["<c>fromAmount</c>"] Quote quantity
         /// </summary>
         [JsonPropertyName("fromAmount")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Base asset
+        /// ["<c>toAsset</c>"] Base asset
         /// </summary>
         [JsonPropertyName("toAsset")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Base quantity
+        /// ["<c>toAmount</c>"] Base quantity
         /// </summary>
         [JsonPropertyName("toAmount")]
         public decimal BaseQuantity { get; set; }
         /// <summary>
-        /// Price ratio
+        /// ["<c>ratio</c>"] Price ratio
         /// </summary>
         [JsonPropertyName("ratio")]
         public decimal Ratio { get; set; }
         /// <summary>
-        /// Inverse price ratio
+        /// ["<c>inverseRatio</c>"] Inverse price ratio
         /// </summary>
         [JsonPropertyName("inverseRatio")]
         public decimal InverseRatio { get; set; }
         /// <summary>
-        /// Creation time
+        /// ["<c>createTime</c>"] Creation time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
     }
 }
+

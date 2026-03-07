@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Convert symbol info
@@ -7,32 +7,32 @@
     public record BinanceFuturesConvertSymbol
     {
         /// <summary>
-        /// From asset
+        /// ["<c>fromAsset</c>"] From asset
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
-        /// To asset
+        /// ["<c>toAsset</c>"] To asset
         /// </summary>
         [JsonPropertyName("toAsset")]
         public string ToAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Minimal convert from asset quantity
+        /// ["<c>fromAssetMinAmount</c>"] Minimal convert from asset quantity
         /// </summary>
         [JsonPropertyName("fromAssetMinAmount")]
         public decimal FromAssetMinQuantity { get; set; }
         /// <summary>
-        /// Maximal convert from asset quantity
+        /// ["<c>fromAssetMaxAmount</c>"] Maximal convert from asset quantity
         /// </summary>
         [JsonPropertyName("fromAssetMaxAmount")]
         public decimal FromAssetMaxQuantity { get; set; }
         /// <summary>
-        /// Minimal convert to asset quantity
+        /// ["<c>toAssetMinAmount</c>"] Minimal convert to asset quantity
         /// </summary>
         [JsonPropertyName("toAssetMinAmount")]
         public decimal ToAssetMinQuantity { get; set; }
         /// <summary>
-        /// Maximal convert to asset quantity
+        /// ["<c>toAssetMaxAmount</c>"] Maximal convert to asset quantity
         /// </summary>
         [JsonPropertyName("toAssetMaxAmount")]
         public decimal ToAssetMaxQuantity { get; set; }
@@ -40,3 +40,4 @@
 
 
 }
+

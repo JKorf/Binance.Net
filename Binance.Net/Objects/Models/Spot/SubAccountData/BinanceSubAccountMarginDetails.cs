@@ -1,4 +1,4 @@
-﻿using Binance.Net.Objects.Models.Spot.Margin;
+using Binance.Net.Objects.Models.Spot.Margin;
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
@@ -9,37 +9,37 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceSubAccountMarginDetails
     {
         /// <summary>
-        /// The account email address.
+        /// ["<c>email</c>"] The account email address.
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Margin level
+        /// ["<c>marginLevel</c>"] Margin level
         /// </summary>
         [JsonPropertyName("marginLevel")]
         public decimal MarginLevel { get; set; }
         /// <summary>
-        /// Total asset in btc
+        /// ["<c>totalAssetOfBtc</c>"] Total asset in btc
         /// </summary>
         [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
-        /// Total liability
+        /// ["<c>totalLiabilityOfBtc</c>"] Total liability
         /// </summary>
         [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
-        /// Total net asset value in BTC.
+        /// ["<c>totalNetAssetOfBtc</c>"] Total net asset value in BTC.
         /// </summary>
         [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
         /// <summary>
-        /// Trade details
+        /// ["<c>marginTradeCoeffVo</c>"] Trade details
         /// </summary>
         [JsonPropertyName("marginTradeCoeffVo")]
         public BinanceMarginTradeCoeff? MarginTradeCoeff { get; set; }
         /// <summary>
-        /// Asset list
+        /// ["<c>marginUserAssetVoList</c>"] Asset list
         /// </summary>
         [JsonPropertyName("marginUserAssetVoList")]
         public BinanceMarginBalance[] MarginUserAssets { get; set; } = Array.Empty<BinanceMarginBalance>();
@@ -51,19 +51,20 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceMarginTradeCoeff
     {
         /// <summary>
-        /// The forced liquidation margin ratio.
+        /// ["<c>forceLiquidationBar</c>"] The forced liquidation margin ratio.
         /// </summary>
         [JsonPropertyName("forceLiquidationBar")]
         public decimal ForceLiquidationBar { get; set; }
         /// <summary>
-        /// The margin call ratio.
+        /// ["<c>marginCallBar</c>"] The margin call ratio.
         /// </summary>
         [JsonPropertyName("marginCallBar")]
         public decimal MarginCallBar { get; set; }
         /// <summary>
-        /// Initial margin ratio
+        /// ["<c>normalBar</c>"] Initial margin ratio
         /// </summary>
         [JsonPropertyName("normalBar")]
         public decimal NormalBar { get; set; }
     }
 }
+

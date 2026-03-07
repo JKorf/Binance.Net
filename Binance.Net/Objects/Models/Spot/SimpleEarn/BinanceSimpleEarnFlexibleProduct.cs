@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SimpleEarn
+namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
     /// <summary>
     /// Simple earn product info
@@ -7,64 +7,65 @@
     public record BinanceSimpleEarnFlexibleProduct
     {
         /// <summary>
-        /// Product asset.
+        /// ["<c>asset</c>"] Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Latest annual percentage rate
+        /// ["<c>latestAnnualPercentageRate</c>"] Latest annual percentage rate
         /// </summary>
         [JsonPropertyName("latestAnnualPercentageRate")]
         public decimal LatestAnnualPercentageRate { get; set; }
         /// <summary>
-        /// Tier annual percentage rate
+        /// ["<c>tierAnnualPercentageRate</c>"] Tier annual percentage rate
         /// </summary>
         [JsonPropertyName("tierAnnualPercentageRate")]
         public Dictionary<string, decimal> TierAnnualPercentageRate { get; set; } = new Dictionary<string, decimal>();
         /// <summary>
-        /// Air drop percentage rate
+        /// ["<c>airDropPercentageRate</c>"] Air drop percentage rate
         /// </summary>
         [JsonPropertyName("airDropPercentageRate")]
         public decimal AirDropPercentageRate { get; set; }
         /// <summary>
-        /// Can purchase product
+        /// ["<c>canPurchase</c>"] Can purchase product
         /// </summary>
         [JsonPropertyName("canPurchase")]
         public bool CanPurchase { get; set; }
         /// <summary>
-        /// Can redeem product
+        /// ["<c>canRedeem</c>"] Can redeem product
         /// </summary>
         [JsonPropertyName("canRedeem")]
         public bool CanRedeem { get; set; }
         /// <summary>
-        /// Product is sold out
+        /// ["<c>isSoldOut</c>"] Product is sold out
         /// </summary>
         [JsonPropertyName("isSoldOut")]
         public bool IsSoldOut { get; set; }
         /// <summary>
-        /// Is hot
+        /// ["<c>hot</c>"] Is hot
         /// </summary>
         [JsonPropertyName("hot")]
         public bool Hot { get; set; }
         /// <summary>
-        /// Min purchase quantity
+        /// ["<c>minPurchaseAmount</c>"] Min purchase quantity
         /// </summary>
         [JsonPropertyName("minPurchaseAmount")]
         public decimal MinPurchaseQuantity { get; set; }
         /// <summary>
-        /// Product identifier.
+        /// ["<c>productId</c>"] Product identifier.
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
-        /// Subscription start time
+        /// ["<c>subscriptionStartTime</c>"] Subscription start time
         /// </summary>
         [JsonPropertyName("subscriptionStartTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? SubscriptionStartTime { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
     }
 }
+

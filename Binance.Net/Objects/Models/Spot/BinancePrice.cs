@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// The price of a symbol
@@ -7,17 +7,17 @@
     public record BinancePrice
     {
         /// <summary>
-        /// The symbol the price is for
+        /// ["<c>symbol</c>"] The symbol the price is for
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The price of the symbol
+        /// ["<c>price</c>"] The price of the symbol
         /// </summary>
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// The data timestamp.
+        /// ["<c>time</c>"] The data timestamp.
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
@@ -30,9 +30,10 @@
     public record BinanceFuturesCoinPrice : BinancePrice
     {
         /// <summary>
-        /// Name of the pair
+        /// ["<c>ps</c>"] Name of the pair
         /// </summary>
         [JsonPropertyName("ps")]
         public string Pair { get; set; } = string.Empty;
     }
 }
+

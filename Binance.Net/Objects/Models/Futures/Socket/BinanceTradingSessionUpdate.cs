@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
@@ -8,19 +8,20 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceTradingSessionUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Session start time.
+        /// ["<c>t</c>"] Session start time.
         /// </summary>
         [JsonPropertyName("t")]
         public DateTime StartTime { get; set; }
         /// <summary>
-        /// Session end time.
+        /// ["<c>T</c>"] Session end time.
         /// </summary>
         [JsonPropertyName("T")]
         public DateTime EndTime { get; set; }
         /// <summary>
-        /// Session type
+        /// ["<c>S</c>"] Session type
         /// </summary>
         [JsonPropertyName("S")]
         public SessionType Type { get; set; }
     }
 }
+

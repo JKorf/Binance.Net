@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
@@ -9,22 +9,22 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestIndex
     {
         /// <summary>
-        /// The index identifier.
+        /// ["<c>indexId</c>"] The index identifier.
         /// </summary>
         [JsonPropertyName("indexId")]
         public long IndexId { get; set; }
         /// <summary>
-        /// Index name
+        /// ["<c>indexName</c>"] Index name
         /// </summary>
         [JsonPropertyName("indexName")]
         public string IndexName { get; set; } = string.Empty;
         /// <summary>
-        /// The index status.
+        /// ["<c>status</c>"] The index status.
         /// </summary>
         [JsonPropertyName("status")]
         public AutoInvestIndexStatus? Status { get; set; }
         /// <summary>
-        /// Asset allocation
+        /// ["<c>assetAllocation</c>"] Asset allocation
         /// </summary>
         [JsonPropertyName("assetAllocation")]
         public BinanceAutoInvestAssetIndex[] AssetAllocation { get; set; } = Array.Empty<BinanceAutoInvestAssetIndex>();
@@ -36,12 +36,12 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestAssetIndex
     {
         /// <summary>
-        /// Target asset
+        /// ["<c>targetAsset</c>"] Target asset
         /// </summary>
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Allocation percentage.
+        /// ["<c>allocation</c>"] Allocation percentage.
         /// </summary>
         [JsonPropertyName("allocation")]
         public decimal Allocation { get; set; }
@@ -49,3 +49,4 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
 
 
 }
+

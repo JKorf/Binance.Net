@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Account configuration
@@ -7,42 +7,42 @@
     public record BinanceFuturesAccountConfiguration
     {
         /// <summary>
-        /// Fee tier
+        /// ["<c>feeTier</c>"] Fee tier
         /// </summary>
         [JsonPropertyName("feeTier")]
         public int FeeTier { get; set; }
         /// <summary>
-        /// Can trade
+        /// ["<c>canTrade</c>"] Can trade
         /// </summary>
         [JsonPropertyName("canTrade")]
         public bool CanTrade { get; set; }
         /// <summary>
-        /// Can deposit
+        /// ["<c>canDeposit</c>"] Can deposit
         /// </summary>
         [JsonPropertyName("canDeposit")]
         public bool CanDeposit { get; set; }
         /// <summary>
-        /// Can withdraw
+        /// ["<c>canWithdraw</c>"] Can withdraw
         /// </summary>
         [JsonPropertyName("canWithdraw")]
         public bool CanWithdraw { get; set; }
         /// <summary>
-        /// Dual side position
+        /// ["<c>dualSidePosition</c>"] Dual side position
         /// </summary>
         [JsonPropertyName("dualSidePosition")]
         public bool DualSidePosition { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>updateTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("updateTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Multi assets margin
+        /// ["<c>multiAssetsMargin</c>"] Multi assets margin
         /// </summary>
         [JsonPropertyName("multiAssetsMargin")]
         public bool MultiAssetsMargin { get; set; }
         /// <summary>
-        /// Trade group id
+        /// ["<c>tradeGroupId</c>"] Trade group id
         /// </summary>
         [JsonPropertyName("tradeGroupId")]
         public long TradeGroupId { get; set; }
@@ -50,3 +50,4 @@
 
 
 }
+

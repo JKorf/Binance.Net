@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Bnb burn status
@@ -7,14 +7,15 @@
     public record BinanceBnbBurnStatus
     {
         /// <summary>
-        /// Whether spot trading BNB burn is enabled.
+        /// ["<c>spotBNBBurn</c>"] Whether spot trading BNB burn is enabled.
         /// </summary>
         [JsonPropertyName("spotBNBBurn")]
         public bool SpotBnbBurn { get; set; }
         /// <summary>
-        /// Whether margin interest BNB burn is enabled.
+        /// ["<c>interestBNBBurn</c>"] Whether margin interest BNB burn is enabled.
         /// </summary>
         [JsonPropertyName("interestBNBBurn")]
         public bool InterestBnbBurn { get; set; }
     }
 }
+

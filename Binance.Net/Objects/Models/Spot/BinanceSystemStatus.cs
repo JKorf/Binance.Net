@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinanceSystemStatus
     {
         /// <summary>
-        /// The system status.
+        /// ["<c>status</c>"] The system status.
         /// </summary>
         [JsonPropertyName("status")]
         public SystemStatus Status { get; set; }
         /// <summary>
-        /// Additional info
+        /// ["<c>msg</c>"] Additional info
         /// </summary>
         [JsonPropertyName("msg")]
         public string? Message { get; set; }
     }
 }
+

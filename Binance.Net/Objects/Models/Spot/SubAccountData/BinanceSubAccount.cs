@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     [SerializationModel]
     internal record BinanceSubAccountWrapper
@@ -13,20 +13,21 @@
     public record BinanceSubAccount
     {
         /// <summary>
-        /// The email associated with the sub account
+        /// ["<c>email</c>"] The email associated with the sub account
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Is account frozen
+        /// ["<c>isFreeze</c>"] Is account frozen
         /// </summary>
         [JsonPropertyName("isFreeze")]
         public bool IsFreeze { get; set; } = false;
         /// <summary>
-        /// The time the sub account was created
+        /// ["<c>createTime</c>"] The time the sub account was created
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
     }
 }
+

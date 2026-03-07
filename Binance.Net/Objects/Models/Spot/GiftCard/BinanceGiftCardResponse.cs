@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.GiftCard
+namespace Binance.Net.Objects.Models.Spot.GiftCard
 {
     /// <summary>
     /// Query results 
@@ -6,22 +6,22 @@
     public record BinanceGiftCardResponse<T>
     {
         /// <summary>
-        /// Response code
+        /// ["<c>code</c>"] Response code
         /// </summary>
         [JsonPropertyName("code")] 
         public string Code { get; set; } = string.Empty;
         /// <summary>
-        /// Response message
+        /// ["<c>message</c>"] Response message
         /// </summary>
         [JsonPropertyName("message")]
         public string Message { get; set; } = string.Empty;
         /// <summary>
-        /// Response data
+        /// ["<c>data</c>"] Response data
         /// </summary>
         [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
         /// <summary>
-        /// Whether the call was successful
+        /// ["<c>success</c>"] Whether the call was successful
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Submit result
@@ -6,14 +6,15 @@
     public record BinanceTravelRuleSubmitResult
     {
         /// <summary>
-        /// Whether the submission was accepted.
+        /// ["<c>accepted</c>"] Whether the submission was accepted.
         /// </summary>
         [JsonPropertyName("accepted")]
         public bool Accepted { get; set; }
         /// <summary>
-        /// Additional submission info.
+        /// ["<c>info</c>"] Additional submission info.
         /// </summary>
         [JsonPropertyName("info")]
         public string Info { get; set; } = string.Empty;
     }
 }
+

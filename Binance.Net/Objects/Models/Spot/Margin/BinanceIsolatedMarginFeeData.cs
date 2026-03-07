@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Fee data
@@ -7,22 +7,22 @@
     public record BinanceIsolatedMarginFeeData
     {
         /// <summary>
-        /// Vip level
+        /// ["<c>vipLevel</c>"] Vip level
         /// </summary>
         [JsonPropertyName("vipLevel")]
         public int VipLevel { get; set; }
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public int Leverage { get; set; }
         /// <summary>
-        /// Data
+        /// ["<c>data</c>"] Data
         /// </summary>
         [JsonPropertyName("data")]
         public BinanceIsolatedMarginFeeInfo[] FeeInfo { get; set; } = Array.Empty<BinanceIsolatedMarginFeeInfo>();
@@ -34,19 +34,20 @@
     public record BinanceIsolatedMarginFeeInfo
     {
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Daily interest
+        /// ["<c>dailyInterest</c>"] Daily interest
         /// </summary>
         [JsonPropertyName("dailyInterest")]
         public decimal DailyInterest { get; set; }
         /// <summary>
-        /// Borrow limit
+        /// ["<c>borrowLimit</c>"] Borrow limit
         /// </summary>
         [JsonPropertyName("borrowLimit")]
         public decimal BorrowLimit { get; set; }
     }
 }
+

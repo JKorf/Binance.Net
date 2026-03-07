@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Blvt
+namespace Binance.Net.Objects.Models.Spot.Blvt
 {
     /// <summary>
     /// Blvt info update
@@ -7,38 +7,38 @@
     public record BinanceBlvtInfoUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// Token name
+        /// ["<c>s</c>"] Token name
         /// </summary>
         [JsonPropertyName("s")]
         public string TokenName { get; set; } = string.Empty;
         /// <summary>
-        /// Token issued
+        /// ["<c>m</c>"] Token issued
         /// </summary>
         [JsonPropertyName("m")]
         public decimal TokenIssued { get; set; }
         /// <summary>
-        /// Nav
+        /// ["<c>n</c>"] Nav
         /// </summary>
         [JsonPropertyName("n")]
         public decimal Nav { get; set; }
 
         /// <summary>
-        /// Baskets
+        /// ["<c>b</c>"] Baskets
         /// </summary>
         [JsonPropertyName("b")]
         public BlvtBasket[] Baskets { get; set; } = Array.Empty<BlvtBasket>();
         /// <summary>
-        /// Real leverage.
+        /// ["<c>l</c>"] Real leverage.
         /// </summary>
         [JsonPropertyName("l")]
         public decimal RealLeverage { get; set; }
         /// <summary>
-        /// Target leverage.
+        /// ["<c>t</c>"] Target leverage.
         /// </summary>
         [JsonPropertyName("t")]
         public decimal TargetLeverage { get; set; }
         /// <summary>
-        /// Funding ratio
+        /// ["<c>f</c>"] Funding ratio
         /// </summary>
         [JsonPropertyName("f")]
         public decimal FundingRatio { get; set; }
@@ -50,14 +50,15 @@
     public record BlvtBasket
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>s</c>"] Symbol
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Position
+        /// ["<c>n</c>"] Position
         /// </summary>
         [JsonPropertyName("n")]
         public decimal Position { get; set; }
     }
 }
+

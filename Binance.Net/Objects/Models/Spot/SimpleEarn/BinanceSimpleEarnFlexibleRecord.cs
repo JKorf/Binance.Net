@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SimpleEarn
 {
@@ -9,54 +9,55 @@ namespace Binance.Net.Objects.Models.Spot.SimpleEarn
     public record BinanceSimpleEarnFlexibleRecord
     {
         /// <summary>
-        /// Subscribed quantity.
+        /// ["<c>amount</c>"] Subscribed quantity.
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Product asset.
+        /// ["<c>asset</c>"] Product asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// ["<c>time</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Purchase id
+        /// ["<c>purchaseId</c>"] Purchase id
         /// </summary>
         [JsonPropertyName("purchaseId")]
         public long PurchaseId { get; set; }
         /// <summary>
-        /// Product id
+        /// ["<c>productId</c>"] Product id
         /// </summary>
         [JsonPropertyName("productId")]
         public string ProductId { get; set; } = string.Empty;
         /// <summary>
-        /// Subscription type
+        /// ["<c>type</c>"] Subscription type
         /// </summary>
         [JsonPropertyName("type")]
         public SubscriptionType Type { get; set; }
         /// <summary>
-        /// Source account
+        /// ["<c>sourceAccount</c>"] Source account
         /// </summary>
         [JsonPropertyName("sourceAccount")]
         public AccountSource SourceAccount { get; set; }
         /// <summary>
-        /// Quantity from spot
+        /// ["<c>amtFromSpot</c>"] Quantity from spot
         /// </summary>
         [JsonPropertyName("amtFromSpot")]
         public decimal SpotQuantity { get; set; }
         /// <summary>
-        /// Quantity from funding
+        /// ["<c>amtFromFunding</c>"] Quantity from funding
         /// </summary>
         [JsonPropertyName("amtFromFunding")]
         public decimal FundingQuantity { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public Enums.SubscriptionStatus Status { get; set; }
     }
 }
+

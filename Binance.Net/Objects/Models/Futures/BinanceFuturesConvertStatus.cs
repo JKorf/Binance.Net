@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -9,47 +9,47 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesConvertStatus
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
         /// <summary>
-        /// Order status
+        /// ["<c>orderStatus</c>"] Order status
         /// </summary>
         [JsonPropertyName("orderStatus")]
         public ConvertOrderStatus Status { get; set; }
         /// <summary>
-        /// From asset
+        /// ["<c>fromAsset</c>"] From asset
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quantity in the from asset
+        /// ["<c>fromAmount</c>"] Quantity in the from asset
         /// </summary>
         [JsonPropertyName("fromAmount")]
         public decimal FromQuantity { get; set; }
         /// <summary>
-        /// To asset
+        /// ["<c>toAsset</c>"] To asset
         /// </summary>
         [JsonPropertyName("toAsset")]
         public string ToAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quantity in the to asset
+        /// ["<c>toAmount</c>"] Quantity in the to asset
         /// </summary>
         [JsonPropertyName("toAmount")]
         public decimal ToQuantity { get; set; }
         /// <summary>
-        /// Ratio
+        /// ["<c>ratio</c>"] Ratio
         /// </summary>
         [JsonPropertyName("ratio")]
         public decimal Ratio { get; set; }
         /// <summary>
-        /// Inverse ratio
+        /// ["<c>inverseRatio</c>"] Inverse ratio
         /// </summary>
         [JsonPropertyName("inverseRatio")]
         public decimal InverseRatio { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>createTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
@@ -57,3 +57,4 @@ namespace Binance.Net.Objects.Models.Futures
 
 
 }
+

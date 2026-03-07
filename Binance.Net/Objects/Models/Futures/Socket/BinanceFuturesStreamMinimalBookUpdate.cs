@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
 {
@@ -8,15 +8,16 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamMinimalBookUpdate
     {
         /// <summary>
-        /// The list of diff bids
+        /// ["<c>b</c>"] The list of diff bids
         /// </summary>
         [JsonPropertyName("b")]
         public BinanceOrderBookEntry[] Bids { get; set; } = Array.Empty<BinanceOrderBookEntry>();
 
         /// <summary>
-        /// The list of diff asks
+        /// ["<c>a</c>"] The list of diff asks
         /// </summary>
         [JsonPropertyName("a")]
         public BinanceOrderBookEntry[] Asks { get; set; } = Array.Empty<BinanceOrderBookEntry>();
     }
 }
+

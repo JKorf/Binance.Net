@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Mining
+namespace Binance.Net.Objects.Models.Spot.Mining
 {
     /// <summary>
     /// Miner details
@@ -7,18 +7,18 @@
     public record BinanceMinerDetails
     {
         /// <summary>
-        /// Name of the worker
+        /// ["<c>workerName</c>"] Name of the worker
         /// </summary>
         [JsonPropertyName("workerName")]
         public string WorkerName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Data type
+        /// ["<c>type</c>"] Data type
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         /// <summary>
-        /// Hash rate data
+        /// ["<c>hashrateDatas</c>"] Hash rate data
         /// </summary>
         [JsonPropertyName("hashrateDatas")]
         public BinanceHashRate[] HashRateDatas { get; set; } = Array.Empty<BinanceHashRate>();
@@ -30,20 +30,21 @@
     public record BinanceHashRate
     {
         /// <summary>
-        /// Timestamp
+        /// ["<c>time</c>"] Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Hashrate
+        /// ["<c>hashrate</c>"] Hashrate
         /// </summary>
         [JsonPropertyName("hashrate")]
         public decimal HashRate { get; set; }
         /// <summary>
-        /// Rejected
+        /// ["<c>reject</c>"] Rejected
         /// </summary>
         [JsonPropertyName("reject")]
         public decimal Reject { get; set; }
     }
 }
+

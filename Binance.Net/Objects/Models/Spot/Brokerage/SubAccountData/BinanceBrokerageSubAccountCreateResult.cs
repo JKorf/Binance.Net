@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Sub Account Create Result
@@ -7,17 +7,17 @@
     public record BinanceBrokerageSubAccountCreateResult
     {
         /// <summary>
-        /// Sub Account Id
+        /// ["<c>subaccountId</c>"] Sub Account Id
         /// </summary>
         [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Email
+        /// ["<c>email</c>"] Email
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Tag
+        /// ["<c>tag</c>"] Tag
         /// </summary>
         [JsonPropertyName("tag")]
         public string Tag { get; set; } = string.Empty;

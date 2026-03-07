@@ -1,4 +1,4 @@
-﻿using Binance.Net.Converters;
+using Binance.Net.Converters;
 using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
@@ -10,32 +10,32 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamTradeUpdate : BinanceStreamEvent
     {
         /// <summary>
-        /// The transaction time.
+        /// ["<c>T</c>"] The transaction time.
         /// </summary>
         [JsonPropertyName("T")]
         public DateTime TransactionTime { get; set; }
         /// <summary>
-        /// The symbol the order is for
+        /// ["<c>s</c>"] The symbol the order is for
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// The quantity of the order
+        /// ["<c>q</c>"] The quantity of the order
         /// </summary>
         [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The price of the order
+        /// ["<c>p</c>"] The price of the order
         /// </summary>
         [JsonPropertyName("p")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Whether the buyer is the maker
+        /// ["<c>m</c>"] Whether the buyer is the maker
         /// </summary>
         [JsonPropertyName("m")]
         public bool BuyerIsMaker { get; set; }
         /// <summary>
-        /// The new client order id
+        /// ["<c>c</c>"] The new client order id
         /// </summary>
         /// <remarks>
         /// special client order id:
@@ -47,29 +47,30 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         [JsonConverter(typeof(ClientOrderIdReplaceConverter))]
         public string ClientOrderId { get; set; } = string.Empty;
         /// <summary>
-        /// The side of the order
+        /// ["<c>S</c>"] The side of the order
         /// </summary>
         [JsonPropertyName("S")]
         public OrderSide Side { get; set; }
         /// <summary>
-        /// The price of the last filled trade
+        /// ["<c>L</c>"] The price of the last filled trade
         /// </summary>
         [JsonPropertyName("L")]
         public decimal PriceLastFilledTrade { get; set; }
         /// <summary>
-        /// The quantity of the last filled trade of this order
+        /// ["<c>l</c>"] The quantity of the last filled trade of this order
         /// </summary>
         [JsonPropertyName("l")]
         public decimal QuantityOfLastFilledTrade { get; set; }
         /// <summary>
-        /// The trade id
+        /// ["<c>t</c>"] The trade id
         /// </summary>
         [JsonPropertyName("t")]
         public long TradeId { get; set; }
         /// <summary>
-        /// The id of the order as assigned by Binance
+        /// ["<c>i</c>"] The id of the order as assigned by Binance
         /// </summary>
         [JsonPropertyName("i")]
         public long OrderId { get; set; }
     }
 }
+

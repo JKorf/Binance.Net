@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Liability update
@@ -11,24 +11,25 @@
         [JsonIgnore]
         public string ListenKey { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>a</c>"] Asset
         /// </summary>
         [JsonPropertyName("a")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Liability update type
+        /// ["<c>t</c>"] Liability update type
         /// </summary>
         [JsonPropertyName("t")]
         public string UpdateType { get; set; } = string.Empty;
         /// <summary>
-        /// Principle quantity
+        /// ["<c>p</c>"] Principle quantity
         /// </summary>
         [JsonPropertyName("p")]
         public decimal? Principle { get; set; }
         /// <summary>
-        /// Interest quantity
+        /// ["<c>i</c>"] Interest quantity
         /// </summary>
         [JsonPropertyName("i")]
         public decimal? Interest { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Customize margin call result
@@ -7,30 +7,31 @@
     public record BinanceCryptoLoanMarginCallResult
     {
         /// <summary>
-        /// The order identifier.
+        /// ["<c>orderId</c>"] The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral asset
+        /// ["<c>collateralCoin</c>"] Collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Pre margin call 
+        /// ["<c>preMarginCall</c>"] Pre margin call 
         /// </summary>
         [JsonPropertyName("preMarginCall")]
         public decimal PreMarginCall { get; set; }
         /// <summary>
-        /// After margin call
+        /// ["<c>afterMarginCall</c>"] After margin call
         /// </summary>
         [JsonPropertyName("afterMarginCall")]
         public decimal AfterMarginCall { get; set; }
         /// <summary>
-        /// The customization timestamp.
+        /// ["<c>customizeTime</c>"] The customization timestamp.
         /// </summary>
         [JsonPropertyName("customizeTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.NFT
+namespace Binance.Net.Objects.Models.Spot.NFT
 {
     /// <summary>
     /// NFT withdraw
@@ -6,39 +6,40 @@
     public record BinanceNftWithdraw
     {
         /// <summary>
-        /// NFT network
+        /// ["<c>network</c>"] NFT network
         /// </summary>
         [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// Transaction id
+        /// ["<c>txID</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("txID")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
-        /// NFT contract address
+        /// ["<c>contractAdrress</c>"] NFT contract address
         /// </summary>
         [JsonPropertyName("contractAdrress")] // not a typo, spelled according to binance docs
         public string ContractAddress { get; set; } = string.Empty;
         /// <summary>
-        /// NFT token id
+        /// ["<c>tokenId</c>"] NFT token id
         /// </summary>
         [JsonPropertyName("tokenId")]
         public string TokenId { get; set; } = string.Empty;
         /// <summary>
-        /// Timestamp
+        /// ["<c>timestamp</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Withdraw fee
+        /// ["<c>fee</c>"] Withdraw fee
         /// </summary>
         [JsonPropertyName("fee")]
         public decimal Fee { get; set; }
         /// <summary>
-        /// Fee asset
+        /// ["<c>feeAsset</c>"] Fee asset
         /// </summary>
         [JsonPropertyName("feeAsset")]
         public string FeeAsset { get; set; } = string.Empty;
     }
 }
+

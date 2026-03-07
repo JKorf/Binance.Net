@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
@@ -9,77 +9,77 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanHoldings
     {
         /// <summary>
-        /// The plan identifier.
+        /// ["<c>planId</c>"] The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }
         /// <summary>
-        /// Plan type
+        /// ["<c>planType</c>"] Plan type
         /// </summary>
         [JsonPropertyName("planType")]
         public AutoInvestPlanType PlanType { get; set; }
         /// <summary>
-        /// Edit allowed
+        /// ["<c>editAllowed</c>"] Edit allowed
         /// </summary>
         [JsonPropertyName("editAllowed")]
         public bool EditAllowed { get; set; }
         /// <summary>
-        /// Flexible allowed to use
+        /// ["<c>flexibleAllowedToUse</c>"] Flexible allowed to use
         /// </summary>
         [JsonPropertyName("flexibleAllowedToUse")]
         public bool FlexibleAllowedToUse { get; set; }
         /// <summary>
-        /// Creation date time
+        /// ["<c>creationDateTime</c>"] Creation date time
         /// </summary>
         [JsonPropertyName("creationDateTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// First execution date time
+        /// ["<c>firstExecutionDateTime</c>"] First execution date time
         /// </summary>
         [JsonPropertyName("firstExecutionDateTime")]
         public DateTime FirstExecutionTime { get; set; }
         /// <summary>
-        /// Next execution date time
+        /// ["<c>nextExecutionDateTime</c>"] Next execution date time
         /// </summary>
         [JsonPropertyName("nextExecutionDateTime")]
         public DateTime? NextExecutionTime { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public AutoInvestPlanStatus Status { get; set; }
         /// <summary>
-        /// Target asset
+        /// ["<c>targetAsset</c>"] Target asset
         /// </summary>
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Source asset
+        /// ["<c>sourceAsset</c>"] Source asset
         /// </summary>
         [JsonPropertyName("sourceAsset")]
         public string SourceAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Plan value in USD
+        /// ["<c>planValueInUSD</c>"] Plan value in USD
         /// </summary>
         [JsonPropertyName("planValueInUSD")]
         public decimal PlanValueInUsd { get; set; }
         /// <summary>
-        /// Pnl in USD
+        /// ["<c>pnlInUSD</c>"] Pnl in USD
         /// </summary>
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Return on investment.
+        /// ["<c>roi</c>"] Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }
         /// <summary>
-        /// Total invested in USD
+        /// ["<c>totalInvestedInUSD</c>"] Total invested in USD
         /// </summary>
         [JsonPropertyName("totalInvestedInUSD")]
         public decimal TotalInvestedInUsd { get; set; }
         /// <summary>
-        /// Details
+        /// ["<c>details</c>"] Details
         /// </summary>
         [JsonPropertyName("details")]
         public BinanceAutoInvestPlanHoldingDetails[] Details { get; set; } = Array.Empty<BinanceAutoInvestPlanHoldingDetails>();
@@ -91,72 +91,72 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanHoldingDetails
     {
         /// <summary>
-        /// Target asset
+        /// ["<c>targetAsset</c>"] Target asset
         /// </summary>
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Average price in USD
+        /// ["<c>averagePriceInUSD</c>"] Average price in USD
         /// </summary>
         [JsonPropertyName("averagePriceInUSD")]
         public decimal AveragePriceInUsd { get; set; }
         /// <summary>
-        /// Total invested in USD
+        /// ["<c>totalInvestedInUSD</c>"] Total invested in USD
         /// </summary>
         [JsonPropertyName("totalInvestedInUSD")]
         public decimal TotalInvestedInUsd { get; set; }
         /// <summary>
-        /// Purchased quantity
+        /// ["<c>purchasedAmount</c>"] Purchased quantity
         /// </summary>
         [JsonPropertyName("purchasedAmount")]
         public decimal PurchasedQuantity { get; set; }
         /// <summary>
-        /// Purchased quantity asset
+        /// ["<c>purchasedAmountUnit</c>"] Purchased quantity asset
         /// </summary>
         [JsonPropertyName("purchasedAmountUnit")]
         public string PurchasedQuantityAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Pnl in USD
+        /// ["<c>pnlInUSD</c>"] Pnl in USD
         /// </summary>
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Return on investment.
+        /// ["<c>roi</c>"] Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }
         /// <summary>
-        /// Percentage
+        /// ["<c>percentage</c>"] Percentage
         /// </summary>
         [JsonPropertyName("percentage")]
         public decimal Percentage { get; set; }
         /// <summary>
-        /// Asset status
+        /// ["<c>assetStatus</c>"] Asset status
         /// </summary>
         [JsonPropertyName("assetStatus")]
         public string AssetStatus { get; set; } = string.Empty;
         /// <summary>
-        /// Available quantity
+        /// ["<c>availableAmount</c>"] Available quantity
         /// </summary>
         [JsonPropertyName("availableAmount")]
         public decimal? AvailableQuantity { get; set; }
         /// <summary>
-        /// Available quantity unit
+        /// ["<c>availableAmountUnit</c>"] Available quantity unit
         /// </summary>
         [JsonPropertyName("availableAmountUnit")]
         public string? AvailableQuantityUnit { get; set; }
         /// <summary>
-        /// Redeemed amount
+        /// ["<c>redeemedAmout</c>"] Redeemed amount
         /// </summary>
         [JsonPropertyName("redeemedAmout")]
         public decimal? RedeemedAmount { get; set; }
         /// <summary>
-        /// Redeemed amount asset
+        /// ["<c>redeemedAmoutUnit</c>"] Redeemed amount asset
         /// </summary>
         [JsonPropertyName("redeemedAmoutUnit")]
         public string? RedeemedAmountAsset { get; set; }
         /// <summary>
-        /// Asset value in USD
+        /// ["<c>assetValueInUSD</c>"] Asset value in USD
         /// </summary>
         [JsonPropertyName("assetValueInUSD")]
         public decimal? AssetValueInUsd { get; set; }
@@ -164,3 +164,4 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
 
 
 }
+

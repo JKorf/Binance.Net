@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
+namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
 {
     /// <summary>
     /// Isolated margin symbol info
@@ -7,39 +7,40 @@
     public record BinanceIsolatedMarginSymbol
     {
         /// <summary>
-        /// Symbol name
+        /// ["<c>symbol</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>base</c>"] Base asset
         /// </summary>
         [JsonPropertyName("base")]
         public string Base { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quote</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quote")]
         public string Quote { get; set; } = string.Empty;
         /// <summary>
-        /// Margin trade
+        /// ["<c>isMarginTrade</c>"] Margin trade
         /// </summary>
         [JsonPropertyName("isMarginTrade")]
         public bool IsMarginTrade { get; set; }
         /// <summary>
-        /// Is buy allowed
+        /// ["<c>isBuyAllowed</c>"] Is buy allowed
         /// </summary>
         [JsonPropertyName("isBuyAllowed")]
         public bool IsBuyAllowed { get; set; }
         /// <summary>
-        /// Is sell allowed
+        /// ["<c>isSellAllowed</c>"] Is sell allowed
         /// </summary>
         [JsonPropertyName("isSellAllowed")]
         public bool IsSellAllowed { get; set; }
         /// <summary>
-        /// Time at which the symbol gets delisted
+        /// ["<c>delistTime</c>"] Time at which the symbol gets delisted
         /// </summary>
         [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? DelistTime { get; set; }
     }
 }
+

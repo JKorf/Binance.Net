@@ -1,4 +1,4 @@
-﻿
+
 namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
 {
     /// <summary>
@@ -8,12 +8,12 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     public record IsolatedMarginAccountLimit
     {
         /// <summary>
-        /// Current enabled accounts
+        /// ["<c>enabledAccount</c>"] Current enabled accounts
         /// </summary>
         [JsonPropertyName("enabledAccount")]
         public int EnabledAccount { get; set; }
         /// <summary>
-        /// Max accounts
+        /// ["<c>maxAccount</c>"] Max accounts
         /// </summary>
         [JsonPropertyName("maxAccount")]
         public int MaxAccount { get; set; }

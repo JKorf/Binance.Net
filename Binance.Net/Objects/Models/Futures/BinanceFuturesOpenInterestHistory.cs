@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Open Interest History info
@@ -7,27 +7,28 @@
     public record BinanceFuturesOpenInterestHistory
     {
         /// <summary>
-        /// The symbol the information is about
+        /// ["<c>symbol</c>"] The symbol the information is about
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Total open interest
+        /// ["<c>sumOpenInterest</c>"] Total open interest
         /// </summary>
         [JsonPropertyName("sumOpenInterest")]
         public decimal SumOpenInterest { get; set; }
 
         /// <summary>
-        /// Total open interest value
+        /// ["<c>sumOpenInterestValue</c>"] Total open interest value
         /// </summary>
         [JsonPropertyName("sumOpenInterestValue")]
         public decimal SumOpenInterestValue { get; set; }
 
         /// <summary>
-        /// The data timestamp.
+        /// ["<c>timestamp</c>"] The data timestamp.
         /// </summary>
         [JsonPropertyName("timestamp"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? Timestamp { get; set; }
     }
 }
+

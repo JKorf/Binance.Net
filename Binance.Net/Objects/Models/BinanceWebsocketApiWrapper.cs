@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Websocket API event wrapper
@@ -6,7 +6,7 @@
     public record BinanceWebsocketApiWrapper
     {
         /// <summary>
-        /// Subscription id
+        /// ["<c>subscriptionId</c>"] Subscription id
         /// </summary>
         [JsonPropertyName("subscriptionId")]
         public long SubscriptionId { get; set; }
@@ -23,9 +23,10 @@
     public record BinanceWebsocketApiWrapper<T> : BinanceWebsocketApiWrapper
     {
         /// <summary>
-        /// The data of stream
+        /// ["<c>event</c>"] The data of stream
         /// </summary>
         [JsonPropertyName("event")]
         public T Event { get; set; } = default!;
     }
 }
+

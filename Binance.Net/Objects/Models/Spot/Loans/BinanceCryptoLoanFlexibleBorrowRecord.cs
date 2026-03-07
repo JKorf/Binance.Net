@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
@@ -8,35 +8,36 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     public record BinanceCryptoLoanFlexibleBorrowRecord
     {
         /// <summary>
-        /// The loaning asset
+        /// ["<c>loanCoin</c>"] The loaning asset
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral asset
+        /// ["<c>collateralCoin</c>"] The collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The loan quantity
+        /// ["<c>initialLoanAmount</c>"] The loan quantity
         /// </summary>
         [JsonPropertyName("initialLoanAmount")]
         public decimal InitialLoanQuantity { get; set; }
         /// <summary>
-        /// The collateral quantity
+        /// ["<c>initialCollateralAmount</c>"] The collateral quantity
         /// </summary>
         [JsonPropertyName("initialCollateralAmount")]
         public decimal InitialCollateralQuantity { get; set; }
         /// <summary>
-        /// Borrow timestamp
+        /// ["<c>borrowTime</c>"] Borrow timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("borrowTime")]
         public DateTime BorrowTime { get; set; }
         /// <summary>
-        /// The borrow record status.
+        /// ["<c>status</c>"] The borrow record status.
         /// </summary>
         [JsonPropertyName("status")]
         public FlexibleBorrowRecordStatus Status { get; set; }
     }
 }
+

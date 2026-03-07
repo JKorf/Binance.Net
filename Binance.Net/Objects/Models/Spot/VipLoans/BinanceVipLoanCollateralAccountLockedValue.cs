@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.VipLoans
+namespace Binance.Net.Objects.Models.Spot.VipLoans
 {
     /// <summary>
     /// VIP Loan repayment data
@@ -6,14 +6,15 @@
     public record BinanceVipLoanCollateralAccountLockedValue
     {
         /// <summary>
-        /// The collateral account identifier.
+        /// ["<c>collateralAccountId</c>"] The collateral account identifier.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Comma-separated collateral assets.
+        /// ["<c>collateralCoin</c>"] Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
     }
 }
+

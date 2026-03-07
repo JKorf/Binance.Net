@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Margin pair info
@@ -7,44 +7,45 @@
     public record BinanceMarginPair
     {
         /// <summary>
-        /// Base asset of the pair
+        /// ["<c>base</c>"] Base asset of the pair
         /// </summary>
         [JsonPropertyName("base")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset of the pair
+        /// ["<c>quote</c>"] Quote asset of the pair
         /// </summary>
         [JsonPropertyName("quote")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Id
+        /// ["<c>id</c>"] Id
         /// </summary>
         [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
-        /// Is buying allowed
+        /// ["<c>isBuyAllowed</c>"] Is buying allowed
         /// </summary>
         [JsonPropertyName("isBuyAllowed")]
         public bool IsBuyAllowed { get; set; }
         /// <summary>
-        /// Is selling allowed
+        /// ["<c>isSellAllowed</c>"] Is selling allowed
         /// </summary>
         [JsonPropertyName("isSellAllowed")]
         public bool IsSellAllowed { get; set; }
         /// <summary>
-        /// Is margin trading
+        /// ["<c>isMarginTrade</c>"] Is margin trading
         /// </summary>
         [JsonPropertyName("isMarginTrade")]
         public bool IsMarginTrade { get; set; }
         /// <summary>
-        /// Symbol name
+        /// ["<c>symbol</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Time at which the symbol gets delisted
+        /// ["<c>delistTime</c>"] Time at which the symbol gets delisted
         /// </summary>
         [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? DelistTime { get; set; }
     }
 }
+

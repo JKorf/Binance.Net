@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// List result
@@ -8,31 +8,32 @@
     public record BinanceListResult<T>
     {
         /// <summary>
-        /// Data start time
+        /// ["<c>startTime</c>"] Data start time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("startTime")]
         public DateTime StartTime { get; set; }
         /// <summary>
-        /// Data end time.
+        /// ["<c>endTime</c>"] Data end time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("endTime")]
         public DateTime EndTime { get; set; }
         /// <summary>
-        /// Limit
+        /// ["<c>limit</c>"] Limit
         /// </summary>
         [JsonPropertyName("limit")]
         public int Limit { get; set; }
         /// <summary>
-        /// More data available
+        /// ["<c>moreData</c>"] More data available
         /// </summary>
         [JsonPropertyName("moreData")]
         public bool MoreData { get; set; }
         /// <summary>
-        /// The data
+        /// ["<c>list</c>"] The data
         /// </summary>
         [JsonPropertyName("list")]
         public T[] Data { get; set; } = Array.Empty<T>();
     }
 }
+

@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Margin available inventory data
@@ -6,14 +6,15 @@
     public record BinanceMarginAvailableInventory
     {
         /// <summary>
-        /// Assets
+        /// ["<c>assets</c>"] Assets
         /// </summary>
         [JsonPropertyName("assets")]
         public Dictionary<string, string> Assets { get; set; } = new();
         /// <summary>
-        /// Update time
+        /// ["<c>updateTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("updateTime")]
         public DateTime UpdateTime { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
@@ -8,34 +8,35 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     public record BinanceStreamMinimalCoinTick
     {
         /// <summary>
-        /// The current day close price. This is the latest price for this symbol.
+        /// ["<c>c</c>"] The current day close price. This is the latest price for this symbol.
         /// </summary>
         [JsonPropertyName("c")]
         public decimal LastPrice { get; set; }
         /// <summary>
-        /// Today's open price.
+        /// ["<c>o</c>"] Today's open price.
         /// </summary>
         [JsonPropertyName("o")]
         public decimal OpenPrice { get; set; }
         /// <summary>
-        /// Todays high price
+        /// ["<c>h</c>"] Todays high price
         /// </summary>
         [JsonPropertyName("h")]
         public decimal HighPrice { get; set; }
         /// <summary>
-        /// Todays low price
+        /// ["<c>l</c>"] Todays low price
         /// </summary>
         [JsonPropertyName("l")]
         public decimal LowPrice { get; set; }
         /// <summary>
-        /// Total traded volume
+        /// ["<c>q</c>"] Total traded volume
         /// </summary>
         [JsonPropertyName("q")]
         public decimal Volume { get; set; }
         /// <summary>
-        /// Total traded quote volume
+        /// ["<c>v</c>"] Total traded quote volume
         /// </summary>
         [JsonPropertyName("v")]
         public decimal QuoteVolume { get; set; }
     }
 }
+

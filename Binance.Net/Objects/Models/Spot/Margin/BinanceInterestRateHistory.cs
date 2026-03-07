@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Margin
+namespace Binance.Net.Objects.Models.Spot.Margin
 {
     /// <summary>
     /// Interest rate history
@@ -7,25 +7,26 @@
     public record BinanceInterestRateHistory
     {
         /// <summary>
-        /// The asset
+        /// ["<c>asset</c>"] The asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// The daily interest
+        /// ["<c>dailyInterestRate</c>"] The daily interest
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterest { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>timestamp</c>"] Timestamp
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Vip level
+        /// ["<c>vipLevel</c>"] Vip level
         /// </summary>
         [JsonPropertyName("vipLevel")]
         public int VipLevel { get; set; }
     }
 }
+

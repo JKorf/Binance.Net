@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
@@ -9,12 +9,12 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanTransactions
     {
         /// <summary>
-        /// The total number of transactions.
+        /// ["<c>total</c>"] The total number of transactions.
         /// </summary>
         [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
-        /// The returned transactions.
+        /// ["<c>list</c>"] The returned transactions.
         /// </summary>
         [JsonPropertyName("list")]
         public BinanceAutoInvestPlanTransaction[] List { get; set; } = Array.Empty<BinanceAutoInvestPlanTransaction>();
@@ -26,92 +26,92 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
     public record BinanceAutoInvestPlanTransaction
     {
         /// <summary>
-        /// The transaction identifier.
+        /// ["<c>id</c>"] The transaction identifier.
         /// </summary>
         [JsonPropertyName("id")]
         public long Id { get; set; }
         /// <summary>
-        /// Target asset
+        /// ["<c>targetAsset</c>"] Target asset
         /// </summary>
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Plan type
+        /// ["<c>planType</c>"] Plan type
         /// </summary>
         [JsonPropertyName("planType")]
         public AutoInvestPlanType PlanType { get; set; }
         /// <summary>
-        /// Plan name
+        /// ["<c>planName</c>"] Plan name
         /// </summary>
         [JsonPropertyName("planName")]
         public string PlanName { get; set; } = string.Empty;
         /// <summary>
-        /// The plan identifier.
+        /// ["<c>planId</c>"] The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }
         /// <summary>
-        /// Transaction time
+        /// ["<c>transactionDateTime</c>"] Transaction time
         /// </summary>
         [JsonPropertyName("transactionDateTime")]
         public DateTime TransactionTime { get; set; }
         /// <summary>
-        /// Transaction status
+        /// ["<c>transactionStatus</c>"] Transaction status
         /// </summary>
         [JsonPropertyName("transactionStatus")]
         public AutoInvestTransactionStatus TransactionStatus { get; set; }
         /// <summary>
-        /// Failed type
+        /// ["<c>failedType</c>"] Failed type
         /// </summary>
         [JsonPropertyName("failedType")]
         public string? FailedType { get; set; }
         /// <summary>
-        /// Source asset
+        /// ["<c>sourceAsset</c>"] Source asset
         /// </summary>
         [JsonPropertyName("sourceAsset")]
         public string SourceAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Source asset quantity
+        /// ["<c>sourceAssetAmount</c>"] Source asset quantity
         /// </summary>
         [JsonPropertyName("sourceAssetAmount")]
         public decimal SourceAssetQuantity { get; set; }
         /// <summary>
-        /// Target asset quantity
+        /// ["<c>targetAssetAmount</c>"] Target asset quantity
         /// </summary>
         [JsonPropertyName("targetAssetAmount")]
         public decimal TargetAssetQuantity { get; set; }
         /// <summary>
-        /// Source wallet
+        /// ["<c>sourceWallet</c>"] Source wallet
         /// </summary>
         [JsonPropertyName("sourceWallet")]
         public string SourceWallet { get; set; } = string.Empty;
         /// <summary>
-        /// Flexible used
+        /// ["<c>flexibleUsed</c>"] Flexible used
         /// </summary>
         [JsonPropertyName("flexibleUsed")]
         public bool FlexibleUsed { get; set; }
         /// <summary>
-        /// Transaction fee
+        /// ["<c>transactionFee</c>"] Transaction fee
         /// </summary>
         [JsonPropertyName("transactionFee")]
         public decimal Fee { get; set; }
         /// <summary>
-        /// Transaction fee unit
+        /// ["<c>transactionFeeUnit</c>"] Transaction fee unit
         /// </summary>
         [JsonPropertyName("transactionFeeUnit")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Execution price
+        /// ["<c>executionPrice</c>"] Execution price
         /// </summary>
         [JsonPropertyName("executionPrice")]
         public decimal ExecutionPrice { get; set; }
         /// <summary>
-        /// Execution type
+        /// ["<c>executionType</c>"] Execution type
         /// </summary>
         [JsonPropertyName("executionType")]
         public AutoInvestExecutionType ExecutionType { get; set; }
         /// <summary>
-        /// Subscription cycle
+        /// ["<c>subscriptionCycle</c>"] Subscription cycle
         /// </summary>
         [JsonPropertyName("subscriptionCycle")]
         public string SubscriptionCycle { get; set; } = string.Empty;
@@ -119,3 +119,4 @@ namespace Binance.Net.Objects.Models.Spot.AutoInvest
 
 
 }
+

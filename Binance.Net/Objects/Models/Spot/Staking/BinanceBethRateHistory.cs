@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Staking
+namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// Rate history
@@ -7,20 +7,21 @@
     public record BinanceBethRateHistory
     {
         /// <summary>
-        /// Exchange rate
+        /// ["<c>exchangeRate</c>"] Exchange rate
         /// </summary>
         [JsonPropertyName("exchangeRate")]
         public decimal ExchangeRate { get; set; }
         /// <summary>
-        /// Annual percentage rate
+        /// ["<c>annualPercentageRate</c>"] Annual percentage rate
         /// </summary>
         [JsonPropertyName("annualPercentageRate")]
         public decimal AnnualPercentageRate { get; set; }
         /// <summary>
-        /// The timestamp.
+        /// ["<c>time</c>"] The timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
     }
 }
+

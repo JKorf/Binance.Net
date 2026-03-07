@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
 {
@@ -9,22 +9,22 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     public record BinanceIsolatedMarginAccount
     {
         /// <summary>
-        /// Account assets
+        /// ["<c>assets</c>"] Account assets
         /// </summary>
         [JsonPropertyName("assets")]
         public BinanceIsolatedMarginAccountSymbol[] Assets { get; set; } = Array.Empty<BinanceIsolatedMarginAccountSymbol>();
         /// <summary>
-        /// Total btc asset
+        /// ["<c>totalAssetOfBtc</c>"] Total btc asset
         /// </summary>
         [JsonPropertyName("totalAssetOfBtc")]
         public decimal TotalAssetOfBtc { get; set; }
         /// <summary>
-        /// Total liability
+        /// ["<c>totalLiabilityOfBtc</c>"] Total liability
         /// </summary>
         [JsonPropertyName("totalLiabilityOfBtc")]
         public decimal TotalLiabilityOfBtc { get; set; }
         /// <summary>
-        /// Total net asset
+        /// ["<c>totalNetAssetOfBtc</c>"] Total net asset
         /// </summary>
         [JsonPropertyName("totalNetAssetOfBtc")]
         public decimal TotalNetAssetOfBtc { get; set; }
@@ -36,64 +36,64 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     public record BinanceIsolatedMarginAccountSymbol
     {
         /// <summary>
-        /// Base asset
+        /// ["<c>baseAsset</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseAsset")]
         public BinanceIsolatedMarginAccountAsset BaseAsset { get; set; } = default!;
 
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteAsset</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteAsset")]
         public BinanceIsolatedMarginAccountAsset QuoteAsset { get; set; } = default!;
 
         /// <summary>
-        /// Symbol name
+        /// ["<c>symbol</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Isolated created
+        /// ["<c>isolatedCreated</c>"] Isolated created
         /// </summary>
         [JsonPropertyName("isolatedCreated")]
         public bool IsolatedCreated { get; set; }
         /// <summary>
-        /// The margin level
+        /// ["<c>marginLevel</c>"] The margin level
         /// </summary>
         [JsonPropertyName("marginLevel")]
         public decimal MarginLevel { get; set; }
         /// <summary>
-        /// Margin level status
+        /// ["<c>marginLevelStatus</c>"] Margin level status
         /// </summary>
         [JsonPropertyName("marginLevelStatus")]
         public MarginLevelStatus MarginLevelStatus { get; set; }
         /// <summary>
-        /// Margin ratio
+        /// ["<c>marginRatio</c>"] Margin ratio
         /// </summary>
         [JsonPropertyName("marginRatio")]
         public decimal MarginRatio { get; set; }
         /// <summary>
-        /// Index price
+        /// ["<c>indexPrice</c>"] Index price
         /// </summary>
         [JsonPropertyName("indexPrice")]
         public decimal IndexPrice { get; set; }
         /// <summary>
-        /// Liquidate price
+        /// ["<c>liquidatePrice</c>"] Liquidate price
         /// </summary>
         [JsonPropertyName("liquidatePrice")]
         public decimal LiquidatePrice { get; set; }
         /// <summary>
-        /// Liquidate rate
+        /// ["<c>liquidateRate</c>"] Liquidate rate
         /// </summary>
         [JsonPropertyName("liquidateRate")]
         public decimal LiquidateRate { get; set; }
         /// <summary>
-        /// If trading is enabled
+        /// ["<c>tradeEnabled</c>"] If trading is enabled
         /// </summary>
         [JsonPropertyName("tradeEnabled")]
         public bool TradeEnabled { get; set; }
         /// <summary>
-        /// Account is enabled
+        /// ["<c>enabled</c>"] Account is enabled
         /// </summary>
         [JsonPropertyName("enabled")]
         public bool Enabled { get; set; }
@@ -105,54 +105,55 @@ namespace Binance.Net.Objects.Models.Spot.IsolatedMargin
     public record BinanceIsolatedMarginAccountAsset
     {
         /// <summary>
-        /// Asset name
+        /// ["<c>asset</c>"] Asset name
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// If borrow is enabled
+        /// ["<c>borrowEnabled</c>"] If borrow is enabled
         /// </summary>
         [JsonPropertyName("borrowEnabled")]
         public bool BorrowEnabled { get; set; }
         /// <summary>
-        /// Borrowed
+        /// ["<c>borrowed</c>"] Borrowed
         /// </summary>
         [JsonPropertyName("borrowed")]
         public decimal Borrowed { get; set; }
         /// <summary>
-        /// Free
+        /// ["<c>free</c>"] Free
         /// </summary>
         [JsonPropertyName("free")]
         public decimal Free { get; set; }
         /// <summary>
-        /// Interest
+        /// ["<c>interest</c>"] Interest
         /// </summary>
         [JsonPropertyName("interest")]
         public decimal Interest { get; set; }
         /// <summary>
-        /// Locked
+        /// ["<c>locked</c>"] Locked
         /// </summary>
         [JsonPropertyName("locked")]
         public decimal Locked { get; set; }
         /// <summary>
-        /// Net asset
+        /// ["<c>netAsset</c>"] Net asset
         /// </summary>
         [JsonPropertyName("netAsset")]
         public decimal NetAsset { get; set; }
         /// <summary>
-        /// Net asset in btc
+        /// ["<c>netAssetOfBtc</c>"] Net asset in btc
         /// </summary>
         [JsonPropertyName("netAssetOfBtc")]
         public decimal NetAssetOfBtc { get; set; }
         /// <summary>
-        /// Is repay enabled
+        /// ["<c>repayEnabled</c>"] Is repay enabled
         /// </summary>
         [JsonPropertyName("repayEnabled")]
         public bool RepayEnabled { get; set; }
         /// <summary>
-        /// Total asset
+        /// ["<c>totalAsset</c>"] Total asset
         /// </summary>
         [JsonPropertyName("totalAsset")]
         public decimal TotalAsset { get; set; }
     }
 }
+

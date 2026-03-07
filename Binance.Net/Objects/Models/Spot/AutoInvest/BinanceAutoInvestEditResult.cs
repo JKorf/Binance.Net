@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.AutoInvest
+namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
     /// <summary>
     /// Edit result
@@ -7,12 +7,12 @@
     public record BinanceAutoInvestEditResult
     {
         /// <summary>
-        /// The plan identifier.
+        /// ["<c>planId</c>"] The plan identifier.
         /// </summary>
         [JsonPropertyName("planId")]
         public long PlanId { get; set; }
         /// <summary>
-        /// Next execution date time
+        /// ["<c>nextExecutionDateTime</c>"] Next execution date time
         /// </summary>
         [JsonPropertyName("nextExecutionDateTime")]
         public DateTime? NextExecutionTime { get; set; }
@@ -20,3 +20,4 @@
 
 
 }
+

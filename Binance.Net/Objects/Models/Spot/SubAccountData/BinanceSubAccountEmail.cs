@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
     /// <summary>
     /// Sub account details
@@ -7,9 +7,10 @@
     public record BinanceSubAccountEmail
     {
         /// <summary>
-        /// The email associated with the sub account
+        /// ["<c>email</c>"] The email associated with the sub account
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
     }
 }
+

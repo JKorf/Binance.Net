@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     internal record BinanceTravelRuleAddressWrapper
     {
@@ -12,29 +12,30 @@
     public record BinanceTravelRuleAddress
     {
         /// <summary>
-        /// The address verification status.
+        /// ["<c>status</c>"] The address verification status.
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// The asset token.
+        /// ["<c>token</c>"] The asset token.
         /// </summary>
         [JsonPropertyName("token")]
         public string Token { get; set; } = string.Empty;
         /// <summary>
-        /// Network
+        /// ["<c>network</c>"] Network
         /// </summary>
         [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// Wallet address
+        /// ["<c>walletAddress</c>"] Wallet address
         /// </summary>
         [JsonPropertyName("walletAddress")]
         public string WalletAddress { get; set; } = string.Empty;
         /// <summary>
-        /// Address questionnaire answers
+        /// ["<c>addressQuestionnaire</c>"] Address questionnaire answers
         /// </summary>
         [JsonPropertyName("addressQuestionnaire")]
         public Dictionary<string, object> AddressQuestionnaire { get; set; } = new();
     }
 }
+

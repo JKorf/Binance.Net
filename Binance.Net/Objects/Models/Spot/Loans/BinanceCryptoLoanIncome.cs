@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
@@ -9,31 +9,32 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     public record BinanceCryptoLoanIncome
     {
         /// <summary>
-        /// The income asset.
+        /// ["<c>asset</c>"] The income asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Income type
+        /// ["<c>type</c>"] Income type
         /// </summary>
         [JsonPropertyName("type")]
         public LoanIncomeType Type { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The income timestamp.
+        /// ["<c>timestamp</c>"] The income timestamp.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("timestamp")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Transaction id
+        /// ["<c>tranId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("tranId")]
         public string TransactionId { get; set; } = string.Empty;
     }
 }
+

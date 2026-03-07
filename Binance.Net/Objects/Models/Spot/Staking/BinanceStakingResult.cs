@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Staking
+namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// Staking result
@@ -7,9 +7,10 @@
     public record BinanceStakingResult
     {
         /// <summary>
-        /// Whether the request succeeded.
+        /// ["<c>success</c>"] Whether the request succeeded.
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
     }
 }
+

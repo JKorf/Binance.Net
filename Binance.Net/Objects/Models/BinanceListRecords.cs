@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Query results
@@ -7,14 +7,15 @@
     public record BinanceListRecords<T>
     {
         /// <summary>
-        /// The total count of the records
+        /// ["<c>total</c>"] The total count of the records
         /// </summary>
         [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
-        /// The list records
+        /// ["<c>list</c>"] The list records
         /// </summary>
         [JsonPropertyName("list")]
         public IEnumerable<T> List { get; set; } = Array.Empty<T>();
     }
 }
+

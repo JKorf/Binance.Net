@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Staking
+namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// Redemption history
@@ -7,44 +7,44 @@
     public record BinanceRedemptionHistory
     {
         /// <summary>
-        /// The redemption asset.
+        /// ["<c>asset</c>"] The redemption asset.
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Amount
+        /// ["<c>amount</c>"] Amount
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// The redemption timestamp.
+        /// ["<c>time</c>"] The redemption timestamp.
         /// </summary>
         [JsonPropertyName("time")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Arrival timestamp
+        /// ["<c>arrivalTime</c>"] Arrival timestamp
         /// </summary>
         [JsonPropertyName("arrivalTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ArrivalTime { get; set; }
         /// <summary>
-        /// Distribute asset
+        /// ["<c>distributeAsset</c>"] Distribute asset
         /// </summary>
         [JsonPropertyName("distributeAsset")]
         public string DistributedAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quantity distributed
+        /// ["<c>distributeAmount</c>"] Quantity distributed
         /// </summary>
         [JsonPropertyName("distributeAmount")]
         public decimal DistributeQuantity { get; set; }
         /// <summary>
-        /// Conversion ratio
+        /// ["<c>conversionRatio</c>"] Conversion ratio
         /// </summary>
         [JsonPropertyName("conversionRatio")]
         public decimal ConversionRatio { get; set; }
@@ -52,3 +52,4 @@
         internal decimal ConversionRatioInt { get => ConversionRatio; set => ConversionRatio = value; }
     }
 }
+

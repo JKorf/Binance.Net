@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.AutoInvest
+namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
     /// <summary>
     /// Plan position info
@@ -7,37 +7,37 @@
     public record BinanceAutoInvestIndexPlanPosition
     {
         /// <summary>
-        /// The index identifier.
+        /// ["<c>indexId</c>"] The index identifier.
         /// </summary>
         [JsonPropertyName("indexId")]
         public long IndexId { get; set; }
         /// <summary>
-        /// Total invested in USD
+        /// ["<c>totalInvestedInUSD</c>"] Total invested in USD
         /// </summary>
         [JsonPropertyName("totalInvestedInUSD")]
         public decimal TotalInvestedInUsd { get; set; }
         /// <summary>
-        /// Current invested in USD
+        /// ["<c>currentInvestedInUSD</c>"] Current invested in USD
         /// </summary>
         [JsonPropertyName("currentInvestedInUSD")]
         public decimal CurrentInvestedInUsd { get; set; }
         /// <summary>
-        /// Pnl in USD
+        /// ["<c>pnlInUSD</c>"] Pnl in USD
         /// </summary>
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Return on investment.
+        /// ["<c>roi</c>"] Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }
         /// <summary>
-        /// Asset allocation
+        /// ["<c>assetAllocation</c>"] Asset allocation
         /// </summary>
         [JsonPropertyName("assetAllocation")]
         public BinanceAutoInvestIndexPlanPositionAllocation[] AssetAllocation { get; set; } = Array.Empty<BinanceAutoInvestIndexPlanPositionAllocation>();
         /// <summary>
-        /// Details
+        /// ["<c>details</c>"] Details
         /// </summary>
         [JsonPropertyName("details")]
         public BinanceAutoInvestIndexPlanPositionDetails[] Details { get; set; } = Array.Empty<BinanceAutoInvestIndexPlanPositionDetails>();
@@ -49,12 +49,12 @@
     public record BinanceAutoInvestIndexPlanPositionAllocation
     {
         /// <summary>
-        /// Target asset
+        /// ["<c>targetAsset</c>"] Target asset
         /// </summary>
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Allocation percentage
+        /// ["<c>allocation</c>"] Allocation percentage
         /// </summary>
         [JsonPropertyName("allocation")]
         public decimal Allocation { get; set; }
@@ -66,57 +66,57 @@
     public record BinanceAutoInvestIndexPlanPositionDetails
     {
         /// <summary>
-        /// Target asset
+        /// ["<c>targetAsset</c>"] Target asset
         /// </summary>
         [JsonPropertyName("targetAsset")]
         public string TargetAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Average price in USD
+        /// ["<c>averagePriceInUSD</c>"] Average price in USD
         /// </summary>
         [JsonPropertyName("averagePriceInUSD")]
         public decimal AveragePriceInUsd { get; set; }
         /// <summary>
-        /// Total invested in USD
+        /// ["<c>totalInvestedInUSD</c>"] Total invested in USD
         /// </summary>
         [JsonPropertyName("totalInvestedInUSD")]
         public decimal TotalInvestedInUsd { get; set; }
         /// <summary>
-        /// Current invested in USD
+        /// ["<c>currentInvestedInUSD</c>"] Current invested in USD
         /// </summary>
         [JsonPropertyName("currentInvestedInUSD")]
         public decimal CurrentInvestedInUsd { get; set; }
         /// <summary>
-        /// Purchased quantity
+        /// ["<c>purchasedAmount</c>"] Purchased quantity
         /// </summary>
         [JsonPropertyName("purchasedAmount")]
         public decimal PurchasedQuantity { get; set; }
         /// <summary>
-        /// Pnl in USD
+        /// ["<c>pnlInUSD</c>"] Pnl in USD
         /// </summary>
         [JsonPropertyName("pnlInUSD")]
         public decimal PnlInUsd { get; set; }
         /// <summary>
-        /// Return on investment.
+        /// ["<c>roi</c>"] Return on investment.
         /// </summary>
         [JsonPropertyName("roi")]
         public decimal Roi { get; set; }
         /// <summary>
-        /// Percentage
+        /// ["<c>percentage</c>"] Percentage
         /// </summary>
         [JsonPropertyName("percentage")]
         public decimal Percentage { get; set; }
         /// <summary>
-        /// Available quantity
+        /// ["<c>availableAmount</c>"] Available quantity
         /// </summary>
         [JsonPropertyName("availableAmount")]
         public decimal AvailableQuantity { get; set; }
         /// <summary>
-        /// Redeemed quantity
+        /// ["<c>redeemedAmount</c>"] Redeemed quantity
         /// </summary>
         [JsonPropertyName("redeemedAmount")]
         public decimal RedeemedQuantity { get; set; }
         /// <summary>
-        /// Asset value in USD
+        /// ["<c>assetValueInUSD</c>"] Asset value in USD
         /// </summary>
         [JsonPropertyName("assetValueInUSD")]
         public decimal AssetValueInUsd { get; set; }
@@ -124,3 +124,4 @@
 
 
 }
+

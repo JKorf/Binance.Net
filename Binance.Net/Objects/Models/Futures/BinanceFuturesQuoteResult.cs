@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Futures
 {
@@ -9,17 +9,17 @@ namespace Binance.Net.Objects.Models.Futures
     public record BinanceFuturesQuoteResult
     {
         /// <summary>
-        /// The order identifier.
+        /// ["<c>orderId</c>"] The order identifier.
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// The order creation time.
+        /// ["<c>createTime</c>"] The order creation time.
         /// </summary>
         [JsonPropertyName("createTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Order status
+        /// ["<c>orderStatus</c>"] Order status
         /// </summary>
         [JsonPropertyName("orderStatus")]
         public ConvertOrderStatus Status { get; set; }
@@ -27,3 +27,4 @@ namespace Binance.Net.Objects.Models.Futures
 
 
 }
+

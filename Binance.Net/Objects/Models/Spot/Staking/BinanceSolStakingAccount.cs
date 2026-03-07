@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Staking
+namespace Binance.Net.Objects.Models.Spot.Staking
 {
     /// <summary>
     /// SOL staking account
@@ -7,19 +7,20 @@
     public record BinanceSolStakingAccount
     {
         /// <summary>
-        /// BNSOL amount.
+        /// ["<c>bnsolAmount</c>"] BNSOL amount.
         /// </summary>
         [JsonPropertyName("bnsolAmount")]
         public decimal BnSolAmount { get; set; }
         /// <summary>
-        /// Holding in SOL
+        /// ["<c>holdingInSOL</c>"] Holding in SOL
         /// </summary>
         [JsonPropertyName("holdingInSOL")]
         public decimal HoldingInSOL { get; set; }
         /// <summary>
-        /// Thirty days profit in SOL
+        /// ["<c>thirtyDaysProfitInSOL</c>"] Thirty days profit in SOL
         /// </summary>
         [JsonPropertyName("thirtyDaysProfitInSOL")]
         public decimal ThirtyDaysProfitInSOL { get; set; }
     }
 }
+

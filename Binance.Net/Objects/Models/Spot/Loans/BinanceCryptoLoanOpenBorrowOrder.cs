@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Open borrow order info
@@ -7,29 +7,30 @@
     public record BinanceCryptoLoanOpenBorrowOrder
     {
         /// <summary>
-        /// The loaning asset
+        /// ["<c>loanCoin</c>"] The loaning asset
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral asset
+        /// ["<c>collateralCoin</c>"] The collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral quantity
+        /// ["<c>collateralAmount</c>"] The collateral quantity
         /// </summary>
         [JsonPropertyName("collateralAmount")]
         public decimal CollateralQuantity { get; set; }
         /// <summary>
-        /// Total debt
+        /// ["<c>totalDebt</c>"] Total debt
         /// </summary>
         [JsonPropertyName("totalDebt")]
         public decimal TotalDebt { get; set; }
         /// <summary>
-        /// Current LTV.
+        /// ["<c>currentLTV</c>"] Current LTV.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal CurrentLTV { get; set; }
     }
 }
+

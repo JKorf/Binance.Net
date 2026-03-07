@@ -10,7 +10,7 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamLiquidationData : BinanceStreamEvent
     {
         /// <summary>
-        /// The data of the event
+        /// ["<c>o</c>"] The data of the event
         /// </summary>
         [JsonPropertyName("o")]
         public BinanceFuturesStreamLiquidation Data { get; set; } = default!;
@@ -22,69 +22,70 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesStreamLiquidation : IBinanceFuturesLiquidation
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>s</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Liquidation side.
+        /// ["<c>S</c>"] Liquidation side.
         /// </summary>
         [JsonPropertyName("S")]
         public OrderSide Side { get; set; }
 
         /// <summary>
-        /// Liquidation order type
+        /// ["<c>o</c>"] Liquidation order type
         /// </summary>
         [JsonPropertyName("o")]
         public FuturesOrderType Type { get; set; }
 
         /// <summary>
-        /// Liquidation Time in Force
+        /// ["<c>f</c>"] Liquidation Time in Force
         /// </summary>
         [JsonPropertyName("f")]
         public TimeInForce TimeInForce { get; set; }
 
         /// <summary>
-        /// Liquidation Original Quantity
+        /// ["<c>q</c>"] Liquidation Original Quantity
         /// </summary>
         [JsonPropertyName("q")]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Liquidation order price
+        /// ["<c>p</c>"] Liquidation order price
         /// </summary>
         [JsonPropertyName("p")]
         public decimal Price { get; set; }
 
         /// <summary>
-        /// Liquidation Average Price
+        /// ["<c>ap</c>"] Liquidation Average Price
         /// </summary>
         [JsonPropertyName("ap")]
         public decimal AveragePrice { get; set; }
 
         /// <summary>
-        /// Liquidation Order Status
+        /// ["<c>X</c>"] Liquidation Order Status
         /// </summary>
         [JsonPropertyName("X")]
         public OrderStatus Status { get; set; }
 
         /// <summary>
-        /// Liquidation Last Filled Quantity
+        /// ["<c>l</c>"] Liquidation Last Filled Quantity
         /// </summary>
         [JsonPropertyName("l")]
         public decimal LastQuantityFilled { get; set; }
 
         /// <summary>
-        /// Liquidation Accumulated fill quantity
+        /// ["<c>z</c>"] Liquidation Accumulated fill quantity
         /// </summary>
         [JsonPropertyName("z")]
         public decimal QuantityFilled { get; set; }
 
         /// <summary>
-        /// Liquidation Trade Time
+        /// ["<c>T</c>"] Liquidation Trade Time
         /// </summary>
         [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }
+

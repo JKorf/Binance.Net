@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// User commission rate
@@ -7,24 +7,25 @@
     public record BinanceFuturesAccountUserCommissionRate
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Maker commission rate
+        /// ["<c>makerCommissionRate</c>"] Maker commission rate
         /// </summary>
         [JsonPropertyName("makerCommissionRate")]
         public decimal MakerCommissionRate { get; set; }
         /// <summary>
-        /// Taker commission rate
+        /// ["<c>takerCommissionRate</c>"] Taker commission rate
         /// </summary>
         [JsonPropertyName("takerCommissionRate")]
         public decimal TakerCommissionRate { get; set; }
         /// <summary>
-        /// RPI commission rate
+        /// ["<c>rpiCommissionRate</c>"] RPI commission rate
         /// </summary>
         [JsonPropertyName("rpiCommissionRate")]
         public decimal RpiCommissionRate { get; set; }
     }
 }
+

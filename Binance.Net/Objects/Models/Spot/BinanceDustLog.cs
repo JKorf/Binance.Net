@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Dust log response details
@@ -7,12 +7,12 @@
     public record BinanceDustLogList
     {
         /// <summary>
-        /// Total counts of exchange
+        /// ["<c>total</c>"] Total counts of exchange
         /// </summary>
         [JsonPropertyName("total")]
         public int Total { get; set; }
         /// <summary>
-        /// Dust conversion logs.
+        /// ["<c>userAssetDribblets</c>"] Dust conversion logs.
         /// </summary>
         [JsonPropertyName("userAssetDribblets")]
         public BinanceDustLog[] UserAssetDribblets { get; set; } = Array.Empty<BinanceDustLog>();
@@ -24,27 +24,27 @@
     public record BinanceDustLog
     {
         /// <summary>
-        /// Total transferred
+        /// ["<c>totalTransferedAmount</c>"] Total transferred
         /// </summary>
         [JsonPropertyName("totalTransferedAmount")]
         public decimal TransferredTotal { get; set; }
         /// <summary>
-        /// Total service charge
+        /// ["<c>totalServiceChargeAmount</c>"] Total service charge
         /// </summary>
         [JsonPropertyName("totalServiceChargeAmount")]
         public decimal ServiceChargeTotal { get; set; }
         /// <summary>
-        /// Transaction id
+        /// ["<c>transId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("transId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Detailed conversion entries.
+        /// ["<c>userAssetDribbletDetails</c>"] Detailed conversion entries.
         /// </summary>
         [JsonPropertyName("userAssetDribbletDetails")]
         public BinanceDustLogDetails[] Logs { get; set; } = Array.Empty<BinanceDustLogDetails>();
         /// <summary>
-        /// Timestamp
+        /// ["<c>operateTime</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("operateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
@@ -57,35 +57,36 @@
     public record BinanceDustLogDetails
     {
         /// <summary>
-        /// Transaction id
+        /// ["<c>transId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("transId")]
         public long TransactionId { get; set; }
         /// <summary>
-        /// Service charge
+        /// ["<c>serviceChargeAmount</c>"] Service charge
         /// </summary>
         [JsonPropertyName("serviceChargeAmount")]
         public decimal ServiceChargeQuantity { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>operateTime</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("operateTime")]
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime OperateTime { get; set; }
         /// <summary>
-        /// Transferred quantity
+        /// ["<c>transferedAmount</c>"] Transferred quantity
         /// </summary>
         [JsonPropertyName("transferedAmount")]
         public decimal TransferredQuantity { get; set; }
         /// <summary>
-        /// Asset
+        /// ["<c>fromAsset</c>"] Asset
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
     }
 }
+

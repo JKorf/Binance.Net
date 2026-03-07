@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.AutoInvest
+namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
     /// <summary>
     /// Redemption result
@@ -7,10 +7,11 @@
     public record BinanceAutoInvestRedemptionResult
     {
         /// <summary>
-        /// The redemption identifier.
+        /// ["<c>redemptionId</c>"] The redemption identifier.
         /// </summary>
         [JsonPropertyName("redemptionId")]
         public long RedemptionId { get; set; }
     }
 
 }
+

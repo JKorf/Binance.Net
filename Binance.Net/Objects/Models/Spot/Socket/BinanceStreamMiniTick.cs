@@ -1,4 +1,4 @@
-﻿using Binance.Net.Interfaces;
+using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
 {
@@ -9,31 +9,31 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     public abstract record BinanceStreamMiniTickBase : BinanceStreamEvent, IBinanceMiniTick
     {
         /// <summary>
-        /// The symbol this data is for
+        /// ["<c>s</c>"] The symbol this data is for
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// The current day close price. This is the latest price for this symbol.
+        /// ["<c>c</c>"] The current day close price. This is the latest price for this symbol.
         /// </summary>
         [JsonPropertyName("c")]
         public decimal LastPrice { get; set; }
 
         /// <summary>
-        /// Today's open price.
+        /// ["<c>o</c>"] Today's open price.
         /// </summary>
         [JsonPropertyName("o")]
         public decimal OpenPrice { get; set; }
 
         /// <summary>
-        /// Todays high price
+        /// ["<c>h</c>"] Todays high price
         /// </summary>
         [JsonPropertyName("h")]
         public decimal HighPrice { get; set; }
 
         /// <summary>
-        /// Todays low price
+        /// ["<c>l</c>"] Todays low price
         /// </summary>
         [JsonPropertyName("l")]
         public decimal LowPrice { get; set; }
@@ -55,10 +55,10 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     [SerializationModel]
     public record BinanceStreamMiniTick : BinanceStreamMiniTickBase
     {
-        /// <inheritdoc/>
+        /// ["<c>v</c>"] <inheritdoc/>
         [JsonPropertyName("v")]
         public override decimal Volume { get; set; }
-        /// <inheritdoc/>
+        /// ["<c>q</c>"] <inheritdoc/>
         [JsonPropertyName("q")]
         public override decimal QuoteVolume { get; set; }
     }
@@ -69,17 +69,18 @@ namespace Binance.Net.Objects.Models.Spot.Socket
     [SerializationModel]
     public record BinanceStreamCoinMiniTick : BinanceStreamMiniTickBase
     {
-        /// <inheritdoc/>
+        /// ["<c>q</c>"] <inheritdoc/>
         [JsonPropertyName("q")]
         public override decimal Volume { get; set; }
-        /// <inheritdoc/>
+        /// ["<c>v</c>"] <inheritdoc/>
         [JsonPropertyName("v")]
         public override decimal QuoteVolume { get; set; }
 
         /// <summary>
-        /// The pair
+        /// ["<c>ps</c>"] The pair
         /// </summary>
         [JsonPropertyName("ps")]
         public string Pair { get; set; } = string.Empty;
     }
 }
+

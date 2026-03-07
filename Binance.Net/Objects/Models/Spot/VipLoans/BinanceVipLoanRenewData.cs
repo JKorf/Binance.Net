@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.VipLoans
+namespace Binance.Net.Objects.Models.Spot.VipLoans
 {
     /// <summary>
     /// VIP Loan renew data
@@ -6,34 +6,35 @@
     public record BinanceVipLoanRenewData
     {
         /// <summary>
-        /// The loan account identifier.
+        /// ["<c>loanAccountId</c>"] The loan account identifier.
         /// </summary>
         [JsonPropertyName("loanAccountId")]
         public string LoanAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// The loan asset.
+        /// ["<c>loanCoin</c>"] The loan asset.
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Loan quantity
+        /// ["<c>loanAmount</c>"] Loan quantity
         /// </summary>
         [JsonPropertyName("loanAmount")]
         public decimal LoanQuantity { get; set; }
         /// <summary>
-        /// Comma-separated collateral account identifiers.
+        /// ["<c>collateralAccountId</c>"] Comma-separated collateral account identifiers.
         /// </summary>
         [JsonPropertyName("collateralAccountId")]
         public string CollateralAccountId { get; set; } = string.Empty;
         /// <summary>
-        /// Comma-separated collateral assets.
+        /// ["<c>collateralCoin</c>"] Comma-separated collateral assets.
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The renewed loan term in days.
+        /// ["<c>loanTerm</c>"] The renewed loan term in days.
         /// </summary>
         [JsonPropertyName("loanTerm")]
         public decimal LoanTerm { get; set; }
     }
 }
+

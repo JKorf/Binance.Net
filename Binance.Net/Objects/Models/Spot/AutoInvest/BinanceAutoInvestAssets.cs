@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.AutoInvest
+namespace Binance.Net.Objects.Models.Spot.AutoInvest
 {
     /// <summary>
     /// Auto invest assets
@@ -7,15 +7,16 @@
     public record BinanceAutoInvestAssets
     {
         /// <summary>
-        /// Supported target assets.
+        /// ["<c>targetAssets</c>"] Supported target assets.
         /// </summary>
         [JsonPropertyName("targetAssets")]
         public string[] TargetAssets { get; set; } = Array.Empty<string>();
         /// <summary>
-        /// Supported source assets.
+        /// ["<c>sourceAssets</c>"] Supported source assets.
         /// </summary>
         [JsonPropertyName("sourceAssets")]
         public string[] SourceAssets { get; set; } = Array.Empty<string>();
     }
 
 }
+

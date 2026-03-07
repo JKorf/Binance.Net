@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Convert
+namespace Binance.Net.Objects.Models.Spot.Convert
 {
     /// <summary>
     /// Precision per asset
@@ -7,14 +7,15 @@
     public record BinanceConvertQuantityPrecisionAsset
     {
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Fraction
+        /// ["<c>fraction</c>"] Fraction
         /// </summary>
         [JsonPropertyName("fraction")]
         public int Fraction { get; set; }
     }
 }
+

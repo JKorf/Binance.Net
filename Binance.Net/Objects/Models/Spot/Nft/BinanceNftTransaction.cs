@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.NFT
+namespace Binance.Net.Objects.Models.Spot.NFT
 {
     /// <summary>
     /// NFT transaction
@@ -6,29 +6,30 @@
     public record BinanceNftTransaction
     {
         /// <summary>
-        /// Order number, 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
+        /// ["<c>orderNo</c>"] Order number, 0: purchase order, 1: sell order, 2: royalty income, 3: primary market order, 4: mint fee
         /// </summary>
         [JsonPropertyName("orderNo")]
         public string OrderNo { get; set; } = string.Empty;
         /// <summary>
-        /// Tokens
+        /// ["<c>tokens</c>"] Tokens
         /// </summary>
         [JsonPropertyName("tokens")]
         public IEnumerable<BinanceNftAsset> Tokens { get; set; } = Array.Empty<BinanceNftAsset>();
         /// <summary>
-        /// Trade time
+        /// ["<c>tradeTime</c>"] Trade time
         /// </summary>
         [JsonPropertyName("tradeTime")]
         public DateTime TradeTime { get; set; }
         /// <summary>
-        /// Trade amount
+        /// ["<c>tradeAmount</c>"] Trade amount
         /// </summary>
         [JsonPropertyName("tradeAmount")]
         public decimal? TradeAmount { get; set; } = null;
         /// <summary>
-        /// Trade currency
+        /// ["<c>tradeCurrency</c>"] Trade currency
         /// </summary>
         [JsonPropertyName("tradeCurrency")]
         public string TradeCurrency { get; set; } = string.Empty;
     }
 }
+

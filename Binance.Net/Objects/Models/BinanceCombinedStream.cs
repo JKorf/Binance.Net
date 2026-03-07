@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models
+namespace Binance.Net.Objects.Models
 {
     /// <summary>
     /// Base stream wrapper
@@ -6,7 +6,7 @@
     public record BinanceCombinedStream
     {
         /// <summary>
-        /// The stream combined
+        /// ["<c>stream</c>"] The stream combined
         /// </summary>
         [JsonPropertyName("stream")]
         public string Stream { get; set; } = string.Empty;
@@ -23,9 +23,10 @@
     public record BinanceCombinedStream<T> : BinanceCombinedStream
     {
         /// <summary>
-        /// The data of stream
+        /// ["<c>data</c>"] The data of stream
         /// </summary>
         [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
     }
 }
+

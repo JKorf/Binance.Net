@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Result of setting a countdown timer
@@ -7,14 +7,15 @@
     public record BinanceFuturesCountDownResult
     {
         /// <summary>
-        /// The symbol.
+        /// ["<c>symbol</c>"] The symbol.
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Count down time in milliseconds
+        /// ["<c>countdownTime</c>"] Count down time in milliseconds
         /// </summary>
         [JsonPropertyName("countdownTime")]
         public int CountDownTime { get; set; }
     }
 }
+

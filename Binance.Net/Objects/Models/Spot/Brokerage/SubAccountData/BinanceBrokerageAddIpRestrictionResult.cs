@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
+namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
     /// <summary>
     /// Add IP Restriction Result
@@ -7,25 +7,25 @@
     public record BinanceBrokerageAddIpRestrictionResult
     {
         /// <summary>
-        /// Sub Account Id
+        /// ["<c>subaccountId</c>"] Sub Account Id
         /// </summary>
         [JsonPropertyName("subaccountId")]
         public string SubAccountId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Api key
+        /// ["<c>apikey</c>"] Api key
         /// </summary>
         [JsonPropertyName("apikey")]
         public string ApiKey { get; set; } = string.Empty;
 
         /// <summary>
-        /// IP
+        /// ["<c>ip</c>"] IP
         /// </summary>
         [JsonPropertyName("ip")]
         public string Ip { get; set; } = string.Empty;
 
         /// <summary>
-        /// Timestamp
+        /// ["<c>updateTime</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("updateTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateDate { get; set; }

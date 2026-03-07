@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Futures
+namespace Binance.Net.Objects.Models.Futures
 {
     /// <summary>
     /// Trading rules status
@@ -7,12 +7,12 @@
     public record BinanceFuturesTradingStatus
     {
         /// <summary>
-        /// The trading rule indicators
+        /// ["<c>indicators</c>"] The trading rule indicators
         /// </summary>
         [JsonPropertyName("indicators")]
         public Dictionary<string, BinanceFuturesTradingStatusIndicator[]> Indicators { get; set; } = new Dictionary<string, BinanceFuturesTradingStatusIndicator[]>();
         /// <summary>
-        /// Last update time
+        /// ["<c>updateTime</c>"] Last update time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("updateTime")]
@@ -25,30 +25,31 @@
     public record BinanceFuturesTradingStatusIndicator
     {
         /// <summary>
-        /// Locked
+        /// ["<c>isLocked</c>"] Locked
         /// </summary>
         [JsonPropertyName("isLocked")]
         public bool IsLocked { get; set; }
         /// <summary>
-        /// Planned time when indicator is unlocked
+        /// ["<c>plannedRecoveryTime</c>"] Planned time when indicator is unlocked
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("plannedRecoveryTime")]
         public DateTime? PlannedRecoveryTime { get; set; }
         /// <summary>
-        /// The indicator name
+        /// ["<c>indicator</c>"] The indicator name
         /// </summary>
         [JsonPropertyName("indicator")]
         public string Indicator { get; set; } = string.Empty;
         /// <summary>
-        /// Current value of the indicator
+        /// ["<c>value</c>"] Current value of the indicator
         /// </summary>
         [JsonPropertyName("value")]
         public decimal Value { get; set; }
         /// <summary>
-        /// The trigger value of the indicator
+        /// ["<c>triggerValue</c>"] The trigger value of the indicator
         /// </summary>
         [JsonPropertyName("triggerValue")]
         public decimal TriggerValue { get; set; }
     }
 }
+

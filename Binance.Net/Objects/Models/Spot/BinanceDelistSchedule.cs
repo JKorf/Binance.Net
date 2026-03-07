@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot
+namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
     /// Spot symbol delist info
@@ -7,15 +7,16 @@
     public record BinanceDelistSchedule
     {
         /// <summary>
-        /// The delisting time.
+        /// ["<c>delistTime</c>"] The delisting time.
         /// </summary>
         [JsonPropertyName("delistTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime DelistTime { get; set; }
 
         /// <summary>
-        /// Symbols being delisted
+        /// ["<c>symbols</c>"] Symbols being delisted
         /// </summary>
         [JsonPropertyName("symbols")]
         public string[] Symbols { get; set; } = [];
     }
 }
+

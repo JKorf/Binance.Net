@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.CopyTrading
+namespace Binance.Net.Objects.Models.Spot.CopyTrading
 {
     /// <summary>
     /// Copy trading lead symbol
@@ -7,19 +7,20 @@
     public record BinanceCopyTradingLeadSymbol
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>baseAsset</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseAsset")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteAsset</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteAsset")]
         public string QuoteAsset { get; set; } = string.Empty;
     }
 }
+

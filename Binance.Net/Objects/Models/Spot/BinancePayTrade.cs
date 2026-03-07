@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot
 {
@@ -9,73 +9,73 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinancePayTrade
     {
         /// <summary>
-        /// The user identifier.
+        /// ["<c>uid</c>"] The user identifier.
         /// </summary>
         [JsonPropertyName("uid")]
         public long? Uid { get; set; }
         /// <summary>
-        /// The counterparty identifier.
+        /// ["<c>counterpartyId</c>"] The counterparty identifier.
         /// </summary>
         [JsonPropertyName("counterpartyId")]
         public long? CounterPartyId { get; set; }
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Note
+        /// ["<c>note</c>"] Note
         /// </summary>
         [JsonPropertyName("note")]
         public string? Note { get; set; }
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public PayOrderType OrderType { get; set; }
         /// <summary>
-        /// Transaction id
+        /// ["<c>transactionId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("transactionId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
-        /// The transaction time.
+        /// ["<c>transactionTime</c>"] The transaction time.
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("transactionTime")]
         public DateTime TransactionTime { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Total fee
+        /// ["<c>totalPaymentFee</c>"] Total fee
         /// </summary>
         [JsonPropertyName("totalPaymentFee")]
         public decimal TotalPaymentFee { get; set; }
         /// <summary>
-        /// Asset
+        /// ["<c>currency</c>"] Asset
         /// </summary>
         [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Main wallet type
+        /// ["<c>walletType</c>"] Main wallet type
         /// </summary>
         [JsonPropertyName("walletType")]
         public PayWalletType WalletType { get; set; }
         /// <summary>
-        /// Fund details
+        /// ["<c>fundsDetail</c>"] Fund details
         /// </summary>
         [JsonPropertyName("fundsDetail")]
         public BinancePayTradeDetails[] Details { get; set; } = Array.Empty<BinancePayTradeDetails>();
         /// <summary>
-        /// Payer info
+        /// ["<c>payerInfo</c>"] Payer info
         /// </summary>
         [JsonPropertyName("payerInfo")]
         public BinancePayTradeParticipantInfo PayerInfo { get; set; } = new BinancePayTradeParticipantInfo();
         /// <summary>
-        /// Receiver info
+        /// ["<c>receiverInfo</c>"] Receiver info
         /// </summary>
         [JsonPropertyName("receiverInfo")]
         public BinancePayTradeParticipantInfo ReceiverInfo { get; set; } = new BinancePayTradeParticipantInfo();
@@ -87,12 +87,12 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinancePayTradeDetails
     {
         /// <summary>
-        /// Asset
+        /// ["<c>currency</c>"] Asset
         /// </summary>
         [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
@@ -104,49 +104,50 @@ namespace Binance.Net.Objects.Models.Spot
     public record BinancePayTradeParticipantInfo
     {
         /// <summary>
-        /// Nickname or merchant name
+        /// ["<c>name</c>"] Nickname or merchant name
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Account type，USER for personal，MERCHANT for merchant
+        /// ["<c>type</c>"] Account type，USER for personal，MERCHANT for merchant
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         /// <summary>
-        /// Email
+        /// ["<c>email</c>"] Email
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; } = string.Empty;
         /// <summary>
-        /// Binance uid
+        /// ["<c>binanceId</c>"] Binance uid
         /// </summary>
         [JsonPropertyName("binanceId")]
         public long BinanceId { get; set; }
         /// <summary>
-        /// Binance pay id
+        /// ["<c>accountId</c>"] Binance pay id
         /// </summary>
         [JsonPropertyName("accountId")]
         public long AccountId { get; set; }
         /// <summary>
-        /// International area code
+        /// ["<c>countryCode</c>"] International area code
         /// </summary>
         [JsonPropertyName("countryCode")]
         public long CountryCode { get; set; }
         /// <summary>
-        /// Phone number
+        /// ["<c>phoneNumber</c>"] Phone number
         /// </summary>
         [JsonPropertyName("phoneNumber")]
         public string PhoneNumber { get; set; } = string.Empty;
         /// <summary>
-        /// Country code
+        /// ["<c>mobileCode</c>"] Country code
         /// </summary>
         [JsonPropertyName("mobileCode")]
         public string MobileCode { get; set; } = string.Empty;
         /// <summary>
-        /// Unmask data
+        /// ["<c>unmaskData</c>"] Unmask data
         /// </summary>
         [JsonPropertyName("unmaskData")]
         public bool? UnmaskData { get; set; }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Loans
 {
@@ -9,34 +9,35 @@ namespace Binance.Net.Objects.Models.Spot.Loans
     public record BinanceCryptoLoanLtvAdjust
     {
         /// <summary>
-        /// The loaning asset
+        /// ["<c>loanCoin</c>"] The loaning asset
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral asset
+        /// ["<c>collateralCoin</c>"] The collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Direction
+        /// ["<c>direction</c>"] Direction
         /// </summary>
         [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
-        /// Adjustment amount
+        /// ["<c>adjustmentAmount</c>"] Adjustment amount
         /// </summary>
         [JsonPropertyName("adjustmentAmount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Current LTV.
+        /// ["<c>currentLTV</c>"] Current LTV.
         /// </summary>
         [JsonPropertyName("currentLTV")]
         public decimal CurrentLtv { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public FlexibleBorrowStatus Status { get; set; }
     }
 }
+

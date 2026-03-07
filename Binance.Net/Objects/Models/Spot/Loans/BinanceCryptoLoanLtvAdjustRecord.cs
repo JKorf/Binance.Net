@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Loans
+namespace Binance.Net.Objects.Models.Spot.Loans
 {
     /// <summary>
     /// Ltv adjustment info
@@ -7,45 +7,46 @@
     public record BinanceCryptoLoanLtvAdjustRecord
     {
         /// <summary>
-        /// The loaning asset
+        /// ["<c>loanCoin</c>"] The loaning asset
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// The collateral asset
+        /// ["<c>collateralCoin</c>"] The collateral asset
         /// </summary>
         [JsonPropertyName("collateralCoin")]
         public string CollateralAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Direction
+        /// ["<c>direction</c>"] Direction
         /// </summary>
         [JsonPropertyName("direction")]
         public string Direction { get; set; } = string.Empty;
         /// <summary>
-        /// Amount
+        /// ["<c>amount</c>"] Amount
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// LTV before adjustment.
+        /// ["<c>preLTV</c>"] LTV before adjustment.
         /// </summary>
         [JsonPropertyName("preLTV")]
         public decimal PreLtv { get; set; }
         /// <summary>
-        /// LTV after adjustment.
+        /// ["<c>afterLTV</c>"] LTV after adjustment.
         /// </summary>
         [JsonPropertyName("afterLTV")]
         public decimal AfterLtv { get; set; }
         /// <summary>
-        /// Adjust time
+        /// ["<c>adjustTime</c>"] Adjust time
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("adjustTime")]
         public DateTime AdjustTime { get; set; }
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public long OrderId { get; set; }
     }
 }
+

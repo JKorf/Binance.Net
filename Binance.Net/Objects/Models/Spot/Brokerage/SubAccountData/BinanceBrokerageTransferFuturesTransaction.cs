@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
 {
@@ -9,19 +9,19 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     public record BinanceBrokerageTransferFuturesTransactions
     {
         /// <summary>
-        /// Success
+        /// ["<c>success</c>"] Success
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
 
         /// <summary>
-        /// Futures type
+        /// ["<c>futuresType</c>"] Futures type
         /// </summary>
         [JsonPropertyName("futuresType")]
         public FuturesAccountType FuturesType { get; set; }
 
         /// <summary>
-        /// Transfer
+        /// ["<c>transfer</c>"] Transfer
         /// </summary>
         [JsonPropertyName("transfer")]
         public BinanceBrokerageTransferFuturesTransaction[] Transactions { get; set; } = Array.Empty<BinanceBrokerageTransferFuturesTransaction>();
@@ -33,43 +33,43 @@ namespace Binance.Net.Objects.Models.Spot.Brokerage.SubAccountData
     public record BinanceBrokerageTransferFuturesTransaction
     {
         /// <summary>
-        /// From Id
+        /// ["<c>fromId</c>"] From Id
         /// </summary>
         [JsonPropertyName("fromId")]
         public string FromId { get; set; } = string.Empty;
 
         /// <summary>
-        /// To Id
+        /// ["<c>toId</c>"] To Id
         /// </summary>
         [JsonPropertyName("toId")]
         public string ToId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Quantity
+        /// ["<c>qty</c>"] Quantity
         /// </summary>
         [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Transaction Id
+        /// ["<c>tranId</c>"] Transaction Id
         /// </summary>
         [JsonPropertyName("tranId")]
         public string Id { get; set; } = string.Empty;
 
         /// <summary>
-        /// Client Transfer Id
+        /// ["<c>clientTranId</c>"] Client Transfer Id
         /// </summary>
         [JsonPropertyName("clientTranId")]
         public string ClientTransferId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Date
+        /// ["<c>time</c>"] Date
         /// </summary>
         [JsonPropertyName("time"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Date { get; set; }

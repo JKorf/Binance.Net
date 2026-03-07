@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 
 namespace Binance.Net.Objects.Models.Spot.SubAccountData
 {
@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
         public FuturesAccountType AccountType { get; set; }
 
         /// <summary>
-        /// Transfers
+        /// ["<c>transfers</c>"] Transfers
         /// </summary>
         [JsonPropertyName("transfers")]
         public BinanceSubAccountAssetTransferHistory[] Transfers { get; set; } = [];
@@ -24,40 +24,41 @@ namespace Binance.Net.Objects.Models.Spot.SubAccountData
     public record BinanceSubAccountAssetTransferHistory
     {
         /// <summary>
-        /// Transaction id
+        /// ["<c>tranId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("tranId")]
         public long TransactionId { get; set; }
 
         /// <summary>
-        /// From email
+        /// ["<c>from</c>"] From email
         /// </summary>
         [JsonPropertyName("from")]
         public string From { get; set; } = string.Empty;
 
         /// <summary>
-        /// To email
+        /// ["<c>to</c>"] To email
         /// </summary>
         [JsonPropertyName("to")]
         public string To { get; set; } = string.Empty;
 
         /// <summary>
-        /// Asset
+        /// ["<c>asset</c>"] Asset
         /// </summary>
         [JsonPropertyName("asset")]
         public string Asset { get; set; } = string.Empty;
 
         /// <summary>
-        /// Quantity
+        /// ["<c>qty</c>"] Quantity
         /// </summary>
         [JsonPropertyName("qty")]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// The time transaction was created
+        /// ["<c>time</c>"] The time transaction was created
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }
     }
 }
+
