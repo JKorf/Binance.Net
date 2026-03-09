@@ -15,6 +15,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("vaspCode")]
         public string VaspCode { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>identifier</c>"] Identifier.
+        /// </summary>
+        [JsonPropertyName("identifier")]
+        public string Identifier { get; set; } = string.Empty;
     }
 }
 
