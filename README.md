@@ -201,6 +201,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.10.0 - 09 Mar 2026
+    * Added restClient.SpotApi.ExchangeData.GetExecutionRulesAsync endpoint
+    * Added restClient.SpotApi.ExchangeData.GetReferencePriceAsync endpoint
+    * Added restClient.SpotApi.ExchangeData.GetReferencePriceCalculationAsync endpoint
+    * Added socketClient.SpotApi.ExchangeData.GetExecutionRulesAsync request
+    * Added socketClient.SpotApi.ExchangeData.GetReferencePriceAsync request
+    * Added socketClient.SpotApi.ExchangeData.GetReferencePriceCalculationAsync request
+    * Added socketClient.SpotApi.ExchangeData.SubscribeToReferencePriceUpdatesAsync stream
+    * Added Identifier to binanceRestClient.SpotApi.Account.GetTravelRuleVaspListAsync response model
+    * Updated UsdFuturesApi WebSocket connection urls to include public/market/private in the URL as per API documentation update
+    * Updated xml comments to include json fields
+
 * Version 12.9.0 - 06 Mar 2026
     * Updated CryptoExchange.Net to version 10.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Improved XML comments
