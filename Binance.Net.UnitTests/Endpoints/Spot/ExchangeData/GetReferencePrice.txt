@@ -1,0 +1,8 @@
+GET
+/api/v3/referencePrice
+false
+{
+  "symbol": "BAZUSD",
+  "referencePrice": "10.00",
+  "timestamp": 1770736694138
+}

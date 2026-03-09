@@ -136,6 +136,9 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetConvertListAllPairsAsync(), "GetConvertListAllPairs");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetConvertQuantityPrecisionPerAssetAsync(), "GetConvertQuantityPrecisionPerAsset");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetDelistScheduleAsync(), "GetDelistSchedule");
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetExecutionRulesAsync(), "GetExecutionRules", nestedJsonProperty: "symbolRules");
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetReferencePriceAsync("123"), "GetReferencePrice");
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetReferencePriceCalculationAsync("123", SymbolStatus.Halt), "GetReferencePriceCalculation");
         }
 
         [Test]

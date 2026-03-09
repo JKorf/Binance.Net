@@ -666,6 +666,48 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns>Spot symbol delist schedules</returns>
         Task<WebCallResult<BinanceDelistSchedule[]>> GetDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get order execution rules, checked at the moment the order would execute
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/general-endpoints#query-execution-rules" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/executionRules<br />
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="status">Filter by symbol status</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceExecutionRules[]>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get reference price for a symbol
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/referencePrice<br />
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceReferencePrice>> GetReferencePriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get reference price calculation info for a symbol
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/market-data-endpoints#query-reference-price" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/referencePrice/calculation<br />
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="symbolStatus">["<c>status</c>"] Filter by symbol status</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BinanceReferencePriceCalculation>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+
     }
 }
 

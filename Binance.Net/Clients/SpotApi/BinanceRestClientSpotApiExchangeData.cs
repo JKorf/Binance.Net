@@ -684,5 +684,50 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
+        #region Get Execution Rules
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceExecutionRules[]>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptionalEnum("status", status);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/executionRules", BinanceExchange.RateLimiter.SpotRestIp, 1, false);
+            var result = await _baseClient.SendAsync<BinanceExecutionRulesWrapper>(request, parameters, ct, weight: symbol == null ? 40 : 2).ConfigureAwait(false);
+            return result.As<BinanceExecutionRules[]>(result.Data?.SymbolRules);
+        }
+
+        #endregion
+
+        #region Get Reference Price
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceReferencePrice>> GetReferencePriceAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/referencePrice", BinanceExchange.RateLimiter.SpotRestIp, 1, false);
+            var result = await _baseClient.SendAsync<BinanceReferencePrice>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Reference Price Calculation
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceReferencePriceCalculation>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptionalEnum("status", symbolStatus);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/referencePrice/calculation", BinanceExchange.RateLimiter.SpotRestIp, 1, false);
+            var result = await _baseClient.SendAsync<BinanceReferencePriceCalculation>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
     }
 }

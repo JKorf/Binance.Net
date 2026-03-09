@@ -1,0 +1,10 @@
+GET
+/api/v3/referencePrice/calculation
+false
+{
+  "symbol": "BAZUSD",
+  "calculationType": "ARITHMETIC_MEAN",
+  "bucketCount": 10,
+  "bucketWidthMs": 1000,
+  "externalCalculationId": 42
+}

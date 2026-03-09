@@ -1,0 +1,19 @@
+GET
+/api/v3/executionRules
+false
+{
+    "symbolRules": [
+        {
+            "symbol": "BAZUSD",
+            "rules": [
+                {
+                    "ruleType": "PRICE_RANGE",
+                    "bidLimitMultUp": "1.0001",
+                    "bidLimitMultDown": "0.9999",
+                    "askLimitMultUp": "1.0001",
+                    "askLimitMultDown": "0.9999"
+                }
+            ]
+        }
+    ]
+}

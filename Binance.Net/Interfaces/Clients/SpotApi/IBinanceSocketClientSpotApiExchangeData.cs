@@ -135,6 +135,36 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<CallResult<BinanceResponse<BinanceSpotKline[]>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get execution rules
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/general-requests#query-execution-rules" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="status">Filter by symbol status</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Execution rules</returns>
+        Task<CallResult<BinanceResponse<BinanceExecutionRules[]>>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get reference price for a symbol
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Reference price</returns>
+        Task<CallResult<BinanceResponse<BinanceReferencePrice>>> GetReferencePriceAsync(string? symbol = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get reference price calculation info for a symbol
+        /// <para>
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/market-data-requests#query-reference-price-calculation" />
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="symbolStatus">["<c>status</c>"] Filter by symbol status</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<CallResult<BinanceResponse<BinanceReferencePriceCalculation>>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribes to the aggregated trade update stream for the provided symbols
         /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#aggregate-trade-streams" /></para>
         /// </summary>
@@ -431,8 +461,8 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             Action<DataEvent<BinanceStreamAveragePrice>> onMessage, CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to average price updates
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#average-price" /></para>
+        /// Subscribes to reference price updates
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#reference-price-streams" /></para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -440,5 +470,27 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(IEnumerable<string> symbols,
             Action<DataEvent<BinanceStreamAveragePrice>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to reference price updates
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#reference-price-streams" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToReferencePriceUpdatesAsync(string symbol,
+            Action<DataEvent<BinanceReferencePriceUpdate>> onMessage, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to Reference price updates
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#Reference-price" /></para>
+        /// </summary>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
+        /// <param name="onMessage">The event handler for the received data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToReferencePriceUpdatesAsync(IEnumerable<string> symbols,
+            Action<DataEvent<BinanceReferencePriceUpdate>> onMessage, CancellationToken ct = default);
     }
 }

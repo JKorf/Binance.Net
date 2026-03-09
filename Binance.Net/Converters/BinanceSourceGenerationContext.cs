@@ -17,6 +17,13 @@ using Binance.Net.Objects.Models.Spot.Staking;
 
 namespace Binance.Net.Converters
 {
+    [JsonSerializable(typeof(BinanceCombinedStream<BinanceReferencePriceUpdate>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceReferencePriceCalculation>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceReferencePrice>))]
+    [JsonSerializable(typeof(BinanceResponse<BinanceExecutionRulesWrapper>))]
+    [JsonSerializable(typeof(BinanceReferencePriceCalculation))]
+    [JsonSerializable(typeof(BinanceReferencePrice))]
+    [JsonSerializable(typeof(BinanceExecutionRulesWrapper))]
     [JsonSerializable(typeof(BinanceTravelWithdrawalResponse))]
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireJapan))]
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireKazakhstan))]
