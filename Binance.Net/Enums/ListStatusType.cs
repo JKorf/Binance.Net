@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum ListStatusType
     {
         /// <summary>
-        /// Failed action
+        /// ["<c>RESPONSE</c>"] Failed action
         /// </summary>
         [Map("RESPONSE")]
         Response,
         /// <summary>
-        /// Placed
+        /// ["<c>EXEC_STARTED</c>"] Placed
         /// </summary>
         [Map("EXEC_STARTED")]
         ExecutionStarted,
         /// <summary>
-        /// Order list is done
+        /// ["<c>ALL_DONE</c>"] Order list is done
         /// </summary>
         [Map("ALL_DONE")]
         Done
     }
 }
+

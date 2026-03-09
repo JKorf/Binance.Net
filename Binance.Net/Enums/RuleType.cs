@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -15,3 +15,4 @@ namespace Binance.Net.Enums
         PriceRange,
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,44 +9,45 @@ namespace Binance.Net.Enums
     public enum ExecutionType
     {
         /// <summary>
-        /// New
+        /// ["<c>NEW</c>"] New
         /// </summary>
         [Map("NEW")]
         New,
         /// <summary>
-        /// Canceled
+        /// ["<c>CANCELED</c>"] Canceled
         /// </summary>
         [Map("CANCELED")]
         Canceled,
         /// <summary>
-        /// Replaced
+        /// ["<c>REPLACED</c>"] Replaced
         /// </summary>
         [Map("REPLACED")]
         Replaced,
         /// <summary>
-        /// Rejected
+        /// ["<c>REJECTED</c>"] Rejected
         /// </summary>
         [Map("REJECTED")]
         Rejected,
         /// <summary>
-        /// Trade
+        /// ["<c>TRADE</c>"] Trade
         /// </summary>
         [Map("TRADE")]
         Trade,
         /// <summary>
-        /// Expired
+        /// ["<c>EXPIRED</c>"] Expired
         /// </summary>
         [Map("EXPIRED")]
         Expired,
         /// <summary>
-        /// Amendment
+        /// ["<c>AMENDMENT</c>"] Amendment
         /// </summary>
         [Map("AMENDMENT")]
         Amendment,
         /// <summary>
-        /// Self trade prevented
+        /// ["<c>TRADE_PREVENTION</c>"] Self trade prevented
         /// </summary>
         [Map("TRADE_PREVENTION")]
         TradePrevention
     }
 }
+

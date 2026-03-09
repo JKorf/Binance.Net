@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum AutoInvestPlanType
     {
         /// <summary>
-        /// Single
+        /// ["<c>SINGLE</c>"] Single
         /// </summary>
         [Map("SINGLE")]
         Single,
         /// <summary>
-        /// Index
+        /// ["<c>INDEX</c>"] Index
         /// </summary>
         [Map("INDEX")]
         Index,
         /// <summary>
-        /// Portfolio
+        /// ["<c>PORTFOLIO</c>"] Portfolio
         /// </summary>
         [Map("PORTFOLIO")]
         Portfolio,
         /// <summary>
-        /// All
+        /// ["<c>ALL</c>"] All
         /// </summary>
         [Map("ALL")]
         All
     }
 }
+

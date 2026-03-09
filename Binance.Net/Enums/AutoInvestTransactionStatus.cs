@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum AutoInvestTransactionStatus
     {
         /// <summary>
-        /// Success
+        /// ["<c>SUCCESS</c>"] Success
         /// </summary>
         [Map("SUCCESS")]
         Success,
         /// <summary>
-        /// Failed
+        /// ["<c>FAILED</c>"] Failed
         /// </summary>
         [Map("FAILED")]
         Failed,
         /// <summary>
-        /// Pending
+        /// ["<c>PENDING</c>"] Pending
         /// </summary>
         [Map("PENDING")]
         Pending
     }
 }
+

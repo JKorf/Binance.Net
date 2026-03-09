@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum FuturesTransferStatus
     {
         /// <summary>
-        /// Pending to execute
+        /// ["<c>PENDING</c>"] Pending to execute
         /// </summary>
         [Map("PENDING")]
         Pending,
         /// <summary>
-        /// Successfully transferred
+        /// ["<c>CONFIRMED</c>"] Successfully transferred
         /// </summary>
         [Map("CONFIRMED")]
         Confirmed,
         /// <summary>
-        /// Execution failed
+        /// ["<c>FAILED</c>"] Execution failed
         /// </summary>
         [Map("FAILED")]
         Failed
     }
 }
+

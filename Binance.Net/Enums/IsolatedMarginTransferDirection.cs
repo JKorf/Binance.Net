@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum IsolatedMarginTransferDirection
     {
         /// <summary>
-        /// Spot
+        /// ["<c>SPOT</c>"] Spot
         /// </summary>
         [Map("SPOT")]
         Spot,
         /// <summary>
-        /// Isolated margin
+        /// ["<c>ISOLATED_MARGIN</c>"] Isolated margin
         /// </summary>
         [Map("ISOLATED_MARGIN")]
         IsolatedMargin
     }
 }
+

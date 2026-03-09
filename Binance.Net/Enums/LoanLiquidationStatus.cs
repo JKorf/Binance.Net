@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum LoanLiquidationStatus
     {
         /// <summary>
-        /// Liquidated
+        /// ["<c>Liquidated</c>"] Liquidated
         /// </summary>
         [Map("Liquidated")]
         Liquidated,
         /// <summary>
-        /// Liquidating
+        /// ["<c>Liquidating</c>"] Liquidating
         /// </summary>
         [Map("Liquidating")]
         Liquidating
     }
 }
+

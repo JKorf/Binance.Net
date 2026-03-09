@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum SolRewardType
     {
         /// <summary>
-        /// Claim
+        /// ["<c>CLAIM</c>"] Claim
         /// </summary>
         [Map("CLAIM")]
         Claim,
         /// <summary>
-        /// Distribute
+        /// ["<c>DISTRIBUTE</c>"] Distribute
         /// </summary>
         [Map("DISTRIBUTE")]
         Distribute
     }
 }
+

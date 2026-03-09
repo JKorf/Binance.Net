@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum OrderUrgency
     {
         /// <summary>
-        /// Low urgency
+        /// ["<c>LOW</c>"] Low urgency
         /// </summary>
         [Map("LOW")]
         Low,
         /// <summary>
-        /// Medium urgency
+        /// ["<c>MEDIUM</c>"] Medium urgency
         /// </summary>
         [Map("MEDIUM")]
         Medium,
         /// <summary>
-        /// High urgency
+        /// ["<c>HIGH</c>"] High urgency
         /// </summary>
         [Map("HIGH")]
         High
     }
 }
+

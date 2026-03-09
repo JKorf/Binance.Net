@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum ConvertOrderStatus
     {
         /// <summary>
-        /// Process
+        /// ["<c>PROCESS</c>"] Process
         /// </summary>
         [Map("PROCESS")]
         Process,
         /// <summary>
-        /// Accept success
+        /// ["<c>ACCEPT_SUCCESS</c>"] Accept success
         /// </summary>
         [Map("ACCEPT_SUCCESS")]
         AcceptSuccess,
         /// <summary>
-        /// Success
+        /// ["<c>SUCCESS</c>"] Success
         /// </summary>
         [Map("SUCCESS")]
         Success,
         /// <summary>
-        /// Fail
+        /// ["<c>FAIL</c>"] Fail
         /// </summary>
         [Map("FAIL")]
         Fail
     }
 }
+

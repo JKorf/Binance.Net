@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum DownloadStatus
     {
         /// <summary>
-        /// Processing
+        /// ["<c>processing</c>"] Processing
         /// </summary>
         [Map("processing")]
         Processing,
         /// <summary>
-        /// Ready for download
+        /// ["<c>completed</c>"] Ready for download
         /// </summary>
         [Map("completed")]
         Completed
     }
 }
+

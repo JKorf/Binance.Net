@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum BlvtStatus
     {
         /// <summary>
-        /// Pending
+        /// ["<c>P</c>"] Pending
         /// </summary>
         [Map("P")]
         Pending,
         /// <summary>
-        /// Success
+        /// ["<c>S</c>"] Success
         /// </summary>
         [Map("S")]
         Success,
         /// <summary>
-        /// Failure
+        /// ["<c>F</c>"] Failure
         /// </summary>
         [Map("F")]
         Failure
     }
 }
+

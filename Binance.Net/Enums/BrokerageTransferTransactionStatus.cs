@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,22 +9,22 @@ namespace Binance.Net.Enums
     public enum BrokerageTransferTransactionStatus
     {
         /// <summary>
-        /// Init
+        /// ["<c>INIT</c>"] Init
         /// </summary>
         [Map("INIT")]
         Init,
         /// <summary>
-        /// Process
+        /// ["<c>PROCESS</c>"] Process
         /// </summary>
         [Map("PROCESS")]
         Process,
         /// <summary> 
-        /// Success 
+        /// ["<c>SUCCESS</c>"] Success 
         /// </summary>
         [Map("SUCCESS")]
         Success,
         /// <summary> 
-        /// Failure 
+        /// ["<c>FAILURE</c>"] Failure 
         /// </summary>
         [Map("FAILURE")]
         Failure,

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,44 +9,45 @@ namespace Binance.Net.Enums
     public enum PayOrderType
     {
         /// <summary>
-        /// C2B Merchant Acquiring Payment
+        /// ["<c>PAY</c>"] C2B Merchant Acquiring Payment
         /// </summary>
         [Map("PAY")]
         Pay,
         /// <summary>
-        /// C2B Merchant Acquiring Payment, refund
+        /// ["<c>PAY_REFUND</c>"] C2B Merchant Acquiring Payment, refund
         /// </summary>
         [Map("PAY_REFUND")]
         PayRefund,
         /// <summary>
-        /// C2C Transfer Payment
+        /// ["<c>C2C</c>"] C2C Transfer Payment
         /// </summary>
         [Map("C2C")]
         C2C,
         /// <summary>
-        /// Crypto box
+        /// ["<c>CRYPTO_BOX</c>"] Crypto box
         /// </summary>
         [Map("CRYPTO_BOX")]
         CryptoBox,
         /// <summary>
-        /// Crypto box, refund
+        /// ["<c>CRYPTO_BOX_RF</c>"] Crypto box, refund
         /// </summary>
         [Map("CRYPTO_BOX_RF")]
         CryptoBoxRefund,
         /// <summary>
-        /// Transfer to new Binance user
+        /// ["<c>C2C_HOLDING</c>"] Transfer to new Binance user
         /// </summary>
         [Map("C2C_HOLDING")]
         C2CHolding,
         /// <summary>
-        /// Transfer to new Binance user, refund
+        /// ["<c>C2C_HOLDING_RF</c>"] Transfer to new Binance user, refund
         /// </summary>
         [Map("C2C_HOLDING_RF")]
         C2CHoldingRefund,
         /// <summary>
-        /// B2C Disbursement Payment
+        /// ["<c>PAYOUT</c>"] B2C Disbursement Payment
         /// </summary>
         [Map("PAYOUT")]
         Payout
     }
 }
+

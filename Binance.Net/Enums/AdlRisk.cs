@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum AdlRisk
     {
         /// <summary>
-        /// High risk
+        /// ["<c>HIGH</c>"] High risk
         /// </summary>
         [Map("HIGH")]
         High,
         /// <summary>
-        /// Medium risk
+        /// ["<c>MIDDLE</c>"] Medium risk
         /// </summary>
         [Map("MIDDLE")]
         Middle,
         /// <summary>
-        /// Low risk
+        /// ["<c>LOW</c>"] Low risk
         /// </summary>
         [Map("LOW")]
         Low
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum SubAccountTransferSubAccountType
     {
         /// <summary>
-        /// From main spot account to sub account
+        /// ["<c>1</c>"] From main spot account to sub account
         /// </summary>
         [Map("1")]
         TransferIn,
         /// <summary>
-        /// From sub account to main spot account
+        /// ["<c>2</c>"] From sub account to main spot account
         /// </summary>
         [Map("2")]
         TransferOut
     }
 }
+

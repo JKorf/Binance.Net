@@ -1,4 +1,4 @@
-﻿
+
 using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
@@ -10,44 +10,45 @@ namespace Binance.Net.Enums
     public enum VipLoanApplicationStatus
     {
         /// <summary>
-        /// Accruing interest
+        /// ["<c>Accruing_Interest</c>"] Accruing interest
         /// </summary>
         [Map("Accruing_Interest")]
         AccruingInterest,
         /// <summary>
-        /// Overdue
+        /// ["<c>Overdue</c>"] Overdue
         /// </summary>
         [Map("Overdue")]
         Overdue,
         /// <summary>
-        /// Liquidating
+        /// ["<c>Liquidating</c>"] Liquidating
         /// </summary>
         [Map("Liquidating")]
         Liquidating,
         /// <summary>
-        /// Repaying
+        /// ["<c>Repaying</c>"] Repaying
         /// </summary>
         [Map("Repaying")]
         Repaying,
         /// <summary>
-        /// Repaying
+        /// ["<c>Repaid</c>"] Repaying
         /// </summary>
         [Map("Repaid")]
         Repaid,
         /// <summary>
-        /// Liquidated
+        /// ["<c>Liquidated</c>"] Liquidated
         /// </summary>
         [Map("Liquidated")]
         Liquidated,
         /// <summary>
-        /// Pending
+        /// ["<c>Pending</c>"] Pending
         /// </summary>
         [Map("Pending")]
         Pending,
         /// <summary>
-        /// Failed
+        /// ["<c>Failed</c>"] Failed
         /// </summary>
         [Map("Failed")]
         Failed,
     }
 }
+

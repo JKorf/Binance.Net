@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum FiatPaymentStatus
     {
         /// <summary>
-        /// Still processing
+        /// ["<c>Processing</c>"] Still processing
         /// </summary>
         [Map("Processing")]
         Processing,
         /// <summary>
-        /// Successfully completed
+        /// ["<c>Completed</c>"] Successfully completed
         /// </summary>
         [Map("Completed")]
         Completed,
         /// <summary>
-        /// Failed
+        /// ["<c>Failed</c>"] Failed
         /// </summary>
         [Map("Failed")]
         Failed,
         /// <summary>
-        /// Refunded
+        /// ["<c>Refunded</c>"] Refunded
         /// </summary>
         [Map("Refunded")]
         Refunded
     }
 }
+

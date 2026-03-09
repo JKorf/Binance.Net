@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum AccountType
     {
         /// <summary>
-        /// Spot account type
+        /// ["<c>SPOT</c>"] Spot account type
         /// </summary>
         [Map("SPOT")]
         Spot,
         /// <summary>
-        /// Margin account type
+        /// ["<c>MARGIN</c>"] Margin account type
         /// </summary>>
         [Map("MARGIN")]
         Margin,
         /// <summary>
-        /// Futures account type
+        /// ["<c>FUTURES</c>"] Futures account type
         /// </summary>
         [Map("FUTURES")]
         Futures,
         /// <summary>
-        /// Leveraged account type
+        /// ["<c>LEVERAGED</c>"] Leveraged account type
         /// </summary>
         [Map("LEVERAGED")]
         Leveraged
     }
 }
+

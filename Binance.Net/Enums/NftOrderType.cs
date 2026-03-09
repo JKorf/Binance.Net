@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -8,29 +8,30 @@ namespace Binance.Net.Enums
     public enum NftOrderType
     {
         /// <summary>
-        /// Purchase order made by the user to buy assets.
+        /// ["<c>0</c>"] Purchase order made by the user to buy assets.
         /// </summary>
         [Map("0")]
         PurchaseOrder,
         /// <summary>
-        /// Sell order made by the user to sell assets.
+        /// ["<c>1</c>"] Sell order made by the user to sell assets.
         /// </summary>
         [Map("1")]
         SellOrder,
         /// <summary>
-        /// Income received as royalty from assets.
+        /// ["<c>2</c>"] Income received as royalty from assets.
         /// </summary>
         [Map("2")]
         RoyaltyIncome,
         /// <summary>
-        /// Order placed during the primary market sale.
+        /// ["<c>3</c>"] Order placed during the primary market sale.
         /// </summary>
         [Map("3")]
         PrimaryMarketOrder,
         /// <summary>
-        /// Fee paid for minting assets.
+        /// ["<c>4</c>"] Fee paid for minting assets.
         /// </summary>
         [Map("4")]
         MintFee
     }
 }
+

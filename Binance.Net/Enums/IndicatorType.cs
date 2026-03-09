@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum IndicatorType
     {
         /// <summary>
-        /// Unfilled ratio
+        /// ["<c>UFR</c>"] Unfilled ratio
         /// </summary>
         [Map("UFR")]
         UnfilledRatio,
         /// <summary>
-        /// Expired orders ratio
+        /// ["<c>IFER</c>"] Expired orders ratio
         /// </summary>
         [Map("IFER")]
         ExpirationRatio,
         /// <summary>
-        /// Canceled orders ratio
+        /// ["<c>GCR</c>"] Canceled orders ratio
         /// </summary>
         [Map("GCR")]
         CancelationRatio
     }
 }
+

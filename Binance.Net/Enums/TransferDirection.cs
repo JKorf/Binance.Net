@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum TransferDirection
     {
         /// <summary>
-        /// Roll-in
+        /// ["<c>ROLL_IN</c>"] Roll-in
         /// </summary>
         [Map("ROLL_IN")]
         RollIn,
         /// <summary>
-        /// Roll-out
+        /// ["<c>ROLL_OUT</c>"] Roll-out
         /// </summary>
         [Map("ROLL_OUT")]
         RollOut
     }
 }
+

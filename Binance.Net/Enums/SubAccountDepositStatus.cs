@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,19 @@ namespace Binance.Net.Enums
     public enum SubAccountDepositStatus
     {
         /// <summary>
-        /// Pending
+        /// ["<c>0</c>"] Pending
         /// </summary>
         [Map("0")]
         Pending,
 
         /// <summary>
-        /// Success
+        /// ["<c>1</c>"] Success
         /// </summary>
         [Map("1")]
         Success,
 
         /// <summary>
-        /// Credited but cannot withdraw
+        /// ["<c>6</c>"] Credited but cannot withdraw
         /// </summary>
         [Map("6")]
         CreditedButCannotWithdraw,

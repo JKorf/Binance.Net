@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,9 +9,10 @@ namespace Binance.Net.Enums
     public enum PegOffsetType
     {
         /// <summary>
-        /// Price level
+        /// ["<c>PRICE_LEVEL</c>"] Price level
         /// </summary>
         [Map("PRICE_LEVEL")]
         PriceLevel
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,37 +9,37 @@ namespace Binance.Net.Enums
     public enum SpotOrderType
     {
         /// <summary>
-        /// Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
+        /// ["<c>LIMIT</c>"] Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
         /// </summary>
         [Map("LIMIT")]
         Limit,
         /// <summary>
-        /// Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+        /// ["<c>MARKET</c>"] Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
         /// </summary>
         [Map("MARKET")]
         Market,
         /// <summary>
-        /// Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
+        /// ["<c>STOP_LOSS</c>"] Stop loss order. Will execute a market order when the price drops below a price to sell and therefor limit the loss
         /// </summary>
         [Map("STOP_LOSS")]
         StopLoss,
         /// <summary>
-        /// Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
+        /// ["<c>STOP_LOSS_LIMIT</c>"] Stop loss order. Will execute a limit order when the price drops below a price to sell and therefor limit the loss
         /// </summary>
         [Map("STOP_LOSS_LIMIT")]
         StopLossLimit,
         /// <summary>
-        /// Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+        /// ["<c>TAKE_PROFIT</c>"] Take profit order. Will execute a market order when the price rises above a price to sell and therefor take a profit
         /// </summary>
         [Map("TAKE_PROFIT")]
         TakeProfit,
         /// <summary>
-        /// Take profit limit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+        /// ["<c>TAKE_PROFIT_LIMIT</c>"] Take profit limit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
         /// </summary>
         [Map("TAKE_PROFIT_LIMIT")]
         TakeProfitLimit,
         /// <summary>
-        /// Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
+        /// ["<c>LIMIT_MAKER</c>"] Same as a limit order, however it will fail if the order would immediately match, therefor preventing taker orders
         /// </summary>
         [Map("LIMIT_MAKER")]
         LimitMaker
@@ -52,44 +52,45 @@ namespace Binance.Net.Enums
     public enum FuturesOrderType
     {
         /// <summary>
-        /// Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
+        /// ["<c>LIMIT</c>"] Limit orders will be placed at a specific price. If the price isn't available in the order book for that asset the order will be added in the order book for someone to fill.
         /// </summary>
         [Map("LIMIT")]
         Limit,
         /// <summary>
-        /// Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
+        /// ["<c>MARKET</c>"] Market order will be placed without a price. The order will be executed at the best price available at that time in the order book.
         /// </summary>
         [Map("MARKET")]
         Market,
         /// <summary>
-        /// Stop order. Execute a limit order when price reaches a specific Stop price
+        /// ["<c>STOP</c>"] Stop order. Execute a limit order when price reaches a specific Stop price
         /// </summary>
         [Map("STOP")]
         Stop,
         /// <summary>
-        /// Stop market order. Execute a market order when price reaches a specific Stop price
+        /// ["<c>STOP_MARKET</c>"] Stop market order. Execute a market order when price reaches a specific Stop price
         /// </summary>
         [Map("STOP_MARKET")]
         StopMarket,
         /// <summary>
-        /// Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
+        /// ["<c>TAKE_PROFIT</c>"] Take profit order. Will execute a limit order when the price rises above a price to sell and therefor take a profit
         /// </summary>
         [Map("TAKE_PROFIT")]
         TakeProfit,
         /// <summary>
-        /// Take profit market order. Will execute a market order when the price rises above a price to sell and therefor take a profit
+        /// ["<c>TAKE_PROFIT_MARKET</c>"] Take profit market order. Will execute a market order when the price rises above a price to sell and therefor take a profit
         /// </summary>
         [Map("TAKE_PROFIT_MARKET")]
         TakeProfitMarket,
         /// <summary>
-        /// A trailing stop order will execute an order when the price drops below a certain percentage from its all time high since the order was activated
+        /// ["<c>TRAILING_STOP_MARKET</c>"] A trailing stop order will execute an order when the price drops below a certain percentage from its all time high since the order was activated
         /// </summary>
         [Map("TRAILING_STOP_MARKET")]
         TrailingStopMarket,
         /// <summary>
-        /// A liquidation order
+        /// ["<c>LIQUIDATION</c>"] A liquidation order
         /// </summary>
         [Map("LIQUIDATION")]
         Liquidation
     }
 }
+

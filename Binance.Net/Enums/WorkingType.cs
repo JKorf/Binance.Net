@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum WorkingType
     {
         /// <summary>
-        /// Mark price type
+        /// ["<c>MARK_PRICE</c>"] Mark price type
         /// </summary>
         [Map("MARK_PRICE")]
         Mark,
         /// <summary>
-        /// Contract price type
+        /// ["<c>CONTRACT_PRICE</c>"] Contract price type
         /// </summary>
         [Map("CONTRACT_PRICE")]
         Contract
     }
 }
+

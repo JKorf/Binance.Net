@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,7 +9,7 @@ namespace Binance.Net.Enums
     public enum FuturesMarginType
     {
         /// <summary>
-        /// Isolated margin
+        /// ["<c>ISOLATED</c>"] Isolated margin
         /// </summary>
         [Map("ISOLATED")]
         Isolated,
@@ -20,3 +20,4 @@ namespace Binance.Net.Enums
         Cross
     }
 }
+

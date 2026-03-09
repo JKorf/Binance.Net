@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum CloudMiningPaymentStatus
     {
         /// <summary>
-        /// Payment
+        /// ["<c>248</c>"] Payment
         /// </summary>
         [Map("248")]
         Payment,
         /// <summary>
-        /// Refund
+        /// ["<c>249</c>"] Refund
         /// </summary>
         [Map("249")]
         Refund
     }
 }
+

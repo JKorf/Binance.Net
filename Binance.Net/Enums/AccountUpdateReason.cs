@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,89 +9,90 @@ namespace Binance.Net.Enums
     public enum AccountUpdateReason
     {
         /// <summary>
-        /// Deposit
+        /// ["<c>DEPOSIT</c>"] Deposit
         /// </summary>
         [Map("DEPOSIT")]
         Deposit,
         /// <summary>
-        /// Withdraw
+        /// ["<c>WITHDRAW</c>"] Withdraw
         /// </summary>
         [Map("WITHDRAW")]
         Withdraw,
         /// <summary>
-        /// Order
+        /// ["<c>ORDER</c>"] Order
         /// </summary>
         [Map("ORDER")]
         Order,
         /// <summary>
-        /// Funding Fee
+        /// ["<c>FUNDING_FEE</c>"] Funding Fee
         /// </summary>
         [Map("FUNDING_FEE")]
         FundingFee,
         /// <summary>
-        /// Withdraw Reject
+        /// ["<c>WITHDRAW_REJECT</c>"] Withdraw Reject
         /// </summary>
         [Map("WITHDRAW_REJECT")]
         WithdrawReject,
         /// <summary>
-        /// Adjustment
+        /// ["<c>ADJUSTMENT</c>"] Adjustment
         /// </summary>
         [Map("ADJUSTMENT")]
         Adjustment,
         /// <summary>
-        /// Insurance Clear
+        /// ["<c>INSURANCE_CLEAR</c>"] Insurance Clear
         /// </summary>
         [Map("INSURANCE_CLEAR")]
         InsuranceClear,
         /// <summary>
-        /// Admin Deposit
+        /// ["<c>ADMIN_DEPOSIT</c>"] Admin Deposit
         /// </summary>
         [Map("ADMIN_DEPOSIT")]
         AdminDeposit,
         /// <summary>
-        /// Admin Withdraw
+        /// ["<c>ADMIN_WITHDRAW</c>"] Admin Withdraw
         /// </summary>
         [Map("ADMIN_WITHDRAW")]
         AdminWithdraw,
         /// <summary>
-        /// Margin Transfer
+        /// ["<c>MARGIN_TRANSFER</c>"] Margin Transfer
         /// </summary>
         [Map("MARGIN_TRANSFER")]
         MarginTransfer,
         /// <summary>
-        /// Margin Type Change
+        /// ["<c>MARGIN_TYPE_CHANGE</c>"] Margin Type Change
         /// </summary>
         [Map("MARGIN_TYPE_CHANGE")]
         MarginTypeChange,
         /// <summary>
-        ///  Asset Transfer
+        /// ["<c>ASSET_TRANSFER</c>"] Asset Transfer
         /// </summary>
         [Map("ASSET_TRANSFER")]
         AssetTransfer,
         /// <summary>
-        /// Options Premium Fee
+        /// ["<c>OPTIONS_PREMIUM_FEE</c>"] Options Premium Fee
         /// </summary>
         [Map("OPTIONS_PREMIUM_FEE")]
         OptionsPremiumFee,
         /// <summary>
-        /// Options Settle Profit
+        /// ["<c>OPTIONS_SETTLE_PROFIT</c>"] Options Settle Profit
         /// </summary>
         [Map("OPTIONS_SETTLE_PROFIT")]
         OptionsSettleProfit,
         /// <summary>
-        /// Auto exchange
+        /// ["<c>AUTO_EXCHANGE</c>"] Auto exchange
         /// </summary>
         [Map("AUTO_EXCHANGE")]
         AutoExchange,
         /// <summary>
-        /// Coin swap withdraw
+        /// ["<c>COIN_SWAP_WITHDRAW</c>"] Coin swap withdraw
         /// </summary>
         [Map("COIN_SWAP_WITHDRAW")]
         CoinSwapWithdraw,
         /// <summary>
-        /// Coin swap deposit
+        /// ["<c>COIN_SWAP_DEPOSIT</c>"] Coin swap deposit
         /// </summary>
         [Map("COIN_SWAP_DEPOSIT")]
         CoinSwapDeposit
     }
 }
+

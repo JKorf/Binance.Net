@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum AutoInvestIndexStatus
     {
         /// <summary>
-        /// Running
+        /// ["<c>RUNNING</c>"] Running
         /// </summary>
         [Map("RUNNING")]
         Running,
         /// <summary>
-        /// Rebalancing
+        /// ["<c>REBALANCING</c>"] Rebalancing
         /// </summary>
         [Map("REBALANCING")]
         Rebalancing,
         /// <summary>
-        /// Paused
+        /// ["<c>PAUSED</c>"] Paused
         /// </summary>
         [Map("PAUSED")]
         Paused
     }
 }
+

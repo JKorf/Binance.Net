@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum AutoInvestExecutionType
     {
         /// <summary>
-        /// One time
+        /// ["<c>ONE_TIME</c>"] One time
         /// </summary>
         [Map("ONE_TIME")]
         OneTime,
         /// <summary>
-        /// Recurring
+        /// ["<c>RECURRING</c>"] Recurring
         /// </summary>
         [Map("RECURRING")]
         Recurring
     }
 }
+

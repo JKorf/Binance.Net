@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,12 +9,12 @@ namespace Binance.Net.Enums
     public enum AprPeriod
     {
         /// <summary>
-        /// Year
+        /// ["<c>YEAR</c>"] Year
         /// </summary>
         [Map("YEAR")]
         Year,
         /// <summary>
-        /// Day
+        /// ["<c>DAY</c>"] Day
         /// </summary>
         [Map("DAY")]
         Day

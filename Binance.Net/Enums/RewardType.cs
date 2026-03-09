@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum RewardType
     {
         /// <summary>
-        /// Bonus tiered APR
+        /// ["<c>BONUS</c>"] Bonus tiered APR
         /// </summary>
         [Map("BONUS")]
         BonusTieredApr,
         /// <summary>
-        /// Realtime APR
+        /// ["<c>REALTIME</c>"] Realtime APR
         /// </summary>
         [Map("REALTIME")]
         RealtimeApr,
         /// <summary>
-        /// Historical rewards
+        /// ["<c>REWARDS</c>"] Historical rewards
         /// </summary>
         [Map("REWARDS")]
         HistoricalRewards,
         /// <summary>
-        /// All reward types
+        /// ["<c>ALL</c>"] All reward types
         /// </summary>
         [Map("ALL")]
         All
     }
 }
+

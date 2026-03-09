@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,29 +9,30 @@ namespace Binance.Net.Enums
     public enum SelfTradePreventionMode
     {
         /// <summary>
-        /// Expire taker
+        /// ["<c>EXPIRE_TAKER</c>"] Expire taker
         /// </summary>
         [Map("EXPIRE_TAKER")]
         ExpireTaker,
         /// <summary>
-        /// Expire maker
+        /// ["<c>EXPIRE_MAKER</c>"] Expire maker
         /// </summary>
         [Map("EXPIRE_MAKER")]
         ExpireMaker,
         /// <summary>
-        /// Expire both
+        /// ["<c>EXPIRE_BOTH</c>"] Expire both
         /// </summary>
         [Map("EXPIRE_BOTH")]
         ExpireBoth,
         /// <summary>
-        /// Decrement
+        /// ["<c>DECREMENT</c>"] Decrement
         /// </summary>
         [Map("DECREMENT")]
         Decrement,
         /// <summary>
-        /// None
+        /// ["<c>NONE</c>"] None
         /// </summary>
         [Map("NONE")]
         None
     }
 }
+

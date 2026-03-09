@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,44 +9,45 @@ namespace Binance.Net.Enums
     public enum BorrowStatus
     {
         /// <summary>
-        /// Accruing interest
+        /// ["<c>Accuring_Interest</c>"] Accruing interest
         /// </summary>
         [Map("Accuring_Interest")]
         AccruingInterest,
         /// <summary>
-        /// Overdue
+        /// ["<c>Overdue</c>"] Overdue
         /// </summary>
         [Map("Overdue")]
         Overdue,
         /// <summary>
-        /// Currently liquidating
+        /// ["<c>Liquidating</c>"] Currently liquidating
         /// </summary>
         [Map("Liquidating")]
         Liquidating,
         /// <summary>
-        /// Repaying
+        /// ["<c>Repaying</c>"] Repaying
         /// </summary>
         [Map("Repaying")]
         Repaying,
         /// <summary>
-        /// Repaid
+        /// ["<c>Repaid</c>"] Repaid
         /// </summary>
         [Map("Repaid")]
         Repaid,
         /// <summary>
-        /// Liquidated
+        /// ["<c>Liquidated</c>"] Liquidated
         /// </summary>
         [Map("Liquidated")]
         Liquidated,
         /// <summary>
-        /// Pending
+        /// ["<c>Pending</c>"] Pending
         /// </summary>
         [Map("Pending")]
         Pending,
         /// <summary>
-        /// Failed
+        /// ["<c>Failed</c>"] Failed
         /// </summary>
         [Map("Failed")]
         Failed
     }
 }
+

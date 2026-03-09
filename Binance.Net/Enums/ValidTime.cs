@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum ValidTime
     {
         /// <summary>
-        /// 10 seconds
+        /// ["<c>0</c>"] 10 seconds
         /// </summary>
         [Map("0")]
         TenSeconds,
         /// <summary>
-        /// 30 seconds
+        /// ["<c>1</c>"] 30 seconds
         /// </summary>
         [Map("1")]
         ThirtySeconds,
         /// <summary>
-        /// 1 minute
+        /// ["<c>2</c>"] 1 minute
         /// </summary>
         [Map("2")]
         OneMinute,
         /// <summary>
-        /// 2 minutes
+        /// ["<c>3</c>"] 2 minutes
         /// </summary>
         [Map("3")]
         TwoMinutes
     }
 }
+

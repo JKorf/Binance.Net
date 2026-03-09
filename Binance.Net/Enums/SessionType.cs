@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,30 +9,31 @@ namespace Binance.Net.Enums
     public enum SessionType
     {
         /// <summary>
-        /// Pre-market
+        /// ["<c>PRE_MARKET</c>"] Pre-market
         /// </summary>
         [Map("PRE_MARKET")]
         PreMarket,
         /// <summary>
-        /// Regular
+        /// ["<c>REGULAR</c>"] Regular
         /// </summary>
         [Map("REGULAR")]
         Regular,
         /// <summary>
-        /// After market
+        /// ["<c>AFTER_MARKET</c>"] After market
         /// </summary>
         [Map("AFTER_MARKET")]
         AfterMarket,
         /// <summary>
-        /// Overnight
+        /// ["<c>OVERNIGHT</c>"] Overnight
         /// </summary>
         [Map("OVERNIGHT")]
         Overnight,
         /// <summary>
-        /// No trading
+        /// ["<c>NO_TRADING</c>"] No trading
         /// </summary>
         [Map("NO_TRADING")]
         NoTrading
 
     }
 }
+

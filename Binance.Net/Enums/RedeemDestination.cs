@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum RedeemDestination
     {
         /// <summary>
-        /// Redeem to spot account
+        /// ["<c>SPOT</c>"] Redeem to spot account
         /// </summary>
         [Map("SPOT")]
         Spot,
         /// <summary>
-        /// Redeem to flexible product
+        /// ["<c>FLEXIBLE</c>"] Redeem to flexible product
         /// </summary>
         [Map("FLEXIBLE")]
         Flexible,
     }
 }
+

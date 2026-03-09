@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum WithdrawDepositTransferType
     {
         /// <summary>
-        /// Internal transfer
+        /// ["<c>1</c>"] Internal transfer
         /// </summary>
         [Map("1")]
         Internal,
         /// <summary>
-        /// External transfer
+        /// ["<c>0</c>"] External transfer
         /// </summary>
         [Map("0")]
         External
     }
 }
+

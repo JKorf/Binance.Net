@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum MinerStatus
     {
         /// <summary>
-        /// All miners
+        /// ["<c>0</c>"] All miners
         /// </summary>
         [Map("0")]
         All,
         /// <summary>
-        /// Valid
+        /// ["<c>1</c>"] Valid
         /// </summary>
         [Map("1")]
         Valid,
         /// <summary>
-        /// Invalid
+        /// ["<c>2</c>"] Invalid
         /// </summary>
         [Map("2")]
         Invalid,
         /// <summary>
-        /// Failure
+        /// ["<c>3</c>"] Failure
         /// </summary>
         [Map("3")]
         Failure
     }
 }
+

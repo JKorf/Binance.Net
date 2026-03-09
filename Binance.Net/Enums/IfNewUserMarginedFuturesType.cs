@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum IfNewUserMarginedFuturesType
     {
         /// <summary>
-        /// Processing
+        /// ["<c>1</c>"] Processing
         /// </summary>
         [Map("1")]
         UsdtMarginedFutures = 1,
         /// <summary>
-        /// Canceled
+        /// ["<c>2</c>"] Canceled
         /// </summary>
         [Map("2")]
         CoinMarginedFutures = 2,
     }
 }
+

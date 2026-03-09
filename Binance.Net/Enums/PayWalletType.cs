@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,17 +9,17 @@ namespace Binance.Net.Enums
     public enum PayWalletType
     {
         /// <summary>
-        /// Funding wallet
+        /// ["<c>1</c>"] Funding wallet
         /// </summary>
         [Map("1")]
         Funding,
         /// <summary>
-        /// Spot wallet
+        /// ["<c>2</c>"] Spot wallet
         /// </summary>
         [Map("2")]
         Spot,
         /// <summary>
-        /// Fiat wallet
+        /// ["<c>3</c>"] Fiat wallet
         /// </summary>
         [Map("3")]
         Fiat,
@@ -29,9 +29,10 @@ namespace Binance.Net.Enums
         [Map("4", "6")]
         Card,
         /// <summary>
-        /// Earn wallet
+        /// ["<c>5</c>"] Earn wallet
         /// </summary>
         [Map("5")]
         Earn
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum OrderSide
     {
         /// <summary>
-        /// Buy
+        /// ["<c>BUY</c>"] Buy
         /// </summary>
         [Map("BUY")]
         Buy,
         /// <summary>
-        /// Sell
+        /// ["<c>SELL</c>"] Sell
         /// </summary>
         [Map("SELL")]
         Sell
     }
 }
+

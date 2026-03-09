@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,25 +9,26 @@ namespace Binance.Net.Enums
     public enum TravelRuleApproveStatus
     {
         /// <summary>
-        /// Completed
+        /// ["<c>0</c>"] Completed
         /// </summary>
         [Map("0")]
         Completed,
         /// <summary>
-        /// Pending
+        /// ["<c>1</c>"] Pending
         /// </summary>
         [Map("1")]
         Pending,
         /// <summary>
-        /// Failed
+        /// ["<c>2</c>"] Failed
         /// </summary>
         [Map("2")]
         Failed,
 
         /// <summary>
-        /// Currently unknown what this status represents
+        /// ["<c>4</c>"] Currently unknown what this status represents
         /// </summary>
         [Map("4")]
         Unknown
     }
 }
+

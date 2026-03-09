@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum SymbolStatusFilter
     {
         /// <summary>
-        /// Trading
+        /// ["<c>TRADING</c>"] Trading
         /// </summary>
         [Map("TRADING")]
         Trading,       
         /// <summary>
-        /// Halted
+        /// ["<c>HALT</c>"] Halted
         /// </summary>
         [Map("HALT")]
         Halt,        
         /// <summary>
-        /// 
+        /// ["<c>BREAK</c>"] 
         /// </summary>
         [Map("BREAK")]
         Break        
     }
 }
+

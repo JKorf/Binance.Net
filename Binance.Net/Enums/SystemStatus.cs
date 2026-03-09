@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum SystemStatus
     {
         /// <summary>
-        /// Operational
+        /// ["<c>0</c>"] Operational
         /// </summary>
         [Map("0")]
         Normal,
         /// <summary>
-        /// In maintenance
+        /// ["<c>1</c>"] In maintenance
         /// </summary>
         [Map("1")]
         Maintenance
     }
 }
+

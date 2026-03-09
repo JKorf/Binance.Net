@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,29 +9,30 @@ namespace Binance.Net.Enums
     public enum MarginLevelStatus
     {
         /// <summary>
-        /// Excessive
+        /// ["<c>EXCESSIVE</c>"] Excessive
         /// </summary>
         [Map("EXCESSIVE")]
         Excessive,
         /// <summary>
-        /// Normal
+        /// ["<c>NORMAL</c>"] Normal
         /// </summary>
         [Map("NORMAL")]
         Normal,
         /// <summary>
-        /// Margin call
+        /// ["<c>MARGIN_CALL</c>"] Margin call
         /// </summary>
         [Map("MARGIN_CALL")]
         MarginCall,
         /// <summary>
-        /// Pre-liquidation
+        /// ["<c>PRE_LIQUIDATION</c>"] Pre-liquidation
         /// </summary>
         [Map("PRE_LIQUIDATION")]
         PreLiquidation,
         /// <summary>
-        /// Force liquidation
+        /// ["<c>FORCE_LIQUIDATION</c>"] Force liquidation
         /// </summary>
         [Map("FORCE_LIQUIDATION")]
         ForceLiquidation
     }
 }
+

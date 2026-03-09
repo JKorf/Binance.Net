@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum RedemptionType
     {
         /// <summary>
-        /// Redeem to spot account
+        /// ["<c>MATURE</c>"] Redeem to spot account
         /// </summary>
         [Map("MATURE")]
         ToSpot,
         /// <summary>
-        /// Redeem to flexible product
+        /// ["<c>NEW_TRANSFERRED</c>"] Redeem to flexible product
         /// </summary>
         [Map("NEW_TRANSFERRED")]
         ToFlexibleProduct,
         /// <summary>
-        /// Early redemption
+        /// ["<c>AHEAD</c>"] Early redemption
         /// </summary>
         [Map("AHEAD")]
         EarlyRedemption
     }
 }
+

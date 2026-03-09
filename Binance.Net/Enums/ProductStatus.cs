@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum ProductStatus
     {
         /// <summary>
-        /// All products
+        /// ["<c>ALL</c>"] All products
         /// </summary>
         [Map("ALL")]
         All,
         /// <summary>
-        /// Products which are subscribable
+        /// ["<c>SUBSCRIBABLE</c>"] Products which are subscribable
         /// </summary>
         [Map("SUBSCRIBABLE")]
         Subscribable,
         /// <summary>
-        /// Products which are unsubscribable
+        /// ["<c>UNSUBSCRIBABLE</c>"] Products which are unsubscribable
         /// </summary>
         [Map("UNSUBSCRIBABLE")]
         Unsubscribable
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,42 +9,42 @@ namespace Binance.Net.Enums
     public enum ContractType
     {
         /// <summary>
-        /// Perpetual
+        /// ["<c>PERPETUAL</c>"] Perpetual
         /// </summary>
         [Map("PERPETUAL")]
         Perpetual,
         /// <summary>
-        /// Perpetual delivering
+        /// ["<c>PERPETUAL DELIVERING</c>"] Perpetual delivering
         /// </summary>
         [Map("PERPETUAL DELIVERING")]
         PerpetualDelivering,
         /// <summary>
-        /// Current month
+        /// ["<c>CURRENT_MONTH</c>"] Current month
         /// </summary>
         [Map("CURRENT_MONTH")]
         CurrentMonth,
         /// <summary>
-        /// Current quarter
+        /// ["<c>CURRENT_QUARTER</c>"] Current quarter
         /// </summary>
         [Map("CURRENT_QUARTER")]
         CurrentQuarter,
         /// <summary>
-        /// Current quarter delivering
+        /// ["<c>CURRENT_QUARTER DELIVERING</c>"] Current quarter delivering
         /// </summary>
         [Map("CURRENT_QUARTER DELIVERING")]
         CurrentQuarterDelivering,
         /// <summary>
-        /// Next quarter
+        /// ["<c>NEXT_QUARTER</c>"] Next quarter
         /// </summary>
         [Map("NEXT_QUARTER")]
         NextQuarter,
         /// <summary>
-        /// Next quarter delivering
+        /// ["<c>NEXT_QUARTER DELIVERING</c>"] Next quarter delivering
         /// </summary>
         [Map("NEXT_QUARTER DELIVERING")]
         NextQuarterDelivering,
         /// <summary>
-        /// Next month
+        /// ["<c>NEXT_MONTH</c>"] Next month
         /// </summary>
         [Map("NEXT_MONTH")]
         NextMonth,
@@ -54,9 +54,10 @@ namespace Binance.Net.Enums
         [Map("")]
         Unknown,
         /// <summary>
-        /// Traditional finance perp contract
+        /// ["<c>TRADIFI_PERPETUAL</c>"] Traditional finance perp contract
         /// </summary>
         [Map("TRADIFI_PERPETUAL")]
         PerpetualTradFi
     }
 }
+

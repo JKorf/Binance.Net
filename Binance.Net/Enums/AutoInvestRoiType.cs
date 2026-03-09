@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,34 +9,35 @@ namespace Binance.Net.Enums
     public enum AutoInvestRoiType
     {
         /// <summary>
-        /// Seven days
+        /// ["<c>SEVEN_DAY</c>"] Seven days
         /// </summary>
         [Map("SEVEN_DAY")]
         SevenDay,
         /// <summary>
-        /// Three months
+        /// ["<c>THREE_MONTH</c>"] Three months
         /// </summary>
         [Map("THREE_MONTH")]
         ThreeMonth,
         /// <summary>
-        /// Six months
+        /// ["<c>SIX_MONTH</c>"] Six months
         /// </summary>
         [Map("SIX_MONTH")]
         SixMonth,
         /// <summary>
-        /// One year
+        /// ["<c>ONE_YEAR</c>"] One year
         /// </summary>
         [Map("ONE_YEAR")]
         OneYear,
         /// <summary>
-        /// Three year
+        /// ["<c>THREE_YEAR</c>"] Three year
         /// </summary>
         [Map("THREE_YEAR")]
         ThreeYear,
         /// <summary>
-        /// Five year
+        /// ["<c>FIVE_YEAR</c>"] Five year
         /// </summary>
         [Map("FIVE_YEAR")]
         FiveYear
     }
 }
+

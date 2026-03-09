@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,59 +9,60 @@ namespace Binance.Net.Enums
     public enum OrderStatus
     {
         /// <summary>
-        /// Order is not yet active
+        /// ["<c>PENDING_NEW</c>"] Order is not yet active
         /// </summary>
         [Map("PENDING_NEW")]
         PendingNew,
         /// <summary>
-        /// Order is new
+        /// ["<c>NEW</c>"] Order is new
         /// </summary>
         [Map("NEW")]
         New,
         /// <summary>
-        /// Order is partly filled, still has quantity left to fill
+        /// ["<c>PARTIALLY_FILLED</c>"] Order is partly filled, still has quantity left to fill
         /// </summary>
         [Map("PARTIALLY_FILLED")]
         PartiallyFilled,
         /// <summary>
-        /// The order has been filled and completed
+        /// ["<c>FILLED</c>"] The order has been filled and completed
         /// </summary>
         [Map("FILLED")]
         Filled,
         /// <summary>
-        /// The order has been canceled
+        /// ["<c>CANCELED</c>"] The order has been canceled
         /// </summary>
         [Map("CANCELED")]
         Canceled,
         /// <summary>
-        /// The order is in the process of being canceled  (currently unused)
+        /// ["<c>PENDING_CANCEL</c>"] The order is in the process of being canceled  (currently unused)
         /// </summary>
         [Map("PENDING_CANCEL")]
         PendingCancel,
         /// <summary>
-        /// The order has been rejected
+        /// ["<c>REJECTED</c>"] The order has been rejected
         /// </summary>
         [Map("REJECTED")]
         Rejected,
         /// <summary>
-        /// The order has expired
+        /// ["<c>EXPIRED</c>"] The order has expired
         /// </summary>
         [Map("EXPIRED")]
         Expired,
         /// <summary>
-        /// Liquidation with Insurance Fund
+        /// ["<c>NEW_INSURANCE</c>"] Liquidation with Insurance Fund
         /// </summary>
         [Map("NEW_INSURANCE")]
         Insurance,
         /// <summary>
-        /// Counterparty Liquidation
+        /// ["<c>NEW_ADL</c>"] Counterparty Liquidation
         /// </summary>
         [Map("NEW_ADL")]
         Adl,
         /// <summary>
-        /// Expired because of trigger SelfTradePrevention
+        /// ["<c>EXPIRED_IN_MATCH</c>"] Expired because of trigger SelfTradePrevention
         /// </summary>
         [Map("EXPIRED_IN_MATCH")]
         ExpiredInMatch
     }
 }
+

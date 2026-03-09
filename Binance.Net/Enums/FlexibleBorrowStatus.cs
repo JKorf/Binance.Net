@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum FlexibleBorrowStatus
     {
         /// <summary>
-        /// Successful execution
+        /// ["<c>Succeeds</c>"] Successful execution
         /// </summary>
         [Map("Succeeds")]
         Succeeds,
         /// <summary>
-        /// Execution failed
+        /// ["<c>Failed</c>"] Execution failed
         /// </summary>
         [Map("Failed")]
         Failed,
         /// <summary>
-        /// Processing
+        /// ["<c>Processing</c>"] Processing
         /// </summary>
         [Map("Processing")]
         Processing
     }
 }
+

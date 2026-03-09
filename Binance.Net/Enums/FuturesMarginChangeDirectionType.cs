@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum FuturesMarginChangeDirectionType
     {
         /// <summary>
-        /// Add margin
+        /// ["<c>1</c>"] Add margin
         /// </summary>
         [Map("1")]
         Add,
         /// <summary>
-        /// Reduce Margin
+        /// ["<c>2</c>"] Reduce Margin
         /// </summary>
         [Map("2")]
         Reduce
     }
 }
+

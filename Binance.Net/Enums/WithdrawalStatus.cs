@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,39 +9,40 @@ namespace Binance.Net.Enums
     public enum WithdrawalStatus
     {
         /// <summary>
-        /// Email has been send
+        /// ["<c>0</c>"] Email has been send
         /// </summary>
         [Map("0")]
         EmailSend,
         /// <summary>
-        /// Withdrawal has been canceled
+        /// ["<c>1</c>"] Withdrawal has been canceled
         /// </summary>
         [Map("1")]
         Canceled,
         /// <summary>
-        /// Withdrawal is awaiting approval
+        /// ["<c>2</c>"] Withdrawal is awaiting approval
         /// </summary>
         [Map("2")]
         AwaitingApproval,
         /// <summary>
-        /// Withdrawal has been rejected
+        /// ["<c>3</c>"] Withdrawal has been rejected
         /// </summary>
         [Map("3")]
         Rejected,
         /// <summary>
-        /// Withdrawal is processing
+        /// ["<c>4</c>"] Withdrawal is processing
         /// </summary>
         [Map("4")]
         Processing,
         /// <summary>
-        /// Withdrawal has failed
+        /// ["<c>5</c>"] Withdrawal has failed
         /// </summary>
         [Map("5")]
         Failure,
         /// <summary>
-        /// Withdrawal has been processed
+        /// ["<c>6</c>"] Withdrawal has been processed
         /// </summary>
         [Map("6")]
         Completed
     }
 }
+

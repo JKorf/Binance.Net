@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,84 +9,85 @@ namespace Binance.Net.Enums
     public enum CapitalTransactionType
     {
         /// <summary>
-        /// Transfer
+        /// ["<c>TRANSFER</c>"] Transfer
         /// </summary>
         [Map("TRANSFER")]
         Transfer,
         /// <summary>
-        /// Borrow
+        /// ["<c>BORROW</c>"] Borrow
         /// </summary>
         [Map("BORROW")]
         Borrow,
         /// <summary>
-        /// Repay
+        /// ["<c>REPAY</c>"] Repay
         /// </summary>
         [Map("REPAY")]
         Repay,
         /// <summary>
-        /// Buy-Trading Income
+        /// ["<c>BUY_INCOME</c>"] Buy-Trading Income
         /// </summary>
         [Map("BUY_INCOME")]
         BuyTradingIncome,
         /// <summary>
-        /// Buy-Trading Expense
+        /// ["<c>BUY_EXPENSE</c>"] Buy-Trading Expense
         /// </summary>
         [Map("BUY_EXPENSE")]
         BuyTradingExpense,
         /// <summary>
-        /// Sell-Trading Income
+        /// ["<c>SELL_INCOME</c>"] Sell-Trading Income
         /// </summary>
         [Map("SELL_INCOME")]
         SellTradingIncome,
         /// <summary>
-        /// Sell-Trading Expense
+        /// ["<c>SELL_EXPENSE</c>"] Sell-Trading Expense
         /// </summary>
         [Map("SELL_EXPENSE")]
         SellTradingExpense,
         /// <summary>
-        /// Trading Commission
+        /// ["<c>TRADING_COMMISSION</c>"] Trading Commission
         /// </summary>
         [Map("TRADING_COMMISSION")]
         TradingCommission,
         /// <summary>
-        /// Buy by Liquidation
+        /// ["<c>BUY_LIQUIDATION</c>"] Buy by Liquidation
         /// </summary>
         [Map("BUY_LIQUIDATION")]
         BuyLiquidation,
         /// <summary>
-        /// Sell by Liquidation
+        /// ["<c>SELL_LIQUIDATION</c>"] Sell by Liquidation
         /// </summary>
         [Map("SELL_LIQUIDATION")]
         SellLiquidation,
         /// <summary>
-        /// Repay by Liquidation
+        /// ["<c>REPAY_LIQUIDATION</c>"] Repay by Liquidation
         /// </summary>
         [Map("REPAY_LIQUIDATION")]
         RepayLiquidation,
         /// <summary>
-        /// Other Liquidation
+        /// ["<c>OTHER_LIQUIDATION</c>"] Other Liquidation
         /// </summary>
         [Map("OTHER_LIQUIDATION")]
         OtherLiquidation,
         /// <summary>
-        /// Liquidation Fee
+        /// ["<c>LIQUIDATION_FEE</c>"] Liquidation Fee
         /// </summary>
         [Map("LIQUIDATION_FEE")]
         LiquidationFee,
         /// <summary>
-        /// Small Balance Convert
+        /// ["<c>SMALL_BALANCE_CONVERT</c>"] Small Balance Convert
         /// </summary>
         [Map("SMALL_BALANCE_CONVERT")]
         SmallBalanceConvert,
         /// <summary>
-        /// Commission Return
+        /// ["<c>COMMISSION_RETURN</c>"] Commission Return
         /// </summary>
         [Map("COMMISSION_RETURN")]
         CommissionReturn,
         /// <summary>
-        /// Small Convert
+        /// ["<c>SMALL_CONVERT</c>"] Small Convert
         /// </summary>
         [Map("SMALL_CONVERT")]
         SmallConvert
     }
 }
+

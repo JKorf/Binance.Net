@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum MarginInventoryType
     {
         /// <summary>
-        /// Represents a regular margin account.
+        /// ["<c>MARGIN</c>"] Represents a regular margin account.
         /// </summary>
         [Map("MARGIN")]
         Margin,
         /// <summary>
-        /// Represents an isolated margin account.
+        /// ["<c>ISOLATED</c>"] Represents an isolated margin account.
         /// </summary>
         [Map("ISOLATED")]
         Isolated
     }
 }
+

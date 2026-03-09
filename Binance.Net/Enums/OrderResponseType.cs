@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum OrderResponseType
     {
         /// <summary>
-        /// Ack only
+        /// ["<c>ACK</c>"] Ack only
         /// </summary>
         [Map("ACK")]
         Acknowledge,
         /// <summary>
-        /// Resulting order
+        /// ["<c>RESULT</c>"] Resulting order
         /// </summary>
         [Map("RESULT")]
         Result,
         /// <summary>
-        /// Full order info, only valid on SPOT orders  
+        /// ["<c>FULL</c>"] Full order info, only valid on SPOT orders  
         /// </summary>
         [Map("FULL")]
         Full
     }
 }
+

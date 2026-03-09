@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,39 +9,40 @@ namespace Binance.Net.Enums
     public enum TimeInForce
     {
         /// <summary>
-        /// GoodTillCanceled orders will stay active until they are filled or canceled
+        /// ["<c>GTC</c>"] GoodTillCanceled orders will stay active until they are filled or canceled
         /// </summary>
         [Map("GTC")]
         GoodTillCanceled,
         /// <summary>
-        /// ImmediateOrCancel orders have to be at least partially filled upon placing or will be automatically canceled
+        /// ["<c>IOC</c>"] ImmediateOrCancel orders have to be at least partially filled upon placing or will be automatically canceled
         /// </summary>
         [Map("IOC")]
         ImmediateOrCancel,
         /// <summary>
-        /// FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
+        /// ["<c>FOK</c>"] FillOrKill orders have to be entirely filled upon placing or will be automatically canceled
         /// </summary>
         [Map("FOK")]
         FillOrKill,
         /// <summary>
-        /// GoodTillCrossing orders will post only
+        /// ["<c>GTX</c>"] GoodTillCrossing orders will post only
         /// </summary>
         [Map("GTX")]
         GoodTillCrossing,
         /// <summary>
-        /// Good til the order expires or is canceled
+        /// ["<c>GTE_GTC</c>"] Good til the order expires or is canceled
         /// </summary>
         [Map("GTE_GTC")]
         GoodTillExpiredOrCanceled,
         /// <summary>
-        /// Good til date
+        /// ["<c>GTD</c>"] Good til date
         /// </summary>
         [Map("GTD")]
         GoodTillDate,
         /// <summary>
-        /// Retail price improvement, is post-only and can only be matched by APP/web orders
+        /// ["<c>RPI</c>"] Retail price improvement, is post-only and can only be matched by APP/web orders
         /// </summary>
         [Map("RPI")]
         Rpi
     }
 }
+

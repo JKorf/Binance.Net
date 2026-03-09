@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum AdjustRateDirection
     {
         /// <summary>
-        /// Additional
+        /// ["<c>ADDITIONAL</c>"] Additional
         /// </summary>
         [Map("ADDITIONAL")]
         Additional,
         /// <summary>
-        /// Reduced
+        /// ["<c>REDUCED</c>"] Reduced
         /// </summary>
         [Map("REDUCED")]
         Reduced
     }
 }
+

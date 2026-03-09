@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,44 +9,45 @@ namespace Binance.Net.Enums
     public enum AutoInvestSubscriptionCycle
     {
         /// <summary>
-        /// One hour
+        /// ["<c>H1</c>"] One hour
         /// </summary>
         [Map("H1")]
         OneHour,
         /// <summary>
-        /// Four hour
+        /// ["<c>H4</c>"] Four hour
         /// </summary>
         [Map("H4")]
         FourHour,
         /// <summary>
-        /// Eight hour
+        /// ["<c>H8</c>"] Eight hour
         /// </summary>
         [Map("H8")]
         EightHour,
         /// <summary>
-        /// Twelve hour
+        /// ["<c>H12</c>"] Twelve hour
         /// </summary>
         [Map("H12")]
         TwelveHour,
         /// <summary>
-        /// Daily
+        /// ["<c>DAILY</c>"] Daily
         /// </summary>
         [Map("DAILY")]
         Daily,
         /// <summary>
-        /// Weekly
+        /// ["<c>WEEKLY</c>"] Weekly
         /// </summary>
         [Map("WEEKLY")]
         Weekly,
         /// <summary>
-        /// Bi-Weekly
+        /// ["<c>BI_WEEKLY</c>"] Bi-Weekly
         /// </summary>
         [Map("BI_WEEKLY")]
         BiWeekly,
         /// <summary>
-        /// Monthly
+        /// ["<c>MONTHLY</c>"] Monthly
         /// </summary>
         [Map("MONTHLY")]
         Monthly
     }
 }
+

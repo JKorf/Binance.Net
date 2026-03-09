@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,15 +9,16 @@ namespace Binance.Net.Enums
     public enum AutoCloseType
     {
         /// <summary>
-        /// ADL
+        /// ["<c>ADL</c>"] ADL
         /// </summary>
         [Map("ADL")]
         ADL,
 
         /// <summary>
-        /// Liquidation
+        /// ["<c>LIQUIDATION</c>"] Liquidation
         /// </summary>
         [Map("LIQUIDATION")]
         Liquidation
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum TravelRuleStatus
     {
         /// <summary>
-        /// Not required or already provided
+        /// ["<c>0</c>"] Not required or already provided
         /// </summary>
         [Map("0")]
         NotRequired,
         /// <summary>
-        /// Travel rule info required
+        /// ["<c>1</c>"] Travel rule info required
         /// </summary>
         [Map("1")]
         Required
     }
 }
+

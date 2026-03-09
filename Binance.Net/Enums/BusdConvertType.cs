@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,29 +9,30 @@ namespace Binance.Net.Enums
     public enum BusdConvertType
     {
         /// <summary>
-        /// Auto convert when deposit
+        /// ["<c>11</c>"] Auto convert when deposit
         /// </summary>
         [Map("11")]
         AutoConvertDeposit,
         /// <summary>
-        /// Auto convert when withdraw
+        /// ["<c>32</c>"] Auto convert when withdraw
         /// </summary>
         [Map("32")]
         AutoConvertWithdrawal,
         /// <summary>
-        /// In case withdraw failed
+        /// ["<c>34</c>"] In case withdraw failed
         /// </summary>
         [Map("34")]
         WithdrawalFailed,
         /// <summary>
-        /// Convert via sapi call
+        /// ["<c>244</c>"] Convert via sapi call
         /// </summary>
         [Map("244")]
         ApiConvert,
         /// <summary>
-        /// Busd auto convert job
+        /// ["<c>254</c>"] Busd auto convert job
         /// </summary>
         [Map("254")]
         AutoConvert
     }
 }
+

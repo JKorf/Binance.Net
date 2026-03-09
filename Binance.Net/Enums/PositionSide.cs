@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum PositionSide
     {
         /// <summary>
-        /// Short
+        /// ["<c>SHORT</c>"] Short
         /// </summary>
         [Map("SHORT")]
         Short,
         /// <summary>
-        /// Long
+        /// ["<c>LONG</c>"] Long
         /// </summary>
         [Map("LONG")]
         Long,
         /// <summary>
-        /// Both for One-way mode when placing an order
+        /// ["<c>BOTH</c>"] Both for One-way mode when placing an order
         /// </summary>
         [Map("BOTH")]
         Both
     }
 }
+

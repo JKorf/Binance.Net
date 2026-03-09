@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum HashrateResaleStatus
     {
         /// <summary>
-        /// Processing
+        /// ["<c>0</c>"] Processing
         /// </summary>
         [Map("0")]
         Processing,
         /// <summary>
-        /// Canceled
+        /// ["<c>1</c>"] Canceled
         /// </summary>
         [Map("1")]
         Canceled,
         /// <summary>
-        /// Terminated
+        /// ["<c>2</c>"] Terminated
         /// </summary>
         [Map("2")]
         Terminated
     }
 }
+

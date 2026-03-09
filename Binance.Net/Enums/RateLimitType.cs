@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,24 +9,25 @@ namespace Binance.Net.Enums
     public enum RateLimitType
     {
         /// <summary>
-        /// Request weight
+        /// ["<c>REQUEST_WEIGHT</c>"] Request weight
         /// </summary>
         [Map("REQUEST_WEIGHT")]
         RequestWeight,
         /// <summary>
-        /// Order amount
+        /// ["<c>ORDERS</c>"] Order amount
         /// </summary>
         [Map("ORDERS")]
         Orders,
         /// <summary>
-        /// Raw requests
+        /// ["<c>RAW_REQUESTS</c>"] Raw requests
         /// </summary>
         [Map("RAW_REQUESTS")]
         RawRequests,
         /// <summary>
-        /// Connections
+        /// ["<c>CONNECTIONS</c>"] Connections
         /// </summary>
         [Map("CONNECTIONS")]
         Connections
     }
 }
+

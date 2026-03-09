@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,69 +9,70 @@ namespace Binance.Net.Enums
     public enum SymbolStatus
     {
         /// <summary>
-        /// Not trading yet
+        /// ["<c>PRE_TRADING</c>"] Not trading yet
         /// </summary>
         [Map("PRE_TRADING")]
         PreTrading,
         /// <summary>
-        /// Pending trading
+        /// ["<c>PENDING_TRADING</c>"] Pending trading
         /// </summary>
         [Map("PENDING_TRADING")]
         PendingTrading,
         /// <summary>
-        /// Trading
+        /// ["<c>TRADING</c>"] Trading
         /// </summary>
         [Map("TRADING")]
         Trading,
         /// <summary>
-        /// No longer trading
+        /// ["<c>POST_TRADING</c>"] No longer trading
         /// </summary>
         [Map("POST_TRADING")]
         PostTrading,
         /// <summary>
-        /// Not trading
+        /// ["<c>END_OF_DAY</c>"] Not trading
         /// </summary>
         [Map("END_OF_DAY")]
         EndOfDay,
         /// <summary>
-        /// Halted
+        /// ["<c>HALT</c>"] Halted
         /// </summary>
         [Map("HALT")]
         Halt,
         /// <summary>
-        /// 
+        /// ["<c>AUCTION_MATCH</c>"] 
         /// </summary>
         [Map("AUCTION_MATCH")]
         AuctionMatch,
         /// <summary>
-        /// 
+        /// ["<c>BREAK</c>"] 
         /// </summary>
         [Map("BREAK")]
         Break,
         /// <summary>
-        /// Closed
+        /// ["<c>CLOSE</c>"] Closed
         /// </summary>
         [Map("CLOSE")]
         Close,
         /// <summary>
-        /// Pre delivering
+        /// ["<c>PRE_DELIVERING</c>"] Pre delivering
         /// </summary>
         [Map("PRE_DELIVERING")]
         PreDelivering,
         /// <summary>
-        /// Delivering
+        /// ["<c>DELIVERING</c>"] Delivering
         /// </summary>
         [Map("DELIVERING")]
         Delivering,
         /// <summary>
-        /// Pre settle
+        /// ["<c>PRE_SETTLE</c>"] Pre settle
         /// </summary>
         [Map("PRE_SETTLE")]
         PreSettle,
         /// <summary>
-        /// Settings
+        /// ["<c>SETTLING</c>"] Settings
         /// </summary>
         [Map("SETTLING")]
         Settling
     }
 }
+

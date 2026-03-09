@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,19 +9,20 @@ namespace Binance.Net.Enums
     public enum RepayStatus
     {
         /// <summary>
-        /// Repaid
+        /// ["<c>Repaid</c>"] Repaid
         /// </summary>
         [Map("Repaid")]
         Repaid,
         /// <summary>
-        /// Repaying
+        /// ["<c>Repaying</c>"] Repaying
         /// </summary>
         [Map("Repaying")]
         Repaying,
         /// <summary>
-        /// Failed
+        /// ["<c>Failed</c>"] Failed
         /// </summary>
         [Map("Failed")]
         Failed
     }
 }
+

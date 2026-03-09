@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Attributes;
 
 namespace Binance.Net.Enums
 {
@@ -9,14 +9,15 @@ namespace Binance.Net.Enums
     public enum PegPriceType
     {
         /// <summary>
-        /// Primary peg
+        /// ["<c>PRIMARY_PEG</c>"] Primary peg
         /// </summary>
         [Map("PRIMARY_PEG")]
         PrimaryPeg,
         /// <summary>
-        /// Market peg
+        /// ["<c>MARKET_PEG</c>"] Market peg
         /// </summary>
         [Map("MARKET_PEG")]
         MarketPeg
     }
 }
+
