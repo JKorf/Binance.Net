@@ -13,18 +13,17 @@ namespace Binance.Net
     {
         public override ApiCredentialsType[] SupportedCredentialTypes => 
             [ApiCredentialsType.Hmac,
-            ApiCredentialsType.RsaPem,
-            ApiCredentialsType.RsaXml,
+            ApiCredentialsType.Rsa,
             ApiCredentialsType.Ed25519];
 
-        public BinanceAuthenticationProvider(ApiCredentials credentials) : base(credentials)
+        public BinanceAuthenticationProvider(ApiCredentials credential) : base(credential)
         {
         }
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("X-MBX-APIKEY", ApiKey);
+            request.Headers.Add("X-MBX-APIKEY", Credential.PublicIdentifier);
 
             if (!request.Authenticated)
                 return;
@@ -53,7 +52,7 @@ namespace Binance.Net
         {
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {
-                { "apiKey", ApiKey },
+                { "apiKey", Credential.PublicIdentifier },
                 { "timestamp", GetMillisecondTimestampLong(apiClient) }
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
@@ -66,9 +65,9 @@ namespace Binance.Net
 
         private string Sign(string data)
         {
-            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
+            if (Credential.CredentialType == ApiCredentialsType.Hmac)
                 return SignHMACSHA256(data);
-            else if (_credentials.CredentialType == ApiCredentialsType.Ed25519)
+            else if (Credential.CredentialType == ApiCredentialsType.Ed25519)
                 return SignEd25519(data, SignOutputType.Base64);
             else
                 return SignRSASHA256(Encoding.ASCII.GetBytes(data), SignOutputType.Base64);

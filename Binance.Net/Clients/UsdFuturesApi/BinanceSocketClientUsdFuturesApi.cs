@@ -127,7 +127,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 if (sign)
                     parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.ApiKey);
+                    parameters.Add("apiKey", AuthenticationProvider.Credential.PublicIdentifier);
             }
 
             var request = new BinanceSocketQuery

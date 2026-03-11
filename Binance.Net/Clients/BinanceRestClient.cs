@@ -59,15 +59,6 @@ namespace Binance.Net.Clients
 
         #endregion
 
-        /// <inheritdoc />
-        public void SetOptions(UpdateOptions options)
-        {
-            GeneralApi.SetOptions(options);
-            SpotApi.SetOptions(options);
-            UsdFuturesApi.SetOptions(options);
-            CoinFuturesApi.SetOptions(options);
-        }
-
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -75,15 +66,6 @@ namespace Binance.Net.Clients
         public static void SetDefaultOptions(Action<BinanceRestOptions> optionsDelegate)
         {
             BinanceRestOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-        }
-
-        /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
-        {
-            GeneralApi.SetApiCredentials(credentials);
-            SpotApi.SetApiCredentials(credentials);
-            UsdFuturesApi.SetApiCredentials(credentials);
-            CoinFuturesApi.SetApiCredentials(credentials);
         }
     }
 }
