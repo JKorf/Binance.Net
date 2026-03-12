@@ -20,7 +20,7 @@ using CryptoExchange.Net.Sockets.HighPerf;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc cref="IBinanceSocketClientCoinFuturesApi" />
-    internal partial class BinanceSocketClientCoinFuturesApi : SocketApiClient, IBinanceSocketClientCoinFuturesApi
+    internal partial class BinanceSocketClientCoinFuturesApi : SocketApiClient<BinanceEnvironment, BinanceCredentials>, IBinanceSocketClientCoinFuturesApi
     {
         #region fields
         protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
@@ -55,7 +55,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion 
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override AuthenticationProvider<BinanceCredentials> CreateAuthenticationProvider(BinanceCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
@@ -78,7 +78,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 if (sign)
                     parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.Credential.PublicIdentifier);
+                    parameters.Add("apiKey", AuthenticationProvider.PublicIdentifier);
             }
 
             var request = new BinanceSocketQuery

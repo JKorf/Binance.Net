@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Interfaces.Clients;
+﻿using Binance.Net.Objects;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Binance.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// Binance general API endpoints
     /// </summary>
-    public interface IBinanceRestClientGeneralApi : IRestApiClient, IDisposable
+    public interface IBinanceRestClientGeneralApi : IRestApiClient<BinanceCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to brokerage

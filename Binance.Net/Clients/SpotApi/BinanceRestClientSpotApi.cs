@@ -16,7 +16,7 @@ using System.Net.Http.Headers;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc cref="IBinanceRestClientSpotApi" />
-    internal partial class BinanceRestClientSpotApi : RestApiClient, IBinanceRestClientSpotApi
+    internal partial class BinanceRestClientSpotApi : RestApiClient<BinanceEnvironment, BinanceCredentials>, IBinanceRestClientSpotApi
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 
@@ -64,7 +64,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override AuthenticationProvider<BinanceCredentials> CreateAuthenticationProvider(BinanceCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));

@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Options
     /// <summary>
     /// Options for Binance Socket API
     /// </summary>
-    public class BinanceSocketApiOptions : SocketApiOptions
+    public class BinanceSocketApiOptions : SocketApiOptions<BinanceCredentials>
     {
         /// <summary>
         /// Whether to check the trade rules when placing new orders and what to do if the trade isn't valid

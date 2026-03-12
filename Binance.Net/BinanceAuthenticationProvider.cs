@@ -9,21 +9,23 @@ using System.Text;
 
 namespace Binance.Net
 {
-    internal class BinanceAuthenticationProvider : AuthenticationProvider
+    internal class BinanceAuthenticationProvider : AuthenticationProvider<BinanceCredentials>
     {
-        public override ApiCredentialsType[] SupportedCredentialTypes => 
+        public override ApiCredentialsType[] SupportedCredentialTypes =>
             [ApiCredentialsType.Hmac,
             ApiCredentialsType.Rsa,
             ApiCredentialsType.Ed25519];
 
-        public BinanceAuthenticationProvider(ApiCredentials credential) : base(credential)
+        public override string PublicIdentifier => ApiCredentials.ApiKey;
+
+        public BinanceAuthenticationProvider(BinanceCredentials credential) : base(credential)
         {
         }
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("X-MBX-APIKEY", Credential.PublicIdentifier);
+            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.ApiKey);
 
             if (!request.Authenticated)
                 return;
@@ -52,7 +54,7 @@ namespace Binance.Net
         {
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {
-                { "apiKey", Credential.PublicIdentifier },
+                { "apiKey", ApiCredentials.ApiKey },
                 { "timestamp", GetMillisecondTimestampLong(apiClient) }
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
@@ -65,13 +67,14 @@ namespace Binance.Net
 
         private string Sign(string data)
         {
-            if (Credential.CredentialType == ApiCredentialsType.Hmac)
-                return SignHMACSHA256(data);
-            else if (Credential.CredentialType == ApiCredentialsType.Ed25519)
-                return SignEd25519(data, SignOutputType.Base64);
+            if (ApiCredentials.CredentialType == ApiCredentialsType.Hmac)
+                return SignHMACSHA256(ApiCredentials.GetCredential<HMACCredential>()!, data);
+#if NET8_0_OR_GREATER
+            else if (ApiCredentials.CredentialType == ApiCredentialsType.Ed25519)
+                return SignEd25519(ApiCredentials.GetCredential<ED25519Credential>()!, data, SignOutputType.Base64);
+#endif
             else
-                return SignRSASHA256(Encoding.ASCII.GetBytes(data), SignOutputType.Base64);
+                return SignRSASHA256(ApiCredentials.GetCredential<RSACredential>()!, Encoding.ASCII.GetBytes(data), SignOutputType.Base64);
         }
-
     }
 }

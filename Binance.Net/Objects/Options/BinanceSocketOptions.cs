@@ -5,7 +5,7 @@ namespace Binance.Net.Objects.Options
     /// <summary>
     /// Options for the BinanceSocketClient
     /// </summary>
-    public class BinanceSocketOptions : SocketExchangeOptions<BinanceEnvironment>
+    public class BinanceSocketOptions : SocketExchangeOptions<BinanceEnvironment, BinanceCredentials>
     {
         /// <summary>
         /// Default options for new clients

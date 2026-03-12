@@ -5,6 +5,7 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects.Options;
@@ -13,7 +14,7 @@ using Microsoft.Extensions.Options;
 namespace Binance.Net.Clients
 {
     /// <inheritdoc cref="IBinanceSocketClient" />
-    public class BinanceSocketClient : BaseSocketClient, IBinanceSocketClient
+    public class BinanceSocketClient : BaseSocketClient<BinanceEnvironment, BinanceCredentials>, IBinanceSocketClient
     {
         #region fields
         #endregion

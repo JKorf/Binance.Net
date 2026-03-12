@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Interfaces.Clients;
+﻿using Binance.Net.Objects;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Spot API socket subscriptions and requests
     /// </summary>
-    public interface IBinanceSocketClientSpotApi : ISocketApiClient
+    public interface IBinanceSocketClientSpotApi : ISocketApiClient<BinanceCredentials>
     {
         /// <summary>
         /// Account streams and queries

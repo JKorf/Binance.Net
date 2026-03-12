@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Interfaces.Clients;
+﻿using Binance.Net.Objects;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
     /// <summary>
     /// Binance Spot API endpoints
     /// </summary>
-    public interface IBinanceRestClientSpotApi : IRestApiClient, IDisposable
+    public interface IBinanceRestClientSpotApi : IRestApiClient<BinanceCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

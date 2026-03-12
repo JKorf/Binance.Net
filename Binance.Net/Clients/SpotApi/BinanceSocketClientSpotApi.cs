@@ -22,7 +22,7 @@ using System.Net.WebSockets;
 namespace Binance.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    internal partial class BinanceSocketClientSpotApi : SocketApiClient, IBinanceSocketClientSpotApi
+    internal partial class BinanceSocketClientSpotApi : SocketApiClient<BinanceEnvironment, BinanceCredentials>, IBinanceSocketClientSpotApi
     {
         #region fields
         /// <inheritdoc />
@@ -71,7 +71,7 @@ namespace Binance.Net.Clients.SpotApi
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override AuthenticationProvider<BinanceCredentials> CreateAuthenticationProvider(BinanceCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
@@ -127,7 +127,7 @@ namespace Binance.Net.Clients.SpotApi
                 if (sign)
                     parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.Credential.PublicIdentifier);
+                    parameters.Add("apiKey", AuthenticationProvider.PublicIdentifier);
             }
 
             var request = new BinanceSocketQuery
@@ -169,7 +169,7 @@ namespace Binance.Net.Clients.SpotApi
                 if (sign)
                     parameters = binanceAuthProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.Credential.PublicIdentifier);
+                    parameters.Add("apiKey", AuthenticationProvider.PublicIdentifier);
             }
 
             var request = new BinanceSocketQuery

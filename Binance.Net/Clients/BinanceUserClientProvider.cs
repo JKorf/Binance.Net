@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Interfaces.Clients;
+using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
@@ -45,7 +46,7 @@ namespace Binance.Net.Clients
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, ApiCredentials credentials, BinanceEnvironment? environment = null)
+        public void InitializeUserClient(string userIdentifier, BinanceCredentials credentials, BinanceEnvironment? environment = null)
         {
             CreateRestClient(userIdentifier, credentials, environment);
             CreateSocketClient(userIdentifier, credentials, environment);
@@ -59,7 +60,7 @@ namespace Binance.Net.Clients
         }
 
         /// <inheritdoc />
-        public IBinanceRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, BinanceEnvironment? environment = null)
+        public IBinanceRestClient GetRestClient(string userIdentifier, BinanceCredentials? credentials = null, BinanceEnvironment? environment = null)
         {
             if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
@@ -68,7 +69,7 @@ namespace Binance.Net.Clients
         }
 
         /// <inheritdoc />
-        public IBinanceSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, BinanceEnvironment? environment = null)
+        public IBinanceSocketClient GetSocketClient(string userIdentifier, BinanceCredentials? credentials = null, BinanceEnvironment? environment = null)
         {
             if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
@@ -76,7 +77,7 @@ namespace Binance.Net.Clients
             return client;
         }
 
-        private IBinanceRestClient CreateRestClient(string userIdentifier, ApiCredentials? credentials, BinanceEnvironment? environment)
+        private IBinanceRestClient CreateRestClient(string userIdentifier, BinanceCredentials? credentials, BinanceEnvironment? environment)
         {
             var clientRestOptions = SetRestEnvironment(environment);
             var client = new BinanceRestClient(_httpClient, _loggerFactory, clientRestOptions);
@@ -88,7 +89,7 @@ namespace Binance.Net.Clients
             return client;
         }
 
-        private IBinanceSocketClient CreateSocketClient(string userIdentifier, ApiCredentials? credentials, BinanceEnvironment? environment)
+        private IBinanceSocketClient CreateSocketClient(string userIdentifier, BinanceCredentials? credentials, BinanceEnvironment? environment)
         {
             var clientSocketOptions = SetSocketEnvironment(environment);
             var client = new BinanceSocketClient(clientSocketOptions!, _loggerFactory);

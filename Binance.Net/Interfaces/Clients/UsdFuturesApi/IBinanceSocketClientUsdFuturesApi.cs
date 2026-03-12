@@ -1,11 +1,12 @@
-﻿using CryptoExchange.Net.Interfaces.Clients;
+﻿using Binance.Net.Objects;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
 {
     /// <summary>
     /// Binance USD futures streams
     /// </summary>
-    public interface IBinanceSocketClientUsdFuturesApi : ISocketApiClient, IDisposable
+    public interface IBinanceSocketClientUsdFuturesApi : ISocketApiClient<BinanceCredentials>, IDisposable
     {
         /// <summary>
         /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
