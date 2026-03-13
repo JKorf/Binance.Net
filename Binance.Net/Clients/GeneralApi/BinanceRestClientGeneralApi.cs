@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Clients.MessageHandlers;
 using Binance.Net.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.GeneralApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
@@ -13,7 +12,7 @@ using System.Net.Http.Headers;
 namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc cref="IBinanceRestClientGeneralApi" />
-    internal class BinanceRestClientGeneralApi : RestApiClient<BinanceEnvironment, BinanceCredentials>, IBinanceRestClientGeneralApi
+    internal class BinanceRestClientGeneralApi : RestApiClient<BinanceEnvironment, BinanceAuthenticationProvider, BinanceCredentials>, IBinanceRestClientGeneralApi
     {
         #region fields 
         /// <inheritdoc />
@@ -77,7 +76,7 @@ namespace Binance.Net.Clients.GeneralApi
         #endregion
 
         /// <inheritdoc />
-        protected override AuthenticationProvider<BinanceCredentials> CreateAuthenticationProvider(BinanceCredentials credentials)
+        protected override BinanceAuthenticationProvider CreateAuthenticationProvider(BinanceCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));

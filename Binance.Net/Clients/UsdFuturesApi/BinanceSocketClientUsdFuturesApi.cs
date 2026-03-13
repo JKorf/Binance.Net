@@ -23,7 +23,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
     /// <summary>
     /// Client providing access to the Binance Usd futures websocket Api
     /// </summary>
-    internal partial class BinanceSocketClientUsdFuturesApi : SocketApiClient<BinanceEnvironment, BinanceCredentials>, IBinanceSocketClientUsdFuturesApi
+    internal partial class BinanceSocketClientUsdFuturesApi : SocketApiClient<BinanceEnvironment, BinanceAuthenticationProvider, BinanceCredentials>, IBinanceSocketClientUsdFuturesApi
     {
         /// <inheritdoc />
         public new BinanceSocketOptions ClientOptions => (BinanceSocketOptions)base.ClientOptions;
@@ -68,7 +68,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion 
 
         /// <inheritdoc />
-        protected override AuthenticationProvider<BinanceCredentials> CreateAuthenticationProvider(BinanceCredentials credentials)
+        protected override BinanceAuthenticationProvider CreateAuthenticationProvider(BinanceCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         /// <inheritdoc />
@@ -123,11 +123,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 if (AuthenticationProvider == null)
                     throw new InvalidOperationException("No credentials provided for authenticated endpoint");
 
-                var binanceAuthProvider = (BinanceAuthenticationProvider)AuthenticationProvider;
                 if (sign)
-                    parameters = binanceAuthProvider.ProcessRequest(this, parameters);
+                    parameters = AuthenticationProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.PublicIdentifier);
+                    parameters.Add("apiKey", AuthenticationProvider.PublicKey);
             }
 
             var request = new BinanceSocketQuery

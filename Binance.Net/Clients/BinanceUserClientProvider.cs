@@ -1,5 +1,4 @@
 ﻿using Binance.Net.Interfaces.Clients;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Options;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;

@@ -11,7 +11,6 @@ using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Options;
 using CryptoExchange.Net.Objects.Options;
-using Binance.Net.Objects;
 
 namespace Binance.Net.Clients
 {

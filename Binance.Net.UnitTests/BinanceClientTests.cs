@@ -21,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Binance.Net.Interfaces.Clients;
 using System.Diagnostics;
+using Binance.Net.Clients.SpotApi;
 
 namespace Binance.Net.UnitTests
 {
@@ -32,16 +33,16 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials("TestKey", "TestSecret"));
 
             // assert
-            Assert.That(authProvider.ApiKey == "TestKey");
+            Assert.That(authProvider.PublicKey == "TestKey");
         }
 
         [Test]
         public void CheckSignatureExample1()
         {
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
             var client = (RestApiClient)new BinanceRestClient().SpotApi;
 
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
@@ -72,7 +73,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckSignatureExample2()
         {
-            var authProvider = new BinanceAuthenticationProvider(new ApiCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
             var client = (RestApiClient)new BinanceRestClient().SpotApi;
             client.ParameterPositions[HttpMethod.Post] = HttpMethodParameterPosition.InUri;
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
@@ -199,8 +200,8 @@ namespace Binance.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.SpotApi).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.SpotApi).OutputOriginalData, Is.False);
-            Assert.That(((BaseApiClient)restClient.SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
-            Assert.That(((BaseApiClient)socketClient.SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((BinanceRestClientSpotApi)restClient.SpotApi).AuthenticationProvider.PublicKey, Is.EqualTo("123"));
+            Assert.That(((BinanceSocketClientSpotApi)socketClient.SpotApi).AuthenticationProvider.PublicKey, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.SpotApi).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));

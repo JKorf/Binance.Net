@@ -1,4 +1,3 @@
-using Binance.Net.Objects;
 using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Binance.Net.Interfaces.Clients.UsdFuturesApi

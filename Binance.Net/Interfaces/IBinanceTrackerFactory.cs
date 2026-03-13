@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects;
-using CryptoExchange.Net.Trackers.UserData.Interfaces;
+﻿using CryptoExchange.Net.Trackers.UserData.Interfaces;
 using CryptoExchange.Net.Trackers.UserData.Objects;
 
 namespace Binance.Net.Interfaces

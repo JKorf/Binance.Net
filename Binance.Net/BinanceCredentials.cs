@@ -1,6 +1,6 @@
 ﻿using CryptoExchange.Net.Authentication;
 
-namespace Binance.Net.Objects
+namespace Binance.Net
 {
     /// <summary>
     /// Binance API credentials
@@ -8,13 +8,6 @@ namespace Binance.Net.Objects
     public class BinanceCredentials : ApiCredentials
     {
         public ApiCredentialsType CredentialType => CredentialPairs.First().CredentialType;
-        public string ApiKey =>
-            CredentialType == ApiCredentialsType.Hmac ? GetCredential<HMACCredential>()?.Key!
-            : CredentialType == ApiCredentialsType.Rsa ? GetCredential<RSACredential>()?.PublicKey!
-#if NET8_0_OR_GREATER
-            : CredentialType == ApiCredentialsType.Ed25519 ? GetCredential<ED25519Credential>()?.PublicKey!
-#endif
-            : null!;
         
         public BinanceCredentials() { }
 

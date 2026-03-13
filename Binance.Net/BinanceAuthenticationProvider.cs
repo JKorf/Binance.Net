@@ -1,5 +1,4 @@
-﻿using Binance.Net.Objects;
-using Binance.Net.Objects.Internal;
+﻿using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Sockets;
@@ -16,7 +15,7 @@ namespace Binance.Net
             ApiCredentialsType.Rsa,
             ApiCredentialsType.Ed25519];
 
-        public override string PublicIdentifier => ApiCredentials.ApiKey;
+        public override string PublicKey => ApiCredentials.PublicKey;
 
         public BinanceAuthenticationProvider(BinanceCredentials credential) : base(credential)
         {
@@ -25,7 +24,7 @@ namespace Binance.Net
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.ApiKey);
+            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.PublicKey);
 
             if (!request.Authenticated)
                 return;
