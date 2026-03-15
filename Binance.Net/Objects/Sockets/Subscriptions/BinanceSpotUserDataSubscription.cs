@@ -78,11 +78,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             _client.UpdateTimeOffset(message.Event.EventTime);
 
-            message.Event.ApiKey = _client.AuthenticationProvider!.PublicKey;
+            message.Event.ApiKey = _client.AuthenticationProvider!.Key;
             _positionHandler?.Invoke(
                 new DataEvent<BinanceStreamPositionsUpdate>(BinanceExchange.ExchangeName, message.Event, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
-                    .WithStreamId(_client.AuthenticationProvider!.PublicKey)
+                    .WithStreamId(_client.AuthenticationProvider!.Key)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())                 
                 );
             
@@ -94,11 +94,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             _client.UpdateTimeOffset(message.Event.EventTime);
 
-            message.Event.ApiKey = _client.AuthenticationProvider!.PublicKey;
+            message.Event.ApiKey = _client.AuthenticationProvider!.Key;
             _balanceHandler?.Invoke(
                 new DataEvent<BinanceStreamBalanceUpdate>(BinanceExchange.ExchangeName, message.Event, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
-                    .WithStreamId(_client.AuthenticationProvider!.PublicKey)
+                    .WithStreamId(_client.AuthenticationProvider!.Key)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
@@ -110,11 +110,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             _client.UpdateTimeOffset(message.Event.EventTime);
 
-            message.Event.ApiKey = _client.AuthenticationProvider!.PublicKey;
+            message.Event.ApiKey = _client.AuthenticationProvider!.Key;
             _orderHandler?.Invoke(
                 new DataEvent<BinanceStreamOrderUpdate>(BinanceExchange.ExchangeName, message.Event, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
-                    .WithStreamId(_client.AuthenticationProvider!.PublicKey)
+                    .WithStreamId(_client.AuthenticationProvider!.Key)
                     .WithSymbol(message.Event.Symbol)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
@@ -127,11 +127,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             _client.UpdateTimeOffset(message.Event.EventTime);
 
-            message.Event.ApiKey = _client.AuthenticationProvider!.PublicKey;
+            message.Event.ApiKey = _client.AuthenticationProvider!.Key;
             _orderListHandler?.Invoke(
                 new DataEvent<BinanceStreamOrderList>(BinanceExchange.ExchangeName, message.Event, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
-                    .WithStreamId(_client.AuthenticationProvider!.PublicKey)
+                    .WithStreamId(_client.AuthenticationProvider!.Key)
                     .WithSymbol(message.Event.Symbol)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
@@ -148,7 +148,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _streamTerminatedHandler?.Invoke(
                 new DataEvent<BinanceStreamEvent>(BinanceExchange.ExchangeName, message.Event, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
-                    .WithStreamId(_client.AuthenticationProvider!.PublicKey)
+                    .WithStreamId(_client.AuthenticationProvider!.Key)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );            
             
@@ -161,11 +161,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         {
             _client.UpdateTimeOffset(message.Event.EventTime);
 
-            message.Event.ApiKey = _client.AuthenticationProvider!.PublicKey;
+            message.Event.ApiKey = _client.AuthenticationProvider!.Key;
             _balanceLockHandler?.Invoke(
                 new DataEvent<BinanceStreamBalanceLockUpdate>(BinanceExchange.ExchangeName, message.Event, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
-                    .WithStreamId(_client.AuthenticationProvider!.PublicKey)
+                    .WithStreamId(_client.AuthenticationProvider!.Key)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
 

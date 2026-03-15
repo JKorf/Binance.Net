@@ -15,7 +15,7 @@ namespace Binance.Net
             ApiCredentialsType.Rsa,
             ApiCredentialsType.Ed25519];
 
-        public override string PublicKey => ApiCredentials.PublicKey;
+        public override string Key => ApiCredentials.Key;
 
         public BinanceAuthenticationProvider(BinanceCredentials credential) : base(credential)
         {
@@ -24,7 +24,7 @@ namespace Binance.Net
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.PublicKey);
+            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.Key);
 
             if (!request.Authenticated)
                 return;

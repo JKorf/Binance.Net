@@ -31,10 +31,22 @@ namespace Microsoft.Extensions.DependencyInjection
             // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
-            configuration.Bind(options);
+
+            try
+            {
+                configuration.Bind(options);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException("Invalid configuration provided", ex);
+            }
 
             if (options.Rest == null || options.Socket == null)
                 throw new ArgumentException("Options null");
+
+            LibraryHelpers.ValidateCredentials(options.ApiCredentials);
+            LibraryHelpers.ValidateCredentials(options.Rest.ApiCredentials);
+            LibraryHelpers.ValidateCredentials(options.Socket.ApiCredentials);
 
             var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;
             var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? BinanceEnvironment.Live.Name;

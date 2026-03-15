@@ -126,7 +126,7 @@ namespace Binance.Net.Clients.SpotApi
                 if (sign)
                     parameters = AuthenticationProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.PublicKey);
+                    parameters.Add("apiKey", AuthenticationProvider.Key);
             }
 
             var request = new BinanceSocketQuery
@@ -167,7 +167,7 @@ namespace Binance.Net.Clients.SpotApi
                 if (sign)
                     parameters = AuthenticationProvider.ProcessRequest(this, parameters);
                 else
-                    parameters.Add("apiKey", AuthenticationProvider.PublicKey);
+                    parameters.Add("apiKey", AuthenticationProvider.Key);
             }
 
             var request = new BinanceSocketQuery
