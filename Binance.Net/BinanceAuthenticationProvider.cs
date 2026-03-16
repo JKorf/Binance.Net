@@ -53,7 +53,7 @@ namespace Binance.Net
         {
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {
-                { "apiKey", ApiCredentials.ApiKey },
+                { "apiKey", ApiCredentials.Key },
                 { "timestamp", GetMillisecondTimestampLong(apiClient) }
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
