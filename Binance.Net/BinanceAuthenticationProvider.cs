@@ -11,8 +11,8 @@ namespace Binance.Net
     internal class BinanceAuthenticationProvider : AuthenticationProvider<BinanceCredentials>
     {
         public override ApiCredentialsType[] SupportedCredentialTypes =>
-            [ApiCredentialsType.Hmac,
-            ApiCredentialsType.Rsa,
+            [ApiCredentialsType.HMAC,
+            ApiCredentialsType.RSA,
             ApiCredentialsType.Ed25519];
 
         public override string Key => ApiCredentials.Key;
@@ -66,11 +66,11 @@ namespace Binance.Net
 
         private string Sign(string data)
         {
-            if (ApiCredentials.CredentialType == ApiCredentialsType.Hmac)
+            if (ApiCredentials.CredentialType == ApiCredentialsType.HMAC)
                 return SignHMACSHA256(ApiCredentials.GetCredential<HMACCredential>()!, data);
 #if NET8_0_OR_GREATER
             else if (ApiCredentials.CredentialType == ApiCredentialsType.Ed25519)
-                return SignEd25519(ApiCredentials.GetCredential<ED25519Credential>()!, data, SignOutputType.Base64);
+                return SignEd25519(ApiCredentials.GetCredential<Ed25519Credential>()!, data, SignOutputType.Base64);
 #endif
             else
                 return SignRSASHA256(ApiCredentials.GetCredential<RSACredential>()!, Encoding.ASCII.GetBytes(data), SignOutputType.Base64);

@@ -54,10 +54,10 @@
 #if NET8_0_OR_GREATER
 
         /// <summary>
-        /// Create API credentials using ED25519 credentials
+        /// Create API credentials using Ed25519 credentials
         /// </summary>
-        /// <param name="ed25519Credential">ED25519 credentials</param>
-        public BinanceCredentials(ED25519Credential ed25519Credential)
+        /// <param name="ed25519Credential">Ed25519 credentials</param>
+        public BinanceCredentials(Ed25519Credential ed25519Credential)
             : base(ed25519Credential)
         {
         }
