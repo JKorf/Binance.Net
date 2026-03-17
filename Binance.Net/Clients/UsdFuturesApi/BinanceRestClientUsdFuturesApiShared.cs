@@ -669,11 +669,22 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return null;
         }
 
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.PendingNew || status == OrderStatus.New || status == OrderStatus.PartiallyFilled || status == OrderStatus.PendingCancel) return SharedOrderStatus.Open;
-            if (status == OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
+            if (status == Enums.OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired)
+                return SharedOrderStatus.Canceled;
+            if (status == Enums.OrderStatus.PendingNew
+                || status == Enums.OrderStatus.PendingCancel
+                || status == Enums.OrderStatus.New
+                || status == Enums.OrderStatus.PartiallyFilled)
+            {
+                return SharedOrderStatus.Open;
+            }
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
 
         private SharedOrderType ParseOrderType(FuturesOrderType type)
@@ -1183,10 +1194,22 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (data.Status == OrderStatus.Filled)
                 return SharedTriggerOrderStatus.Filled;
 
-            if (data.Status == OrderStatus.Canceled || data.Status == OrderStatus.Rejected || data.Status == OrderStatus.Expired)
+            if (data.Status == OrderStatus.Canceled
+                || data.Status == OrderStatus.Rejected
+                || data.Status == OrderStatus.Expired
+                || data.Status == OrderStatus.ExpiredInMatch)
+            {
                 return SharedTriggerOrderStatus.CanceledOrRejected;
+            }
 
-            return SharedTriggerOrderStatus.Active;
+            if (data.Status == OrderStatus.New
+                || data.Status == OrderStatus.PartiallyFilled
+                || data.Status == OrderStatus.PendingCancel)
+            {
+                return SharedTriggerOrderStatus.Active;
+            }
+
+            return SharedTriggerOrderStatus.Unknown;
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);

@@ -622,18 +622,19 @@ namespace Binance.Net.Clients.SpotApi
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.Filled)
-                return SharedOrderStatus.Filled;
-
-            if (status == OrderStatus.PartiallyFilled
-                || status == OrderStatus.New
-                || status == OrderStatus.PendingNew
-                || status == OrderStatus.PendingCancel)
+            if (status == Enums.OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired)
+                return SharedOrderStatus.Canceled;
+            if (status == Enums.OrderStatus.PendingNew
+                || status == Enums.OrderStatus.PendingCancel
+                || status == Enums.OrderStatus.New
+                || status == Enums.OrderStatus.PartiallyFilled)
             {
                 return SharedOrderStatus.Open;
             }
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
 
-            return SharedOrderStatus.Canceled;
+            return SharedOrderStatus.Unknown;
         }
 
         private SharedOrderType ParseOrderType(SpotOrderType type)
@@ -839,9 +840,7 @@ namespace Binance.Net.Clients.SpotApi
                             x.Quantity,
                             x.Status == DepositStatus.Success,
                             x.InsertTime,
-                            x.Status == DepositStatus.Success ? SharedTransferStatus.Completed
-                                    : x.Status == DepositStatus.Pending || x.Status == DepositStatus.Completed ? SharedTransferStatus.InProgress
-                                    : SharedTransferStatus.Failed)
+                            ParseTransferStatus(x.Status))
                         {
                             Confirmations = x.Confirmations.Contains("/") ? int.Parse(x.Confirmations.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0]) : null,
                             Network = x.Network,
@@ -883,9 +882,7 @@ namespace Binance.Net.Clients.SpotApi
                             x.Quantity,
                             x.Status == DepositStatus.Success,
                             x.InsertTime,
-                            x.Status == DepositStatus.Success ? SharedTransferStatus.Completed
-                                    : x.Status == DepositStatus.Pending || x.Status == DepositStatus.Completed ? SharedTransferStatus.InProgress
-                                    : SharedTransferStatus.Failed)
+                            ParseTransferStatus(x.Status))
                         {
                             Confirmations = x.Confirmations.Contains("/") ? int.Parse(x.Confirmations.Split(new[] { "/" }, StringSplitOptions.RemoveEmptyEntries)[0]) : null,
                             Network = x.Network,
@@ -894,6 +891,18 @@ namespace Binance.Net.Clients.SpotApi
                             Id = x.Id
                         }).ToArray(), nextPageRequest);
             }
+        }
+
+        private SharedTransferStatus ParseTransferStatus(DepositStatus status)
+        {
+            if (status == DepositStatus.Success)
+                return SharedTransferStatus.Completed;
+            if (status == DepositStatus.Pending || status == DepositStatus.Completed || status == DepositStatus.WaitingUserConfirm)
+                return SharedTransferStatus.InProgress;
+            if (status == DepositStatus.Rejected || status == DepositStatus.WrongDeposit)
+                return SharedTransferStatus.Failed;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
@@ -1146,10 +1155,22 @@ namespace Binance.Net.Clients.SpotApi
             if (data.Status == OrderStatus.Filled)
                 return SharedTriggerOrderStatus.Filled;
 
-            if (data.Status == OrderStatus.Canceled || data.Status == OrderStatus.Rejected || data.Status == OrderStatus.Expired)
+            if (data.Status == OrderStatus.Canceled
+                || data.Status == OrderStatus.Rejected
+                || data.Status == OrderStatus.Expired
+                || data.Status == OrderStatus.ExpiredInMatch)
+            {
                 return SharedTriggerOrderStatus.CanceledOrRejected;
+            }
 
-            return SharedTriggerOrderStatus.Active;
+            if (data.Status == OrderStatus.New
+                || data.Status == OrderStatus.PartiallyFilled
+                || data.Status == OrderStatus.PendingCancel)
+            {
+                return SharedTriggerOrderStatus.Active;
+            }
+
+            return SharedTriggerOrderStatus.Unknown;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
