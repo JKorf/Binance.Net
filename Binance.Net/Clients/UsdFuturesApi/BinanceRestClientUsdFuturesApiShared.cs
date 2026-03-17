@@ -669,7 +669,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return null;
         }
 
-
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == Enums.OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired)
