@@ -24,7 +24,7 @@ namespace Binance.Net.UnitTests
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 RequestTimeout = TimeSpan.FromSeconds(1),
-                ApiCredentials = new BinanceCredentials("123", "456")
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456")
             }), fact);
             return client;
         }

@@ -33,7 +33,7 @@ namespace Binance.Net.UnitTests
             {
                 AutoTimestamp = false,
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new BinanceCredentials(key, sec) : null
+                ApiCredentials = Authenticated ? new BinanceCredentials().WithHMAC(key, sec) : null
             }));
         }
 

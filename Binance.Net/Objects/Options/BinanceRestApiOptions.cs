@@ -6,7 +6,7 @@ namespace Binance.Net.Objects.Options
     /// <summary>
     /// Options for Binance Rest API
     /// </summary>
-    public class BinanceRestApiOptions : RestApiOptions<BinanceCredentials>
+    public class BinanceRestApiOptions : RestApiOptions
     {
         /// <summary>
         /// A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough

@@ -33,7 +33,7 @@ namespace Binance.Net.UnitTests
         {
             // arrange
             // act
-            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials("TestKey", "TestSecret"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials().WithHMAC("TestKey", "TestSecret"));
 
             // assert
             Assert.That(authProvider.Key == "TestKey");
@@ -42,7 +42,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckSignatureExample1()
         {
-            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials().WithHMAC("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
             var client = (RestApiClient)new BinanceRestClient().SpotApi;
 
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
@@ -73,7 +73,7 @@ namespace Binance.Net.UnitTests
         [Test]
         public void CheckSignatureExample2()
         {
-            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
+            var authProvider = new BinanceAuthenticationProvider(new BinanceCredentials().WithHMAC("vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A", "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"));
             var client = (RestApiClient)new BinanceRestClient().SpotApi;
             client.ParameterPositions[HttpMethod.Post] = HttpMethodParameterPosition.InUri;
             CryptoExchange.Net.Testing.TestHelpers.CheckSignature(
