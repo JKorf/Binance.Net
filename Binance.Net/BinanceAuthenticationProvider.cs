@@ -12,7 +12,7 @@ namespace Binance.Net
     {
         public override string Key => ApiCredentials.Credential.Key;
 
-        public BinanceAuthenticationProvider(BinanceCredentials credentials) : base(credentials, credentials.Credential)
+        public BinanceAuthenticationProvider(BinanceCredentials credentials) : base(credentials)
         {
         }
 
