@@ -7,7 +7,7 @@ namespace Binance.Net
     /// </summary>
     public class BinanceCredentials : ApiCredentials
     {
-        internal CredentialPair? Credential { get; set; }
+        internal CredentialSet? Credential { get; set; }
 
         /// <summary>
         /// HMAC credentials
