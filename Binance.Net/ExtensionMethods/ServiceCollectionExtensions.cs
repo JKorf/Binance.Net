@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         /// <summary>
         /// Add services such as the IBinanceRestClient and IBinanceSocketClient. Configures the services based on the provided configuration.<br />
-        /// See <see href="https://github.com/JKorf/CryptoExchange.Net/blob/master/Examples/example-config.json" /> for an example of how to set up the configuration.
+        /// See <see href="https://github.com/JKorf/Binance.Net/blob/master/Examples/example-config.json" /> for an example of how to set up the configuration.
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="configuration">The configuration(section) containing the options</param>
