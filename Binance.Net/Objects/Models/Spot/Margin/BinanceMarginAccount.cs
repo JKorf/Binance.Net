@@ -22,6 +22,16 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         [JsonPropertyName("transferEnabled")]
         public bool TransferEnabled { get; set; }
         /// <summary>
+        /// ["<c>transferInEnabled</c>"] Boolean indicating if this account can transfered in
+        /// </summary>
+        [JsonPropertyName("transferInEnabled")]
+        public bool TransferInEnabled { get; set; }
+        /// <summary>
+        /// ["<c>transferOutEnabled</c>"] Boolean indicating if this account can transfer out
+        /// </summary>
+        [JsonPropertyName("transferOutEnabled")]
+        public bool TransferOutEnabled { get; set; }
+        /// <summary>
         /// ["<c>collateralMarginLevel</c>"] Collateral margin level
         /// </summary>
         [JsonPropertyName("collateralMarginLevel")]
@@ -61,6 +71,16 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// </summary>
         [JsonPropertyName("userAssets")]
         public BinanceMarginBalance[] Balances { get; set; } = Array.Empty<BinanceMarginBalance>();
+        /// <summary>
+        /// ["<c>created</c>"] Created
+        /// </summary>
+        [JsonPropertyName("created")]
+        public bool Created { get; set; }
+        /// <summary>
+        /// ["<c>withdrawCollateralMarginLevel</c>"] Withdraw collateral margin level
+        /// </summary>
+        [JsonPropertyName("withdrawCollateralMarginLevel")]
+        public decimal? WithdrawCollateralMarginLevel { get; set; }
     }
 
     /// <summary>

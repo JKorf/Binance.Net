@@ -114,12 +114,21 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("marketTakeBound")]
         public decimal MarketTakeBound { get; set; }
-
+        /// <summary>
+        /// ["<c>maxMoveOrderLimit</c>"]
+        /// </summary>
+        [JsonPropertyName("maxMoveOrderLimit")]
+        public decimal? MaxMoveOrderLimit { get; set; }
         /// <summary>
         /// ["<c>timeInForce</c>"] Allowed order time in force
         /// </summary>
         [JsonPropertyName("timeInForce")]
         public TimeInForce[] TimeInForce { get; set; } = Array.Empty<TimeInForce>();
+        /// <summary>
+        /// ["<c>permissionSets</c>"] Permission sets
+        /// </summary>
+        [JsonPropertyName("permissionSets")]
+        public string[] PermissionSets { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Filter for the max accuracy of the price for this symbol
         /// </summary>

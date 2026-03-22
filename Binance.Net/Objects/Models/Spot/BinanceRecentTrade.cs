@@ -33,9 +33,9 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("isBuyerMaker")]
         public bool BuyerIsMaker { get; set; }
         /// <summary>
-        /// ["<c>IsRPITrade</c>"] Whether this was a Retail Price Improvement trade
+        /// ["<c>isRPITrade</c>"] Whether this was a Retail Price Improvement trade
         /// </summary>
-        [JsonPropertyName("IsRPITrade")]
+        [JsonPropertyName("isRPITrade")]
         public bool? IsRpiTrade { get; set; }
         /// <summary>
         /// ["<c>isBestMatch</c>"] Whether the trade was made at the best match

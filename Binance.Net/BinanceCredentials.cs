@@ -169,7 +169,7 @@ namespace Binance.Net
         public override void Validate()
         {
             if (Credential == null)
-                throw new ArgumentException("Credential not set");
+                throw new ArgumentException($"No credentials provided on {GetType().Name}");
 
             Credential.Validate();
         }

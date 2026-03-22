@@ -31,6 +31,12 @@ namespace Binance.Net.Objects.Models.Futures
         public bool CanWithdraw { get; set; }
 
         /// <summary>
+        /// ["<c>feeBurn</c>"] Boolean indicating if this account has fee burn on or off
+        /// </summary>
+        [JsonPropertyName("feeBurn")]
+        public bool FeeBurn { get; set; }
+
+        /// <summary>
         /// ["<c>multiAssetsMargin</c>"] Boolean indicating if this account is in multi asset mode
         /// </summary>
         [JsonPropertyName("multiAssetsMargin")]

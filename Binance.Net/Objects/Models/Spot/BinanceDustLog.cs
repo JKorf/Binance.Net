@@ -87,6 +87,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("fromAsset")]
         public string FromAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>toAsset</c>"] To asset
+        /// </summary>
+        [JsonPropertyName("toAsset")]
+        public string ToAsset { get; set; } = string.Empty;
     }
 }
 

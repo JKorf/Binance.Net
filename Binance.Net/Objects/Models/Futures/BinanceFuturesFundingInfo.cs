@@ -26,6 +26,11 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("fundingIntervalHours")]
         public int FundingIntervalHours { get; set; }
+        /// <summary>
+        /// ["<c>updateTime</c>"] Funding interval in hours.
+        /// </summary>
+        [JsonPropertyName("updateTime")]
+        public DateTime UpdateTime { get; set; }
     }
 }
 
