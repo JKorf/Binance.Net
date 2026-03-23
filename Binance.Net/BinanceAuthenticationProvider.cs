@@ -10,7 +10,7 @@ namespace Binance.Net
 {
     internal class BinanceAuthenticationProvider : AuthenticationProvider<BinanceCredentials>
     {
-        public override string Key => ApiCredentials.Credential.Key;
+        public override string Key => ApiCredentials.Credential!.Key;
 
         public BinanceAuthenticationProvider(BinanceCredentials credentials) : base(credentials)
         {
@@ -19,7 +19,7 @@ namespace Binance.Net
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.Credential.Key);
+            request.Headers.Add("X-MBX-APIKEY", ApiCredentials.Credential!.Key);
 
             if (!request.Authenticated)
                 return;
@@ -48,7 +48,7 @@ namespace Binance.Net
         {
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {
-                { "apiKey", ApiCredentials.Credential.Key },
+                { "apiKey", ApiCredentials.Credential!.Key },
                 { "timestamp", GetMillisecondTimestampLong(apiClient) }
             };
             var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
