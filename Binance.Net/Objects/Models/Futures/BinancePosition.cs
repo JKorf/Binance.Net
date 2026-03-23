@@ -74,6 +74,11 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("isolated")]
         public bool Isolated { get; set; }
+        /// <summary>
+        /// ["<c>isolatedWallet</c>"] Isolated wallet
+        /// </summary>
+        [JsonPropertyName("isolatedWallet")]
+        public decimal IsolatedWallet { get; set; }
 
         /// <summary>
         /// ["<c>positionAmt</c>"] Position quantity
@@ -111,11 +116,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("notional")]
         public decimal Notional { get; set; }
-        /// <summary>
-        /// ["<c>isolatedWallet</c>"] Isolated wallet
-        /// </summary>
-        [JsonPropertyName("isolatedWallet")]
-        public decimal IsolatedWallet { get; set; }
     }
 
     /// <summary>
