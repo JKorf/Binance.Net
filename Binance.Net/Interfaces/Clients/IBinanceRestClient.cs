@@ -10,7 +10,7 @@ namespace Binance.Net.Interfaces.Clients
     /// <summary>
     /// Client for accessing the Binance Rest API. 
     /// </summary>
-    public interface IBinanceRestClient : IRestClient
+    public interface IBinanceRestClient : IRestClient<BinanceCredentials>
     {
         /// <summary>
         /// General API endpoints
@@ -32,17 +32,5 @@ namespace Binance.Net.Interfaces.Clients
         /// </summary>
         /// <see cref="IBinanceRestClientUsdFuturesApi"/>
         IBinanceRestClientUsdFuturesApi UsdFuturesApi { get; }
-
-        /// <summary>
-        /// Update specific options
-        /// </summary>
-        /// <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
-        void SetOptions(UpdateOptions options);
-
-        /// <summary>
-        /// Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
-        /// </summary>
-        /// <param name="credentials">The credentials to set</param>
-        void SetApiCredentials(ApiCredentials credentials);
     }
 }

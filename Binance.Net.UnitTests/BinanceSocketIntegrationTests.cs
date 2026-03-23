@@ -29,7 +29,7 @@ namespace Binance.Net.UnitTests
             return new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
+                ApiCredentials = Authenticated ? new BinanceCredentials().WithHMAC(key, sec) : null
             }), loggerFactory);
         }
 
@@ -41,7 +41,7 @@ namespace Binance.Net.UnitTests
             Authenticated = key != null && sec != null;
             return new BinanceRestClient(x =>
             {
-                x.ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null;
+                x.ApiCredentials = Authenticated ? new BinanceCredentials().WithHMAC(key, sec) : null;
             });
         }
 

@@ -86,6 +86,16 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("otoAllowed")]
         public bool OTOAllowed { get; set; }
         /// <summary>
+        /// ["<c>opoAllowed</c>"] If OPO(One Pays Other) orders are allowed
+        /// </summary>
+        [JsonPropertyName("opoAllowed")]
+        public bool OPOAllowed { get; set; }
+        /// <summary>
+        /// ["<c>amendAllowed</c>"] Amend allowed
+        /// </summary>
+        [JsonPropertyName("amendAllowed")]
+        public bool AmendAllowed { get; set; }
+        /// <summary>
         /// ["<c>quoteOrderQtyMarketAllowed</c>"] Whether or not it is allowed to specify the quantity of a market order in the quote asset
         /// </summary>
         [JsonPropertyName("quoteOrderQtyMarketAllowed")]

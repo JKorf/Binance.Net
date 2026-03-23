@@ -26,7 +26,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -104,7 +104,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -149,7 +149,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -205,7 +205,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -251,7 +251,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -295,7 +295,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -337,7 +337,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -360,7 +360,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -394,7 +394,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -435,7 +435,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -463,7 +463,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -510,7 +510,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -541,7 +541,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -559,7 +559,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -579,7 +579,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -597,7 +597,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -619,7 +619,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,
@@ -659,7 +659,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceRestClient(null, logger, Options.Create(new BinanceRestOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true,
                 AutoTimestamp = false,
                 RateLimiterEnabled = false,

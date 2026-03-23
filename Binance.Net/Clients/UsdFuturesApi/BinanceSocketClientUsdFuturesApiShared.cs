@@ -160,7 +160,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                         update.Data.UpdateData.OrderId.ToString(),
                         ParseOrderType(update.Data.UpdateData.Type),
                         update.Data.UpdateData.Side == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                        update.Data.UpdateData.Status == Enums.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (update.Data.UpdateData.Status == Enums.OrderStatus.New || update.Data.UpdateData.Status == Enums.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                        ParseOrderStatus(update.Data.UpdateData.Status),
                         update.Data.UpdateData.UpdateTime)
                     {
                         ClientOrderId = update.Data.UpdateData.ClientOrderId,
@@ -187,6 +187,23 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderStatus ParseOrderStatus(OrderStatus status)
+        {
+            if (status == Enums.OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired)
+                return SharedOrderStatus.Canceled;
+            if (status == Enums.OrderStatus.PendingNew
+                || status == Enums.OrderStatus.PendingCancel
+                || status == Enums.OrderStatus.New
+                || status == Enums.OrderStatus.PartiallyFilled)
+            {
+                return SharedOrderStatus.Open;
+            }
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
 
         private SharedOrderType ParseOrderType(FuturesOrderType type)

@@ -26,6 +26,11 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// </summary>
         [JsonPropertyName("data")]
         public BinanceIsolatedMarginFeeInfo[] FeeInfo { get; set; } = Array.Empty<BinanceIsolatedMarginFeeInfo>();
+        /// <summary>
+        /// ["<c>isPublic</c>"] Is public
+        /// </summary>
+        [JsonPropertyName("isPublic")]
+        public bool IsPublic { get; set; }
     }
 
     /// <summary>

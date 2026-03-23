@@ -25,7 +25,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
 
@@ -44,7 +44,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
 
@@ -63,7 +63,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
 
@@ -82,7 +82,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456")
             }), logger);
             var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "https://api.binance.com", "data");
             await tester.ValidateAsync<BinanceStreamTrade>((client, handler) => client.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
@@ -103,7 +103,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456"),
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/Account", "https://api.binance.com", "data");
@@ -124,7 +124,7 @@ namespace Binance.Net.UnitTests
 
             var client = new BinanceSocketClient(Options.Create(new BinanceSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456")
+                ApiCredentials = new BinanceCredentials().WithHMAC("123", "456")
             }), logger);
             var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "https://fapi.binance.com", "data");
             await tester.ValidateAsync<BinanceFuturesUsdtStreamMarkPrice>((client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToMarkPriceUpdatesAsync("BTCUSDT", 1000, handler), "MarkPrice");

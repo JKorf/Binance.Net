@@ -15,7 +15,7 @@ namespace Binance.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
+        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, BinanceCredentials credentials, SpotUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
         /// <summary>
         /// Create a new spot user data tracker
         /// </summary>
@@ -29,7 +29,7 @@ namespace Binance.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserUsdFuturesDataTracker(string userIdentifier, BinanceCredentials credentials, FuturesUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
         /// <summary>
         /// Create a new linear futures user data tracker
         /// </summary>
@@ -43,7 +43,7 @@ namespace Binance.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserCoinFuturesDataTracker(string userIdentifier, BinanceCredentials credentials, FuturesUserDataTrackerConfig? config = null, BinanceEnvironment? environment = null);
         /// <summary>
         /// Create a new inverse futures user data tracker
         /// </summary>

@@ -144,11 +144,20 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("specialTips")]
         public string SpecialTips { get; set; } = string.Empty;
         /// <summary>
+        /// ["<c>specialWithdrawTips</c>"] Withdraw tips
+        /// </summary>
+        [JsonPropertyName("specialWithdrawTips")]
+        public string SpecialWithdrawTips { get; set; } = string.Empty;
+        /// <summary>
         /// ["<c>unLockConfirm</c>"] Confirmation number for balance unlock
         /// </summary>
         [JsonPropertyName("unLockConfirm")]
         public int UnlockConfirm { get; set; }
-
+        /// <summary>
+        /// ["<c>resetAddressStatus</c>"] Reset address status
+        /// </summary>
+        [JsonPropertyName("resetAddressStatus")]
+        public bool ResetAddressStatus { get; set; }
         /// <summary>
         /// ["<c>withdrawDesc</c>"] Withdraw description
         /// </summary>
@@ -209,6 +218,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("denomination")]
         public decimal? Denomination { get; set; }
+        /// <summary>
+        /// ["<c>depositDust</c>"] Deposit dust
+        /// </summary>
+        [JsonPropertyName("depositDust")]
+        public decimal DepositDust { get; set; }
     }
 }
 

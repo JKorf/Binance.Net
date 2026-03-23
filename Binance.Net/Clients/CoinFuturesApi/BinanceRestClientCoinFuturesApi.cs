@@ -1,7 +1,6 @@
 ﻿using Binance.Net.Clients.MessageHandlers;
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
-using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Options;
@@ -15,7 +14,7 @@ using System.Net.Http.Headers;
 namespace Binance.Net.Clients.CoinFuturesApi
 {
     /// <inheritdoc cref="IBinanceRestClientCoinFuturesApi" />
-    internal partial class BinanceRestClientCoinFuturesApi : RestApiClient, IBinanceRestClientCoinFuturesApi
+    internal partial class BinanceRestClientCoinFuturesApi : RestApiClient<BinanceEnvironment, BinanceAuthenticationProvider, BinanceCredentials>, IBinanceRestClientCoinFuturesApi
     {
         #region fields 
         /// <inheritdoc />
@@ -59,7 +58,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override BinanceAuthenticationProvider CreateAuthenticationProvider(BinanceCredentials credentials)
             => new BinanceAuthenticationProvider(credentials);
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));

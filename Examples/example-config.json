@@ -1,0 +1,33 @@
+{
+	// Options section, select this section during DI registration using Configuration.GetSection("Binance")
+	"Binance": {
+		// API credentials for both REST and Websocket client
+		"ApiCredentials": {
+			"HMAC": {
+				"Key": "APIKEY",
+				"Secret": "APISECRET",
+			}
+		},
+		// Set the environment by name
+		"Environment": {
+			"name": "live"
+		},
+		// REST client options
+		"Rest": {
+			"RequestTimeout": "00:00:20",
+			"CachingEnabled": true,
+			"OutputOriginalData": true,
+			"Proxy": {
+				"Host": "https://127.0.0.1",
+				"Port": 8080,
+				"Login": "User",
+				"Password": "Pass"
+			}
+		},
+		// Socket client options
+		"Socket": {
+			"RequestTimeout": "00:00:05",
+			"SocketSubscriptionsCombineTarget": 15
+		}
+	}
+}

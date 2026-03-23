@@ -25,6 +25,12 @@ namespace Binance.Net.Objects.Models.Futures
         public decimal SumOpenInterestValue { get; set; }
 
         /// <summary>
+        /// ["<c>CMCCirculatingSupply</c>"] Circulating supply of the asset
+        /// </summary>
+        [JsonPropertyName("CMCCirculatingSupply")]
+        public decimal CirculatingSupply { get; set; }
+
+        /// <summary>
         /// ["<c>timestamp</c>"] The data timestamp.
         /// </summary>
         [JsonPropertyName("timestamp"), JsonConverter(typeof(DateTimeConverter))]

@@ -1,3 +1,5 @@
+using Binance.Net.Enums;
+
 namespace Binance.Net.Objects.Models.Spot
 {
     /// <summary>
@@ -36,6 +38,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("enInfo")]
         public string? Info { get; set; }
+        /// <summary>
+        /// ["<c>direction</c>"] Direction
+        /// </summary>
+        [JsonPropertyName("direction")]
+        public DividendDirection Direction { get; set; }
     }
 }
 

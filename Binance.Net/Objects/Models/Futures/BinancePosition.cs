@@ -74,12 +74,23 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("isolated")]
         public bool Isolated { get; set; }
+        /// <summary>
+        /// ["<c>isolatedWallet</c>"] Isolated wallet
+        /// </summary>
+        [JsonPropertyName("isolatedWallet")]
+        public decimal IsolatedWallet { get; set; }
 
         /// <summary>
         /// ["<c>positionAmt</c>"] Position quantity
         /// </summary>
         [JsonPropertyName("positionAmt")]
         public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// ["<c>breakEvenPrice</c>"] Break even price
+        /// </summary>
+        [JsonPropertyName("breakEvenPrice")]
+        public decimal BreakEvenPrice { get; set; }
 
         /// <summary>
         /// ["<c>updateTime</c>"] Last update time
@@ -100,6 +111,11 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("maxNotional")]
         public decimal MaxNotional { get; set; }
+        /// <summary>
+        /// ["<c>notional</c>"] Notional
+        /// </summary>
+        [JsonPropertyName("notional")]
+        public decimal Notional { get; set; }
     }
 
     /// <summary>
@@ -113,16 +129,6 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("notionalValue")]
         public decimal NotionalValue { get; set; }
-        /// <summary>
-        /// ["<c>isolatedWallet</c>"] Isolated wallet
-        /// </summary>
-        [JsonPropertyName("isolatedWallet")]
-        public decimal IsolatedWallet { get; set; }
-        /// <summary>
-        /// ["<c>breakEvenPrice</c>"] Break even price
-        /// </summary>
-        [JsonPropertyName("breakEvenPrice")]
-        public decimal BreakEvenPrice { get; set; }
         /// <summary>
         /// ["<c>maxQty</c>"] Max quantity
         /// </summary>
@@ -207,6 +213,16 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("isolatedWallet")]
         public decimal IsolatedWallet { get; set; }
+        /// <summary>
+        /// ["<c>isolated</c>"] Isolated position
+        /// </summary>
+        [JsonPropertyName("isolated")]
+        public bool Isolated { get; set; }
+        /// <summary>
+        /// ["<c>adlQuantile</c>"] ADL quantile
+        /// </summary>
+        [JsonPropertyName("adlQuantile")]
+        public decimal AdlQuantile { get; set; }
     }
 
     /// <summary>

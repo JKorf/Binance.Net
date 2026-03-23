@@ -4,7 +4,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     /// <summary>
     /// Binance Coin futures API endpoints
     /// </summary>
-    public interface IBinanceRestClientCoinFuturesApi : IRestApiClient, IDisposable
+    public interface IBinanceRestClientCoinFuturesApi : IRestApiClient<BinanceCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

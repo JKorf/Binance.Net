@@ -36,6 +36,11 @@ namespace Binance.Net.Objects.Models.Spot.Convert
         /// </summary>
         [JsonPropertyName("toAssetMaxAmount")]
         public decimal BaseAssetMaxQuantity { get; set; }
+        /// <summary>
+        /// From asset is the base asset of the pair
+        /// </summary>
+        [JsonPropertyName("fromIsBase")]
+        public bool? FromIsBase { get; set; }
     }
 }
 

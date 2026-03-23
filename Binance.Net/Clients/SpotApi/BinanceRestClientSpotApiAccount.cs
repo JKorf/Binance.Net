@@ -53,7 +53,7 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/fiat/payments", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceFiatPayment[]>>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data?.Data!);
+            return result.As(result.Data?.Data ?? []);
         }
 
         #endregion
