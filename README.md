@@ -46,8 +46,7 @@ The NuGet package files are added along side the source with the latest GitHub r
 
 	
 ## How to use
-*REST Endpoints*  
-
+*Basic request:*
 ```csharp
 // Get the ETH/USDT ticker via rest request
 var restClient = new BinanceRestClient();
@@ -55,8 +54,24 @@ var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT
 var lastPrice = tickerResult.Data.LastPrice;
 ```
 
-*Websocket streams*  
+*Place order:*
+```csharp
+var restClient = new BinanceRestClient(opts => {
+	opts.ApiCredentials = new BinanceCredentials("APIKEY", "APISECRET");
+});
 
+// Place Limit order to go long for 0.1 ETH at 2000
+var orderResult = await restClient.UsdFuturesApi.Trading.PlaceOrderAsync(
+    "ETHUSDT",
+    OrderSide.Buy,
+    FuturesOrderType.Limit,
+    0.1m,
+    2000,
+    timeInForce: TimeInForce.GoodTillCanceled,
+    positionSide: PositionSide.Long);
+```
+
+*WebSocket subscription:*
 ```csharp
 // Subscribe to ETH/USDT ticker updates via the websocket API
 var socketClient = new BinanceSocketClient();
