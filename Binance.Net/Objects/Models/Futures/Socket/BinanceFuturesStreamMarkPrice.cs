@@ -46,10 +46,15 @@ namespace Binance.Net.Objects.Models.Futures.Socket
     public record BinanceFuturesUsdtStreamMarkPrice : BinanceFuturesStreamMarkPrice
     {
         /// <summary>
-        /// ["<c>i</c>"] Mark Price
+        /// ["<c>i</c>"] Index Price
         /// </summary>
         [JsonPropertyName("i")]
         public decimal IndexPrice { get; set; }
+        /// <summary>
+        /// ["<c>i</c>"] Mark private moving average
+        /// </summary>
+        [JsonPropertyName("ap")]
+        public decimal MarkPriceMovingAverage { get; set; }
     }
 
     /// <summary>
