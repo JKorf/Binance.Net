@@ -216,6 +216,33 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.11.0 - 24 Mar 2026
+    * Updated CryptoExchange.Net to version 11.0.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Updated class for supplying API credentials from ApiCredentials to BinanceCredentials
+    * Updated Shared status parsing to default to Unknown value if not parsable
+    * Added support for specifying non-HMAC credentials via Configuration
+    * Added FeeBurn property to BinanceFuturesAccountInfo model
+    * Added UpdateTime property to BinanceFuturesFundingInfo model
+    * Added CirculatingSupply property to BinacneFuturesOpenInterestHistory model
+    * Added MaxMoveOrderLimit and PermissionSets properties to BinanceFuturesSymbol model
+    * Added IsolatedWallet, Notional and BreakEvenPrice properties to BinancePositionInfoBase model
+    * Added Isolated and AdlQuantile properties to BinancePositionDetailsUsdt model
+    * Added FromIsBase to BinanceConvertAssetPair model
+    * Added IsPublic to BinanceIsolatedMarginFeeData model
+    * Added TransferInEnabled, TransferOutEnabled, Created and WithdrawCollateralMarginLevel properties to BinanceMarginAccount model
+    * Added RiskBasedLiquidationRatio and UpdateTime to BinancePortfolioMarginCollateralRate model
+    * Added Direction property to BinanceDividendRecords model
+    * Added ToAsset to BinanceDustLog model
+    * Added OPOAllowed and AmendAllowed properties to BinanceSymbol model
+    * Added SpecialWithdrawTips, ResetAddressStatus and DepositDust properties to BinanceUserAsset model
+    * Added MarkPriceMovingAverage property to UsdFuturesApimark price subscriptions
+    * Fixed IsRpiTrade mapping on BinanceRecentTrade model
+    * Fixed restClient.SpotApi.Account.GetFiatPaymentHistoryAsync returning null in data instead of empty array
+
+    * Notes for updating:
+        * Update ApiCredentials to BinanceCredentials for authentication, i.e. `ApiCredentials = new ApiCredentials(..)` => `ApiCredentials = new BinanceCredentials(..)`
+        * When using AddBinance with the Configuration overload (loading config from appsettings), the API credentials path has been changed from ApiCredentials:Key to ApiCredentials:HMAC:Key (and secret)
+
 * Version 12.10.0 - 09 Mar 2026
     * Added restClient.SpotApi.ExchangeData.GetExecutionRulesAsync endpoint
     * Added restClient.SpotApi.ExchangeData.GetReferencePriceAsync endpoint
