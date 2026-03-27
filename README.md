@@ -216,6 +216,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.11.1 - 27 Mar 2026
+    * Removed socketClient.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync as it's no longer available in the API
+    * Updated Shared Spot SubscribeToAllTickersUpdatesAsync to alternative stream
+
+    * Notes for updating:
+        * If you previously relied on Spot SubscribeToAllTickerUpdatesAsync you can switch to either SubscribeToAllMiniTickerUpdatesAsync or SubscribeToAllRollingWindowTickerUpdatesAsync with timespan `TimeSpan.FromDays(1)`
+
 * Version 12.11.0 - 24 Mar 2026
     * Updated CryptoExchange.Net to version 11.0.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Updated class for supplying API credentials from ApiCredentials to BinanceCredentials
