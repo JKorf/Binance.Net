@@ -206,21 +206,12 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// Subscribes to rolling-window ticker updates stream for all symbols
         /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-rolling-window-statistics-streams" /></para>
         /// </summary>
-        /// <param name="windowSize">Window size, either 1 hour or 4 hours</param>
+        /// <param name="windowSize">Window size, either 1 hour, 4 hours or 1 day</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize, Action<DataEvent<BinanceStreamRollingWindowTick[]>> onMessage, CancellationToken ct = default);
 
-        /// <summary>
-        /// Subscribes to ticker updates stream for all symbols
-        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-streams#all-market-tickers-stream" /></para>
-        /// </summary>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IBinanceTick[]>> onMessage, CancellationToken ct = default);
-        
         /// <summary>
         /// Subscribes to the book ticker update stream for the provided symbols
         /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#individual-symbol-book-ticker-streams" /></para>

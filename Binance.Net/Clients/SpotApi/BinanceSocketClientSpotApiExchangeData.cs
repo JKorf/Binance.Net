@@ -639,27 +639,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region All Market Tickers Streams
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllTickerUpdatesAsync(Action<DataEvent<IBinanceTick[]>> onMessage, CancellationToken ct = default)
-        {
-            var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTick[]>>((receiveTime, originalData, data) =>
-            {
-                var timestamp = data.Data.Max(x => x.EventTime);
-                _client.UpdateTimeOffset(timestamp);
-
-                onMessage(
-                    new DataEvent<IBinanceTick[]>(_client.Exchange, data.Data, receiveTime, originalData)
-                        .WithStreamId(data.Stream)
-                        .WithDataTimestamp(timestamp, _client.GetTimeOffset())
-                    );
-            });
-            return await _client.SubscribeAsync(_client.BaseAddress, "24hrTicker", new[] { "!ticker@arr" }, handler, ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region Average Price Stream
 
         /// <inheritdoc />
