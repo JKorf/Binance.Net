@@ -97,7 +97,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             var data = result.Data.Symbols.Where(x => x.ContractType != null);
             if (request.TradingMode != null)
-                data = data.Where(x => request.TradingMode == TradingMode.PerpetualInverse ? x.ContractType == ContractType.Perpetual : (x.ContractType != ContractType.Perpetual && x.ContractType != ContractType.PerpetualDelivering));
+                data = data.Where(x => FilterContractType(request.TradingMode.Value, x.ContractType!.Value));
             var resultData = result.AsExchangeResult(Exchange, request.TradingMode == null ? SupportedTradingModes : new[] { request.TradingMode.Value }, data.Select(s =>
             new SharedFuturesSymbol(
                 s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualInverse : TradingMode.DeliveryInverse,
@@ -116,6 +116,15 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             ExchangeSymbolCache.UpdateSymbolInfo(_topicId, resultData.Data);
             return resultData;
+        }
+
+        private bool FilterContractType(TradingMode mode, ContractType type)
+        {
+            var isPerp = type == ContractType.Perpetual || type == ContractType.PerpetualDelivering || type == ContractType.PerpetualTradFi;
+            if (mode == TradingMode.PerpetualInverse)
+                return isPerp;
+
+            return !isPerp;
         }
 
         async Task<ExchangeResult<SharedSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsForBaseAssetAsync(string baseAsset)
