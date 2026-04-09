@@ -216,6 +216,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.11.2 - 02 Apr 2026
+    * Updated CryptoExchange.Net to version 11.0.3, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Fixed TradeFi contracts not showing up in Shared GetFuturesSymbolsAsync response
+
 * Version 12.11.1 - 27 Mar 2026
     * Removed socketClient.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync as it's no longer available in the API
     * Updated Shared Spot SubscribeToAllTickersUpdatesAsync to alternative stream
