@@ -79,6 +79,12 @@ namespace Binance.Net.Objects.Models.Futures
         public decimal Quantity { get; set; }
 
         /// <summary>
+        /// ["<c>actualQty</c>"] Actually filled quantity
+        /// </summary>
+        [JsonPropertyName("actualQty")]
+        public decimal? ActualQuantity { get; set; }
+
+        /// <summary>
         /// ["<c>icebergQuantity</c>"] Iceberg quantity
         /// </summary>
         [JsonPropertyName("icebergQuantity")]
@@ -124,6 +130,12 @@ namespace Binance.Net.Objects.Models.Futures
         /// </summary>
         [JsonPropertyName("orderType")]
         public FuturesOrderType Type { get; set; }
+
+        /// <summary>
+        /// ["<c>actualType</c>"] Actual type of the order
+        /// </summary>
+        [JsonPropertyName("actualType")]
+        public FuturesOrderType? ActualType { get; set; }
 
         /// <summary>
         /// ["<c>activatePrice</c>"] Activation price, only return with TRAILING_STOP_MARKET order
