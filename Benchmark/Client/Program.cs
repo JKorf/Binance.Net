@@ -219,8 +219,6 @@ namespace Binance.Net.Benchmark.Client
             //test.GlobalCleanup();
 
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
-			
-			Console.ReadLine();
         }
     }
 }
