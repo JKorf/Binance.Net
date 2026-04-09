@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0;net10.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     <LangVersion>latest</LangVersion>
@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>Binance.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>12.11.2</PackageVersion>
-    <AssemblyVersion>12.11.2</AssemblyVersion>
-    <FileVersion>12.11.2</FileVersion>
+    <PackageVersion>12.11.3</PackageVersion>
+    <AssemblyVersion>12.11.3</AssemblyVersion>
+    <FileVersion>12.11.3</FileVersion>
     <Description>A high-performance .NET client library for the Binance REST and WebSocket APIs, providing strongly typed models, automatic WebSocket reconnection, client-side rate limiting, local order book support, and seamless integration with other CryptoExchange.Net based clients.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Binance;Binance.Net;Binance.com;Binance Client;Binance API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net</PackageTags>
