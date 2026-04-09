@@ -48,8 +48,6 @@ namespace Binance.Net.Benchmark.Client
     }
 
     [MemoryDiagnoser]
-    //[SimpleJob(RuntimeMoniker.Net48)]
-    //[SimpleJob(RuntimeMoniker.Net10_0)]
     [Config(typeof(Config))]
     public class SocketTester
     {
@@ -61,38 +59,67 @@ namespace Binance.Net.Benchmark.Client
 
                 AddJob(
                     baseJob
-                        .WithId("NET10_0 - 11.0.3")
-                        .WithNuGet("CryptoExchange.Net", "11.0.3")
+                        .WithId("NET10_0 - 12.11.1")
+                        .WithNuGet("Binance.Net", "12.11.1")
+                        .WithIterationCount(20)
                         .WithRuntime(CoreRuntime.Core10_0));
                 AddJob(
                     baseJob
-                        .WithId("NET481 - 11.0.3")
-                        .WithNuGet("CryptoExchange.Net", "11.0.3")
-                        .WithRuntime(ClrRuntime.Net481));
+                        .WithId("NET481 -  12.11.1")
+                        .WithNuGet("Binance.Net", "12.11.1")
+                        .WithIterationCount(20)
+                        .WithRuntime(ClrRuntime.Net48));
 
                 AddJob(
                     baseJob
-                        .WithId("NET10_0 - 11.0.4")
-                        .WithNuGet("CryptoExchange.Net", "11.0.4")
+                        .WithId("NET10_0 - 12.11.3")
+                        .WithNuGet("Binance.Net", "12.11.3")
+                        .WithIterationCount(20)
                         .WithRuntime(CoreRuntime.Core10_0));
                 AddJob(
                     baseJob
-                        .WithId("NET481 - 11.0.4")
-                        .WithNuGet("CryptoExchange.Net", "11.0.4")
-                        .WithRuntime(ClrRuntime.Net481));
+                        .WithId("NET481 -  12.11.3")
+                        .WithNuGet("Binance.Net", "12.11.3")
+                        .WithIterationCount(20)
+                        .WithRuntime(ClrRuntime.Net48));
             }
         }
 
         public BinanceSocketClient SocketClient;
         public ILogger Logger;
 
-        private const int _socketUpdateReceiveTarget = 10000; // Should match the number in the server
+        private const int _socketUpdateReceiveTarget = 1000000; // Should match the number in the server
 
 
-        [GlobalSetup]
-        public void SetupUpdatedDeserialization()
+        [GlobalSetup()]
+        public void Setup()
         {
-            CreateClient(false);
+            CreateClient();
+        }
+
+        [IterationSetup(Target = nameof(Socket100Topics))]
+        public void IterationSetupMultiTopic()
+        {
+            Task.Run(async () =>
+            {
+                for (var i = 0; i < 10; i++)
+                {
+                    var subTopics = new string[10];
+                    for (var j = 0; j < 10; j++)
+                        subTopics[j] = "DUMMY" + i;
+
+                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(subTopics, x => { }, CancellationToken.None);
+                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(subTopics, x => { }, CancellationToken.None);
+                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToBookTickerUpdatesAsync(subTopics, x => { }, CancellationToken.None);
+                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToOrderBookUpdatesAsync(subTopics, null, x => { }, CancellationToken.None);
+                }
+            }).Wait();
+        }
+
+        [IterationCleanup(Target = nameof(Socket100Topics))]
+        public void IterationCleanUpMultiTopic()
+        {
+            SocketClient.SpotApi.UnsubscribeAllAsync().Wait();
         }
 
         //[Benchmark()]
@@ -140,8 +167,6 @@ namespace Binance.Net.Benchmark.Client
 
             topics[50] = "ETHUSDT";
 
-            _ = await SocketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(topics, x => { }, CancellationToken.None);
-
             var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(topics, x =>
             {
                 received++;
@@ -151,7 +176,6 @@ namespace Binance.Net.Benchmark.Client
             }, CancellationToken.None);
 
             await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
         }
 
         [GlobalCleanup]
@@ -160,7 +184,7 @@ namespace Binance.Net.Benchmark.Client
             SocketClient.Dispose();
         }
 
-        private void CreateClient(bool expFeatures)
+        private void CreateClient()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider(LogLevel.Information));
@@ -194,8 +218,9 @@ namespace Binance.Net.Benchmark.Client
             //Console.ReadLine();
             //test.GlobalCleanup();
 
-#warning add CE.net 11.0.3 to Binance.Net
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+			
+			Console.ReadLine();
         }
     }
 }
