@@ -160,6 +160,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.Trading.CancelOrderAsync("ETHUSDT", 123), "CancelOrder");
             await tester.ValidateAsync(client => client.SpotApi.Trading.CancelAllOrdersAsync("ETHUSDT"), "CancelAllOrders");
             await tester.ValidateAsync(client => client.SpotApi.Trading.ReplaceOrderAsync("ETHUSDT", Enums.OrderSide.Sell, Enums.SpotOrderType.Limit, Enums.CancelReplaceMode.AllowFailure, 123, quantity: 1), "ReplaceOrder", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApi.Trading.AmendOrderAsync("ETHUSDT", 123, newQty: 0.5), "AmendOrder");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOrderAsync("ETHUSDT", 123), "GetOrder");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOpenOrdersAsync("ETHUSDT"), "GetOpenOrders");
             await tester.ValidateAsync(client => client.SpotApi.Trading.GetOrdersAsync("ETHUSDT"), "GetOrders");
