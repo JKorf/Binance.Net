@@ -13,6 +13,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     internal class BinanceSpotUserDataSubscription : Subscription
     {
         private readonly BinanceSocketClientSpotApi _client;
+        private string? _subscriptionId;
 
         private readonly Action<DataEvent<BinanceStreamOrderUpdate>>? _orderHandler;
         private readonly Action<DataEvent<BinanceStreamOrderList>>? _orderListHandler;
@@ -41,26 +42,38 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _streamTerminatedHandler = streamTerminatedHandler;
             _balanceLockHandler = lockHandler;
 
-            MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>.CreateWithoutTopicFilter("outboundAccountPosition", DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>.CreateWithoutTopicFilter("balanceUpdate", DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>.CreateWithoutTopicFilter("executionReport", DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>.CreateWithoutTopicFilter("listStatus", DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamEvent>>.CreateWithoutTopicFilter("eventStreamTerminated", DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>>.CreateWithoutTopicFilter("externalLockUpdate", DoHandleMessage),
-                ]);
+            MessageRouter = MessageRouter.Create([]);
         }
 
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
             var signParameters = ((BinanceAuthenticationProvider)_client.AuthenticationProvider!).ProcessRequest(_client, new Dictionary<string, object>());
-            return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
+            return new BinanceSpotQuery<BinanceResponse<BinanceWebsocketApiWrapper>>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.subscribe.signature",
                 Params = signParameters,
                 Id = ExchangeHelpers.NextId()
             }, false);            
+        }
+
+        public override void HandleSubQueryResponse(SocketConnection connection, object? message)
+        {
+            if (message == null)
+                return;
+
+            var response = (BinanceResponse<BinanceWebsocketApiWrapper>)message;
+            var id = response.Result.SubscriptionId.ToString();
+            _subscriptionId = id;
+
+            MessageRouter = MessageRouter.Create([
+                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>.CreateWithTopicFilter("outboundAccountPosition", id, DoHandleMessage),
+                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>.CreateWithTopicFilter("balanceUpdate", id, DoHandleMessage),
+                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>.CreateWithTopicFilter("executionReport", id, DoHandleMessage),
+                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>.CreateWithTopicFilter("listStatus", id, DoHandleMessage),
+                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamEvent>>.CreateWithTopicFilter("eventStreamTerminated", id, DoHandleMessage),
+                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>>.CreateWithTopicFilter("externalLockUpdate", id, DoHandleMessage),
+                ]);
         }
 
         /// <inheritdoc />
@@ -69,7 +82,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.unsubscribe",
-                Params = [],
+                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : [],
                 Id = ExchangeHelpers.NextId()
             }, false);            
         }

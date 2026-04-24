@@ -32,6 +32,7 @@ namespace Binance.Net.Clients.MessageHandlers
             AddTopicMapping<BinanceCombinedStream<BinanceStreamOrderList>>(x => x.Stream);
             AddTopicMapping<BinanceCombinedStream<BinanceStreamEvent>>(x => x.Stream);
             AddTopicMapping<BinanceCombinedStream<BinanceStreamBalanceLockUpdate>>(x => x.Stream);
+            AddTopicMapping<BinanceWebsocketApiWrapper>(x => x.SubscriptionId.ToString());
         }
 
         protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
