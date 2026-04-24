@@ -32,7 +32,12 @@ namespace Binance.Net.Enums
         /// ["<c>NONE</c>"] None
         /// </summary>
         [Map("NONE")]
-        None
+        None,
+        /// <summary>
+        /// ["<c>TRANSFER</c>"] Transfer
+        /// </summary>
+        [Map("TRANSFER")]
+        Transfer
     }
 }
 
