@@ -1,0 +1,35 @@
+PUT
+/api/v3/order/amend/keepPriority
+true
+{
+  "transactTime": 1684804350068,
+  "executionId": 1234567890123456789,
+  "amendedOrder": {
+      "symbol": "BTCUSDT",
+      "orderId": 12569099453,
+      "orderListId": -1,
+      "clientOrderId": "4d96324ff9d44481926157",
+      "price": "23416.10000000",
+      "origQty": "0.00847000",
+      "executedQty": "0.00847000",
+      "cummulativeQuoteQty": "198.33521500",
+      "status": "NEW",
+      "timeInForce": "GTC",
+      "type": "LIMIT",
+      "side": "SELL",
+      "stopPrice": "0.00000000",
+      "trailingDelta": 10,
+      "trailingTime": -1,
+      "icebergQty": "0.00000000",
+      "time": 1660801715639,
+      "updateTime": 1660801717945,
+      "isWorking": true,
+      "workingTime": 1660801715639,
+      "origQuoteOrderQty": "0.00000000",
+      "strategyId": 37463720,
+      "strategyType": 1000000,
+      "selfTradePreventionMode": "NONE",
+      "preventedMatchId": 0,
+      "preventedQuantity": "1.200000"
+  }
+}
