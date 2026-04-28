@@ -99,7 +99,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         Task<WebCallResult<BinanceFuturesFundingInfo[]>> GetFundingInfoAsync(CancellationToken ct = default);
 
         /// <summary>
-        /// Get funding rate history for the provided symbol
+        /// Get funding rate history for the provided symbol or for all symbols
         /// <para>
         /// Docs:<br />
         /// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/market-data/rest-api/Get-Funding-Rate-History" /><br />
@@ -107,13 +107,13 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// GET /fapi/v1/fundingRate
         /// </para>
         /// </summary>
-        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`. Or null to get the data for all symbols</param>
         /// <param name="startTime">["<c>startTime</c>"] Start time to get funding rate history</param>
         /// <param name="endTime">["<c>endTime</c>"] End time to get funding rate history</param>
-        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results. Default 100, max 1000</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The funding rate history for the provided symbol</returns>
-        Task<WebCallResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string? symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets Top Trader Long/Short Ratio (Accounts)
