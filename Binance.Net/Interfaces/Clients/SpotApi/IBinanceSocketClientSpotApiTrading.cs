@@ -277,5 +277,18 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cancel-replace order response</returns>
         Task<CallResult<BinanceResponse<BinanceReplaceOrderResult>>> ReplaceOrderAsync(string symbol, OrderSide side, SpotOrderType type, CancelReplaceMode cancelReplaceMode, long? cancelOrderId = null, string? cancelClientOrderId = null, string? newCancelClientOrderId = null, string? newClientOrderId = null, decimal? quantity = null, decimal? quoteQuantity = null, decimal? price = null, TimeInForce? timeInForce = null, decimal? stopPrice = null, decimal? icebergQty = null, OrderResponseType? orderResponseType = null, int? trailingDelta = null, int? strategyId = null, int? strategyType = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Amendments an existing order quantity
+        /// <para><a href="https://developers.binance.com/docs/binance-spot-api-docs/websocket-api/trading-requests#order-amend-keep-priority-trade" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="newQuantity">The new quantity for the order</param>
+        /// <param name="orderId">The order id to amend. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">The client order id to amend. Either this or orderId should be provided</param>
+        /// <param name="newClientOrderId">New client order id for the amended order</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Amended order response</returns>
+        Task<CallResult<BinanceResponse<BinanceAmendedOrderResult>>> AmendOrderAsync(string symbol, decimal newQuantity, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default);
     }
 }

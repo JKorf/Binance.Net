@@ -308,6 +308,46 @@ namespace Binance.Net.Clients.SpotApi
         }
         #endregion
 
+        #region Amend Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BinanceAmendedOrderResult>> AmendOrderAsync(
+            string symbol,
+            decimal newQty,
+            long? orderId = null,
+            string? origClientOrderId = null,
+            string? newClientOrderId = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default)
+        {
+            if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
+                throw new ArgumentException("Either orderId or origClientOrderId must be sent");
+
+            if (newClientOrderId != null)
+            {
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(
+                    newClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Spot"),
+                    36,
+                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+            }
+
+            var parameters = new ParameterCollection
+            {
+                { "symbol", symbol },
+                { "newQty", newQty.ToString(CultureInfo.InvariantCulture) }
+            };
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("origClientOrderId", origClientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+
+            var request = _definitions.GetOrCreate(HttpMethod.Put, "api/v3/order/amend/keepPriority", BinanceExchange.RateLimiter.SpotRestIp, 4, true);
+            return await _baseClient.SendAsync<BinanceAmendedOrderResult>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Query Order
 
         /// <inheritdoc />

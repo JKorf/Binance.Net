@@ -269,6 +269,45 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Amend Order
+
+        /// <inheritdoc />
+        public async Task<CallResult<BinanceResponse<BinanceAmendedOrderResult>>> AmendOrderAsync(string symbol, decimal newQuantity, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
+        {
+            if (!orderId.HasValue && string.IsNullOrEmpty(clientOrderId))
+                return new CallResult<BinanceResponse<BinanceAmendedOrderResult>>(ArgumentError.Invalid("Either orderId or clientOrderId must be provided", "Either orderId or clientOrderId must be provided"));
+
+            if (newClientOrderId != null)
+            {
+                newClientOrderId = LibraryHelpers.ApplyBrokerId(
+                    newClientOrderId,
+                    LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange, "Spot"),
+                    36,
+                    _client.ClientOptions.AllowAppendingClientOrderId);
+            }
+
+            if (clientOrderId != null)
+            {
+                clientOrderId = LibraryHelpers.ApplyBrokerId(
+                    clientOrderId,
+                    LibraryHelpers.GetClientReference(() => _client.ClientOptions.BrokerId, _client.Exchange, "Spot"),
+                    36,
+                    _client.ClientOptions.AllowAppendingClientOrderId);
+            }
+
+            var parameters = new ParameterCollection
+            {
+                { "symbol", symbol },
+                { "newQty", newQuantity.ToString(CultureInfo.InvariantCulture) }
+            };
+            parameters.AddOptionalParameter("orderId", orderId?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
+            parameters.AddOptionalParameter("newClientOrderId", newClientOrderId);
+            return await _client.QueryAsync<BinanceAmendedOrderResult>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.amend.keepPriority", parameters, true, true, weight: 4, ct: ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Open Orders
 
         /// <inheritdoc />

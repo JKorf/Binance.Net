@@ -198,6 +198,32 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             CancellationToken ct = default);
 
         /// <summary>
+        /// Amends an existing open order (reduces quantity)
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/binance-spot-api-docs/rest-api/trading-endpoints#order-amend-keep-priority-trade" /><br />
+        /// Endpoint:<br />
+        /// PUT /api/v3/order/amend/keepPriority
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] The order id of the order. Either this or origClientOrderId should be provided</param>
+        /// <param name="origClientOrderId">["<c>origClientOrderId</c>"] The client order id of the order. Either this or orderId should be provided</param>
+        /// <param name="newClientOrderId">["<c>newClientOrderId</c>"] The new client order id for the order after being amended</param>
+        /// <param name="newQuantity">["<c>newQuantity</c>"] The new quantity (must be greater than 0 and less than the order's quantity)</param>
+        /// <param name="receiveWindow">The receive window for which this request is active</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>The amended order details</returns>
+        Task<WebCallResult<BinanceAmendedOrderResult>> AmendOrderAsync(
+            string symbol,
+            decimal newQuantity,
+            long? orderId = null,
+            string? origClientOrderId = null,
+            string? newClientOrderId = null,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
         /// <para>
         /// Docs:<br />
