@@ -14,6 +14,7 @@ This codebase uses **Binance.Net** for Binance cryptocurrency exchange access. D
 
 ```csharp
 using Binance.Net.Clients;
+using Binance.Net;
 using Binance.Net.Objects;
 
 var restClient = new BinanceRestClient(options =>
@@ -36,10 +37,10 @@ var price = ticker.Data.LastPrice;
 
 ## API surface
 
-- `restClient.SpotApi.{ExchangeData|Account|Trading|Margin|SubAccount|Brokerage}`
+- `restClient.SpotApi.{ExchangeData|Account|Trading}`
 - `restClient.UsdFuturesApi.{ExchangeData|Account|Trading}`
 - `restClient.CoinFuturesApi.{ExchangeData|Account|Trading}`
-- `restClient.GeneralApi.`{Brokerage|Futures|CryptoLoans|AutoInvest|Mining|SubAccount|Staking|SimpleEarn|CopyTrading|GiftCard|Nft}
+- `restClient.GeneralApi.{Brokerage|Futures|CryptoLoans|AutoInvest|Mining|SubAccount|Staking|SimpleEarn|CopyTrading|GiftCard|Nft}`
 - `socketClient.SpotApi.{ExchangeData|Account|Trading}` for WebSocket subscriptions and requests
 - `socketClient.UsdFuturesApi.{ExchangeData|Account|Trading}` for WebSocket subscriptions and requests
 - `socketClient.CoinFuturesApi.{ExchangeData|Account|Trading}` for WebSocket subscriptions
@@ -61,6 +62,7 @@ var socketClient = new BinanceSocketClient();
 var sub = await socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(
     "BTCUSDT",
     update => { /* update.Data.LastPrice */ });
+if (!sub.Success) { /* sub.Error */ return; }
 
 // On shutdown:
 await socketClient.UnsubscribeAsync(sub.Data);

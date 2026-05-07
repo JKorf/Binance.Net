@@ -6,6 +6,7 @@
 // Setup: dotnet add package Binance.Net
 // Substitute API_KEY / API_SECRET. The API key must have Futures trading enabled.
 
+using Binance.Net;
 using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Objects;
@@ -29,13 +30,12 @@ Console.WriteLine($"Leverage set to {leverage.Data.Leverage}x for {symbol}");
 
 // ---- 2. PLACE MARKET ORDER (open long position) ----
 // Market order — fills immediately at best available price.
-// PositionSide.Long required if account is in Hedge mode; ignore if One-way mode.
+// In Hedge mode add positionSide: PositionSide.Long.
 var openOrder = await client.UsdFuturesApi.Trading.PlaceOrderAsync(
     symbol: symbol,
     side: OrderSide.Buy,
     type: FuturesOrderType.Market,
-    quantity: 0.01m,
-    positionSide: PositionSide.Long);
+    quantity: 0.01m);
 
 if (!openOrder.Success)
 {
@@ -71,7 +71,6 @@ var closeOrder = await client.UsdFuturesApi.Trading.PlaceOrderAsync(
     side: OrderSide.Sell,
     type: FuturesOrderType.Market,
     quantity: Math.Abs(position.Quantity),
-    positionSide: PositionSide.Long,
     reduceOnly: true);
 
 if (closeOrder.Success)
@@ -84,5 +83,5 @@ if (closeOrder.Success)
 //   Stop-market:        type: FuturesOrderType.StopMarket, add stopPrice
 //   Take-profit:        type: FuturesOrderType.TakeProfitMarket, add stopPrice
 //   COIN-M futures:     use client.CoinFuturesApi.* (same API surface)
-//   Hedge vs One-way:   client.UsdFuturesApi.Account.ModifyPositionModeAsync(...)
+//   Hedge mode:         add positionSide: PositionSide.Long / PositionSide.Short to orders
 //   Margin type:        client.UsdFuturesApi.Account.ChangeMarginTypeAsync(symbol, FuturesMarginType.Isolated)

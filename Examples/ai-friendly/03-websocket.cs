@@ -5,6 +5,7 @@
 //
 // Setup: dotnet add package Binance.Net
 
+using Binance.Net;
 using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Objects;
@@ -45,6 +46,13 @@ var klineSub = await publicSocket.SpotApi.ExchangeData.SubscribeToKlineUpdatesAs
         }
     });
 
+if (!klineSub.Success)
+{
+    Console.WriteLine($"Failed to subscribe klines: {klineSub.Error}");
+    await publicSocket.UnsubscribeAsync(tickerSub.Data);
+    return;
+}
+
 // ---- 2. AUTHENTICATED SOCKET CLIENT — for user data ----
 // User data stream pushes order updates, balance changes, position updates.
 var authSocket = new BinanceSocketClient(options =>
@@ -69,6 +77,14 @@ var userSub = await authSocket.SpotApi.Account.SubscribeToUserDataUpdatesAsync(
         // Triggered specifically for deposits / withdrawals
         Console.WriteLine($"Asset {update.Data.Asset} delta: {update.Data.BalanceDelta}");
     });
+
+if (!userSub.Success)
+{
+    Console.WriteLine($"Failed to subscribe user data: {userSub.Error}");
+    await publicSocket.UnsubscribeAsync(tickerSub.Data);
+    await publicSocket.UnsubscribeAsync(klineSub.Data);
+    return;
+}
 
 Console.WriteLine("All subscriptions active. Press Enter to teardown...");
 Console.ReadLine();

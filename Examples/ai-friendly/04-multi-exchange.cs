@@ -78,12 +78,13 @@ var sub = await binanceTickerSocket.SubscribeToTickerUpdatesAsync(
 if (!sub.Success)
 {
     Console.WriteLine($"Subscribe failed: {sub.Error}");
+    return;
 }
 
 Console.WriteLine("Press Enter to exit");
 Console.ReadLine();
 
-await binanceTickerSocket.UnsubscribeAsync(sub.Data);
+await sub.Data.UnsubscribeAsync();
 
 // Common variations:
 //   Multi-exchange arbitrage:  loop over List<ISpotTickerRestClient>, find max bid / min ask

@@ -4,9 +4,11 @@
 //
 // Setup: dotnet add package Binance.Net
 
+using Binance.Net;
 using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Objects;
+using CryptoExchange.Net.Objects;
 
 var client = new BinanceRestClient(options =>
 {
@@ -77,7 +79,9 @@ var ticker = await WithRetry(
 //
 //      var symbols = await client.SpotApi.ExchangeData.GetExchangeInfoAsync();
 //      var symInfo = symbols.Data.Symbols.First(s => s.Name == "BTCUSDT");
-//      var validQty = ExchangeHelpers.AdjustValueStep(rawQty, symInfo.LotSizeFilter!.StepSize);
+//      var lotSize = symInfo.LotSizeFilter!;
+//      var validQty = ExchangeHelpers.AdjustValueStep(
+//          lotSize.MinQuantity, lotSize.MaxQuantity, lotSize.StepSize, RoundingType.Floor, rawQty);
 //
 // Code -1022 ("Signature for this request is not valid"):
 //   API key / secret mismatch, or trying to use Spot key for Futures endpoint.
@@ -88,7 +92,7 @@ var ticker = await WithRetry(
 
 // ---- 4. ORDER PLACEMENT WITH FILTER VALIDATION ----
 var exchangeInfo = await client.SpotApi.ExchangeData.GetExchangeInfoAsync("BTCUSDT");
-if (!exchangeInfo.Success || exchangeInfo.Data.Symbols.Count == 0)
+if (!exchangeInfo.Success || exchangeInfo.Data.Symbols.Length == 0)
 {
     Console.WriteLine("Cannot fetch symbol info — aborting order");
     return;
@@ -99,7 +103,12 @@ decimal rawQuantity = 0.00123456m;
 
 // Round to allowed step size to avoid -1013 LOT_SIZE error
 decimal validQuantity = symbol.LotSizeFilter != null
-    ? CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(rawQuantity, symbol.LotSizeFilter.StepSize)
+    ? CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(
+        symbol.LotSizeFilter.MinQuantity,
+        symbol.LotSizeFilter.MaxQuantity,
+        symbol.LotSizeFilter.StepSize,
+        RoundingType.Floor,
+        rawQuantity)
     : rawQuantity;
 
 var order = await client.SpotApi.Trading.PlaceOrderAsync(

@@ -10,6 +10,7 @@
 //   Substitute API_KEY / API_SECRET below
 //   dotnet run
 
+using Binance.Net;
 using Binance.Net.Clients;
 using Binance.Net.Enums;
 using Binance.Net.Objects;

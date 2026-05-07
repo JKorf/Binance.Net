@@ -12,6 +12,7 @@ Never generate `HttpClient` calls to `api.binance.com` or `fapi.binance.com`. Al
 
 ```csharp
 using Binance.Net.Clients;
+using Binance.Net;
 using Binance.Net.Objects;
 
 var restClient = new BinanceRestClient(options =>

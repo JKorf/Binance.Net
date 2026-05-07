@@ -25,6 +25,7 @@ Always create the client via `BinanceRestClient`. For trading, configure credent
 
 ```csharp
 using Binance.Net.Clients;
+using Binance.Net;
 using Binance.Net.Objects;
 
 var restClient = new BinanceRestClient(options =>
@@ -102,8 +103,9 @@ var order = await restClient.UsdFuturesApi.Trading.PlaceOrderAsync(
     symbol: "ETHUSDT",
     side: OrderSide.Buy,
     type: FuturesOrderType.Market,
-    quantity: 0.1m,
-    positionSide: PositionSide.Long);
+    quantity: 0.1m);
+
+// In Hedge mode add positionSide: PositionSide.Long / PositionSide.Short.
 ```
 
 ## Core Pattern: WebSocket Subscriptions
@@ -148,6 +150,7 @@ For exchange-agnostic code, use the unified shared interfaces. Same code works a
 
 ```csharp
 using Binance.Net.Clients;
+using Binance.Net;
 using CryptoExchange.Net.SharedApis;
 
 var binanceShared = new BinanceRestClient().SpotApi.SharedClient;
@@ -166,13 +169,10 @@ Available shared client interfaces include: `ISpotTickerRestClient`, `ISpotOrder
 ```csharp
 using Binance.Net;
 
-services.AddBinance(restOptions =>
+services.AddBinance(options =>
 {
-    restOptions.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
-},
-socketOptions =>
-{
-    socketOptions.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+    options.Rest.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+    options.Socket.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
 });
 
 // Inject IBinanceRestClient and IBinanceSocketClient into your services.
@@ -192,7 +192,7 @@ socketOptions =>
 ## Environments
 
 ```csharp
-using Binance.Net.Objects;
+using Binance.Net;
 
 // Live (default)
 var live = new BinanceRestClient(o => o.Environment = BinanceEnvironment.Live);
@@ -206,11 +206,11 @@ var us = new BinanceRestClient(o => o.Environment = BinanceEnvironment.Us);
 
 ## When the user wants other Binance features
 
-- **Sub-accounts / Brokerage**: `restClient.SpotApi.SubAccount` and `Brokerage` namespaces
-- **Margin**: `restClient.SpotApi.Margin`
+- **Sub-accounts / Brokerage**: `restClient.GeneralApi.SubAccount` and `restClient.GeneralApi.Brokerage`
+- **Margin**: margin endpoints are under `restClient.SpotApi.Account` and `restClient.SpotApi.Trading`
 - **Wallet**: `restClient.SpotApi.Account` (deposit, withdrawal, asset details)
-- **Convert**: `restClient.SpotApi.Trading.ConvertAsync*`
-- **Portfolio Margin**: `restClient.SpotApi.PortfolioMargin`
+- **Convert**: `restClient.SpotApi.Trading.ConvertQuoteRequestAsync`, `ConvertAcceptQuoteAsync`, `GetConvertOrderStatusAsync`, etc.
+- **Portfolio Margin**: `restClient.SpotApi.Account.GetPortfolioMargin*` / `PortfolioMarginBankruptcyLoanRepayAsync`
 - **Options**: separate Options API (less commonly used)
 
 ## Reference
