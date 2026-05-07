@@ -3,6 +3,22 @@
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Binance.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Binance.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Binance.Net?style=for-the-badge)
 
 Binance.Net is a strongly typed client library for accessing the [Binance REST and Websocket API](https://binance-docs.github.io/apidocs/#change-log). 
+
+## For AI Coding Assistants
+
+This library provides first-class support for AI coding assistants. The relevant skill files are in this repository:
+
+- **Claude Code**: `CLAUDE.md` (auto-detected at repo root)
+- **Cursor**: `.cursor/rules/binance-net.mdc`
+- **GitHub Copilot**: `.github/copilot-instructions.md`
+- **Other tools** (Windsurf, Codex, Continue, Aider, etc.): `llms.txt` at repo root
+- **Compilable examples**: `Examples/ai-friendly/`
+
+**Quick prompt to verify your assistant is using these:**
+> "Show me a minimal example of placing a limit buy order on Binance Spot using Binance.Net, including authentication setup."
+
+The expected output should use `BinanceRestClient`, `BinanceCredentials`, and the `WebCallResult` pattern.
+
 ## Features
 * Response data is mapped to descriptive models
 * Input parameters and response values are mapped to discriptive enum values where possible

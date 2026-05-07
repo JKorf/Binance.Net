@@ -1,0 +1,99 @@
+---
+description: Conventions for using Binance.Net library when working with Binance cryptocurrency exchange in C#/.NET. Apply when generating code that interacts with Binance API.
+globs:
+  - "**/*.cs"
+  - "**/*.csproj"
+alwaysApply: false
+---
+
+# Binance.Net Conventions
+
+This codebase uses **Binance.Net** for Binance cryptocurrency exchange access. Do not write raw `HttpClient` calls to Binance endpoints.
+
+## Client setup pattern
+
+```csharp
+using Binance.Net.Clients;
+using Binance.Net.Objects;
+
+var restClient = new BinanceRestClient(options =>
+{
+    options.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+});
+```
+
+For public market data only, no credentials needed: `new BinanceRestClient()`.
+
+## Result pattern
+
+All methods return `WebCallResult<T>` (REST) or `CallResult<T>` (WebSocket). Always check `.Success` before reading `.Data`:
+
+```csharp
+var ticker = await restClient.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
+if (!ticker.Success) { /* ticker.Error */ return; }
+var price = ticker.Data.LastPrice;
+```
+
+## API surface
+
+- `restClient.SpotApi.{ExchangeData|Account|Trading|Margin|SubAccount|Brokerage}`
+- `restClient.UsdFuturesApi.{ExchangeData|Account|Trading}`
+- `restClient.CoinFuturesApi.{ExchangeData|Account|Trading}`
+- `restClient.GeneralApi.`{Brokerage|Futures|CryptoLoans|AutoInvest|Mining|SubAccount|Staking|SimpleEarn|CopyTrading|GiftCard|Nft}
+- `socketClient.SpotApi.{ExchangeData|Account|Trading}` for WebSocket subscriptions and requests
+- `socketClient.UsdFuturesApi.{ExchangeData|Account|Trading}` for WebSocket subscriptions and requests
+- `socketClient.CoinFuturesApi.{ExchangeData|Account|Trading}` for WebSocket subscriptions
+
+## Order placement
+
+Let the library auto-generate `clientOrderId`. Do not pass a custom one unless required for an existing operational flow:
+
+```csharp
+var order = await restClient.SpotApi.Trading.PlaceOrderAsync(
+    "BTCUSDT", OrderSide.Buy, SpotOrderType.Limit,
+    quantity: 0.001m, price: 50000m, timeInForce: TimeInForce.GoodTillCanceled);
+```
+
+## WebSocket pattern
+
+```csharp
+var socketClient = new BinanceSocketClient();
+var sub = await socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(
+    "BTCUSDT",
+    update => { /* update.Data.LastPrice */ });
+
+// On shutdown:
+await socketClient.UnsubscribeAsync(sub.Data);
+```
+
+## Multi-exchange code
+
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis`:
+
+```csharp
+using CryptoExchange.Net.SharedApis;
+
+var shared = new BinanceRestClient().SpotApi.SharedClient;
+var ticker = await shared.GetSpotTickerAsync(
+    new GetTickerRequest(new SharedSymbol(TradingMode.Spot, "BTC", "USDT")));
+```
+
+Same code works against `OKXRestClient().UnifiedApi.SharedClient`, `BybitRestClient().V5Api.SharedClient`, and 25+ other exchanges.
+
+## Hard rules
+
+- ❌ Never write raw `HttpClient` to Binance endpoints
+- ❌ Never use `.Result` or `.Wait()` — async-only
+- ❌ Never instantiate clients per-request — reuse via DI
+- ❌ Never skip checking `WebCallResult.Success`
+- ❌ Never use `BinanceClient` (legacy) — always `BinanceRestClient`
+- ❌ Never pass a custom `clientOrderId` to `PlaceOrderAsync` unless required
+- ✅ Always use `BinanceCredentials("key", "secret")`, not generic `ApiCredentials`
+- ✅ Always store WebSocket subscriptions and unsubscribe on shutdown
+- ✅ Always use `var binanceShared = client.SpotApi.SharedClient` for cross-exchange code
+
+## Reference
+
+- Skill: `CLAUDE.md` in repo root has fuller examples
+- llms.txt in repo root for AI context
+- Examples: `Examples/ai-friendly/`
