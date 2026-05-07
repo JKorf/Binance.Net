@@ -437,7 +437,8 @@ Console.WriteLine(ticker.Data.LastPrice);
 Shared WebSocket subscriptions return an `UpdateSubscription` in `.Data`. For shared interface variables, unsubscribe through the subscription object:
 
 ```csharp
-ITickerSocketClient tickerSocket = new BinanceSocketClient().SpotApi.SharedClient;
+var socketClient = new BinanceSocketClient();
+ITickerSocketClient tickerSocket = socketClient.SpotApi.SharedClient;
 
 var sub = await tickerSocket.SubscribeToTickerUpdatesAsync(
     new SubscribeTickerRequest(new SharedSymbol(TradingMode.Spot, "BTC", "USDT")),
@@ -451,7 +452,7 @@ if (!sub.Success)
 
 Console.ReadLine();
 
-await sub.Data.UnsubscribeAsync();
+await socketClient.UnsubscribeAsync(sub.Data);
 ```
 
 Do not call `tickerSocket.UnsubscribeAsync(...)` on `ITickerSocketClient`; that shared interface does not expose the method.
@@ -479,7 +480,7 @@ var validQuantity = symbol.LotSizeFilter == null
         symbol.LotSizeFilter.MinQuantity,
         symbol.LotSizeFilter.MaxQuantity,
         symbol.LotSizeFilter.StepSize,
-        RoundingType.Floor,
+        RoundingType.Down,
         rawQuantity);
 ```
 
@@ -544,7 +545,7 @@ Before finalizing generated code:
 - Does it avoid custom client order IDs unless requested?
 - Does it avoid `.Result` and `.Wait()`?
 - Are WebSocket subscriptions unsubscribed on shutdown?
-- For shared socket interfaces, does it call `sub.Data.UnsubscribeAsync()`?
+- For shared socket interfaces, does it keep the concrete socket client for `UnsubscribeAsync(sub.Data)`?
 - For futures hedge-mode code, is `positionSide` only included when hedge mode is intended?
 - For order quantities/prices, does it use exchange info filters or a library helper?
 
@@ -620,7 +621,7 @@ await sharedTickerSocket.UnsubscribeAsync(sub.Data);
 Use:
 
 ```csharp
-await sub.Data.UnsubscribeAsync();
+await socketClient.UnsubscribeAsync(sub.Data);
 ```
 
 Wrong:
@@ -644,5 +645,5 @@ CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(rawQuantity, stepSize);
 Use:
 
 ```csharp
-CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(min, max, step, RoundingType.Floor, rawQuantity);
+CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(min, max, step, RoundingType.Down, rawQuantity);
 ```

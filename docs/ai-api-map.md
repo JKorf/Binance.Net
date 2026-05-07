@@ -177,7 +177,7 @@ Use SharedApis for exchange-agnostic code across Binance, Bybit, OKX, Kraken, an
 | Shared ticker socket | `ITickerSocketClient.SubscribeToTickerUpdatesAsync(...)` |
 | Shared order book socket | `IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(...)` |
 
-For shared socket subscriptions, unsubscribe with `await subscription.Data.UnsubscribeAsync()`.
+For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
 ## Result Handling
 
@@ -200,6 +200,6 @@ For shared socket subscriptions, unsubscribe with `await subscription.Data.Unsub
 | `SpotApi.SubAccount` | `GeneralApi.SubAccount` |
 | `GeneralApi.Loans` | `GeneralApi.CryptoLoans` |
 | `.Data` without `.Success` check | Check `.Success` first |
-| `ITickerSocketClient.UnsubscribeAsync(...)` | `subscription.Data.UnsubscribeAsync()` |
+| `ITickerSocketClient.UnsubscribeAsync(...)` | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
 | Custom `clientOrderId` by default | Let Binance.Net auto-generate it |
 | `positionSide` in every futures order | Include only when hedge mode is intended |

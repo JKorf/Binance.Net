@@ -81,7 +81,7 @@ var ticker = await WithRetry(
 //      var symInfo = symbols.Data.Symbols.First(s => s.Name == "BTCUSDT");
 //      var lotSize = symInfo.LotSizeFilter!;
 //      var validQty = ExchangeHelpers.AdjustValueStep(
-//          lotSize.MinQuantity, lotSize.MaxQuantity, lotSize.StepSize, RoundingType.Floor, rawQty);
+//          lotSize.MinQuantity, lotSize.MaxQuantity, lotSize.StepSize, RoundingType.Down, rawQty);
 //
 // Code -1022 ("Signature for this request is not valid"):
 //   API key / secret mismatch, or trying to use Spot key for Futures endpoint.
@@ -107,7 +107,7 @@ decimal validQuantity = symbol.LotSizeFilter != null
         symbol.LotSizeFilter.MinQuantity,
         symbol.LotSizeFilter.MaxQuantity,
         symbol.LotSizeFilter.StepSize,
-        RoundingType.Floor,
+        RoundingType.Down,
         rawQuantity)
     : rawQuantity;
 

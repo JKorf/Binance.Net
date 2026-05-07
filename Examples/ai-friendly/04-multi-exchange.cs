@@ -69,7 +69,8 @@ async Task PrintTicker(ISpotTickerRestClient client, SharedSymbol symbol)
 //   IFuturesOrderSocketClient
 
 // ---- WEBSOCKET EXAMPLE — SHARED SUBSCRIPTION ----
-ITickerSocketClient binanceTickerSocket = new BinanceSocketClient().SpotApi.SharedClient;
+var binanceSocket = new BinanceSocketClient();
+ITickerSocketClient binanceTickerSocket = binanceSocket.SpotApi.SharedClient;
 
 var sub = await binanceTickerSocket.SubscribeToTickerUpdatesAsync(
     new SubscribeTickerRequest(btcusdt),
@@ -84,7 +85,7 @@ if (!sub.Success)
 Console.WriteLine("Press Enter to exit");
 Console.ReadLine();
 
-await sub.Data.UnsubscribeAsync();
+await binanceSocket.UnsubscribeAsync(sub.Data);
 
 // Common variations:
 //   Multi-exchange arbitrage:  loop over List<ISpotTickerRestClient>, find max bid / min ask
