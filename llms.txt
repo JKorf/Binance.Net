@@ -8,6 +8,8 @@ Binance.Net is the most widely adopted C# client for Binance, with full coverage
 
 - [README](https://github.com/JKorf/Binance.Net/blob/master/README.md): Overview, installation, supported features, basic usage examples, full release notes
 - [Documentation Site](https://cryptoexchange.jkorf.dev/Binance.Net/): Full documentation hub including client reference, WebSocket subscriptions, dependency injection, and shared interfaces
+- [AI API Quick Map](https://github.com/JKorf/Binance.Net/blob/master/docs/ai-api-map.md): Quick intent-to-method map for routing common user requests to the correct client member
+- [Full LLM Context](https://github.com/JKorf/Binance.Net/blob/master/llms-full.txt): Detailed AI/LLM guide with code patterns, endpoint map, common mistakes, and anti-hallucination rules
 
 ## Examples
 

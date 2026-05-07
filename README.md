@@ -12,6 +12,7 @@ This library provides first-class support for AI coding assistants. The relevant
 - **Cursor**: `.cursor/rules/binance-net.mdc`
 - **GitHub Copilot**: `.github/copilot-instructions.md`
 - **Other tools** (Windsurf, Codex, Continue, Aider, etc.): `llms.txt` at repo root
+- **API quick map**: `docs/ai-api-map.md`
 - **Compilable examples**: `Examples/ai-friendly/`
 
 **Quick prompt to verify your assistant is using these:**
@@ -169,7 +170,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 |Fiat Endpoints|✓|`restClient.SpotApi.Account`|
 |C2C Endpoints|✓|`restClient.SpotApi.Trading`|
 |VIP Loans Endpoints|X||
-|Crypto Loans Endpoints|Partial|`restClient.GeneralApi.Loans`|
+|Crypto Loans Endpoints|Partial|`restClient.GeneralApi.CryptoLoans`|
 |Pay Endpoints|✓|`restClient.SpotApi.Trading`|
 |Convert Endpoints|✓|`restClient.SpotApi.ExchangeData` / `restClient.SpotApi.Trading`|
 |Rebate Endpoints|✓|`restClient.SpotApi.Account`|

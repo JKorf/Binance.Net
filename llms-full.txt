@@ -1,0 +1,648 @@
+# Binance.Net Full LLM Context
+
+> Detailed AI/LLM reference for generating correct C#/.NET code with Binance.Net. Use this file when `llms.txt` is too brief and the task needs concrete examples, endpoint routing guidance, or anti-hallucination rules.
+
+Binance.Net is a strongly typed .NET client library for the Binance REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, and socket patterns as the other JKorf exchange libraries.
+
+Current package version in this repository: 12.12.0.
+CryptoExchange.Net dependency: 11.1.0.
+Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Native AOT: supported on compatible .NET targets.
+
+Primary documentation:
+- README.md: overview, installation, feature table, release notes, basic examples
+- docs site: https://cryptoexchange.jkorf.dev/Binance.Net/
+- API quick map: `docs/ai-api-map.md`
+- source interfaces: `Binance.Net/Interfaces/Clients/**`
+- AI examples: `Examples/ai-friendly/`
+
+## Golden Rules For AI Code Generation
+
+- Use `BinanceRestClient` for REST and `BinanceSocketClient` for WebSocket. Do not generate raw `HttpClient` calls to Binance endpoints.
+- Use `BinanceCredentials`, not generic `ApiCredentials`, for API key setup.
+- Include `using Binance.Net;` when using `BinanceCredentials` or `BinanceEnvironment`.
+- Always check `.Success` before reading `.Data`.
+- REST methods return `WebCallResult<T>` or `WebCallResult`.
+- WebSocket subscriptions and socket API requests return `CallResult<T>` or `CallResult`.
+- Reuse clients. Do not instantiate a REST or socket client per request in production code.
+- Prefer dependency injection for long-running services.
+- Store WebSocket subscriptions and unsubscribe during shutdown.
+- Do not call `.Result` or `.Wait()` on async methods.
+- Do not invent endpoint names. If unsure, inspect `Binance.Net/Interfaces/Clients/**`.
+- Do not pass custom client order IDs unless the user explicitly needs correlation with an external system. Let the library auto-generate IDs in ordinary examples.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
+
+## Installation
+
+```bash
+dotnet add package Binance.Net
+```
+
+## Required Usings
+
+Typical REST/trading code:
+
+```csharp
+using Binance.Net;
+using Binance.Net.Clients;
+using Binance.Net.Enums;
+using Binance.Net.Objects;
+```
+
+Shared API code:
+
+```csharp
+using Binance.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+```
+
+Retry/error helper code may also need:
+
+```csharp
+using CryptoExchange.Net.Objects;
+```
+
+Dependency injection setup:
+
+```csharp
+using Binance.Net;
+using Microsoft.Extensions.DependencyInjection;
+```
+
+## Client Setup
+
+Public market data does not require credentials:
+
+```csharp
+var client = new BinanceRestClient();
+
+var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
+if (!ticker.Success)
+{
+    Console.WriteLine(ticker.Error);
+    return;
+}
+
+Console.WriteLine(ticker.Data.LastPrice);
+```
+
+Private account and trading endpoints require credentials:
+
+```csharp
+var client = new BinanceRestClient(options =>
+{
+    options.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+});
+```
+
+Socket client with credentials:
+
+```csharp
+var socketClient = new BinanceSocketClient(options =>
+{
+    options.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+});
+```
+
+Environments:
+
+```csharp
+var live = new BinanceRestClient(options => options.Environment = BinanceEnvironment.Live);
+var testnet = new BinanceRestClient(options => options.Environment = BinanceEnvironment.Testnet);
+var us = new BinanceRestClient(options => options.Environment = BinanceEnvironment.Us);
+```
+
+## Dependency Injection
+
+Current DI shape:
+
+```csharp
+services.AddBinance(options =>
+{
+    options.Rest.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+    options.Socket.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+});
+```
+
+Inject:
+
+```csharp
+public class MyService
+{
+    private readonly IBinanceRestClient _restClient;
+    private readonly IBinanceSocketClient _socketClient;
+
+    public MyService(IBinanceRestClient restClient, IBinanceSocketClient socketClient)
+    {
+        _restClient = restClient;
+        _socketClient = socketClient;
+    }
+}
+```
+
+Interface namespaces:
+
+```csharp
+using Binance.Net.Interfaces.Clients;
+```
+
+## Result Handling Pattern
+
+Always branch on `.Success`.
+
+```csharp
+var result = await client.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
+if (!result.Success)
+{
+    Console.WriteLine($"Code: {result.Error?.Code}");
+    Console.WriteLine($"Message: {result.Error?.Message}");
+    return;
+}
+
+var price = result.Data.LastPrice;
+```
+
+For retry logic, only retry transient errors:
+
+```csharp
+async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+{
+    WebCallResult<T> last = default!;
+
+    for (var attempt = 1; attempt <= maxAttempts; attempt++)
+    {
+        last = await call();
+        if (last.Success)
+            return last;
+
+        if (last.Error?.IsTransient != true)
+            return last;
+
+        await Task.Delay(TimeSpan.FromMilliseconds(250 * Math.Pow(2, attempt)));
+    }
+
+    return last;
+}
+```
+
+## Main API Surface
+
+REST:
+
+```text
+BinanceRestClient
+  .SpotApi
+    .ExchangeData
+    .Account
+    .Trading
+    .SharedClient
+  .UsdFuturesApi
+    .ExchangeData
+    .Account
+    .Trading
+    .Agent
+    .SharedClient
+  .CoinFuturesApi
+    .ExchangeData
+    .Account
+    .Trading
+    .Agent
+    .SharedClient
+  .GeneralApi
+    .Brokerage
+    .Futures
+    .CryptoLoans
+    .AutoInvest
+    .Mining
+    .SubAccount
+    .Staking
+    .SimpleEarn
+    .CopyTrading
+    .GiftCard
+    .Nft
+```
+
+WebSocket:
+
+```text
+BinanceSocketClient
+  .SpotApi
+    .ExchangeData
+    .Account
+    .Trading
+    .SharedClient
+  .UsdFuturesApi
+    .ExchangeData
+    .Account
+    .Trading
+    .SharedClient
+  .CoinFuturesApi
+    .ExchangeData
+    .Account
+    .Trading
+    .SharedClient
+```
+
+Important: margin and portfolio margin endpoints are not separate top-level `SpotApi.Margin` or `SpotApi.PortfolioMargin` properties. They are under `SpotApi.Account` and `SpotApi.Trading` where applicable.
+
+## Intent To Method Map
+
+For a broader quick reference, see `docs/ai-api-map.md`.
+
+Common REST tasks:
+
+```text
+Get spot ticker -> client.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT")
+Get spot exchange info -> client.SpotApi.ExchangeData.GetExchangeInfoAsync("BTCUSDT")
+Get account balances -> client.SpotApi.Account.GetAccountInfoAsync()
+Place spot order -> client.SpotApi.Trading.PlaceOrderAsync(...)
+Get spot order -> client.SpotApi.Trading.GetOrderAsync(symbol, orderId)
+Cancel spot order -> client.SpotApi.Trading.CancelOrderAsync(symbol, orderId)
+Place spot test order -> client.SpotApi.Trading.PlaceTestOrderAsync(...)
+Place OCO order list -> client.SpotApi.Trading.PlaceOcoOrderListAsync(...)
+Get USD-M futures exchange info -> client.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync()
+Set USD-M futures leverage -> client.UsdFuturesApi.Account.ChangeInitialLeverageAsync(symbol, leverage)
+Get USD-M futures positions -> client.UsdFuturesApi.Account.GetPositionInformationAsync(symbol)
+Place USD-M futures order -> client.UsdFuturesApi.Trading.PlaceOrderAsync(...)
+Get COIN-M futures positions -> client.CoinFuturesApi.Account.GetPositionInformationAsync(...)
+Place COIN-M futures order -> client.CoinFuturesApi.Trading.PlaceOrderAsync(...)
+Sub-account endpoints -> client.GeneralApi.SubAccount.*
+Brokerage endpoints -> client.GeneralApi.Brokerage.*
+Simple Earn endpoints -> client.GeneralApi.SimpleEarn.*
+Auto Invest endpoints -> client.GeneralApi.AutoInvest.*
+Mining endpoints -> client.GeneralApi.Mining.*
+Gift Card endpoints -> client.GeneralApi.GiftCard.*
+NFT endpoints -> client.GeneralApi.Nft.*
+Convert quote -> client.SpotApi.Trading.ConvertQuoteRequestAsync(...)
+Accept convert quote -> client.SpotApi.Trading.ConvertAcceptQuoteAsync(...)
+Get convert status -> client.SpotApi.Trading.GetConvertOrderStatusAsync(...)
+Portfolio margin info -> client.SpotApi.Account.GetPortfolioMarginAccountInfoAsync()
+Portfolio margin collateral rates -> client.SpotApi.Account.GetPortfolioMarginCollateralRateAsync()
+```
+
+Common WebSocket tasks:
+
+```text
+Subscribe spot ticker -> socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(symbol, handler)
+Subscribe spot klines -> socketClient.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync(symbol, interval, handler)
+Subscribe spot order book -> socketClient.SpotApi.ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(...)
+Subscribe spot aggregated trades -> socketClient.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(...)
+Subscribe spot user data -> socketClient.SpotApi.Account.SubscribeToUserDataUpdatesAsync(...)
+Subscribe USD-M futures ticker -> socketClient.UsdFuturesApi.ExchangeData.SubscribeToTickerUpdatesAsync(...)
+Subscribe USD-M futures user data -> socketClient.UsdFuturesApi.Account.SubscribeToUserDataUpdatesAsync(...)
+Socket API spot place order -> socketClient.SpotApi.Trading.PlaceOrderAsync(...)
+```
+
+## Spot Order Example
+
+```csharp
+using Binance.Net;
+using Binance.Net.Clients;
+using Binance.Net.Enums;
+using Binance.Net.Objects;
+
+var client = new BinanceRestClient(options =>
+{
+    options.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+});
+
+var order = await client.SpotApi.Trading.PlaceOrderAsync(
+    symbol: "BTCUSDT",
+    side: OrderSide.Buy,
+    type: SpotOrderType.Limit,
+    quantity: 0.001m,
+    price: 50000m,
+    timeInForce: TimeInForce.GoodTillCanceled);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+
+Console.WriteLine(order.Data.Id);
+```
+
+For market buy orders that specify quote currency amount, use `quoteQuantity`:
+
+```csharp
+var order = await client.SpotApi.Trading.PlaceOrderAsync(
+    symbol: "BTCUSDT",
+    side: OrderSide.Buy,
+    type: SpotOrderType.Market,
+    quoteQuantity: 100m);
+```
+
+## Futures Order Example
+
+```csharp
+using Binance.Net;
+using Binance.Net.Clients;
+using Binance.Net.Enums;
+using Binance.Net.Objects;
+
+var client = new BinanceRestClient(options =>
+{
+    options.ApiCredentials = new BinanceCredentials("API_KEY", "API_SECRET");
+});
+
+var leverage = await client.UsdFuturesApi.Account.ChangeInitialLeverageAsync("ETHUSDT", 5);
+if (!leverage.Success)
+{
+    Console.WriteLine(leverage.Error);
+    return;
+}
+
+var order = await client.UsdFuturesApi.Trading.PlaceOrderAsync(
+    symbol: "ETHUSDT",
+    side: OrderSide.Buy,
+    type: FuturesOrderType.Market,
+    quantity: 0.01m);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+```
+
+Hedge mode note: if the account is in hedge mode, add `positionSide: PositionSide.Long` or `positionSide: PositionSide.Short`. In one-way mode, omit `positionSide`.
+
+Use `reduceOnly: true` when closing a futures position if you want to avoid flipping the position.
+
+## WebSocket Subscription Example
+
+```csharp
+using Binance.Net.Clients;
+using Binance.Net.Enums;
+
+var socketClient = new BinanceSocketClient();
+
+var tickerSub = await socketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(
+    "BTCUSDT",
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!tickerSub.Success)
+{
+    Console.WriteLine(tickerSub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(tickerSub.Data);
+```
+
+Multiple subscriptions should all be checked before `.Data` is used.
+
+```csharp
+var klineSub = await socketClient.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync(
+    "ETHUSDT",
+    KlineInterval.OneMinute,
+    update =>
+    {
+        if (update.Data.Data.Final)
+            Console.WriteLine(update.Data.Data.ClosePrice);
+    });
+
+if (!klineSub.Success)
+{
+    await socketClient.UnsubscribeAsync(tickerSub.Data);
+    Console.WriteLine(klineSub.Error);
+    return;
+}
+```
+
+## SharedApis Multi-Exchange Pattern
+
+Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Binance and other exchanges.
+
+```csharp
+using Binance.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+
+ISpotTickerRestClient tickerClient = new BinanceRestClient().SpotApi.SharedClient;
+var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
+
+var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
+if (!ticker.Success)
+{
+    Console.WriteLine(ticker.Error);
+    return;
+}
+
+Console.WriteLine(ticker.Data.LastPrice);
+```
+
+Shared WebSocket subscriptions return an `UpdateSubscription` in `.Data`. For shared interface variables, unsubscribe through the subscription object:
+
+```csharp
+ITickerSocketClient tickerSocket = new BinanceSocketClient().SpotApi.SharedClient;
+
+var sub = await tickerSocket.SubscribeToTickerUpdatesAsync(
+    new SubscribeTickerRequest(new SharedSymbol(TradingMode.Spot, "BTC", "USDT")),
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!sub.Success)
+{
+    Console.WriteLine(sub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await sub.Data.UnsubscribeAsync();
+```
+
+Do not call `tickerSocket.UnsubscribeAsync(...)` on `ITickerSocketClient`; that shared interface does not expose the method.
+
+## Symbol And Filter Handling
+
+For order quantities and prices, use exchange info filters. Do not manually round with ad hoc decimal string manipulation.
+
+```csharp
+using CryptoExchange.Net.Objects;
+
+var exchangeInfo = await client.SpotApi.ExchangeData.GetExchangeInfoAsync("BTCUSDT");
+if (!exchangeInfo.Success || exchangeInfo.Data.Symbols.Length == 0)
+{
+    Console.WriteLine(exchangeInfo.Error);
+    return;
+}
+
+var symbol = exchangeInfo.Data.Symbols.First();
+var rawQuantity = 0.00123456m;
+
+var validQuantity = symbol.LotSizeFilter == null
+    ? rawQuantity
+    : CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(
+        symbol.LotSizeFilter.MinQuantity,
+        symbol.LotSizeFilter.MaxQuantity,
+        symbol.LotSizeFilter.StepSize,
+        RoundingType.Floor,
+        rawQuantity);
+```
+
+Common spot order filter errors:
+
+```text
+-1013 Filter failure: PRICE_FILTER
+-1013 Filter failure: LOT_SIZE
+-1013 Filter failure: MIN_NOTIONAL
+```
+
+Fix these by using exchange info filters for tick size, step size, min quantity, max quantity, and notional requirements.
+
+## Error Handling Notes
+
+Common Binance error codes:
+
+```text
+-1003 Too many requests: transient; back off and retry if appropriate.
+-1021 Timestamp outside recvWindow: enable/default AutoTimestamp and check local clock.
+-1022 Signature not valid: credentials, environment, or signing issue; do not retry blindly.
+-1013 Filter failure: invalid price/quantity/notional; fix order parameters.
+-2010 Insufficient balance or rejected order: usually permanent; surface to caller.
+-2011 Unknown order: may be expected for already-filled/canceled/missing orders.
+```
+
+Binance.Net returns API/network/rate-limit errors through `.Error` on result objects. It generally does not throw for normal API failures. Exceptions are for misconfiguration, disposal, cancellation, or programming errors.
+
+## AI-Friendly Examples
+
+Use these examples when generating code:
+
+```text
+Examples/ai-friendly/01-spot-quickstart.cs
+  Client setup, public ticker, authenticated account balance, limit spot order, order status, cancellation.
+
+Examples/ai-friendly/02-futures.cs
+  USD-M futures leverage, market order, position lookup, reduce-only close.
+
+Examples/ai-friendly/03-websocket.cs
+  Public ticker stream, kline stream, authenticated user data stream, success checks, teardown.
+
+Examples/ai-friendly/04-multi-exchange.cs
+  CryptoExchange.Net.SharedApis REST and socket patterns.
+
+Examples/ai-friendly/05-error-handling.cs
+  WebCallResult pattern, transient retry, Binance error examples, exchange filter handling.
+```
+
+These files are intended to be copied into a console `Program.cs` after `dotnet add package Binance.Net`.
+
+## Anti-Hallucination Checklist
+
+Before finalizing generated code:
+
+- Does it compile with the current package?
+- Does it include `using Binance.Net;` when using credentials or environments?
+- Does every REST/socket result check `.Success` before `.Data`?
+- Does it use the correct API branch: SpotApi, UsdFuturesApi, CoinFuturesApi, or GeneralApi?
+- Does it avoid raw Binance URLs and manual signing?
+- Does it avoid legacy `BinanceClient`?
+- Does it avoid custom client order IDs unless requested?
+- Does it avoid `.Result` and `.Wait()`?
+- Are WebSocket subscriptions unsubscribed on shutdown?
+- For shared socket interfaces, does it call `sub.Data.UnsubscribeAsync()`?
+- For futures hedge-mode code, is `positionSide` only included when hedge mode is intended?
+- For order quantities/prices, does it use exchange info filters or a library helper?
+
+## Source Of Truth For Method Names
+
+When unsure, inspect these files instead of guessing:
+
+```text
+Binance.Net/Interfaces/Clients/IBinanceRestClient.cs
+Binance.Net/Interfaces/Clients/IBinanceSocketClient.cs
+Binance.Net/Interfaces/Clients/SpotApi/IBinanceRestClientSpotApi*.cs
+Binance.Net/Interfaces/Clients/SpotApi/IBinanceSocketClientSpotApi*.cs
+Binance.Net/Interfaces/Clients/UsdFuturesApi/IBinanceRestClientUsdFuturesApi*.cs
+Binance.Net/Interfaces/Clients/UsdFuturesApi/IBinanceSocketClientUsdFuturesApi*.cs
+Binance.Net/Interfaces/Clients/CoinFuturesApi/IBinanceRestClientCoinFuturesApi*.cs
+Binance.Net/Interfaces/Clients/CoinFuturesApi/IBinanceSocketClientCoinFuturesApi*.cs
+Binance.Net/Interfaces/Clients/GeneralApi/IBinanceRestClientGeneralApi*.cs
+```
+
+Prefer the interface files over memory when generating endpoint names, parameters, callback names, and return types.
+
+## Common Wrong Patterns To Avoid
+
+Wrong:
+
+```csharp
+var client = new BinanceClient();
+```
+
+Use:
+
+```csharp
+var client = new BinanceRestClient();
+```
+
+Wrong:
+
+```csharp
+options.ApiCredentials = new ApiCredentials("key", "secret");
+```
+
+Use:
+
+```csharp
+options.ApiCredentials = new BinanceCredentials("key", "secret");
+```
+
+Wrong:
+
+```csharp
+var result = await client.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
+Console.WriteLine(result.Data.LastPrice);
+```
+
+Use:
+
+```csharp
+var result = await client.SpotApi.ExchangeData.GetTickerAsync("BTCUSDT");
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+Console.WriteLine(result.Data.LastPrice);
+```
+
+Wrong:
+
+```csharp
+await sharedTickerSocket.UnsubscribeAsync(sub.Data);
+```
+
+Use:
+
+```csharp
+await sub.Data.UnsubscribeAsync();
+```
+
+Wrong:
+
+```csharp
+restClient.SpotApi.PortfolioMargin.GetPortfolioMarginAccountInfoAsync();
+```
+
+Use:
+
+```csharp
+restClient.SpotApi.Account.GetPortfolioMarginAccountInfoAsync();
+```
+
+Wrong:
+
+```csharp
+CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(rawQuantity, stepSize);
+```
+
+Use:
+
+```csharp
+CryptoExchange.Net.ExchangeHelpers.AdjustValueStep(min, max, step, RoundingType.Floor, rawQuantity);
+```
