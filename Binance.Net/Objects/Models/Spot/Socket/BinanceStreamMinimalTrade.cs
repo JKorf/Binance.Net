@@ -27,6 +27,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonPropertyName("T")]
         public DateTime TradeTime { get; set; }
+        /// <summary>
+        /// ["<c>M</c>"] True if the buyer is the maker
+        /// </summary>
+        [JsonPropertyName("M")]
+        public bool BuyerIsMaker { get; set; }
     }
 }
 
