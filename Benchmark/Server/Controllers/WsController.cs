@@ -7,18 +7,20 @@ using System.Text.Json.Serialization;
 namespace Binance.Net.Benchmark.Controllers
 {
     [ApiController]
-    [Route("stream")]
+    [Route("")]
     public class WsController : ControllerBase
     {
-        private const int _sendTarget = 1000000; // Should match the number in the client
-
-        [HttpGet]
-        public async Task Get()
+        [HttpGet("stream")]
+        [HttpGet("stream/{*streamPath}")]
+        [HttpGet("ws/{*streamPath}")]
+        public async Task Get(string? streamPath = null)
         {
             var webSocket = await Request.HttpContext.WebSockets.AcceptWebSocketAsync();
 
             var cts = new CancellationTokenSource();
-            
+
+            var useCombinedStreamPayload = string.IsNullOrEmpty(streamPath);
+
             _ = Task.Run(async () =>
             {
                 while (!cts.IsCancellationRequested)
@@ -45,16 +47,12 @@ namespace Binance.Net.Benchmark.Controllers
                     {
                         var msg = JsonSerializer.Deserialize<SubscribeMessage>(Encoding.UTF8.GetString(buffer, 0, result.Count))!;
 
-                        var totalWritten = 0;
-
-                        // Sub response
-                        var response = "{\"id\":" + msg.Id + ",\"result\": null}";
+                        var response = "{\"result\":null,\"id\":" + msg.Id + "}";
                         await SendAsync(webSocket, response);
-                        totalWritten += response.Length;
 
-                        if (msg.Params.Any(x => x == "ethusdt@trade"))
+                        if (msg.Params.Any(x => string.Equals(x, "ethusdt@trade", StringComparison.OrdinalIgnoreCase)))
                         {
-                            _ = PushTradeUpdates(webSocket, cts.Token);
+                            _ = PushTradeUpdates(webSocket, cts.Token, useCombinedStreamPayload);
                         }
                     }
                 }
@@ -69,6 +67,7 @@ namespace Binance.Net.Benchmark.Controllers
 
             //Console.WriteLine("Finished");
         }
+
         private async Task SendAsync(WebSocket webSocket, string message)
         {
             await webSocket.SendAsync(Encoding.UTF8.GetBytes(message),
@@ -85,25 +84,25 @@ namespace Binance.Net.Benchmark.Controllers
                 CancellationToken.None);
         }
 
-        private async Task PushTradeUpdates(WebSocket webSocket, CancellationToken ct)
+        private async Task PushTradeUpdates(WebSocket webSocket, CancellationToken ct, bool combinedStreamPayload)
         {
-            var messageBytes = Encoding.UTF8.GetBytes("{\"stream\":\"ethusdt@trade\",\"data\":{\"e\":\"trade\",\"E\":1763116829354,\"s\":\"ETHUSDT\",\"t\":3165660468,\"p\":\"3187.96000000\",\"q\":\"0.00170000\",\"T\":1763116829353,\"m\":false,\"M\":true}}");
-            for (var i = 0; i < _sendTarget; i++)
+            var time = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds;
+            for (var i = 0; i < 1_000_000; i++)
             {
                 if (ct.IsCancellationRequested)
                     break;
 
-                await SendAsync(webSocket, messageBytes);
-            }
+                var trade = "{\"e\":\"trade\",\"E\":"+time+",\"s\":\"ETHUSDT\",\"t\":" + (5000000000L + i) + ",\"p\":\"3187.96000000\",\"q\":\"0.00170000\",\"T\":"+time+",\"m\":false,\"M\":true}";
+                var combinedTrade = "{\"stream\":\"ethusdt@trade\",\"data\":" + trade + "}";
 
-            if (!ct.IsCancellationRequested)
-            {
-                //Console.WriteLine("Writing done, closing output");
-                await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "done", CancellationToken.None);
-            }
-            else
-            {
-                //Console.WriteLine("Writing done, cancellation already requested");
+                if (combinedStreamPayload)
+                {
+                    await SendAsync(webSocket, Encoding.UTF8.GetBytes(combinedTrade));
+                }
+                else
+                {
+                    await SendAsync(webSocket, Encoding.UTF8.GetBytes(trade));
+                }
             }
 
             try

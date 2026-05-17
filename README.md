@@ -33,6 +33,9 @@ The expected output should use `BinanceRestClient`, `BinanceCredentials`, and th
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
 * Native AOT support
 
+## Benchmark
+Performance is a core focus. For a benchmark comparing Binance.Net performance to CCXT and Binance.Api, see [docs/binance-net-benchmark.md](docs/binance-net-benchmark.md).
+
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility, as well as the latest dotnet versions to use the latest framework features.
 
