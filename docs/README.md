@@ -1,1 +1,0 @@
-Source for https://jkorf.github.io/Binance.Net
