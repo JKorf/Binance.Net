@@ -12,7 +12,7 @@
     <FileVersion>12.12.0</FileVersion>
     <Description>A high-performance .NET client library for the Binance REST and WebSocket APIs, providing strongly typed models, automatic WebSocket reconnection, client-side rate limiting, local order book support, and seamless integration with other CryptoExchange.Net based clients.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>Binance;Binance.Net;Binance.com;Binance Client;Binance API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net</PackageTags>
+    <PackageTags>Binance;Binance.Net;Binance.com;Binance Client;Binance API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net;ccxt</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JKorf/Binance.Net.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/JKorf/Binance.Net</PackageProjectUrl>
