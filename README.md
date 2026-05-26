@@ -237,6 +237,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.13.0 - 26 May 2026
+    * Updated CryptoExchange.Net to version 11.2.0
+    * Added BuyerIsMaker property to BinanceStreamMinimalTrade model
+    * Added ExpiryReason property to BinanceOrderBase model
+
 * Version 12.12.0 - 01 May 2026
     * Added REST and WebSocket SpotApi.Trading.AmendOrderAsync endpoint
 
