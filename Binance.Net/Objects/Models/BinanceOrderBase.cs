@@ -217,6 +217,11 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("peggedPrice")]
         public decimal? PeggedPrice { get; set; }
+        /// <summary>
+        /// ["<c>expiryReason</c>"] Expire reason
+        /// </summary>
+        [JsonPropertyName("expiryReason")]
+        public string? ExpiryReason { get; set; }
     }
 }
 
