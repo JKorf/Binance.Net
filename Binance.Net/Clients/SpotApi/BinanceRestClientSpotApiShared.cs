@@ -29,7 +29,7 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var interval = (Enums.KlineInterval)request.Interval;
                     if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-                        return (new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported")), default, null);
+                        return SharedExecutionResult<SharedKline[]>.Error(new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported")));
 
                     var direction = request.Direction ?? DataDirection.Ascending;
                     var symbol = request.Symbol!.GetSymbol(FormatSymbol);
@@ -46,7 +46,7 @@ namespace Binance.Net.Clients.SpotApi
                         ct: ct
                         ).ConfigureAwait(false);
                     if (!result)
-                        return (result, default, null);
+                        return SharedExecutionResult<SharedKline[]>.Error(result);
 
                     var nextPageRequest = Pagination.GetNextPageRequest(
                             () => direction == DataDirection.Ascending
@@ -59,7 +59,7 @@ namespace Binance.Net.Clients.SpotApi
                             pageParams);
 
                     // Return
-                    return (result, 
+                    return SharedExecutionResult<SharedKline[]>.Ok(result,
                         ExchangeHelpers.ApplyFilter(result.Data, x => x.OpenTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume))
@@ -70,7 +70,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Spot Symbol client
-        EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient> ISpotSymbolRestClient.GetSpotSymbolsOptions { get; } 
+        EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient> ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
             = new EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient>(_exchangeName, false);
 
         Task<ExchangeWebResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
@@ -83,7 +83,7 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var result = await ExchangeData.GetExchangeInfoAsync(false, SymbolStatus.Trading, ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedSpotSymbol[]>.Error(result);
 
                     var resultData = result.Data!.Symbols.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading && s.IsSpotTradingAllowed)
                     {
@@ -95,7 +95,7 @@ namespace Binance.Net.Clients.SpotApi
                     }).ToArray();
 
                     ExchangeSymbolCache.UpdateSymbolInfo(_topicId, resultData);
-                    return (result, resultData);
+                    return SharedExecutionResult<SharedSpotSymbol[]>.Ok(result, resultData);
                 });
 
             //var validationError = ((ISpotSymbolRestClient)this).GetSpotSymbolsOptions.ValidateRequest(request, TradingMode.Spot, SupportedTradingModes);
@@ -172,11 +172,9 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var result = await ExchangeData.GetTickerAsync(request.SymbolName(FormatSymbol), ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedSpotTicker>.Error(result);
 
-                    return (
-                        result,
-                        new SharedSpotTicker(
+                    return SharedExecutionResult<SharedSpotTicker>.Ok(result, new SharedSpotTicker(
                             ExchangeSymbolCache.ParseSymbol(_topicId, result.Data!.Symbol),
                             result.Data.Symbol,
                             result.Data.LastPrice,
@@ -192,7 +190,7 @@ namespace Binance.Net.Clients.SpotApi
 
         GetSpotTickersOptions ISpotTickerRestClient.GetSpotTickersOptions { get; } = new GetSpotTickersOptions(_exchangeName);
         Task<ExchangeWebResult<SharedSpotTicker[]>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
-        {   
+        {
             return SharedUtils.ExecuteSharedAsync(
                 ((ISpotTickerRestClient)this).GetSpotTickersOptions,
                 request,
@@ -201,15 +199,13 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedSpotTicker[]>.Error(result);
 
-                    return (
-                        result, 
-                        result.Data!.Select(x =>
+                    return SharedExecutionResult<SharedSpotTicker[]>.Ok(result, result.Data!.Select(x =>
                             new SharedSpotTicker(
                                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                                 x.Symbol,
-                                x.LastPrice, 
+                                x.LastPrice,
                                 x.HighPrice,
                                 x.LowPrice,
                                 x.Volume,
@@ -236,9 +232,9 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var resultTicker = await ExchangeData.GetBookPriceAsync(request.Symbol!.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
                     if (!resultTicker)
-                        return (resultTicker, default);
+                        return SharedExecutionResult<SharedBookTicker>.Error(resultTicker);
 
-                    return (resultTicker, new SharedBookTicker(
+                    return SharedExecutionResult<SharedBookTicker>.Ok(resultTicker, new SharedBookTicker(
                         ExchangeSymbolCache.ParseSymbol(_topicId, resultTicker.Data!.Symbol),
                         resultTicker.Data.Symbol,
                         resultTicker.Data.BestAskPrice,
@@ -268,10 +264,10 @@ namespace Binance.Net.Clients.SpotApi
                         limit: request.Limit,
                         ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedTrade[]>.Error(result);
 
                     // Return
-                    return (result, result.Data!.Select(x =>
+                    return SharedExecutionResult<SharedTrade[]>.Ok(result, result.Data!.Select(x =>
                         new SharedTrade(request.Symbol, symbol, x.BaseQuantity, x.Price, x.TradeTime)
                         {
                             Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
@@ -306,7 +302,7 @@ namespace Binance.Net.Clients.SpotApi
                         ct: ct).ConfigureAwait(false);
 
                     if (!result)
-                        return (result, default, null);
+                        return SharedExecutionResult<SharedTrade[]>.Error(result);
 
                     var nextPageRequest = Pagination.GetNextPageRequest(
                         () => direction == DataDirection.Ascending
@@ -319,18 +315,16 @@ namespace Binance.Net.Clients.SpotApi
                         pageParams);
 
                     // Return
-                    return (result,
-                        ExchangeHelpers.ApplyFilter(result.Data, x => x.TradeTime, request.StartTime, request.EndTime, direction)
+                    return SharedExecutionResult<SharedTrade[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.TradeTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.TradeTime)
                                 {
                                     Side = x.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
-                                }).ToArray(),
-                        nextPageRequest);
+                                }).ToArray(), nextPageRequest);
                 });
         }
         #endregion
-                
+
         #region Order Book client
         GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(_exchangeName, 1, 5000, false);
         Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
@@ -346,9 +340,9 @@ namespace Binance.Net.Clients.SpotApi
                         limit: request.Limit,
                         ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedOrderBook>.Error(result);
 
-                    return (result, new SharedOrderBook(result.Data!.Asks, result.Data.Bids));
+                    return SharedExecutionResult<SharedOrderBook>.Ok(result, new SharedOrderBook(result.Data!.Asks, result.Data.Bids));
                 });
         }
 
@@ -369,17 +363,17 @@ namespace Binance.Net.Clients.SpotApi
                      {
                          var result = await Account.GetFundingWalletAsync(ct: ct).ConfigureAwait(false);
                          if (!result)
-                             return (result, default);
+                             return SharedExecutionResult<SharedBalance[]>.Error(result);
 
-                         return (result, result.Data!.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + x.Freeze + x.Locked)).ToArray());
+                         return SharedExecutionResult<SharedBalance[]>.Ok(result, result.Data!.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + x.Freeze + x.Locked)).ToArray());
                      }
                      else
                      {
                          var result = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
                          if (!result)
-                             return (result, default);
+                             return SharedExecutionResult<SharedBalance[]>.Error(result);
 
-                         return (result, result.Data!.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray());
+                         return SharedExecutionResult<SharedBalance[]>.Ok(result, result.Data!.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray());
                      }
                  });
         }
@@ -421,9 +415,9 @@ namespace Binance.Net.Clients.SpotApi
                         ct: ct).ConfigureAwait(false);
 
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedId>.Error(result);
 
-                    return (result, new SharedId(result.Data!.Id.ToString()));
+                    return SharedExecutionResult<SharedId>.Ok(result, new SharedId(result.Data!.Id.ToString()));
                 });
         }
 
@@ -437,15 +431,13 @@ namespace Binance.Net.Clients.SpotApi
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
-                        return (new ExchangeWebResult<SharedSpotOrder>(Exchange, ArgumentError.Invalid(nameof(GetOrderRequest.OrderId), "Invalid order id")), default);
+                        return SharedExecutionResult<SharedSpotOrder>.Error(new ExchangeWebResult<SharedSpotOrder>(Exchange, ArgumentError.Invalid(nameof(GetOrderRequest.OrderId), "Invalid order id")));
 
                     var order = await Trading.GetOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), orderId, ct: ct).ConfigureAwait(false);
                     if (!order)
-                        return (order, default);
+                        return SharedExecutionResult<SharedSpotOrder>.Error(order);
 
-                    return (
-                        order,
-                        new SharedSpotOrder(
+                    return SharedExecutionResult<SharedSpotOrder>.Ok(order, new SharedSpotOrder(
                             ExchangeSymbolCache.ParseSymbol(_topicId, order.Data!.Symbol),
                             order.Data.Symbol,
                             order.Data.Id.ToString(),
@@ -453,17 +445,17 @@ namespace Binance.Net.Clients.SpotApi
                             order.Data.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                             ParseOrderStatus(order.Data.Status),
                             order.Data.CreateTime)
-                        {
-                            ClientOrderId = order.Data.ClientOrderId,
-                            AveragePrice = order.Data.AverageFillPrice,
-                            OrderPrice = order.Data.Price,
-                            OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, order.Data.QuoteQuantity == 0 ? null : order.Data.QuoteQuantity),
-                            QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
-                            TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                            UpdateTime = order.Data.UpdateTime,
-                            TriggerPrice = order.Data.StopPrice,
-                            IsTriggerOrder = order.Data.StopPrice != null
-                        });
+                    {
+                        ClientOrderId = order.Data.ClientOrderId,
+                        AveragePrice = order.Data.AverageFillPrice,
+                        OrderPrice = order.Data.Price,
+                        OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, order.Data.QuoteQuantity == 0 ? null : order.Data.QuoteQuantity),
+                        QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
+                        TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
+                        UpdateTime = order.Data.UpdateTime,
+                        TriggerPrice = order.Data.StopPrice,
+                        IsTriggerOrder = order.Data.StopPrice != null
+                    });
                 });
         }
 
@@ -480,9 +472,9 @@ namespace Binance.Net.Clients.SpotApi
                     var symbol = request.Symbol?.GetSymbol(FormatSymbol);
                     var orders = await Trading.GetOpenOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
                     if (!orders)
-                        return (orders, default);
+                        return SharedExecutionResult<SharedSpotOrder[]>.Error(orders);
 
-                    return (orders, orders.Data!.Select(x => new SharedSpotOrder(
+                    return SharedExecutionResult<SharedSpotOrder[]>.Ok(orders, orders.Data!.Select(x => new SharedSpotOrder(
                         ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                         x.Symbol,
                         x.Id.ToString(),
@@ -532,7 +524,7 @@ namespace Binance.Net.Clients.SpotApi
                         orderId: pageParams.FromId == null ? null : long.Parse(pageParams.FromId),
                         ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default, null);
+                        return SharedExecutionResult<SharedSpotOrder[]>.Error(result);
 
                     var nextPageRequest = Pagination.GetNextPageRequest(
                            () => direction == DataDirection.Ascending
@@ -545,8 +537,7 @@ namespace Binance.Net.Clients.SpotApi
                            pageParams,
                            pageRequest?.FromId != null ? null : TimeSpan.FromDays(1));
 
-                    return (result, 
-                            ExchangeHelpers.ApplyFilter(result.Data, x => x.CreateTime, request.StartTime, request.EndTime, direction)
+                    return SharedExecutionResult<SharedSpotOrder[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.CreateTime, request.StartTime, request.EndTime, direction)
                             .Where(x => x.Status == OrderStatus.Filled || x.Status == OrderStatus.Canceled || x.Status == OrderStatus.Expired)
                             .Select(x => new SharedSpotOrder(
                                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
@@ -571,7 +562,7 @@ namespace Binance.Net.Clients.SpotApi
                 });
         }
 
-        EndpointOptions<GetOrderTradesRequest, ISpotOrderRestClient> ISpotOrderRestClient.GetSpotOrderTradesOptions { get; } 
+        EndpointOptions<GetOrderTradesRequest, ISpotOrderRestClient> ISpotOrderRestClient.GetSpotOrderTradesOptions { get; }
             = new EndpointOptions<GetOrderTradesRequest, ISpotOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
@@ -582,13 +573,13 @@ namespace Binance.Net.Clients.SpotApi
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
-                        return (new ExchangeWebResult<SharedUserTrade[]>(Exchange, ArgumentError.Invalid(nameof(GetOrderTradesRequest.OrderId), "Invalid order id")), default);
+                        return SharedExecutionResult<SharedUserTrade[]>.Error(new ExchangeWebResult<SharedUserTrade[]>(Exchange, ArgumentError.Invalid(nameof(GetOrderTradesRequest.OrderId), "Invalid order id")));
 
                     var orders = await Trading.GetUserTradesAsync(request.Symbol!.GetSymbol(FormatSymbol), orderId: orderId, ct: ct).ConfigureAwait(false);
                     if (!orders)
-                        return (orders, default);
+                        return SharedExecutionResult<SharedUserTrade[]>.Error(orders);
 
-                    return (orders, orders.Data!.Select(x => new SharedUserTrade(
+                    return SharedExecutionResult<SharedUserTrade[]>.Ok(orders, orders.Data!.Select(x => new SharedUserTrade(
                         ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                         x.Symbol,
                         x.OrderId.ToString(),
@@ -634,7 +625,7 @@ namespace Binance.Net.Clients.SpotApi
                         ct: ct
                         ).ConfigureAwait(false);
                     if (!result)
-                        return (result, default, null);
+                        return SharedExecutionResult<SharedUserTrade[]>.Error(result);
 
                     var nextPageRequest = Pagination.GetNextPageRequest(
                         () => direction == DataDirection.Ascending
@@ -647,8 +638,7 @@ namespace Binance.Net.Clients.SpotApi
                         pageParams,
                         pageRequest?.FromId != null ? null : TimeSpan.FromDays(1));
 
-                    return (result,
-                            ExchangeHelpers.ApplyFilter(result.Data, x => x.Timestamp, request.StartTime, request.EndTime, direction)
+                    return SharedExecutionResult<SharedUserTrade[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.Timestamp, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedUserTrade(
                                     ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
@@ -668,7 +658,7 @@ namespace Binance.Net.Clients.SpotApi
                 });
         }
 
-        EndpointOptions<CancelOrderRequest, ISpotOrderRestClient> ISpotOrderRestClient.CancelSpotOrderOptions { get; } 
+        EndpointOptions<CancelOrderRequest, ISpotOrderRestClient> ISpotOrderRestClient.CancelSpotOrderOptions { get; }
             = new EndpointOptions<CancelOrderRequest, ISpotOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
@@ -679,13 +669,13 @@ namespace Binance.Net.Clients.SpotApi
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
-                        return (new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid(nameof(CancelOrderRequest.OrderId), "Invalid order id")), default);
+                        return SharedExecutionResult<SharedId>.Error(new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid(nameof(CancelOrderRequest.OrderId), "Invalid order id")));
 
                     var order = await Trading.CancelOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), orderId, ct: ct).ConfigureAwait(false);
                     if (!order)
-                        return (order, default);
+                        return SharedExecutionResult<SharedId>.Error(order);
 
-                    return (order, new SharedId(order.Data!.Id.ToString()));
+                    return SharedExecutionResult<SharedId>.Ok(order, new SharedId(order.Data!.Id.ToString()));
                 });
         }
 
@@ -750,9 +740,9 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var order = await Trading.GetOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), origClientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
                     if (!order)
-                        return (order, default);
+                        return SharedExecutionResult<SharedSpotOrder>.Error(order);
 
-                    return (order, new SharedSpotOrder(
+                    return SharedExecutionResult<SharedSpotOrder>.Ok(order, new SharedSpotOrder(
                         ExchangeSymbolCache.ParseSymbol(_topicId, order.Data!.Symbol),
                         order.Data.Symbol,
                         order.Data.Id.ToString(),
@@ -774,7 +764,7 @@ namespace Binance.Net.Clients.SpotApi
                 });
         }
 
-        EndpointOptions<CancelOrderRequest, ISpotOrderClientIdRestClient> ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdOptions { get; } 
+        EndpointOptions<CancelOrderRequest, ISpotOrderClientIdRestClient> ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdOptions { get; }
             = new EndpointOptions<CancelOrderRequest, ISpotOrderClientIdRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedId>> ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
         {
@@ -786,15 +776,15 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var order = await Trading.CancelOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), origClientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
                     if (!order)
-                        return (order, default);
+                        return SharedExecutionResult<SharedId>.Error(order);
 
-                    return (order, new SharedId(order.Data!.Id.ToString()));
+                    return SharedExecutionResult<SharedId>.Ok(order, new SharedId(order.Data!.Id.ToString()));
                 });
         }
         #endregion
 
         #region Asset client
-        EndpointOptions<GetAssetsRequest, IAssetsRestClient> IAssetsRestClient.GetAssetsOptions { get; } 
+        EndpointOptions<GetAssetsRequest, IAssetsRestClient> IAssetsRestClient.GetAssetsOptions { get; }
             = new EndpointOptions<GetAssetsRequest, IAssetsRestClient>(_exchangeName, true);
 
         Task<ExchangeWebResult<SharedAsset[]>> IAssetsRestClient.GetAssetsAsync(GetAssetsRequest request, CancellationToken ct)
@@ -807,9 +797,9 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var assets = await Account.GetUserAssetsAsync(ct: ct).ConfigureAwait(false);
                     if (!assets)
-                        return (assets, default);
+                        return SharedExecutionResult<SharedAsset[]>.Error(assets);
 
-                    return (assets, assets.Data!.Select(x => new SharedAsset(x.Asset)
+                    return SharedExecutionResult<SharedAsset[]>.Ok(assets, assets.Data!.Select(x => new SharedAsset(x.Asset)
                     {
                         FullName = x.Name,
                         Networks = x.NetworkList.Select(x => new SharedAssetNetwork(x.Network)
@@ -838,13 +828,13 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var assets = await Account.GetUserAssetsAsync(ct: ct).ConfigureAwait(false);
                     if (!assets)
-                        return (assets, default);
+                        return SharedExecutionResult<SharedAsset>.Error(assets);
 
                     var asset = assets.Data!.SingleOrDefault(x => x.Asset.Equals(request.Asset, StringComparison.InvariantCultureIgnoreCase));
                     if (asset == null)
-                        return (new ExchangeWebResult<SharedAsset>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownAsset, false, "Asset not found"))), default);
+                        return SharedExecutionResult<SharedAsset>.Error(new ExchangeWebResult<SharedAsset>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownAsset, false, "Asset not found"))));
 
-                    return (assets, new SharedAsset(asset.Asset)
+                    return SharedExecutionResult<SharedAsset>.Ok(assets, new SharedAsset(asset.Asset)
                     {
                         FullName = asset.Name,
                         Networks = asset.NetworkList.Select(x => new SharedAssetNetwork(x.Network)
@@ -878,10 +868,9 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var depositAddresses = await Account.GetDepositAddressAsync(request.Asset, request.Network, ct: ct).ConfigureAwait(false);
                     if (!depositAddresses)
-                        return (depositAddresses, default);
+                        return SharedExecutionResult<SharedDepositAddress[]>.Error(depositAddresses);
 
-                    return (depositAddresses, 
-                        new[] {
+                    return SharedExecutionResult<SharedDepositAddress[]>.Ok(depositAddresses, new[] {
                             new SharedDepositAddress(depositAddresses.Data!.Asset, depositAddresses.Data.Address)
                             {
                                 TagOrMemo = depositAddresses.Data.Tag
@@ -921,7 +910,7 @@ namespace Binance.Net.Clients.SpotApi
                                 offset: pageParams.Offset,
                                 ct: ct).ConfigureAwait(false);
                         if (!result)
-                            return (result, default, null);
+                            return SharedExecutionResult<SharedDeposit[]>.Error(result);
 
                         var nextPageRequest = Pagination.GetNextPageRequest(
                             () => Pagination.NextPageFromTime(pageParams, result.Data!.Min(x => x.InsertTime), false),
@@ -932,8 +921,7 @@ namespace Binance.Net.Clients.SpotApi
                             pageParams,
                             TimeSpan.FromDays(90));
 
-                        return (result,
-                            ExchangeHelpers.ApplyFilter(result.Data, x => x.InsertTime, request.StartTime, request.EndTime, direction)
+                        return SharedExecutionResult<SharedDeposit[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.InsertTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedDeposit(
                                     x.Asset,
@@ -959,7 +947,7 @@ namespace Binance.Net.Clients.SpotApi
                             offset: pageParams.Offset,
                             ct: ct).ConfigureAwait(false);
                         if (!result)
-                            return (result, default, null);
+                            return SharedExecutionResult<SharedDeposit[]>.Error(result);
 
                         var nextPageRequest = Pagination.GetNextPageRequest(
                             () => direction == DataDirection.Ascending
@@ -972,8 +960,7 @@ namespace Binance.Net.Clients.SpotApi
                             pageParams,
                             TimeSpan.FromDays(90));
 
-                        return (result, 
-                            ExchangeHelpers.ApplyFilter(result.Data, x => x.InsertTime, request.StartTime, request.EndTime, direction)
+                        return SharedExecutionResult<SharedDeposit[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.InsertTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedDeposit(
                                     x.Asset,
@@ -1038,7 +1025,7 @@ namespace Binance.Net.Clients.SpotApi
                             offset: pageParams.Offset,
                             ct: ct).ConfigureAwait(false);
                         if (!result)
-                            return (result, default, null);
+                            return SharedExecutionResult<SharedWithdrawal[]>.Error(result);
 
                         var nextPageRequest = Pagination.GetNextPageRequest(
                             () => direction == DataDirection.Ascending
@@ -1051,8 +1038,7 @@ namespace Binance.Net.Clients.SpotApi
                             pageParams,
                             TimeSpan.FromDays(90));
 
-                        return (result,
-                            ExchangeHelpers.ApplyFilter(result.Data, x => x.ApplyTime, request.StartTime, request.EndTime, direction)
+                        return SharedExecutionResult<SharedWithdrawal[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.ApplyTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
                                 {
@@ -1075,7 +1061,7 @@ namespace Binance.Net.Clients.SpotApi
                            offset: pageParams.Offset,
                            ct: ct).ConfigureAwait(false);
                         if (!result)
-                            return (result, default, null);
+                            return SharedExecutionResult<SharedWithdrawal[]>.Error(result);
 
                         var nextPageRequest = Pagination.GetNextPageRequest(
                             () => direction == DataDirection.Ascending
@@ -1088,8 +1074,7 @@ namespace Binance.Net.Clients.SpotApi
                             pageParams,
                             TimeSpan.FromDays(90));
 
-                        return (result,
-                        ExchangeHelpers.ApplyFilter(result.Data, x => x.ApplyTime, request.StartTime, request.EndTime, direction)
+                        return SharedExecutionResult<SharedWithdrawal[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.ApplyTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
                                 {
@@ -1135,9 +1120,9 @@ namespace Binance.Net.Clients.SpotApi
                             addressTag: request.AddressTag,
                             ct: ct).ConfigureAwait(false);
                         if (!withdrawal)
-                            return (withdrawal, default);
+                            return SharedExecutionResult<SharedId>.Error(withdrawal);
 
-                        return (withdrawal, new SharedId(withdrawal.Data!.Id));
+                        return SharedExecutionResult<SharedId>.Ok(withdrawal, new SharedId(withdrawal.Data!.Id));
                     }
                     else
                     {
@@ -1150,9 +1135,9 @@ namespace Binance.Net.Clients.SpotApi
                             addressTag: request.AddressTag,
                             ct: ct).ConfigureAwait(false);
                         if (!withdrawal)
-                            return (withdrawal, default);
+                            return SharedExecutionResult<SharedId>.Error(withdrawal);
 
-                        return (withdrawal, new SharedId(withdrawal.Data!.TravelRuleId.ToString()));
+                        return SharedExecutionResult<SharedId>.Ok(withdrawal, new SharedId(withdrawal.Data!.TravelRuleId.ToString()));
                     }
                 });
         }
@@ -1175,14 +1160,14 @@ namespace Binance.Net.Clients.SpotApi
                         request.Symbol!.GetSymbol(FormatSymbol),
                         ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedFee>.Error(result);
 
                     var symbol = result.Data!.SingleOrDefault();
                     if (symbol == null)
-                        return (new ExchangeWebResult<SharedFee>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found"))), default);
+                        return SharedExecutionResult<SharedFee>.Error(new ExchangeWebResult<SharedFee>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol not found"))));
 
                     // Return
-                    return (result, new SharedFee(symbol.MakerFee * 100, symbol.TakerFee * 100));
+                    return SharedExecutionResult<SharedFee>.Ok(result, new SharedFee(symbol.MakerFee * 100, symbol.TakerFee * 100));
                 });
         }
         #endregion
@@ -1209,10 +1194,10 @@ namespace Binance.Net.Clients.SpotApi
                         stopPrice: request.TriggerPrice,
                         ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedId>.Error(result);
 
                     // Return
-                    return (result, new SharedId(result.Data!.Id.ToString()));
+                    return SharedExecutionResult<SharedId>.Ok(result, new SharedId(result.Data!.Id.ToString()));
                 });
         }
 
@@ -1234,11 +1219,11 @@ namespace Binance.Net.Clients.SpotApi
                         id,
                         ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return (result, default);
+                        return SharedExecutionResult<SharedSpotTriggerOrder>.Error(result);
 
                     var (orderType, orderDirection) = ParseTriggerDirections(result.Data!.Type, result.Data.Side);
                     // Return
-                    return (result, new SharedSpotTriggerOrder(
+                    return SharedExecutionResult<SharedSpotTriggerOrder>.Ok(result, new SharedSpotTriggerOrder(
                         ExchangeSymbolCache.ParseSymbol(_topicId, result.Data.Symbol),
                         result.Data.Symbol,
                         result.Data.Id.ToString(),
@@ -1295,13 +1280,13 @@ namespace Binance.Net.Clients.SpotApi
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
-                        return (new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid(nameof(CancelOrderRequest.OrderId), "Invalid order id")), default);
+                        return SharedExecutionResult<SharedId>.Error(new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid(nameof(CancelOrderRequest.OrderId), "Invalid order id")));
 
                     var order = await Trading.CancelOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), orderId, ct: ct).ConfigureAwait(false);
                     if (!order)
-                        return (order, default);
+                        return SharedExecutionResult<SharedId>.Error(order);
 
-                    return (order, new SharedId(order.Data!.Id.ToString()));
+                    return SharedExecutionResult<SharedId>.Ok(order, new SharedId(order.Data!.Id.ToString()));
                 });
         }
 
@@ -1386,7 +1371,7 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var transferType = GetTransferType(request);
                     if (transferType == null)
-                        return (new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid("To/From AccountType", "invalid to/from account combination")), default);
+                        return SharedExecutionResult<SharedId>.Error(new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid("To/From AccountType", "invalid to/from account combination")));
 
                     // Get data
                     var transfer = await Account.TransferAsync(
@@ -1397,9 +1382,9 @@ namespace Binance.Net.Clients.SpotApi
                         request.ToSymbol,
                         ct: ct).ConfigureAwait(false);
                     if (!transfer)
-                        return (transfer, default);
+                        return SharedExecutionResult<SharedId>.Error(transfer);
 
-                    return (transfer, new SharedId(transfer.Data!.TransactionId.ToString()));
+                    return SharedExecutionResult<SharedId>.Ok(transfer, new SharedId(transfer.Data!.TransactionId.ToString()));
                 });
         }
 
