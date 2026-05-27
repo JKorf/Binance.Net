@@ -18,6 +18,17 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
 
+        private async Task<ExchangeWebResult<TResult>> ExecuteSharedAsync<TClient, TRequest, TResult>(
+            TClient client,
+            Func<TClient, EndpointOptions<TRequest, TClient>> options,
+            TRequest request,
+            Func<Task<SharedExecutionResult<TResult>>> action)
+            where TRequest : SharedRequest
+            where TClient : ISharedClient
+        {
+            return await SharedUtils.ExecuteSharedAsync(client, options(client), request, action).ConfigureAwait(false);
+        }
+
         #region Klines client
 
         GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, false, true, true, 1500, false,
@@ -35,52 +46,50 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IKlineRestClient)this).GetKlinesOptions,
+            return ExecuteSharedAsync<IKlineRestClient, GetKlinesRequest, SharedKline[]>(
+                this,
+                client => client.GetKlinesOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
-                {
-                    var interval = (Enums.KlineInterval)request.Interval;
-                    if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-                        return SharedExecutionResult<SharedKline[]>.Error(new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported")));
+            {
+                var interval = (Enums.KlineInterval)request.Interval;
+                if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
+                    return SharedExecutionResult<SharedKline[]>.Error(new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported")));
 
-                    // Ascending order doesn't seem to work correctly.
-                    // When only startTime + limit is send it doesn't return the x klines after that time
-                    var direction = DataDirection.Descending;
-                    var symbol = request.Symbol!.GetSymbol(FormatSymbol);
-                    var limit = request.Limit ?? 1000;
-                    var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
+                // Ascending order doesn't seem to work correctly.
+                // When only startTime + limit is send it doesn't return the x klines after that time
+                var direction = DataDirection.Descending;
+                var symbol = request.Symbol!.GetSymbol(FormatSymbol);
+                var limit = request.Limit ?? 1000;
+                var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
 
-                    var result = await ExchangeData.GetKlinesAsync(
-                        symbol,
-                        interval,
-                        pageParams.StartTime,
-                        pageParams.EndTime,
-                        limit,
-                        ct: ct
-                        ).ConfigureAwait(false);
-                    if (!result)
-                        return SharedExecutionResult<SharedKline[]>.Error(result);
+                var result = await ExchangeData.GetKlinesAsync(
+                    symbol,
+                    interval,
+                    pageParams.StartTime,
+                    pageParams.EndTime,
+                    limit,
+                    ct: ct
+                    ).ConfigureAwait(false);
+                if (!result)
+                    return SharedExecutionResult<SharedKline[]>.Error(result);
 
-                    var nextPageRequest = Pagination.GetNextPageRequest(
-                            () => direction == DataDirection.Ascending
-                                ? Pagination.NextPageFromTime(pageParams, result.Data.Max(x => x.OpenTime))
-                                : Pagination.NextPageFromTime(pageParams, result.Data.Min(x => x.OpenTime)),
-                            result.Data.Length,
-                            result.Data.Select(x => x.OpenTime),
-                            request.StartTime,
-                            request.EndTime ?? DateTime.UtcNow,
-                            pageParams);
+                var nextPageRequest = Pagination.GetNextPageRequest(
+                        () => direction == DataDirection.Ascending
+                            ? Pagination.NextPageFromTime(pageParams, result.Data.Max(x => x.OpenTime))
+                            : Pagination.NextPageFromTime(pageParams, result.Data.Min(x => x.OpenTime)),
+                        result.Data.Length,
+                        result.Data.Select(x => x.OpenTime),
+                        request.StartTime,
+                        request.EndTime ?? DateTime.UtcNow,
+                        pageParams);
 
-                    // Return
-                    return SharedExecutionResult<SharedKline[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.OpenTime, request.StartTime, request.EndTime, direction)
-                            .Select(x =>
-                                new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume))
-                            .ToArray(), nextPageRequest);
-
-
-                });
+                // Return
+                return SharedExecutionResult<SharedKline[]>.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.OpenTime, request.StartTime, request.EndTime, direction)
+                        .Select(x =>
+                            new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume))
+                        .ToArray(), nextPageRequest);
+            });
         }
 
         #endregion
@@ -90,10 +99,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
         EndpointOptions<GetSymbolsRequest, IFuturesSymbolRestClient> IFuturesSymbolRestClient.GetFuturesSymbolsOptions { get; } = new EndpointOptions<GetSymbolsRequest, IFuturesSymbolRestClient>(_exchangeName, false);
         Task<ExchangeWebResult<SharedFuturesSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IFuturesSymbolRestClient)this).GetFuturesSymbolsOptions,
+            return ExecuteSharedAsync<IFuturesSymbolRestClient, GetSymbolsRequest, SharedFuturesSymbol[]>(
+                this,
+                client => client.GetFuturesSymbolsOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
 

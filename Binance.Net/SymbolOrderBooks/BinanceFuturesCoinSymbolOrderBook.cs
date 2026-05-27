@@ -81,7 +81,7 @@ namespace Binance.Net.SymbolOrderBooks
 
             if (ct.IsCancellationRequested)
             {
-                await subResult.Data.CloseAsync().ConfigureAwait(false);
+                await subResult.Data!.CloseAsync().ConfigureAwait(false);
                 return subResult.AsError<UpdateSubscription>(new CancellationRequestedError());
             }
 
@@ -94,17 +94,17 @@ namespace Binance.Net.SymbolOrderBooks
                 var bookResult = await _restClient.CoinFuturesApi.ExchangeData.GetOrderBookAsync(Symbol, _limit ?? 1000).ConfigureAwait(false);
                 if (!bookResult)
                 {
-                    await _socketClient.UnsubscribeAsync(subResult.Data).ConfigureAwait(false);
+                    await _socketClient.UnsubscribeAsync(subResult.Data!).ConfigureAwait(false);
                     return new CallResult<UpdateSubscription>(bookResult.Error!);
                 }
 
-                SetSnapshot(bookResult.Data.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
+                SetSnapshot(bookResult.Data!.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
             }
             else
             {
                 var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
                 if (!setResult)
-                    await subResult.Data.CloseAsync().ConfigureAwait(false);
+                    await subResult.Data!.CloseAsync().ConfigureAwait(false);
 
                 return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
             }
@@ -138,7 +138,7 @@ namespace Binance.Net.SymbolOrderBooks
             if (!bookResult)
                 return new CallResult<bool>(bookResult.Error!);
 
-            SetSnapshot(bookResult.Data.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
+            SetSnapshot(bookResult.Data!.LastUpdateId, bookResult.Data.Bids, bookResult.Data.Asks);
             return new CallResult<bool>(true);
         }
 

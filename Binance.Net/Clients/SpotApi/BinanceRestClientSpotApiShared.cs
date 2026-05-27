@@ -22,7 +22,7 @@ namespace Binance.Net.Clients.SpotApi
         Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             return SharedUtils.ExecuteSharedAsync(
-                ((ISpotTickerRestClient)this).GetSpotTickerOptions,
+                ((IKlineRestClient)this).GetKlinesOptions,
                 request,
                 SupportedTradingModes,
                 async () =>

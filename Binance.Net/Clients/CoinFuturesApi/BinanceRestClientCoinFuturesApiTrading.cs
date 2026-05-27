@@ -182,7 +182,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 return response.As<CallResult<BinanceFuturesOrder>[]>(default);
 
             var result = new List<CallResult<BinanceFuturesOrder>>();
-            foreach (var item in response.Data)
+            foreach (var item in response.Data!)
             {
                 result.Add(item.Code != 0
                     ? new CallResult<BinanceFuturesOrder>(new ServerError(item.Code.ToString(), _baseClient.GetErrorInfo(item.Code, item.Message)))
