@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Objects.Errors;
@@ -21,10 +21,10 @@ namespace Binance.Net.Clients.SpotApi
         GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, true, true, true, 1000, false);
         Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IKlineRestClient)this).GetKlinesOptions,
+            return SharedUtils.ExecuteSharedAsync<IKlineRestClient, GetKlinesRequest, SharedKline[]>(
+                this,
+                client => client.GetKlinesOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var interval = (Enums.KlineInterval)request.Interval;
@@ -75,10 +75,10 @@ namespace Binance.Net.Clients.SpotApi
 
         Task<ExchangeWebResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotSymbolRestClient)this).GetSpotSymbolsOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotSymbolRestClient, GetSymbolsRequest, SharedSpotSymbol[]>(
+                this,
+                client => client.GetSpotSymbolsOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var result = await ExchangeData.GetExchangeInfoAsync(false, SymbolStatus.Trading, ct: ct).ConfigureAwait(false);
@@ -164,10 +164,10 @@ namespace Binance.Net.Clients.SpotApi
         GetSpotTickerOptions ISpotTickerRestClient.GetSpotTickerOptions { get; } = new GetSpotTickerOptions(_exchangeName);
         Task<ExchangeWebResult<SharedSpotTicker>> ISpotTickerRestClient.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotTickerRestClient)this).GetSpotTickerOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotTickerRestClient, GetTickerRequest, SharedSpotTicker>(
+                this,
+                client => client.GetSpotTickerOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var result = await ExchangeData.GetTickerAsync(request.SymbolName(FormatSymbol), ct).ConfigureAwait(false);
@@ -191,10 +191,10 @@ namespace Binance.Net.Clients.SpotApi
         GetSpotTickersOptions ISpotTickerRestClient.GetSpotTickersOptions { get; } = new GetSpotTickersOptions(_exchangeName);
         Task<ExchangeWebResult<SharedSpotTicker[]>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotTickerRestClient)this).GetSpotTickersOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotTickerRestClient, GetTickersRequest, SharedSpotTicker[]>(
+                this,
+                client => client.GetSpotTickersOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var result = await ExchangeData.GetTickersAsync(ct: ct).ConfigureAwait(false);
@@ -224,10 +224,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<GetBookTickerRequest, IBookTickerRestClient>(_exchangeName, false);
         Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IBookTickerRestClient)this).GetBookTickerOptions,
+            return SharedUtils.ExecuteSharedAsync<IBookTickerRestClient, GetBookTickerRequest, SharedBookTicker>(
+                this,
+                client => client.GetBookTickerOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var resultTicker = await ExchangeData.GetBookPriceAsync(request.Symbol!.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
@@ -251,10 +251,10 @@ namespace Binance.Net.Clients.SpotApi
 
         Task<ExchangeWebResult<SharedTrade[]>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IRecentTradeRestClient)this).GetRecentTradesOptions,
+            return SharedUtils.ExecuteSharedAsync<IRecentTradeRestClient, GetRecentTradesRequest, SharedTrade[]>(
+                this,
+                client => client.GetRecentTradesOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     // Get data
@@ -280,10 +280,10 @@ namespace Binance.Net.Clients.SpotApi
         GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(_exchangeName, true, true, true, 1000, false);
         Task<ExchangeWebResult<SharedTrade[]>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ITradeHistoryRestClient)this).GetTradeHistoryOptions,
+            return SharedUtils.ExecuteSharedAsync<ITradeHistoryRestClient, GetTradeHistoryRequest, SharedTrade[]>(
+                this,
+                client => client.GetTradeHistoryOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var direction = request.Direction ?? DataDirection.Ascending;
@@ -329,10 +329,10 @@ namespace Binance.Net.Clients.SpotApi
         GetOrderBookOptions IOrderBookRestClient.GetOrderBookOptions { get; } = new GetOrderBookOptions(_exchangeName, 1, 5000, false);
         Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IOrderBookRestClient)this).GetOrderBookOptions,
+            return SharedUtils.ExecuteSharedAsync<IOrderBookRestClient, GetOrderBookRequest, SharedOrderBook>(
+                this,
+                client => client.GetOrderBookOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var result = await ExchangeData.GetOrderBookAsync(
@@ -353,10 +353,10 @@ namespace Binance.Net.Clients.SpotApi
 
         Task<ExchangeWebResult<SharedBalance[]>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync<GetBalancesRequest, SharedBalance[], GetBalancesOptions>(
-                 ((IBalanceRestClient)this).GetBalancesOptions,
-                 request,
-                 SupportedTradingModes,
+            return SharedUtils.ExecuteSharedAsync<IBalanceRestClient, GetBalancesRequest, SharedBalance[]>(
+                this,
+                client => client.GetBalancesOptions,
+                request,
                  async () =>
                  {
                      if (request.AccountType == SharedAccountType.Funding)
@@ -397,10 +397,10 @@ namespace Binance.Net.Clients.SpotApi
         PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions(_exchangeName);
         Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).PlaceSpotOrderOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, PlaceSpotOrderRequest, SharedId>(
+                this,
+                client => client.PlaceSpotOrderOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var result = await Trading.PlaceOrderAsync(
@@ -424,10 +424,10 @@ namespace Binance.Net.Clients.SpotApi
         EndpointOptions<GetOrderRequest, ISpotOrderRestClient> ISpotOrderRestClient.GetSpotOrderOptions { get; } = new EndpointOptions<GetOrderRequest, ISpotOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderRestClient.GetSpotOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).GetSpotOrderOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, GetOrderRequest, SharedSpotOrder>(
+                this,
+                client => client.GetSpotOrderOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
@@ -463,10 +463,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<GetOpenOrdersRequest, ISpotOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedSpotOrder[]>> ISpotOrderRestClient.GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).GetOpenSpotOrdersOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, GetOpenOrdersRequest, SharedSpotOrder[]>(
+                this,
+                client => client.GetOpenSpotOrdersOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var symbol = request.Symbol?.GetSymbol(FormatSymbol);
@@ -499,10 +499,10 @@ namespace Binance.Net.Clients.SpotApi
         GetSpotClosedOrdersOptions ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new GetSpotClosedOrdersOptions(_exchangeName, true, true, true, 1000);
         Task<ExchangeWebResult<SharedSpotOrder[]>> ISpotOrderRestClient.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).GetClosedSpotOrdersOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, GetClosedOrdersRequest, SharedSpotOrder[]>(
+                this,
+                client => client.GetClosedSpotOrdersOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var direction = request.Direction ?? DataDirection.Ascending;
@@ -566,10 +566,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<GetOrderTradesRequest, ISpotOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).GetSpotOrderTradesOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, GetOrderTradesRequest, SharedUserTrade[]>(
+                this,
+                client => client.GetSpotOrderTradesOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
@@ -599,10 +599,10 @@ namespace Binance.Net.Clients.SpotApi
         GetSpotUserTradesOptions ISpotOrderRestClient.GetSpotUserTradesOptions { get; } = new GetSpotUserTradesOptions(_exchangeName, true, true, true, 1000);
         Task<ExchangeWebResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotUserTradesAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).GetSpotUserTradesOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, GetUserTradesRequest, SharedUserTrade[]>(
+                this,
+                client => client.GetSpotUserTradesOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var direction = request.Direction ?? DataDirection.Ascending;
@@ -662,10 +662,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<CancelOrderRequest, ISpotOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderRestClient)this).CancelSpotOrderOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, CancelOrderRequest, SharedId>(
+                this,
+                client => client.CancelSpotOrderOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
@@ -732,10 +732,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<GetOrderRequest, ISpotOrderClientIdRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedSpotOrder>> ISpotOrderClientIdRestClient.GetSpotOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderClientIdRestClient)this).GetSpotOrderByClientOrderIdOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderClientIdRestClient, GetOrderRequest, SharedSpotOrder>(
+                this,
+                client => client.GetSpotOrderByClientOrderIdOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var order = await Trading.GetOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), origClientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
@@ -768,10 +768,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<CancelOrderRequest, ISpotOrderClientIdRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedId>> ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotOrderClientIdRestClient)this).CancelSpotOrderByClientOrderIdOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderClientIdRestClient, CancelOrderRequest, SharedId>(
+                this,
+                client => client.CancelSpotOrderByClientOrderIdOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var order = await Trading.CancelOrderAsync(request.Symbol!.GetSymbol(FormatSymbol), origClientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
@@ -789,10 +789,10 @@ namespace Binance.Net.Clients.SpotApi
 
         Task<ExchangeWebResult<SharedAsset[]>> IAssetsRestClient.GetAssetsAsync(GetAssetsRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IAssetsRestClient)this).GetAssetsOptions,
+            return SharedUtils.ExecuteSharedAsync<IAssetsRestClient, GetAssetsRequest, SharedAsset[]>(
+                this,
+                client => client.GetAssetsOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var assets = await Account.GetUserAssetsAsync(ct: ct).ConfigureAwait(false);
@@ -820,10 +820,10 @@ namespace Binance.Net.Clients.SpotApi
         EndpointOptions<GetAssetRequest, IAssetsRestClient> IAssetsRestClient.GetAssetOptions { get; } = new EndpointOptions<GetAssetRequest, IAssetsRestClient>(_exchangeName, false);
         Task<ExchangeWebResult<SharedAsset>> IAssetsRestClient.GetAssetAsync(GetAssetRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IAssetsRestClient)this).GetAssetOptions,
+            return SharedUtils.ExecuteSharedAsync<IAssetsRestClient, GetAssetRequest, SharedAsset>(
+                this,
+                client => client.GetAssetOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var assets = await Account.GetUserAssetsAsync(ct: ct).ConfigureAwait(false);
@@ -860,10 +860,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<GetDepositAddressesRequest, IDepositRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedDepositAddress[]>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IDepositRestClient)this).GetDepositAddressesOptions,
+            return SharedUtils.ExecuteSharedAsync<IDepositRestClient, GetDepositAddressesRequest, SharedDepositAddress[]>(
+                this,
+                client => client.GetDepositAddressesOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var depositAddresses = await Account.GetDepositAddressAsync(request.Asset, request.Network, ct: ct).ConfigureAwait(false);
@@ -888,10 +888,10 @@ namespace Binance.Net.Clients.SpotApi
         };
         Task<ExchangeWebResult<SharedDeposit[]>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync<GetDepositsRequest, SharedDeposit[], GetDepositsOptions>(
-                ((IDepositRestClient)this).GetDepositsOptions,
+            return SharedUtils.ExecuteSharedAsync<IDepositRestClient, GetDepositsRequest, SharedDeposit[]>(
+                this,
+                client => client.GetDepositsOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var limit = request.Limit ?? 100;
@@ -1004,10 +1004,10 @@ namespace Binance.Net.Clients.SpotApi
         };
         Task<ExchangeWebResult<SharedWithdrawal[]>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync<GetWithdrawalsRequest, SharedWithdrawal[], GetWithdrawalsOptions>(
-                ((IWithdrawalRestClient)this).GetWithdrawalsOptions,
+            return SharedUtils.ExecuteSharedAsync<IWithdrawalRestClient, GetWithdrawalsRequest, SharedWithdrawal[]>(
+                this,
+                client => client.GetWithdrawalsOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var limit = request.Limit ?? 100;
@@ -1103,10 +1103,10 @@ namespace Binance.Net.Clients.SpotApi
         };
         Task<ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync<WithdrawRequest, SharedId, WithdrawOptions>(
-                ((IWithdrawRestClient)this).WithdrawOptions,
+            return SharedUtils.ExecuteSharedAsync<IWithdrawRestClient, WithdrawRequest, SharedId>(
+                this,
+                client => client.WithdrawOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var questionnaire = ExchangeParameters.GetValue<BinanceWithdrawQuestionnaire?>(request.ExchangeParameters, Exchange, "TravelRuleQuestionnaire");
@@ -1149,10 +1149,10 @@ namespace Binance.Net.Clients.SpotApi
 
         Task<ExchangeWebResult<SharedFee>> IFeeRestClient.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((IFeeRestClient)this).GetFeeOptions,
+            return SharedUtils.ExecuteSharedAsync<IFeeRestClient, GetFeeRequest, SharedFee>(
+                this,
+                client => client.GetFeeOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     // Get data
@@ -1176,10 +1176,10 @@ namespace Binance.Net.Clients.SpotApi
         PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(_exchangeName, true);
         Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotOrderRestClient, PlaceSpotTriggerOrderRequest, SharedId>(
+                this,
+                client => ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var type = GetTriggerOrderParameters(request.PriceDirection, request.OrderPrice, request.OrderSide);
@@ -1205,10 +1205,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<GetOrderRequest, ISpotTriggerOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedSpotTriggerOrder>> ISpotTriggerOrderRestClient.GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotTriggerOrderRestClient)this).GetSpotTriggerOrderOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotTriggerOrderRestClient, GetOrderRequest, SharedSpotTriggerOrder>(
+                this,
+                client => client.GetSpotTriggerOrderOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var id))
@@ -1273,10 +1273,10 @@ namespace Binance.Net.Clients.SpotApi
             = new EndpointOptions<CancelOrderRequest, ISpotTriggerOrderRestClient>(_exchangeName, true);
         Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ISpotTriggerOrderRestClient)this).CancelSpotTriggerOrderOptions,
+            return SharedUtils.ExecuteSharedAsync<ISpotTriggerOrderRestClient, CancelOrderRequest, SharedId>(
+                this,
+                client => client.CancelSpotTriggerOrderOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     if (!long.TryParse(request.OrderId, out var orderId))
@@ -1363,10 +1363,10 @@ namespace Binance.Net.Clients.SpotApi
             ]);
         Task<ExchangeWebResult<SharedId>> ITransferRestClient.TransferAsync(TransferRequest request, CancellationToken ct)
         {
-            return SharedUtils.ExecuteSharedAsync(
-                ((ITransferRestClient)this).TransferOptions,
+            return SharedUtils.ExecuteSharedAsync<ITransferRestClient, TransferRequest, SharedId>(
+                this,
+                client => client.TransferOptions,
                 request,
-                SupportedTradingModes,
                 async () =>
                 {
                     var transferType = GetTransferType(request);
