@@ -83,7 +83,7 @@ namespace Binance.Net.Clients
             if (credentials != null)
             {
                 client.SetApiCredentials(credentials);
-                _restClients.TryAdd(userIdentifier, client);
+                _restClients[userIdentifier] = client;
             }
             return client;
         }
@@ -95,7 +95,7 @@ namespace Binance.Net.Clients
             if (credentials != null)
             {
                 client.SetApiCredentials(credentials);
-                _socketClients.TryAdd(userIdentifier, client);
+                _socketClients[userIdentifier] = client;
             }
             return client;
         }
