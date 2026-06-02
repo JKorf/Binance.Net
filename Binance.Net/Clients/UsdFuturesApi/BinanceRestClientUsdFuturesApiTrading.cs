@@ -135,7 +135,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             }
 
             var parameters = new ParameterCollection();
-            var parameterOrders = new List<Dictionary<string, object>>();
+            var parameterOrders = new List<IDictionary<string, object>>();
             int i = 0;
             foreach (var order in orders)
             {
@@ -352,7 +352,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var parameterOrders = new List<Dictionary<string, object>>();
+            var parameterOrders = new List<IDictionary<string, object>>();
             int i = 0;
             foreach (var order in orders)
             {

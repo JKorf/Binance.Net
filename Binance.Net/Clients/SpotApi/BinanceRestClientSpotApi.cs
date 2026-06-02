@@ -18,6 +18,10 @@ namespace Binance.Net.Clients.SpotApi
     internal partial class BinanceRestClientSpotApi : RestApiClient<BinanceEnvironment, BinanceAuthenticationProvider, BinanceCredentials>, IBinanceRestClientSpotApi
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
+        private static readonly ParameterSerializationSettings _serializationSettings = new ParameterSerializationSettings()
+        {
+            Decimal = DecimalSerialization.String
+        };
 
         #region fields 
         /// <inheritdoc />
@@ -99,6 +103,7 @@ namespace Binance.Net.Clients.SpotApi
             PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
             int weight = 1,
+            IDictionary<string, object>? additionalParameters = null,
             CancellationToken ct = default)
         {
             if (quoteQuantity != null && type != SpotOrderType.Market)
@@ -125,31 +130,30 @@ namespace Binance.Net.Clients.SpotApi
                 36,
                 ClientOptions.AllowAppendingClientOrderId);
 
-            var parameters = new ParameterCollection()
-            {
-                { "symbol", symbol },
-            };
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("type", type);
-            parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("timeInForce", timeInForce);
-            parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("sideEffectType", sideEffectType);
-            parameters.AddOptionalParameter("isIsolated", isIsolated);
-            parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
-            parameters.AddOptionalParameter("trailingDelta", trailingDelta);
-            parameters.AddOptionalParameter("strategyId", strategyId);
-            parameters.AddOptionalParameter("strategyType", strategyType);
-            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
-            parameters.AddOptionalParameter("autoRepayAtCancel", autoRepayAtCancel);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("pegPriceType", pegPriceType);
-            parameters.AddOptional("pegOffsetValue", pegOffsetValue);
-            parameters.AddOptionalEnum("pegOffsetType", pegOffsetType);
+            var parameters = new Parameters(_serializationSettings);
+            parameters.Add("symbol", symbol);
+            parameters.Add("side", side);
+            parameters.Add("type", type);
+            parameters.Add("quantity", quantity);
+            parameters.Add("quoteOrderQty", quoteQuantity);
+            parameters.Add("newClientOrderId", clientOrderId);
+            parameters.Add("price", price);
+            parameters.Add("timeInForce", timeInForce);
+            parameters.Add("stopPrice", stopPrice);
+            parameters.Add("icebergQty", icebergQty);
+            parameters.Add("sideEffectType", sideEffectType);
+            parameters.Add("isIsolated", isIsolated);
+            parameters.Add("newOrderRespType", orderResponseType);
+            parameters.Add("trailingDelta", trailingDelta);
+            parameters.Add("strategyId", strategyId);
+            parameters.Add("strategyType", strategyType);
+            parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.Add("autoRepayAtCancel", autoRepayAtCancel);
+            parameters.Add("recvWindow", receiveWindow ?? ClientOptions.ReceiveWindow.TotalMilliseconds);
+            parameters.Add("pegPriceType", pegPriceType);
+            parameters.Add("pegOffsetValue", pegOffsetValue);
+            parameters.Add("pegOffsetType", pegOffsetType);
+            parameters.ApplyOptionalParameters(additionalParameters);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, path, gate, 1, true);
             return await SendAsync<BinancePlacedOrder>(request, parameters, ct, weight: weight).ConfigureAwait(false);
@@ -169,7 +173,7 @@ namespace Binance.Net.Clients.SpotApi
             return BinanceHelpers.ValidateTradeRules(_logger, ApiOptions.TradeRulesBehaviour, _exchangeInfo, symbol, quantity, quoteQuantity, price, stopPrice, type);
         }
 
-        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
+        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, IParameters? parameters, CancellationToken cancellationToken, int? weight = null)
         {
             var result = await base.SendAsync(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
@@ -180,10 +184,10 @@ namespace Binance.Net.Clients.SpotApi
             return result;
         }
 
-        internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+        internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, IParameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
             => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight);
 
-        internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+        internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, IParameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
             var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))

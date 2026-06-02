@@ -412,6 +412,7 @@ namespace Binance.Net.Clients.SpotApi
                         price: request.Price,
                         timeInForce: GetTimeInForce(request.TimeInForce, request.OrderType),
                         newClientOrderId: request.ClientOrderId,
+                        additionalParameters: request.ExchangeParameters?.GetCollection(Exchange),
                         ct: ct).ConfigureAwait(false);
 
                     if (!result)

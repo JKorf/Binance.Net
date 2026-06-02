@@ -108,6 +108,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? pegOffsetValue = null,
             PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
+            IDictionary<string, object>? additionalParameters = null,
             CancellationToken ct = default);
 
         /// <summary>

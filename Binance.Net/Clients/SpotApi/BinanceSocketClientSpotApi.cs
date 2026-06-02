@@ -116,7 +116,7 @@ namespace Binance.Net.Clients.SpotApi
             return base.SubscribeAsync(url, subscription, ct);
         }
 
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
+        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, IDictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {
@@ -153,7 +153,7 @@ namespace Binance.Net.Clients.SpotApi
         internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(
             string url,
             string method,
-            Dictionary<string, object> parameters,
+            IDictionary<string, object> parameters,
             Func<BinanceSocketClientSpotApi, BinanceSocketQuery, Query<BinanceResponse<T>>> queryFactory,
             bool authenticated = false,
             bool sign = false,

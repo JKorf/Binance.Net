@@ -78,7 +78,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.unsubscribe",
-                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : [],
+                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : new Dictionary<string, object>(),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }

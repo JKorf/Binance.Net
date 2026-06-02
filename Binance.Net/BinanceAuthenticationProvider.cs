@@ -44,7 +44,7 @@ namespace Binance.Net
             }
         }
 
-        public Dictionary<string, object> ProcessRequest(SocketApiClient apiClient, Dictionary<string, object> providedParameters)
+        public Dictionary<string, object> ProcessRequest(SocketApiClient apiClient, IDictionary<string, object> providedParameters)
         {
             var sortedParameters = new SortedDictionary<string, object>(providedParameters)
             {

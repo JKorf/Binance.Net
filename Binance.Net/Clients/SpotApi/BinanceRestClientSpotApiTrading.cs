@@ -113,6 +113,7 @@ namespace Binance.Net.Clients.SpotApi
             int? pegOffsetValue = null,
             PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
+            IDictionary<string, object>? additionalParameters = null,
             CancellationToken ct = default)
         {
             var result = await _baseClient.PlaceOrderInternal("/api/v3/order",
@@ -140,6 +141,7 @@ namespace Binance.Net.Clients.SpotApi
                 pegOffsetType,
                 receiveWindow,
                 1,
+                additionalParameters,
                 ct).ConfigureAwait(false);
 
             return result;
@@ -930,6 +932,7 @@ namespace Binance.Net.Clients.SpotApi
                 null,
                 receiveWindow,
                 weight: 6,
+                null,
                 ct).ConfigureAwait(false);
 
             return result;

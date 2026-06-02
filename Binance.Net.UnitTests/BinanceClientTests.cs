@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Binance.Net.Interfaces.Clients;
 using System.Diagnostics;
 using Binance.Net.Clients.SpotApi;
+using CryptoExchange.Net.Interfaces;
 
 namespace Binance.Net.UnitTests
 {
@@ -55,18 +56,8 @@ namespace Binance.Net.UnitTests
                     return bodyParams["signature"].ToString();
                 },
                 "c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71",
-                new Dictionary<string, object>
-                {
-                    { "symbol", "LTCBTC" },
-                    { "side", "BUY" },
-                    { "type", "LIMIT" },
-                    { "timeInForce", "GTC" },
-                    { "quantity", "1" },
-                    { "price", "0.1" },
-                    { "recvWindow", "5000" },
-                },
+                GetSignParameters(),
                 DateTimeConverter.ParseFromString("1499827320559", null),
-                true,
                 false);
         }
 
@@ -86,19 +77,22 @@ namespace Binance.Net.UnitTests
                     return uriParams["signature"].ToString();
                 },
                 "c8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71",
-                new Dictionary<string, object>
-                {
-                    { "symbol", "LTCBTC" },
-                    { "side", "BUY" },
-                    { "type", "LIMIT" },
-                    { "timeInForce", "GTC" },
-                    { "quantity", "1" },
-                    { "price", "0.1" },
-                    { "recvWindow", "5000" },
-                },
+                GetSignParameters(),
                 DateTimeConverter.ParseFromString("1499827320559", null),
-                true,
                 false);
+        }
+
+        private IParameters GetSignParameters()
+        {
+            var result = new Parameters(new ParameterSerializationSettings { Decimal = DecimalSerialization.String });
+            result.Add("symbol", "LTCBTC");
+            result.Add("side", "BUY");
+            result.Add("type", "LIMIT");
+            result.Add("timeInForce", "GTC");
+            result.Add("quantity", "1");
+            result.Add("price", "0.1");
+            result.Add("recvWindow", "5000");
+            return result;
         }
 
         [Test]
