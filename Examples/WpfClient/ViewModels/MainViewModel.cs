@@ -1,11 +1,12 @@
-﻿using System.Collections.ObjectModel;
+using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using Binance.Net;
 using Binance.Net.Objects;
 using Binance.Net.Enums;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Sockets;
 using WpfClient.MVVM;
 using WpfClient.MessageBox;
@@ -107,6 +108,7 @@ namespace WpfClient.ViewModels
         private SettingsWindow settings;
         private object orderLock;
         private BinanceSocketClient socketClient;
+        private BinanceSocketClient userSocketClient;
 
         public MainViewModel()
         {
@@ -172,7 +174,10 @@ namespace WpfClient.ViewModels
             settings = null;
 
             if (!string.IsNullOrEmpty(apiKey) && !string.IsNullOrEmpty(apiSecret))
-                BinanceRestClient.SetDefaultOptions(options => { options.ApiCredentials = new ApiCredentials(apiKey, apiSecret); });
+            {
+                BinanceRestClient.SetDefaultOptions(options => { options.ApiCredentials = new BinanceCredentials(apiKey, apiSecret); });
+                BinanceSocketClient.SetDefaultOptions(options => { options.ApiCredentials = new BinanceCredentials(apiKey, apiSecret); });
+            }
 
             await GetOrders();
             await SubscribeUserStream();
@@ -190,7 +195,7 @@ namespace WpfClient.ViewModels
             }
 
             socketClient = new BinanceSocketClient();
-            var subscribeResult = await socketClient.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync(data =>
+            var subscribeResult = await socketClient.SpotApi.ExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan.FromDays(1), data =>
             {
                 foreach (var ud in data.Data)
                 {
@@ -266,14 +271,8 @@ namespace WpfClient.ViewModels
             
             using (var client = new BinanceRestClient())
             {
-                var startOkay = await client.SpotApi.Account.StartUserStreamAsync();
-                if (!startOkay.Success)
-                {
-                    messageBoxService.ShowMessage($"Error starting user stream: {startOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                var subOkay = await socketClient.SpotApi.Account.SubscribeToUserDataUpdatesAsync(startOkay.Data, OnOrderUpdate, null, OnAccountUpdate, null);
+                userSocketClient ??= new BinanceSocketClient(options => options.ApiCredentials = new BinanceCredentials(ApiKey, ApiSecret));
+                var subOkay = await userSocketClient.SpotApi.Account.SubscribeToUserDataUpdatesAsync(OnOrderUpdate, null, OnAccountUpdate, null);
                 if (!subOkay.Success)
                 {
                     messageBoxService.ShowMessage($"Error subscribing to user stream: {subOkay.Error.Message}", "error", MessageBoxButton.OK, MessageBoxImage.Error);

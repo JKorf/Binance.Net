@@ -1,15 +1,16 @@
-﻿using Binance.Net.Clients;
-using CryptoExchange.Net.Authentication;
+using Binance.Net;
+using Binance.Net.Clients;
+using Binance.Net.Objects;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 
 BinanceRestClient.SetDefaultOptions(options =>
 {
-    options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"); // <- Provide you API key/secret in these fields to retrieve data related to your account
+    options.ApiCredentials = new BinanceCredentials("APIKEY", "APISECRET"); // <- Provide you API key/secret in these fields to retrieve data related to your account
 });
 BinanceSocketClient.SetDefaultOptions(options =>
 {
-    options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
+    options.ApiCredentials = new BinanceCredentials("APIKEY", "APISECRET");
 });
 
 string? read = "";

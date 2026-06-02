@@ -24,7 +24,9 @@ app.UseHttpsRedirection();
 app.MapGet("/price/{symbol}", async (IBinanceRestClient restClient, string symbol) =>
 {
     var price = await restClient.SpotApi.ExchangeData.GetPriceAsync(symbol);
-    return price.Data;
+    return price.Success
+        ? Results.Ok(price.Data)
+        : Results.Problem(price.Error?.Message, statusCode: 502);
 })
 .WithName("GetSymbolPrice");
 

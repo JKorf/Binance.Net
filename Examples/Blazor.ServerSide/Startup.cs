@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CryptoExchange.Net.Authentication;
+using Binance.Net.Objects;
 
 namespace Blazor.ServerSide
 {
@@ -24,7 +24,7 @@ namespace Blazor.ServerSide
         {
             services.AddBinance(options =>
             {
-                options.ApiCredentials = new ApiCredentials("KEY", "SECRET");
+                options.ApiCredentials = new BinanceCredentials("KEY", "SECRET");
             });
 
             services.AddRazorPages();
