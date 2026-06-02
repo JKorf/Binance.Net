@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spectre.Console" Version="0.49.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Binance.Net\Binance.Net.csproj" />
   </ItemGroup>
-
 </Project>
