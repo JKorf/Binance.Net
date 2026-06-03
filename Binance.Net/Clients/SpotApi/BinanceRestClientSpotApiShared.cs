@@ -59,7 +59,7 @@ namespace Binance.Net.Clients.SpotApi
                             pageParams);
 
                     // Return
-                    return SharedExecutionResult<SharedKline[]>.Ok(result,
+                    return SharedExecutionResult.Ok(result,
                         ExchangeHelpers.ApplyFilter(result.Data, x => x.OpenTime, request.StartTime, request.EndTime, direction)
                             .Select(x =>
                                 new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume))
@@ -83,7 +83,7 @@ namespace Binance.Net.Clients.SpotApi
                 {
                     var result = await ExchangeData.GetExchangeInfoAsync(false, SymbolStatus.Trading, ct: ct).ConfigureAwait(false);
                     if (!result)
-                        return SharedExecutionResult<SharedSpotSymbol[]>.Error(result);
+                        return SharedExecutionResult.Error<SharedSpotSymbol[]>(result);
 
                     var resultData = result.Data!.Symbols.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading && s.IsSpotTradingAllowed)
                     {
@@ -95,28 +95,8 @@ namespace Binance.Net.Clients.SpotApi
                     }).ToArray();
 
                     ExchangeSymbolCache.UpdateSymbolInfo(_topicId, resultData);
-                    return SharedExecutionResult<SharedSpotSymbol[]>.Ok(result, resultData);
+                    return SharedExecutionResult.Ok(result, resultData);
                 });
-
-            //var validationError = ((ISpotSymbolRestClient)this).GetSpotSymbolsOptions.ValidateRequest(request, TradingMode.Spot, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedSpotSymbol[]>(Exchange, validationError);
-
-            //var result = await ExchangeData.GetExchangeInfoAsync(false, SymbolStatus.Trading, ct: ct).ConfigureAwait(false);
-            //if (!result)
-            //    return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
-
-            //var resultData = result.AsExchangeResult(Exchange, TradingMode.Spot, result.Data.Symbols.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Name, s.Status == SymbolStatus.Trading && s.IsSpotTradingAllowed)
-            //{
-            //    MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
-            //    MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
-            //    MinNotionalValue = s.MinNotionalFilter?.MinNotional ?? s.NotionalFilter?.MinNotional,
-            //    QuantityStep = s.LotSizeFilter?.StepSize,
-            //    PriceStep = s.PriceFilter?.TickSize
-            //}).ToArray());
-
-            //ExchangeSymbolCache.UpdateSymbolInfo(_topicId, resultData.Data);
-            //return resultData;
         }
 
         async Task<ExchangeResult<SharedSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsForBaseAssetAsync(string baseAsset)
