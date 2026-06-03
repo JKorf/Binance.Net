@@ -22,7 +22,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceMiningCoin[]>> GetMiningCoinListAsync(CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/coinList", BinanceExchange.RateLimiter.SpotRestIp);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningCoin[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
@@ -40,7 +40,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceMiningAlgorithm[]>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/algoList", BinanceExchange.RateLimiter.SpotRestIp);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningAlgorithm[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
@@ -63,7 +63,7 @@ namespace Binance.Net.Clients.GeneralApi
             userName.ValidateNotNull(nameof(userName));
             workerName.ValidateNotNull(nameof(workerName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"algo", algorithm},
                 {"userName", userName},
@@ -90,7 +90,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -99,7 +99,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("sortAscending", sortAscending == null ? null : sortAscending == true ? "1" : "0");
             parameters.AddOptionalParameter("sortColumn", sortColumn);
-            parameters.AddOptionalEnum("workerStatus", workerStatus);
+            parameters.Add("workerStatus", workerStatus);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMinerList>>(request, parameters, ct).ConfigureAwait(false);
@@ -121,7 +121,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -153,7 +153,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -184,7 +184,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -209,7 +209,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"algo", algorithm},
                 {"userName", userName}
@@ -231,7 +231,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
@@ -254,7 +254,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "configId", configId.ToString(CultureInfo.InvariantCulture) },
                 { "userName", userName }
@@ -285,7 +285,7 @@ namespace Binance.Net.Clients.GeneralApi
             algorithm.ValidateNotNull(nameof(algorithm));
             toUser.ValidateNotNull(nameof(toUser));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "userName", userName },
                 { "algo", algorithm },
@@ -315,7 +315,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             userName.ValidateNotNull(nameof(userName));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "configId", configId },
                 { "userName", userName }
@@ -338,7 +338,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "algo", algo }
             };

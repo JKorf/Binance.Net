@@ -82,9 +82,9 @@ namespace Binance.Net.UnitTests
                 false);
         }
 
-        private IParameters GetSignParameters()
+        private Parameters GetSignParameters()
         {
-            var result = new Parameters(new ParameterSerializationSettings { Decimal = DecimalSerialization.String });
+            var result = new Parameters(new ParameterSerializationSettings { Decimal = DecimalSerialization.String, Sort = false });
             result.Add("symbol", "LTCBTC");
             result.Add("side", "BUY");
             result.Add("type", "LIMIT");

@@ -48,7 +48,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
-            var signParameters = ((BinanceAuthenticationProvider)_client.AuthenticationProvider!).ProcessRequest(_client, new Dictionary<string, object>());
+            var signParameters = _client.AuthenticationProvider!.ProcessRequest(_client, new Parameters(BinanceExchange._parameterSerializationSettings));
             return new BinanceSpotQuery<BinanceResponse<BinanceWebsocketApiWrapper>>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.subscribe.signature",
@@ -82,7 +82,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.unsubscribe",
-                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : new Dictionary<string, object>(),
+                Params = _subscriptionId != null ? new Parameters(BinanceExchange._parameterSerializationSettings) { { "subscriptionId", _subscriptionId } } : new Parameters(BinanceExchange._parameterSerializationSettings),
                 Id = ExchangeHelpers.NextId()
             }, false);            
         }

@@ -21,7 +21,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             apiAgentCode.ValidateNotNull(nameof(apiAgentCode));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "apiAgentCode", apiAgentCode }
             };

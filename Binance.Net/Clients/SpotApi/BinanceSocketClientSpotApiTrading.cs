@@ -58,11 +58,11 @@ namespace Binance.Net.Clients.SpotApi
                     36,
                     _client.ClientOptions.AllowAppendingClientOrderId);
 
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("type", type);
-            parameters.AddOptionalEnum("timeInForce", timeInForce);
+            parameters.Add("side", side);
+            parameters.Add("type", type);
+            parameters.Add("timeInForce", timeInForce);
             parameters.AddOptionalParameter("price", rulesCheck.Price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", rulesCheck.Quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", rulesCheck.QuoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -72,7 +72,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
             return await _client.QueryAsync<BinancePlacedOrder>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.place", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
@@ -97,11 +97,11 @@ namespace Binance.Net.Clients.SpotApi
             SelfTradePreventionMode? selfTradePreventionMode = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("type", type);
-            parameters.AddOptionalEnum("timeInForce", timeInForce);
+            parameters.Add("side", side);
+            parameters.Add("type", type);
+            parameters.Add("timeInForce", timeInForce);
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
@@ -111,7 +111,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyId", strategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("strategyType", strategyType?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
             return await _client.QueryAsync<BinanceTestOrderCommission>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"order.test", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.SpotApi
                     _client.ClientOptions.AllowAppendingClientOrderId);
             }
 
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
@@ -163,7 +163,7 @@ namespace Binance.Net.Clients.SpotApi
                     _client.ClientOptions.AllowAppendingClientOrderId);
             }
 
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
@@ -220,13 +220,13 @@ namespace Binance.Net.Clients.SpotApi
                     _client.ClientOptions.AllowAppendingClientOrderId);
             }
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "symbol", symbol },
             };
-            parameters.AddEnum("cancelReplaceMode", cancelReplaceMode);
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("type", type);
+            parameters.Add("cancelReplaceMode", cancelReplaceMode);
+            parameters.Add("side", side);
+            parameters.Add("type", type);
             parameters.AddOptionalParameter("cancelNewClientOrderId", newCancelClientOrderId);
             parameters.AddOptionalParameter("newClientOrderId", clientOrderId);
             parameters.AddOptionalParameter("cancelOrderId", cancelOrderId);
@@ -236,10 +236,10 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("quoteOrderQty", quoteQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("timeInForce", timeInForce);
+            parameters.Add("timeInForce", timeInForce);
             parameters.AddOptionalParameter("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("icebergQty", icebergQty?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("newOrderRespType", orderResponseType);
+            parameters.Add("newOrderRespType", orderResponseType);
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
 
             var result = await _client.QueryAsync(
@@ -295,7 +295,7 @@ namespace Binance.Net.Clients.SpotApi
                     _client.ClientOptions.AllowAppendingClientOrderId);
             }
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "symbol", symbol },
                 { "newQty", newQuantity.ToString(CultureInfo.InvariantCulture) }
@@ -313,7 +313,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
             return await _client.QueryAsync<BinanceOrder[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.status", parameters, true, true, weight: symbol == null ? 80 : 6, ct: ct).ConfigureAwait(false);
         }
@@ -325,7 +325,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceOrder[]>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             return await _client.QueryAsync<BinanceOrder[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrders.cancelAll", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
@@ -373,7 +373,7 @@ namespace Binance.Net.Clients.SpotApi
                     36,
                     _client.ClientOptions.AllowAppendingClientOrderId);
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
@@ -381,7 +381,7 @@ namespace Binance.Net.Clients.SpotApi
                 { "stopPrice", stopPrice.ToString(CultureInfo.InvariantCulture) }
             };
 
-            parameters.AddEnum("side", side);
+            parameters.Add("side", side);
             parameters.AddOptionalParameter("limitStrategyId", limitStrategyId?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limitStrategyType", limitStrategyType?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQty?.ToString(CultureInfo.InvariantCulture));
@@ -389,7 +389,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("limitIcebergQty", limitIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
 
             parameters.AddOptionalParameter("trailingDelta", trailingDelta?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
             parameters.AddOptionalParameter("listClientOrderId", listClientOrderId);
 
             parameters.AddOptionalParameter("stopLimitPrice", stopLimitPrice?.ToString(CultureInfo.InvariantCulture));
@@ -398,7 +398,7 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQty?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopIcebergQty", stopIcebergQuantity?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("stopClientOrderId", stopClientOrderId);
-            parameters.AddOptionalEnum("stopLimitTimeInForce", stopLimitTimeInForce);
+            parameters.Add("stopLimitTimeInForce", stopLimitTimeInForce);
 
             return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
@@ -453,35 +453,35 @@ namespace Binance.Net.Clients.SpotApi
                     36,
                     _client.ClientOptions.AllowAppendingClientOrderId);
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "symbol", symbol },
                 { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
             };
-            parameters.AddEnum("aboveType", aboveOrderType);
-            parameters.AddEnum("belowType", belowOrderType);
-            parameters.AddEnum("side", side);
-            parameters.AddOptional("listClientOrderId", listClientOrderId);
+            parameters.Add("aboveType", aboveOrderType);
+            parameters.Add("belowType", belowOrderType);
+            parameters.Add("side", side);
+            parameters.Add("listClientOrderId", listClientOrderId);
 
-            parameters.AddOptional("aboveClientOrderId", aboveClientOrderId);
-            parameters.AddOptional("aboveIcebergQty", aboveIcebergQuantity);
-            parameters.AddOptional("abovePrice", abovePrice);
-            parameters.AddOptional("aboveStopPrice", aboveStopPrice);
-            parameters.AddOptional("aboveTrailingDelta", aboveTrailingDelta);
-            parameters.AddOptionalEnum("aboveTimeInForce", aboveTimeInForce);
-            parameters.AddOptional("aboveStrategyId", aboveStrategyId);
-            parameters.AddOptional("aboveStrategyType", aboveStrategyType);
+            parameters.Add("aboveClientOrderId", aboveClientOrderId);
+            parameters.Add("aboveIcebergQty", aboveIcebergQuantity);
+            parameters.Add("abovePrice", abovePrice);
+            parameters.Add("aboveStopPrice", aboveStopPrice);
+            parameters.Add("aboveTrailingDelta", aboveTrailingDelta);
+            parameters.Add("aboveTimeInForce", aboveTimeInForce);
+            parameters.Add("aboveStrategyId", aboveStrategyId);
+            parameters.Add("aboveStrategyType", aboveStrategyType);
 
-            parameters.AddOptional("belowClientOrderId", belowClientOrderId);
-            parameters.AddOptional("belowIcebergQty", belowIcebergQuantity);
-            parameters.AddOptional("belowPrice", belowPrice);
-            parameters.AddOptional("belowStopPrice", belowStopPrice);
-            parameters.AddOptional("belowTrailingDelta", belowTrailingDelta);
-            parameters.AddOptionalEnum("belowTimeInForce", belowTimeInForce);
-            parameters.AddOptional("belowStrategyId", belowStrategyId);
-            parameters.AddOptional("belowStrategyType", belowStrategyType);
+            parameters.Add("belowClientOrderId", belowClientOrderId);
+            parameters.Add("belowIcebergQty", belowIcebergQuantity);
+            parameters.Add("belowPrice", belowPrice);
+            parameters.Add("belowStopPrice", belowStopPrice);
+            parameters.Add("belowTrailingDelta", belowTrailingDelta);
+            parameters.Add("belowTimeInForce", belowTimeInForce);
+            parameters.Add("belowStrategyId", belowStrategyId);
+            parameters.Add("belowStrategyType", belowStrategyType);
 
-            parameters.AddOptionalEnum("selfTradePreventionMode", selfTradePreventionMode);
+            parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
             return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.place.oco", parameters, true, true, ct: ct).ConfigureAwait(false);
         }
 
@@ -501,7 +501,7 @@ namespace Binance.Net.Clients.SpotApi
                     _client.ClientOptions.AllowAppendingClientOrderId);
             }
 
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("orderListId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
             return await _client.QueryAsync<BinanceOrderOcoList>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"orderList.status", parameters, true, true, weight: 4, ct: ct).ConfigureAwait(false);
@@ -532,7 +532,7 @@ namespace Binance.Net.Clients.SpotApi
                     _client.ClientOptions.AllowAppendingClientOrderId);
             }
 
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderListId", orderId);
             parameters.AddOptionalParameter("origClientOrderId", clientOrderId);
@@ -547,7 +547,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOpenOcoOrdersAsync(CancellationToken ct = default)
         {
-            return await _client.QueryAsync<BinanceOrderOcoList[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrderLists.status", new Dictionary<string, object>(), true, true, weight: 6, ct: ct).ConfigureAwait(false);
+            return await _client.QueryAsync<BinanceOrderOcoList[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrderLists.status", new Parameters(BinanceExchange._parameterSerializationSettings), true, true, weight: 6, ct: ct).ConfigureAwait(false);
         }
 
         #endregion
@@ -557,7 +557,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceOrder[]>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", fromOrderId);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -573,7 +573,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("fromId", fromOrderId);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
@@ -588,7 +588,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceTrade[]>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("fromId", fromOrderId);
@@ -606,7 +606,7 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinancePreventedTrade[]>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("preventedMatchId", preventedTradeId);

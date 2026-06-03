@@ -20,7 +20,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageSubAccountCreateResult>> CreateSubAccountAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/broker/subAccount", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageSubAccount[]>> GetSubAccountsAsync(string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"margin", true},  // only true for now
@@ -64,7 +64,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceBrokerageEnableFuturesResult>> EnableFuturesForSubAccountAsync(string subAccountId, int? receiveWindow = null, CancellationToken ct = default)
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"futures", true},  // only true for now
@@ -80,7 +80,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"blvt", true},  // only true for now
@@ -101,7 +101,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"canTrade", isSpotTradingEnabled}
@@ -120,7 +120,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey}
@@ -136,7 +136,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                              };
@@ -156,7 +156,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -178,7 +178,7 @@ namespace Binance.Net.Clients.GeneralApi
             apiKey.ValidateNotNull(nameof(apiKey));
             ipAddress.ValidateNotNull(nameof(ipAddress));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -197,7 +197,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -216,7 +216,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             apiKey.ValidateNotNull(nameof(apiKey));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey}
@@ -235,7 +235,7 @@ namespace Binance.Net.Clients.GeneralApi
             apiKey.ValidateNotNull(nameof(apiKey));
             ipAddress.ValidateNotNull(nameof(ipAddress));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"subAccountApiKey", apiKey},
@@ -258,7 +258,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"makerCommission", makerCommission.ToString(CultureInfo.InvariantCulture)},
@@ -279,7 +279,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             symbol.ValidateNotNull(nameof(symbol));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"symbol", symbol},
@@ -298,7 +298,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId}
                              };
@@ -316,7 +316,7 @@ namespace Binance.Net.Clients.GeneralApi
             subAccountId.ValidateNotNull(nameof(subAccountId));
             pair.ValidateNotNull(nameof(pair));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"pair", pair},
@@ -335,7 +335,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId}
                              };
@@ -354,7 +354,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceBrokerageSpotAssetInfo>> GetSubAccountSpotAssetInfoAsync(
             string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
@@ -368,7 +368,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceBrokerageMarginAssetInfo>> GetSubAccountMarginAssetInfoAsync(
             string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
@@ -382,8 +382,8 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceBrokerageFuturesAssetInfo>> GetSubAccountFuturesAssetInfoAsync(FuturesAccountType futuresType,
             string? subAccountId = null, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("futuresType", futuresType);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("futuresType", futuresType);
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
@@ -403,7 +403,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"spotBNBBurn", spotBnbBurn.ToString().ToLower()}
@@ -420,7 +420,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                                  {"interestBNBBurn", interestBnbBurn.ToString().ToLower()}
@@ -436,7 +436,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId}
                              };
@@ -457,13 +457,13 @@ namespace Binance.Net.Clients.GeneralApi
         {
             asset.ValidateNotNull(nameof(asset));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 {"asset", asset},
                 {"amount", quantity.ToString(CultureInfo.InvariantCulture)}
             };
-            parameters.AddEnum("fromAccountType", fromAccountType);
-            parameters.AddEnum("toAccountType", toAccountType);
+            parameters.Add("fromAccountType", fromAccountType);
+            parameters.Add("toAccountType", toAccountType);
             parameters.AddOptionalParameter("fromId", fromId);
             parameters.AddOptionalParameter("toId", toId);
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
@@ -478,7 +478,7 @@ namespace Binance.Net.Clients.GeneralApi
             string? fromId = null, string? toId = null, string? clientTransferId = null, DateTime? startDate = null, DateTime? endDate = null,
             int? page = null, int? limit = null, bool showAllStatus = false, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"showAllStatus", showAllStatus.ToString().ToLower()},
                              };
@@ -501,7 +501,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             asset.ValidateNotNull(nameof(asset));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"asset", asset},
                                  {"amount", quantity.ToString(CultureInfo.InvariantCulture)},
@@ -521,12 +521,12 @@ namespace Binance.Net.Clients.GeneralApi
         {
             asset.ValidateNotNull(nameof(asset));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"asset", asset},
                                  {"amount", quantity.ToString(CultureInfo.InvariantCulture)},
                              };
-            parameters.AddEnum("futuresType", futuresType);
+            parameters.Add("futuresType", futuresType);
             parameters.AddOptionalParameter("fromId", fromId);
             parameters.AddOptionalParameter("toId", toId);
             parameters.AddOptionalParameter("clientTranId", clientTransferId);
@@ -541,7 +541,7 @@ namespace Binance.Net.Clients.GeneralApi
             string? clientTransferId = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? limit = null, bool showAllStatus = false,
             int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"showAllStatus", showAllStatus.ToString().ToLower()},
                              };
@@ -565,11 +565,11 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection()
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId}
                              };
-            parameters.AddEnum("futuresType", futuresType);
+            parameters.Add("futuresType", futuresType);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
@@ -586,10 +586,10 @@ namespace Binance.Net.Clients.GeneralApi
             string? asset = null, SubAccountDepositStatus? status = null, DateTime? startDate = null, DateTime? endDate = null,
             int? limit = null, int? offset = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("subAccountId", subAccountId);
             parameters.AddOptionalParameter("coin", asset);
-            parameters.AddOptionalEnum("status", status);
+            parameters.Add("status", status);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endDate));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
@@ -607,7 +607,7 @@ namespace Binance.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult<BinanceBrokerageAccountInfo>> GetBrokerAccountInfoAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/broker/info", BinanceExchange.RateLimiter.SpotRestIp, 0, true);
@@ -624,7 +624,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             subAccountId.ValidateNotNull(nameof(subAccountId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"subAccountId", subAccountId},
                              };
@@ -642,12 +642,12 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<WebCallResult<BinanceBrokerageFuturesRebate[]>> GetBrokerFuturesCommissionRebatesHistoryAsync(FuturesAccountType futuresType,
             DateTime startDate, DateTime endDate, int? page = null, int? size = null, int? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
                              {
                                  {"startTime", DateTimeConverter.ConvertToMilliseconds(startDate)!},
                                  {"endTime",  DateTimeConverter.ConvertToMilliseconds(endDate)!}
                              };
-            parameters.AddEnum("futuresType", futuresType);
+            parameters.Add("futuresType", futuresType);
             parameters.AddOptionalParameter("page", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", size?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

@@ -25,7 +25,7 @@ namespace Binance.Net
                 return;
 
             var timestamp = GetMillisecondTimestamp(apiClient);
-            var parameters = request.GetPositionParameters() ?? new Dictionary<string, object>();
+            var parameters = request.GetPositionParameters() ?? new Parameters(ParameterSerializationSettings.Default);
             parameters.Add("timestamp", timestamp);
 
             if (request.ParameterPosition == HttpMethodParameterPosition.InUri)
@@ -44,19 +44,16 @@ namespace Binance.Net
             }
         }
 
-        public Dictionary<string, object> ProcessRequest(SocketApiClient apiClient, IDictionary<string, object> providedParameters)
+        public Parameters ProcessRequest(SocketApiClient apiClient, Parameters? providedParameters)
         {
-            var sortedParameters = new SortedDictionary<string, object>(providedParameters)
-            {
-                { "apiKey", ApiCredentials.Credential!.Key },
-                { "timestamp", GetMillisecondTimestampLong(apiClient) }
-            };
-            var paramString = string.Join("&", sortedParameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
+            var parameters = providedParameters ?? new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("apiKey", ApiCredentials.Credential!.Key);
+            parameters.Add("timestamp", GetMillisecondTimestampLong(apiClient));
+            var paramString = string.Join("&", parameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
 
             string sign = Sign(paramString);
-            var result = sortedParameters.ToDictionary(p => p.Key, p => p.Value);
-            result.Add("signature", sign);
-            return result;
+            parameters.Add("signature", sign);
+            return parameters;
         }
 
         private string Sign(string data)

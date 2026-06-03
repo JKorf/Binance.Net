@@ -48,7 +48,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceFuturesOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             int weight = limit <= 50 ? 2 : limit <= 100 ? 5 : limit <= 500 ? 10 : 20;
@@ -65,7 +65,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinancePrice>>> GetPriceAsync(string symbol, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             return await _client.QueryAsync<BinancePrice>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"ticker.price", parameters, weight: 1, ct: ct).ConfigureAwait(false);
         }
@@ -77,7 +77,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinancePrice[]>>> GetPricesAsync(CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             return await _client.QueryAsync<BinancePrice[]>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"ticker.price", parameters, weight: 2, ct: ct).ConfigureAwait(false);
         }
 
@@ -88,7 +88,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceBookPrice>>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             return await _client.QueryAsync<BinanceBookPrice>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"ticker.book", parameters, weight: 2, ct: ct).ConfigureAwait(false);
         }
@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<CallResult<BinanceResponse<BinanceBookPrice[]>>> GetBookPricesAsync(CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             return await _client.QueryAsync<BinanceBookPrice[]>(_client.ClientOptions.Environment.UsdFuturesSocketApiAddress!.AppendPath("ws-fapi/v1"), $"ticker.book", parameters, weight: 5, ct: ct).ConfigureAwait(false);
         }
 

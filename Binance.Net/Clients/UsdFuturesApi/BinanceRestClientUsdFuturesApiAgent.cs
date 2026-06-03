@@ -22,11 +22,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             brokerId.ValidateNotNull(nameof(brokerId));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "brokerId", brokerId }
             };
-            parameters.AddEnum("type", IfNewUserMarginedFuturesType.UsdtMarginedFutures);
+            parameters.Add("type", IfNewUserMarginedFuturesType.UsdtMarginedFutures);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.FuturesRest, 100, true);

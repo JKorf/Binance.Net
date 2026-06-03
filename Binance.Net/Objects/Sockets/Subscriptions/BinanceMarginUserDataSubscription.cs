@@ -47,7 +47,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse<BinanceWebsocketApiWrapper>>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.subscribe.listenToken",
-                Params = new Dictionary<string, object>
+                Params = new Parameters(BinanceExchange._parameterSerializationSettings)
                 {
                     { "listenToken", _listenToken }
                 },
@@ -78,7 +78,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.unsubscribe",
-                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : new Dictionary<string, object>(),
+                Params = _subscriptionId != null ? new Parameters(BinanceExchange._parameterSerializationSettings) { { "subscriptionId", _subscriptionId } } : new Parameters(BinanceExchange._parameterSerializationSettings),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -149,7 +149,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             var result = await _client.QueryAsync<object>(
                 _client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"),
                 "userDataStream.subscribe.listenToken",
-                new Dictionary<string, object> { { "listenToken", newListenToken } },
+                new Parameters(BinanceExchange._parameterSerializationSettings) { { "listenToken", newListenToken } },
                 authenticated: false,
                 ct: ct).ConfigureAwait(false);
 
