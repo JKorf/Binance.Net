@@ -42,6 +42,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonIgnore]
         public static BinanceDepositQuestionnaireSouthAfrica SouthAfrica => new BinanceDepositQuestionnaireSouthAfrica();
+        /// <summary>
+        /// Create a questionnaire for a deposit for Australia
+        /// </summary>
+        [JsonIgnore]
+        public static BinanceDepositQuestionnaireAustralia Australia => new BinanceDepositQuestionnaireAustralia();
 
 #pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
 #pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
@@ -464,6 +469,100 @@ namespace Binance.Net.Objects.Models.Spot
         public string? VaspName { get; set; }
         /// <summary>
         /// ["<c>declaration</c>"] Declaration
+        /// </summary>
+        [JsonPropertyName("declaration")]
+        public bool Declaration { get; set; }
+    }
+
+    /// <summary>
+    /// Australia deposit questionnaire
+    /// </summary>
+    public record BinanceDepositQuestionnaireAustralia : BinanceDepositQuestionnaire
+    {
+        /// <summary>
+        /// ["<c>depositOriginator</c>"] 1:Myself, 2:Not Myself
+        /// </summary>
+        [JsonPropertyName("depositOriginator")]
+        public int DepositOriginator { get; set; }
+        /// <summary>
+        /// ["<c>orgType</c>"] 0:Individual, 1:Corporate/Entity
+        /// </summary>
+        [JsonPropertyName("orgType")]
+        public int OrgType { get; set; }
+        /// <summary>
+        /// ["<c>orgFirstName</c>"] Originator's first name. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("orgFirstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrgFirstName { get; set; }
+        /// <summary>
+        /// ["<c>orgLastName</c>"] Originator's last name. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("orgLastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrgLastName { get; set; }
+        /// <summary>
+        /// ["<c>country</c>"] Originator's country code, ISO 2 digit, lower case. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Country { get; set; }
+        /// <summary>
+        /// ["<c>city</c>"] Originator's city/town. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("city")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? City { get; set; }
+        /// <summary>
+        /// ["<c>corpName</c>"] Corporation/entity name. Required when OrgType is 1
+        /// </summary>
+        [JsonPropertyName("corpName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CorpName { get; set; }
+        /// <summary>
+        /// ["<c>corpCountry</c>"] Corporation country code, ISO 2 digit, lower case. Required when OrgType is 1
+        /// </summary>
+        [JsonPropertyName("corpCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CorpCountry { get; set; }
+        /// <summary>
+        /// ["<c>corpCity</c>"] Corporation city/town. Required when OrgType is 1
+        /// </summary>
+        [JsonPropertyName("corpCity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CorpCity { get; set; }
+        /// <summary>
+        /// ["<c>identifierType</c>"] Identifier type. Required when DepositOriginator is 2.
+        /// Individual: PASSPORT, NATIONAL_ID. Corporate: ABN (11 digits), ACN (9 digits), OTHER
+        /// </summary>
+        [JsonPropertyName("identifierType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? IdentifierType { get; set; }
+        /// <summary>
+        /// ["<c>identifier</c>"] Identifier value matching IdentifierType validation. Required when DepositOriginator is 2
+        /// </summary>
+        [JsonPropertyName("identifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Identifier { get; set; }
+        /// <summary>
+        /// ["<c>receiveFrom</c>"] 1:Private Wallet, 2:Another VASP
+        /// </summary>
+        [JsonPropertyName("receiveFrom")]
+        public int ReceiveFrom { get; set; }
+        /// <summary>
+        /// ["<c>vasp</c>"] VASP identifier of the originator. Required when ReceiveFrom is 2
+        /// </summary>
+        [JsonPropertyName("vasp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Vasp { get; set; }
+        /// <summary>
+        /// ["<c>vaspName</c>"] Exchange name. Required when ReceiveFrom is 2 and Vasp is `others`
+        /// </summary>
+        [JsonPropertyName("vaspName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? VaspName { get; set; }
+        /// <summary>
+        /// ["<c>declaration</c>"] Declaration confirmation
         /// </summary>
         [JsonPropertyName("declaration")]
         public bool Declaration { get; set; }
