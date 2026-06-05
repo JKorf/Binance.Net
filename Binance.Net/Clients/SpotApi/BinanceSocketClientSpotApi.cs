@@ -47,7 +47,7 @@ namespace Binance.Net.Clients.SpotApi
         #region constructor/destructor
 
         internal BinanceSocketClientSpotApi(ILogger logger, BinanceSocketOptions options) :
-            base(logger, options.Environment.SpotSocketStreamAddress, options, options.SpotOptions)
+            base(logger, BinanceExchange.Metadata.Id,options.Environment.SpotSocketStreamAddress, options, options.SpotOptions)
         {
             Account = new BinanceSocketClientSpotApiAccount(logger, this);
             ExchangeData = new BinanceSocketClientSpotApiExchangeData(logger, this);
@@ -76,13 +76,13 @@ namespace Binance.Net.Clients.SpotApi
 
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BinanceExchange._serializerContext));
         
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+        internal Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
             string url,
             string[] topics,
             Action<U> onData,            
@@ -106,17 +106,17 @@ namespace Binance.Net.Clients.SpotApi
                 ct);
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
         {
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternal2Async(string url, Subscription subscription, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeInternal2Async(string url, Subscription subscription, CancellationToken ct)
         {
             return base.SubscribeAsync(url, subscription, ct);
         }
 
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
+        internal async Task<WebSocketResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {
@@ -150,7 +150,7 @@ namespace Binance.Net.Clients.SpotApi
             return result;
         }
 
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(
+        internal async Task<WebSocketResult<BinanceResponse<T>>> QueryAsync<T>(
             string url,
             string method,
             Parameters parameters,

@@ -21,7 +21,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> PlaceOrderAsync(string symbol,
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesOrder>>> PlaceOrderAsync(string symbol,
             Enums.OrderSide side,
             FuturesOrderType type,
             decimal? quantity,
@@ -88,7 +88,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Edit Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -123,7 +123,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -153,7 +153,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Get Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -183,7 +183,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Get Positions
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinancePositionDetailsCoin[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinancePositionDetailsCoin[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);

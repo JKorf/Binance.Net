@@ -26,7 +26,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Test New Order 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTestOrderCommission>> PlaceTestOrderAsync(string symbol,
+        public async Task<HttpResult<BinanceTestOrderCommission>> PlaceTestOrderAsync(string symbol,
             Enums.OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -55,7 +55,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceTestOrderCommission>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
+                return HttpResult.Fail<BinanceTestOrderCommission>(BinanceExchange.Metadata.Id, ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -94,7 +94,7 @@ namespace Binance.Net.Clients.SpotApi
         #region New Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
+        public async Task<HttpResult<BinancePlacedOrder>> PlaceOrderAsync(string symbol,
             Enums.OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -152,7 +152,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, CancelRestriction? cancelRestriction = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderBase>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, CancelRestriction? cancelRestriction = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -195,7 +195,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel all Open Orders on a Symbol
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderBase[]>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderBase[]>> CancelAllOrdersAsync(string symbol, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -210,7 +210,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Replace order
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol,
+        public async Task<HttpResult<BinanceReplaceOrderResult>> ReplaceOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             CancelReplaceMode cancelReplaceMode,
@@ -246,7 +246,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceReplaceOrderResult>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
+                return HttpResult.Fail<BinanceReplaceOrderResult>(BinanceExchange.Metadata.Id, ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity;
@@ -286,34 +286,34 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true, tryParseOnNonSuccess: true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceReplaceOrderResult>>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result.As<BinanceReplaceOrderResult>(default);
+            if (!result.Success)
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result);
 
             if (result.Data?.Data == null)
             {
                 if (result.Data == null)
-                    return result.AsError<BinanceReplaceOrderResult>(new ServerError(ErrorInfo.Unknown));
+                    return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(ErrorInfo.Unknown));
 
                 // A general API error
-                return result.AsError<BinanceReplaceOrderResult>(new ServerError(result.Data.Code, _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Code, _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
             }
 
             if (result.Data.Data.NewOrderResult == OrderOperationResult.NotAttempted)
                 // Not attempted because cancel failed
-                return result.AsErrorWithData<BinanceReplaceOrderResult>(new ServerError(result.Data.Data.CancelResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.CancelResponse.Code.Value, result.Data.Data.CancelResponse.Message)), result.Data.Data);
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Data.CancelResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.CancelResponse.Code.Value, result.Data.Data.CancelResponse.Message)), result.Data.Data);
 
             if (result.Data.Data.NewOrderResult == OrderOperationResult.Failure)
                 // New order attempted; if cancel failed this still takes priority since cancelReplaceMode was AllowFailure
-                return result.AsErrorWithData<BinanceReplaceOrderResult>(new ServerError(result.Data.Data.NewOrderResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.NewOrderResponse.Code.Value, result.Data.Data.NewOrderResponse.Message)), result.Data.Data);
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Data.NewOrderResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.NewOrderResponse.Code.Value, result.Data.Data.NewOrderResponse.Message)), result.Data.Data);
 
-            return result.As<BinanceReplaceOrderResult>(result.Data.Data);
+            return HttpResult.Ok(result, result.Data.Data);
         }
         #endregion
 
         #region Amend Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAmendedOrderResult>> AmendOrderAsync(
+        public async Task<HttpResult<BinanceAmendedOrderResult>> AmendOrderAsync(
             string symbol,
             decimal newQty,
             long? orderId = null,
@@ -353,7 +353,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrder>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrder>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -383,7 +383,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Current Open Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrder[]>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrder[]>> GetOpenOrdersAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -398,7 +398,7 @@ namespace Binance.Net.Clients.SpotApi
         #region All Orders 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrder[]>> GetOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrder[]>> GetOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -421,7 +421,7 @@ namespace Binance.Net.Clients.SpotApi
         #region New OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol,
+        public async Task<HttpResult<BinanceOrderOcoList>> PlaceOcoOrderAsync(string symbol,
             Enums.OrderSide side,
             decimal quantity,
             decimal price,
@@ -446,7 +446,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceOrderOcoList>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
+                return HttpResult.Fail<BinanceOrderOcoList>(BinanceExchange.Metadata.Id, ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity!.Value;
@@ -498,7 +498,7 @@ namespace Binance.Net.Clients.SpotApi
         #region New OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOcoOrderListAsync(
+        public async Task<HttpResult<BinanceOrderOcoList>> PlaceOcoOrderListAsync(
             string symbol,
             OrderSide side,
             decimal quantity,
@@ -579,7 +579,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel OCO 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList>> CancelOcoOrderAsync(string symbol, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderOcoList>> CancelOcoOrderAsync(string symbol, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
@@ -611,7 +611,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList>> GetOcoOrderAsync(long? orderListId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderOcoList>> GetOcoOrderAsync(long? orderListId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderListId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
@@ -639,7 +639,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query all OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList[]>> GetOcoOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderOcoList[]>> GetOcoOrdersAsync(long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (fromId != null && (startTime != null || endTime != null))
                 throw new ArgumentException("Start/end time can only be provided without fromId parameter");
@@ -662,7 +662,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Open OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList[]>> GetOpenOcoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderOcoList[]>> GetOpenOcoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -676,7 +676,7 @@ namespace Binance.Net.Clients.SpotApi
         #region New OTO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOtoOrderListAsync(
+        public async Task<HttpResult<BinanceOrderOcoList>> PlaceOtoOrderListAsync(
             string symbol,
 
             OrderSide workingSide,
@@ -758,7 +758,7 @@ namespace Binance.Net.Clients.SpotApi
         #region New OTOCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderOcoList>> PlaceOtocoOrderListAsync(
+        public async Task<HttpResult<BinanceOrderOcoList>> PlaceOtocoOrderListAsync(
             string symbol,
 
             OrderSide workingSide,
@@ -865,7 +865,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get User Trades
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTrade[]>> GetUserTradesAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTrade[]>> GetUserTradesAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -889,7 +889,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Account New Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
+        public async Task<HttpResult<BinancePlacedOrder>> PlaceMarginOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -943,7 +943,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Account Cancel Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderBase>> CancelMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderBase>> CancelMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, string? newClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -986,7 +986,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Account Cancel All Open Orders
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrderBase[]>> CancelAllMarginOrdersAsync(string symbol, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrderBase[]>> CancelAllMarginOrdersAsync(string symbol, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -1004,7 +1004,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Margin Account's Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrder>> GetMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrder>> GetMarginOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId should be provided");
@@ -1036,7 +1036,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Margin Account's Open Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrder[]>> GetOpenMarginOrdersAsync(string? symbol = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrder[]>> GetOpenMarginOrdersAsync(string? symbol = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             if (isIsolated == true && symbol == null)
                 throw new ArgumentException("Symbol must be provided for isolated margin");
@@ -1055,7 +1055,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Margin Account's All Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceOrder[]>> GetMarginOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceOrder[]>> GetMarginOrdersAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, bool? isIsolated = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
@@ -1078,7 +1078,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Margin Account's Trade List
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTrade[]>> GetMarginUserTradesAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null,
+        public async Task<HttpResult<BinanceTrade[]>> GetMarginUserTradesAsync(string symbol, long? orderId = null, DateTime? startTime = null, DateTime? endTime = null,
             int? limit = null, long? fromId = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
@@ -1104,7 +1104,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Account New OCO Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginOrderOcoList>> PlaceMarginOCOOrderAsync(string symbol,
+        public async Task<HttpResult<BinanceMarginOrderOcoList>> PlaceMarginOCOOrderAsync(string symbol,
             Enums.OrderSide side,
             decimal price,
             decimal stopPrice,
@@ -1128,7 +1128,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return new WebCallResult<BinanceMarginOrderOcoList>(ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
+                return HttpResult.Fail<BinanceMarginOrderOcoList>(BinanceExchange.Metadata.Id, ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             quantity = rulesCheck.Quantity!.Value;
@@ -1178,7 +1178,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel OCO 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginOrderOcoList>> CancelMarginOcoOrderAsync(string symbol, bool? isIsolated = null, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginOrderOcoList>> CancelMarginOcoOrderAsync(string symbol, bool? isIsolated = null, long? orderListId = null, string? listClientOrderId = null, string? newClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderListId.HasValue && string.IsNullOrEmpty(listClientOrderId))
                 throw new ArgumentException("Either orderListId or listClientOrderId must be sent");
@@ -1220,7 +1220,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginOrderOcoList>> GetMarginOcoOrderAsync(string? symbol = null, bool? isIsolated = null, long? orderListId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginOrderOcoList>> GetMarginOcoOrderAsync(string? symbol = null, bool? isIsolated = null, long? orderListId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderListId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderListId or origClientOrderId must be sent");
@@ -1250,7 +1250,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query all OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginOrderOcoList[]>> GetMarginOcoOrdersAsync(string? symbol = null, bool? isIsolated = null, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginOrderOcoList[]>> GetMarginOcoOrdersAsync(string? symbol = null, bool? isIsolated = null, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (fromId != null && (startTime != null || endTime != null))
                 throw new ArgumentException("Start/end time can only be provided without fromId parameter");
@@ -1275,7 +1275,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Open OCO
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginOrderOcoList[]>> GetMarginOpenOcoOrdersAsync(string? symbol = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginOrderOcoList[]>> GetMarginOpenOcoOrdersAsync(string? symbol = null, bool? isIsolated = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -1291,7 +1291,7 @@ namespace Binance.Net.Clients.SpotApi
         #region C2C
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceC2CUserTrade[]>> GetC2CTradeHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceC2CUserTrade[]>> GetC2CTradeHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("tradeType", side);
@@ -1304,12 +1304,12 @@ namespace Binance.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/c2c/orderMatch/listUserOrderHistory", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceC2CUserTrade[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<BinanceC2CUserTrade[]>(default);
+                return HttpResult.Fail<BinanceC2CUserTrade[]>(result);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceC2CUserTrade[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
+                return HttpResult.Fail<BinanceC2CUserTrade[]>(result, new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
-            return result.As(result.Data.Data);
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -1317,7 +1317,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Pay
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePayTrade[]>> GetPayTradeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinancePayTrade[]>> GetPayTradeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1328,12 +1328,12 @@ namespace Binance.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/pay/transactions", BinanceExchange.RateLimiter.SpotRestUid, 3000, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinancePayTrade[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<BinancePayTrade[]>(default);
+                return HttpResult.Fail<BinancePayTrade[]>(result);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinancePayTrade[]>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
+                return HttpResult.Fail<BinancePayTrade[]>(result, new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
-            return result.As(result.Data.Data);
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -1343,7 +1343,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Convert Quote Request
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceConvertQuote>> ConvertQuoteRequestAsync(string quoteAsset, string baseAsset, decimal? quoteQuantity = null, decimal? baseQuantity = null, WalletType? walletType = null, ValidTime? validTime = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceConvertQuote>> ConvertQuoteRequestAsync(string quoteAsset, string baseAsset, decimal? quoteQuantity = null, decimal? baseQuantity = null, WalletType? walletType = null, ValidTime? validTime = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (quoteQuantity == null && baseQuantity == null || quoteQuantity != null && baseQuantity != null)
                 throw new ArgumentException("Either quoteQuantity or baseQuantity must be sent, but not both");
@@ -1366,7 +1366,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Convert Accept Quote
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceConvertResult>> ConvertAcceptQuoteAsync(string quoteId, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceConvertResult>> ConvertAcceptQuoteAsync(string quoteId, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("quoteId", quoteId);
@@ -1381,7 +1381,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Convert Order Status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceConvertOrderStatus>> GetConvertOrderStatusAsync(string? orderId = null, string? quoteId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceConvertOrderStatus>> GetConvertOrderStatusAsync(string? orderId = null, string? quoteId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && quoteId == null || orderId != null && quoteId != null)
                 throw new ArgumentException("Either orderId or quoteId must be sent, but not both");
@@ -1400,7 +1400,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Convert Trade History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListResult<BinanceConvertTrade>>> GetConvertTradeHistoryAsync(DateTime startTime, DateTime endTime, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1418,7 +1418,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Prevented Trades
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePreventedTrade[]>> GetPreventedTradesAsync(string symbol, long? preventedMatchId = null, long? orderId = null, long? fromPreventedMatchId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinancePreventedTrade[]>> GetPreventedTradesAsync(string symbol, long? preventedMatchId = null, long? orderId = null, long? fromPreventedMatchId = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -1440,7 +1440,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Place TWAP
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(
+        public async Task<HttpResult<BinanceAlgoOrderResult>> PlaceTimeWeightedAveragePriceOrderAsync(
             string symbol,
             OrderSide side,
             decimal quantity,
@@ -1474,7 +1474,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Cancel algo order
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAlgoResult>> CancelAlgoOrderAsync(long algoOrderId, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -1489,7 +1489,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Open Algo Orders
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAlgoOrders>> GetOpenAlgoOrdersAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1501,7 +1501,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get historical Algo Orders
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = null, OrderSide? side = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAlgoOrders>> GetClosedAlgoOrdersAsync(string? symbol = null, OrderSide? side = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -1519,7 +1519,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Algo sub Orders
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAlgoSubOrderList>> GetAlgoSubOrdersAsync(long algoId, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {

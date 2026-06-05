@@ -39,7 +39,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region constructor/destructor
 
         internal BinanceSocketClientCoinFuturesApi(ILogger logger, BinanceSocketOptions options) :
-            base(logger, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
+            base(logger, BinanceExchange.Metadata.Id, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
         {
             // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval)
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
@@ -67,7 +67,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
+        internal async Task<WebSocketResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {
@@ -101,13 +101,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return result;
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+        internal Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
             string url,
             string[] topics,
             Action<U> onData,
@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ct);
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
         {
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }

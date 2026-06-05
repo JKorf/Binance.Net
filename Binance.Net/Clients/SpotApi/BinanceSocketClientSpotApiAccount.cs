@@ -33,7 +33,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("omitZeroBalances", omitZeroBalances?.ToString().ToLowerInvariant());
@@ -45,7 +45,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Order Rate Limits
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbols", symbols);
@@ -57,13 +57,13 @@ namespace Binance.Net.Clients.SpotApi
         #region Start User Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<string>>> StartUserStreamAsync(CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<string>>> StartUserStreamAsync(CancellationToken ct = default)
         {
             var result = await _client.QueryAsync<BinanceListenKey>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.start", new Parameters(BinanceExchange._parameterSerializationSettings), true, weight: 2, ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsError<BinanceResponse<string>>(result.Error!);
+            if (!result.Success)
+                return WebSocketResult.Fail<BinanceResponse<string>>(result);
 
-            return result.As(new BinanceResponse<string>
+            return WebSocketResult.Ok(result, new BinanceResponse<string>
             {
                 Ratelimits = result.Data!.Ratelimits!,
                 Result = result.Data!.Result?.ListenKey!
@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Keep Alive User Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("listenKey", listenKey);
@@ -87,7 +87,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Stop User Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("listenKey", listenKey);
@@ -103,7 +103,7 @@ namespace Binance.Net.Clients.SpotApi
         #region User Data Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
             Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
@@ -120,7 +120,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Risk User Data Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
             string listenKey,
             Action<DataEvent<BinanceMarginCallUpdate>>? onMarginCallUpdate = null,
             Action<DataEvent<BinanceLiabilityUpdate>>? onLiabilityUpdate = null,
@@ -136,7 +136,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Margin User Data Stream
-        public async Task<CallResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
             string listenToken,
             Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
             Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
@@ -153,16 +153,16 @@ namespace Binance.Net.Clients.SpotApi
         public async Task<CallResult> UpdateMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)
         {
             var marginSubscriptions = _client.GetMarginUserDataSubscriptions();
-            var tasks = new List<Task<CallResult>>();
+            var tasks = new List<Task<WebSocketResult>>();
             foreach (var marginSubscription in marginSubscriptions)
                 tasks.Add(marginSubscription.RenewTokenAsync(newListenToken));
 
             await Task.WhenAll(tasks).ConfigureAwait(false);
             var error = tasks.FirstOrDefault(x => x.Result.Error != null);
             if (error != null)
-                return new CallResult(error.Result.Error);
+                return CallResult.Fail(error.Result.Error!);
 
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         #endregion

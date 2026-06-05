@@ -23,7 +23,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Collateral Assets
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("collateralCoin", collateralAsset);
@@ -36,7 +36,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Loanable Assets
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("loanCoin", loanAsset);
@@ -53,7 +53,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Borrow
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanBorrow>> BorrowAsync(string loanAsset, string collateralAsset, decimal? loanQuantity = null, decimal? collateralQuantity = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanBorrow>> BorrowAsync(string loanAsset, string collateralAsset, decimal? loanQuantity = null, decimal? collateralQuantity = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -71,7 +71,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Repay
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanRepay>> RepayAsync(string loanAsset, string collateralAsset, decimal quantity, bool? collateralReturn = null, bool? fullRepayment = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanRepay>> RepayAsync(string loanAsset, string collateralAsset, decimal quantity, bool? collateralReturn = null, bool? fullRepayment = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -90,7 +90,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Repay Collateral
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanRepay>> RepayCollateralAsync(string loanAsset, string collateralAsset, decimal quantity, bool? collateralReturn = null, bool? fullRepayment = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanRepay>> RepayCollateralAsync(string loanAsset, string collateralAsset, decimal quantity, bool? collateralReturn = null, bool? fullRepayment = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -109,7 +109,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Adjust LTV
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanLtvAdjust>> AdjustLTVAsync(string loanAsset, string collateralAsset, decimal quantity, bool addOrRemove, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanLtvAdjust>> AdjustLTVAsync(string loanAsset, string collateralAsset, decimal quantity, bool addOrRemove, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Flexible LTV Adjustment History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanFlexibleLtvAdjustRecord>>> GetFlexibleLtvAdjustHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanFlexibleLtvAdjustRecord>>> GetFlexibleLtvAdjustHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("loanCoin", loanAsset);
@@ -149,7 +149,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Collateral Assets Rate
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -165,7 +165,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Flexible Borrow History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanFlexibleBorrowRecord>>> GetFlexibleBorrowHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanFlexibleBorrowRecord>>> GetFlexibleBorrowHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("loanAsset", loanAsset);
@@ -183,7 +183,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Open Borrow Orders
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanOpenBorrowOrder>>> GetOpenBorrowOrdersAsync(string? loanAsset = null, string? collateralAsset = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanOpenBorrowOrder>>> GetOpenBorrowOrdersAsync(string? loanAsset = null, string? collateralAsset = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("loanAsset", loanAsset);
@@ -199,7 +199,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Liquidation History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanLiquidationRecord>>> GetLiquidationHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanLiquidationRecord>>> GetLiquidationHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("loanAsset", loanAsset);
@@ -217,7 +217,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Flexible Repay History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanFlexibleRepayRecord>>> GetFlexibleRepayHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanFlexibleRepayRecord>>> GetFlexibleRepayHistoryAsync(string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("loanCoin", loanAsset);
@@ -241,7 +241,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Income History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanIncome[]>> GetIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanIncome[]>> GetIncomeHistoryAsync(string asset, LoanIncomeType? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -260,7 +260,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Borrow History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanBorrowRecord>>> GetBorrowHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanBorrowRecord>>> GetBorrowHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("orderId", orderId);
@@ -279,7 +279,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get LTV Adjustment History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanLtvAdjustRecord>>> GetLtvAdjustHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanLtvAdjustRecord>>> GetLtvAdjustHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("orderId", orderId);
@@ -298,7 +298,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Repay History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanRepayRecord>>> GetRepayHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanRepayRecord>>> GetRepayHistoryAsync(long? orderId = null, string? loanAsset = null, string? collateralAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("orderId", orderId);
@@ -319,7 +319,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Loanable Assets
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanAsset>>> GetLoanableAssetsAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("vipLevel", vipLevel);
@@ -333,7 +333,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Collateral Assets
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanCollateralAsset>>> GetCollateralAssetsAsync(string? collateralAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("vipLevel", vipLevel);
@@ -347,7 +347,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Collateral Assets
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCryptoLoanRepayRate>> GetCollateralRepayRateAsync(string loanAsset, string collateralAsset, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -364,7 +364,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Customize Margin Call (FULLY RETIRED)
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>> CustomizeMarginCallAsync(decimal marginCall, string? orderId = null, string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCryptoLoanMarginCallResult>>> CustomizeMarginCallAsync(decimal marginCall, string? orderId = null, string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {

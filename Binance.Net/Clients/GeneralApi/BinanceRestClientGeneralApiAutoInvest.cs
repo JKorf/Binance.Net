@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Source And Target Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestAssets>> GetSourceAndTargetAssetsAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestAssets>> GetSourceAndTargetAssetsAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/all/asset", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
@@ -32,7 +32,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Source Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestSourceAssets>> GetSourceAssetsAsync(string usageType, string? targetAsset = null, bool? flexibleAllowedToUse = null, string? sourceType = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestSourceAssets>> GetSourceAssetsAsync(string usageType, string? targetAsset = null, bool? flexibleAllowedToUse = null, string? sourceType = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("targetAsset", targetAsset);
@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Target Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestTargetAssets>> GetTargetAssetsAsync(string? targetAsset = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestTargetAssets>> GetTargetAssetsAsync(string? targetAsset = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("targetAsset", targetAsset);
@@ -65,7 +65,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Target Asset Rois
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("targetAsset", asset);
@@ -80,7 +80,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Index Info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestIndex>> GetIndexInfoAsync(string indexId, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestIndex>> GetIndexInfoAsync(string indexId, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("indexId", indexId);
@@ -94,7 +94,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Plans
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestPlan>> GetPlansAsync(AutoInvestPlanType planType, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestPlan>> GetPlansAsync(AutoInvestPlanType planType, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planType", planType);
@@ -108,7 +108,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region One Time Transaction
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestTradeResult>> OneTimeTransactionAsync(string sourceType, string requestId, decimal subscriptionQuantity, string sourceAsset, bool flexibleAllowedToUse, long indexId, Dictionary<string, decimal> subscriptionDetails, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestTradeResult>> OneTimeTransactionAsync(string sourceType, string requestId, decimal subscriptionQuantity, string sourceAsset, bool flexibleAllowedToUse, long indexId, Dictionary<string, decimal> subscriptionDetails, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("sourceType", sourceType);
@@ -132,7 +132,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Edit Plan Status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestEditStatusResult>> EditPlanStatusAsync(long planId, AutoInvestPlanStatus status, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestEditStatusResult>> EditPlanStatusAsync(long planId, AutoInvestPlanStatus status, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planId", planId);
@@ -147,7 +147,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Edit Plan
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestEditResult>> EditPlanAsync(string planId, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, int? subscriptionStartTime = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestEditResult>> EditPlanAsync(string planId, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, int? subscriptionStartTime = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planId", planId);
@@ -173,7 +173,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Redeem Index Linked Plan
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestRedemptionResult>> RedeemIndexLinkedPlanAsync(string indexId, string requestId, int redemptionPercentage, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestRedemptionResult>> RedeemIndexLinkedPlanAsync(string indexId, string requestId, int redemptionPercentage, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("indexId", indexId);
@@ -189,7 +189,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Subscription Transaction History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestPlanTransactions>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestPlanTransactions>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planId", planId);
@@ -209,7 +209,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get One Time Transaction Status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestOneTimeTransactionStatus>> GetOneTimeTransactionStatusAsync(long transactionId, string requestId, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestOneTimeTransactionStatus>> GetOneTimeTransactionStatusAsync(long transactionId, string requestId, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("transactionId", transactionId);
@@ -224,7 +224,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Create Plan
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestTradeResult>> CreatePlanAsync(string sourceType, AutoInvestPlanType planType, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, int subscriptionStartTime, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, string? requestId = null, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestTradeResult>> CreatePlanAsync(string sourceType, AutoInvestPlanType planType, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, int subscriptionStartTime, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, string? requestId = null, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("sourceType", sourceType);
@@ -252,7 +252,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Index Linked Plan Redemption History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestRedemption[]>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestRedemption[]>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("requestId", requestId);
@@ -271,7 +271,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Plan Holdings
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestPlanHoldings>> GetPlanHoldingsAsync(long? planId = null, string? requestId = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestPlanHoldings>> GetPlanHoldingsAsync(long? planId = null, string? requestId = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planId", planId);
@@ -286,7 +286,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Index Linked Plan Position Details
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestIndexPlanPosition>> GetIndexLinkedPlanPositionDetailsAsync(long indexId, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestIndexPlanPosition>> GetIndexLinkedPlanPositionDetailsAsync(long indexId, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("indexId", indexId);
@@ -300,7 +300,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Index Linked Plan Rebalance History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAutoInvestRebalanceInfo[]>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAutoInvestRebalanceInfo[]>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("startTime", startTime);

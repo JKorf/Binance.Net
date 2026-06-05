@@ -24,7 +24,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Asset details keyed by asset name</returns>
-        Task<WebCallResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<Dictionary<string, BinanceAssetDetails>>> GetAssetDetailsAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets general product data available on Binance
@@ -32,7 +32,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Product data</returns>
-        Task<WebCallResult<BinanceProduct[]>> GetProductsAsync(CancellationToken ct = default);
+        Task<HttpResult<BinanceProduct[]>> GetProductsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Pings the Binance API
@@ -45,7 +45,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>True if successful ping, false if no response</returns>
-        Task<WebCallResult<long>> PingAsync(CancellationToken ct = default);
+        Task<HttpResult<long>> PingAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the current Binance server time
@@ -58,7 +58,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Server time</returns>
-        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+        Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets information about the exchange including rate limits and symbol list
@@ -73,7 +73,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceExchangeInfo>> GetExchangeInfoAsync(bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbol
@@ -88,7 +88,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="returnPermissionSets">["<c>showPermissionSets</c>"] Whether or not permission sets should be returned</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, bool? returnPermissionSets = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceExchangeInfo>> GetExchangeInfoAsync(string symbol, bool? returnPermissionSets = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbols
@@ -104,7 +104,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceExchangeInfo>> GetExchangeInfoAsync(IEnumerable<string> symbols, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbol based on an account permission
@@ -120,7 +120,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(PermissionType permission, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceExchangeInfo>> GetExchangeInfoAsync(PermissionType permission, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets information about the exchange including rate limits and information on the provided symbols based on account permissions
@@ -136,7 +136,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status, Trading, Halt or Break</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Exchange info</returns>
-        Task<WebCallResult<BinanceExchangeInfo>> GetExchangeInfoAsync(PermissionType[] permissions, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceExchangeInfo>> GetExchangeInfoAsync(PermissionType[] permissions, bool? returnPermissionSets = null, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the status of the Binance platform
@@ -149,7 +149,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The system status</returns>
-        Task<WebCallResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default);
+        Task<HttpResult<BinanceSystemStatus>> GetSystemStatusAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the recent trades for a symbol
@@ -164,7 +164,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">["<c>limit</c>"] Result limit</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        Task<WebCallResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the historical trades for a symbol
@@ -180,7 +180,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="fromId">["<c>fromId</c>"] From which trade id on results should be retrieved</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of recent trades</returns>
-        Task<WebCallResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default);
+        Task<HttpResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets compressed, aggregate trades. Trades that fill at the same time, from the same order, with the same price will have the quantity aggregated.
@@ -198,7 +198,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The aggregated trades list for the symbol</returns>
-        Task<WebCallResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets candlestick data for the provided symbol
@@ -216,7 +216,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        Task<WebCallResult<IBinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval,
+        Task<HttpResult<IBinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval,
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The candlestick data for the provided symbol</returns>
-        Task<WebCallResult<IBinanceKline[]>> GetUiKlinesAsync(string symbol, KlineInterval interval,
+        Task<HttpResult<IBinanceKline[]>> GetUiKlinesAsync(string symbol, KlineInterval interval,
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The order book for the symbol</returns>
-        Task<WebCallResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the current average price for a symbol
@@ -265,7 +265,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Current average price information</returns>
-        Task<WebCallResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BinanceAveragePrice>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Gets 24-hour ticker statistics for the provided symbol
@@ -279,7 +279,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol to get the data for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IBinanceTick>> GetTickerAsync(string symbol,
+        Task<HttpResult<IBinanceTick>> GetTickerAsync(string symbol,
             CancellationToken ct = default);
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Data over the last 24 hours</returns>
-        Task<WebCallResult<IBinanceTick[]>> GetTickersAsync(IEnumerable<string> symbols,
+        Task<HttpResult<IBinanceTick[]>> GetTickersAsync(IEnumerable<string> symbols,
             SymbolStatusFilter? symbolStatus = null,
             CancellationToken ct = default);
 
@@ -311,7 +311,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of data over the last 24 hours</returns>
-        Task<WebCallResult<IBinanceTick[]>> GetTickersAsync(SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<IBinanceTick[]>> GetTickersAsync(SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets price change statistics for a trading day
@@ -326,7 +326,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="timeZone">["<c>timeZone</c>"] The timezone offset, for example -3 for UTC-3 or 5 for UTC+5</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Trading day ticker statistics</returns>
-        Task<WebCallResult<BinanceTradingDayTicker>> GetTradingDayTickerAsync(string symbol, string? timeZone = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTradingDayTicker>> GetTradingDayTickerAsync(string symbol, string? timeZone = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets price change statistics for a trading day
@@ -342,7 +342,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Trading day ticker statistics</returns>
-        Task<WebCallResult<BinanceTradingDayTicker[]>> GetTradingDayTickersAsync(IEnumerable<string> symbols, string? timeZone = null, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTradingDayTicker[]>> GetTradingDayTickersAsync(IEnumerable<string> symbols, string? timeZone = null, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets ticker statistics over a rolling time window
@@ -357,7 +357,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="windowSize">["<c>windowSize</c>"] The window size to use</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rolling-window ticker statistics</returns>
-        Task<WebCallResult<IBinance24HPrice>> GetRollingWindowTickerAsync(string symbol, TimeSpan? windowSize = null, CancellationToken ct = default);
+        Task<HttpResult<IBinance24HPrice>> GetRollingWindowTickerAsync(string symbol, TimeSpan? windowSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets ticker statistics over a rolling time window
@@ -373,7 +373,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rolling-window ticker statistics</returns>
-        Task<WebCallResult<IBinance24HPrice[]>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, TimeSpan? windowSize = null, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<IBinance24HPrice[]>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, TimeSpan? windowSize = null, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
@@ -387,7 +387,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Book price for the symbol</returns>
-        Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
@@ -402,7 +402,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        Task<WebCallResult<BinanceBookPrice[]>> GetBookPricesAsync(IEnumerable<string> symbols, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceBookPrice[]>> GetBookPricesAsync(IEnumerable<string> symbols, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
@@ -416,7 +416,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        Task<WebCallResult<BinanceBookPrice[]>> GetBookPricesAsync(SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceBookPrice[]>> GetBookPricesAsync(SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the price of a symbol
@@ -430,7 +430,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol to get the price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Price of symbol</returns>
-        Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the prices for the provided symbols
@@ -445,7 +445,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        Task<WebCallResult<BinancePrice[]>> GetPricesAsync(IEnumerable<string> symbols, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinancePrice[]>> GetPricesAsync(IEnumerable<string> symbols, SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the prices for all symbols
@@ -459,7 +459,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbolStatus">["<c>symbolStatus</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of prices</returns>
-        Task<WebCallResult<BinancePrice[]>> GetPricesAsync(SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinancePrice[]>> GetPricesAsync(SymbolStatusFilter? symbolStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all assets available for margin trading
@@ -473,7 +473,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="asset">["<c>asset</c>"] Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin assets</returns>
-        Task<WebCallResult<BinanceMarginAsset[]>> GetMarginAssetsAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginAsset[]>> GetMarginAssetsAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all asset pairs available for margin trading
@@ -487,7 +487,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of margin pairs</returns>
-        Task<WebCallResult<BinanceMarginPair[]>> GetMarginSymbolsAsync(string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginPair[]>> GetMarginSymbolsAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the margin price index for a symbol
@@ -501,7 +501,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol to get, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Margin price index</returns>
-        Task<WebCallResult<BinanceMarginPriceIndex>> GetMarginPriceIndexAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginPriceIndex>> GetMarginPriceIndexAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Gets isolated margin symbol information
@@ -516,7 +516,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Isolated margin symbols</returns>
-        Task<WebCallResult<BinanceIsolatedMarginSymbol[]>> GetIsolatedMarginSymbolsAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceIsolatedMarginSymbol[]>> GetIsolatedMarginSymbolsAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets historical leveraged token kline data
@@ -535,7 +535,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Historical leveraged token kline data</returns>
-        Task<WebCallResult<BinanceBlvtKline[]>> GetLeveragedTokensHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceBlvtKline[]>> GetLeveragedTokensHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets cross margin collateral ratios
@@ -549,7 +549,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cross margin collateral ratios</returns>
-        Task<WebCallResult<BinanceCrossMarginCollateralRatio[]>> GetCrossMarginCollateralRatioAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceCrossMarginCollateralRatio[]>> GetCrossMarginCollateralRatioAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets futures hourly interest rates
@@ -565,7 +565,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Hourly interest rates for the provided assets</returns>
-        Task<WebCallResult<BinanceFuturesInterestRate[]>> GetFutureHourlyInterestRateAsync(IEnumerable<string> assets, bool isolated, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceFuturesInterestRate[]>> GetFutureHourlyInterestRateAsync(IEnumerable<string> assets, bool isolated, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets cross and isolated margin delist schedules
@@ -579,7 +579,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cross and isolated margin delist schedules</returns>
-        Task<WebCallResult<BinanceMarginDelistSchedule[]>> GetMarginDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginDelistSchedule[]>> GetMarginDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets isolated margin tier data
@@ -595,7 +595,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Isolated margin tier data</returns>
-        Task<WebCallResult<BinanceIsolatedMarginTierData[]>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceIsolatedMarginTierData[]>> GetIsolatedMarginTierDataAsync(string symbol, int? tier = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets margin available inventory
@@ -609,7 +609,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="type">["<c>type</c>"] The margin type to query for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Available margin inventory for the specified type</returns>
-        Task<WebCallResult<BinanceMarginAvailableInventory>> GetMarginAvailableInventoryAsync(MarginInventoryType type, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginAvailableInventory>> GetMarginAvailableInventoryAsync(MarginInventoryType type, CancellationToken ct = default);
 
         /// <summary>
         /// Gets liability coin leverage brackets in cross margin pro mode
@@ -622,7 +622,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Liability coin leverage brackets</returns>
-        Task<WebCallResult<BinanceCrossMarginProLiabilityCoinLeverageBracket[]>> GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(CancellationToken ct = default);
+        Task<HttpResult<BinanceCrossMarginProLiabilityCoinLeverageBracket[]>> GetLiabilityCoinLeverageBracketInCrossMarginProModeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets all convert pairs
@@ -637,7 +637,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="baseAsset">["<c>toAsset</c>"] Base asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Convert asset pairs</returns>
-        Task<WebCallResult<BinanceConvertAssetPair[]>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceConvertAssetPair[]>> GetConvertListAllPairsAsync(string? quoteAsset = null, string? baseAsset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets quantity precision per asset
@@ -651,7 +651,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Quantity precision settings per asset</returns>
-        Task<WebCallResult<BinanceConvertQuantityPrecisionAsset[]>> GetConvertQuantityPrecisionPerAssetAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceConvertQuantityPrecisionAsset[]>> GetConvertQuantityPrecisionPerAssetAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets spot symbol delist schedules
@@ -665,7 +665,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Spot symbol delist schedules</returns>
-        Task<WebCallResult<BinanceDelistSchedule[]>> GetDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceDelistSchedule[]>> GetDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order execution rules, checked at the moment the order would execute
@@ -679,7 +679,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="status">Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BinanceExecutionRules[]>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceExecutionRules[]>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get reference price for a symbol
@@ -692,7 +692,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BinanceReferencePrice>> GetReferencePriceAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BinanceReferencePrice>> GetReferencePriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get reference price calculation info for a symbol
@@ -706,7 +706,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="symbolStatus">["<c>status</c>"] Filter by symbol status</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BinanceReferencePriceCalculation>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceReferencePriceCalculation>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default);
 
     }
 }

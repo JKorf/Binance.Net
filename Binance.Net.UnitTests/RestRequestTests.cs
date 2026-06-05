@@ -689,7 +689,7 @@ namespace Binance.Net.UnitTests
 
         // Vip Loans tests (placeholder)
 
-        private bool IsAuthenticated(WebCallResult result)
+        private bool IsAuthenticated(IHttpResult result)
         {
             return result.RequestUrl?.Contains("signature") == true || result.RequestBody?.Contains("signature=") == true;
         }

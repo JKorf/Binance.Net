@@ -20,7 +20,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Borrow Interest Rate
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BinanceVipLoanBorrowInterestRate>>> GetBorrowInterestRateAsync(string loanAsset, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<IEnumerable<BinanceVipLoanBorrowInterestRate>>> GetBorrowInterestRateAsync(string loanAsset, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -36,7 +36,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get VIP Loan Interest Rate History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanInterestRate>>> GetVipLoanInterestaRateHistoryAsync(string loanAsset, DateTime? startTime = null, DateTime? endTime = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanInterestRate>>> GetVipLoanInterestaRateHistoryAsync(string loanAsset, DateTime? startTime = null, DateTime? endTime = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -54,7 +54,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Loanable Assets Data
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanAsset>>> GetVipLoanAssetDataAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanAsset>>> GetVipLoanAssetDataAsync(string? loanAsset = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("loanCoin", loanAsset);
@@ -67,7 +67,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Collateral Assets Data
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanCollateralAsset>>> GetVipLoanCollateralAssetDataAsync(string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanCollateralAsset>>> GetVipLoanCollateralAssetDataAsync(string? collateralAsset = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("collateralCoin", collateralAsset);
@@ -83,7 +83,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get VIP Loan Ongoing Orders
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanOngoingOrderData>>> GetVipLoanOngoinOrdersAsync(long? orderId = null, long? collateralAccountId = null, string? loanAsset = null, string? collateralAsset = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanOngoingOrderData>>> GetVipLoanOngoinOrdersAsync(long? orderId = null, long? collateralAccountId = null, string? loanAsset = null, string? collateralAsset = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("orderId", orderId);
@@ -100,7 +100,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get VIP Loan Repayment History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanRepayHistoryData>>> GetVipLoanRepaymentHistoryAsync(long? orderId = null, string? loanAsset = null, DateTime? startTime = null, DateTime? endTime = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanRepayHistoryData>>> GetVipLoanRepaymentHistoryAsync(long? orderId = null, string? loanAsset = null, DateTime? startTime = null, DateTime? endTime = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("orderId", orderId);
@@ -118,7 +118,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get VIP Loan Accrued Interest
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanAccuredInterest>>> GetVipLoanAccuredInterestAsync(long? orderId = null, string? loanAsset = null, DateTime? startTime = null, DateTime? endTime = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanAccuredInterest>>> GetVipLoanAccuredInterestAsync(long? orderId = null, string? loanAsset = null, DateTime? startTime = null, DateTime? endTime = null, long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("orderId", orderId);
@@ -136,7 +136,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Locked Value of VIP Collateral Account
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanCollateralAccountLockedValue>>> GetVipLoanCollateralAccountAsync(long? orderId = null, long? collateralAccountId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanCollateralAccountLockedValue>>> GetVipLoanCollateralAccountAsync(long? orderId = null, long? collateralAccountId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("orderId", orderId);
@@ -150,7 +150,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region Get Application Status
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceVipLoanApplicationStatus>>> GetApplicationStatusAsync(long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceVipLoanApplicationStatus>>> GetApplicationStatusAsync(long? page = null, long? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("current", page);
@@ -168,7 +168,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region VIP Loan Renew
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceVipLoanRenewData>> RenewVipLoanAsync(long orderId, int loanTerm, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceVipLoanRenewData>> RenewVipLoanAsync(long orderId, int loanTerm, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -184,7 +184,7 @@ namespace Binance.Net.Clients.GeneralApi
 
         #region VIP Loan Repay
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceVipLoanRepayData>> RepayVipLoanAsync(long orderId, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceVipLoanRepayData>> RepayVipLoanAsync(long orderId, decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -200,7 +200,7 @@ namespace Binance.Net.Clients.GeneralApi
         
         #region VIP Loan Borrow
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceVipLoanBorrowData>> BorrowVipLoanAsync(long loanAccountId, string loanAsset, decimal loanQuantity, string collateralAccountId, string collateralAsset, bool flexibleRate, int? loanTerm = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceVipLoanBorrowData>> BorrowVipLoanAsync(long loanAccountId, string loanAsset, decimal loanQuantity, string collateralAccountId, string collateralAsset, bool flexibleRate, int? loanTerm = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {

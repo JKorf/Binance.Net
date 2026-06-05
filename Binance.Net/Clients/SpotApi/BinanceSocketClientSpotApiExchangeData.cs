@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Ping
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<object>>> PingAsync(CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<object>>> PingAsync(CancellationToken ct = default)
         {
             return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"ping", new Parameters(BinanceExchange._parameterSerializationSettings), ct: ct).ConfigureAwait(false);
         }
@@ -40,13 +40,13 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Server Time
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<DateTime>>> GetServerTimeAsync(CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<DateTime>>> GetServerTimeAsync(CancellationToken ct = default)
         {
             var result = await _client.QueryAsync<BinanceCheckTime>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"time", new Parameters(BinanceExchange._parameterSerializationSettings), ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsError<BinanceResponse<DateTime>>(result.Error!);
+            if (!result.Success)
+                return WebSocketResult.Fail<BinanceResponse<DateTime>>(result);
 
-            return result.As(new BinanceResponse<DateTime>
+            return WebSocketResult.Ok(result, new BinanceResponse<DateTime>
             {
                 Ratelimits = result.Data!.Ratelimits!,
                 Result = result.Data!.Result!.ServerTime!
@@ -58,12 +58,12 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Exchange Info
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceExchangeInfo>>> GetExchangeInfoAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbols", symbols);
             var result = await _client.QueryAsync<BinanceExchangeInfo>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"exchangeInfo", parameters, weight: 20, ct: ct).ConfigureAwait(false);
-            if (!result)
+            if (!result.Success)
                 return result;
 
             _client._exchangeInfo = result.Data.Result;
@@ -77,14 +77,14 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Orderbook
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
             parameters.AddOptionalParameter("limit", limit);
             int weight = limit <= 100 ? 5 : limit <= 500 ? 25 : limit <= 1000 ? 50 : 250;
             var result = await _client.QueryAsync<BinanceOrderBook>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"depth", parameters, weight: weight, ct: ct).ConfigureAwait(false);
-            if (result)
+            if (result.Success)
                 result.Data.Result.Symbol = symbol;
             return result;
         }
@@ -94,7 +94,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Recent Trades
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -107,7 +107,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Trade History
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceRecentTradeQuote[]>>> GetTradeHistoryAsync(string symbol, long? fromId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -121,7 +121,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Aggregated Trades
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceStreamAggregatedTrade[]>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceStreamAggregatedTrade[]>>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Klines
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceSpotKline[]>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceSpotKline[]>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -153,7 +153,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get UI Klines
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceSpotKline[]>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceSpotKline[]>>> GetUIKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -169,7 +169,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Average Price
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceAveragePrice>>> GetCurrentAvgPriceAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -181,7 +181,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Tickers
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<Binance24HPrice[]>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<Binance24HPrice[]>>> GetTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbols", symbols?.ToArray());
@@ -195,7 +195,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Rolling Window Tickers
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceRollingWindowTick[]>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceRollingWindowTick[]>>> GetRollingWindowTickersAsync(IEnumerable<string> symbols, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbols", symbols.ToArray());
@@ -209,7 +209,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Book Tickers
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceBookPrice[]>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceBookPrice[]>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbols", symbols?.ToArray());
@@ -221,16 +221,16 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Execution Rules
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceExecutionRules[]>>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceExecutionRules[]>>> GetExecutionRulesAsync(string? symbol = null, SymbolStatus? status = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
             parameters.Add("status", status);
             var result = await _client.QueryAsync<BinanceExecutionRulesWrapper>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"executionRules", parameters, false, weight: symbol == null ? 40: 2, ct: ct).ConfigureAwait(false);
-            if (!result)
-                return result.AsError<BinanceResponse<BinanceExecutionRules[]>>(result.Error!);
+            if (!result.Success)
+                return WebSocketResult.Fail<BinanceResponse<BinanceExecutionRules[]>>(result);
 
-            return result.As(new BinanceResponse<BinanceExecutionRules[]>
+            return WebSocketResult.Ok(result, new BinanceResponse<BinanceExecutionRules[]>
             {
                 Ratelimits = result.Data!.Ratelimits!,
                 Result = result.Data!.Result!.SymbolRules!
@@ -242,7 +242,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Reference Price
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceReferencePrice>>> GetReferencePriceAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceReferencePrice>>> GetReferencePriceAsync(string? symbol = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -254,7 +254,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Reference Price Calculation
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceReferencePriceCalculation>>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceReferencePriceCalculation>>> GetReferencePriceCalculationAsync(string symbol, SymbolStatus? symbolStatus = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -270,17 +270,17 @@ namespace Binance.Net.Clients.SpotApi
         #region Trade Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
             Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default) =>
             await SubscribeToTradeUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols,
             Action<DataEvent<BinanceStreamTrade>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
 
-            CallResult<UpdateSubscription>? subscription = null;
+            WebSocketResult<UpdateSubscription>? subscription = null;
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamTrade>>((receiveTime, originalData, data) =>
             {
                 _client.UpdateTimeOffset(data.Data.EventTime);
@@ -298,7 +298,7 @@ namespace Binance.Net.Clients.SpotApi
             return subscription;
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> callback, CancellationToken ct)
+        public Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeToTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@trade"));
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamMinimalTrade>, BinanceStreamMinimalTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
@@ -309,12 +309,12 @@ namespace Binance.Net.Clients.SpotApi
         #region Aggregate Trade Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(string symbol,
             Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage, CancellationToken ct = default) =>
             await SubscribeToAggregatedTradeUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAggregatedTradeUpdatesAsync(
             IEnumerable<string> symbols, Action<DataEvent<BinanceStreamAggregatedTrade>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
@@ -335,7 +335,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "aggTrade", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> callback, CancellationToken ct)
+        public Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeToAggregatedTradeUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTrade> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@aggTrade"));
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamMinimalTrade>, BinanceStreamMinimalTrade>(_client.BaseAddress, topics.ToArray(), callback, ct: ct);
@@ -346,22 +346,22 @@ namespace Binance.Net.Clients.SpotApi
         #region Kline/Candlestick Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
             KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
             await SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol,
             IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
             await SubscribeToKlineUpdatesAsync(new[] { symbol }, intervals, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
             KlineInterval interval, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default) =>
             await SubscribeToKlineUpdatesAsync(symbols, new[] { interval }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
             IEnumerable<KlineInterval> intervals, Action<DataEvent<IBinanceStreamKlineData>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
@@ -389,12 +389,12 @@ namespace Binance.Net.Clients.SpotApi
         #region Individual Symbol Mini Ticker Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(string symbol,
             Action<DataEvent<IBinanceMiniTick>> onMessage, CancellationToken ct = default) =>
             await SubscribeToMiniTickerUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToMiniTickerUpdatesAsync(
             IEnumerable<string> symbols, Action<DataEvent<IBinanceMiniTick>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
@@ -416,7 +416,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "24hrMiniTicker", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToMiniTickerUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTick> onMessage, CancellationToken ct)
+        public Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeToMiniTickerUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamMinimalTick> onMessage, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@miniTicker"));
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamMinimalTick>, BinanceStreamMinimalTick>(_client.BaseAddress, topics.ToArray(), onMessage, ct: ct);
@@ -427,7 +427,7 @@ namespace Binance.Net.Clients.SpotApi
         #region All Market Mini Tickers Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAllMiniTickerUpdatesAsync(
             Action<DataEvent<IBinanceMiniTick[]>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamMiniTick[]>>((receiveTime, originalData, data) =>
@@ -449,7 +449,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Individual Market Rolling Window Tickers Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToRollingWindowTickerUpdatesAsync(string symbol, TimeSpan windowSize,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToRollingWindowTickerUpdatesAsync(string symbol, TimeSpan windowSize,
             Action<DataEvent<BinanceStreamRollingWindowTick>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamRollingWindowTick>>((receiveTime, originalData, data) =>
@@ -472,7 +472,7 @@ namespace Binance.Net.Clients.SpotApi
         #region All Market Rolling Window Tickers Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan windowSize,
             Action<DataEvent<BinanceStreamRollingWindowTick[]>> onMessage, CancellationToken ct = default)
         {
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceStreamRollingWindowTick[]>>((receiveTime, originalData, data) =>
@@ -495,12 +495,12 @@ namespace Binance.Net.Clients.SpotApi
         #region Individual Symbol Book Ticker Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(string symbol,
             Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default) =>
             await SubscribeToBookTickerUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerable<string> symbols,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBookTickerUpdatesAsync(IEnumerable<string> symbols,
             Action<DataEvent<BinanceStreamBookPrice>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
@@ -517,7 +517,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "bookTicker", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToBookTickerUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamBookPrice> callback, CancellationToken ct)
+        public Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeToBookTickerUpdatesPerfAsync(IEnumerable<string> symbols, Action<BinanceStreamBookPrice> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(x => x.ToLowerInvariant() + "@bookTicker"));
             return _client.SubscribeHighPerfAsync<BinanceCombinedStream<BinanceStreamBookPrice>, BinanceStreamBookPrice>(_client.BaseAddress, topics.ToArray(), callback, ct);
@@ -528,13 +528,13 @@ namespace Binance.Net.Clients.SpotApi
         #region Partial Book Depth Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(string symbol,
             int levels, int? updateInterval, Action<DataEvent<IBinanceOrderBook>> onMessage, CancellationToken ct = default) =>
             await SubscribeToPartialOrderBookUpdatesAsync(new[] { symbol }, levels, updateInterval, onMessage, ct)
                 .ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPartialOrderBookUpdatesAsync(
             IEnumerable<string> symbols, int levels, int? updateInterval, Action<DataEvent<IBinanceOrderBook>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
@@ -559,7 +559,7 @@ namespace Binance.Net.Clients.SpotApi
             return await _client.SubscribeAsync(_client.BaseAddress, "depthUpdate", symbols, handler, ct).ConfigureAwait(false);
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToPartialOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage, CancellationToken ct)
+        public Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeToPartialOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int levels, int? updateInterval, Action<BinanceOrderBook> onMessage, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@depth" + levels +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")));
@@ -571,19 +571,19 @@ namespace Binance.Net.Clients.SpotApi
         #region Diff. Depth Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol,
             int? updateInterval, Action<DataEvent<IBinanceEventOrderBook>> onMessage, CancellationToken ct = default) =>
             await SubscribeToOrderBookUpdatesAsync(new[] { symbol }, updateInterval, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols,
             int? updateInterval, Action<DataEvent<IBinanceEventOrderBook>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
 
             updateInterval?.ValidateIntValues(nameof(updateInterval), 100, 1000);
 
-            CallResult<UpdateSubscription>? subscription = null;
+            WebSocketResult<UpdateSubscription>? subscription = null;
             var handler = new Action<DateTime, string?, BinanceCombinedStream<BinanceEventOrderBook>>((receiveTime, originalData, data) =>
             {
                 _client.UpdateTimeOffset(data.Data.EventTime);
@@ -603,7 +603,7 @@ namespace Binance.Net.Clients.SpotApi
             return subscription;
         }
 
-        public Task<CallResult<HighPerfUpdateSubscription>> SubscribeToOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceEventOrderBook> callback, CancellationToken ct)
+        public Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeToOrderBookUpdatesPerfAsync(IEnumerable<string> symbols, int? updateInterval, Action<BinanceEventOrderBook> callback, CancellationToken ct)
         {
             var topics = new HashSet<string>(symbols.Select(a => a.ToLower(CultureInfo.InvariantCulture) + "@depth" +
                 (updateInterval.HasValue ? $"@{updateInterval.Value}ms" : "")));
@@ -615,10 +615,10 @@ namespace Binance.Net.Clients.SpotApi
         #region Individual Symbol Ticker Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default) => await SubscribeToTickerUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default) => await SubscribeToTickerUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IBinanceTick>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
 
@@ -642,12 +642,12 @@ namespace Binance.Net.Clients.SpotApi
         #region Average Price Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(string symbol,
             Action<DataEvent<BinanceStreamAveragePrice>> onMessage, CancellationToken ct = default) =>
             await SubscribeToAveragePriceUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAveragePriceUpdatesAsync(
             IEnumerable<string> symbols, Action<DataEvent<BinanceStreamAveragePrice>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));
@@ -674,12 +674,12 @@ namespace Binance.Net.Clients.SpotApi
         #region Reference Price Stream
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToReferencePriceUpdatesAsync(string symbol,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToReferencePriceUpdatesAsync(string symbol,
             Action<DataEvent<BinanceReferencePriceUpdate>> onMessage, CancellationToken ct = default) =>
             await SubscribeToReferencePriceUpdatesAsync(new[] { symbol }, onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToReferencePriceUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToReferencePriceUpdatesAsync(
             IEnumerable<string> symbols, Action<DataEvent<BinanceReferencePriceUpdate>> onMessage, CancellationToken ct = default)
         {
             symbols.ValidateNotNull(nameof(symbols));

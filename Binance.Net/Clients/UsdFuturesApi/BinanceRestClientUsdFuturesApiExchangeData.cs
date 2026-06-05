@@ -25,13 +25,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Test Connectivity
 
         /// <inheritdoc />
-        public async Task<WebCallResult<long>> PingAsync(CancellationToken ct = default)
+        public async Task<HttpResult<long>> PingAsync(CancellationToken ct = default)
         {
             var sw = Stopwatch.StartNew();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/ping", BinanceExchange.RateLimiter.FuturesRest, 1);
             var result = await _baseClient.SendAsync<object>(request, null, ct).ConfigureAwait(false);
             sw.Stop();
-            return result ? result.As(sw.ElapsedMilliseconds) : result.As<long>(default!);
+            return result.Success ? HttpResult.Ok(result, sw.ElapsedMilliseconds) : HttpResult.Fail<long>(result);
         }
 
         #endregion
@@ -39,11 +39,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Check Server Time
 
         /// <inheritdoc />
-        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
+        public async Task<HttpResult<DateTime>> GetServerTimeAsync(bool resetAutoTimestamp = false, CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/time", BinanceExchange.RateLimiter.FuturesRest, 1);
             var result = await _baseClient.SendAsync<BinanceCheckTime>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ServerTime ?? default);
+            if (!result.Success)
+                return HttpResult.Fail<DateTime>(result);
+
+            return HttpResult.Ok(result, result.Data.ServerTime);
         }
 
         #endregion
@@ -51,11 +54,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Exchange Information
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesUsdtExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesUsdtExchangeInfo>> GetExchangeInfoAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/exchangeInfo", BinanceExchange.RateLimiter.FuturesRest, 1);
             var exchangeInfoResult = await _baseClient.SendAsync<BinanceFuturesUsdtExchangeInfo>(request, null, ct).ConfigureAwait(false);
-            if (!exchangeInfoResult)
+            if (!exchangeInfoResult.Success)
                 return exchangeInfoResult;
 
             _baseClient._exchangeInfo = exchangeInfoResult.Data;
@@ -69,7 +72,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Order Book
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesOrderBook>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntValues(nameof(limit), 5, 10, 20, 50, 100, 500, 1000);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) { { "symbol", symbol } };
@@ -78,9 +81,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var requestWeight = limit == null ? 10 : limit <= 50 ? 2 : limit == 100 ? 5 : limit == 500 ? 10 : 20;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/depth", BinanceExchange.RateLimiter.FuturesRest, requestWeight);
             var result = await _baseClient.SendAsync<BinanceFuturesOrderBook>(request, parameters, ct, requestWeight).ConfigureAwait(false);
-            if (result && string.IsNullOrEmpty(result.Data.Symbol))
+            if (result.Success && string.IsNullOrEmpty(result.Data.Symbol))
                 result.Data.Symbol = symbol;
-            return result.As(result.Data);
+            return result;
         }
 
         #endregion
@@ -88,16 +91,16 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region RPI Order Book
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesOrderBook>> GetRpiOrderBookAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesOrderBook>> GetRpiOrderBookAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) { { "symbol", symbol } };
             parameters.AddOptionalParameter("limit", 1000);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/rpiDepth", BinanceExchange.RateLimiter.FuturesRest, 20);
             var result = await _baseClient.SendAsync<BinanceFuturesOrderBook>(request, parameters, ct).ConfigureAwait(false);
-            if (result && string.IsNullOrEmpty(result.Data.Symbol))
+            if (result.Success && string.IsNullOrEmpty(result.Data.Symbol))
                 result.Data.Symbol = symbol;
-            return result.As(result.Data);
+            return result;
         }
 
         #endregion
@@ -105,7 +108,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Compressed/Aggregate Trades List
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAggregatedTrade[]>> GetAggregatedTradeHistoryAsync(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -124,7 +127,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Funding Info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesFundingInfo[]>> GetFundingInfoAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesFundingInfo[]>> GetFundingInfoAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/fundingInfo", BinanceExchange.RateLimiter.FuturesRest, 0);
             return await _baseClient.SendAsync<BinanceFuturesFundingInfo[]>(request, null, ct).ConfigureAwait(false);
@@ -135,7 +138,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Funding Rate History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) {
@@ -155,7 +158,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Top Trader Long/Short Ratio (Accounts)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesLongShortRatio[]>> GetTopLongShortAccountRatioAsync(string symbolPair, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesLongShortRatio[]>> GetTopLongShortAccountRatioAsync(string symbolPair, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
@@ -178,7 +181,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Top Trader Long/Short Ratio (Positions)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesLongShortRatio[]>> GetTopLongShortPositionRatioAsync(string symbolPair, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesLongShortRatio[]>> GetTopLongShortPositionRatioAsync(string symbolPair, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
@@ -201,7 +204,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Global Long/Short Ratio (Accounts)
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesLongShortRatio[]>> GetGlobalLongShortAccountRatioAsync(string symbolPair, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesLongShortRatio[]>> GetGlobalLongShortAccountRatioAsync(string symbolPair, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
@@ -224,7 +227,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Mark Price Kline/Candlestick Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarkIndexKline[]>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarkIndexKline[]>> GetMarkPriceKlinesAsync(string symbol, KlineInterval interval, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
 
@@ -246,7 +249,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Get Recent Trades
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<IBinanceRecentTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
 
@@ -255,13 +258,16 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/trades", BinanceExchange.RateLimiter.FuturesRest, 5);
             var result = await _baseClient.SendAsync<BinanceRecentTradeQuote[]>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IBinanceRecentTrade[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinanceRecentTrade[]>(result);
+
+            return HttpResult.Ok<IBinanceRecentTrade[]>(result, result.Data);
         }
         #endregion
 
         #region Get Trade History
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
+        public async Task<HttpResult<IBinanceRecentTrade[]>> GetTradeHistoryAsync(string symbol, int? limit = null, long? fromId = null,
             CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
@@ -271,14 +277,17 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/historicalTrades", BinanceExchange.RateLimiter.FuturesRest, 20);
             var result = await _baseClient.SendAsync<BinanceRecentTradeQuote[]>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IBinanceRecentTrade[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinanceRecentTrade[]>(result);
+
+            return HttpResult.Ok<IBinanceRecentTrade[]>(result, result.Data);
         }
         #endregion
 
         #region Mark Price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol,
+        public async Task<HttpResult<BinanceFuturesMarkPrice>> GetMarkPriceAsync(string symbol,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
@@ -289,7 +298,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesMarkPrice[]>> GetMarkPricesAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesMarkPrice[]>> GetMarkPricesAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/premiumIndex", BinanceExchange.RateLimiter.FuturesRest, 10);
             return await _baseClient.SendAsync<BinanceFuturesMarkPrice[]>(request, null, ct).ConfigureAwait(false);
@@ -298,29 +307,35 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region 24h statistics
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinance24HPrice>> GetTickerAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<IBinance24HPrice>> GetTickerAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/ticker/24hr", BinanceExchange.RateLimiter.FuturesRest, 1);
             var result = await _baseClient.SendAsync<Binance24HPrice>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IBinance24HPrice>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinance24HPrice>(result);
+
+            return HttpResult.Ok<IBinance24HPrice>(result, result.Data);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinance24HPrice[]>> GetTickersAsync(CancellationToken ct = default)
+        public async Task<HttpResult<IBinance24HPrice[]>> GetTickersAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/ticker/24hr", BinanceExchange.RateLimiter.FuturesRest, 40);
             var result = await _baseClient.SendAsync<Binance24HPrice[]>(request, null, ct).ConfigureAwait(false);
-            return result.As<IBinance24HPrice[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinance24HPrice[]>(result);
+
+            return HttpResult.Ok<IBinance24HPrice[]>(result, result.Data);
         }
         #endregion
 
         #region Kline/Candlestick Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<IBinanceKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) {
@@ -334,7 +349,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var requestWeight = limit == null ? 5 : limit <= 100 ? 1 : limit <= 500 ? 2 : limit <= 1000 ? 5 : 10;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/klines", BinanceExchange.RateLimiter.FuturesRest, requestWeight);
             var result = await _baseClient.SendAsync<BinanceFuturesUsdtKline[]>(request, parameters, ct, requestWeight).ConfigureAwait(false);
-            return result.As<IBinanceKline[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinanceKline[]>(result);
+
+            return HttpResult.Ok<IBinanceKline[]>(result, result.Data);
         }
 
         #endregion
@@ -342,7 +360,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Kline/Premium Index
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarkIndexKline[]>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarkIndexKline[]>> GetPremiumIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) {
@@ -363,7 +381,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Symbol Order Book Ticker
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceBookPrice>> GetBookPriceAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -373,7 +391,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBookPrice[]>> GetBookPricesAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceBookPrice[]>> GetBookPricesAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/ticker/bookTicker", BinanceExchange.RateLimiter.FuturesRest, 5);
             return await _baseClient.SendAsync<BinanceBookPrice[]>(request, null, ct).ConfigureAwait(false);
@@ -384,7 +402,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Open Interest
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -400,7 +418,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Open Interest History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesOpenInterestHistory[]>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesOpenInterestHistory[]>> GetOpenInterestHistoryAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
@@ -423,7 +441,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Taker Buy/Sell Volume Ratio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesBuySellVolumeRatio[]>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesBuySellVolumeRatio[]>> GetTakerBuySellVolumeRatioAsync(string symbol, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 500);
 
@@ -446,7 +464,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Composite index symbol information
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesCompositeIndexInfo[]>> GetCompositeIndexInfoAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesCompositeIndexInfo[]>> GetCompositeIndexInfoAsync(string? symbol = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -461,7 +479,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinancePrice>> GetPriceAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -473,7 +491,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePrice[]>> GetPricesAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinancePrice[]>> GetPricesAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v2/ticker/price", BinanceExchange.RateLimiter.FuturesRest, 2);
             return await _baseClient.SendAsync<BinancePrice[]>(request, null, ct, 2).ConfigureAwait(false);
@@ -483,7 +501,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Continuous contract Kline Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinanceKline[]>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<IBinanceKline[]>> GetContinuousContractKlinesAsync(string pair, ContractType contractType, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) {
@@ -498,7 +516,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var requestWeight = limit == null ? 5 : limit <= 100 ? 1 : limit <= 500 ? 2 : limit <= 1000 ? 5 : 10;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/continuousKlines", BinanceExchange.RateLimiter.FuturesRest, requestWeight);
             var result = await _baseClient.SendAsync<BinanceFuturesUsdtKline[]>(request, parameters, ct, requestWeight).ConfigureAwait(false);
-            return result.As<IBinanceKline[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinanceKline[]>(result);
+
+            return HttpResult.Ok<IBinanceKline[]>(result, result.Data);
         }
 
         #endregion
@@ -506,7 +527,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Index Price Kline Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IBinanceKline[]>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<IBinanceKline[]>> GetIndexPriceKlinesAsync(string pair, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1500);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings) {
@@ -520,7 +541,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var requestWeight = limit == null ? 5 : limit <= 100 ? 1 : limit <= 500 ? 2 : limit <= 1000 ? 5 : 10;
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/indexPriceKlines", BinanceExchange.RateLimiter.FuturesRest, requestWeight);
             var result = await _baseClient.SendAsync<BinanceFuturesUsdtKline[]>(request, parameters, ct, requestWeight).ConfigureAwait(false);
-            return result.As<IBinanceKline[]>(result.Data);
+            if (!result.Success)
+                return HttpResult.Fail<IBinanceKline[]>(result);
+
+            return HttpResult.Ok<IBinanceKline[]>(result, result.Data);
         }
 
         #endregion
@@ -528,14 +552,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Asset index
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesAssetIndex[]>> GetAssetIndexesAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesAssetIndex[]>> GetAssetIndexesAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/assetIndex", BinanceExchange.RateLimiter.FuturesRest, 10);
             return await _baseClient.SendAsync<BinanceFuturesAssetIndex[]>(request, null, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesAssetIndex>> GetAssetIndexAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -551,7 +575,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Basis
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesBasis[]>> GetBasisAsync(string symbol, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesBasis[]>> GetBasisAsync(string symbol, ContractType contractType, PeriodInterval period, int? limit = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -572,7 +596,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Convert Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesConvertSymbol[]>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesConvertSymbol[]>> GetConvertSymbolsAsync(string? fromAsset = null, string? toAsset = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("fromAsset", fromAsset);
@@ -587,7 +611,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Index Price Constituents
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceConstituents>> GetIndexPriceConstituentsAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -601,7 +625,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Insurance Fund Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceInsuranceFundBalance>> GetInsuranceFundBalancesAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceInsuranceFundBalance>> GetInsuranceFundBalancesAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -615,7 +639,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Insurance Fund Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceInsuranceFundBalance[]>> GetInsuranceFundBalancesAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceInsuranceFundBalance[]>> GetInsuranceFundBalancesAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/insuranceBalance", BinanceExchange.RateLimiter.FuturesRest, 1, false);
@@ -628,7 +652,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Symbol ADL ratings
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSymbolAdlRate>> GetSymbolAdlRiskRatingAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSymbolAdlRate>> GetSymbolAdlRiskRatingAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -638,7 +662,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSymbolAdlRate[]>> GetSymbolAdlRiskRatingsAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSymbolAdlRate[]>> GetSymbolAdlRiskRatingsAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/symbolAdlRisk", BinanceExchange.RateLimiter.FuturesRest, 1, false);
@@ -650,7 +674,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Trading Schedule
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTradingSchedule>> GetTradingScheduleAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/tradingSchedule", BinanceExchange.RateLimiter.FuturesRest, 5, false);

@@ -17,18 +17,18 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Tickers client
         SubscribeTickersOptions ITickersSocketClient.SubscribeAllTickersOptions { get; } = new SubscribeTickersOptions(_exchangeName);
-        async Task<ExchangeResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(SubscribeAllTickersRequest request, Action<DataEvent<SharedSpotTicker[]>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> ITickersSocketClient.SubscribeToAllTickersUpdatesAsync(SubscribeAllTickersRequest request, Action<DataEvent<SharedSpotTicker[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITickersSocketClient)this).SubscribeAllTickersOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var result = await ExchangeData.SubscribeToAllRollingWindowTickerUpdatesAsync(TimeSpan.FromDays(1), update => handler(update.ToType(update.Data.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.PriceChangePercent)
             {
                 QuoteVolume = x.QuoteVolume
             }).ToArray())), ct).ConfigureAwait(false);
 
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+            return result;
         }
 
         #endregion
@@ -39,19 +39,19 @@ namespace Binance.Net.Clients.SpotApi
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
         };
-        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
         {
             var validationError = ((ITickerSocketClient)this).SubscribeTickerOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await ExchangeData.SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.PriceChangePercent)
             {
                 QuoteVolume = update.Data.QuoteVolume
             })), ct).ConfigureAwait(false);
-            
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+
+            return result;
         }
         #endregion
 
@@ -67,11 +67,11 @@ namespace Binance.Net.Clients.SpotApi
                 new ParameterDescription("Aggregated", typeof(bool), "Whether to subscribe to aggregated trade updates instead of individual trade updates", true)
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<DataEvent<SharedTrade[]>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<DataEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             if (ExchangeParameters.GetProcessValue<bool?>(request.ExchangeParameters, Exchange, "Aggregated") == true)
@@ -83,7 +83,7 @@ namespace Binance.Net.Clients.SpotApi
                     Side = update.Data.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
                 } })), ct).ConfigureAwait(false);
 
-                return new ExchangeResult<UpdateSubscription>(Exchange, result);
+                return result;
             }
             else
             {
@@ -94,7 +94,7 @@ namespace Binance.Net.Clients.SpotApi
                     Side = update.Data.BuyerIsMaker ? SharedOrderSide.Sell : SharedOrderSide.Buy,
                 } })), ct).ConfigureAwait(false);
 
-                return new ExchangeResult<UpdateSubscription>(Exchange, result);
+                return result;
             }
         }
 
@@ -108,16 +108,16 @@ namespace Binance.Net.Clients.SpotApi
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
         {
             var validationError = ((IBookTickerSocketClient)this).SubscribeBookTickerOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
-            
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+
+            return result;
         }
 
         #endregion
@@ -125,17 +125,17 @@ namespace Binance.Net.Clients.SpotApi
         #region Balance client
         EndpointOptions<SubscribeBalancesRequest, IBalanceSocketClient> IBalanceSocketClient.SubscribeBalanceOptions { get; }
             = new EndpointOptions<SubscribeBalancesRequest, IBalanceSocketClient>(_exchangeName, true);
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
             var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(
                 onAccountPositionMessage: update => handler(update.ToType(update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+            return result;
         }
 
         #endregion
@@ -144,11 +144,11 @@ namespace Binance.Net.Clients.SpotApi
 
         EndpointOptions<SubscribeSpotOrderRequest, ISpotOrderSocketClient> ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } 
             = new EndpointOptions<SubscribeSpotOrderRequest, ISpotOrderSocketClient>(_exchangeName, true);
-        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(
                 onOrderUpdateMessage: update => handler(update.ToType(new[] {
@@ -180,7 +180,7 @@ namespace Binance.Net.Clients.SpotApi
                 })),
                 ct: ct).ConfigureAwait(false);
 
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+            return result;
         }
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
@@ -218,21 +218,17 @@ namespace Binance.Net.Clients.SpotApi
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
         };
-        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
         {
-            var interval = (Enums.KlineInterval)request.Interval;
-            if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-                return new ExchangeResult<UpdateSubscription>(Exchange, ArgumentError.Invalid(nameof(SubscribeKlineRequest.Interval), "Interval not supported"));
-
             var validationError = ((IKlineSocketClient)this).SubscribeKlineOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await ExchangeData.SubscribeToKlineUpdatesAsync(symbols, interval, update => handler(update.ToType(
+            var result = await ExchangeData.SubscribeToKlineUpdatesAsync(symbols, (KlineInterval)request.Interval, update => handler(update.ToType(
                 new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.Data.OpenTime, update.Data.Data.ClosePrice, update.Data.Data.HighPrice, update.Data.Data.LowPrice, update.Data.Data.OpenPrice, update.Data.Data.Volume))), ct).ConfigureAwait(false);
-            
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+
+            return result;
         }
         #endregion
 
@@ -242,16 +238,16 @@ namespace Binance.Net.Clients.SpotApi
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
         };
-        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<DataEvent<SharedOrderBook>> handler, CancellationToken ct)
+        async Task<WebSocketResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<DataEvent<SharedOrderBook>> handler, CancellationToken ct)
         {
             var validationError = ((IOrderBookSocketClient)this).SubscribeOrderBookOptions.ValidateRequest(request, this);
             if (validationError != null)
-                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var result = await ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(symbols, request.Limit ?? 20, 100, update => handler(update.ToType(new SharedOrderBook(update.Data.Asks, update.Data.Bids))), ct).ConfigureAwait(false);
-            
-            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+
+            return result;
         }
         #endregion
     }

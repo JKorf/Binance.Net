@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingResult>> SubscribeEthStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceStakingResult>> SubscribeEthStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -33,7 +33,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingResult>> RedeemEthStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceStakingResult>> RedeemEthStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -47,7 +47,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceStakingHistory>>> GetEthStakingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceStakingHistory>>> GetEthStakingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -61,7 +61,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceRedemptionHistory>>> GetEthRedemptionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceRedemptionHistory>>> GetEthRedemptionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceEthRewardsHistory>>> GetEthRewardsHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceEthRewardsHistory>>> GetEthRewardsHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -89,7 +89,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceEthStakingQuota>> GetEthStakingQuotaAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceEthStakingQuota>> GetEthStakingQuotaAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -99,7 +99,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceBethRateHistory>>> GetBethRateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceBethRateHistory>>> GetBethRateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -113,7 +113,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceEthStakingAccount>> GetEthStakingAccountAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceEthStakingAccount>> GetEthStakingAccountAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -123,7 +123,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingResult>> WrapBethAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceStakingResult>> WrapBethAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceBethWrapHistory>>> GetBethWrapHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceBethWrapHistory>>> GetBethWrapHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -151,7 +151,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceBethWrapHistory>>> GetBethUnwrapHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceBethWrapHistory>>> GetBethUnwrapHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -165,7 +165,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSolStakingAccount>> GetSolStakingAccountAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSolStakingAccount>> GetSolStakingAccountAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -175,7 +175,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSolStakingQuota>> GetSolStakingQuotaAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSolStakingQuota>> GetSolStakingQuotaAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -185,7 +185,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSolStakingResult>> SubscribeSolStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSolStakingResult>> SubscribeSolStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -199,7 +199,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSolStakingResult>> RedeemSolStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSolStakingResult>> RedeemSolStakingAsync(decimal quantity, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -213,7 +213,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceStakingResult>> ClaimSolBoostRewardsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceStakingResult>> ClaimSolBoostRewardsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -224,7 +224,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceStakingHistory>>> GetSolStakingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceStakingHistory>>> GetSolStakingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -238,7 +238,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceRedemptionHistory>>> GetSolRedemptionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceRedemptionHistory>>> GetSolRedemptionHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -252,7 +252,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSolRewards>> GetBnSolRewardsHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSolRewards>> GetBnSolRewardsHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -266,7 +266,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceBnsolRateHistory>>> GetBnSolRateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceBnsolRateHistory>>> GetBnSolRateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -280,7 +280,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceBnsolRewardHistory>>> GetSolBoostRewardsHistoryAsync(SolRewardType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceBnsolRewardHistory>>> GetSolBoostRewardsHistoryAsync(SolRewardType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("type", type);
@@ -295,7 +295,7 @@ namespace Binance.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSolUnclaimedReward[]>> GetSolUnclaimedRewardsAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSolUnclaimedReward[]>> GetSolUnclaimedRewardsAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));

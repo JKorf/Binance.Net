@@ -44,7 +44,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region constructor/destructor
         internal BinanceRestClientCoinFuturesApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)
-            : base(logger, httpClient, options.Environment.CoinFuturesRestAddress!, options, options.CoinFuturesOptions)
+            : base(logger, BinanceExchange.Metadata.Id, httpClient, options.Environment.CoinFuturesRestAddress!, options, options.CoinFuturesOptions)
         {
             Account = new BinanceRestClientCoinFuturesApiAccount(this);
             ExchangeData = new BinanceRestClientCoinFuturesApiExchangeData(logger, this);
@@ -212,10 +212,10 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return BinanceTradeRuleResult.CreatePassed(outputQuantity, outputQuoteQuantity, outputPrice, outputStopPrice);
         }
 
-        internal async Task<WebCallResult> SendAsync(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null)
+        internal async Task<HttpResult> SendAsync(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            var result = await base.SendAsync(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-            if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            var result = await base.SendAsync<Unit>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            if (!result.Success && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 TimeOffsetManager.ResetRestUpdateTime(ClientName);
@@ -223,13 +223,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return result;
         }
 
-        internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+        internal Task<HttpResult<T>> SendAsync<T>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
             => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight);
 
-        internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+        internal async Task<HttpResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
             var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-            if (!result && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
+            if (!result.Success && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
                 TimeOffsetManager.ResetRestUpdateTime(ClientName);
@@ -238,7 +238,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         /// <inheritdoc />
-        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+        protected override Task<HttpResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
 
         public IBinanceRestClientCoinFuturesApiShared SharedClient => this;

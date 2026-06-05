@@ -67,12 +67,12 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _subscriptionId = id;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>.CreateWithTopicFilter("outboundAccountPosition", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>.CreateWithTopicFilter("balanceUpdate", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>.CreateWithTopicFilter("executionReport", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>.CreateWithTopicFilter("listStatus", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamEvent>>.CreateWithTopicFilter("eventStreamTerminated", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>>.CreateWithTopicFilter("externalLockUpdate", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>("outboundAccountPosition", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>("balanceUpdate", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>("executionReport", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>("listStatus", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamEvent>>("eventStreamTerminated", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>>("externalLockUpdate", id, DoHandleMessage),
                 ]);
         }
 
@@ -100,7 +100,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())                 
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -116,7 +116,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -133,7 +133,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -150,7 +150,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
 
@@ -166,7 +166,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );            
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
 
@@ -183,7 +183,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
 
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }

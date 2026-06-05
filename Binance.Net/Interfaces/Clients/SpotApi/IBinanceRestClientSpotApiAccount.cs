@@ -25,7 +25,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(bool? omitZeroBalances = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAccountInfo>> GetAccountInfoAsync(bool? omitZeroBalances = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets a daily spot account snapshot (balances)
@@ -42,7 +42,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Daily spot account snapshots</returns>
-        Task<WebCallResult<BinanceSpotAccountSnapshot[]>> GetDailySpotAccountSnapshotAsync(
+        Task<HttpResult<BinanceSpotAccountSnapshot[]>> GetDailySpotAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -61,7 +61,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Daily margin account snapshots</returns>
-        Task<WebCallResult<BinanceMarginAccountSnapshot[]>> GetDailyMarginAccountSnapshotAsync(
+        Task<HttpResult<BinanceMarginAccountSnapshot[]>> GetDailyMarginAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -80,7 +80,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Daily futures account snapshots</returns>
-        Task<WebCallResult<BinanceFuturesAccountSnapshot[]>> GetDailyFutureAccountSnapshotAsync(
+        Task<HttpResult<BinanceFuturesAccountSnapshot[]>> GetDailyFutureAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -96,7 +96,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account status</returns>
-        Task<WebCallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets funding wallet assets
@@ -112,7 +112,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of assets</returns>
-        Task<WebCallResult<BinanceFundingAsset[]>> GetFundingWalletAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceFundingAsset[]>> GetFundingWalletAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets permission info for the current API key
@@ -126,7 +126,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Permission info</returns>
-        Task<WebCallResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets information of assets for a user
@@ -140,7 +140,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Assets info</returns>
-        Task<WebCallResult<BinanceUserAsset[]>> GetUserAssetsAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceUserAsset[]>> GetUserAssetsAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Retrieves balance info
@@ -156,7 +156,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>User balances</returns>
-        Task<WebCallResult<BinanceUserBalance[]>> GetBalancesAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceUserBalance[]>> GetBalancesAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets balances of the different user wallets
@@ -171,7 +171,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Wallet balances</returns>
-        Task<WebCallResult<BinanceWalletBalance[]>> GetWalletBalancesAsync(string quoteAsset = "BTC", int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceWalletBalance[]>> GetWalletBalancesAsync(string quoteAsset = "BTC", int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets asset dividend records
@@ -189,7 +189,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dividend records</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// This request will disable fastwithdraw switch under your account.
@@ -204,7 +204,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
-        Task<WebCallResult> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// This request will enable fastwithdraw switch under your account.
@@ -222,7 +222,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
-        Task<WebCallResult> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the history of dust conversions
@@ -239,7 +239,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The history of dust conversions</returns>
-        Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets assets that can be converted to BNB
@@ -254,7 +254,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Eligible dust assets</returns>
-        Task<WebCallResult<BinanceEligibleDusts>> GetAssetsForDustTransferAsync(AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceEligibleDusts>> GetAssetsForDustTransferAsync(AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Converts dust (small amounts of) assets to BNB 
@@ -270,7 +270,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Dust transfer result</returns>
-        Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the status of the BNB burn switch for spot trading and margin interest
@@ -284,7 +284,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>BNB burn switch status</returns>
-        Task<WebCallResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Sets the status of the BNB burn switch for spot trading and margin interest
@@ -300,7 +300,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Updated BNB burn switch status</returns>
-        Task<WebCallResult<BinanceBnbBurnStatus>> SetBnbBurnStatusAsync(bool? spotTrading = null, bool? marginInterest = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceBnbBurnStatus>> SetBnbBurnStatusAsync(bool? spotTrading = null, bool? marginInterest = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Transfers between accounts
@@ -319,7 +319,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer transaction details</returns>
-        Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal quantity, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal quantity, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets transfer history
@@ -338,7 +338,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Transfer history</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfersAsync(UniversalTransferType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfersAsync(UniversalTransferType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets fiat payment history
@@ -357,7 +357,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Fiat payment history</returns>
-        Task<WebCallResult<BinanceFiatPayment[]>> GetFiatPaymentHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceFiatPayment[]>> GetFiatPaymentHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets fiat deposit and withdrawal history
@@ -376,7 +376,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Fiat deposit and withdrawal history</returns>
-        Task<WebCallResult<BinanceFiatWithdrawDeposit[]>> GetFiatDepositWithdrawHistoryAsync(TransactionType side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceFiatWithdrawDeposit[]>> GetFiatDepositWithdrawHistoryAsync(TransactionType side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Withdraw assets from Binance to an address
@@ -399,7 +399,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, WalletType? walletType = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, WalletType? walletType = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the withdrawal history
@@ -421,7 +421,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="offset">["<c>offset</c>"] Add offset</param>
         /// <param name="ids">["<c>idList</c>"] Filter by withdrawal ids</param>
         /// <returns>List of withdrawals</returns>
-        Task<WebCallResult<BinanceWithdrawal[]>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, IEnumerable<string>? ids = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceWithdrawal[]>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, IEnumerable<string>? ids = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets withdrawal addresses
@@ -435,7 +435,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal addresses</returns>
-        Task<WebCallResult<BinanceWithdrawalAddress[]>> GetWithdrawalAddressesAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceWithdrawalAddress[]>> GetWithdrawalAddressesAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the deposit history
@@ -456,7 +456,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="includeSource">["<c>includeSource</c>"] Include source address to response</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of deposits</returns>
-        Task<WebCallResult<BinanceDeposit[]>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default);
+        Task<HttpResult<BinanceDeposit[]>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the deposit address for an asset
@@ -472,7 +472,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Deposit address</returns>
-        Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets all deposit addresses for an asset
@@ -488,7 +488,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Deposit addresses</returns>
-        Task<WebCallResult<BinanceDepositAddress[]>> GetDepositAddressesAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceDepositAddress[]>> GetDepositAddressesAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets personal margin level information for your account
@@ -502,7 +502,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Margin level information</returns>
-        Task<WebCallResult<BinanceMarginLevel>> GetMarginLevelInformationAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginLevel>> GetMarginLevelInformationAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Borrows an asset by submitting a margin loan request
@@ -520,7 +520,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Borrow transaction details</returns>
-        Task<WebCallResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Repays a margin loan
@@ -538,7 +538,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay transaction details</returns>
-        Task<WebCallResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets margin transfer history
@@ -558,7 +558,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of transfers</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceTransferHistory>>> GetMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets margin borrow records
@@ -580,7 +580,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Loan records</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetMarginLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceLoan>>> GetMarginLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets margin repay records
@@ -602,7 +602,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay records</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetMarginRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceRepay>>> GetMarginRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets margin interest history
@@ -623,7 +623,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of interest events</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetMarginInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceInterestHistory>>> GetMarginInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets margin interest rate history
@@ -642,7 +642,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Interest rate history</returns>
-        Task<WebCallResult<BinanceInterestRateHistory[]>> GetMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceInterestRateHistory[]>> GetMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets cross margin interest data
@@ -658,7 +658,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cross margin interest data</returns>
-        Task<WebCallResult<BinanceInterestMarginData[]>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceInterestMarginData[]>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get history of forced liquidations
@@ -677,7 +677,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of forced liquidations</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetMarginForcedLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetMarginForcedLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets cross margin account details
@@ -691,7 +691,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The margin account information</returns>
-        Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the maximum borrowable amount
@@ -707,7 +707,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Max quantity</returns>
-        Task<WebCallResult<BinanceMarginAmount>> GetMarginMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginAmount>> GetMarginMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the maximum transferable amount
@@ -723,7 +723,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Max quantity</returns>
-        Task<WebCallResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets isolated margin account information
@@ -737,7 +737,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Isolated margin account information</returns>
-        Task<WebCallResult<BinanceIsolatedMarginAccount>> GetIsolatedMarginAccountAsync(
+        Task<HttpResult<BinanceIsolatedMarginAccount>> GetIsolatedMarginAccountAsync(
             int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -752,7 +752,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Enabled isolated margin account limit</returns>
-        Task<WebCallResult<IsolatedMarginAccountLimit>> GetEnabledIsolatedMarginAccountLimitAsync(
+        Task<HttpResult<IsolatedMarginAccountLimit>> GetEnabledIsolatedMarginAccountLimitAsync(
             int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -768,7 +768,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Created isolated margin account details</returns>
-        Task<WebCallResult<CreateIsolatedMarginAccountResult>> EnableIsolatedMarginAccountAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<CreateIsolatedMarginAccountResult>> EnableIsolatedMarginAccountAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Disables an isolated margin account
@@ -783,7 +783,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Disabled isolated margin account details</returns>
-        Task<WebCallResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAccountAsync(string symbol,
+        Task<HttpResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAccountAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
@@ -798,7 +798,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Current margin order rate limit usage</returns>
-        Task<WebCallResult<BinanceCurrentRateLimit[]>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceCurrentRateLimit[]>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Creates a listenToken for subscribing to the cross margin user data stream.
@@ -814,7 +814,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="validity">["<c>validity</c>"] Validity of the token, max 24 hours</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>ListenToken and expiration time</returns>
-        Task<WebCallResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the trading status for the current account
@@ -828,7 +828,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The trading status of the account</returns>
-        Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the current used order rate limits
@@ -842,7 +842,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Current order rate limit usage</returns>
-        Task<WebCallResult<BinanceCurrentRateLimit[]>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceCurrentRateLimit[]>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets rebate history
@@ -859,7 +859,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Rebate history</returns>
-        Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets portfolio margin account information
@@ -873,7 +873,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Portfolio margin account information</returns>
-        Task<WebCallResult<BinancePortfolioMarginInfo>> GetPortfolioMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinancePortfolioMarginInfo>> GetPortfolioMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets portfolio margin account collateral rates
@@ -887,7 +887,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Portfolio margin collateral rates</returns>
-        Task<WebCallResult<BinancePortfolioMarginCollateralRate[]>> GetPortfolioMarginCollateralRateAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinancePortfolioMarginCollateralRate[]>> GetPortfolioMarginCollateralRateAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets portfolio margin bankruptcy loan amount
@@ -901,7 +901,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Portfolio margin bankruptcy loan information</returns>
-        Task<WebCallResult<BinancePortfolioMarginLoan>> GetPortfolioMarginBankruptcyLoanAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinancePortfolioMarginLoan>> GetPortfolioMarginBankruptcyLoanAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Repays portfolio margin bankruptcy loan
@@ -915,7 +915,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Repay transaction details</returns>
-        Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets BUSD convert history
@@ -936,7 +936,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>BUSD convert history</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceBusdHistory>>> GetBusdConvertHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceBusdHistory>>> GetBusdConvertHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets cloud mining payment and refund history
@@ -957,7 +957,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Cloud mining payment and refund history</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceCloudMiningHistory>>> GetCloudMiningHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceCloudMiningHistory>>> GetCloudMiningHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Adjusts cross margin maximum leverage
@@ -972,7 +972,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Updated cross margin leverage settings</returns>
-        Task<WebCallResult<BinanceCrossMarginLeverageResult>> CrossMarginAdjustMaxLeverageAsync(int maxLeverage, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceCrossMarginLeverageResult>> CrossMarginAdjustMaxLeverageAsync(int maxLeverage, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets isolated margin fee data for a specific VIP level or the current user level
@@ -988,7 +988,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Isolated margin fee data</returns>
-        Task<WebCallResult<BinanceIsolatedMarginFeeData[]>> GetIsolatedMarginFeeDataAsync(string? symbol = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceIsolatedMarginFeeData[]>> GetIsolatedMarginFeeDataAsync(string? symbol = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets cross and isolated margin capital flow data for the last 90 days
@@ -1009,7 +1009,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Margin capital flow data</returns>
-        Task<WebCallResult<BinanceMarginCapitalFlowData[]>> GetMarginCapitalFlowDataAsync(string? asset = null, string? symbol = null, CapitalTransactionType? type = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMarginCapitalFlowData[]>> GetMarginCapitalFlowDataAsync(string? asset = null, string? symbol = null, CapitalTransactionType? type = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets assets eligible for small liability exchange
@@ -1023,7 +1023,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Assets eligible for small liability exchange</returns>
-        Task<WebCallResult<BinanceSmallLiabilityAsset[]>> GetCrossMarginSmallLiabilityExchangeAssetsAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceSmallLiabilityAsset[]>> GetCrossMarginSmallLiabilityExchangeAssetsAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Executes a cross margin small liability exchange
@@ -1038,7 +1038,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
-        Task<WebCallResult> CrossMarginSmallLiabilityExchangeAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult> CrossMarginSmallLiabilityExchangeAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets small liability exchange history
@@ -1056,7 +1056,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Small liability exchange history</returns>
-        Task<WebCallResult<BinanceQueryRecords<BinanceSmallLiabilityHistory>>> GetCrossMarginSmallLiabilityExchangeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceQueryRecords<BinanceSmallLiabilityHistory>>> GetCrossMarginSmallLiabilityExchangeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the trade fee for a symbol
@@ -1071,7 +1071,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Trade fees</returns>
-        Task<WebCallResult<BinanceTradeFee[]>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceTradeFee[]>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets account VIP level and margin/futures enabled status
@@ -1085,7 +1085,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account VIP level and margin/futures status</returns>
-        Task<WebCallResult<BinanceVipLevelAndStatus>> GetAccountVipLevelAndStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceVipLevelAndStatus>> GetAccountVipLevelAndStatusAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets current account commission rates
@@ -1100,7 +1100,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Commission rates for the symbol</returns>
-        Task<WebCallResult<BinanceCommissions>> GetCommissionRatesAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceCommissions>> GetCommissionRatesAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Starts a risk data user stream by requesting a listen key. The stream closes after 60 minutes unless keep-alive requests are sent.
@@ -1113,7 +1113,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Listen key</returns>
-        Task<WebCallResult<string>> StartRiskDataUserStreamAsync(CancellationToken ct = default);
+        Task<HttpResult<string>> StartRiskDataUserStreamAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Sends a keep-alive for the current risk data user stream listen key. The stream auto-closes after 60 minutes if no keep-alive is sent.
@@ -1127,7 +1127,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">["<c>listenKey</c>"] The listen key to keep alive</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
-        Task<WebCallResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<HttpResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Stops the current user stream
@@ -1141,7 +1141,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="listenKey">["<c>listenKey</c>"] The listen key to stop</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>A successful response</returns>
-        Task<WebCallResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
+        Task<HttpResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default);
 
         /// <summary>
         /// Submit a withdraw request with questionnaire required for certain regions
@@ -1165,7 +1165,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Withdrawal confirmation</returns>
-        Task<WebCallResult<BinanceTravelWithdrawalResponse>> TravelRuleWithdrawAsync(
+        Task<HttpResult<BinanceTravelWithdrawalResponse>> TravelRuleWithdrawAsync(
             string asset,
             string address,
             decimal quantity,
@@ -1201,7 +1201,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="transactionIds">["<c>txId</c>"] Filter by transaction ids</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of withdrawals</returns>
-        Task<WebCallResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
+        Task<HttpResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
             string? asset = null,
             string? withdrawOrderId = null,
             TravelRuleApproveStatus? status = null,
@@ -1227,7 +1227,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule requirements</returns>
-        Task<WebCallResult<BinanceTravelRuleRequirement>> GetTravelRuleRequirementAsync(
+        Task<HttpResult<BinanceTravelRuleRequirement>> GetTravelRuleRequirementAsync(
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -1243,7 +1243,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule address verification list</returns>
-        Task<WebCallResult<BinanceTravelRuleAddress[]>> GetTravelRuleAddressVerificationListAsync(
+        Task<HttpResult<BinanceTravelRuleAddress[]>> GetTravelRuleAddressVerificationListAsync(
            int? receiveWindow = null,
            CancellationToken ct = default);
 
@@ -1259,7 +1259,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule VASP list</returns>
-        Task<WebCallResult<BinanceTravelRuleVasp[]>> GetTravelRuleVaspListAsync(
+        Task<HttpResult<BinanceTravelRuleVasp[]>> GetTravelRuleVaspListAsync(
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -1284,7 +1284,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule deposit history</returns>
-        Task<WebCallResult<BinanceTravelRuleDeposit[]>> GetTravelRuleDepositHistoryAsync(
+        Task<HttpResult<BinanceTravelRuleDeposit[]>> GetTravelRuleDepositHistoryAsync(
             string? asset = null,
             IEnumerable<string>? depositIds = null,
             IEnumerable<string>? transactionIds = null,
@@ -1311,7 +1311,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule questionnaire submission result</returns>
-        Task<WebCallResult<BinanceTravelRuleSubmitResult>> SubmitTravelRuleQuestionnaireAsync(
+        Task<HttpResult<BinanceTravelRuleSubmitResult>> SubmitTravelRuleQuestionnaireAsync(
             long depositId,
             BinanceDepositQuestionnaire questionnaire,
             int? receiveWindow = null,

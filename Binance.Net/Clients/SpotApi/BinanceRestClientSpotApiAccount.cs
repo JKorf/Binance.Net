@@ -26,7 +26,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Account info
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAccountInfo>> GetAccountInfoAsync(bool? omitZeroBalances = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAccountInfo>> GetAccountInfoAsync(bool? omitZeroBalances = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("omitZeroBalances", omitZeroBalances?.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
@@ -39,7 +39,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Fiat Payments History 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFiatPayment[]>> GetFiatPaymentHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFiatPayment[]>> GetFiatPaymentHistoryAsync(OrderSide side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -53,14 +53,17 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/fiat/payments", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceFiatPayment[]>>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data?.Data ?? []);
+            if (!result.Success)
+                return HttpResult.Fail<BinanceFiatPayment[]>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
 
         #region Get Fiat Deposit Withdraw History 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFiatWithdrawDeposit[]>> GetFiatDepositWithdrawHistoryAsync(TransactionType side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFiatWithdrawDeposit[]>> GetFiatDepositWithdrawHistoryAsync(TransactionType side, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -74,14 +77,17 @@ namespace Binance.Net.Clients.SpotApi
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/fiat/orders", BinanceExchange.RateLimiter.SpotRestUid, 9000, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceFiatWithdrawDeposit[]>>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data?.Data!);
+            if (!result.Success)
+                return HttpResult.Fail<BinanceFiatWithdrawDeposit[]>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
 
         #region Withdraw
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, WalletType? walletType = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceWithdrawalPlaced>> WithdrawAsync(string asset, string address, decimal quantity, string? withdrawOrderId = null, string? network = null, string? addressTag = null, string? name = null, bool? transactionFeeFlag = null, WalletType? walletType = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             address.ValidateNotNull(nameof(address));
@@ -108,7 +114,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Withdraw History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceWithdrawal[]>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, IEnumerable<string>? ids = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceWithdrawal[]>> GetWithdrawalHistoryAsync(string? asset = null, string? withdrawOrderId = null, WithdrawalStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? receiveWindow = null, int? limit = null, int? offset = null, IEnumerable<string>? ids = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("coin", asset);
@@ -131,7 +137,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Withdrawal Addresses
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceWithdrawalAddress[]>> GetWithdrawalAddressesAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceWithdrawalAddress[]>> GetWithdrawalAddressesAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -144,7 +150,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Deposit history        
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceDeposit[]>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceDeposit[]>> GetDepositHistoryAsync(string? asset = null, DepositStatus? status = null, DateTime? startTime = null, DateTime? endTime = null, int? offset = null, int? limit = null, int? receiveWindow = null, bool includeSource = false, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("coin", asset);
@@ -164,7 +170,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Deposit Address
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
 
@@ -184,7 +190,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Deposit Addresses
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceDepositAddress[]>> GetDepositAddressesAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceDepositAddress[]>> GetDepositAddressesAsync(string asset, string? network = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
 
@@ -203,43 +209,52 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Daily snapshots
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSpotAccountSnapshot[]>> GetDailySpotAccountSnapshotAsync(
+        public async Task<HttpResult<BinanceSpotAccountSnapshot[]>> GetDailySpotAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default)
         {
             var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceSpotAccountSnapshot[]>>(AccountType.Spot, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
-            if (result.Data.Code != 200)
-                return result.AsError<BinanceSpotAccountSnapshot[]>(new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+            if (!result.Success)
+                return HttpResult.Fail<BinanceSpotAccountSnapshot[]>(result);
 
-            return result.As(result.Data.SnapshotData);
+            if (result.Data.Code != 200)
+                return HttpResult.Fail<BinanceSpotAccountSnapshot[]>(result, new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+
+            return HttpResult.Ok(result, result.Data.SnapshotData);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginAccountSnapshot[]>> GetDailyMarginAccountSnapshotAsync(
+        public async Task<HttpResult<BinanceMarginAccountSnapshot[]>> GetDailyMarginAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default)
         {
             var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceMarginAccountSnapshot[]>>(AccountType.Margin, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
-            if (result.Data.Code != 200)
-                return result.AsError<BinanceMarginAccountSnapshot[]>(new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+            if (!result.Success)
+                return HttpResult.Fail<BinanceMarginAccountSnapshot[]>(result);
 
-            return result.As(result.Data.SnapshotData);
+            if (result.Data.Code != 200)
+                return HttpResult.Fail<BinanceMarginAccountSnapshot[]>(result, new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+
+            return HttpResult.Ok(result, result.Data.SnapshotData);
         }
 
         // TODO Should be moved
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFuturesAccountSnapshot[]>> GetDailyFutureAccountSnapshotAsync(
+        public async Task<HttpResult<BinanceFuturesAccountSnapshot[]>> GetDailyFutureAccountSnapshotAsync(
             DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default)
         {
             var result = await GetDailyAccountSnapshot<BinanceSnapshotWrapper<BinanceFuturesAccountSnapshot[]>>(AccountType.Futures, startTime, endTime, limit, receiveWindow, ct).ConfigureAwait(false);
-            if (result.Data.Code != 200)
-                return result.AsError<BinanceFuturesAccountSnapshot[]>(new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+            if (!result.Success)
+                return HttpResult.Fail<BinanceFuturesAccountSnapshot[]>(result);
 
-            return result.As(result.Data.SnapshotData);
+            if (result.Data.Code != 200)
+                return HttpResult.Fail<BinanceFuturesAccountSnapshot[]>(result, new ServerError(result.Data.Code.ToString(), _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
+
+            return HttpResult.Ok(result, result.Data.SnapshotData);
         }
 
-        private async Task<WebCallResult<T>> GetDailyAccountSnapshot<T>(AccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
+        private async Task<HttpResult<T>> GetDailyAccountSnapshot<T>(AccountType accountType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null,
             CancellationToken ct = default) where T : class
         {
             limit?.ValidateIntBetween(nameof(limit), 7, 30);
@@ -259,7 +274,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Account status
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAccountStatus>> GetAccountStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -271,7 +286,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Funding Wallet
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceFundingAsset[]>> GetFundingWalletAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFundingAsset[]>> GetFundingWalletAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("asset", asset);
@@ -285,7 +300,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region API Key Permission
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceAPIKeyPermissions>> GetAPIKeyPermissionsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -297,7 +312,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region User coins
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceUserAsset[]>> GetUserAssetsAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceUserAsset[]>> GetUserAssetsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -309,7 +324,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Balances
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceUserBalance[]>> GetBalancesAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceUserBalance[]>> GetBalancesAsync(string? asset = null, bool? needBtcValuation = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -323,7 +338,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Wallet Balances
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceWalletBalance[]>> GetWalletBalancesAsync(string quoteAsset = "BTC", int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceWalletBalance[]>> GetWalletBalancesAsync(string quoteAsset = "BTC", int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("quoteAsset", quoteAsset);
@@ -336,7 +351,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Asset Dividend Records
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceDividendRecord>>> GetAssetDividendRecordsAsync(string? asset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("asset", asset);
@@ -352,7 +367,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Disable Fast Withdraw Switch
         /// <inheritdoc />
-        public async Task<WebCallResult> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult> DisableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -365,7 +380,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Enable Fast Withdraw Switch
         /// <inheritdoc />
-        public async Task<WebCallResult> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult> EnableFastWithdrawSwitchAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -377,7 +392,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region DustLog
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceDustLogList>> GetDustLogAsync(DateTime? startTime = null, DateTime? endTime = null, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("accountType", accountType);
@@ -393,7 +408,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Dust Transfer
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceDustTransferResult>> DustTransferAsync(IEnumerable<string> assets, AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var assetsArray = assets.ToArray();
 
@@ -416,7 +431,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Dust Elligable
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceEligibleDusts>> GetAssetsForDustTransferAsync(AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceEligibleDusts>> GetAssetsForDustTransferAsync(AccountType? accountType = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("accountType", accountType);
@@ -430,7 +445,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get BNB Burn Status
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceBnbBurnStatus>> GetBnbBurnStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -442,7 +457,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Set BNB Burn Status
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceBnbBurnStatus>> SetBnbBurnStatusAsync(bool? spotTrading = null, bool? marginInterest = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceBnbBurnStatus>> SetBnbBurnStatusAsync(bool? spotTrading = null, bool? marginInterest = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             if (spotTrading == null && marginInterest == null)
                 throw new ArgumentException("SpotTrading or MarginInterest should be provided");
@@ -459,7 +474,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region User Universal Transfer
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal quantity, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTransaction>> TransferAsync(UniversalTransferType type, string asset, decimal quantity, string? fromSymbol = null, string? toSymbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -479,7 +494,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get User Universal Transfers
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfersAsync(UniversalTransferType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceTransfer>>> GetTransfersAsync(UniversalTransferType type, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("type", type);
@@ -497,7 +512,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Level Information
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginLevel>> GetMarginLevelInformationAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginLevel>> GetMarginLevelInformationAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -511,7 +526,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Account Borrow
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTransaction>> MarginBorrowAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             if (isIsolated == true && symbol == null)
@@ -536,7 +551,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Margin Account Repay
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTransaction>> MarginRepayAsync(string asset, decimal quantity, bool? isIsolated = null, string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
@@ -558,7 +573,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cross Margin Adjust Max Leverage
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCrossMarginLeverageResult>> CrossMarginAdjustMaxLeverageAsync(int maxLeverage, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCrossMarginLeverageResult>> CrossMarginAdjustMaxLeverageAsync(int maxLeverage, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -575,7 +590,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Transfer History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceTransferHistory>>> GetMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceTransferHistory>>> GetMarginTransferHistoryAsync(TransferDirection direction, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
 
@@ -597,7 +612,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Loan Record
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceLoan>>> GetMarginLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceLoan>>> GetMarginLoansAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = 1, int? limit = 10, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -634,7 +649,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Repay Record
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceRepay>>> GetMarginRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceRepay>>> GetMarginRepaysAsync(string asset, long? transactionId = null, DateTime? startTime = null, DateTime? endTime = null, int? current = null, int? size = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
@@ -670,7 +685,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Cross Margin Interest Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceInterestMarginData[]>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceInterestMarginData[]>> GetInterestMarginDataAsync(string? asset = null, string? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset?.ValidateNotNull(nameof(asset));
 
@@ -690,7 +705,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Interest History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceInterestHistory>>> GetMarginInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceInterestHistory>>> GetMarginInterestHistoryAsync(string? asset = null, int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, bool? archived = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
@@ -712,7 +727,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Interest Rate History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceInterestRateHistory[]>> GetMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceInterestRateHistory[]>> GetMarginInterestRateHistoryAsync(string asset, string? vipLevel = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset?.ValidateNotNull(nameof(asset));
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
@@ -735,7 +750,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Force Liquidation Record
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetMarginForcedLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceForcedLiquidation>>> GetMarginForcedLiquidationHistoryAsync(int? page = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 100);
 
@@ -756,7 +771,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Margin Account Details
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginAccount>> GetMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -770,7 +785,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Max Borrow
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginAmount>> GetMarginMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginAmount>> GetMarginMaxBorrowAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
 
@@ -791,7 +806,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query Max Transfer-Out Amount
 
         /// <inheritdoc />
-        public async Task<WebCallResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<decimal>> GetMarginMaxTransferAmountAsync(string asset, string? isolatedSymbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             asset.ValidateNotNull(nameof(asset));
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
@@ -805,10 +820,10 @@ namespace Binance.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/margin/maxTransferable", BinanceExchange.RateLimiter.SpotRestIp, 50, true);
             var result = await _baseClient.SendAsync<BinanceMarginAmount>(request, parameters, ct).ConfigureAwait(false);
 
-            if (!result)
-                return result.As<decimal>(default);
+            if (!result.Success)
+                return HttpResult.Fail<decimal>(result);
 
-            return result.As(result.Data.Quantity);
+            return HttpResult.Ok(result, result.Data.Quantity);
         }
 
         #endregion
@@ -816,7 +831,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Query isolated margin account
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIsolatedMarginAccount>> GetIsolatedMarginAccountAsync(
+        public async Task<HttpResult<BinanceIsolatedMarginAccount>> GetIsolatedMarginAccountAsync(
             int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
@@ -834,7 +849,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Disable isolated margin account
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAccountAsync(string symbol,
+        public async Task<HttpResult<CreateIsolatedMarginAccountResult>> DisableIsolatedMarginAccountAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
@@ -855,7 +870,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Enable isolated margin account
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CreateIsolatedMarginAccountResult>> EnableIsolatedMarginAccountAsync(string symbol,
+        public async Task<HttpResult<CreateIsolatedMarginAccountResult>> EnableIsolatedMarginAccountAsync(string symbol,
             int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
@@ -876,7 +891,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get enabled isolated margin account
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IsolatedMarginAccountLimit>> GetEnabledIsolatedMarginAccountLimitAsync(
+        public async Task<HttpResult<IsolatedMarginAccountLimit>> GetEnabledIsolatedMarginAccountLimitAsync(
             int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
@@ -892,7 +907,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Margin order rate limit
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCurrentRateLimit[]>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCurrentRateLimit[]>> GetMarginOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -904,7 +919,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Margin User Listen Token
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListenToken>> GetMarginUserListenTokenAsync(string? symbol = null, TimeSpan? validity = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -919,11 +934,14 @@ namespace Binance.Net.Clients.SpotApi
         #region Create a Risk Data ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult<string>> StartRiskDataUserStreamAsync(CancellationToken ct = default)
+        public async Task<HttpResult<string>> StartRiskDataUserStreamAsync(CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/margin/listen-key", BinanceExchange.RateLimiter.SpotRestUid, 3000);
             var result = await _baseClient.SendAsync<BinanceListenKey>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ListenKey!);
+            if (!result.Success)
+                return HttpResult.Fail<string>(result);
+
+            return HttpResult.Ok(result, result.Data.ListenKey!);
         }
 
         #endregion
@@ -931,7 +949,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Ping/Keep-alive a Risk Data ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<HttpResult> KeepAliveRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
 
@@ -949,7 +967,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Invalidate a Risk Data ListenKey
 
         /// <inheritdoc />
-        public async Task<WebCallResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<HttpResult> StopRiskDataUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             listenKey.ValidateNotNull(nameof(listenKey));
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
@@ -965,23 +983,25 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Trading status
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTradingStatus>> GetTradingStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/account/apiTradingStatus", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceTradingStatus>>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result.As<BinanceTradingStatus>(default);
+            if (!result.Success)
+                return HttpResult.Fail<BinanceTradingStatus>(result);
 
-            return !string.IsNullOrEmpty(result.Data.Message) ? result.AsError<BinanceTradingStatus>(new ServerError(ErrorInfo.Unknown with { Message = result.Data.Message! })) : result.As(result.Data.Data);
+            return !string.IsNullOrEmpty(result.Data.Message) 
+                ? HttpResult.Fail<BinanceTradingStatus>(result, new ServerError(ErrorInfo.Unknown with { Message = result.Data.Message! })) 
+                : HttpResult.Ok(result, result.Data.Data);
         }
         #endregion
 
         #region Order rate limit
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCurrentRateLimit[]>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCurrentRateLimit[]>> GetOrderRateLimitStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -994,7 +1014,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Rebate
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceRebateWrapper>> GetRebateHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1005,12 +1025,12 @@ namespace Binance.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/rebate/taxQuery", BinanceExchange.RateLimiter.SpotRestUid, 12000, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceRebateWrapper>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<BinanceRebateWrapper>(default);
+                return HttpResult.Fail<BinanceRebateWrapper>(result);
 
             if (result.Data?.Code != 0)
-                return result.AsError<BinanceRebateWrapper>(new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
+                return HttpResult.Fail<BinanceRebateWrapper>(result, new ServerError(result.Data!.Code.ToString(), _baseClient.GetErrorInfo(result.Data!.Code, result.Data!.Message)));
 
-            return result.As(result.Data.Data);
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -1018,7 +1038,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Portfolio margin
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePortfolioMarginInfo>> GetPortfolioMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinancePortfolioMarginInfo>> GetPortfolioMarginAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1028,7 +1048,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePortfolioMarginCollateralRate[]>> GetPortfolioMarginCollateralRateAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinancePortfolioMarginCollateralRate[]>> GetPortfolioMarginCollateralRateAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1038,7 +1058,7 @@ namespace Binance.Net.Clients.SpotApi
 
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinancePortfolioMarginLoan>> GetPortfolioMarginBankruptcyLoanAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinancePortfolioMarginLoan>> GetPortfolioMarginBankruptcyLoanAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1047,7 +1067,7 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTransaction>> PortfolioMarginBankruptcyLoanRepayAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1060,7 +1080,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Convert BUSD history
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceBusdHistory>>> GetBusdConvertHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceBusdHistory>>> GetBusdConvertHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1080,7 +1100,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Cloud Mining History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceCloudMiningHistory>>> GetCloudMiningHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceCloudMiningHistory>>> GetCloudMiningHistoryAsync(DateTime startTime, DateTime endTime, long? transferId = null, string? clientTransferId = null, string? asset = null, int? page = null, int? pageSize = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1100,7 +1120,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Isolated Margin Fee Data
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceIsolatedMarginFeeData[]>> GetIsolatedMarginFeeDataAsync(string? symbol = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceIsolatedMarginFeeData[]>> GetIsolatedMarginFeeDataAsync(string? symbol = null, int? vipLevel = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -1117,7 +1137,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Cross Isolated Margin Capital Flow Records
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceMarginCapitalFlowData[]>> GetMarginCapitalFlowDataAsync(string? asset = null, string? symbol = null, CapitalTransactionType? type = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceMarginCapitalFlowData[]>> GetMarginCapitalFlowDataAsync(string? asset = null, string? symbol = null, CapitalTransactionType? type = null, DateTime? startTime = null, DateTime? endTime = null, long? fromId = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("asset", asset);
@@ -1138,7 +1158,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Small Liability Exchange Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceSmallLiabilityAsset[]>> GetCrossMarginSmallLiabilityExchangeAssetsAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceSmallLiabilityAsset[]>> GetCrossMarginSmallLiabilityExchangeAssetsAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1152,7 +1172,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Small Liability Exchange Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult> CrossMarginSmallLiabilityExchangeAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult> CrossMarginSmallLiabilityExchangeAsync(IEnumerable<string> assets, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
@@ -1169,7 +1189,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Small Liability Exchange History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceQueryRecords<BinanceSmallLiabilityHistory>>> GetCrossMarginSmallLiabilityExchangeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceQueryRecords<BinanceSmallLiabilityHistory>>> GetCrossMarginSmallLiabilityExchangeHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? limit = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
@@ -1187,7 +1207,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Trade Fee
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTradeFee[]>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceTradeFee[]>> GetTradeFeeAsync(string? symbol = null, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -1206,7 +1226,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Account VIP level and margin/futures enabled status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceVipLevelAndStatus>> GetAccountVipLevelAndStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceVipLevelAndStatus>> GetAccountVipLevelAndStatusAsync(int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
@@ -1220,7 +1240,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Trade Fee
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCommissions>> GetCommissionRatesAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCommissions>> GetCommissionRatesAsync(string symbol, int? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -1234,7 +1254,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Travel Rule Withdraw
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelWithdrawalResponse>> TravelRuleWithdrawAsync(
+        public async Task<HttpResult<BinanceTravelWithdrawalResponse>> TravelRuleWithdrawAsync(
             string asset,
             string address,
             decimal quantity,
@@ -1274,7 +1294,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Travel Rule Withdraw History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
+        public async Task<HttpResult<BinanceTravelRuleWithdrawal[]>> GetTravelRuleWithdrawalHistoryAsync(
             string? asset = null,
             string? withdrawOrderId = null, 
             TravelRuleApproveStatus? status = null,
@@ -1309,7 +1329,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Travel Rule Deposit History
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleDeposit[]>> GetTravelRuleDepositHistoryAsync(
+        public async Task<HttpResult<BinanceTravelRuleDeposit[]>> GetTravelRuleDepositHistoryAsync(
             string? asset = null,
             IEnumerable<string>? depositIds = null,
             IEnumerable<string>? transactionIds = null,
@@ -1342,7 +1362,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Travel Rule Requirement
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleRequirement>> GetTravelRuleRequirementAsync(
+        public async Task<HttpResult<BinanceTravelRuleRequirement>> GetTravelRuleRequirementAsync(
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -1354,20 +1374,23 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Travel Rule Address Verification List
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleAddress[]>> GetTravelRuleAddressVerificationListAsync(
+        public async Task<HttpResult<BinanceTravelRuleAddress[]>> GetTravelRuleAddressVerificationListAsync(
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/addressVerify/list", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
             var result = await _baseClient.SendAsync<BinanceTravelRuleAddressWrapper>(request, null, ct).ConfigureAwait(false);
-            return result.As<BinanceTravelRuleAddress[]>(result.Data?.Addresses);
+            if (!result.Success)
+                return HttpResult.Fail<BinanceTravelRuleAddress[]>(result);
+
+            return HttpResult.Ok(result, result.Data.Addresses);
         }
 
         #endregion
 
         #region Get Travel Rule VASP list
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleVasp[]>> GetTravelRuleVaspListAsync(
+        public async Task<HttpResult<BinanceTravelRuleVasp[]>> GetTravelRuleVaspListAsync(
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
@@ -1379,7 +1402,7 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Submit Travel Rule Questionnaire
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleSubmitResult>> SubmitTravelRuleQuestionnaireAsync(
+        public async Task<HttpResult<BinanceTravelRuleSubmitResult>> SubmitTravelRuleQuestionnaireAsync(
             long depositId,
             BinanceDepositQuestionnaire questionnaire,
             int? receiveWindow = null,
@@ -1390,11 +1413,11 @@ namespace Binance.Net.Clients.SpotApi
             parameters.Add("questionnaire", questionnaire.Serialize());
             var request = _definitions.GetOrCreate(HttpMethod.Put, "sapi/v2/localentity/deposit/provide-info", BinanceExchange.RateLimiter.SpotRestUid, 600, true, parameterPosition: HttpMethodParameterPosition.InUri);
             var result = await _baseClient.SendAsync<BinanceTravelRuleSubmitResult>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
+            if (!result.Success)
                 return result;
 
             if (!result.Data.Accepted)
-                return result.AsError<BinanceTravelRuleSubmitResult>(new ServerError(ErrorInfo.Unknown with { Message = result.Data.Info }));
+                return HttpResult.Fail<BinanceTravelRuleSubmitResult>(result, new ServerError(ErrorInfo.Unknown with { Message = result.Data.Info }));
 
             return result;
         }

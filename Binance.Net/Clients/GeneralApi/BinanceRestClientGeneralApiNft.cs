@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region  Get NFT Deposit History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftDeposit>>> GetNftDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftDeposit>>> GetNftDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("startTime", startTime);
@@ -37,7 +37,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get NFT Withdraw History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftWithdraw>>> GetNftWithdrawHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftWithdraw>>> GetNftWithdrawHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("startTime", startTime);
@@ -55,7 +55,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get NFT Transaction History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftTransaction>>> GetNftTransactionHistoryAsync(NftOrderType orderType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftTransaction>>> GetNftTransactionHistoryAsync(NftOrderType orderType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("orderType", orderType);
@@ -74,7 +74,7 @@ namespace Binance.Net.Clients.GeneralApi
         #region  Get NFT Asset
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftAsset>>> GetNftAssetAsync(int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftAsset>>> GetNftAssetAsync(int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("limit", limit);

@@ -8,7 +8,7 @@ namespace Binance.Net.Objects.Sockets
     {
         public BinanceSystemQuery(BinanceSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
-            MessageRouter = MessageRouter.CreateWithoutHandler<T>(request.Id.ToString());
+            MessageRouter = MessageRouter.CreateVoid<T>(request.Id.ToString());
         }
     }
 }

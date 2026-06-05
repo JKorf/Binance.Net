@@ -18,7 +18,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region If New User
 
-        public async Task<WebCallResult<BinanceFuturesIfNewUser>> GetIfNewUserAsync(string brokerId, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesIfNewUser>> GetIfNewUserAsync(string brokerId, int? receiveWindow = null, CancellationToken ct = default)
         {
             brokerId.ValidateNotNull(nameof(brokerId));
 

@@ -21,11 +21,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Queries
 
-
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
@@ -38,7 +37,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
@@ -47,11 +46,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #endregion
 
-
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
@@ -67,7 +65,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region User Data Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate = null,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,

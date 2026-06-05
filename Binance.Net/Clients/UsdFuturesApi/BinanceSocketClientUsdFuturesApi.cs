@@ -52,7 +52,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// Create a new instance of BinanceSocketClientUsdFuturesStreams
         /// </summary>
         internal BinanceSocketClientUsdFuturesApi(ILogger logger, BinanceSocketOptions options) :
-            base(logger, options.Environment.UsdFuturesSocketAddress!, options, options.UsdFuturesOptions)
+            base(logger, BinanceExchange.Metadata.Id,options.Environment.UsdFuturesSocketAddress!, options, options.UsdFuturesOptions)
         {
             Account = new BinanceSocketClientUsdFuturesApiAccount(logger, this);
             ExchangeData = new BinanceSocketClientUsdFuturesApiExchangeData(logger, this);
@@ -81,13 +81,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public IBinanceSocketClientUsdFuturesApiShared SharedClient => this;
 
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+        internal Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
             string url,
             string[] topics,
             Action<U> onData,
@@ -111,12 +111,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 ct);
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
         {
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
+        internal async Task<WebSocketResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {

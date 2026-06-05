@@ -26,27 +26,27 @@ namespace Binance.Net.Benchmark.Client
 
                 AddJob(
                     baseJob
-                        .WithId("NET10_0 - 12.11.1")
-                        .WithNuGet("Binance.Net", "12.11.1")
+                        .WithId("NET10_0 - 12.13.0")
+                        .WithNuGet("Binance.Net", "12.13.0")
                         .WithIterationCount(20)
                         .WithRuntime(CoreRuntime.Core10_0));
                 AddJob(
                     baseJob
-                        .WithId("NET481 -  12.11.1")
-                        .WithNuGet("Binance.Net", "12.11.1")
+                        .WithId("NET481 -  12.13.0")
+                        .WithNuGet("Binance.Net", "12.13.0")
                         .WithIterationCount(20)
                         .WithRuntime(ClrRuntime.Net48));
 
                 AddJob(
                     baseJob
-                        .WithId("NET10_0 - 12.11.3")
-                        .WithNuGet("Binance.Net", "12.11.3")
+                        .WithId("NET10_0 - 13.0.0")
+                        .WithNuGet("Binance.Net", "13.0.0-beta1")
                         .WithIterationCount(20)
                         .WithRuntime(CoreRuntime.Core10_0));
                 AddJob(
                     baseJob
-                        .WithId("NET481 -  12.11.3")
-                        .WithNuGet("Binance.Net", "12.11.3")
+                        .WithId("NET481 -  13.0.0")
+                        .WithNuGet("Binance.Net", "13.0.0-beta1")
                         .WithIterationCount(20)
                         .WithRuntime(ClrRuntime.Net48));
             }

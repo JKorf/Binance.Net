@@ -33,8 +33,8 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _lk = listenKey;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>.CreateWithoutTopicFilter("MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>.CreateWithoutTopicFilter("USER_LIABILITY_CHANGE", DoHandleMessage)
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceMarginCallUpdate>>("MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceLiabilityUpdate>>("USER_LIABILITY_CHANGE", DoHandleMessage)
                 ]);
         }
 
@@ -74,7 +74,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -90,7 +90,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }

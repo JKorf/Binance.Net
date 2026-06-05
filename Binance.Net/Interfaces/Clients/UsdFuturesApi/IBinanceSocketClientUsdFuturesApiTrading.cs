@@ -35,7 +35,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Placed order response</returns>
-        Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> PlaceOrderAsync(string symbol,
+        Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> PlaceOrderAsync(string symbol,
             Enums.OrderSide side,
             FuturesOrderType type,
             decimal? quantity,
@@ -71,7 +71,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Edited order response</returns>
-        Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancels a pending order
@@ -83,7 +83,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Canceled order response</returns>
-        Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -95,7 +95,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
-        Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets position information
@@ -105,7 +105,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Position information response</returns>
-        Task<CallResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<WebSocketResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Places a new conditional order
@@ -132,7 +132,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Placed conditional order response</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> PlaceConditionalOrderAsync(
+        Task<WebSocketResult<BinanceResponse<BinanceFuturesConditionalOrder>>> PlaceConditionalOrderAsync(
             string symbol,
             Enums.OrderSide side,
             ConditionalOrderType type,
@@ -163,7 +163,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Canceled conditional order response</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> CancelConditionalOrderAsync(
+        Task<WebSocketResult<BinanceResponse<BinanceFuturesConditionalOrder>>> CancelConditionalOrderAsync(
             long? orderId = null,
             string? clientOrderId = null,
             long? receiveWindow = null,

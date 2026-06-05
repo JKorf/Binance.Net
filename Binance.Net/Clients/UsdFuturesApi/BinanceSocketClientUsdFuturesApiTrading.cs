@@ -21,7 +21,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> PlaceOrderAsync(string symbol,
+        public async Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> PlaceOrderAsync(string symbol,
             Enums.OrderSide side,
             FuturesOrderType type,
             decimal? quantity,
@@ -90,7 +90,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Edit Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal? price = null, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -125,7 +125,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(origClientOrderId))
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -155,7 +155,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceUsdFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             if (orderId == null && origClientOrderId == null)
                 throw new ArgumentException("Either orderId or origClientOrderId must be sent");
@@ -185,7 +185,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Positions
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<WebSocketResult<BinanceResponse<BinancePositionV3[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
@@ -199,7 +199,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Place Conditional Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> PlaceConditionalOrderAsync(
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesConditionalOrder>>> PlaceConditionalOrderAsync(
             string symbol,
             Enums.OrderSide side,
             ConditionalOrderType type,
@@ -257,7 +257,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Cancel Conditional Order
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesConditionalOrder>>> CancelConditionalOrderAsync(
+        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesConditionalOrder>>> CancelConditionalOrderAsync(
             long? orderId = null,
             string? clientOrderId = null,
             long? receiveWindow = null,
