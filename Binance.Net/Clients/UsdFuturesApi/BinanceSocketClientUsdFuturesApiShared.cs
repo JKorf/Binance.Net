@@ -29,7 +29,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
-            var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
+            var symbols = request.SymbolNames(FormatSymbol);
             var result = await ExchangeData.SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.PriceChangePercent)
             {
                 QuoteVolume = update.Data.QuoteVolume
@@ -83,7 +83,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
-            var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
+            var symbols = request.SymbolNames(FormatSymbol);
             var result = await ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(symbols, update => handler(update.ToType(new[]
             { 
                 new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.Quantity, update.Data.Price, update.Data.TradeTime)
@@ -110,7 +110,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
-            var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
+            var symbols = request.SymbolNames(FormatSymbol);
             var result = await ExchangeData.SubscribeToBookTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
 
             return result;
@@ -235,7 +235,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
-            var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
+            var symbols = request.SymbolNames(FormatSymbol);
             var result = await ExchangeData.SubscribeToKlineUpdatesAsync(symbols, (KlineInterval)request.Interval, update => handler(update.ToType(
                 new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.Data.OpenTime, update.Data.Data.ClosePrice, update.Data.Data.HighPrice, update.Data.Data.LowPrice, update.Data.Data.OpenPrice, update.Data.Data.Volume))), false, false, ct).ConfigureAwait(false);
 
@@ -255,7 +255,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (validationError != null)
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
-            var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
+            var symbols = request.SymbolNames(FormatSymbol);
             var result = await ExchangeData.SubscribeToPartialOrderBookUpdatesAsync(symbols, request.Limit ?? 20, 100, update => handler(update.ToType(new SharedOrderBook(update.Data.Asks, update.Data.Bids))), ct).ConfigureAwait(false);
 
             return result;

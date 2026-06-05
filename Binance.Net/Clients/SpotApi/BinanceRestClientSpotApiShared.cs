@@ -30,7 +30,7 @@ namespace Binance.Net.Clients.SpotApi
                 return HttpResult.Fail<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var direction = request.Direction ?? DataDirection.Ascending;
-            var symbol = request.Symbol!.GetSymbol(FormatSymbol);
+            var symbol = request.SymbolName(FormatSymbol);
             var limit = request.Limit ?? 1000;
             var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
 
@@ -372,7 +372,7 @@ namespace Binance.Net.Clients.SpotApi
                 price: request.Price,
                 timeInForce: GetTimeInForce(request.TimeInForce, request.OrderType),
                 newClientOrderId: request.ClientOrderId,
-                //additionalParameters: request.ExchangeParameters?.GetCollection(Exchange),
+                additionalParameters: request.ExchangeParameters?.GetRawParameters(Exchange),
                 ct: ct).ConfigureAwait(false);
 
             if (!result.Success)
