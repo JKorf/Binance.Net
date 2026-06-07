@@ -27,7 +27,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/positionSide/dual", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/positionSide/dual", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -41,7 +41,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/positionSide/dual", BinanceExchange.RateLimiter.FuturesRest, 30, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/positionSide/dual", BinanceExchange.RateLimiter.FuturesRest, 30, true);
             return await _baseClient.SendAsync<BinanceFuturesPositionMode>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -59,7 +59,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/leverage", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/leverage", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesInitialLeverageChangeResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -77,7 +77,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.Add("marginType", marginType);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/marginType", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/marginType", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesChangeMarginTypeResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -97,7 +97,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.Add("positionSide", positionSide);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/positionMargin", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/positionMargin", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesPositionMarginResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -118,7 +118,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/positionMargin/history", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/positionMargin/history", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesMarginChangeHistoryResult[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -140,7 +140,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/income", BinanceExchange.RateLimiter.FuturesRest, 30, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/income", BinanceExchange.RateLimiter.FuturesRest, 30, true);
             return await _baseClient.SendAsync<BinanceFuturesIncomeHistory[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -155,7 +155,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("symbol", symbolOrPair);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/leverageBracket", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/leverageBracket", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceFuturesSymbolBracket[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -172,11 +172,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             if (symbol == null)
             {
-                var request1 = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/adlQuantile", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+                var request1 = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/adlQuantile", BinanceExchange.RateLimiter.FuturesRest, 5, true);
                 return await _baseClient.SendAsync<BinanceFuturesQuantileEstimation[]>(request1, parameters, ct).ConfigureAwait(false);
             }
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/adlQuantile", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/adlQuantile", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var result = await _baseClient.SendAsync<BinanceFuturesQuantileEstimation>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceFuturesQuantileEstimation[]>(result);
@@ -190,7 +190,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<HttpResult<string>> StartUserStreamAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/listenKey", BinanceExchange.RateLimiter.FuturesRest, 1);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/listenKey", BinanceExchange.RateLimiter.FuturesRest, 1);
             var result = await _baseClient.SendAsync<Objects.Models.Spot.BinanceListenKey>(request, null, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<string>(result);
@@ -212,7 +212,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "listenKey", listenKey }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Put, "fapi/v1/listenKey", BinanceExchange.RateLimiter.FuturesRest, 1);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, _baseClient.BaseAddress, "fapi/v1/listenKey", BinanceExchange.RateLimiter.FuturesRest, 1);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -229,7 +229,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 { "listenKey", listenKey }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, "fapi/v1/listenKey", BinanceExchange.RateLimiter.FuturesRest, 1);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, _baseClient.BaseAddress, "fapi/v1/listenKey", BinanceExchange.RateLimiter.FuturesRest, 1);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -243,7 +243,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v2/account", BinanceExchange.RateLimiter.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/fapi/v2/account", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinanceFuturesAccountInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -256,7 +256,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v3/account", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/fapi/v3/account", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var result = await _baseClient.SendAsync<BinanceFuturesAccountInfoV3>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -271,7 +271,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v3/balance", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v3/balance", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             return await _baseClient.SendAsync<BinanceUsdFuturesAccountBalance[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -285,7 +285,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/multiAssetsMargin", BinanceExchange.RateLimiter.FuturesRest, 30, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/multiAssetsMargin", BinanceExchange.RateLimiter.FuturesRest, 30, true);
             return await _baseClient.SendAsync<BinanceFuturesMultiAssetMode>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -298,7 +298,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/multiAssetsMargin", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/multiAssetsMargin", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -313,7 +313,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v2/positionRisk", BinanceExchange.RateLimiter.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v2/positionRisk", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinancePositionDetailsUsdt[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -326,7 +326,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/apiTradingStatus", BinanceExchange.RateLimiter.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/apiTradingStatus", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinanceFuturesTradingStatus>(request, parameters, ct).ConfigureAwait(false);
 
         }
@@ -342,7 +342,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/commissionRate", BinanceExchange.RateLimiter.FuturesRest, 20, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/commissionRate", BinanceExchange.RateLimiter.FuturesRest, 20, true);
             return await _baseClient.SendAsync<BinanceFuturesAccountUserCommissionRate>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -358,7 +358,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/income/asyn", BinanceExchange.RateLimiter.FuturesRest, 1500, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/income/asyn", BinanceExchange.RateLimiter.FuturesRest, 1500, true);
             return await _baseClient.SendAsync<BinanceFuturesDownloadIdInfo>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -373,7 +373,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/income/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/income/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinanceFuturesDownloadLink>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -389,7 +389,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/order/asyn", BinanceExchange.RateLimiter.FuturesRest, 1500, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/order/asyn", BinanceExchange.RateLimiter.FuturesRest, 1500, true);
             return await _baseClient.SendAsync<BinanceFuturesDownloadIdInfo>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -404,7 +404,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/order/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/order/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinanceFuturesDownloadLink>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -420,7 +420,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/trade/asyn", BinanceExchange.RateLimiter.FuturesRest, 1500, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/trade/asyn", BinanceExchange.RateLimiter.FuturesRest, 1500, true);
             return await _baseClient.SendAsync<BinanceFuturesDownloadIdInfo>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -435,7 +435,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/trade/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 10, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/trade/asyn/id", BinanceExchange.RateLimiter.FuturesRest, 10, true);
             return await _baseClient.SendAsync<BinanceFuturesDownloadLink>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -448,7 +448,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/rateLimit/order", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/rateLimit/order", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync<BinanceRateLimit[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -462,7 +462,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/feeBurn", BinanceExchange.RateLimiter.FuturesRest, 30, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/feeBurn", BinanceExchange.RateLimiter.FuturesRest, 30, true);
             return await _baseClient.SendAsync<BinanceFuturesBnbBurnStatus>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -479,7 +479,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "fapi/v1/feeBurn", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "fapi/v1/feeBurn", BinanceExchange.RateLimiter.FuturesRest, 1, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -493,7 +493,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/symbolConfig", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/fapi/v1/symbolConfig", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var result = await _baseClient.SendAsync<BinanceSymbolConfiguration[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -507,7 +507,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/fapi/v1/accountConfig", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/fapi/v1/accountConfig", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             var result = await _baseClient.SendAsync<BinanceFuturesAccountConfiguration>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -522,7 +522,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/fapi/v1/stock/contract", BinanceExchange.RateLimiter.FuturesRest, 50, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/fapi/v1/stock/contract", BinanceExchange.RateLimiter.FuturesRest, 50, true);
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 

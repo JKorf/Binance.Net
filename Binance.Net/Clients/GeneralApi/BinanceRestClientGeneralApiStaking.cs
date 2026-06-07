@@ -27,7 +27,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/eth/stake", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/stake", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -41,7 +41,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/eth/redeem", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/redeem", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -56,7 +56,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/eth/history/stakingHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/history/stakingHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceStakingHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -70,7 +70,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/eth/history/redemptionHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/history/redemptionHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceRedemptionHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -84,7 +84,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/eth/history/rewardsHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/history/rewardsHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceEthRewardsHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -94,7 +94,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/eth/quota", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/quota", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceEthStakingQuota>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -108,7 +108,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/eth/history/rateHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/eth/history/rateHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceBethRateHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -118,7 +118,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/account", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/account", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceEthStakingAccount>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -131,7 +131,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/eth-staking/wbeth/wrap", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/eth-staking/wbeth/wrap", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -146,7 +146,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/wbeth/history/wrapHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/wbeth/history/wrapHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceBethWrapHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -160,7 +160,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/eth-staking/wbeth/history/unwrapHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/eth-staking/wbeth/history/unwrapHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceBethWrapHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -170,7 +170,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/account", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/account", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceSolStakingAccount>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -180,7 +180,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/quota", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/quota", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceSolStakingQuota>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -193,7 +193,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sol-staking/sol/stake", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/stake", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceSolStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -207,7 +207,7 @@ namespace Binance.Net.Clients.GeneralApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sol-staking/sol/redeem", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/redeem", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceSolStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -218,7 +218,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/sol-staking/sol/claim", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/claim", BinanceExchange.RateLimiter.EndpointLimit, 150, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(3), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BinanceStakingResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -233,7 +233,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/stakingHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/history/stakingHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceStakingHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -247,7 +247,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/redemptionHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/history/redemptionHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceRedemptionHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -261,7 +261,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/bnsolRewardsHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/history/bnsolRewardsHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceSolRewards>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -275,7 +275,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/rateHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/history/rateHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceBnsolRateHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -290,7 +290,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("size", pageSize);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/boostRewardsHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/history/boostRewardsHistory", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceQueryRecords<BinanceBnsolRewardHistory>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -300,7 +300,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/sol-staking/sol/history/unclaimedRewards", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/sol-staking/sol/history/unclaimedRewards", BinanceExchange.RateLimiter.SpotRestIp, 150, true);
             return await _baseClient.SendAsync<BinanceSolUnclaimedReward[]>(request, parameters, ct).ConfigureAwait(false);
         }
     }

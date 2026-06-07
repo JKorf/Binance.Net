@@ -29,7 +29,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.Add("type", IfNewUserMarginedFuturesType.UsdtMarginedFutures);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "fapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.FuturesRest, 100, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.FuturesRest, 100, true);
             return await _baseClient.SendAsync<BinanceFuturesIfNewUser>(request, parameters, ct).ConfigureAwait(false);
         }
 

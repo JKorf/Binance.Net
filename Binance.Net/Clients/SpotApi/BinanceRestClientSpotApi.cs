@@ -103,7 +103,6 @@ namespace Binance.Net.Clients.SpotApi
             PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
             int weight = 1,
-            IDictionary<string, object>? additionalParameters = null,
             CancellationToken ct = default)
         {
             if (quoteQuantity != null && type != SpotOrderType.Market)
@@ -153,9 +152,8 @@ namespace Binance.Net.Clients.SpotApi
             parameters.Add("pegPriceType", pegPriceType);
             parameters.Add("pegOffsetValue", pegOffsetValue);
             parameters.Add("pegOffsetType", pegOffsetType);
-            parameters.ApplyRawParameters(additionalParameters);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, path, gate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, BaseAddress, path, gate, 1, true);
             return await SendAsync<BinancePlacedOrder>(request, parameters, ct, weight: weight).ConfigureAwait(false);
         }
 
@@ -175,7 +173,7 @@ namespace Binance.Net.Clients.SpotApi
 
         internal async Task<HttpResult> SendAsync(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            var result = await base.SendAsync<Unit>(BaseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            var result = await base.SendAsync<Unit>(definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result.Success && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");
@@ -184,12 +182,9 @@ namespace Binance.Net.Clients.SpotApi
             return result;
         }
 
-        internal Task<HttpResult<T>> SendAsync<T>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
-            => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight);
-
-        internal async Task<HttpResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
+        internal async Task<HttpResult<T>> SendAsync<T>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
-            var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
+            var result = await base.SendAsync<T>(definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
             if (!result.Success && result.Error!.ErrorType == ErrorType.InvalidTimestamp && (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp))
             {
                 _logger.Log(LogLevel.Debug, "Received Invalid Timestamp error, triggering new time sync");

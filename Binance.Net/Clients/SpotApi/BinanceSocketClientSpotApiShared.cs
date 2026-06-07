@@ -9,11 +9,21 @@ namespace Binance.Net.Clients.SpotApi
     {
         private const string _exchangeName = "Binance";
         private const string _topicId = "BinanceSpot";
-        public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public EndpointOptions[] AllOptions =>
+        [
+            SharedClient.SubscribeAllTickersOptions,
+            SharedClient.SubscribeTickerOptions,
+            SharedClient.SubscribeTradeOptions,
+            SharedClient.SubscribeBookTickerOptions,
+            SharedClient.SubscribeBalanceOptions,
+            SharedClient.SubscribeSpotOrderOptions,
+            SharedClient.SubscribeKlineOptions,
+            SharedClient.SubscribeOrderBookOptions
+        ];
 
         #region Tickers client
         SubscribeTickersOptions ITickersSocketClient.SubscribeAllTickersOptions { get; } = new SubscribeTickersOptions(_exchangeName);
@@ -74,7 +84,7 @@ namespace Binance.Net.Clients.SpotApi
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.SymbolNames(FormatSymbol);
-            if (ExchangeParameters.GetProcessValue<bool?>(request.ExchangeParameters, Exchange, "Aggregated") == true)
+            if (ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "Aggregated") == true)
             {
                 var result = await ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(symbols, update => handler(update.ToType(new[] 
                 { 

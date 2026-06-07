@@ -27,7 +27,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("amount", amount);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/giftcard/createCode", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/giftcard/createCode", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceGiftCardResponse<BinaceGiftCardData>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -44,7 +44,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("baseTokenAmount", baseTokenAmount);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/giftcard/buyCode", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/giftcard/buyCode", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceGiftCardResponse<BinaceGiftCardData>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -86,7 +86,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("externalUid", externalUid);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/giftcard/redeemCode", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/giftcard/redeemCode", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -101,7 +101,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("referenceNo", referenceNumber);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/giftcard/verify", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/giftcard/verify", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceGiftCardResponse<BinanceGiftCardValidity>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -116,7 +116,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("baseToken", baseToken);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/giftcard/buyCode/token-limit", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/giftcard/buyCode/token-limit", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -130,7 +130,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/giftcard/cryptography/rsa-public-key", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/giftcard/cryptography/rsa-public-key", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceGiftCardResponse<string>>(request, parameters, ct).ConfigureAwait(false);
         }
 

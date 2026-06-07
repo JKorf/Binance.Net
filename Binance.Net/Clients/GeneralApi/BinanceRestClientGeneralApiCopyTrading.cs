@@ -23,7 +23,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/copyTrading/futures/userStatus", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/copyTrading/futures/userStatus", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
             var data = await _baseClient.SendAsync<BinanceResult<BinanceCopyTradingUserStatus>>(request, parameters, ct).ConfigureAwait(false);
 
             if (!data.Success)
@@ -45,7 +45,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/copyTrading/futures/leadSymbol", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/copyTrading/futures/leadSymbol", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
             var data = await _baseClient.SendAsync<BinanceResult<BinanceCopyTradingLeadSymbol[]>>(request, parameters, ct).ConfigureAwait(false);
 
             if (!data.Success)

@@ -27,7 +27,7 @@ namespace Binance.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
             return await _baseClient.SendAsync<BinanceIfNewUser>(request, parameters, ct).ConfigureAwait(false);
         }
 

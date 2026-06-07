@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoExchange.Net", "..\Cr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binance.Net.TestClient", "..\..\Users\Jan\source\repos\CryptoTest\Binance.Net.TestClient\Binance.Net.TestClient.csproj", "{76768F58-1918-4731-F860-81588EBC618E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binance.Net.Benchmark.Client", "Benchmark\Client\Binance.Net.Benchmark.Client.csproj", "{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{76768F58-1918-4731-F860-81588EBC618E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76768F58-1918-4731-F860-81588EBC618E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76768F58-1918-4731-F860-81588EBC618E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

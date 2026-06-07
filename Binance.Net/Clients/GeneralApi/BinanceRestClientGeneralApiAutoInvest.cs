@@ -22,7 +22,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<HttpResult<BinanceAutoInvestAssets>> GetSourceAndTargetAssetsAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/all/asset", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/all/asset", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestAssets>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -39,7 +39,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("usageType", usageType);
             parameters.Add("flexibleAllowedToUse", flexibleAllowedToUse);
             parameters.Add("sourceType", sourceType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/source-asset/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/source-asset/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestSourceAssets>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -55,7 +55,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("targetAsset", targetAsset);
             parameters.Add("page", page);
             parameters.Add("pageSize", pageSize);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/target-asset/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/target-asset/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestTargetAssets>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -70,7 +70,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("targetAsset", asset);
             parameters.Add("hisRoiType", roiType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/target-asset/roi/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/target-asset/roi/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestRoi[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -84,7 +84,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("indexId", indexId);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/index/info", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/index/info", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestIndex>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -98,7 +98,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planType", planType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/plan/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/plan/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestPlan>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -122,7 +122,7 @@ namespace Binance.Net.Clients.GeneralApi
                 targetAsset = x.Key,
                 percentage = x.Value
             }).ToList());
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/lending/auto-invest/one-off", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/one-off", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestTradeResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -137,7 +137,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planId", planId);
             parameters.Add("status", status);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/lending/auto-invest/plan/edit-status", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/plan/edit-status", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestEditStatusResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -163,7 +163,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("subscriptionStartWeekday", subscriptionStartWeekday);
             parameters.Add("subscriptionStartTime", subscriptionStartTime);
             parameters.Add("flexibleAllowedToUse", flexibleAllowedToUse);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/lending/auto-invest/plan/edit", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/plan/edit", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestEditResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -179,7 +179,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("indexId", indexId);
             parameters.Add("requestId", requestId);
             parameters.Add("redemptionPercentage", redemptionPercentage);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/lending/auto-invest/redeem", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/redeem", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestRedemptionResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -199,7 +199,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("planType", planType);
             parameters.Add("current", page);
             parameters.Add("size", pageSize);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/history/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/history/list", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestPlanTransactions>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -214,7 +214,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("transactionId", transactionId);
             parameters.Add("requestId", requestId);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/one-off/status", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/one-off/status", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestOneTimeTransactionStatus>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -242,7 +242,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("subscriptionStartDay", subscriptionStartDay);
             parameters.Add("subscriptionStartWeekday", subscriptionStartWeekday);
             parameters.Add("flexibleAllowedToUse", flexibleAllowedToUse);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/sapi/v1/lending/auto-invest/plan/add", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/plan/add", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestTradeResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -261,7 +261,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("current", page);
             parameters.Add("size", pageSize);
             parameters.Add("asset", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/redeem/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/redeem/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestRedemption[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -276,7 +276,7 @@ namespace Binance.Net.Clients.GeneralApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("planId", planId);
             parameters.Add("requestId", requestId);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/plan/id", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/plan/id", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestPlanHoldings>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -290,7 +290,7 @@ namespace Binance.Net.Clients.GeneralApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("indexId", indexId);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/index/user-summary", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/index/user-summary", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestIndexPlanPosition>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -307,7 +307,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.Add("endTime", endTime);
             parameters.Add("current", page);
             parameters.Add("size", pageSize);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/sapi/v1/lending/auto-invest/rebalance/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/sapi/v1/lending/auto-invest/rebalance/history", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             var result = await _baseClient.SendAsync<BinanceAutoInvestRebalanceInfo[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }

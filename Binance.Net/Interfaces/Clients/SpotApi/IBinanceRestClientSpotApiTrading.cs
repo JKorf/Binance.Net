@@ -4,6 +4,7 @@ using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Models.Spot.Convert;
 using Binance.Net.Objects.Models.Spot.Margin;
+using System.ComponentModel;
 
 namespace Binance.Net.Interfaces.Clients.SpotApi
 {
@@ -108,7 +109,6 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             int? pegOffsetValue = null,
             PegOffsetType? pegOffsetType = null,
             int? receiveWindow = null,
-            IDictionary<string, object>? additionalParameters = null,
             CancellationToken ct = default);
 
         /// <summary>

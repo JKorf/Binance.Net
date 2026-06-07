@@ -10,11 +10,43 @@ namespace Binance.Net.Clients.SpotApi
     {
         private const string _exchangeName = "Binance";
         private const string _topicId = "BinanceSpot";
-        public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
-        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticExchangeParameters(Exchange);
+
+        public EndpointOptions[] AllOptions =>
+        [
+            SharedClient.GetKlinesOptions,
+            SharedClient.GetSpotSymbolsOptions,
+            SharedClient.GetSpotTickerOptions,
+            SharedClient.GetSpotTickersOptions,
+            SharedClient.GetBookTickerOptions,
+            SharedClient.GetRecentTradesOptions,
+            SharedClient.GetTradeHistoryOptions,
+            SharedClient.GetOrderBookOptions,
+            SharedClient.GetBalancesOptions,
+            SharedClient.PlaceSpotOrderOptions,
+            SharedClient.GetSpotOrderOptions,
+            SharedClient.GetOpenSpotOrdersOptions,
+            SharedClient.GetClosedSpotOrdersOptions,
+            SharedClient.GetSpotOrderTradesOptions,
+            SharedClient.GetSpotUserTradesOptions,
+            SharedClient.CancelSpotOrderOptions,
+            SharedClient.GetSpotOrderByClientOrderIdOptions,
+            SharedClient.CancelSpotOrderByClientOrderIdOptions,
+            SharedClient.GetAssetsOptions,
+            SharedClient.GetAssetOptions,
+            SharedClient.GetDepositAddressesOptions,
+            SharedClient.GetDepositsOptions,
+            SharedClient.GetWithdrawalsOptions,
+            SharedClient.WithdrawOptions,
+            SharedClient.GetFeeOptions,
+            SharedClient.PlaceSpotTriggerOrderOptions,
+            SharedClient.GetSpotTriggerOrderOptions,
+            SharedClient.CancelSpotTriggerOrderOptions,
+            SharedClient.TransferOptions
+        ];
 
         #region Klines Client
 
@@ -372,7 +404,6 @@ namespace Binance.Net.Clients.SpotApi
                 price: request.Price,
                 timeInForce: GetTimeInForce(request.TimeInForce, request.OrderType),
                 newClientOrderId: request.ClientOrderId,
-                additionalParameters: request.ExchangeParameters?.GetRawParameters(Exchange),
                 ct: ct).ConfigureAwait(false);
 
             if (!result.Success)
@@ -835,7 +866,7 @@ namespace Binance.Net.Clients.SpotApi
             var direction = DataDirection.Descending;
             var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
 
-            var traveRule = ExchangeParameters.GetProcessValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
+            var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
             if (traveRule == true)
             {
                 // Get data
@@ -949,7 +980,7 @@ namespace Binance.Net.Clients.SpotApi
             var direction = DataDirection.Descending;
             var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
 
-            var traveRule = ExchangeParameters.GetProcessValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
+            var traveRule = ExchangeParameters.GetValue<bool?>(request.ExchangeParameters, Exchange, "TravelRuleEndpoint");
             if (traveRule == true)
             {
                 var result = await Account.GetTravelRuleWithdrawalHistoryAsync(
@@ -1042,7 +1073,7 @@ namespace Binance.Net.Clients.SpotApi
             if (validationError != null)
                 return HttpResult.Fail<SharedId>(Exchange, validationError);
 
-            var questionnaire = ExchangeParameters.GetProcessValue<BinanceWithdrawQuestionnaire?>(request.ExchangeParameters, Exchange, "TravelRuleQuestionnaire");
+            var questionnaire = ExchangeParameters.GetValue<BinanceWithdrawQuestionnaire?>(request.ExchangeParameters, Exchange, "TravelRuleQuestionnaire");
             if (questionnaire == null)
             {
                 var withdrawal = await Account.WithdrawAsync(

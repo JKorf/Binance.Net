@@ -10,11 +10,22 @@ namespace Binance.Net.Clients.CoinFuturesApi
     {
         private const string _exchangeName = "Binance";
         private const string _topicId = "BinanceCoinFutures";
-        public string Exchange => BinanceExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public EndpointOptions[] AllOptions =>
+        [
+            SharedClient.SubscribeTickerOptions,
+            SharedClient.SubscribeAllTickersOptions,
+            SharedClient.SubscribeTradeOptions,
+            SharedClient.SubscribeBookTickerOptions,
+            SharedClient.SubscribeKlineOptions,
+            SharedClient.SubscribeOrderBookOptions,
+            SharedClient.SubscribeBalanceOptions,
+            SharedClient.SubscribePositionOptions,
+            SharedClient.SubscribeFuturesOrderOptions
+        ];
 
         #region Ticker client
 

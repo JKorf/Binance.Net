@@ -23,7 +23,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<HttpResult<BinanceMiningCoin[]>> GetMiningCoinListAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/coinList", BinanceExchange.RateLimiter.SpotRestIp);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/pub/coinList", BinanceExchange.RateLimiter.SpotRestIp);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningCoin[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMiningCoin[]>(result);
@@ -41,7 +41,7 @@ namespace Binance.Net.Clients.GeneralApi
         public async Task<HttpResult<BinanceMiningAlgorithm[]>> GetMiningAlgorithmListAsync(CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/pub/algoList", BinanceExchange.RateLimiter.SpotRestIp);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/pub/algoList", BinanceExchange.RateLimiter.SpotRestIp);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningAlgorithm[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMiningAlgorithm[]>(result);
@@ -70,7 +70,7 @@ namespace Binance.Net.Clients.GeneralApi
                 {"workerName", workerName}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/detail", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/worker/detail", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMinerDetails[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMinerDetails[]>(result);
@@ -101,7 +101,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("sortColumn", sortColumn);
             parameters.Add("workerStatus", workerStatus);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/worker/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/worker/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMinerList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMinerList>(result);
@@ -133,7 +133,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endDate));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/payment/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/payment/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceRevenueList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceRevenueList>(result);
@@ -165,7 +165,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("startDate", DateTimeConverter.ConvertToMilliseconds(startDate));
             parameters.AddOptionalParameter("endDate", DateTimeConverter.ConvertToMilliseconds(endDate));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/payment/other", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/payment/other", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceOtherRevenueList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceOtherRevenueList>(result);
@@ -190,7 +190,7 @@ namespace Binance.Net.Clients.GeneralApi
                 {"userName", userName}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/statistics/user/status", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/statistics/user/status", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningStatistic>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMiningStatistic>(result);
@@ -215,7 +215,7 @@ namespace Binance.Net.Clients.GeneralApi
                 {"userName", userName}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/statistics/user/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/statistics/user/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningAccount[]>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMiningAccount[]>(result);
@@ -235,7 +235,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/hash-transfer/config/details/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/hash-transfer/config/details/list", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceHashrateResaleList>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceHashrateResaleList>(result);
@@ -263,7 +263,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/hash-transfer/profit/details", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/hash-transfer/profit/details", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceHashrateResaleDetails>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceHashrateResaleDetails>(result);
@@ -295,7 +295,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "hashRate", hashRate }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/mining/hash-transfer/config", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/mining/hash-transfer/config", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<int>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<int>(result);
@@ -321,7 +321,7 @@ namespace Binance.Net.Clients.GeneralApi
                 { "userName", userName }
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "sapi/v1/mining/hash-transfer/config/cancel", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "sapi/v1/mining/hash-transfer/config/cancel", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<bool>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<bool>(result);
@@ -347,7 +347,7 @@ namespace Binance.Net.Clients.GeneralApi
             parameters.AddOptionalParameter("pageIndex", page?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("pageSize", pageSize?.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/mining/payment/uid", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/mining/payment/uid", BinanceExchange.RateLimiter.SpotRestIp, 5, true);
             var result = await _baseClient.SendAsync<BinanceResult<BinanceMiningEarnings>>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceMiningEarnings>(result);

@@ -11,12 +11,51 @@ namespace Binance.Net.Clients.CoinFuturesApi
     {
         private const string _exchangeName = "Binance";
         private const string _topicId = "BinanceCoinFutures";
-        public string Exchange => BinanceExchange.ExchangeName;
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public EndpointOptions[] AllOptions =>
+        [
+            SharedClient.GetKlinesOptions,
+            SharedClient.GetFuturesSymbolsOptions,
+            SharedClient.GetBookTickerOptions,
+            SharedClient.GetFuturesTickerOptions,
+            SharedClient.GetFuturesTickersOptions,
+            SharedClient.GetRecentTradesOptions,
+            SharedClient.PlaceFuturesOrderOptions,
+            SharedClient.GetFuturesOrderOptions,
+            SharedClient.GetOpenFuturesOrdersOptions,
+            SharedClient.GetClosedFuturesOrdersOptions,
+            SharedClient.GetFuturesOrderTradesOptions,
+            SharedClient.GetFuturesUserTradesOptions,
+            SharedClient.CancelFuturesOrderOptions,
+            SharedClient.GetPositionsOptions,
+            SharedClient.ClosePositionOptions,
+            SharedClient.GetFuturesOrderByClientOrderIdOptions,
+            SharedClient.CancelFuturesOrderByClientOrderIdOptions,
+            SharedClient.GetLeverageOptions,
+            SharedClient.SetLeverageOptions,
+            SharedClient.GetMarkPriceKlinesOptions,
+            SharedClient.GetOrderBookOptions,
+            SharedClient.GetTradeHistoryOptions,
+            SharedClient.GetIndexPriceKlinesOptions,
+            SharedClient.GetOpenInterestOptions,
+            SharedClient.GetFundingRateHistoryOptions,
+            SharedClient.GetBalancesOptions,
+            SharedClient.GetPositionModeOptions,
+            SharedClient.SetPositionModeOptions,
+            SharedClient.StartOptions,
+            SharedClient.KeepAliveOptions,
+            SharedClient.StopOptions,
+            SharedClient.GetFeeOptions,
+            SharedClient.PlaceFuturesTriggerOrderOptions,
+            SharedClient.GetFuturesTriggerOrderOptions,
+            SharedClient.CancelFuturesTriggerOrderOptions,
+            SharedClient.SetFuturesTpSlOptions,
+            SharedClient.CancelFuturesTpSlOptions
+        ];
 
         #region Klines client
 

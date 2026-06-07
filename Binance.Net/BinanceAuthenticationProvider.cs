@@ -21,7 +21,7 @@ namespace Binance.Net
             request.Headers ??= new Dictionary<string, string>();
             request.Headers.Add("X-MBX-APIKEY", ApiCredentials.Credential!.Key);
 
-            if (!request.Authenticated)
+            if (!request.RequestDefinition.Authenticated)
                 return;
 
             var timestamp = GetMillisecondTimestamp(apiClient);

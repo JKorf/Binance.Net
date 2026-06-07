@@ -11,11 +11,50 @@ namespace Binance.Net.Clients.UsdFuturesApi
     {
         private const string _exchangeName = "Binance";
         private const string _topicId = "BinanceUsdFutures";
-        public string Exchange => BinanceExchange.ExchangeName;
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear };
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+        public EndpointOptions[] AllOptions =>
+        [
+            SharedClient.GetKlinesOptions,
+            SharedClient.GetMarkPriceKlinesOptions,
+            SharedClient.GetFuturesSymbolsOptions,
+            SharedClient.GetFuturesTickerOptions,
+            SharedClient.GetFuturesTickersOptions,
+            SharedClient.GetBookTickerOptions,
+            SharedClient.GetRecentTradesOptions,
+            SharedClient.PlaceFuturesOrderOptions,
+            SharedClient.GetFuturesOrderOptions,
+            SharedClient.GetOpenFuturesOrdersOptions,
+            SharedClient.GetClosedFuturesOrdersOptions,
+            SharedClient.GetFuturesOrderTradesOptions,
+            SharedClient.GetFuturesUserTradesOptions,
+            SharedClient.CancelFuturesOrderOptions,
+            SharedClient.GetPositionsOptions,
+            SharedClient.ClosePositionOptions,
+            SharedClient.GetFuturesOrderByClientOrderIdOptions,
+            SharedClient.CancelFuturesOrderByClientOrderIdOptions,
+            SharedClient.GetLeverageOptions,
+            SharedClient.SetLeverageOptions,
+            SharedClient.GetOrderBookOptions,
+            SharedClient.GetTradeHistoryOptions,
+            SharedClient.GetIndexPriceKlinesOptions,
+            SharedClient.GetOpenInterestOptions,
+            SharedClient.GetFundingRateHistoryOptions,
+            SharedClient.GetBalancesOptions,
+            SharedClient.GetPositionModeOptions,
+            SharedClient.SetPositionModeOptions,
+            SharedClient.StartOptions,
+            SharedClient.KeepAliveOptions,
+            SharedClient.StopOptions,
+            SharedClient.GetFeeOptions,
+            SharedClient.PlaceFuturesTriggerOrderOptions,
+            SharedClient.GetFuturesTriggerOrderOptions,
+            SharedClient.CancelFuturesTriggerOrderOptions,
+            SharedClient.SetFuturesTpSlOptions,
+            SharedClient.CancelFuturesTpSlOptions
+        ];
 
         #region Klines client
 
@@ -69,7 +108,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, true, true, true, 1000, false);
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, true, true, true, 1000, false, "GetMarkPriceKlines");
 
         async Task<HttpResult<SharedFuturesKline[]>> IMarkPriceKlineRestClient.GetMarkPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
@@ -875,7 +914,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, true, true, true, 1000, false);
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, true, true, true, 1000, false, "GetIndexPriceKlines");
 
         async Task<HttpResult<SharedFuturesKline[]>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
