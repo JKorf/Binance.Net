@@ -50,6 +50,8 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceTravelRuleAddressWrapper))]
     [JsonSerializable(typeof(BinanceTravelRuleVasp[]))]
     [JsonSerializable(typeof(BinanceTravelRuleSubmitResult))]
+    [JsonSerializable(typeof(BinanceTravelRuleCountryList))]
+    [JsonSerializable(typeof(BinanceTravelRuleRegionList))]
 
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate[]>))]
