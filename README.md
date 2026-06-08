@@ -238,6 +238,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 12.14.0 - 08 Jun 2026
+    * Updated CryptoExchange.Net to version 11.2.2
+    * Added support for Australia (AU) Travel Rule questionnaire
+    * Added restClient.SpotApi.Account.GetTravelRuleCountryListAsync endpoint
+    * Added restClient.SpotApi.Account.GetTravelRuleRegionListAsync endpoint
+    * Fixed user client provider not caching new client when previous client was disposed
+    * Fixed BinanceDustLog ToAsset property deserialization
+
 * Version 12.13.0 - 26 May 2026
     * Updated CryptoExchange.Net to version 11.2.0
     * Added BuyerIsMaker property to BinanceStreamMinimalTrade model
