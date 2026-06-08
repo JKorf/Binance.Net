@@ -1402,28 +1402,28 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Get Travel Rule Country List
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleCountryList>> GetTravelRuleCountryListAsync(
+        public async Task<HttpResult<BinanceTravelRuleCountryList>> GetTravelRuleCountryListAsync(
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/localentity/country/list", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/localentity/country/list", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
             return await _baseClient.SendAsync<BinanceTravelRuleCountryList>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
 
         #region Get Travel Rule Region List
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceTravelRuleRegionList>> GetTravelRuleRegionListAsync(
+        public async Task<HttpResult<BinanceTravelRuleRegionList>> GetTravelRuleRegionListAsync(
             string countryCode,
             int? receiveWindow = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("countryCode", countryCode);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/localentity/region/list", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/localentity/region/list", BinanceExchange.RateLimiter.SpotRestUid, 1, true);
             return await _baseClient.SendAsync<BinanceTravelRuleRegionList>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion

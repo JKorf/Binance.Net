@@ -1270,7 +1270,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule country list</returns>
-        Task<WebCallResult<BinanceTravelRuleCountryList>> GetTravelRuleCountryListAsync(
+        Task<HttpResult<BinanceTravelRuleCountryList>> GetTravelRuleCountryListAsync(
             int? receiveWindow = null,
             CancellationToken ct = default);
 
@@ -1282,7 +1282,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Travel rule region list</returns>
-        Task<WebCallResult<BinanceTravelRuleRegionList>> GetTravelRuleRegionListAsync(
+        Task<HttpResult<BinanceTravelRuleRegionList>> GetTravelRuleRegionListAsync(
             string countryCode,
             int? receiveWindow = null,
             CancellationToken ct = default);
