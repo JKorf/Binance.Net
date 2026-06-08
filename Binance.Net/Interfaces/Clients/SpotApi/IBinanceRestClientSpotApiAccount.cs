@@ -1264,6 +1264,30 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             CancellationToken ct = default);
 
         /// <summary>
+        /// Gets the list of countries supported for travel rule questionnaires
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/country-list" /></para>
+        /// </summary>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Travel rule country list</returns>
+        Task<WebCallResult<BinanceTravelRuleCountryList>> GetTravelRuleCountryListAsync(
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Gets the list of valid region/city values for a given country for use in travel rule questionnaire city fields
+        /// <para><a href="https://developers.binance.com/docs/wallet/travel-rule/region-list" /></para>
+        /// </summary>
+        /// <param name="countryCode">["<c>countryCode</c>"] ISO 2-digit country code, lower case (e.g. "au")</param>
+        /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Travel rule region list</returns>
+        Task<WebCallResult<BinanceTravelRuleRegionList>> GetTravelRuleRegionListAsync(
+            string countryCode,
+            int? receiveWindow = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Gets travel rule deposit history
         /// <para>
         /// Docs:<br />

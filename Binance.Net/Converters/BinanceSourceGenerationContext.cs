@@ -34,6 +34,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireIndia))]
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireEu))]
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireSouthAfrica))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireAustralia))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireJapan))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireKazakhstan))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireBahrain))]
@@ -41,6 +42,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceDepositQuestionnaireIndia))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireEu))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireSouthAfrica))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireAustralia))]
 
     [JsonSerializable(typeof(BinanceTravelRuleDeposit[]))]
     [JsonSerializable(typeof(BinanceTravelRuleWithdrawal[]))]
@@ -48,6 +50,8 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceTravelRuleAddressWrapper))]
     [JsonSerializable(typeof(BinanceTravelRuleVasp[]))]
     [JsonSerializable(typeof(BinanceTravelRuleSubmitResult))]
+    [JsonSerializable(typeof(BinanceTravelRuleCountryList))]
+    [JsonSerializable(typeof(BinanceTravelRuleRegionList))]
 
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate>))]
     [JsonSerializable(typeof(BinanceResponse<BinanceSymbolAdlRate[]>))]
