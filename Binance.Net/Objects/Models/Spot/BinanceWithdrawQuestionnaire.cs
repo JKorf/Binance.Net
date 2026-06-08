@@ -47,6 +47,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonIgnore]
         public static BinanceWithdrawQuestionnaireSouthAfrica SouthAfrica => new BinanceWithdrawQuestionnaireSouthAfrica();
+        /// <summary>
+        /// Create a questionnaire for a withdrawal for Australia
+        /// </summary>
+        [JsonIgnore]
+        public static BinanceWithdrawQuestionnaireAustralia Australia => new BinanceWithdrawQuestionnaireAustralia();
 
 #pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
 #pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
@@ -552,6 +557,88 @@ namespace Binance.Net.Objects.Models.Spot
         public string? Vasp { get; set; }
         /// <summary>
         /// ["<c>vaspName</c>"] VASP name, required when Vasp is `others`
+        /// </summary>
+        [JsonPropertyName("vaspName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? VaspName { get; set; }
+        /// <summary>
+        /// ["<c>declaration</c>"] Declaration confirmation
+        /// </summary>
+        [JsonPropertyName("declaration")]
+        public bool Declaration { get; set; }
+    }
+
+    /// <summary>
+    /// Australia withdraw questionnaire
+    /// </summary>
+    public record BinanceWithdrawQuestionnaireAustralia : BinanceWithdrawQuestionnaire
+    {
+        /// <summary>
+        /// ["<c>isAddressOwner</c>"] 1:Send to myself, 2:Send to another beneficiary
+        /// </summary>
+        [JsonPropertyName("isAddressOwner")]
+        public int IsAddressOwner { get; set; }
+        /// <summary>
+        /// ["<c>bnfType</c>"] 0:Individual, 1:Corporate/Entity, required when IsAddressOwner is 2
+        /// </summary>
+        [JsonPropertyName("bnfType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public int? BnfType { get; set; }
+        /// <summary>
+        /// ["<c>bnfFirstName</c>"] Individual beneficiary first name, required when BnfType is 0
+        /// </summary>
+        [JsonPropertyName("bnfFirstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? BnfFirstName { get; set; }
+        /// <summary>
+        /// ["<c>bnfLastName</c>"] Individual beneficiary last name, required when BnfType is 0
+        /// </summary>
+        [JsonPropertyName("bnfLastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? BnfLastName { get; set; }
+        /// <summary>
+        /// ["<c>country</c>"] Beneficiary country code, ISO 2 digit, lower case. Required when BnfType is 0
+        /// </summary>
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Country { get; set; }
+        /// <summary>
+        /// ["<c>city</c>"] Beneficiary city/town. Required when BnfType is 0
+        /// </summary>
+        [JsonPropertyName("city")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? City { get; set; }
+        /// <summary>
+        /// ["<c>bnfCorpName</c>"] Beneficiary corporation name. Required when BnfType is 1
+        /// </summary>
+        [JsonPropertyName("bnfCorpName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? BnfCorpName { get; set; }
+        /// <summary>
+        /// ["<c>bnfCorpCountry</c>"] Beneficiary corporation country code, ISO 2 digit, lower case. Required when BnfType is 1
+        /// </summary>
+        [JsonPropertyName("bnfCorpCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? BnfCorpCountry { get; set; }
+        /// <summary>
+        /// ["<c>bnfCorpCity</c>"] Beneficiary corporation city/town. Required when BnfType is 1
+        /// </summary>
+        [JsonPropertyName("bnfCorpCity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? BnfCorpCity { get; set; }
+        /// <summary>
+        /// ["<c>sendTo</c>"] 1:Private Wallet, 2:Another VASP
+        /// </summary>
+        [JsonPropertyName("sendTo")]
+        public int SendTo { get; set; }
+        /// <summary>
+        /// ["<c>vasp</c>"] VASP identifier of the beneficiary. Required when SendTo is 2
+        /// </summary>
+        [JsonPropertyName("vasp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Vasp { get; set; }
+        /// <summary>
+        /// ["<c>vaspName</c>"] VASP name. Required when SendTo is 2 and Vasp is `others`
         /// </summary>
         [JsonPropertyName("vaspName")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
