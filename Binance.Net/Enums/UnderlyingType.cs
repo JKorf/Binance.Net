@@ -32,7 +32,12 @@ namespace Binance.Net.Enums
         /// ["<c>EQUITY</c>"] Equity
         /// </summary>
         [Map("EQUITY")]
-        Equity
+        Equity,
+        /// <summary>
+        /// ["<c>KR_EQUITY</c>"] Korean Equity
+        /// </summary>
+        [Map("KR_EQUITY")]
+        KrEquity
     }
 }
 
