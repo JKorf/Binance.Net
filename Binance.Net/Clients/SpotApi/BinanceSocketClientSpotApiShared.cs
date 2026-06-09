@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
@@ -13,17 +13,7 @@ namespace Binance.Net.Clients.SpotApi
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
-        public EndpointOptions[] AllOptions =>
-        [
-            SharedClient.SubscribeAllTickersOptions,
-            SharedClient.SubscribeTickerOptions,
-            SharedClient.SubscribeTradeOptions,
-            SharedClient.SubscribeBookTickerOptions,
-            SharedClient.SubscribeBalanceOptions,
-            SharedClient.SubscribeSpotOrderOptions,
-            SharedClient.SubscribeKlineOptions,
-            SharedClient.SubscribeOrderBookOptions
-        ];
+        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(this);
 
         #region Tickers client
         SubscribeTickersOptions ITickersSocketClient.SubscribeAllTickersOptions { get; } = new SubscribeTickersOptions(_exchangeName);
@@ -67,8 +57,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Trade client
 
-        EndpointOptions<SubscribeTradeRequest, ITradeSocketClient> ITradeSocketClient.SubscribeTradeOptions { get; } 
-            = new EndpointOptions<SubscribeTradeRequest, ITradeSocketClient>(_exchangeName, false)
+        SubscribeTradeOptions ITradeSocketClient.SubscribeTradeOptions { get; } 
+            = new SubscribeTradeOptions(_exchangeName, false)
         {
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200,
@@ -112,8 +102,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Book Ticker client
 
-        EndpointOptions<SubscribeBookTickerRequest, IBookTickerSocketClient> IBookTickerSocketClient.SubscribeBookTickerOptions { get; }
-            = new EndpointOptions<SubscribeBookTickerRequest, IBookTickerSocketClient>(_exchangeName, false)
+        SubscribeBookTickerOptions IBookTickerSocketClient.SubscribeBookTickerOptions { get; }
+            = new SubscribeBookTickerOptions(_exchangeName, false)
         {
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
@@ -133,8 +123,8 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Balance client
-        EndpointOptions<SubscribeBalancesRequest, IBalanceSocketClient> IBalanceSocketClient.SubscribeBalanceOptions { get; }
-            = new EndpointOptions<SubscribeBalancesRequest, IBalanceSocketClient>(_exchangeName, true);
+        SubscribeBalanceOptions IBalanceSocketClient.SubscribeBalanceOptions { get; }
+            = new SubscribeBalanceOptions(_exchangeName, true);
         async Task<WebSocketResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
             var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(request, this);
@@ -152,8 +142,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Spot Order client
 
-        EndpointOptions<SubscribeSpotOrderRequest, ISpotOrderSocketClient> ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } 
-            = new EndpointOptions<SubscribeSpotOrderRequest, ISpotOrderSocketClient>(_exchangeName, true);
+        SubscribeSpotOrderOptions ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } 
+            = new SubscribeSpotOrderOptions(_exchangeName, true);
         async Task<WebSocketResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(request, this);

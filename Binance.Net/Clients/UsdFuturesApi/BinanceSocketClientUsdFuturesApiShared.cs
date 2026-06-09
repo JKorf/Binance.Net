@@ -1,4 +1,4 @@
-﻿using Binance.Net.Enums;
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using CryptoExchange.Net.Objects.Sockets;
@@ -14,18 +14,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
-        public EndpointOptions[] AllOptions =>
-        [
-            SharedClient.SubscribeTickerOptions,
-            SharedClient.SubscribeAllTickersOptions,
-            SharedClient.SubscribeTradeOptions,
-            SharedClient.SubscribeBookTickerOptions,
-            SharedClient.SubscribeBalanceOptions,
-            SharedClient.SubscribeFuturesOrderOptions,
-            SharedClient.SubscribeKlineOptions,
-            SharedClient.SubscribeOrderBookOptions,
-            SharedClient.SubscribePositionOptions
-        ];
+        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(this);
 
         #region Ticker client
 
@@ -82,8 +71,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Trade client
 
-        EndpointOptions<SubscribeTradeRequest, ITradeSocketClient> ITradeSocketClient.SubscribeTradeOptions { get; }
-            = new EndpointOptions<SubscribeTradeRequest, ITradeSocketClient>(_exchangeName, false)
+        SubscribeTradeOptions ITradeSocketClient.SubscribeTradeOptions { get; }
+            = new SubscribeTradeOptions(_exchangeName, false)
         {
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
@@ -109,8 +98,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Book Ticker client
 
-        EndpointOptions<SubscribeBookTickerRequest, IBookTickerSocketClient> IBookTickerSocketClient.SubscribeBookTickerOptions { get; } 
-            = new EndpointOptions<SubscribeBookTickerRequest, IBookTickerSocketClient>(_exchangeName, false)
+        SubscribeBookTickerOptions IBookTickerSocketClient.SubscribeBookTickerOptions { get; } 
+            = new SubscribeBookTickerOptions(_exchangeName, false)
         {
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200
@@ -130,8 +119,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion
 
         #region Balance client
-        EndpointOptions<SubscribeBalancesRequest, IBalanceSocketClient> IBalanceSocketClient.SubscribeBalanceOptions { get; } 
-            = new EndpointOptions<SubscribeBalancesRequest, IBalanceSocketClient>(_exchangeName, false)
+        SubscribeBalanceOptions IBalanceSocketClient.SubscribeBalanceOptions { get; } 
+            = new SubscribeBalanceOptions(_exchangeName, false)
         {
             RequiredOptionalParameters = new List<ParameterDescription>
             {
@@ -155,8 +144,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region Futures Order client
 
-        EndpointOptions<SubscribeFuturesOrderRequest, IFuturesOrderSocketClient> IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; }
-            = new EndpointOptions<SubscribeFuturesOrderRequest, IFuturesOrderSocketClient>(_exchangeName, false)
+        SubscribeFuturesOrderOptions IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; }
+            = new SubscribeFuturesOrderOptions(_exchangeName, false)
         {
             RequiredOptionalParameters = new List<ParameterDescription>
             {
@@ -274,8 +263,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #endregion
 
         #region Position client
-        EndpointOptions<SubscribePositionRequest, IPositionSocketClient> IPositionSocketClient.SubscribePositionOptions { get; } 
-            = new EndpointOptions<SubscribePositionRequest, IPositionSocketClient>(_exchangeName, false)
+        SubscribePositionOptions IPositionSocketClient.SubscribePositionOptions { get; } 
+            = new SubscribePositionOptions(_exchangeName, false)
         {
             RequiredOptionalParameters = new List<ParameterDescription>
             {

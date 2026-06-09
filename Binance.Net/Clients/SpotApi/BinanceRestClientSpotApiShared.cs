@@ -14,39 +14,7 @@ namespace Binance.Net.Clients.SpotApi
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticExchangeParameters(Exchange);
-
-        public EndpointOptions[] AllOptions =>
-        [
-            SharedClient.GetKlinesOptions,
-            SharedClient.GetSpotSymbolsOptions,
-            SharedClient.GetSpotTickerOptions,
-            SharedClient.GetSpotTickersOptions,
-            SharedClient.GetBookTickerOptions,
-            SharedClient.GetRecentTradesOptions,
-            SharedClient.GetTradeHistoryOptions,
-            SharedClient.GetOrderBookOptions,
-            SharedClient.GetBalancesOptions,
-            SharedClient.PlaceSpotOrderOptions,
-            SharedClient.GetSpotOrderOptions,
-            SharedClient.GetOpenSpotOrdersOptions,
-            SharedClient.GetClosedSpotOrdersOptions,
-            SharedClient.GetSpotOrderTradesOptions,
-            SharedClient.GetSpotUserTradesOptions,
-            SharedClient.CancelSpotOrderOptions,
-            SharedClient.GetSpotOrderByClientOrderIdOptions,
-            SharedClient.CancelSpotOrderByClientOrderIdOptions,
-            SharedClient.GetAssetsOptions,
-            SharedClient.GetAssetOptions,
-            SharedClient.GetDepositAddressesOptions,
-            SharedClient.GetDepositsOptions,
-            SharedClient.GetWithdrawalsOptions,
-            SharedClient.WithdrawOptions,
-            SharedClient.GetFeeOptions,
-            SharedClient.PlaceSpotTriggerOrderOptions,
-            SharedClient.GetSpotTriggerOrderOptions,
-            SharedClient.CancelSpotTriggerOrderOptions,
-            SharedClient.TransferOptions
-        ];
+        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(this);
 
         #region Klines Client
 
@@ -100,8 +68,8 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Spot Symbol client
-        EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient> ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
-            = new EndpointOptions<GetSymbolsRequest, ISpotSymbolRestClient>(_exchangeName, false);
+        GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
+            = new GetSpotSymbolsOptions(_exchangeName, false);
 
         async Task<HttpResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
@@ -224,8 +192,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Book Ticker client
 
-        EndpointOptions<GetBookTickerRequest, IBookTickerRestClient> IBookTickerRestClient.GetBookTickerOptions { get; }
-            = new EndpointOptions<GetBookTickerRequest, IBookTickerRestClient>(_exchangeName, false);
+        GetBookTickerOptions IBookTickerRestClient.GetBookTickerOptions { get; }
+            = new GetBookTickerOptions(_exchangeName, false);
         async Task<HttpResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetBookTickerOptions.ValidateRequest(request, this);
@@ -413,7 +381,7 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<GetOrderRequest, ISpotOrderRestClient> ISpotOrderRestClient.GetSpotOrderOptions { get; } = new EndpointOptions<GetOrderRequest, ISpotOrderRestClient>(_exchangeName, true);
+        GetSpotOrderOptions ISpotOrderRestClient.GetSpotOrderOptions { get; } = new GetSpotOrderOptions(_exchangeName, true);
         async Task<HttpResult<SharedSpotOrder>> ISpotOrderRestClient.GetSpotOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetSpotOrderOptions.ValidateRequest(request, this);
@@ -449,8 +417,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<GetOpenOrdersRequest, ISpotOrderRestClient> ISpotOrderRestClient.GetOpenSpotOrdersOptions { get; }
-            = new EndpointOptions<GetOpenOrdersRequest, ISpotOrderRestClient>(_exchangeName, true);
+        GetOpenSpotOrdersOptions ISpotOrderRestClient.GetOpenSpotOrdersOptions { get; }
+            = new GetOpenSpotOrdersOptions(_exchangeName, true);
         async Task<HttpResult<SharedSpotOrder[]>> ISpotOrderRestClient.GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetOpenSpotOrdersOptions.ValidateRequest(request, this);
@@ -548,8 +516,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<GetOrderTradesRequest, ISpotOrderRestClient> ISpotOrderRestClient.GetSpotOrderTradesOptions { get; }
-            = new EndpointOptions<GetOrderTradesRequest, ISpotOrderRestClient>(_exchangeName, true);
+        GetSpotOrderTradesOptions ISpotOrderRestClient.GetSpotOrderTradesOptions { get; }
+            = new GetSpotOrderTradesOptions(_exchangeName, true);
         async Task<HttpResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetSpotOrderTradesOptions.ValidateRequest(request, this);
@@ -640,8 +608,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<CancelOrderRequest, ISpotOrderRestClient> ISpotOrderRestClient.CancelSpotOrderOptions { get; }
-            = new EndpointOptions<CancelOrderRequest, ISpotOrderRestClient>(_exchangeName, true);
+        CancelSpotOrderOptions ISpotOrderRestClient.CancelSpotOrderOptions { get; }
+            = new CancelSpotOrderOptions(_exchangeName, true);
         async Task<HttpResult<SharedId>> ISpotOrderRestClient.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.CancelSpotOrderOptions.ValidateRequest(request, this);
@@ -708,8 +676,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Spot Client Id Order Client
 
-        EndpointOptions<GetOrderRequest, ISpotOrderClientIdRestClient> ISpotOrderClientIdRestClient.GetSpotOrderByClientOrderIdOptions { get; }
-            = new EndpointOptions<GetOrderRequest, ISpotOrderClientIdRestClient>(_exchangeName, true);
+        GetSpotOrderByClientOrderIdOptions ISpotOrderClientIdRestClient.GetSpotOrderByClientOrderIdOptions { get; }
+            = new GetSpotOrderByClientOrderIdOptions(_exchangeName, true);
         async Task<HttpResult<SharedSpotOrder>> ISpotOrderClientIdRestClient.GetSpotOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetSpotOrderByClientOrderIdOptions.ValidateRequest(request, this);
@@ -742,8 +710,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<CancelOrderRequest, ISpotOrderClientIdRestClient> ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdOptions { get; }
-            = new EndpointOptions<CancelOrderRequest, ISpotOrderClientIdRestClient>(_exchangeName, true);
+        CancelSpotOrderByClientOrderIdOptions ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdOptions { get; }
+            = new CancelSpotOrderByClientOrderIdOptions(_exchangeName, true);
         async Task<HttpResult<SharedId>> ISpotOrderClientIdRestClient.CancelSpotOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.CancelSpotOrderByClientOrderIdOptions.ValidateRequest(request, this);
@@ -760,8 +728,8 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Asset client
-        EndpointOptions<GetAssetsRequest, IAssetsRestClient> IAssetsRestClient.GetAssetsOptions { get; }
-            = new EndpointOptions<GetAssetsRequest, IAssetsRestClient>(_exchangeName, true);
+        GetAssetsOptions IAssetsRestClient.GetAssetsOptions { get; }
+            = new GetAssetsOptions(_exchangeName, true);
 
         async Task<HttpResult<SharedAsset[]>> IAssetsRestClient.GetAssetsAsync(GetAssetsRequest request, CancellationToken ct)
         {
@@ -791,7 +759,7 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<GetAssetRequest, IAssetsRestClient> IAssetsRestClient.GetAssetOptions { get; } = new EndpointOptions<GetAssetRequest, IAssetsRestClient>(_exchangeName, false);
+        GetAssetOptions IAssetsRestClient.GetAssetOptions { get; } = new GetAssetOptions(_exchangeName, false);
         async Task<HttpResult<SharedAsset>> IAssetsRestClient.GetAssetAsync(GetAssetRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetAssetOptions.ValidateRequest(request, this);
@@ -828,8 +796,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Deposit client
 
-        EndpointOptions<GetDepositAddressesRequest, IDepositRestClient> IDepositRestClient.GetDepositAddressesOptions { get; }
-            = new EndpointOptions<GetDepositAddressesRequest, IDepositRestClient>(_exchangeName, true);
+        GetDepositAddressOptions IDepositRestClient.GetDepositAddressesOptions { get; }
+            = new GetDepositAddressOptions(_exchangeName, true);
         async Task<HttpResult<SharedDepositAddress[]>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetDepositAddressesOptions.ValidateRequest(request, this);
@@ -1109,7 +1077,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Fee Client
-        EndpointOptions<GetFeeRequest, IFeeRestClient> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest, IFeeRestClient>(_exchangeName, true);
+        GetFeeOptions IFeeRestClient.GetFeeOptions { get; } = new GetFeeOptions(_exchangeName, true);
 
         async Task<HttpResult<SharedFee>> IFeeRestClient.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
         {
@@ -1161,8 +1129,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        EndpointOptions<GetOrderRequest, ISpotTriggerOrderRestClient> ISpotTriggerOrderRestClient.GetSpotTriggerOrderOptions { get; }
-            = new EndpointOptions<GetOrderRequest, ISpotTriggerOrderRestClient>(_exchangeName, true);
+        GetSpotTriggerOrderOptions ISpotTriggerOrderRestClient.GetSpotTriggerOrderOptions { get; }
+            = new GetSpotTriggerOrderOptions(_exchangeName, true);
         async Task<HttpResult<SharedSpotTriggerOrder>> ISpotTriggerOrderRestClient.GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -1227,8 +1195,8 @@ namespace Binance.Net.Clients.SpotApi
             return SharedTriggerOrderStatus.Unknown;
         }
 
-        EndpointOptions<CancelOrderRequest, ISpotTriggerOrderRestClient> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; }
-            = new EndpointOptions<CancelOrderRequest, ISpotTriggerOrderRestClient>(_exchangeName, true);
+        CancelSpotTriggerOrderOptions ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; }
+            = new CancelSpotTriggerOrderOptions(_exchangeName, true);
         async Task<HttpResult<SharedId>> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.CancelSpotTriggerOrderOptions.ValidateRequest(request, this);
