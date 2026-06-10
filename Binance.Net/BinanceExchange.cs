@@ -62,6 +62,7 @@ namespace Binance.Net
         internal static readonly ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings()
         {
             Decimal = DecimalSerialization.String,
+            Array = ArrayParametersSerialization.MultipleValues,
             Sort = false
         };
 

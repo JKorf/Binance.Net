@@ -51,7 +51,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
-            ArraySerialization = ArrayParametersSerialization.MultipleValues;
         }
         #endregion
 

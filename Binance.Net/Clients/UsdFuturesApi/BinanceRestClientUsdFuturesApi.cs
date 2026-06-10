@@ -57,7 +57,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
-            ArraySerialization = ArrayParametersSerialization.MultipleValues;
         }
 
         #endregion

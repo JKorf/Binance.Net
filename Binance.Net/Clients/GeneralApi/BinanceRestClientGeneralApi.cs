@@ -70,7 +70,6 @@ namespace Binance.Net.Clients.GeneralApi
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
-            ArraySerialization = ArrayParametersSerialization.MultipleValues;
         }
 
         #endregion
