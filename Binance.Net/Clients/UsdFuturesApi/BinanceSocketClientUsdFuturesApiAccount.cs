@@ -24,7 +24,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
@@ -37,7 +37,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));

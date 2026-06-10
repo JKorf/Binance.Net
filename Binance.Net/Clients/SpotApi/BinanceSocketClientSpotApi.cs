@@ -150,7 +150,7 @@ namespace Binance.Net.Clients.SpotApi
             return result;
         }
 
-        internal async Task<WebSocketResult<BinanceResponse<T>>> QueryAsync<T>(
+        internal async Task<QueryResult<BinanceResponse<T>>> QueryAsync<T>(
             string url,
             string method,
             Parameters parameters,

@@ -33,7 +33,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("omitZeroBalances", omitZeroBalances?.ToString().ToLowerInvariant());
@@ -45,7 +45,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Order Rate Limits
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbols", symbols);
@@ -57,13 +57,13 @@ namespace Binance.Net.Clients.SpotApi
         #region Start User Stream
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<string>>> StartUserStreamAsync(CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<string>>> StartUserStreamAsync(CancellationToken ct = default)
         {
             var result = await _client.QueryAsync<BinanceListenKey>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.start", new Parameters(BinanceExchange._parameterSerializationSettings), true, weight: 2, ct: ct).ConfigureAwait(false);
             if (!result.Success)
-                return WebSocketResult.Fail<BinanceResponse<string>>(result);
+                return QueryResult.Fail<BinanceResponse<string>>(result);
 
-            return WebSocketResult.Ok(result, new BinanceResponse<string>
+            return QueryResult.Ok(result, new BinanceResponse<string>
             {
                 Ratelimits = result.Data!.Ratelimits!,
                 Result = result.Data!.Result?.ListenKey!
@@ -75,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Keep Alive User Stream
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("listenKey", listenKey);
@@ -87,7 +87,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Stop User Stream
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("listenKey", listenKey);

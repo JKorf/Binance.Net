@@ -796,8 +796,8 @@ namespace Binance.Net.Clients.SpotApi
 
         #region Deposit client
 
-        GetDepositAddressOptions IDepositRestClient.GetDepositAddressesOptions { get; }
-            = new GetDepositAddressOptions(_exchangeName, true);
+        GetDepositAddressesOptions IDepositRestClient.GetDepositAddressesOptions { get; }
+            = new GetDepositAddressesOptions(_exchangeName, true);
         async Task<HttpResult<SharedDepositAddress[]>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetDepositAddressesOptions.ValidateRequest(request, this);

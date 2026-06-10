@@ -116,7 +116,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal async Task<WebSocketResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
+        internal async Task<QueryResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {

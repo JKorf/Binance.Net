@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order book response</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceFuturesOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesOrderBook>>> GetOrderBookAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the price of a symbol
@@ -30,7 +30,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">The symbol to get the price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Price of symbol</returns>
-        Task<WebSocketResult<BinanceResponse<BinancePrice>>> GetPriceAsync(string symbol, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinancePrice>>> GetPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the price of all symbols
@@ -38,7 +38,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Price for all symbols</returns>
-        Task<WebSocketResult<BinanceResponse<BinancePrice[]>>> GetPricesAsync(CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinancePrice[]>>> GetPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for a symbol.
@@ -47,7 +47,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="symbol">Symbol to get book price for, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Book price for the symbol</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceBookPrice>>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceBookPrice>>> GetBookPriceAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Gets the best price/quantity on the order book for all symbols.
@@ -55,7 +55,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of book prices</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceBookPrice[]>>> GetBookPricesAsync(CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceBookPrice[]>>> GetBookPricesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the aggregated trades update stream for the provided symbol

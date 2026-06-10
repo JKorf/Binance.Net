@@ -18,7 +18,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets account information, including positions and balances
@@ -27,7 +27,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account information</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets account information, including positions and balances
@@ -36,7 +36,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account information</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the account update stream. Before using this method, call <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> to start the stream and obtain a listen key.

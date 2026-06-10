@@ -20,7 +20,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="omitZeroBalances">When true only return non-zero balances in the account</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account information response</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceAccountInfo>>> GetAccountInfoAsync(bool? omitZeroBalances = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets order rate limit status
@@ -29,7 +29,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// <param name="symbols">Filter by symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Order rate limit status response</returns>
-        Task<WebSocketResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceCurrentRateLimit[]>>> GetOrderRateLimitsAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the account update stream

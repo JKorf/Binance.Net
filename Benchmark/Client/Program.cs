@@ -23,14 +23,14 @@ namespace Binance.Net.Benchmark.Client
         {
             // For manual testing:
 
-            //var test = new SocketTester();
-            //test.SetupUpdatedDeserialization();
+            //var test = new LibraryBenchmarksSocket();
+            //test.Setup();
             //Console.ReadLine();
             //Console.WriteLine("Starting");
             //var sw = Stopwatch.StartNew();
             //for (var i = 0; i < 1; i++)
             //{
-            //    test.Socket100Topics().Wait();
+            //    test.Socket1Topic().Wait();
             //}
             //sw.Stop();
             //Console.WriteLine($"Finished in {sw.ElapsedMilliseconds} ms");

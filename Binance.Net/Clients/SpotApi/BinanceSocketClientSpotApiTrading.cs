@@ -28,7 +28,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinancePlacedOrder>>> PlaceOrderAsync(string symbol,
+        public async Task<QueryResult<BinanceResponse<BinancePlacedOrder>>> PlaceOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -49,7 +49,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!rulesCheck.Passed)
             {
                 _logger.Log(LogLevel.Warning, rulesCheck.ErrorMessage!);
-                return WebSocketResult.Fail<BinanceResponse<BinancePlacedOrder>>(BinanceExchange.Metadata.Id, ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
+                return QueryResult.Fail<BinanceResponse<BinancePlacedOrder>>(BinanceExchange.Metadata.Id, ArgumentError.Invalid(rulesCheck.ErrorParameter!, rulesCheck.ErrorMessage!));
             }
 
             string clientOrderId = LibraryHelpers.ApplyBrokerId(
@@ -81,7 +81,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Place Test Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceTestOrderCommission>>> PlaceTestOrderAsync(string symbol,
+        public async Task<QueryResult<BinanceResponse<BinanceTestOrderCommission>>> PlaceTestOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             decimal? quantity = null,
@@ -120,7 +120,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
         {
             if (clientOrderId != null)
             {
@@ -143,7 +143,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
         {
             if (clientOrderId != null)
             {
@@ -176,7 +176,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Replace Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceReplaceOrderResult>>> ReplaceOrderAsync(string symbol,
+        public async Task<QueryResult<BinanceResponse<BinanceReplaceOrderResult>>> ReplaceOrderAsync(string symbol,
             OrderSide side,
             SpotOrderType type,
             CancelReplaceMode cancelReplaceMode,
@@ -251,18 +251,18 @@ namespace Binance.Net.Clients.SpotApi
                 true,
                 ct: ct).ConfigureAwait(false);
             if (!result.Success)
-                return WebSocketResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result);
+                return QueryResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result);
 
             if (result.Data == null)
-                return WebSocketResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result, new ServerError(ErrorInfo.Unknown));
+                return QueryResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result, new ServerError(ErrorInfo.Unknown));
 
             if (result.Data.Result.NewOrderResult == OrderOperationResult.NotAttempted)
                 // Not attempted because cancel failed
-                return WebSocketResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result, new ServerError(result.Data.Result.CancelResponse!.Code!.Value, _client.GetErrorInfo(result.Data.Result.CancelResponse.Code.Value, result.Data.Result.CancelResponse.Message)), result.Data);
+                return QueryResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result, new ServerError(result.Data.Result.CancelResponse!.Code!.Value, _client.GetErrorInfo(result.Data.Result.CancelResponse.Code.Value, result.Data.Result.CancelResponse.Message)), result.Data);
 
             if (result.Data.Result.NewOrderResult == OrderOperationResult.Failure)
                 // New order attempted; if cancel failed this still takes priority since cancelReplaceMode was AllowFailure
-                return WebSocketResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result, new ServerError(result.Data.Result.NewOrderResponse!.Code!.Value, _client.GetErrorInfo(result.Data.Result.NewOrderResponse.Code.Value, result.Data.Result.NewOrderResponse.Message)), result.Data);
+                return QueryResult.Fail<BinanceResponse<BinanceReplaceOrderResult>>(result, new ServerError(result.Data.Result.NewOrderResponse!.Code!.Value, _client.GetErrorInfo(result.Data.Result.NewOrderResponse.Code.Value, result.Data.Result.NewOrderResponse.Message)), result.Data);
 
             return result;
         }
@@ -272,10 +272,10 @@ namespace Binance.Net.Clients.SpotApi
         #region Amend Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceAmendedOrderResult>>> AmendOrderAsync(string symbol, decimal newQuantity, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceAmendedOrderResult>>> AmendOrderAsync(string symbol, decimal newQuantity, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
         {
             if (!orderId.HasValue && string.IsNullOrEmpty(clientOrderId))
-                return WebSocketResult.Fail<BinanceResponse<BinanceAmendedOrderResult>>(BinanceExchange.Metadata.Id, ArgumentError.Invalid("Either orderId or clientOrderId must be provided", "Either orderId or clientOrderId must be provided"));
+                return QueryResult.Fail<BinanceResponse<BinanceAmendedOrderResult>>(BinanceExchange.Metadata.Id, ArgumentError.Invalid("Either orderId or clientOrderId must be provided", "Either orderId or clientOrderId must be provided"));
 
             if (newClientOrderId != null)
             {
@@ -311,7 +311,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Open Orders
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrder[]>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrder[]>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("symbol", symbol);
@@ -323,7 +323,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel All Orders
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrder[]>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrder[]>>> CancelAllOrdersAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -335,7 +335,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Place Oco Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderAsync(string symbol,
+        public async Task<QueryResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderAsync(string symbol,
             OrderSide side,
             decimal quantity,
             decimal price,
@@ -408,7 +408,7 @@ namespace Binance.Net.Clients.SpotApi
         #region New OCO
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderListAsync(
+        public async Task<QueryResult<BinanceResponse<BinanceOrderOcoList>>> PlaceOcoOrderListAsync(
             string symbol,
             OrderSide side,
             decimal quantity,
@@ -490,7 +490,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Oco Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrderOcoList>>> GetOcoOrderAsync(long? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrderOcoList>>> GetOcoOrderAsync(long? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
         {
             if (clientOrderId != null)
             {
@@ -512,7 +512,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Cancel Oco Order
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrderOcoList>>> CancelOcoOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrderOcoList>>> CancelOcoOrderAsync(string symbol, long? orderId = null, string? clientOrderId = null, string? newClientOrderId = null, CancellationToken ct = default)
         {
             if (clientOrderId != null)
             {
@@ -545,7 +545,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Open Oco Orders
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOpenOcoOrdersAsync(CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOpenOcoOrdersAsync(CancellationToken ct = default)
         {
             return await _client.QueryAsync<BinanceOrderOcoList[]>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"openOrderLists.status", new Parameters(BinanceExchange._parameterSerializationSettings), true, true, weight: 6, ct: ct).ConfigureAwait(false);
         }
@@ -555,7 +555,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Order History
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrder[]>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrder[]>>> GetOrdersAsync(string symbol, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -571,7 +571,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get OCO Order History
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceOrderOcoList[]>>> GetOcoOrdersAsync(long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("fromId", fromOrderId);
@@ -586,7 +586,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get User Trades
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceTrade[]>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceTrade[]>>> GetUserTradesAsync(string symbol, long? orderId = null, long? fromOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);
@@ -604,7 +604,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Prevented Trades
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinancePreventedTrade[]>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinancePreventedTrade[]>>> GetPreventedTradesAsync(string symbol, long? preventedTradeId = null, long? orderId = null, long? fromPreventedTradeId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddParameter("symbol", symbol);

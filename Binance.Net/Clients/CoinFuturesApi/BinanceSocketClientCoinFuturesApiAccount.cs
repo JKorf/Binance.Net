@@ -24,7 +24,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
@@ -37,7 +37,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<BinanceResponse<BinanceFuturesCoinAccountInfo>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceFuturesCoinAccountInfo>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
