@@ -17,17 +17,17 @@ namespace Binance.Net.Clients.SpotApi
 
         #region If New User
 
-        public async Task<WebCallResult<BinanceIfNewUser>> GetIfNewUserAsync(string apiAgentCode, int? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceIfNewUser>> GetIfNewUserAsync(string apiAgentCode, int? receiveWindow = null, CancellationToken ct = default)
         {
             apiAgentCode.ValidateNotNull(nameof(apiAgentCode));
 
-            var parameters = new ParameterCollection
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
             {
                 { "apiAgentCode", apiAgentCode }
             };
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/apiReferral/ifNewUser", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
             return await _baseClient.SendAsync<BinanceIfNewUser>(request, parameters, ct).ConfigureAwait(false);
         }
 

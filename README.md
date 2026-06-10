@@ -5,6 +5,19 @@
 
 Binance.Net is a strongly typed client library for accessing the [Binance REST and Websocket API](https://binance-docs.github.io/apidocs/#change-log). 
 
+## Features
+* Response data is mapped to descriptive models
+* Input parameters and response values are mapped to discriptive enum values where possible
+* High performance
+* Automatic websocket (re)connection management 
+* Client side rate limiting 
+* Client side order book implementation
+* Support for managing different accounts
+* Extensive logging
+* Support for different environments (binance.com, binance.us, testnet)
+* Easy integration with other exchange client based on the CryptoExchange.Net base library
+* Native AOT support
+
 ## For AI Coding Assistants
 
 This library provides first-class support for AI coding assistants. The relevant skill files are in this repository:
@@ -20,19 +33,6 @@ This library provides first-class support for AI coding assistants. The relevant
 > "Show me a minimal example of placing a limit buy order on Binance Spot using Binance.Net, including authentication setup."
 
 The expected output should use `BinanceRestClient`, `BinanceCredentials`, and the `WebCallResult` pattern.
-
-## Features
-* Response data is mapped to descriptive models
-* Input parameters and response values are mapped to discriptive enum values where possible
-* High performance
-* Automatic websocket (re)connection management 
-* Client side rate limiting 
-* Client side order book implementation
-* Support for managing different accounts
-* Extensive logging
-* Support for different environments (binance.com, binance.us, testnet)
-* Easy integration with other exchange client based on the CryptoExchange.Net base library
-* Native AOT support
 
 ## Benchmark
 Performance is a core focus. For a benchmark comparing Binance.Net performance to CCXT and Binance.Api, see [docs/binance-net-benchmark.md](docs/binance-net-benchmark.md).

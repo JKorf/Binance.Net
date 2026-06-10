@@ -51,13 +51,13 @@ namespace Binance.Net.Objects.Sockets
             _lk = listenKey;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>.CreateWithoutTopicFilter("ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>.CreateWithoutTopicFilter("MARGIN_CALL", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>.CreateWithoutTopicFilter("ACCOUNT_UPDATE", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>.CreateWithoutTopicFilter("ORDER_TRADE_UPDATE", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceStreamEvent>>.CreateWithoutTopicFilter("listenKeyExpired", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceStrategyUpdate>>.CreateWithoutTopicFilter("STRATEGY_UPDATE", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceGridUpdate>>.CreateWithoutTopicFilter("GRID_UPDATE", DoHandleMessage)
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceFuturesStreamConfigUpdate>>("ACCOUNT_CONFIG_UPDATE", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceFuturesStreamMarginUpdate>>("MARGIN_CALL", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceFuturesStreamAccountUpdate>>("ACCOUNT_UPDATE", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceFuturesStreamOrderUpdate>>("ORDER_TRADE_UPDATE", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceStreamEvent>>("listenKeyExpired", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceStrategyUpdate>>("STRATEGY_UPDATE", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceGridUpdate>>("GRID_UPDATE", DoHandleMessage)
                 ]);
         }
 
@@ -95,7 +95,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamMarginUpdate> message)
@@ -109,7 +109,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamAccountUpdate> message)
@@ -123,7 +123,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceFuturesStreamOrderUpdate> message)
@@ -138,7 +138,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithSymbol(message.Data.UpdateData.Symbol)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceStreamEvent> message)
@@ -151,7 +151,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceStrategyUpdate> message)
@@ -164,7 +164,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceCombinedStream<BinanceGridUpdate> message)
@@ -177,7 +177,7 @@ namespace Binance.Net.Objects.Sockets
                     .WithStreamId(message.Stream)
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }

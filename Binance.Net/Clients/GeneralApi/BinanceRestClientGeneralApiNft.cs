@@ -19,16 +19,16 @@ namespace Binance.Net.Clients.GeneralApi
         #region  Get NFT Deposit History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftDeposit>>> GetNftDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftDeposit>>> GetNftDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            parameters.AddOptional("page", page);
-            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("page", page);
+            parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/history/deposit", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/nft/history/deposit", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftDeposit>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -37,16 +37,16 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get NFT Withdraw History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftWithdraw>>> GetNftWithdrawHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftWithdraw>>> GetNftWithdrawHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            parameters.AddOptional("page", page);
-            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("page", page);
+            parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/history/withdraw", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/nft/history/withdraw", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftWithdraw>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -55,17 +55,17 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get NFT Transaction History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftTransaction>>> GetNftTransactionHistoryAsync(NftOrderType orderType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftTransaction>>> GetNftTransactionHistoryAsync(NftOrderType orderType, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("orderType", orderType);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            parameters.AddOptional("page", page);
-            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("orderType", orderType);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("page", page);
+            parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/history/transactions", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/nft/history/transactions", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftTransaction>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -74,14 +74,14 @@ namespace Binance.Net.Clients.GeneralApi
         #region  Get NFT Asset
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceListRecords<BinanceNftAsset>>> GetNftAssetAsync(int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceListRecords<BinanceNftAsset>>> GetNftAssetAsync(int? limit = null, int? page = null, long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("limit", limit);
-            parameters.AddOptional("page", page);
-            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("limit", limit);
+            parameters.Add("page", page);
+            parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/nft/user/getAsset", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/nft/user/getAsset", BinanceExchange.RateLimiter.SpotRestIp, 3000, true);
             return await _baseClient.SendAsync<BinanceListRecords<BinanceNftAsset>>(request, parameters, ct).ConfigureAwait(false);
         }
 

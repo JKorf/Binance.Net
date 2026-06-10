@@ -19,7 +19,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Coins info</returns>
-        Task<WebCallResult<BinanceMiningCoin[]>> GetMiningCoinListAsync(CancellationToken ct = default);
+        Task<HttpResult<BinanceMiningCoin[]>> GetMiningCoinListAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets mining algorithms info
@@ -32,7 +32,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Algorithms info</returns>
-        Task<WebCallResult<BinanceMiningAlgorithm[]>> GetMiningAlgorithmListAsync(CancellationToken ct = default);
+        Task<HttpResult<BinanceMiningAlgorithm[]>> GetMiningAlgorithmListAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets miner details
@@ -48,7 +48,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="workerName">Miner name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Miner details</returns>
-        Task<WebCallResult<BinanceMinerDetails[]>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default);
+        Task<HttpResult<BinanceMinerDetails[]>> GetMinerDetailsAsync(string algorithm, string userName, string workerName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets miner list
@@ -67,7 +67,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="workerStatus">Filter by status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Miner list</returns>
-        Task<WebCallResult<BinanceMinerList>> GetMinerListAsync(string algorithm, string userName, int? page = null, bool? sortAscending = null, string? sortColumn = null, MinerStatus? workerStatus = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMinerList>> GetMinerListAsync(string algorithm, string userName, int? page = null, bool? sortAscending = null, string? sortColumn = null, MinerStatus? workerStatus = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets revenue list
@@ -87,7 +87,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="endDate">End date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Revenue list</returns>
-        Task<WebCallResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceRevenueList>> GetMiningRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets other revenue list
@@ -107,7 +107,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="endDate">End date</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Revenue list</returns>
-        Task<WebCallResult<BinanceOtherRevenueList>> GetMiningOtherRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceOtherRevenueList>> GetMiningOtherRevenueListAsync(string algorithm, string userName, string? coin = null, DateTime? startDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets mining statistics
@@ -122,7 +122,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="userName">User name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Mining statistics</returns>
-        Task<WebCallResult<BinanceMiningStatistic>> GetMiningStatisticsAsync(string algorithm, string userName, CancellationToken ct = default);
+        Task<HttpResult<BinanceMiningStatistic>> GetMiningStatisticsAsync(string algorithm, string userName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets mining account list
@@ -137,7 +137,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="userName">Mining account user name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Mining account list</returns>
-        Task<WebCallResult<BinanceMiningAccount[]>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
+        Task<HttpResult<BinanceMiningAccount[]>> GetMiningAccountListAsync(string algorithm, string userName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets hash rate resale list
@@ -152,7 +152,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Results per page</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Resale list</returns>
-        Task<WebCallResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceHashrateResaleList>> GetHashrateResaleListAsync(int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets hash rate resale details
@@ -169,7 +169,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Results per page</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Resale details</returns>
-        Task<WebCallResult<BinanceHashrateResaleDetails>> GetHashrateResaleDetailsAsync(int configId, string userName, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceHashrateResaleDetails>> GetHashrateResaleDetailsAsync(int configId, string userName, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Places a hashrate resale request
@@ -188,7 +188,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="hashRate">Resale hashrate h/s must be transferred (BTC is greater than 500000000000 ETH is greater than 500000)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Created resale configuration id</returns>
-        Task<WebCallResult<int>> PlaceHashrateResaleRequestAsync(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default);
+        Task<HttpResult<int>> PlaceHashrateResaleRequestAsync(string userName, string algorithm, DateTime startDate, DateTime endDate, string toUser, decimal hashRate, CancellationToken ct = default);
 
         /// <summary>
         /// Cancels hashrate resale configuration
@@ -203,7 +203,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="userName">Mining account</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Success</returns>
-        Task<WebCallResult<bool>> CancelHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default);
+        Task<HttpResult<bool>> CancelHashrateResaleRequestAsync(int configId, string userName, CancellationToken ct = default);
 
         /// <summary>
         /// Gets mining account earnings
@@ -221,6 +221,6 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Mining account earnings</returns>
-        Task<WebCallResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceMiningEarnings>> GetMiningAccountEarningsAsync(string algo, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
     }
 }

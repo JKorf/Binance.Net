@@ -47,7 +47,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse<BinanceWebsocketApiWrapper>>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.subscribe.listenToken",
-                Params = new Dictionary<string, object>
+                Params = new Parameters(BinanceExchange._parameterSerializationSettings)
                 {
                     { "listenToken", _listenToken }
                 },
@@ -65,11 +65,11 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _subscriptionId = id;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>.CreateWithTopicFilter("outboundAccountPosition", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>.CreateWithTopicFilter("balanceUpdate", id,DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>.CreateWithTopicFilter("executionReport", id,DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>.CreateWithTopicFilter("listStatus",id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamEvent>>.CreateWithTopicFilter("eventStreamTerminated", id,DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>("outboundAccountPosition", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>("balanceUpdate", id,DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>("executionReport", id,DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>("listStatus",id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamEvent>>("eventStreamTerminated", id,DoHandleMessage),
             ]);
         }
 
@@ -78,7 +78,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.unsubscribe",
-                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : [],
+                Params = _subscriptionId != null ? new Parameters(BinanceExchange._parameterSerializationSettings) { { "subscriptionId", _subscriptionId } } : new Parameters(BinanceExchange._parameterSerializationSettings),
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -91,7 +91,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate> message)
@@ -102,7 +102,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate> message)
@@ -114,7 +114,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithSymbol(message.Event.Symbol)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceWebsocketApiWrapper<BinanceStreamOrderList> message)
@@ -126,7 +126,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithSymbol(message.Event.Symbol)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceWebsocketApiWrapper<BinanceStreamEvent> message)
@@ -137,19 +137,19 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <summary>
         /// Seamlessly renew the listen token on the existing connection without
         /// disconnecting. Also updates the stored token so reconnects use the new value.
         /// </summary>
-        internal async Task<CallResult> RenewTokenAsync(string newListenToken, CancellationToken ct = default)
+        internal async Task<WebSocketResult> RenewTokenAsync(string newListenToken, CancellationToken ct = default)
         {
             var result = await _client.QueryAsync<object>(
                 _client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"),
                 "userDataStream.subscribe.listenToken",
-                new Dictionary<string, object> { { "listenToken", newListenToken } },
+                new Parameters(BinanceExchange._parameterSerializationSettings) { { "listenToken", newListenToken } },
                 authenticated: false,
                 ct: ct).ConfigureAwait(false);
 

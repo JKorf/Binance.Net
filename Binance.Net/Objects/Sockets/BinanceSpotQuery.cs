@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Sockets
         public BinanceSpotQuery(SocketApiClient client, BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _client = client;
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<T>(request.Id.ToString(), HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<T>(request.Id.ToString(), HandleMessage);
         }
 
         public CallResult<T> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)
@@ -23,7 +23,7 @@ namespace Binance.Net.Objects.Sockets
                 if (message.Status == 418 || message.Status == 429)
                 {
                     // Rate limit error 
-                    return new CallResult<T>(new BinanceRateLimitError(message.Error!.Code, message.Error!.Message)
+                    return CallResult<T>.Fail(new BinanceRateLimitError(message.Error!.Code, message.Error!.Message)
                     {
                         RetryAfter = message.Error.Data!.RetryAfter
                     }, originalData);
@@ -32,13 +32,13 @@ namespace Binance.Net.Objects.Sockets
                 if (message.Error!.Code == -2035)
                 {
                     // Duplicate subscription, treat as success as it handled correctly internally
-                    return new CallResult<T>(message, originalData, null);
+                    return CallResult<T>.Ok(message, originalData);
                 }
 
-                return new CallResult<T>(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
+                return CallResult<T>.Fail(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
             }
 
-            return new CallResult<T>(message, originalData, null);
+            return CallResult<T>.Ok(message, originalData);
         }
     }
 }
