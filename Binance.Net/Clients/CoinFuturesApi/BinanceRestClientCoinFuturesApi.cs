@@ -9,6 +9,8 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.TokenManagement;
+using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
 namespace Binance.Net.Clients.CoinFuturesApi
@@ -41,12 +43,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion
 
         #region constructor/destructor
-        internal BinanceRestClientCoinFuturesApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)
-            : base(logger, BinanceExchange.Metadata.Id, httpClient, options.Environment.CoinFuturesRestAddress!, options, options.CoinFuturesOptions)
+        internal BinanceRestClientCoinFuturesApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BinanceRestOptions options)
+            : base(loggerFactory, BinanceExchange.Metadata.Id, httpClient, options.Environment.CoinFuturesRestAddress!, options, options.CoinFuturesOptions)
         {
+
             Account = new BinanceRestClientCoinFuturesApiAccount(this);
-            ExchangeData = new BinanceRestClientCoinFuturesApiExchangeData(logger, this);
-            Trading = new BinanceRestClientCoinFuturesApiTrading(logger, this);
+            ExchangeData = new BinanceRestClientCoinFuturesApiExchangeData(_logger, this);
+            Trading = new BinanceRestClientCoinFuturesApiTrading(_logger, this);
             Agent = new BinanceRestClientCoinFuturesApiAgent(this);
 
             RequestBodyEmptyContent = "";

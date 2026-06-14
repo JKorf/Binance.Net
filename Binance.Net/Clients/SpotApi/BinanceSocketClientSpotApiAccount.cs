@@ -54,48 +54,6 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
-        #region Start User Stream
-
-        /// <inheritdoc />
-        public async Task<QueryResult<BinanceResponse<string>>> StartUserStreamAsync(CancellationToken ct = default)
-        {
-            var result = await _client.QueryAsync<BinanceListenKey>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.start", new Parameters(BinanceExchange._parameterSerializationSettings), true, weight: 2, ct: ct).ConfigureAwait(false);
-            if (!result.Success)
-                return QueryResult.Fail<BinanceResponse<string>>(result);
-
-            return QueryResult.Ok(result, new BinanceResponse<string>
-            {
-                Ratelimits = result.Data!.Ratelimits!,
-                Result = result.Data!.Result?.ListenKey!
-            });
-        }
-
-        #endregion
-
-        #region Keep Alive User Stream
-
-        /// <inheritdoc />
-        public async Task<QueryResult<BinanceResponse<object>>> KeepAliveUserStreamAsync(string listenKey, CancellationToken ct = default)
-        {
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
-            parameters.AddParameter("listenKey", listenKey);
-            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.ping", parameters, true, weight: 2, ct: ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
-        #region Stop User Stream
-
-        /// <inheritdoc />
-        public async Task<QueryResult<BinanceResponse<object>>> StopUserStreamAsync(string listenKey, CancellationToken ct = default)
-        {
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
-            parameters.AddParameter("listenKey", listenKey);
-            return await _client.QueryAsync<object>(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), $"userDataStream.stop", parameters, true, weight: 2, ct: ct).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #endregion
 
         #region Streams

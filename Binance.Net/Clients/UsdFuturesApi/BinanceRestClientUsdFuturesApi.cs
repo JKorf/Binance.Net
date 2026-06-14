@@ -47,12 +47,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         #region constructor/destructor
-        internal BinanceRestClientUsdFuturesApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)
-            : base(logger, BinanceExchange.Metadata.Id, httpClient, options.Environment.UsdFuturesRestAddress!, options, options.UsdFuturesOptions)
+        internal BinanceRestClientUsdFuturesApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BinanceRestOptions options)
+            : base(loggerFactory, BinanceExchange.Metadata.Id, httpClient, options.Environment.UsdFuturesRestAddress!, options, options.UsdFuturesOptions)
         {
             Account = new BinanceRestClientUsdFuturesApiAccount(this);
-            ExchangeData = new BinanceRestClientUsdFuturesApiExchangeData(logger, this);
-            Trading = new BinanceRestClientUsdFuturesApiTrading(logger, this);
+            ExchangeData = new BinanceRestClientUsdFuturesApiExchangeData(_logger, this);
+            Trading = new BinanceRestClientUsdFuturesApiTrading(_logger, this);
             Agent = new BinanceRestClientUsdFuturesApiAgent(this);
 
             RequestBodyEmptyContent = "";

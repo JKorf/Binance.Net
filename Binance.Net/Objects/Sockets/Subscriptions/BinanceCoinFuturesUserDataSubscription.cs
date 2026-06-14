@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Sockets
     /// <inheritdoc />
     internal class BinanceCoinFuturesUserDataSubscription : Subscription
     {
-        private readonly string _lk;
+        private readonly string? _lk;
         private readonly BinanceSocketClientCoinFuturesApi _client;
 
         private readonly Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? _orderHandler;
@@ -30,7 +30,7 @@ namespace Binance.Net.Objects.Sockets
         public BinanceCoinFuturesUserDataSubscription(
             ILogger logger,
             BinanceSocketClientCoinFuturesApi client,
-            string listenKey,
+            string? listenKey,
             Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? orderHandler,
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? configHandler,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? marginHandler,
@@ -67,7 +67,7 @@ namespace Binance.Net.Objects.Sockets
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = [_lk],
+                Params = [_lk ?? TokenLease!.Token.Token],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -78,7 +78,7 @@ namespace Binance.Net.Objects.Sockets
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = [_lk],
+                Params = [_lk ?? TokenLease!.Token.Token],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }

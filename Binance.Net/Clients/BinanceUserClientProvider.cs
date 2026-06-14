@@ -1,23 +1,23 @@
 ﻿using Binance.Net.Interfaces.Clients;
 using Binance.Net.Objects.Options;
+using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
 
 namespace Binance.Net.Clients
 {
     /// <inheritdoc />
-    public class BinanceUserClientProvider : IBinanceUserClientProvider
+    public class BinanceUserClientProvider :
+        UserClientProvider<
+            IBinanceRestClient, 
+            IBinanceSocketClient,
+            BinanceRestOptions,
+            BinanceSocketOptions,
+            BinanceCredentials,
+            BinanceEnvironment>, IBinanceUserClientProvider
     {
-        private ConcurrentDictionary<string, IBinanceRestClient> _restClients = new ConcurrentDictionary<string, IBinanceRestClient>();
-        private ConcurrentDictionary<string, IBinanceSocketClient> _socketClients = new ConcurrentDictionary<string, IBinanceSocketClient>();
-
-        private readonly IOptions<BinanceRestOptions> _restOptions;
-        private readonly IOptions<BinanceSocketOptions> _socketOptions;
-        private readonly HttpClient _httpClient;
-        private readonly ILoggerFactory? _loggerFactory;
-
         /// <inheritdoc />
-        public string ExchangeName => BinanceExchange.ExchangeName;
+        public override string ExchangeName => BinanceExchange.Metadata.Id;
 
         /// <summary>
         /// ctor
@@ -36,97 +36,23 @@ namespace Binance.Net.Clients
             ILoggerFactory? loggerFactory,
             IOptions<BinanceRestOptions> restOptions,
             IOptions<BinanceSocketOptions> socketOptions)
+            : base(httpClient, loggerFactory, restOptions, socketOptions)
         {
-            _httpClient = httpClient ?? new HttpClient();
-            _httpClient.Timeout = restOptions.Value.RequestTimeout;
-            _loggerFactory = loggerFactory;
-            _restOptions = restOptions;
-            _socketOptions = socketOptions;
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, BinanceCredentials credentials, BinanceEnvironment? environment = null)
-        {
-            CreateRestClient(userIdentifier, credentials, environment);
-            CreateSocketClient(userIdentifier, credentials, environment);
-        }
+        protected override IBinanceRestClient ConstructRestClient(
+            HttpClient httpClient,
+            ILoggerFactory? loggerFactory,
+            IOptions<BinanceRestOptions> options,
+            BinanceCredentials? credentials,
+            BinanceEnvironment? environment) => new BinanceRestClient(httpClient, loggerFactory, options);
 
         /// <inheritdoc />
-        public void ClearUserClients(string userIdentifier)
-        {
-            _restClients.TryRemove(userIdentifier, out _);
-            _socketClients.TryRemove(userIdentifier, out _);
-        }
-
-        /// <inheritdoc />
-        public IBinanceRestClient GetRestClient(string userIdentifier, BinanceCredentials? credentials = null, BinanceEnvironment? environment = null)
-        {
-            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateRestClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        /// <inheritdoc />
-        public IBinanceSocketClient GetSocketClient(string userIdentifier, BinanceCredentials? credentials = null, BinanceEnvironment? environment = null)
-        {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateSocketClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        private IBinanceRestClient CreateRestClient(string userIdentifier, BinanceCredentials? credentials, BinanceEnvironment? environment)
-        {
-            var clientRestOptions = SetRestEnvironment(environment);
-            var client = new BinanceRestClient(_httpClient, _loggerFactory, clientRestOptions);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _restClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IBinanceSocketClient CreateSocketClient(string userIdentifier, BinanceCredentials? credentials, BinanceEnvironment? environment)
-        {
-            var clientSocketOptions = SetSocketEnvironment(environment);
-            var client = new BinanceSocketClient(clientSocketOptions!, _loggerFactory);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _socketClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IOptions<BinanceRestOptions> SetRestEnvironment(BinanceEnvironment? environment)
-        {
-            if (environment == null)
-                return _restOptions;
-
-            var newRestClientOptions = new BinanceRestOptions();
-            var restOptions = _restOptions.Value.Set(newRestClientOptions);
-            newRestClientOptions.Environment = environment;
-            return Options.Create(newRestClientOptions);
-        }
-
-        private IOptions<BinanceSocketOptions> SetSocketEnvironment(BinanceEnvironment? environment)
-        {
-            if (environment == null)
-                return _socketOptions;
-
-            var newSocketClientOptions = new BinanceSocketOptions();
-            var restOptions = _socketOptions.Value.Set(newSocketClientOptions);
-            newSocketClientOptions.Environment = environment;
-            return Options.Create(newSocketClientOptions);
-        }
-
-        private static T ApplyOptionsDelegate<T>(Action<T>? del) where T : new()
-        {
-            var opts = new T();
-            del?.Invoke(opts);
-            return opts;
-        }
+        protected override IBinanceSocketClient ConstructSocketClient(
+            ILoggerFactory? loggerFactory,
+            IOptions<BinanceSocketOptions> options,
+            BinanceCredentials? credentials,
+            BinanceEnvironment? environment) => new BinanceSocketClient(options, loggerFactory);
     }
 }

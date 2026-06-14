@@ -52,12 +52,12 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region constructor/destructor
-        internal BinanceRestClientSpotApi(ILogger logger, HttpClient? httpClient, BinanceRestOptions options)
-            : base(logger, BinanceExchange.Metadata.Id,httpClient, options.Environment.SpotRestAddress, options, options.SpotOptions)
+        internal BinanceRestClientSpotApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BinanceRestOptions options)
+            : base(loggerFactory, BinanceExchange.Metadata.Id,httpClient, options.Environment.SpotRestAddress, options, options.SpotOptions)
         {
             Account = new BinanceRestClientSpotApiAccount(this);
-            ExchangeData = new BinanceRestClientSpotApiExchangeData(logger, this);
-            Trading = new BinanceRestClientSpotApiTrading(logger, this);
+            ExchangeData = new BinanceRestClientSpotApiExchangeData(_logger, this);
+            Trading = new BinanceRestClientSpotApiTrading(_logger, this);
             Agent = new BinanceRestClientSpotApiAgent(this);
 
             RequestBodyEmptyContent = "";

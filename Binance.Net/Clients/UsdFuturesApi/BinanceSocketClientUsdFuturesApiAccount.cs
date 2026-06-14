@@ -5,6 +5,7 @@ using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.TokenManagement;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -64,9 +65,37 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         #region User Data Streams
 
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamTradeUpdate>>? onTradeUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate = null,
+            Action<DataEvent<BinanceAlgoOrderUpdate>>? onAlgoOrderUpdate = null,
+            CancellationToken ct = default)
+            => await SubscribeToUserDataUpdatesAsync(
+                null,
+                onConfigUpdate,
+                onMarginUpdate,
+                onAccountUpdate, 
+                onOrderUpdate,
+                onTradeUpdate,
+                onListenKeyExpired,
+                onStrategyUpdate,
+                onGridUpdate,
+                onConditionalOrderTriggerRejectUpdate,
+                onAlgoOrderUpdate,
+                ct).ConfigureAwait(false);
+
+
+
         /// <inheritdoc />
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
-            string listenKey,
+            string? listenKey = null,
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate = null,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
@@ -79,7 +108,22 @@ namespace Binance.Net.Clients.UsdFuturesApi
             Action<DataEvent<BinanceAlgoOrderUpdate>>? onAlgoOrderUpdate = null,
             CancellationToken ct = default)
         {
-            listenKey.ValidateNotNull(nameof(listenKey));
+            if (listenKey == null && !_client.Authenticated)
+                return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, new NoApiCredentialsError());
+
+            TokenLease? lease = null;
+            if (listenKey == null)
+            {   
+                var leaseResult = await _client.TokenManager.AcquireAsync(new TokenScope(
+                    BinanceExchange.Metadata.Id,
+                    _client.EnvironmentName,
+                    "UsdFutures",
+                    _client.ApiCredentials!.Credential!.Key), ct).ConfigureAwait(false);
+                if (!leaseResult.Success)
+                    return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, leaseResult.Error);
+
+                lease = leaseResult.Data;
+            }
 
             var subscription = new BinanceUsdFuturesUserDataSubscription(
                 _logger,
@@ -94,8 +138,15 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 onStrategyUpdate,
                 onGridUpdate,
                 onConditionalOrderTriggerRejectUpdate,
-                onAlgoOrderUpdate);
-            return await _client.SubscribeInternalAsync(_client.BaseAddress.AppendPath("private"), subscription, ct).ConfigureAwait(false);
+                onAlgoOrderUpdate)
+            {
+                TokenLease = lease
+            };
+            var result = await _client.SubscribeInternalAsync(_client.BaseAddress.AppendPath("private"), subscription, ct).ConfigureAwait(false);
+            if (!result.Success && lease != null)
+                await lease.ReleaseAsync().ConfigureAwait(false);
+
+            return result;
         }
 
         #endregion

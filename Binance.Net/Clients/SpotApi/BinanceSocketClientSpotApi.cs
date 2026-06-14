@@ -17,6 +17,8 @@ using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Sockets.Default;
 using CryptoExchange.Net.Sockets.HighPerf;
+using CryptoExchange.Net.TokenManagement;
+using Microsoft.Extensions.Options;
 using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.SpotApi
@@ -34,6 +36,26 @@ namespace Binance.Net.Clients.SpotApi
         internal DateTime? _lastExchangeInfoUpdate;
 
         protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
+        private readonly ILoggerFactory? _loggerFactory;
+        private BinanceRestClient? _tokenClient;
+        internal TokenManager TokenManager { get; }
+        private BinanceRestClient TokenClient
+        {
+            get
+            {
+                if (_tokenClient == null)
+                {
+                    _tokenClient = new BinanceRestClient(null, _loggerFactory, Options.Create(new BinanceRestOptions
+                    {
+                        ApiCredentials = ApiCredentials,
+                        Environment = ClientOptions.Environment,
+                        Proxy = ClientOptions.Proxy
+                    }));
+                }
+
+                return _tokenClient;
+            }
+        }
 
         #endregion
 
@@ -46,12 +68,14 @@ namespace Binance.Net.Clients.SpotApi
 
         #region constructor/destructor
 
-        internal BinanceSocketClientSpotApi(ILogger logger, BinanceSocketOptions options) :
-            base(logger, BinanceExchange.Metadata.Id,options.Environment.SpotSocketStreamAddress, options, options.SpotOptions)
+        internal BinanceSocketClientSpotApi(ILoggerFactory? loggerFactory, BinanceSocketOptions options) :
+            base(loggerFactory, BinanceExchange.Metadata.Id,options.Environment.SpotSocketStreamAddress, options, options.SpotOptions)
         {
-            Account = new BinanceSocketClientSpotApiAccount(logger, this);
-            ExchangeData = new BinanceSocketClientSpotApiExchangeData(logger, this);
-            Trading = new BinanceSocketClientSpotApiTrading(logger, this);
+            _loggerFactory = loggerFactory;
+
+            Account = new BinanceSocketClientSpotApiAccount(_logger, this);
+            ExchangeData = new BinanceSocketClientSpotApiExchangeData(_logger, this);
+            Trading = new BinanceSocketClientSpotApiTrading(_logger, this);
 
             // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval)
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
@@ -61,6 +85,8 @@ namespace Binance.Net.Clients.SpotApi
             RateLimiter = BinanceExchange.RateLimiter.SpotSocket;
 
             SetDedicatedConnection(ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), true);
+
+#warning token manager, there are multiple different token types, for example risk data and margin
         }
         #endregion
 
