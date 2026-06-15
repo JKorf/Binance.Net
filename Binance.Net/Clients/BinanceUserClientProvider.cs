@@ -44,15 +44,11 @@ namespace Binance.Net.Clients
         protected override IBinanceRestClient ConstructRestClient(
             HttpClient httpClient,
             ILoggerFactory? loggerFactory,
-            IOptions<BinanceRestOptions> options,
-            BinanceCredentials? credentials,
-            BinanceEnvironment? environment) => new BinanceRestClient(httpClient, loggerFactory, options);
+            IOptions<BinanceRestOptions> options) => new BinanceRestClient(httpClient, loggerFactory, options);
 
         /// <inheritdoc />
         protected override IBinanceSocketClient ConstructSocketClient(
             ILoggerFactory? loggerFactory,
-            IOptions<BinanceSocketOptions> options,
-            BinanceCredentials? credentials,
-            BinanceEnvironment? environment) => new BinanceSocketClient(options, loggerFactory);
+            IOptions<BinanceSocketOptions> options) => new BinanceSocketClient(options, loggerFactory);
     }
 }
