@@ -32,7 +32,7 @@ This library provides first-class support for AI coding assistants. The relevant
 **Quick prompt to verify your assistant is using these:**
 > "Show me a minimal example of placing a limit buy order on Binance Spot using Binance.Net, including authentication setup."
 
-The expected output should use `BinanceRestClient`, `BinanceCredentials`, and the `WebCallResult` pattern.
+The expected output should use `BinanceRestClient`, `BinanceCredentials`, and the `HttpResult` pattern.
 
 ## Benchmark
 Performance is a core focus. For a benchmark comparing Binance.Net performance to CCXT and Binance.Api, see [docs/binance-net-benchmark.md](docs/binance-net-benchmark.md).

@@ -1,6 +1,6 @@
 // 05-error-handling.cs
 //
-// Demonstrates: WebCallResult patterns, retry logic, common error scenarios.
+// Demonstrates: HttpResult patterns, retry logic, common error scenarios.
 //
 // Setup: dotnet add package Binance.Net
 
@@ -16,7 +16,7 @@ var client = new BinanceRestClient(options =>
 });
 
 // ---- 1. THE BASIC PATTERN ----
-// Every method returns WebCallResult<T> (REST) or CallResult<T> (WebSocket).
+// Every method returns HttpResult<T> (REST) or WebSocketResult<T> (WebSocket).
 // .Success is true/false. .Data is the payload (only valid when .Success).
 // .Error contains structured error info when .Success is false.
 // .Error.IsTransient hints if a retry might succeed (rate limit, network, 5xx).
@@ -39,11 +39,11 @@ else
 // Retry only on transient errors (rate limit, network blip, server overload).
 // Do not retry on validation errors or insufficient balance — they will repeat.
 
-async Task<WebCallResult<T>> WithRetry<T>(
-    Func<Task<WebCallResult<T>>> call,
+async Task<HttpResult<T>> WithRetry<T>(
+    Func<Task<HttpResult<T>>> call,
     int maxAttempts = 3)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
     for (int attempt = 1; attempt <= maxAttempts; attempt++)
     {
         last = await call();
@@ -128,7 +128,7 @@ if (!order.Success)
 }
 
 // ---- 5. EXCEPTIONS VS ERROR RESULTS ----
-// Binance.Net returns errors via WebCallResult.Error, NOT via thrown exceptions.
+// Binance.Net returns errors via HttpResult.Error, NOT via thrown exceptions.
 // Exceptions are thrown only for:
 //   - Misconfiguration (e.g., disposed client, missing credentials when required)
 //   - OperationCanceledException when CancellationToken is triggered

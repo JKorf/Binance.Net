@@ -29,7 +29,7 @@ namespace Binance.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
 
-            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "https://api.binance.com", "data");
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/Spot/ExchangeData", "wss://stream.binance.com:9443/stream", "data");
             await tester.ValidateConcurrentAsync<IBinanceStreamKlineData>(
                 (client, handler) => client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.EightHour, handler),
                 (client, handler) => client.SpotApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneHour, handler),
@@ -48,7 +48,7 @@ namespace Binance.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
 
-            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/CoinFutures", "https://api.binance.com", "data");
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/CoinFutures", "wss://dstream.binance.com/stream", "data");
             await tester.ValidateConcurrentAsync<IBinanceStreamKlineData>(
                 (client, handler) => client.CoinFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSD", Enums.KlineInterval.EightHour, handler),
                 (client, handler) => client.CoinFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSD", Enums.KlineInterval.OneHour, handler),
@@ -67,7 +67,7 @@ namespace Binance.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
 
-            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "https://api.binance.com", "data");
+            var tester = new SocketSubscriptionValidator<BinanceSocketClient>(client, "Subscriptions/UsdFutures", "wss://fstream.binance.com/market/stream", "data");
             await tester.ValidateConcurrentAsync<IBinanceStreamKlineData>(
                 (client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.EightHour, handler),
                 (client, handler) => client.UsdFuturesApi.ExchangeData.SubscribeToKlineUpdatesAsync("BTCUSDT", Enums.KlineInterval.OneHour, handler),
