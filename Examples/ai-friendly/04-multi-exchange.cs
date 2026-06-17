@@ -16,8 +16,16 @@ using CryptoExchange.Net.SharedApis;
 // Each exchange client exposes a `.SharedClient` property on its API surfaces.
 // SharedClient implements interfaces like ISpotTickerRestClient, ISpotOrderRestClient,
 // IBalanceRestClient, etc. — a common abstraction across all exchanges.
+// Call SharedClient.Discover() before routing optional shared features.
 
-ISpotTickerRestClient binanceShared = new BinanceRestClient().SpotApi.SharedClient;
+var binanceRest = new BinanceRestClient();
+ISpotTickerRestClient binanceShared = binanceRest.SpotApi.SharedClient;
+
+var sharedInfo = binanceRest.SpotApi.SharedClient.Discover();
+var supportedFeatures = sharedInfo.Features
+    .Where(x => x.Supported)
+    .Select(x => x.EndpointName);
+Console.WriteLine($"{sharedInfo.Exchange} {sharedInfo.TypeName}: {string.Join(", ", supportedFeatures)}");
 
 // To add OKX or Bybit, install the package and:
 //   ISpotTickerRestClient okxShared    = new OKXRestClient().UnifiedApi.SharedClient;

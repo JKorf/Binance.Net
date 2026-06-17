@@ -1,6 +1,7 @@
 // 05-error-handling.cs
 //
-// Demonstrates: HttpResult patterns, retry logic, common error scenarios.
+// Demonstrates: HttpResult, WebSocketResult, ExchangeCallResult, retry logic,
+// common error scenarios.
 //
 // Setup: dotnet add package Binance.Net
 
@@ -16,7 +17,10 @@ var client = new BinanceRestClient(options =>
 });
 
 // ---- 1. THE BASIC PATTERN ----
-// Every method returns HttpResult<T> (REST) or WebSocketResult<T> (WebSocket).
+// REST methods return HttpResult<T> or HttpResult.
+// WebSocket subscriptions return WebSocketResult<UpdateSubscription>.
+// Socket API requests return WebSocketResult<T> or WebSocketResult.
+// Shared non-I/O symbol/cache helpers return ExchangeCallResult<T>.
 // .Success is true/false. .Data is the payload (only valid when .Success).
 // .Error contains structured error info when .Success is false.
 // .Error.IsTransient hints if a retry might succeed (rate limit, network, 5xx).

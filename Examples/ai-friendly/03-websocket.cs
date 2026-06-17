@@ -16,6 +16,7 @@ using Binance.Net.Objects;
 // when possible, splits across sockets when symbol limits are hit).
 var publicSocket = new BinanceSocketClient();
 
+// Subscription methods return WebSocketResult<UpdateSubscription>.
 // Subscribe to ticker updates — fires ~1/second for active symbols
 var tickerSub = await publicSocket.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(
     "BTCUSDT",
