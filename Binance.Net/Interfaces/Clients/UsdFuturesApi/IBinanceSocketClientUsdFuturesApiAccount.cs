@@ -70,7 +70,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// Subscribes to the account update stream. Before using this method, call <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> to start the stream and obtain a listen key.
+        /// Subscribes to the account update stream. Listen key is initially requested and kept alive when needed
         /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams" /></para>
         /// </summary>
         /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>

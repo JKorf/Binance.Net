@@ -18,7 +18,6 @@ namespace Binance.Net
             SpotUserDataTrackerConfig? config = null) : base(
                 logger,
                 restClient.SpotApi.SharedClient,
-                null,
                 restClient.SpotApi.SharedClient,
                 socketClient.SpotApi.SharedClient,
                 restClient.SpotApi.SharedClient,
@@ -49,7 +48,6 @@ namespace Binance.Net
             base(logger,
                 restClient.UsdFuturesApi.SharedClient,
                 restClient.UsdFuturesApi.SharedClient,
-                restClient.UsdFuturesApi.SharedClient,
                 socketClient.UsdFuturesApi.SharedClient,
                 restClient.UsdFuturesApi.SharedClient,
                 socketClient.UsdFuturesApi.SharedClient,
@@ -77,7 +75,6 @@ namespace Binance.Net
             IBinanceSocketClient socketClient,
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config = null) : base(logger,
-                restClient.CoinFuturesApi.SharedClient,
                 restClient.CoinFuturesApi.SharedClient,
                 restClient.CoinFuturesApi.SharedClient,
                 socketClient.CoinFuturesApi.SharedClient,

@@ -40,6 +40,34 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         Task<QueryResult<BinanceResponse<BinanceFuturesCoinAccountInfo>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribes to the account update stream. Listen key is initially requested and kept alive when needed
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/derivatives/coin-margined-futures/user-data-streams" /><br />
+        /// Endpoint:<br />
+        /// listenKey
+        /// </para>
+        /// </summary>
+        /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>
+        /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
+        /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
+        /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
+        /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
+        /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
+        /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribes to the account update stream. Before using this method, call <see cref="IBinanceRestClientCoinFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.CoinFuturesApi.Account.StartUserStreamAsync</see> to start the stream and obtain a listen key.
         /// <para>
         /// Docs:<br />

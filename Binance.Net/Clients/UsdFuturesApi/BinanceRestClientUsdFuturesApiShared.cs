@@ -1038,56 +1038,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
         #endregion
 
-        #region Listen Key client
-
-        StartListenKeyOptions IListenKeyRestClient.StartOptions { get; } = new StartListenKeyOptions(_exchangeName, true);
-        async Task<HttpResult<string>> IListenKeyRestClient.StartListenKeyAsync(StartListenKeyRequest request, CancellationToken ct)
-        {
-            var validationError = SharedClient.StartOptions.ValidateRequest(request, this);
-            if (validationError != null)
-                return HttpResult.Fail<string>(Exchange, validationError);
-
-            // Get data
-            var result = await Account.StartUserStreamAsync(ct: ct).ConfigureAwait(false);
-            if (!result.Success)
-                return HttpResult.Fail<string>(result);
-
-            return HttpResult.Ok(result, result.Data);
-
-        }
-        KeepAliveListenKeyOptions IListenKeyRestClient.KeepAliveOptions { get; } = new KeepAliveListenKeyOptions(_exchangeName, true);
-        async Task<HttpResult<string>> IListenKeyRestClient.KeepAliveListenKeyAsync(KeepAliveListenKeyRequest request, CancellationToken ct)
-        {
-            var validationError = SharedClient.KeepAliveOptions.ValidateRequest(request, this);
-            if (validationError != null)
-                return HttpResult.Fail<string>(Exchange, validationError);
-
-            // Get data
-            var result = await Account.KeepAliveUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
-            if (!result.Success)
-                return HttpResult.Fail<string>(result);
-
-            return HttpResult.Ok(result, request.ListenKey);
-
-        }
-
-        StopListenKeyOptions IListenKeyRestClient.StopOptions { get; } = new StopListenKeyOptions(_exchangeName, true);
-        async Task<HttpResult<string>> IListenKeyRestClient.StopListenKeyAsync(StopListenKeyRequest request, CancellationToken ct)
-        {
-            var validationError = SharedClient.StopOptions.ValidateRequest(request, this);
-            if (validationError != null)
-                return HttpResult.Fail<string>(Exchange, validationError);
-
-            // Get data
-            var result = await Account.StopUserStreamAsync(request.ListenKey, ct: ct).ConfigureAwait(false);
-            if (!result.Success)
-                return HttpResult.Fail<string>(result);
-
-            return HttpResult.Ok(result, request.ListenKey);
-
-        }
-        #endregion
-
         #region Fee Client
         GetFeeOptions IFeeRestClient.GetFeeOptions { get; } = new GetFeeOptions(_exchangeName, true);
 
