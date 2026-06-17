@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     internal class BinanceSpotUserDataSubscription : Subscription
     {
         private readonly BinanceSocketClientSpotApi _client;
-        private string? _subscriptionId;
+        internal string? _subscriptionId;
 
         private readonly Action<DataEvent<BinanceStreamOrderUpdate>>? _orderHandler;
         private readonly Action<DataEvent<BinanceStreamOrderList>>? _orderListHandler;
@@ -62,8 +62,24 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             if (message == null)
                 return;
 
+            string? id = null;
             var response = (BinanceResponse<BinanceWebsocketApiWrapper>)message;
-            var id = response.Result.SubscriptionId.ToString();
+            if (response.Result == null && response.Error?.Code == -2035)
+            {
+                // Duplicate subscription, treat as success as it handled correctly internally
+                var otherUserConnection = connection.Subscriptions.First(x => x is BinanceSpotUserDataSubscription userSub);
+                if (otherUserConnection != null)
+                    id = ((BinanceSpotUserDataSubscription)otherUserConnection)._subscriptionId;
+            }
+            else if (response.Result?.SubscriptionId != null)
+            {
+                id = response.Result.SubscriptionId.ToString();
+            }
+            else
+            {
+                return;
+            }
+
             _subscriptionId = id;
 
             MessageRouter = MessageRouter.Create([

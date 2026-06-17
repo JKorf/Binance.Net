@@ -61,7 +61,23 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 return;
 
             var response = (BinanceResponse<BinanceWebsocketApiWrapper>)message;
-            var id = response.Result.SubscriptionId.ToString();
+            string? id = null;
+            if (response.Result == null && response.Error?.Code == -2035)
+            {
+                // Duplicate subscription, treat as success as it handled correctly internally
+                var otherUserConnection = connection.Subscriptions.First(x => x is BinanceMarginUserDataSubscription userSub);
+                if (otherUserConnection != null)
+                    id = ((BinanceMarginUserDataSubscription)otherUserConnection)._subscriptionId;
+            }
+            else if (response.Result?.SubscriptionId != null)
+            {
+                id = response.Result.SubscriptionId.ToString();
+            }
+            else
+            {
+                return;
+            }
+
             _subscriptionId = id;
 
             MessageRouter = MessageRouter.Create([
