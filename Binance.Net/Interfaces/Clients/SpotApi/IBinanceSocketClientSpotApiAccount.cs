@@ -52,6 +52,24 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
                                                                              Action<DataEvent<BinanceStreamBalanceLockUpdate>>? onBalanceLockUpdate = null,
                                                                              CancellationToken ct = default);
 
+        /// <summary>
+        /// Subscribes to the cross margin account update stream, listen key is internally managed and automatically renewed
+        /// <para><a href="https://developers.binance.com/docs/margin_trading/trade-data-stream" /></para>
+        /// </summary>
+        /// <param name="onOrderUpdateMessage">The event handler for whenever an order status update is received</param>
+        /// <param name="onOcoOrderUpdateMessage">The event handler for whenever an OCO order status update is received</param>
+        /// <param name="onAccountPositionMessage">The event handler for whenever an account position update is received</param>
+        /// <param name="onAccountBalanceUpdate">The event handler for whenever a deposit or withdrawal has been processed and the account balance has changed</param>
+        /// <param name="onUserDataStreamTerminated">The event handler for when the User Data Stream is stopped</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
+            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the cross margin account update stream using a listen token
@@ -72,6 +90,18 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
             Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
             Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
             Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to the risk data account update stream. Listen key is automatically retrieved and kept alive.
+        /// </summary>
+        /// <param name="onMarginCallUpdate">Event handler for margin call status updates</param>
+        /// <param name="onLiabilityUpdate">Event handler for liability updates</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
+            Action<DataEvent<BinanceMarginCallUpdate>>? onMarginCallUpdate = null,
+            Action<DataEvent<BinanceLiabilityUpdate>>? onLiabilityUpdate = null,
             CancellationToken ct = default);
 
         /// <summary>

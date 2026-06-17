@@ -38,7 +38,8 @@ namespace Binance.Net.Clients.SpotApi
         protected override ErrorMapping ErrorMapping => BinanceErrors.SpotErrors;
         private readonly ILoggerFactory? _loggerFactory;
         private BinanceRestClient? _tokenClient;
-        internal TokenManager TokenManager { get; }
+        internal TokenManager RiskDataTokenManager { get; }
+        internal TokenManager MarginTokenManager { get; }
         private BinanceRestClient TokenClient
         {
             get
@@ -49,7 +50,8 @@ namespace Binance.Net.Clients.SpotApi
                     {
                         ApiCredentials = ApiCredentials,
                         Environment = ClientOptions.Environment,
-                        Proxy = ClientOptions.Proxy
+                        Proxy = ClientOptions.Proxy,
+                        OutputOriginalData = ClientOptions.OutputOriginalData
                     }));
                 }
 
@@ -86,7 +88,22 @@ namespace Binance.Net.Clients.SpotApi
 
             SetDedicatedConnection(ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), true);
 
-#warning token manager, there are multiple different token types, for example risk data and margin
+            RiskDataTokenManager = new TokenManager(
+                BinanceExchange.Metadata.Id,
+                loggerFactory,
+                TimeSpan.FromMinutes(30),
+                TimeSpan.FromMinutes(60),
+                startToken: StartRiskDataListenKeyAsync,
+                keepAliveToken: KeepAliveRiskDataListenKeyAsync,
+                stopToken: StopRiskDataListenKeyAsync);
+
+            MarginTokenManager = new TokenManager(
+                BinanceExchange.Metadata.Id,
+                loggerFactory,
+                TimeSpan.FromHours(12),
+                TimeSpan.FromHours(24),
+                startToken: StartMarginListenKeyAsync,
+                keepAliveToken: KeepAliveMarginListenKeyAsync);
         }
         #endregion
 
@@ -236,6 +253,69 @@ namespace Binance.Net.Clients.SpotApi
         internal BinanceMarginUserDataSubscription[] GetMarginUserDataSubscriptions()
         {
             return _socketConnections.Values.SelectMany(x => x.Subscriptions.OfType<BinanceMarginUserDataSubscription>()).ToArray();
+        }
+
+        protected override async Task<CallResult> RevitalizeRequestAsync(Subscription subscription)
+        {
+            if (subscription.TokenLease == null)
+                return CallResult.Ok(); // Not an authenticated subscription, no need to revitalize
+
+            var scope = new TokenScope(
+                    BinanceExchange.Metadata.Id,
+                    EnvironmentName,
+                    subscription.TokenLease.Token.Scope.TokenType,
+                    ApiCredentials!.Credential!.Key);
+
+
+            if (subscription.TokenLease.Token.Scope.TokenType == "RiskData")
+                return await RiskDataTokenManager.AcquireAndReplaceAsync(subscription, scope).ConfigureAwait(false);
+
+            return await MarginTokenManager.AcquireAndReplaceAsync(subscription, scope).ConfigureAwait(false);
+        }
+
+        private async Task<CallResult<string>> StartRiskDataListenKeyAsync(TokenScope tokenScope, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.StartRiskDataUserStreamAsync(ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok(result.Data);
+        }
+
+        private async Task<CallResult> KeepAliveRiskDataListenKeyAsync(TokenInfo token, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.KeepAliveRiskDataUserStreamAsync(token.Token, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok();
+        }
+
+        private async Task<CallResult> StopRiskDataListenKeyAsync(TokenInfo token, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.StopRiskDataUserStreamAsync(token.Token, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok();
+        }
+
+        private async Task<CallResult<string>> StartMarginListenKeyAsync(TokenScope tokenScope, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.GetMarginUserListenTokenAsync(ct: ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok(result.Data.Token);
+        }
+
+        private async Task<CallResult> KeepAliveMarginListenKeyAsync(TokenInfo token, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.GetMarginUserListenTokenAsync(ct: ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return await Account.UpdateMarginUserDataTokenAsync(result.Data.Token, ct).ConfigureAwait(false);
         }
     }
 }

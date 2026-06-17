@@ -6,6 +6,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Spot.Margin;
+using CryptoExchange.Net.TokenManagement;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -78,8 +79,15 @@ namespace Binance.Net.Clients.SpotApi
         #region Risk User Data Stream
 
         /// <inheritdoc />
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
+            Action<DataEvent<BinanceMarginCallUpdate>>? onMarginCallUpdate = null,
+            Action<DataEvent<BinanceLiabilityUpdate>>? onLiabilityUpdate = null,
+            CancellationToken ct = default)
+            => SubscribeToUserRiskDataUpdatesAsync(null, onMarginCallUpdate, onLiabilityUpdate, ct);
+
+        /// <inheritdoc />
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserRiskDataUpdatesAsync(
-            string listenKey,
+            string? listenKey,
             Action<DataEvent<BinanceMarginCallUpdate>>? onMarginCallUpdate = null,
             Action<DataEvent<BinanceLiabilityUpdate>>? onLiabilityUpdate = null,
             CancellationToken ct = default)
@@ -87,15 +95,48 @@ namespace Binance.Net.Clients.SpotApi
             if (_riskDataBaseAddress == null)
                 throw new NotSupportedException("RiskData base address not configured");
 
-            listenKey.ValidateNotNull(nameof(listenKey));
-            var subscription = new BinanceMarginRiskDataSubscription(_logger, _client, listenKey, onMarginCallUpdate, onLiabilityUpdate, false);
-            return await _client.SubscribeInternalAsync(_riskDataBaseAddress, subscription, ct).ConfigureAwait(false);
+            if (listenKey == null && !_client.Authenticated)
+                return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, new NoApiCredentialsError());
+
+            TokenLease? lease = null;
+            if (listenKey == null)
+            {
+                var leaseResult = await _client.RiskDataTokenManager.AcquireAsync(new TokenScope(
+                    BinanceExchange.Metadata.Id,
+                    _client.EnvironmentName,
+                    "RiskData",
+                    _client.ApiCredentials!.Credential!.Key), ct).ConfigureAwait(false);
+                if (!leaseResult.Success)
+                    return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, leaseResult.Error);
+
+                lease = leaseResult.Data;
+            }
+
+            var subscription = new BinanceMarginRiskDataSubscription(_logger, _client, listenKey, onMarginCallUpdate, onLiabilityUpdate, false)
+            {
+                TokenLease = lease
+            };
+            var result = await _client.SubscribeInternalAsync(_riskDataBaseAddress, subscription, ct).ConfigureAwait(false);
+            if (!result.Success && lease != null)
+                await lease.ReleaseAsync().ConfigureAwait(false);
+
+            return result;
         }
         #endregion
 
         #region Margin User Data Stream
+
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
+            Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
+            Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
+            Action<DataEvent<BinanceStreamBalanceUpdate>>? onAccountBalanceUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
+            CancellationToken ct = default)
+            => SubscribeToMarginUserDataUpdatesAsync(null, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onUserDataStreamTerminated, ct);
+
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToMarginUserDataUpdatesAsync(
-            string listenToken,
+            string? listenToken,
             Action<DataEvent<BinanceStreamOrderUpdate>>? onOrderUpdateMessage = null,
             Action<DataEvent<BinanceStreamOrderList>>? onOcoOrderUpdateMessage = null,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? onAccountPositionMessage = null,
@@ -103,9 +144,33 @@ namespace Binance.Net.Clients.SpotApi
             Action<DataEvent<BinanceStreamEvent>>? onUserDataStreamTerminated = null,
             CancellationToken ct = default)
         {
-            var subscription = new BinanceMarginUserDataSubscription(_logger, _client, listenToken, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onUserDataStreamTerminated);
+            if (listenToken == null && !_client.Authenticated)
+                return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, new NoApiCredentialsError());
 
-            return await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
+            TokenLease? lease = null;
+            if (listenToken == null)
+            {
+                var leaseResult = await _client.MarginTokenManager.AcquireAsync(new TokenScope(
+                    BinanceExchange.Metadata.Id,
+                    _client.EnvironmentName,
+                    "Margin",
+                    _client.ApiCredentials!.Credential!.Key), ct).ConfigureAwait(false);
+                if (!leaseResult.Success)
+                    return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, leaseResult.Error);
+
+                lease = leaseResult.Data;
+            }
+
+            var subscription = new BinanceMarginUserDataSubscription(_logger, _client, listenToken, onOrderUpdateMessage, onOcoOrderUpdateMessage, onAccountPositionMessage, onAccountBalanceUpdate, onUserDataStreamTerminated)
+            {
+                TokenLease = lease
+            };
+
+            var result = await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
+            if (!result.Success && lease != null)
+                await lease.ReleaseAsync().ConfigureAwait(false);
+
+            return result;
         }
 
         public async Task<CallResult> UpdateMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)

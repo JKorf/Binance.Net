@@ -51,7 +51,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     {
                         ApiCredentials = ApiCredentials,
                         Environment = ClientOptions.Environment,
-                        Proxy = ClientOptions.Proxy
+                        Proxy = ClientOptions.Proxy,
+                        OutputOriginalData = ClientOptions.OutputOriginalData
                     }));
                 }
 
@@ -91,7 +92,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             TokenManager = new TokenManager(
                 BinanceExchange.Metadata.Id,
                 loggerFactory,
-                TimeSpan.FromMinutes(1),
+                TimeSpan.FromMinutes(30),
                 TimeSpan.FromMinutes(60),
                 startToken: StartListenKeyAsync,
                 keepAliveToken: KeepAliveListenKeyAsync,
@@ -187,7 +188,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return result;
         }
 
-
         protected override async Task<CallResult> RevitalizeRequestAsync(Subscription subscription)
         {
             if (subscription.TokenLease == null)
@@ -196,7 +196,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var scope = new TokenScope(
                     BinanceExchange.Metadata.Id,
                     EnvironmentName,
-                    "Futures",
+                    "UsdFutures",
                     ApiCredentials!.Credential!.Key);
 
             return await TokenManager.AcquireAndReplaceAsync(subscription, scope).ConfigureAwait(false);

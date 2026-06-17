@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     internal class BinanceMarginUserDataSubscription : Subscription
     {
         private readonly BinanceSocketClientSpotApi _client;
-        private string _listenToken;  // not readonly - updated on renewal
+        private string? _listenToken;  // not readonly - updated on renewal
         private string? _subscriptionId;
 
         private readonly Action<DataEvent<BinanceStreamOrderUpdate>>? _orderHandler;
@@ -24,7 +24,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public BinanceMarginUserDataSubscription(
             ILogger logger,
             BinanceSocketClientSpotApi client,
-            string listenToken,
+            string? listenToken,
             Action<DataEvent<BinanceStreamOrderUpdate>>? orderHandler,
             Action<DataEvent<BinanceStreamOrderList>>? orderListHandler,
             Action<DataEvent<BinanceStreamPositionsUpdate>>? positionHandler,
@@ -49,7 +49,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                 Method = "userDataStream.subscribe.listenToken",
                 Params = new Parameters(BinanceExchange._parameterSerializationSettings)
                 {
-                    { "listenToken", _listenToken }
+                    { "listenToken", _listenToken ?? TokenLease!.Token.Token }
                 },
                 Id = ExchangeHelpers.NextId()
             }, false);

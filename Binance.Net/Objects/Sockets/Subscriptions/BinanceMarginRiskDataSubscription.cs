@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class BinanceMarginRiskDataSubscription : Subscription
     {
-        private readonly string _lk;
+        private readonly string? _lk;
         private readonly BinanceSocketClientSpotApi _client;
 
         private readonly Action<DataEvent<BinanceMarginCallUpdate>>? _marginCallHandler;
@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public BinanceMarginRiskDataSubscription(
             ILogger logger,
             BinanceSocketClientSpotApi client,
-            string listenKey,
+            string? listenKey,
             Action<DataEvent<BinanceMarginCallUpdate>>? marginCallHandler,
             Action<DataEvent<BinanceLiabilityUpdate>>? liabilityHandler,
             bool auth) : base(logger, auth)
@@ -44,7 +44,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = [_lk],
+                Params = [_lk ?? TokenLease!.Token.Token],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -55,7 +55,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = [_lk],
+                Params = [_lk ?? TokenLease!.Token.Token],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
