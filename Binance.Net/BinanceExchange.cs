@@ -103,7 +103,7 @@ namespace Binance.Net
         /// <summary>
         /// Rate limiter configuration for the Binance API
         /// </summary>
-        public static BinanceRateLimiters RateLimiter { get; } = new BinanceRateLimiters();
+        public static BinanceRateLimiters RateLimiter { get; set; } = new BinanceRateLimiters();
     }
 
     /// <summary>
@@ -121,13 +121,19 @@ namespace Binance.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal BinanceRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             EndpointLimit = new RateLimitGate("Endpoint Limit");
             SpotRestIp = new RateLimitGate("Spot Rest")
