@@ -974,7 +974,13 @@ namespace Binance.Net.Clients.SpotApi
 
                 return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.ApplyTime, request.StartTime, request.EndTime, direction)
                     .Select(x =>
-                        new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
+                        new SharedWithdrawal(
+                            x.Asset, 
+                            x.Address, 
+                            x.Quantity, 
+                            x.Status == WithdrawalStatus.Completed,
+                            x.ApplyTime,
+                            GetWithdrawalStatus(x.Status))
                         {
                             Confirmations = x.ConfirmTimes,
                             Network = x.Network,
@@ -1010,7 +1016,13 @@ namespace Binance.Net.Clients.SpotApi
 
                 return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.ApplyTime, request.StartTime, request.EndTime, direction)
                     .Select(x =>
-                        new SharedWithdrawal(x.Asset, x.Address, x.Quantity, x.Status == WithdrawalStatus.Completed, x.ApplyTime)
+                        new SharedWithdrawal(
+                            x.Asset, 
+                            x.Address,
+                            x.Quantity,
+                            x.Status == WithdrawalStatus.Completed,
+                            x.ApplyTime,
+                            GetWithdrawalStatus(x.Status))
                         {
                             Confirmations = x.ConfirmTimes,
                             Network = x.Network,
@@ -1022,6 +1034,20 @@ namespace Binance.Net.Clients.SpotApi
                     .ToArray(), nextPageRequest);
             }
 
+        }
+
+        private SharedTransferStatus GetWithdrawalStatus(WithdrawalStatus x)
+        {
+            if (x == WithdrawalStatus.Canceled || x == WithdrawalStatus.Rejected || x == WithdrawalStatus.Failure)
+                return SharedTransferStatus.Failed;
+
+            if (x == WithdrawalStatus.Completed)
+                return SharedTransferStatus.Completed;
+
+            if (x == WithdrawalStatus.AwaitingApproval || x == WithdrawalStatus.EmailSend || x == WithdrawalStatus.Processing)
+                return SharedTransferStatus.InProgress;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
