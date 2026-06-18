@@ -23,7 +23,8 @@ namespace Binance.Net
                 "https://www.binance.com",
                 ["https://binance-docs.github.io/apidocs/spot/en/#change-log"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                BinanceEnvironment.All
                 );
 
         /// <summary>
