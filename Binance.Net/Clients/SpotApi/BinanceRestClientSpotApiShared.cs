@@ -919,7 +919,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             if (status == DepositStatus.Success)
                 return SharedTransferStatus.Completed;
-            if (status == DepositStatus.Pending || status == DepositStatus.Completed || status == DepositStatus.WaitingUserConfirm)
+            if (status == DepositStatus.Pending || status == DepositStatus.Credited || status == DepositStatus.WaitingUserConfirm)
                 return SharedTransferStatus.InProgress;
             if (status == DepositStatus.Rejected || status == DepositStatus.WrongDeposit)
                 return SharedTransferStatus.Failed;

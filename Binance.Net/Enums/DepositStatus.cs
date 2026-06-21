@@ -24,17 +24,17 @@ namespace Binance.Net.Enums
         [Map("2")]
         Rejected,
         /// <summary>
-        /// ["<c>6</c>"] Completed
+        /// ["<c>6</c>"] Credited but cannot withdraw
         /// </summary>
         [Map("6")]
-        Completed,
+        Credited,
         /// <summary>
-        /// ["<c>7</c>"] Rejected
+        /// ["<c>7</c>"] Wrong deposit
         /// </summary>
         [Map("7")]
         WrongDeposit,
         /// <summary>
-        /// ["<c>8</c>"] Rejected
+        /// ["<c>8</c>"] Waiting user confirmation
         /// </summary>
         [Map("8")]
         WaitingUserConfirm,
