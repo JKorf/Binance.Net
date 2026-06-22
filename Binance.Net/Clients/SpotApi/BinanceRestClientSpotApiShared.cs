@@ -327,7 +327,12 @@ namespace Binance.Net.Clients.SpotApi
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, result.Data!.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + x.Freeze + x.Locked)).ToArray());
+                return HttpResult.Ok(result, result.Data!.Select(x => 
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset,
+                        x.Available, 
+                        x.Available + x.Freeze + x.Locked)).ToArray());
             }
             else
             {
@@ -335,7 +340,12 @@ namespace Binance.Net.Clients.SpotApi
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, result.Data!.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray());
+                return HttpResult.Ok(result, result.Data!.Select(x => 
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset,
+                        x.Available, 
+                        x.Total)).ToArray());
             }
 
         }

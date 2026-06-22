@@ -118,11 +118,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             {
                 TokenLease = lease
             };
-            var result = await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
-            if (!result.Success && lease != null)
-                await lease.ReleaseAsync().ConfigureAwait(false);
-
-            return result;
+            return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
 
         #endregion

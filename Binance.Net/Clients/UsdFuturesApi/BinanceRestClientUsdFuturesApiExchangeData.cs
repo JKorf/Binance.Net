@@ -138,7 +138,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         #region Get Funding Rate History
 
         /// <inheritdoc />
-        public async Task<HttpResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceFuturesFundingRateHistory[]>> GetFundingRatesAsync(string? symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             limit?.ValidateIntBetween(nameof(limit), 1, 1000);
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);

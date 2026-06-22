@@ -132,7 +132,12 @@ namespace Binance.Net.Clients.SpotApi
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(
-                onAccountPositionMessage: update => handler(update.ToType(update.Data.Balances.Select(x => new SharedBalance(x.Asset, x.Available, x.Total)).ToArray())),
+                onAccountPositionMessage: update => handler(update.ToType(update.Data.Balances.Select(x =>
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset,
+                        x.Available,
+                        x.Total)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return result;

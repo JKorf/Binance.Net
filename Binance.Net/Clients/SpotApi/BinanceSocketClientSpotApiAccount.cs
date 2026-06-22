@@ -116,11 +116,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 TokenLease = lease
             };
-            var result = await _client.SubscribeInternalAsync(_riskDataBaseAddress, subscription, ct).ConfigureAwait(false);
-            if (!result.Success && lease != null)
-                await lease.ReleaseAsync().ConfigureAwait(false);
-
-            return result;
+            return await _client.SubscribeInternalAsync(_riskDataBaseAddress, subscription, ct).ConfigureAwait(false);
         }
         #endregion
 
@@ -166,11 +162,7 @@ namespace Binance.Net.Clients.SpotApi
                 TokenLease = lease
             };
 
-            var result = await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
-            if (!result.Success && lease != null)
-                await lease.ReleaseAsync().ConfigureAwait(false);
-
-            return result;
+            return await _client.SubscribeInternal2Async(_client.ClientOptions.Environment.SpotSocketApiAddress.AppendPath("ws-api/v3"), subscription, ct).ConfigureAwait(false);
         }
 
         public async Task<CallResult> UpdateMarginUserDataTokenAsync(string newListenToken, CancellationToken ct = default)

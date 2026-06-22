@@ -998,7 +998,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!result.Success)
                 return HttpResult.Fail<SharedBalance[]>(result);
 
-            return HttpResult.Ok(result, result.Data.Select(x => new SharedBalance(x.Asset, x.AvailableBalance, x.WalletBalance)).ToArray());
+            return HttpResult.Ok(result, result.Data.Select(x => 
+                new SharedBalance(
+                    SupportedTradingModes, 
+                    x.Asset, 
+                    x.AvailableBalance,
+                    x.WalletBalance)).ToArray());
 
         }
 

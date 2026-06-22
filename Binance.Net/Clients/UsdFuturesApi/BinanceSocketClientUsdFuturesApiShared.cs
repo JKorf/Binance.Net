@@ -128,7 +128,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
 
             var result = await Account.SubscribeToUserDataUpdatesAsync(
-                onAccountUpdate: update => handler(update.ToType(update.Data.UpdateData.Balances.Select(x => new SharedBalance(x.Asset, x.WalletBalance, x.WalletBalance)).ToArray())),
+                onAccountUpdate: update => handler(update.ToType(update.Data.UpdateData.Balances.Select(x => 
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset,
+                        x.WalletBalance,
+                        x.WalletBalance)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return result;
