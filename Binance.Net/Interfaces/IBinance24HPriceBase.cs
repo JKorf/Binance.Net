@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Interfaces
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// 24 hour price stats

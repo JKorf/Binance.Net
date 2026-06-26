@@ -1,3 +1,4 @@
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
@@ -111,6 +112,11 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// </summary>
         [JsonPropertyName("C"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime CloseTime { get; set; }
+        /// <summary>
+        /// ["<c>st</c>"] Symbol type
+        /// </summary>
+        [JsonPropertyName("st")]
+        public SymbolType? SymbolType { get; set; }
     }
 
     /// <summary>

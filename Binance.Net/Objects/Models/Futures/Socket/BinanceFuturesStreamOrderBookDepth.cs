@@ -1,3 +1,4 @@
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Futures.Socket
@@ -13,6 +14,11 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>st</c>"] Symbol type
+        /// </summary>
+        [JsonPropertyName("st")]
+        public SymbolType? SymbolType { get; set; }
 
         /// <summary>
         /// ["<c>T</c>"] The time the event happened

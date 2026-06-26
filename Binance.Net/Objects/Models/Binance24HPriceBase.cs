@@ -1,3 +1,4 @@
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models
@@ -87,6 +88,11 @@ namespace Binance.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("count")]
         public long TotalTrades { get; set; }
+        /// <summary>
+        /// Symbol type
+        /// </summary>
+        [JsonPropertyName("st")]
+        public SymbolType? SymbolType { get; set; }
     }
 }
 

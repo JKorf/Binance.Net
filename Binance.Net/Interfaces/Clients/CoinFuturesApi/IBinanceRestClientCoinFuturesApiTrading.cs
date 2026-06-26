@@ -1,4 +1,5 @@
 using Binance.Net.Enums;
+using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
 
 namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
@@ -252,6 +253,166 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns>List of trades</returns>
         Task<HttpResult<BinanceFuturesCoinTrade[]>> GetUserTradesAsync(string? symbol = null, string? pair = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? fromId = null, long? orderId = null, long? receiveWindow = null, CancellationToken ct = default);
+
+        ///// <summary>
+        ///// Places a new conditional order
+        ///// <para>
+        ///// Docs:<br />
+        ///// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/New-Algo-Order" /><br />
+        ///// Endpoint:<br />
+        ///// POST /fapi/v1/algoOrder
+        ///// </para>
+        ///// </summary>
+        ///// <param name="symbol">["<c>symbol</c>"] The symbol the order is for, for example `ETHUSDT`</param>
+        ///// <param name="side">["<c>side</c>"] The order side (buy/sell)</param>
+        ///// <param name="type">["<c>type</c>"] The order type</param>
+        ///// <param name="timeInForce">["<c>timeInForce</c>"] Lifetime of the order (GoodTillCancel/ImmediateOrCancel/FillOrKill)</param>
+        ///// <param name="quantity">["<c>quantity</c>"] The quantity of the base symbol</param>
+        ///// <param name="positionSide">["<c>positionSide</c>"] The position side</param>
+        ///// <param name="reduceOnly">["<c>reduceOnly</c>"] Specify as true if the order is intended to only reduce the position</param>
+        ///// <param name="price">["<c>price</c>"] The price to use</param>
+        ///// <param name="clientOrderId">["<c>clientAlgoId</c>"] Unique id for order</param>
+        ///// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        ///// <param name="activationPrice">["<c>activatePrice</c>"] Used with TRAILING_STOP_MARKET orders, default as the latest price(supporting different workingType)</param>
+        ///// <param name="callbackRate">["<c>callbackRate</c>"] Used with TRAILING_STOP_MARKET orders</param>
+        ///// <param name="workingType">["<c>workingType</c>"] stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+        ///// <param name="closePosition">["<c>closePosition</c>"] Close-All,used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+        ///// <param name="priceProtect">["<c>priceProtect</c>"] If true when price reaches stopPrice, difference between "MARK_PRICE" and "CONTRACT_PRICE" cannot be larger than "triggerProtect" of the symbol.</param>
+        ///// <param name="priceMatch">["<c>priceMatch</c>"] Only available for Limit/Stop/TakeProfit order</param>
+        ///// <param name="selfTradePreventionMode">["<c>selfTradePreventionMode</c>"] Self trade prevention mode</param>
+        ///// <param name="goodTillDate">["<c>goodTillDate</c>"] Order cancel time for timeInForce GoodTillDate</param>
+        ///// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        ///// <param name="ct">Cancellation token</param>
+        ///// <returns>Placed conditional order details</returns>
+        //Task<WebCallResult<BinanceFuturesConditionalOrder>> PlaceConditionalOrderAsync(
+        //    string symbol,
+        //    Enums.OrderSide side,
+        //    ConditionalOrderType type,
+        //    decimal? quantity,
+        //    decimal? price = null,
+        //    Enums.PositionSide? positionSide = null,
+        //    TimeInForce? timeInForce = null,
+        //    bool? reduceOnly = null,
+        //    string? clientOrderId = null,
+        //    decimal? triggerPrice = null,
+        //    decimal? activationPrice = null,
+        //    decimal? callbackRate = null,
+        //    WorkingType? workingType = null,
+        //    bool? closePosition = null,
+        //    bool? priceProtect = null,
+        //    PriceMatch? priceMatch = null,
+        //    SelfTradePreventionMode? selfTradePreventionMode = null,
+        //    DateTime? goodTillDate = null,
+        //    int? receiveWindow = null,
+        //    CancellationToken ct = default);
+
+        ///// <summary>
+        ///// Cancels an active conditional order
+        ///// <para>
+        ///// Docs:<br />
+        ///// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-Algo-Order" /><br />
+        ///// Endpoint:<br />
+        ///// DELETE /fapi/v1/algoOrder
+        ///// </para>
+        ///// </summary>
+        ///// <param name="orderId">["<c>algoId</c>"] Id of the order to cancel. Either this or clientOrderId should be provided</param>
+        ///// <param name="clientOrderId">["<c>clientAlgoId</c>"] Client order id of the order to cancel. Either this or orderId should be provided</param>
+        ///// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        ///// <param name="ct">Cancellation token</param>
+        ///// <returns>Canceled conditional order details</returns>
+        //Task<WebCallResult<BinanceFuturesConditionalOrder>> CancelConditionalOrderAsync(
+        //    long? orderId = null,
+        //    string? clientOrderId = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default);
+
+        ///// <summary>
+        ///// Cancels all open conditional orders on a symbol
+        ///// <para>
+        ///// Docs:<br />
+        ///// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Cancel-All-Algo-Open-Orders" /><br />
+        ///// Endpoint:<br />
+        ///// DELETE /fapi/v1/algoOpenOrders
+        ///// </para>
+        ///// </summary>
+        ///// <param name="symbol">["<c>symbol</c>"] Symbol to close conditional orders on, for example `ETHUSDT`</param>
+        ///// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        ///// <param name="ct">Cancellation token</param>
+        ///// <returns>Whether the request was successful</returns>
+        //Task<WebCallResult<BinanceResult>> CancelAllConditionalOrdersAsync(
+        //    string symbol,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default);
+
+        ///// <summary>
+        ///// Gets all open conditional orders
+        ///// <para>
+        ///// Docs:<br />
+        ///// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Current-All-Algo-Open-Orders" /><br />
+        ///// Endpoint:<br />
+        ///// GET /fapi/v1/openAlgoOrders
+        ///// </para>
+        ///// </summary>
+        ///// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        ///// <param name="algoType">["<c>algoType</c>"] Filter by algo type</param>
+        ///// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        ///// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        ///// <param name="ct">Cancellation token</param>
+        ///// <returns>Open conditional orders</returns>
+        //Task<WebCallResult<BinanceFuturesConditionalOrder[]>> GetOpenConditionalOrdersAsync(
+        //    string? symbol = null,
+        //    string? algoType = null,
+        //    long? orderId = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default);
+
+        ///// <summary>
+        ///// Gets info on a specific conditional order
+        ///// <para>
+        ///// Docs:<br />
+        ///// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-Algo-Order" /><br />
+        ///// Endpoint:<br />
+        ///// GET /fapi/v1/algoOrder
+        ///// </para>
+        ///// </summary>
+        ///// <param name="orderId">["<c>algoId</c>"] Id of the order to retrieve. Either this or clientOrderId should be provided</param>
+        ///// <param name="clientOrderId">["<c>clientAlgoId</c>"] Client order id of the order to retrieve. Either this or orderId should be provided</param>
+        ///// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        ///// <param name="ct">Cancellation token</param>
+        ///// <returns>Conditional order details</returns>
+        //Task<WebCallResult<BinanceFuturesConditionalOrder>> GetConditionalOrderAsync(
+        //    long? orderId = null,
+        //    string? clientOrderId = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default);
+
+        ///// <summary>
+        ///// Gets all conditional orders
+        ///// <para>
+        ///// Docs:<br />
+        ///// <a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/trade/rest-api/Query-All-Algo-Orders" /><br />
+        ///// Endpoint:<br />
+        ///// GET /fapi/v1/allAlgoOrders
+        ///// </para>
+        ///// </summary>
+        ///// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        ///// <param name="orderId">["<c>orderId</c>"] Order id</param>
+        ///// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        ///// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        ///// <param name="page">["<c>page</c>"] Page number</param>
+        ///// <param name="limit">["<c>limit</c>"] Page size</param>
+        ///// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+        ///// <param name="ct">Cancellation token</param>
+        ///// <returns>Conditional orders</returns>
+        //Task<WebCallResult<BinanceFuturesConditionalOrder[]>> GetConditionalOrdersAsync(
+        //    string symbol,
+        //    long? orderId = null,
+        //    DateTime? startTime = null,
+        //    DateTime? endTime = null,
+        //    int? page = null,
+        //    int? limit = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default);
     }
 }
 

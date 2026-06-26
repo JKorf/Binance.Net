@@ -1,3 +1,4 @@
+using Binance.Net.Enums;
 using Binance.Net.Interfaces;
 
 namespace Binance.Net.Objects.Models.Spot.Socket
@@ -47,6 +48,12 @@ namespace Binance.Net.Objects.Models.Spot.Socket
         /// Total traded quote volume
         /// </summary>
         public abstract decimal QuoteVolume { get; set; }
+
+        /// <summary>
+        /// ["<c>st</c>"] Symbol type
+        /// </summary>
+        [JsonPropertyName("st")]
+        public SymbolType? SymbolType { get; set; }
     }
 
     /// <summary>
