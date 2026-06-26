@@ -769,7 +769,7 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        GetAssetOptions IAssetsRestClient.GetAssetOptions { get; } = new GetAssetOptions(_exchangeName, false);
+        GetAssetOptions IAssetsRestClient.GetAssetOptions { get; } = new GetAssetOptions(_exchangeName, true);
         async Task<HttpResult<SharedAsset>> IAssetsRestClient.GetAssetAsync(GetAssetRequest request, CancellationToken ct)
         {
             var validationError = SharedClient.GetAssetOptions.ValidateRequest(request, this);
