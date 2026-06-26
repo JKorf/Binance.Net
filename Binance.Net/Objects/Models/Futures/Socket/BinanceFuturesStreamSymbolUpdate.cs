@@ -14,6 +14,11 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         [JsonPropertyName("s")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
+        /// ["<c>st</c>"] Symbol type
+        /// </summary>
+        [JsonPropertyName("st")]
+        public SymbolType? SymbolType { get; set; }
+        /// <summary>
         /// ["<c>ps</c>"] The pair.
         /// </summary>
         [JsonPropertyName("ps")]

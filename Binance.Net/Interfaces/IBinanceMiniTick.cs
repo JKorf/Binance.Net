@@ -1,4 +1,6 @@
-﻿namespace Binance.Net.Interfaces
+﻿using Binance.Net.Enums;
+
+namespace Binance.Net.Interfaces
 {
     /// <summary>
     /// MiniTick info
@@ -39,5 +41,10 @@
         /// Total traded alternate asset volume
         /// </summary>
         decimal QuoteVolume { get; set; }
+
+        /// <summary>
+        /// Symbol type
+        /// </summary>
+        SymbolType? SymbolType { get; set; }
     }
 }

@@ -86,6 +86,12 @@ namespace Binance.Net.Objects.Models.Futures.Socket
         /// </summary>
         [JsonPropertyName("T"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
+
+        /// <summary>
+        /// ["<c>st</c>"] Symbol type
+        /// </summary>
+        [JsonPropertyName("st")]
+        public SymbolType? SymbolType { get; set; }
     }
 }
 
