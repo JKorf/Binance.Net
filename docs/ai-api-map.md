@@ -13,6 +13,13 @@ Use this file to route common user intents to the correct Binance.Net client mem
 | Testnet environment | `BinanceEnvironment.Testnet` |
 | Binance.US environment | `BinanceEnvironment.Us` |
 | Dependency injection | `services.AddBinance(options => { ... })` |
+| Shared spot REST client | `client.SpotApi.SharedClient` |
+| Shared USD-M futures REST client | `client.UsdFuturesApi.SharedClient` |
+| Shared COIN-M futures REST client | `client.CoinFuturesApi.SharedClient` |
+| Shared spot socket client | `socketClient.SpotApi.SharedClient` |
+| Shared USD-M futures socket client | `socketClient.UsdFuturesApi.SharedClient` |
+| Shared COIN-M futures socket client | `socketClient.CoinFuturesApi.SharedClient` |
+| Discover shared capabilities | `client.SpotApi.SharedClient.Discover()` / `client.UsdFuturesApi.SharedClient.Discover()` / `client.CoinFuturesApi.SharedClient.Discover()` |
 
 ## Spot REST
 
@@ -171,6 +178,7 @@ Use SharedApis for exchange-agnostic code across Binance, Bybit, OKX, Kraken, an
 | Shared spot socket client | `new BinanceSocketClient().SpotApi.SharedClient` |
 | Shared USD-M futures socket client | `new BinanceSocketClient().UsdFuturesApi.SharedClient` |
 | Shared COIN-M futures socket client | `new BinanceSocketClient().CoinFuturesApi.SharedClient` |
+| Discover shared capabilities | `.SharedClient.Discover()` |
 | Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
 | Shared spot order REST | `ISpotOrderRestClient.PlaceSpotOrderAsync(...)` |
 | Shared futures order REST | `IFuturesOrderRestClient.PlaceFuturesOrderAsync(...)` |
@@ -179,13 +187,16 @@ Use SharedApis for exchange-agnostic code across Binance, Bybit, OKX, Kraken, an
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
+Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers such as symbol support checks return `ExchangeCallResult<T>`.
+
 ## Result Handling
 
 | Situation | Pattern |
 |---|---|
 | REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Socket subscription success check | `if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
+| Socket subscription success check | `WebSocketResult<UpdateSubscription> sub = await ...; if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
 | Read REST data | Read `result.Data` only after `result.Success` |
+| Shared helper data | Read `ExchangeCallResult<T>.Data` only after `result.Success` |
 | Retry decision | Retry only when `result.Error?.IsTransient == true` |
 | Cancellation | Pass `ct: cancellationToken` |
 

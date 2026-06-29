@@ -39,7 +39,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Placed order response</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> PlaceOrderAsync(string symbol,
+        Task<QueryResult<BinanceResponse<BinanceFuturesOrder>>> PlaceOrderAsync(string symbol,
             Enums.OrderSide side,
             FuturesOrderType type,
             decimal? quantity,
@@ -79,7 +79,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Edited order response</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesOrder>>> EditOrderAsync(string symbol, OrderSide side, decimal quantity, decimal price, PriceMatch? priceMatch = null, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancels a pending order
@@ -96,7 +96,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Canceled order response</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesOrder>>> CancelOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Retrieves data for a specific order. Either orderId or origClientOrderId should be provided.
@@ -113,7 +113,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The specific order</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesOrder>>> GetOrderAsync(string symbol, long? orderId = null, string? origClientOrderId = null, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets position information
@@ -128,7 +128,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Position information response</returns>
-        Task<CallResult<BinanceResponse<BinancePositionDetailsCoin[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinancePositionDetailsCoin[]>>> GetPositionsAsync(string? symbol = null, long? receiveWindow = null, CancellationToken ct = default);
 
     }
 }

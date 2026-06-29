@@ -5,6 +5,7 @@ using Binance.Net.Objects.Models.Futures;
 using Binance.Net.Objects.Models.Futures.Socket;
 using Binance.Net.Objects.Sockets;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.TokenManagement;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -24,9 +25,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Future Account Balance
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceCoinFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
 
             return await _client.QueryAsync<BinanceCoinFuturesAccountBalance[]>(_client.ClientOptions.Environment.CoinFuturesSocketApiAddress!.AppendPath("ws-dapi/v1"), $"account.balance", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
@@ -37,9 +38,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region Get Account Info
 
         /// <inheritdoc />
-        public async Task<CallResult<BinanceResponse<BinanceFuturesCoinAccountInfo>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<QueryResult<BinanceResponse<BinanceFuturesCoinAccountInfo>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture));
             return await _client.QueryAsync<BinanceFuturesCoinAccountInfo>(_client.ClientOptions.Environment.CoinFuturesSocketApiAddress!.AppendPath("ws-dapi/v1"), $"account.status", parameters, true, true, weight: 5, ct: ct).ConfigureAwait(false);
         }
@@ -54,8 +55,29 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #region User Data Streams
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
-            string listenKey,
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
+            CancellationToken ct = default)
+            => await SubscribeToUserDataUpdatesAsync(
+                null,
+                onConfigUpdate, 
+                onMarginUpdate, 
+                onAccountUpdate, 
+                onOrderUpdate, 
+                onListenKeyExpired,
+                onStrategyUpdate, 
+                onGridUpdate, 
+                ct).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+            string? listenKey,
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onConfigUpdate = null,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
@@ -65,9 +87,37 @@ namespace Binance.Net.Clients.CoinFuturesApi
             Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
             CancellationToken ct = default)
         {
-            listenKey.ValidateNotNull(nameof(listenKey));
+            if (listenKey == null && !_client.Authenticated)
+                return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, new NoApiCredentialsError());
 
-            var subscription = new BinanceCoinFuturesUserDataSubscription(_logger, _client, listenKey, onOrderUpdate, onConfigUpdate, onMarginUpdate, onAccountUpdate, onListenKeyExpired, onStrategyUpdate, onGridUpdate);
+            TokenLease? lease = null;
+            if (listenKey == null)
+            {
+                var leaseResult = await _client.TokenManager.AcquireAsync(new TokenScope(
+                    BinanceExchange.Metadata.Id,
+                    _client.EnvironmentName,
+                    "CoinFutures",
+                    _client.ApiCredentials!.Credential!.Key), ct).ConfigureAwait(false);
+                if (!leaseResult.Success)
+                    return WebSocketResult.Fail<UpdateSubscription>(_client.Exchange, leaseResult.Error);
+
+                lease = leaseResult.Data;
+            }
+
+            var subscription = new BinanceCoinFuturesUserDataSubscription(
+                _logger,
+                _client,
+                listenKey,
+                onOrderUpdate,
+                onConfigUpdate,
+                onMarginUpdate,
+                onAccountUpdate,
+                onListenKeyExpired,
+                onStrategyUpdate,
+                onGridUpdate)
+            {
+                TokenLease = lease
+            };
             return await _client.SubscribeInternalAsync(_client.BaseAddress, subscription, ct).ConfigureAwait(false);
         }
 

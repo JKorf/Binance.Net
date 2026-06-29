@@ -135,7 +135,7 @@ namespace Binance.Net.UnitTests
             var tester = new SocketRequestValidator<BinanceSocketClient>("Socket/CoinFutures/Trading");
 
             await tester.ValidateAsync(CreateClient(), client => client.CoinFuturesApi.Trading.PlaceOrderAsync("ETHUSD_PERP", Enums.OrderSide.Buy, Enums.FuturesOrderType.Limit, 1), "PlaceOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
-            await tester.ValidateAsync(CreateClient(), client => client.CoinFuturesApi.Trading.EditOrderAsync("ETHUSD_PERP", Enums.OrderSide.Buy, 1, orderId: 123), "EditOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
+            await tester.ValidateAsync(CreateClient(), client => client.CoinFuturesApi.Trading.EditOrderAsync("ETHUSD_PERP", Enums.OrderSide.Buy, 1, 1, orderId: 123), "EditOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
             await tester.ValidateAsync(CreateClient(), client => client.CoinFuturesApi.Trading.CancelOrderAsync("ETHUSD_PERP", 123), "CancelOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
             await tester.ValidateAsync(CreateClient(), client => client.CoinFuturesApi.Trading.GetOrderAsync("ETHUSD_PERP", 123), "GetOrder", responseMapper: x => x.Result, nestedJsonProperty: "result");
             await tester.ValidateAsync(CreateClient(), client => client.CoinFuturesApi.Trading.GetPositionsAsync("ETHUSD_PERP"), "GetPositions", responseMapper: x => x.Result, nestedJsonProperty: "result");

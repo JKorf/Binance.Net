@@ -18,7 +18,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>The account information</returns>
-        Task<CallResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceUsdFuturesAccountBalance[]>>> GetBalancesAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets account information, including positions and balances
@@ -27,7 +27,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account information</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesAccountInfoV3>>> GetAccountInfoAsync(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets account information, including positions and balances
@@ -36,7 +36,7 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Account information</returns>
-        Task<CallResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default);
+        Task<QueryResult<BinanceResponse<BinanceFuturesAccountInfo>>> GetAccountInfoV1Async(long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribes to the account update stream. Before using this method, call <see cref="IBinanceRestClientUsdFuturesApiAccount.StartUserStreamAsync(CancellationToken)">restClient.UsdFuturesApi.Account.StartUserStreamAsync</see> to start the stream and obtain a listen key.
@@ -55,8 +55,37 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         /// <param name="onAlgoOrderUpdate">The event handler for whenever a conditional order is changed</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
+            Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamOrderUpdate>>? onOrderUpdate = null,
+            Action<DataEvent<BinanceFuturesStreamTradeUpdate>>? onTradeUpdate = null,
+            Action<DataEvent<BinanceStreamEvent>>? onListenKeyExpired = null,
+            Action<DataEvent<BinanceStrategyUpdate>>? onStrategyUpdate = null,
+            Action<DataEvent<BinanceGridUpdate>>? onGridUpdate = null,
+            Action<DataEvent<BinanceConditionOrderTriggerRejectUpdate>>? onConditionalOrderTriggerRejectUpdate = null,
+            Action<DataEvent<BinanceAlgoOrderUpdate>>? onAlgoOrderUpdate = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribes to the account update stream. Listen key is initially requested and kept alive when needed
+        /// <para><a href="https://developers.binance.com/docs/derivatives/usds-margined-futures/user-data-streams" /></para>
+        /// </summary>
+        /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>
+        /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
+        /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
+        /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
+        /// <param name="onTradeUpdate">The event handler for whenever a trade status update is received</param>
+        /// <param name="onListenKeyExpired">Responds when the listen key for the stream has expired. Initiate a new instance of the stream here</param>
+        /// <param name="onStrategyUpdate">The event handler for whenever a strategy update is received</param>
+        /// <param name="onGridUpdate">The event handler for whenever a grid update is received</param>
+        /// <param name="onConditionalOrderTriggerRejectUpdate">The event handler for whenever a trigger order failed to place an order</param>
+        /// <param name="onAlgoOrderUpdate">The event handler for whenever a conditional order is changed</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             Action<DataEvent<BinanceFuturesStreamConfigUpdate>>? onLeverageUpdate = null,
             Action<DataEvent<BinanceFuturesStreamMarginUpdate>>? onMarginUpdate = null,
             Action<DataEvent<BinanceFuturesStreamAccountUpdate>>? onAccountUpdate = null,

@@ -22,15 +22,16 @@ Primary documentation:
 - Use `BinanceCredentials`, not generic `ApiCredentials`, for API key setup.
 - Include `using Binance.Net;` when using `BinanceCredentials` or `BinanceEnvironment`.
 - Always check `.Success` before reading `.Data`.
-- REST methods return `WebCallResult<T>` or `WebCallResult`.
-- WebSocket subscriptions and socket API requests return `CallResult<T>` or `CallResult`.
+- REST methods return `HttpResult<T>` or `HttpResult`.
+- WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
 - Do not call `.Result` or `.Wait()` on async methods.
 - Do not invent endpoint names. If unsure, inspect `Binance.Net/Interfaces/Clients/**`.
 - Do not pass custom client order IDs unless the user explicitly needs correlation with an external system. Let the library auto-generate IDs in ordinary examples.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.SharedClient.Discover()` before routing optional shared features.
 
 ## Installation
 
@@ -165,9 +166,9 @@ var price = result.Data.LastPrice;
 For retry logic, only retry transient errors:
 
 ```csharp
-async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+async Task<HttpResult<T>> WithRetry<T>(Func<Task<HttpResult<T>>> call, int maxAttempts = 3)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
 
     for (var attempt = 1; attempt <= maxAttempts; attempt++)
     {
@@ -421,7 +422,15 @@ Use CryptoExchange.Net.SharedApis when the user asks for code that can work agai
 using Binance.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
-ISpotTickerRestClient tickerClient = new BinanceRestClient().SpotApi.SharedClient;
+var restClient = new BinanceRestClient();
+ISpotTickerRestClient tickerClient = restClient.SpotApi.SharedClient;
+
+var sharedInfo = restClient.SpotApi.SharedClient.Discover();
+var supportedFeatures = sharedInfo.Features
+    .Where(x => x.Supported)
+    .Select(x => x.EndpointName);
+Console.WriteLine($"{sharedInfo.Exchange} {sharedInfo.TypeName}: {string.Join(", ", supportedFeatures)}");
+
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
 
 var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
@@ -524,10 +533,10 @@ Examples/ai-friendly/03-websocket.cs
   Public ticker stream, kline stream, authenticated user data stream, success checks, teardown.
 
 Examples/ai-friendly/04-multi-exchange.cs
-  CryptoExchange.Net.SharedApis REST and socket patterns.
+  CryptoExchange.Net.SharedApis REST and socket patterns, capability discovery.
 
 Examples/ai-friendly/05-error-handling.cs
-  WebCallResult pattern, transient retry, Binance error examples, exchange filter handling.
+  HttpResult, WebSocketResult, ExchangeCallResult patterns, transient retry, Binance error examples, exchange filter handling.
 ```
 
 These files are intended to be copied into a console `Program.cs` after `dotnet add package Binance.Net`.

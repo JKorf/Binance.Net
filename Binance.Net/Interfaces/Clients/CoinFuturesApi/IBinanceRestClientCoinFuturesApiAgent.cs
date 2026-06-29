@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>USER DATA</returns>
-        Task<WebCallResult<BinanceFuturesIfNewUser>> GetIfNewUserAsync(string brokerId,
+        Task<HttpResult<BinanceFuturesIfNewUser>> GetIfNewUserAsync(string brokerId,
             int? receiveWindow = null,
             CancellationToken ct = default);
     }

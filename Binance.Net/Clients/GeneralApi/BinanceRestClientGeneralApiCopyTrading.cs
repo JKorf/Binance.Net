@@ -18,21 +18,21 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get User Status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCopyTradingUserStatus>> GetUserStatusAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCopyTradingUserStatus>> GetUserStatusAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/copyTrading/futures/userStatus", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/copyTrading/futures/userStatus", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
             var data = await _baseClient.SendAsync<BinanceResult<BinanceCopyTradingUserStatus>>(request, parameters, ct).ConfigureAwait(false);
 
             if (!data.Success)
-                return data.As<BinanceCopyTradingUserStatus>(default);
+                return HttpResult.Fail<BinanceCopyTradingUserStatus>(data);
 
             if (data.Data?.Code != 0)
-                return data.AsError<BinanceCopyTradingUserStatus>(new ServerError(data.Data!.Code.ToString(), _baseClient.GetErrorInfo(data.Data!.Code, data.Data!.Message)));
+                return HttpResult.Fail<BinanceCopyTradingUserStatus>(data, new ServerError(data.Data!.Code.ToString(), _baseClient.GetErrorInfo(data.Data!.Code, data.Data!.Message)));
 
-            return data.As(data.Data.Data);
+            return HttpResult.Ok(data, data.Data.Data);
         }
 
         #endregion
@@ -40,21 +40,21 @@ namespace Binance.Net.Clients.GeneralApi
         #region Get Lead Symbol
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BinanceCopyTradingLeadSymbol[]>> GetLeadSymbolAsync(long? receiveWindow = null, CancellationToken ct = default)
+        public async Task<HttpResult<BinanceCopyTradingLeadSymbol[]>> GetLeadSymbolAsync(long? receiveWindow = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalString("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
+            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+            parameters.Add("recvWindow", receiveWindow ?? (long)_baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "sapi/v1/copyTrading/futures/leadSymbol", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/copyTrading/futures/leadSymbol", BinanceExchange.RateLimiter.SpotRestUid, 20, true);
             var data = await _baseClient.SendAsync<BinanceResult<BinanceCopyTradingLeadSymbol[]>>(request, parameters, ct).ConfigureAwait(false);
 
             if (!data.Success)
-                return data.As<BinanceCopyTradingLeadSymbol[]>(default);
+                return HttpResult.Fail<BinanceCopyTradingLeadSymbol[]>(data);
 
             if (data.Data?.Code != 0)
-                return data.AsError<BinanceCopyTradingLeadSymbol[]>(new ServerError(data.Data!.Code.ToString(), _baseClient.GetErrorInfo(data.Data!.Code, data.Data!.Message)));
+                return HttpResult.Fail<BinanceCopyTradingLeadSymbol[]>(data, new ServerError(data.Data!.Code.ToString(), _baseClient.GetErrorInfo(data.Data!.Code, data.Data!.Message)));
 
-            return data.As(data.Data.Data);
+            return HttpResult.Ok(data, data.Data.Data);
         }
 
         #endregion

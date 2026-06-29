@@ -14,7 +14,7 @@ namespace Binance.Net.Objects.Sockets
         public BinanceSpotOrderReplaceQuery(SocketApiClient client, BinanceSocketQuery request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _client = client;
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<BinanceResponse<BinanceReplaceOrderResult>>(request.Id.ToString(), HandleMessage);
         }
 
         public CallResult<BinanceResponse<BinanceReplaceOrderResult>> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BinanceResponse<BinanceReplaceOrderResult> message)
@@ -24,18 +24,18 @@ namespace Binance.Net.Objects.Sockets
                 if (message.Status == 418 || message.Status == 429)
                 {
                     // Rate limit error 
-                    return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new BinanceRateLimitError(message.Error!.Code, message.Error!.Message)
+                    return CallResult<BinanceResponse<BinanceReplaceOrderResult>>.Fail(new BinanceRateLimitError(message.Error!.Code, message.Error!.Message)
                     {
                         RetryAfter = message.Error.Data!.RetryAfter
-                    }, originalData);
+                    });
                 }
 
                 if (message.Status == 400 || message.Status == 409)
                 {
                     if (message.Error!.Data == null)
-                        return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Error.Code, _client.GetErrorInfo(message.Error.Code, message.Error.Message)));
+                        return CallResult<BinanceResponse<BinanceReplaceOrderResult>>.Fail(new ServerError(message.Error.Code, _client.GetErrorInfo(message.Error.Code, message.Error.Message)));
 
-                    return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new BinanceResponse<BinanceReplaceOrderResult>()
+                    return CallResult<BinanceResponse<BinanceReplaceOrderResult>>.Ok(new BinanceResponse<BinanceReplaceOrderResult>()
                     {
                         Id = message.Id,
                         Status = message.Status,
@@ -50,10 +50,10 @@ namespace Binance.Net.Objects.Sockets
                     });
                 }
 
-                return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
+                return CallResult<BinanceResponse<BinanceReplaceOrderResult>>.Fail(new ServerError(message.Error!.Code.ToString(), _client.GetErrorInfo(message.Error!.Code, message.Error!.Message)), originalData);
             }
 
-            return new CallResult<BinanceResponse<BinanceReplaceOrderResult>>(message, originalData, null);
+            return CallResult<BinanceResponse<BinanceReplaceOrderResult>>.Ok(message, originalData);
         }
     }
 }

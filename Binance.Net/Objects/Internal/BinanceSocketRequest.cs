@@ -20,6 +20,6 @@
     internal class BinanceSocketQuery : BinanceSocketMessage
     {
         [JsonPropertyName("params")]
-        public Dictionary<string, object> Params { get; set; } = new Dictionary<string, object>();
+        public Parameters Params { get; set; } = new Parameters(BinanceExchange._parameterSerializationSettings);
     }
 }

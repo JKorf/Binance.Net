@@ -1,7 +1,8 @@
-﻿using Binance.Net.Interfaces.Clients.CoinFuturesApi;
+﻿using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects;
 using Binance.Net.Objects.Internal;
-using Binance.Net.Clients.MessageHandlers;
+using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Options;
 using Binance.Net.Objects.Sockets;
 using Binance.Net.Objects.Sockets.Subscriptions;
@@ -12,10 +13,11 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
-using System.Net.WebSockets;
 using CryptoExchange.Net.Sockets.Default;
-using Binance.Net.Objects.Models;
 using CryptoExchange.Net.Sockets.HighPerf;
+using CryptoExchange.Net.TokenManagement;
+using Microsoft.Extensions.Options;
+using System.Net.WebSockets;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -24,6 +26,27 @@ namespace Binance.Net.Clients.CoinFuturesApi
     {
         #region fields
         protected override ErrorMapping ErrorMapping => BinanceErrors.FuturesErrors;
+        private readonly ILoggerFactory? _loggerFactory;
+        private BinanceRestClient? _tokenClient;
+        internal TokenManager TokenManager { get; }
+        private BinanceRestClient TokenClient
+        {
+            get
+            {
+                if (_tokenClient == null)
+                {
+                    _tokenClient = new BinanceRestClient(null, _loggerFactory, Options.Create(new BinanceRestOptions
+                    {
+                        ApiCredentials = ApiCredentials,
+                        Environment = ClientOptions.Environment,
+                        Proxy = ClientOptions.Proxy,
+                        OutputOriginalData = ClientOptions.OutputOriginalData
+                    }));
+                }
+
+                return _tokenClient;
+            }
+        }
         #endregion
 
         /// <inheritdoc />
@@ -38,19 +61,30 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #region constructor/destructor
 
-        internal BinanceSocketClientCoinFuturesApi(ILogger logger, BinanceSocketOptions options) :
-            base(logger, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
+        internal BinanceSocketClientCoinFuturesApi(ILoggerFactory? loggerFactory, BinanceSocketOptions options) :
+            base(loggerFactory, BinanceExchange.Metadata.Id, options.Environment.CoinFuturesSocketAddress!, options, options.CoinFuturesOptions)
         {
             // When sending more than 4000 bytes the server responds very delayed (somehow connected to the websocket keep alive interval)
             // See https://dev.binance.vision/t/socket-live-subscribing-server-delay/9645/2
             // To prevent issues we keep below this
             MessageSendSizeLimit = 4000;
 
-            Account = new BinanceSocketClientCoinFuturesApiAccount(logger, this);
-            ExchangeData = new BinanceSocketClientCoinFuturesApiExchangeData(logger, this);
-            Trading = new BinanceSocketClientCoinFuturesApiTrading(logger, this);
+            _loggerFactory = loggerFactory;
+
+            Account = new BinanceSocketClientCoinFuturesApiAccount(_logger, this);
+            ExchangeData = new BinanceSocketClientCoinFuturesApiExchangeData(_logger, this);
+            Trading = new BinanceSocketClientCoinFuturesApiTrading(_logger, this);
 
             RateLimiter = BinanceExchange.RateLimiter.FuturesSocket;
+
+            TokenManager = new TokenManager(
+                BinanceExchange.Metadata.Id,
+                loggerFactory,
+                TimeSpan.FromMinutes(30),
+                TimeSpan.FromMinutes(60),
+                startToken: StartListenKeyAsync,
+                keepAliveToken: KeepAliveListenKeyAsync,
+                stopToken: StopListenKeyAsync);
         }
         #endregion 
 
@@ -67,7 +101,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 => BinanceExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         
-        internal async Task<CallResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Dictionary<string, object> parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
+        internal async Task<QueryResult<BinanceResponse<T>>> QueryAsync<T>(string url, string method, Parameters parameters, bool authenticated = false, bool sign = false, int weight = 1, CancellationToken ct = default)
         {
             if (authenticated)
             {
@@ -101,13 +135,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return result;
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeAsync<T>(string url, string dataType, IEnumerable<string> topics, Action<DateTime, string?, T> onData, CancellationToken ct)
         {
             var subscription = new BinanceSubscription<T>(_logger, dataType, topics.ToList(), onData, false);
             return SubscribeAsync(url.AppendPath("stream"), subscription, ct);
         }
 
-        internal Task<CallResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
+        internal Task<WebSocketResult<HighPerfUpdateSubscription>> SubscribeHighPerfAsync<T, U>(
             string url,
             string[] topics,
             Action<U> onData,
@@ -131,9 +165,50 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 ct);
         }
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
+        internal Task<WebSocketResult<UpdateSubscription>> SubscribeInternalAsync(string url, Subscription subscription, CancellationToken ct)
         {
             return base.SubscribeAsync(url.AppendPath("stream"), subscription, ct);
+        }
+
+        protected override async Task<CallResult> RevitalizeRequestAsync(Subscription subscription)
+        {
+            if (subscription.TokenLease == null)
+                return CallResult.Ok(); // Not an authenticated subscription, no need to revitalize
+
+            var scope = new TokenScope(
+                    BinanceExchange.Metadata.Id,
+                    EnvironmentName,
+                    "Futures",
+                    ApiCredentials!.Credential!.Key);
+
+            return await TokenManager.AcquireAndReplaceAsync(subscription, scope).ConfigureAwait(false);
+        }
+
+        private async Task<CallResult<string>> StartListenKeyAsync(TokenScope tokenScope, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.StartRiskDataUserStreamAsync(ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok(result.Data);
+        }
+
+        private async Task<CallResult> KeepAliveListenKeyAsync(TokenInfo token, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.KeepAliveRiskDataUserStreamAsync(token.Token, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok();
+        }
+
+        private async Task<CallResult> StopListenKeyAsync(TokenInfo token, CancellationToken ct)
+        {
+            var result = await TokenClient.SpotApi.Account.StopRiskDataUserStreamAsync(token.Token, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return CallResult.Fail<string>(result.Error);
+
+            return CallResult.Ok();
         }
     }
 }

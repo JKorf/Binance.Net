@@ -21,7 +21,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateSingleTokenGiftCardAsync(string token, double amount, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateSingleTokenGiftCardAsync(string token, double amount, long? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Create a dual-token gift card
@@ -38,7 +38,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateDualTokenGiftCardAsync(string baseToken, string faceToken, double baseTokenAmount, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceGiftCardResponse<BinaceGiftCardData>>> CreateDualTokenGiftCardAsync(string baseToken, string faceToken, double baseTokenAmount, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Redeem a Binance Gift Card
@@ -55,7 +55,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>> RedeemGiftCardAsync(string code, string? externalUid = null, bool useEncryption = true, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceGiftCardResponse<BinanceGiftCardRedeemData>>> RedeemGiftCardAsync(string code, string? externalUid = null, bool useEncryption = true, long? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
         /// Verify Binance Gift Card by Gift Card Number
@@ -70,7 +70,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardValidity>>> VerifyGiftCardByNumberAsync(string referenceNumber, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceGiftCardResponse<BinanceGiftCardValidity>>> VerifyGiftCardByNumberAsync(string referenceNumber, long? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Get Token Limit
@@ -86,7 +86,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         
-        Task<WebCallResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceGiftCardResponse<BinanceGiftCardTokenLimit[]>>> GetTokenLimitAsync(string baseToken, long? receiveWindow = null, CancellationToken ct = default);
         
         /// <summary>
         /// Get RSA public key
@@ -100,6 +100,6 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BinanceGiftCardResponse<string>>> GetRsaPublicKeyAsync(long? receiveWindow = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceGiftCardResponse<string>>> GetRsaPublicKeyAsync(long? receiveWindow = null, CancellationToken ct = default);
     }
 }

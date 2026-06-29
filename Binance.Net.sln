@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Binance.Net", "Binance.Net\Binance.Net.csproj", "{4E00B047-875A-4AAC-A205-F1EF0DB81FD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binance.Net.UnitTests", "Binance.Net.UnitTests\Binance.Net.UnitTests.csproj", "{09E46E06-F6CA-4330-8ADF-106673480F95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binance.Net.Benchmark.Client", "Benchmark\Client\Binance.Net.Benchmark.Client.csproj", "{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{09E46E06-F6CA-4330-8ADF-106673480F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09E46E06-F6CA-4330-8ADF-106673480F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09E46E06-F6CA-4330-8ADF-106673480F95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE50058-15D3-C0A2-3B16-7F7AD559F24D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

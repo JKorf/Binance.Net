@@ -51,9 +51,9 @@ namespace Binance.Net.Clients
         {
             Initialize(options.Value);
 
-            SpotApi = AddApiClient(new BinanceSocketClientSpotApi(_logger, options.Value));
-            UsdFuturesApi = AddApiClient(new BinanceSocketClientUsdFuturesApi(_logger, options.Value));
-            CoinFuturesApi = AddApiClient(new BinanceSocketClientCoinFuturesApi(_logger, options.Value));
+            SpotApi = AddApiClient(new BinanceSocketClientSpotApi(loggerFactory, options.Value));
+            UsdFuturesApi = AddApiClient(new BinanceSocketClientUsdFuturesApi(loggerFactory, options.Value));
+            CoinFuturesApi = AddApiClient(new BinanceSocketClientCoinFuturesApi(loggerFactory, options.Value));
         }
         #endregion
 

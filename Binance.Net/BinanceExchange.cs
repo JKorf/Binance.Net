@@ -23,7 +23,8 @@ namespace Binance.Net
                 "https://www.binance.com",
                 ["https://binance-docs.github.io/apidocs/spot/en/#change-log"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                BinanceEnvironment.All
                 );
 
         /// <summary>
@@ -59,6 +60,13 @@ namespace Binance.Net
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BinanceSourceGenerationContext>();
+        internal static readonly ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings()
+        {
+            Decimal = DecimalSerialization.String,
+            Array = ArrayParametersSerialization.MultipleValues,
+            Sort = false
+        };
+
 
         /// <summary>
         /// Aliases for Binance assets
@@ -96,7 +104,7 @@ namespace Binance.Net
         /// <summary>
         /// Rate limiter configuration for the Binance API
         /// </summary>
-        public static BinanceRateLimiters RateLimiter { get; } = new BinanceRateLimiters();
+        public static BinanceRateLimiters RateLimiter { get; set; } = new BinanceRateLimiters();
     }
 
     /// <summary>
@@ -114,13 +122,19 @@ namespace Binance.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal BinanceRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             EndpointLimit = new RateLimitGate("Endpoint Limit");
             SpotRestIp = new RateLimitGate("Spot Rest")

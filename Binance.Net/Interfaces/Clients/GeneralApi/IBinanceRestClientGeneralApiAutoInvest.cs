@@ -19,7 +19,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Auto invest source and target assets</returns>
-        Task<WebCallResult<BinanceAutoInvestAssets>> GetSourceAndTargetAssetsAsync(CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestAssets>> GetSourceAndTargetAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Gets source assets info
@@ -36,7 +36,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="sourceType">MAIN_SITE (default) or TR (Turkey users)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Source assets information</returns>
-        Task<WebCallResult<BinanceAutoInvestSourceAssets>> GetSourceAssetsAsync(string usageType, string? targetAsset = null, bool? flexibleAllowedToUse = null, string? sourceType = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestSourceAssets>> GetSourceAssetsAsync(string usageType, string? targetAsset = null, bool? flexibleAllowedToUse = null, string? sourceType = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets target assets info
@@ -52,7 +52,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Target assets information</returns>
-        Task<WebCallResult<BinanceAutoInvestTargetAssets>> GetTargetAssetsAsync(string? targetAsset = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestTargetAssets>> GetTargetAssetsAsync(string? targetAsset = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
         /// <summary>
         /// Gets target asset ROIs
         /// <para>
@@ -66,7 +66,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="roiType">ROI type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Target asset ROI data</returns>
-        Task<WebCallResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestRoi[]>> GetTargetAssetRoisAsync(string asset, AutoInvestRoiType roiType, CancellationToken ct = default);
         /// <summary>
         /// Gets index info
         /// <para>
@@ -79,7 +79,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="indexId">The id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Index information</returns>
-        Task<WebCallResult<BinanceAutoInvestIndex>> GetIndexInfoAsync(string indexId, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestIndex>> GetIndexInfoAsync(string indexId, CancellationToken ct = default);
         /// <summary>
         /// Gets auto invest plans
         /// <para>
@@ -92,7 +92,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="planType">Type of plans</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Auto invest plans</returns>
-        Task<WebCallResult<BinanceAutoInvestPlan>> GetPlansAsync(AutoInvestPlanType planType, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestPlan>> GetPlansAsync(AutoInvestPlanType planType, CancellationToken ct = default);
 
         /// <summary>
         /// Creates a one-time transaction
@@ -112,7 +112,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>One-time transaction result</returns>
-        Task<WebCallResult<BinanceAutoInvestTradeResult>> OneTimeTransactionAsync(string sourceType, string requestId, decimal subscriptionQuantity, string sourceAsset, bool flexibleAllowedToUse, long indexId, Dictionary<string, decimal> subscriptionDetails, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestTradeResult>> OneTimeTransactionAsync(string sourceType, string requestId, decimal subscriptionQuantity, string sourceAsset, bool flexibleAllowedToUse, long indexId, Dictionary<string, decimal> subscriptionDetails, CancellationToken ct = default);
 
         /// <summary>
         /// Edits the status of a plan
@@ -127,7 +127,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="status">New status</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Edit status result</returns>
-        Task<WebCallResult<BinanceAutoInvestEditStatusResult>> EditPlanStatusAsync(long planId, AutoInvestPlanStatus status, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestEditStatusResult>> EditPlanStatusAsync(long planId, AutoInvestPlanStatus status, CancellationToken ct = default);
 
         /// <summary>
         /// Edits a plan
@@ -149,7 +149,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Edit plan result</returns>
-        Task<WebCallResult<BinanceAutoInvestEditResult>> EditPlanAsync(string planId, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, int? subscriptionStartTime = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestEditResult>> EditPlanAsync(string planId, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, int? subscriptionStartTime = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default);
 
         /// <summary>
         /// Redeems an index-linked plan
@@ -165,7 +165,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="redemptionPercentage">Redemption percentage</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Redemption result</returns>
-        Task<WebCallResult<BinanceAutoInvestRedemptionResult>> RedeemIndexLinkedPlanAsync(string indexId, string requestId, int redemptionPercentage, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestRedemptionResult>> RedeemIndexLinkedPlanAsync(string indexId, string requestId, int redemptionPercentage, CancellationToken ct = default);
 
         /// <summary>
         /// Gets subscription transaction history
@@ -185,7 +185,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Subscription transaction history</returns>
-        Task<WebCallResult<BinanceAutoInvestPlanTransactions>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestPlanTransactions>> GetSubscriptionTransactionHistoryAsync(long? planId = null, DateTime? startTime = null, DateTime? endTime = null, string? targetAsset = null, AutoInvestPlanType? planType = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets one-time transaction status
@@ -200,7 +200,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="requestId">Request id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>One-time transaction status</returns>
-        Task<WebCallResult<BinanceAutoInvestOneTimeTransactionStatus>> GetOneTimeTransactionStatusAsync(long transactionId, string requestId, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestOneTimeTransactionStatus>> GetOneTimeTransactionStatusAsync(long transactionId, string requestId, CancellationToken ct = default);
 
         /// <summary>
         /// Creates a new investment plan
@@ -224,7 +224,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="subscriptionDetails">Subscription details of asset => percentage. Total percentage should add up to 100%</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Create plan result</returns>
-        Task<WebCallResult<BinanceAutoInvestTradeResult>> CreatePlanAsync(string sourceType, AutoInvestPlanType planType, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, int subscriptionStartTime, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, string? requestId = null, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestTradeResult>> CreatePlanAsync(string sourceType, AutoInvestPlanType planType, decimal subscriptionQuantity, AutoInvestSubscriptionCycle subscriptionCycle, int subscriptionStartTime, string sourceAsset, Dictionary<string, decimal> subscriptionDetails, string? requestId = null, int? subscriptionStartDay = null, string? subscriptionStartWeekday = null, bool? flexibleAllowedToUse = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets index-linked plan redemption history
@@ -243,7 +243,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Index-linked plan redemption history</returns>
-        Task<WebCallResult<BinanceAutoInvestRedemption[]>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestRedemption[]>> GetIndexLinkedPlanRedemptionHistoryAsync(long requestId, DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets holding details of a plan
@@ -258,7 +258,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="requestId">Request id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Plan holdings details</returns>
-        Task<WebCallResult<BinanceAutoInvestPlanHoldings>> GetPlanHoldingsAsync(long? planId = null, string? requestId = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestPlanHoldings>> GetPlanHoldingsAsync(long? planId = null, string? requestId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Gets index-linked plan position details
@@ -272,7 +272,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="indexId">The index id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Index-linked plan position details</returns>
-        Task<WebCallResult<BinanceAutoInvestIndexPlanPosition>> GetIndexLinkedPlanPositionDetailsAsync(long indexId, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestIndexPlanPosition>> GetIndexLinkedPlanPositionDetailsAsync(long indexId, CancellationToken ct = default);
 
         /// <summary>
         /// Gets index-linked plan rebalance history
@@ -289,7 +289,7 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         /// <param name="pageSize">Page size</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns>Index-linked plan rebalance history</returns>
-        Task<WebCallResult<BinanceAutoInvestRebalanceInfo[]>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
+        Task<HttpResult<BinanceAutoInvestRebalanceInfo[]>> GetIndexLinkedPlanRebalanceHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, int? page = null, int? pageSize = null, CancellationToken ct = default);
 
     }
 }

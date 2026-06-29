@@ -13,7 +13,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     internal class BinanceSpotUserDataSubscription : Subscription
     {
         private readonly BinanceSocketClientSpotApi _client;
-        private string? _subscriptionId;
+        internal string? _subscriptionId;
 
         private readonly Action<DataEvent<BinanceStreamOrderUpdate>>? _orderHandler;
         private readonly Action<DataEvent<BinanceStreamOrderList>>? _orderListHandler;
@@ -48,7 +48,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         protected override Query? GetSubQuery(SocketConnection connection)
         {
-            var signParameters = ((BinanceAuthenticationProvider)_client.AuthenticationProvider!).ProcessRequest(_client, new Dictionary<string, object>());
+            var signParameters = _client.AuthenticationProvider!.ProcessRequest(_client, new Parameters(BinanceExchange._parameterSerializationSettings));
             return new BinanceSpotQuery<BinanceResponse<BinanceWebsocketApiWrapper>>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.subscribe.signature",
@@ -62,17 +62,33 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             if (message == null)
                 return;
 
+            string? id = null;
             var response = (BinanceResponse<BinanceWebsocketApiWrapper>)message;
-            var id = response.Result.SubscriptionId.ToString();
+            if (response.Result == null && response.Error?.Code == -2035)
+            {
+                // Duplicate subscription, treat as success as it handled correctly internally
+                var otherUserConnection = connection.Subscriptions.First(x => x is BinanceSpotUserDataSubscription userSub);
+                if (otherUserConnection != null)
+                    id = ((BinanceSpotUserDataSubscription)otherUserConnection)._subscriptionId;
+            }
+            else if (response.Result?.SubscriptionId != null)
+            {
+                id = response.Result.SubscriptionId.ToString();
+            }
+            else
+            {
+                return;
+            }
+
             _subscriptionId = id;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>.CreateWithTopicFilter("outboundAccountPosition", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>.CreateWithTopicFilter("balanceUpdate", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>.CreateWithTopicFilter("executionReport", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>.CreateWithTopicFilter("listStatus", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamEvent>>.CreateWithTopicFilter("eventStreamTerminated", id, DoHandleMessage),
-                MessageRoute<BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>>.CreateWithTopicFilter("externalLockUpdate", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamPositionsUpdate>>("outboundAccountPosition", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamBalanceUpdate>>("balanceUpdate", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamOrderUpdate>>("executionReport", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamOrderList>>("listStatus", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamEvent>>("eventStreamTerminated", id, DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceWebsocketApiWrapper<BinanceStreamBalanceLockUpdate>>("externalLockUpdate", id, DoHandleMessage),
                 ]);
         }
 
@@ -82,7 +98,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSpotQuery<BinanceResponse>(_client, new BinanceSocketQuery
             {
                 Method = "userDataStream.unsubscribe",
-                Params = _subscriptionId != null ? new() { { "subscriptionId", _subscriptionId } } : [],
+                Params = _subscriptionId != null ? new Parameters(BinanceExchange._parameterSerializationSettings) { { "subscriptionId", _subscriptionId } } : new Parameters(BinanceExchange._parameterSerializationSettings),
                 Id = ExchangeHelpers.NextId()
             }, false);            
         }
@@ -100,7 +116,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())                 
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -116,7 +132,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -133,7 +149,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -150,7 +166,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
 
@@ -166,7 +182,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );            
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
 
@@ -183,7 +199,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Event.EventTime, _client.GetTimeOffset())
                 );
 
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }

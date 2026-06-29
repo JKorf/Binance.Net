@@ -51,10 +51,10 @@ namespace Binance.Net.Clients
         {
             Initialize(options.Value);
 
-            GeneralApi = AddApiClient(new BinanceRestClientGeneralApi(_logger, httpClient, this, options.Value));
-            SpotApi = AddApiClient(new BinanceRestClientSpotApi(_logger, httpClient, options.Value));
-            UsdFuturesApi = AddApiClient(new BinanceRestClientUsdFuturesApi(_logger, httpClient, options.Value));
-            CoinFuturesApi = AddApiClient(new BinanceRestClientCoinFuturesApi(_logger, httpClient, options.Value));
+            GeneralApi = AddApiClient(new BinanceRestClientGeneralApi(loggerFactory, httpClient, this, options.Value));
+            SpotApi = AddApiClient(new BinanceRestClientSpotApi(loggerFactory, httpClient, options.Value));
+            UsdFuturesApi = AddApiClient(new BinanceRestClientUsdFuturesApi(loggerFactory, httpClient, options.Value));
+            CoinFuturesApi = AddApiClient(new BinanceRestClientCoinFuturesApi(loggerFactory, httpClient, options.Value));
         }
 
         #endregion

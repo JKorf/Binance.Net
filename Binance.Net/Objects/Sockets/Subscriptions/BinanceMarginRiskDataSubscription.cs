@@ -12,7 +12,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class BinanceMarginRiskDataSubscription : Subscription
     {
-        private readonly string _lk;
+        private readonly string? _lk;
         private readonly BinanceSocketClientSpotApi _client;
 
         private readonly Action<DataEvent<BinanceMarginCallUpdate>>? _marginCallHandler;
@@ -22,7 +22,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
         public BinanceMarginRiskDataSubscription(
             ILogger logger,
             BinanceSocketClientSpotApi client,
-            string listenKey,
+            string? listenKey,
             Action<DataEvent<BinanceMarginCallUpdate>>? marginCallHandler,
             Action<DataEvent<BinanceLiabilityUpdate>>? liabilityHandler,
             bool auth) : base(logger, auth)
@@ -33,8 +33,8 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             _lk = listenKey;
 
             MessageRouter = MessageRouter.Create([
-                MessageRoute<BinanceCombinedStream<BinanceMarginCallUpdate>>.CreateWithoutTopicFilter("MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
-                MessageRoute<BinanceCombinedStream<BinanceLiabilityUpdate>>.CreateWithoutTopicFilter("USER_LIABILITY_CHANGE", DoHandleMessage)
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceMarginCallUpdate>>("MARGIN_LEVEL_STATUS_CHANGE", DoHandleMessage),
+                MessageRoute.CreateForEvent<BinanceCombinedStream<BinanceLiabilityUpdate>>("USER_LIABILITY_CHANGE", DoHandleMessage)
                 ]);
         }
 
@@ -44,7 +44,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "SUBSCRIBE",
-                Params = [_lk],
+                Params = [_lk ?? TokenLease!.Token.Token],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -55,7 +55,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
             return new BinanceSystemQuery<BinanceSocketQueryResponse>(new BinanceSocketRequest
             {
                 Method = "UNSUBSCRIBE",
-                Params = [_lk],
+                Params = [_lk ?? TokenLease!.Token.Token],
                 Id = ExchangeHelpers.NextId()
             }, false);
         }
@@ -74,7 +74,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -90,7 +90,7 @@ namespace Binance.Net.Objects.Sockets.Subscriptions
                     .WithDataTimestamp(message.Data.EventTime, _client.GetTimeOffset())
                 );
             
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }
