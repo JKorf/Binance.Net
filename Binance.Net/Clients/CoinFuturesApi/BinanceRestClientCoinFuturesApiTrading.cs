@@ -461,185 +461,185 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
-        #region New Conditional Order
+        //#region New Conditional Order
 
-        /// <inheritdoc />
-        public async Task<HttpResult<BinanceFuturesConditionalOrder>> PlaceConditionalOrderAsync(
-            string symbol,
-            Enums.OrderSide side,
-            ConditionalOrderType type,
-            decimal? quantity,
-            decimal? price = null,
-            Enums.PositionSide? positionSide = null,
-            TimeInForce? timeInForce = null,
-            bool? reduceOnly = null,
-            string? clientOrderId = null,
-            decimal? triggerPrice = null,
-            decimal? activationPrice = null,
-            decimal? callbackRate = null,
-            WorkingType? workingType = null,
-            bool? closePosition = null,
-            bool? priceProtect = null,
-            PriceMatch? priceMatch = null,
-            SelfTradePreventionMode? selfTradePreventionMode = null,
-            DateTime? goodTillDate = null,
-            int? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            var clientOrderIdInt = LibraryHelpers.ApplyBrokerId(
-                    clientOrderId,
-                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
-                    36,
-                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
+        ///// <inheritdoc />
+        //public async Task<HttpResult<BinanceFuturesConditionalOrder>> PlaceConditionalOrderAsync(
+        //    string symbol,
+        //    Enums.OrderSide side,
+        //    ConditionalOrderType type,
+        //    decimal? quantity,
+        //    decimal? price = null,
+        //    Enums.PositionSide? positionSide = null,
+        //    TimeInForce? timeInForce = null,
+        //    bool? reduceOnly = null,
+        //    string? clientOrderId = null,
+        //    decimal? triggerPrice = null,
+        //    decimal? activationPrice = null,
+        //    decimal? callbackRate = null,
+        //    WorkingType? workingType = null,
+        //    bool? closePosition = null,
+        //    bool? priceProtect = null,
+        //    PriceMatch? priceMatch = null,
+        //    SelfTradePreventionMode? selfTradePreventionMode = null,
+        //    DateTime? goodTillDate = null,
+        //    int? receiveWindow = null,
+        //    CancellationToken ct = default)
+        //{
+        //    var clientOrderIdInt = LibraryHelpers.ApplyBrokerId(
+        //            clientOrderId,
+        //            LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+        //            36,
+        //            _baseClient.ClientOptions.AllowAppendingClientOrderId);
 
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
-            {
-                { "algoType", "CONDITIONAL" },
-                { "symbol", symbol }
-            };
-            parameters.Add("side", side);
-            parameters.Add("type", type);
-            parameters.Add("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.Add("clientAlgoId", clientOrderIdInt);
-            parameters.Add("price", price?.ToString(CultureInfo.InvariantCulture));
-            parameters.Add("timeInForce", timeInForce);
-            parameters.Add("positionSide", positionSide);
-            parameters.Add("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.Add("activatePrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.Add("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));
-            parameters.Add("workingType", workingType);
-            parameters.Add("reduceOnly", reduceOnly?.ToString().ToLower());
-            parameters.Add("closePosition", closePosition?.ToString().ToLower());
-            parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
-            parameters.Add("priceProtect", priceProtect?.ToString().ToUpper());
-            parameters.Add("priceMatch", priceMatch);
-            parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
-            parameters.Add("goodTillDate", goodTillDate);
+        //    var parameters = new Parameters(BinanceExchange._parameterSerializationSettings)
+        //    {
+        //        { "algoType", "CONDITIONAL" },
+        //        { "symbol", symbol }
+        //    };
+        //    parameters.Add("side", side);
+        //    parameters.Add("type", type);
+        //    parameters.Add("quantity", quantity?.ToString(CultureInfo.InvariantCulture));
+        //    parameters.Add("clientAlgoId", clientOrderIdInt);
+        //    parameters.Add("price", price?.ToString(CultureInfo.InvariantCulture));
+        //    parameters.Add("timeInForce", timeInForce);
+        //    parameters.Add("positionSide", positionSide);
+        //    parameters.Add("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
+        //    parameters.Add("activatePrice", activationPrice?.ToString(CultureInfo.InvariantCulture));
+        //    parameters.Add("callbackRate", callbackRate?.ToString(CultureInfo.InvariantCulture));
+        //    parameters.Add("workingType", workingType);
+        //    parameters.Add("reduceOnly", reduceOnly?.ToString().ToLower());
+        //    parameters.Add("closePosition", closePosition?.ToString().ToLower());
+        //    parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+        //    parameters.Add("priceProtect", priceProtect?.ToString().ToUpper());
+        //    parameters.Add("priceMatch", priceMatch);
+        //    parameters.Add("selfTradePreventionMode", selfTradePreventionMode);
+        //    parameters.Add("goodTillDate", goodTillDate);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "dapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 0, true);
-            var result = await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
-            return result;
-        }
+        //    var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "dapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 0, true);
+        //    var result = await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
+        //    return result;
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Cancel Conditional Order
-        /// <inheritdoc />
-        public async Task<HttpResult<BinanceFuturesConditionalOrder>> CancelConditionalOrderAsync(
-            long? orderId = null,
-            string? clientOrderId = null,
-            long? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            if (clientOrderId != null)
-            {
-                clientOrderId = LibraryHelpers.ApplyBrokerId(
-                    clientOrderId,
-                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
-                    36,
-                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
-            }
+        //#region Cancel Conditional Order
+        ///// <inheritdoc />
+        //public async Task<HttpResult<BinanceFuturesConditionalOrder>> CancelConditionalOrderAsync(
+        //    long? orderId = null,
+        //    string? clientOrderId = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default)
+        //{
+        //    if (clientOrderId != null)
+        //    {
+        //        clientOrderId = LibraryHelpers.ApplyBrokerId(
+        //            clientOrderId,
+        //            LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+        //            36,
+        //            _baseClient.ClientOptions.AllowAppendingClientOrderId);
+        //    }
 
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
-            parameters.Add("algoId", orderId);
-            parameters.Add("clientAlgoId", clientOrderId);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+        //    var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
+        //    parameters.Add("algoId", orderId);
+        //    parameters.Add("clientAlgoId", clientOrderId);
+        //    parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, _baseClient.BaseAddress, "/dapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
-        }
-        #endregion
+        //    var request = _definitions.GetOrCreate(HttpMethod.Delete, _baseClient.BaseAddress, "/dapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+        //    return await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
+        //}
+        //#endregion
 
-        #region Cancel All Conditional Orders
-        /// <inheritdoc />
-        public async Task<HttpResult<BinanceResult>> CancelAllConditionalOrdersAsync(
-            string symbol,
-            long? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
-            parameters.Add("symbol", symbol);
-            parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+        //#region Cancel All Conditional Orders
+        ///// <inheritdoc />
+        //public async Task<HttpResult<BinanceResult>> CancelAllConditionalOrdersAsync(
+        //    string symbol,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default)
+        //{
+        //    var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
+        //    parameters.Add("symbol", symbol);
+        //    parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, _baseClient.BaseAddress, "/dapi/v1/algoOpenOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<BinanceResult>(request, parameters, ct).ConfigureAwait(false);
-        }
-        #endregion
+        //    var request = _definitions.GetOrCreate(HttpMethod.Delete, _baseClient.BaseAddress, "/dapi/v1/algoOpenOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+        //    return await _baseClient.SendAsync<BinanceResult>(request, parameters, ct).ConfigureAwait(false);
+        //}
+        //#endregion
 
-        #region Get Open Conditional Orders
-        /// <inheritdoc />
-        public async Task<HttpResult<BinanceFuturesConditionalOrder[]>> GetOpenConditionalOrdersAsync(
-            string? symbol = null,
-            string? algoType = null,
-            long? orderId = null,
-            long? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
-            parameters.Add("algoType", algoType);
-            parameters.Add("symbol", symbol);
-            parameters.Add("orderId", orderId);
-            parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+        //#region Get Open Conditional Orders
+        ///// <inheritdoc />
+        //public async Task<HttpResult<BinanceFuturesConditionalOrder[]>> GetOpenConditionalOrdersAsync(
+        //    string? symbol = null,
+        //    string? algoType = null,
+        //    long? orderId = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default)
+        //{
+        //    var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
+        //    parameters.Add("algoType", algoType);
+        //    parameters.Add("symbol", symbol);
+        //    parameters.Add("orderId", orderId);
+        //    parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var weight = symbol == null ? 40 : 1;
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/dapi/v1/openAlgoOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<BinanceFuturesConditionalOrder[]>(request, parameters, ct, weight: weight).ConfigureAwait(false);
-        }
-        #endregion
+        //    var weight = symbol == null ? 40 : 1;
+        //    var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/dapi/v1/openAlgoOrders", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+        //    return await _baseClient.SendAsync<BinanceFuturesConditionalOrder[]>(request, parameters, ct, weight: weight).ConfigureAwait(false);
+        //}
+        //#endregion
 
-        #region Get Conditional Order
+        //#region Get Conditional Order
 
-        /// <inheritdoc />
-        public async Task<HttpResult<BinanceFuturesConditionalOrder>> GetConditionalOrderAsync(
-            long? orderId = null,
-            string? clientOrderId = null,
-            long? receiveWindow = null,
-            CancellationToken ct = default)
-        {
+        ///// <inheritdoc />
+        //public async Task<HttpResult<BinanceFuturesConditionalOrder>> GetConditionalOrderAsync(
+        //    long? orderId = null,
+        //    string? clientOrderId = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default)
+        //{
 
-            if (clientOrderId != null)
-            {
-                clientOrderId = LibraryHelpers.ApplyBrokerId(
-                    clientOrderId,
-                    LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
-                    36,
-                    _baseClient.ClientOptions.AllowAppendingClientOrderId);
-            }
+        //    if (clientOrderId != null)
+        //    {
+        //        clientOrderId = LibraryHelpers.ApplyBrokerId(
+        //            clientOrderId,
+        //            LibraryHelpers.GetClientReference(() => _baseClient.ClientOptions.BrokerId, _baseClient.Exchange, "Futures"),
+        //            36,
+        //            _baseClient.ClientOptions.AllowAppendingClientOrderId);
+        //    }
 
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
-            parameters.Add("algoId", orderId);
-            parameters.Add("clientAlgoId", clientOrderId);
-            parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+        //    var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
+        //    parameters.Add("algoId", orderId);
+        //    parameters.Add("clientAlgoId", clientOrderId);
+        //    parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/dapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 1, true);
-            return await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
-        }
-        #endregion
+        //    var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/dapi/v1/algoOrder", BinanceExchange.RateLimiter.FuturesRest, 1, true);
+        //    return await _baseClient.SendAsync<BinanceFuturesConditionalOrder>(request, parameters, ct).ConfigureAwait(false);
+        //}
+        //#endregion
 
-        #region Get Conditional Orders
-        /// <inheritdoc />
-        public async Task<HttpResult<BinanceFuturesConditionalOrder[]>> GetConditionalOrdersAsync(
-            string symbol,
-            long? orderId = null,
-            DateTime? startTime = null,
-            DateTime? endTime = null,
-            int? page = null,
-            int? limit = null,
-            long? receiveWindow = null,
-            CancellationToken ct = default)
-        {
-            var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
-            parameters.Add("symbol", symbol);
-            parameters.Add("orderId", orderId);
-            parameters.Add("startTime", startTime);
-            parameters.Add("endTime", endTime);
-            parameters.Add("page", page);
-            parameters.Add("limit", limit);
-            parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
+        //#region Get Conditional Orders
+        ///// <inheritdoc />
+        //public async Task<HttpResult<BinanceFuturesConditionalOrder[]>> GetConditionalOrdersAsync(
+        //    string symbol,
+        //    long? orderId = null,
+        //    DateTime? startTime = null,
+        //    DateTime? endTime = null,
+        //    int? page = null,
+        //    int? limit = null,
+        //    long? receiveWindow = null,
+        //    CancellationToken ct = default)
+        //{
+        //    var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);;
+        //    parameters.Add("symbol", symbol);
+        //    parameters.Add("orderId", orderId);
+        //    parameters.Add("startTime", startTime);
+        //    parameters.Add("endTime", endTime);
+        //    parameters.Add("page", page);
+        //    parameters.Add("limit", limit);
+        //    parameters.Add("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/dapi/v1/allAlgoOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
-            return await _baseClient.SendAsync<BinanceFuturesConditionalOrder[]>(request, parameters, ct).ConfigureAwait(false);
-        }
-        #endregion
+        //    var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/dapi/v1/allAlgoOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
+        //    return await _baseClient.SendAsync<BinanceFuturesConditionalOrder[]>(request, parameters, ct).ConfigureAwait(false);
+        //}
+        //#endregion
     }
 }
