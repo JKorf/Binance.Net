@@ -11,22 +11,22 @@ namespace Binance.Net.Enums
         /// <summary>
         /// ["<c>SPOT</c>"] Spot account type
         /// </summary>
-        [Map("SPOT")]
+        [Map("SPOT", "spot")]
         Spot,
         /// <summary>
         /// ["<c>MARGIN</c>"] Margin account type
         /// </summary>>
-        [Map("MARGIN")]
+        [Map("MARGIN", "margin")]
         Margin,
         /// <summary>
         /// ["<c>FUTURES</c>"] Futures account type
         /// </summary>
-        [Map("FUTURES")]
+        [Map("FUTURES", "futures")]
         Futures,
         /// <summary>
         /// ["<c>LEVERAGED</c>"] Leveraged account type
         /// </summary>
-        [Map("LEVERAGED")]
+        [Map("LEVERAGED", "leveraged")]
         Leveraged
     }
 }
