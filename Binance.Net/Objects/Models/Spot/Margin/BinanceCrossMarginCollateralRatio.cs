@@ -11,6 +11,18 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// </summary>
         [JsonPropertyName("collaterals")]
         public BinanceCrossMarginCollateral[] Collaterals { get; set; } = Array.Empty<BinanceCrossMarginCollateral>();
+
+        /// <summary>
+        /// ["<c>withdrawCollaterals</c>"] Withdraw collaterals
+        /// </summary>
+        [JsonPropertyName("withdrawCollaterals")]
+        public BinanceCrossMarginCollateral[] WithdrawCollaterals { get; set; } = Array.Empty<BinanceCrossMarginCollateral>();
+
+        /// <summary>
+        /// ["<c>borrowCollaterals</c>"] Borrow collaterals
+        /// </summary>
+        [JsonPropertyName("borrowCollaterals")]
+        public BinanceCrossMarginCollateral[] BorrowCollaterals { get; set; } = Array.Empty<BinanceCrossMarginCollateral>();
         /// <summary>
         /// ["<c>assetNames</c>"] Asset names
         /// </summary>
