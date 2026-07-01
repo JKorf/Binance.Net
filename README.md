@@ -241,6 +241,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 13.0.1 - 01 Jul 2026
+    * Updated CryptoExchange.Net to V12.0.2
+    * Added lower case value mapping for AccountType and FuturesMarginType enums
+    * Added WithdrawCollaterals, BorrowCollaterals to BinanceCrossMarginCollateralRatio model
+    * Added TieredLiquidationRatio to BinancePortfolioMarginCollateralRate model
+    * Added IsPublic to BinanceIsolatedMarginTierData
+    * Updated GetFiatPaymentHistoryAsync to return empty array if no results
+    * Fixed websocket request signing issue
+
 * Version 13.0.0 - 29 Jun 2026
     * Result types:
       * (Web)CallResult types are replaced by HttpResult, WebSocketResult and QueryResult with the same logic
