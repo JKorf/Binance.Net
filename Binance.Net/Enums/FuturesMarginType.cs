@@ -11,7 +11,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// ["<c>ISOLATED</c>"] Isolated margin
         /// </summary>
-        [Map("ISOLATED")]
+        [Map("ISOLATED", "isolated")]
         Isolated,
         /// <summary>
         /// Crossed margin

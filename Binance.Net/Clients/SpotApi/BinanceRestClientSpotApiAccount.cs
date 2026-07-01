@@ -56,7 +56,7 @@ namespace Binance.Net.Clients.SpotApi
             if (!result.Success)
                 return HttpResult.Fail<BinanceFiatPayment[]>(result);
 
-            return HttpResult.Ok(result, result.Data.Data);
+            return HttpResult.Ok(result, result.Data.Data ?? []);
         }
 
         #endregion

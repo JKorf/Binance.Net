@@ -41,6 +41,11 @@ namespace Binance.Net.Objects.Models.Spot.Margin
         /// </summary>
         [JsonPropertyName("quoteAssetMaxBorrowable")]
         public decimal QuoteAssetMaxBorrowable { get; set; }
+        /// <summary>
+        /// ["<c>isPublic</c>"] Is public
+        /// </summary>
+        [JsonPropertyName("isPublic")]
+        public bool IsPublic { get; set; }
     }
 }
 
