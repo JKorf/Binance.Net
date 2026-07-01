@@ -46,7 +46,13 @@ namespace Binance.Net
 
         public Parameters ProcessRequest(SocketApiClient apiClient, Parameters? providedParameters)
         {
-            var parameters = providedParameters ?? new Parameters(BinanceExchange._parameterSerializationSettings);
+            var parameters = new Parameters(BinanceExchange._socketParameterSignSettings);
+            if (providedParameters?.Count > 0)
+            {
+                foreach (var param in providedParameters)
+                    parameters.AddRaw(param.Key, param.Value);
+            }
+
             parameters.Add("apiKey", ApiCredentials.Credential!.Key);
             parameters.Add("timestamp", GetMillisecondTimestampLong(apiClient));
             var paramString = string.Join("&", parameters.Select(p => p.Key + "=" + Convert.ToString(p.Value, CultureInfo.InvariantCulture)));
