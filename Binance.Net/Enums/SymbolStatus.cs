@@ -72,7 +72,12 @@ namespace Binance.Net.Enums
         /// ["<c>SETTLING</c>"] Settings
         /// </summary>
         [Map("SETTLING")]
-        Settling
+        Settling,
+        /// <summary>
+        /// ["<c>CANCEL_ONLY</c>"] Only cancel orders is allowed
+        /// </summary>
+        [Map("CANCEL_ONLY")]
+        CancelOnly
     }
 }
 
