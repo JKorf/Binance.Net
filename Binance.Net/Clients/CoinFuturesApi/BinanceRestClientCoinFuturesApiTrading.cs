@@ -2,6 +2,7 @@
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Objects.Models;
 using Binance.Net.Objects.Models.Futures;
+using Binance.Net.Objects.Models.Futures.AlgoOrders;
 using CryptoExchange.Net.Objects.Errors;
 using System.Text.Json;
 

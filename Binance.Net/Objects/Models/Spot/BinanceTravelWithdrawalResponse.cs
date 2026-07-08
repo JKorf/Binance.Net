@@ -11,9 +11,9 @@ namespace Binance.Net.Objects.Models.Spot
         [JsonPropertyName("trId")]
         public long TravelRuleId { get; set; }
         /// <summary>
-        /// ["<c>accpted</c>"] Accepted
+        /// ["<c>accepted</c>"] Accepted
         /// </summary>
-        [JsonPropertyName("accpted")]
+        [JsonPropertyName("accepted")]
         public bool Accepted { get; set; }
         /// <summary>
         /// ["<c>info</c>"] Info
