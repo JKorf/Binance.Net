@@ -1,6 +1,6 @@
 GET
 /sapi/v1/margin/crossMarginCollateralRatio
-false
+true
 [
   {
     "collaterals": [
