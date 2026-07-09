@@ -241,6 +241,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 13.1.0 - 09 Jul 2026
+    * Updated CryptoExchange.Net to v12.1.0
+    * Added CancelOnly to SymbolStatus enum
+    * Added CoinM conditional order endpoints
+    * Fixed typo in Accepeted deserialization in BinanceTravelWithdrawalResponse model
+
 * Version 13.0.1 - 01 Jul 2026
     * Updated CryptoExchange.Net to V12.0.2
     * Added lower case value mapping for AccountType and FuturesMarginType enums
