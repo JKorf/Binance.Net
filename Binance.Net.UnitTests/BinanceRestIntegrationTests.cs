@@ -131,16 +131,16 @@ namespace Binance.Net.UnitTests
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetPriceAsync("ETHUSDT", CancellationToken.None), false);
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetPricesAsync(null, CancellationToken.None), false);
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetBookPriceAsync("ETHUSDT", CancellationToken.None), false);
-            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginAssetsAsync(null, CancellationToken.None), false);
-            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginSymbolsAsync(null, CancellationToken.None), false);
-            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginPriceIndexAsync("ETHUSDT", CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginAssetsAsync(null, CancellationToken.None), true);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginSymbolsAsync(null, CancellationToken.None), true);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginPriceIndexAsync("ETHUSDT", CancellationToken.None), true);
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetIsolatedMarginSymbolsAsync("ETHUSDT", 5000, CancellationToken.None), true);
-            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync(null, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetCrossMarginCollateralRatioAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(new[] { "ETH" }, false, null, CancellationToken.None), true);
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetIsolatedMarginTierDataAsync("ETHUSDT", default, default, default), true);
-            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(null, CancellationToken.None), true);
             await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetConvertListAllPairsAsync(null, null, CancellationToken.None), false);
-            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetDelistScheduleAsync(null, CancellationToken.None), false);
+            await RunAndCheckResult(warnings, client => client.SpotApi.ExchangeData.GetDelistScheduleAsync(null, CancellationToken.None), true);
 
             foreach (var warning in warnings)
                 Assert.Warn(warning.Message);

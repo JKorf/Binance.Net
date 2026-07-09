@@ -501,7 +501,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("asset", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/allAssets", BinanceExchange.RateLimiter.SpotRestIp, 1);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/allAssets", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceMarginAsset[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -514,7 +514,7 @@ namespace Binance.Net.Clients.SpotApi
         {
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/allPairs", BinanceExchange.RateLimiter.SpotRestIp, 1);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/allPairs", BinanceExchange.RateLimiter.SpotRestIp, 1, true);
             return await _baseClient.SendAsync<BinanceMarginPair[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -531,7 +531,7 @@ namespace Binance.Net.Clients.SpotApi
                 {"symbol", symbol}
             };
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/priceIndex", BinanceExchange.RateLimiter.SpotRestIp, 10);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/priceIndex", BinanceExchange.RateLimiter.SpotRestIp, 10, true);
             return await _baseClient.SendAsync<BinanceMarginPriceIndex>(request, parameters, ct).ConfigureAwait(false);
         }
         #endregion
@@ -589,7 +589,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/crossMarginCollateralRatio", BinanceExchange.RateLimiter.SpotRestIp, 100, false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/crossMarginCollateralRatio", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
             return await _baseClient.SendAsync<BinanceCrossMarginCollateralRatio[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -621,7 +621,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/delist-schedule", BinanceExchange.RateLimiter.SpotRestIp, 100);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/delist-schedule", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
             return await _baseClient.SendAsync<BinanceMarginDelistSchedule[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -709,7 +709,7 @@ namespace Binance.Net.Clients.SpotApi
             var parameters = new Parameters(BinanceExchange._parameterSerializationSettings);
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/spot/delist-schedule", BinanceExchange.RateLimiter.SpotRestIp, 100);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/spot/delist-schedule", BinanceExchange.RateLimiter.SpotRestIp, 100, true);
             return await _baseClient.SendAsync<BinanceDelistSchedule[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
