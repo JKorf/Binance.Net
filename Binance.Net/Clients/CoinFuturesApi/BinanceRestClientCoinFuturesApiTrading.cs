@@ -412,7 +412,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
 
-            var weight = symbol == null ? 40 : 20;
             var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "dapi/v1/allOrders", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             return await _baseClient.SendAsync<BinanceFuturesOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -455,7 +454,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
-            var weight = symbol == null ? 40 : 20;
             var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "dapi/v1/userTrades", BinanceExchange.RateLimiter.FuturesRest, 5, true);
             return await _baseClient.SendAsync<BinanceFuturesCoinTrade[]>(request, parameters, ct).ConfigureAwait(false);
         }
