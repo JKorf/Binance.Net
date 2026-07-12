@@ -1,10 +1,16 @@
-﻿using Binance.Net.Converters;
+﻿using Binance.Net.Clients;
+using Binance.Net.Converters;
+using Binance.Net.Enums;
+using Binance.Net.Objects.Models.Futures;
+using Binance.Net.Objects.Models.Spot;
+using CryptoExchange.Net.Caching;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.SharedApis.Models;
 
 namespace Binance.Net
 {
@@ -109,6 +115,128 @@ namespace Binance.Net
         /// Rate limiter configuration for the Binance API
         /// </summary>
         public static BinanceRateLimiters RateLimiter { get; set; } = new BinanceRateLimiters();
+
+        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["USD", "EUR"];
+
+#warning these should be in the shared interfaces
+        public static BinanceExchangeInfo? _spotExchangeInfo;
+        public static BinanceFuturesUsdtExchangeInfo? _usdtFuturesExchangeInfo;
+        public static BinanceProduct[]? _products;
+        public static ExchangeCache Cache { get; } = new ExchangeCache(
+            new CacheItemDefinition<SharedExchangeInfo>
+            {
+                Key = "Binance.Spot.live.ExchangeInfo",
+                Ttl = TimeSpan.FromMinutes(5),
+                ValueFactory = async () =>
+                {
+                    SharedAssetInfo MapAsset(string name, BinanceProduct[] products)
+                    {
+                        var product = products.FirstOrDefault(p => p.BaseAsset == name);
+                        if (product?.Tags.Contains("bStocks", StringComparer.InvariantCultureIgnoreCase) == true)
+                            return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Stock);
+
+                        if (product?.Tags.Contains("tCommodities", StringComparer.InvariantCultureIgnoreCase) == true)
+                            return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Commodity);
+
+                        // Stablecoins / Fiat
+                        if (LibraryHelpers.IsStableCoin(name))
+                            return new SharedAssetInfo(name, SharedAssetType.Crypto, SharedAssetSubType.StableCoin);
+
+                        if (_exchangeSupportedFiatCurrencies.Contains(name))
+                            return new SharedAssetInfo(name, SharedAssetType.Fiat, null);
+
+                        return new SharedAssetInfo(name, SharedAssetType.Crypto, null);
+                    }
+
+                    using var client = new BinanceRestClient();
+                    var tasks = new List<Task>();
+                    if (_spotExchangeInfo == null)
+                        tasks.Add(client.SpotApi.ExchangeData.GetExchangeInfoAsync(false, Enums.SymbolStatus.Trading));
+                    if (_products == null)
+                        tasks.Add(client.SpotApi.ExchangeData.GetProductsAsync());
+                    await Task.WhenAll(tasks).ConfigureAwait(false);
+
+                    if (_spotExchangeInfo == null || _products == null)
+                        throw new Exception($"Failed to retrieve exchange info");
+
+                    var exchangeInfo = new SharedExchangeInfo();
+                    foreach(var symbol in _spotExchangeInfo.Symbols)
+                    {
+                        if (!exchangeInfo.Assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo))
+                        {
+                            baseAssetInfo = MapAsset(symbol.BaseAsset, _products);
+                            exchangeInfo.Assets.Add(symbol.BaseAsset, baseAssetInfo);
+                        }
+                        if (!exchangeInfo.Assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo))
+                        {
+                            quoteAssetInfo = MapAsset(symbol.QuoteAsset, _products);
+                            exchangeInfo.Assets.Add(symbol.QuoteAsset, quoteAssetInfo);
+                        }
+
+                        exchangeInfo.Symbols.Add(symbol.Name, new SharedSymbolInfo(symbol.Name, baseAssetInfo, quoteAssetInfo));
+                    }
+
+                    return exchangeInfo;
+                },
+            },
+            new CacheItemDefinition<SharedExchangeInfo>
+            {
+                Key = "Binance.UsdtFutures.live.ExchangeInfo",
+                Ttl = TimeSpan.FromMinutes(5),
+                ValueFactory = async () =>
+                {
+                    SharedAssetInfo MapAsset(BinanceFuturesUsdtSymbol symbol)
+                    {
+                        if (symbol.ContractType == ContractType.PerpetualTradFi)
+                        {
+                            if (symbol.UnderlyingType == UnderlyingType.Commodity)
+                                return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Rwa, SharedAssetSubType.Commodity);
+
+                            if (symbol.UnderlyingType == UnderlyingType.Equity
+                            || symbol.UnderlyingType == UnderlyingType.KrEquity
+                            || symbol.UnderlyingType == UnderlyingType.PreMarket)
+                                return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Rwa, SharedAssetSubType.Stock);
+
+                            return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Rwa, null);
+                        }
+
+                        if (symbol.UnderlyingType == UnderlyingType.Coin || symbol.UnderlyingType == UnderlyingType.Index)
+                            return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Crypto, null);
+
+                        return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Unspecified, null);
+                    }
+
+                    using var client = new BinanceRestClient();
+                    var tasks = new List<Task>();
+                    if (_usdtFuturesExchangeInfo == null)
+                        tasks.Add(client.UsdFuturesApi.ExchangeData.GetExchangeInfoAsync());
+                    await Task.WhenAll(tasks).ConfigureAwait(false);
+
+                    if (_usdtFuturesExchangeInfo == null)
+                        throw new Exception($"Failed to retrieve exchange info");
+
+                    var exchangeInfo = new SharedExchangeInfo();
+                    foreach (var symbol in _usdtFuturesExchangeInfo.Symbols)
+                    {
+                        if (!exchangeInfo.Assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo))
+                        {
+                            baseAssetInfo = MapAsset(symbol);
+                            exchangeInfo.Assets.Add(symbol.BaseAsset, baseAssetInfo);
+                        }
+
+                        if (!exchangeInfo.Assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo))
+                        {
+                            quoteAssetInfo = new SharedAssetInfo(symbol.QuoteAsset, SharedAssetType.Crypto, SharedAssetSubType.StableCoin);
+                            exchangeInfo.Assets.Add(symbol.QuoteAsset, quoteAssetInfo);
+                        }
+
+                        exchangeInfo.Symbols.Add(symbol.Name, new SharedSymbolInfo(symbol.Name, baseAssetInfo, quoteAssetInfo));
+                    }
+
+                    return exchangeInfo;
+                },
+            }
+        );
     }
 
     /// <summary>

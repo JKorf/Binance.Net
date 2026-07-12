@@ -4,6 +4,7 @@ using Binance.Net.Interfaces.Clients.UsdFuturesApi;
 using Binance.Net.Objects.Models.Futures;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.SharedApis.Models;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
@@ -130,15 +131,37 @@ namespace Binance.Net.Clients.UsdFuturesApi
             if (!result.Success)
                 return HttpResult.Fail<SharedFuturesSymbol[]>(result);
 
+            BinanceExchange._usdtFuturesExchangeInfo = result.Data;
+            var exchangeInfo = await BinanceExchange.Cache.GetAsync<SharedExchangeInfo>("Binance.UsdtFutures.live.ExchangeInfo").ConfigureAwait(false);
+
             var data = result.Data.Symbols.Where(x => x.ContractType != null);
+            var resultData = data.Select(x => ParseSymbol(x, exchangeInfo));
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData.ToArray());
+
             if (request.TradingMode != null)
-                data = data.Where(x => FilterContractType(request.TradingMode.Value, x.ContractType!.Value));
-            var resultData = data.Select(s =>
-            new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualLinear : TradingMode.DeliveryLinear,
-            s.BaseAsset,
-            s.QuoteAsset,
-            s.Name,
-            s.Status == SymbolStatus.Trading)
+                resultData = resultData.Where(x => x.TradingMode == request.TradingMode);
+            if (request.BaseAssetType != null)
+                resultData = resultData.Where(x => x.BaseAssetType == request.BaseAssetType);
+            if (request.QuoteAssetType != null)
+                resultData = resultData.Where(x => x.QuoteAssetType == request.QuoteAssetType);
+            if (request.BaseAssetSubType != null)
+                resultData = resultData.Where(x => x.BaseAssetSubType == request.BaseAssetSubType);
+            if (request.QuoteAssetSubType != null)
+                resultData = resultData.Where(x => x.QuoteAssetSubType == request.QuoteAssetSubType);
+
+            return HttpResult.Ok(result, resultData.ToArray());
+
+        }
+
+        private SharedFuturesSymbol ParseSymbol(BinanceFuturesUsdtSymbol s, SharedExchangeInfo exchangeInfo)
+        {
+            exchangeInfo.Assets.TryGetValue(s.BaseAsset, out var baseAssetInfo);
+            exchangeInfo.Assets.TryGetValue(s.QuoteAsset, out var quoteAssetInfo);
+            return new SharedFuturesSymbol(s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualLinear : TradingMode.DeliveryLinear,
+                s.BaseAsset,
+                s.QuoteAsset,
+                s.Name,
+                s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
@@ -146,21 +169,13 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 PriceStep = s.PriceFilter?.TickSize,
                 MinNotionalValue = s.MinNotionalFilter?.MinNotional,
                 ContractSize = 1,
-                DeliveryTime = s.DeliveryDate.Year == 2100 ? null : s.DeliveryDate
-            }).ToArray();
-
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData);
-            return HttpResult.Ok(result, resultData);
-
-        }
-
-        private bool FilterContractType(TradingMode mode, ContractType type)
-        {
-            var isPerp = type == ContractType.Perpetual || type == ContractType.PerpetualDelivering || type == ContractType.PerpetualTradFi;
-            if (mode == TradingMode.PerpetualLinear)
-                return isPerp;
-
-            return !isPerp;
+                DeliveryTime = s.DeliveryDate.Year == 2100 ? null : s.DeliveryDate,
+                BaseAssetType = baseAssetInfo?.Type ?? SharedAssetType.Unspecified,
+                BaseAssetSubType = baseAssetInfo?.SubType,
+                QuoteAssetType = quoteAssetInfo?.Type ?? SharedAssetType.Unspecified,
+                QuoteAssetSubType = quoteAssetInfo?.SubType,
+                DisplayName = s.Name
+            };
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsForBaseAssetAsync(string baseAsset)
