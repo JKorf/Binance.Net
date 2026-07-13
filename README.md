@@ -241,6 +241,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 13.1.1 - 13 Jul 2026
+    * Combined request rate limit for coin and usdt futures
+    * Updated Usdt futures GetFundingInfoAsync and GetBasisAsync endpoint weight from 0 to 1
+    * Fixed exception during authentication when retrying requests
+
 * Version 13.1.0 - 09 Jul 2026
     * Updated CryptoExchange.Net to v12.1.0
     * Added CancelOnly to SymbolStatus enum
