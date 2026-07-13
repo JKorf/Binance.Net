@@ -129,7 +129,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         /// <inheritdoc />
         public async Task<HttpResult<BinanceFuturesFundingInfo[]>> GetFundingInfoAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/fundingInfo", BinanceExchange.RateLimiter.FuturesRest, 0);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "fapi/v1/fundingInfo", BinanceExchange.RateLimiter.FuturesRest, 1);
             return await _baseClient.SendAsync<BinanceFuturesFundingInfo[]>(request, null, ct).ConfigureAwait(false);
         }
 
@@ -586,7 +586,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             parameters.Add("startTime", startTime);
             parameters.Add("endTime", endTime);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "futures/data/basis", BinanceExchange.RateLimiter.FuturesRest, 0);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "futures/data/basis", BinanceExchange.RateLimiter.FuturesRest, 1);
             return await _baseClient.SendAsync<BinanceFuturesBasis[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
