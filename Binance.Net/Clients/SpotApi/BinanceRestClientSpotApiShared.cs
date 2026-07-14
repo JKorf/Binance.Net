@@ -4,6 +4,7 @@ using Binance.Net.Objects.Models.Spot;
 using CryptoExchange.Net.Caching;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 
 namespace Binance.Net.Clients.SpotApi
@@ -18,75 +19,9 @@ namespace Binance.Net.Clients.SpotApi
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticExchangeParameters(Exchange);
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BinanceExchange.Metadata, this);
 
-#warning move to public central location
-        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["USD", "EUR"];
-        private static BinanceExchangeInfo? _spotExchangeInfo;
-        private static BinanceProduct[]? _products;
-        private static ExchangeCache Cache { get; } = new ExchangeCache(
-            new CacheItemDefinition<SharedSymbolCatalog>
-            {
-                Key = "Binance.Spot.ExchangeInfo",
-                Ttl = TimeSpan.FromMinutes(5),
-                ValueFactory = () => GetExchangeInfoAsync()
-            }
-        );
-
-        private static async Task<SharedSymbolCatalog> GetExchangeInfoAsync()
-        {
-            SharedAssetInfo MapAsset(string name)
-            {
-                var product = _products.FirstOrDefault(p => p.BaseAsset == name);
-                if (product?.Tags.Contains("bStocks", StringComparer.InvariantCultureIgnoreCase) == true)
-                    return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Stock);
-
-                if (product?.Tags.Contains("tCommodities", StringComparer.InvariantCultureIgnoreCase) == true)
-                    return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Commodity);
-
-                // Stablecoins / Fiat
-                if (LibraryHelpers.IsStableCoin(name))
-                    return new SharedAssetInfo(name, SharedAssetType.Crypto, SharedAssetSubType.StableCoin);
-
-                if (_exchangeSupportedFiatCurrencies.Contains(name))
-                    return new SharedAssetInfo(name, SharedAssetType.Fiat, null);
-
-                return new SharedAssetInfo(name, SharedAssetType.Crypto, null);
-            }
-
-            using var client = new BinanceRestClient();
-            var tasks = new List<Task>();
-            if (_spotExchangeInfo == null)
-                tasks.Add(client.SpotApi.ExchangeData.GetExchangeInfoAsync(false, Enums.SymbolStatus.Trading));
-            if (_products == null)
-                tasks.Add(client.SpotApi.ExchangeData.GetProductsAsync());
-            await Task.WhenAll(tasks).ConfigureAwait(false);
-
-            if (_spotExchangeInfo == null || _products == null)
-                throw new Exception($"Failed to retrieve exchange info");
-
-            var assets = new Dictionary<string, SharedAssetInfo>();
-            var symbols = new Dictionary<string, SharedSymbolInfo>();
-            foreach (var symbol in _spotExchangeInfo.Symbols)
-            {
-                if (!assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo))
-                {
-                    baseAssetInfo = MapAsset(symbol.BaseAsset);
-                    assets.Add(symbol.BaseAsset, baseAssetInfo);
-                }
-                if (!assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo))
-                {
-                    quoteAssetInfo = MapAsset(symbol.QuoteAsset);
-                    assets.Add(symbol.QuoteAsset, quoteAssetInfo);
-                }
-
-                symbols.Add(symbol.Name, new SharedSymbolInfo(symbol.Name, baseAssetInfo, quoteAssetInfo));
-            }
-
-            return new SharedSymbolCatalog
-            {
-                Assets = assets,
-                Symbols = symbols
-            };
-        }
+        private static ConcurrentDictionary<string, SharedSymbolCatalog> _exchangeInfoCache = new ConcurrentDictionary<string, SharedSymbolCatalog>();
+        private static ConcurrentDictionary<string, SemaphoreSlim> _exchangeInfoLocks = new ConcurrentDictionary<string, SemaphoreSlim>();
+        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["AED", "ARS", "BRL", "COP", "EUR", "JPY", "KZT", "MXN", "UAH", "ZAR"];
 
         #region Klines Client
 
@@ -140,7 +75,7 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Spot Symbol client
-        SharedSymbolCatalog? ISpotSymbolRestClient.SymbolCatalog => Cache.Get<SharedSymbolCatalog?>("Binance.Spot.live.ExchangeInfo");
+        SharedSymbolCatalog? ISpotSymbolRestClient.SymbolCatalog => _exchangeInfoCache.TryGetValue(EnvironmentName, out var cache) ? cache : null;
 
         GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
             = new GetSpotSymbolsOptions(_exchangeName, false);
@@ -151,18 +86,41 @@ namespace Binance.Net.Clients.SpotApi
             if (validationError != null)
                 return HttpResult.Fail<SharedSpotSymbol[]>(Exchange, validationError);
 
-            var resultEx = ExchangeData.GetExchangeInfoAsync(false, SymbolStatus.Trading, ct: ct);
-            var resultPr = ExchangeData.GetProductsAsync(ct: ct);
-            await Task.WhenAll(resultEx, resultPr).ConfigureAwait(false);
-            if (!resultEx.Result.Success)
-                return HttpResult.Fail<SharedSpotSymbol[]>(resultEx.Result);
+            var exchangeInfo = await ExchangeData.GetExchangeInfoAsync(false, SymbolStatus.Trading, ct: ct).ConfigureAwait(false);
+            if (!exchangeInfo.Success)
+                return HttpResult.Fail<SharedSpotSymbol[]>(exchangeInfo);
 
-            _products = resultPr.Result.Data;
-            _spotExchangeInfo = resultEx.Result.Data;
+            if (!_exchangeInfoCache.TryGetValue(EnvironmentName, out var catalog)
+                || ExchangeInfoChanged(catalog, exchangeInfo.Data))
+            {
+                var locker = _exchangeInfoLocks.GetOrAdd(EnvironmentName, x => new SemaphoreSlim(1, 1));
+                await locker.WaitAsync(ct).ConfigureAwait(false);
+                try
+                {
+                    // Another thread might've already retrieved it while waiting for the lock
+                    _exchangeInfoCache.TryGetValue(EnvironmentName, out var currentCatalog);
+                    if (currentCatalog == null || ReferenceEquals(currentCatalog, catalog)) // Still the same catalog so try to update it
+                    {
+                        var products = await ExchangeData.GetProductsAsync(ct: ct).ConfigureAwait(false);
+                        if (!products.Success)
+                            _logger.LogWarning("Failed to retrieve product info for {Exchange} ({EnvironmentName}): {Error}", Exchange, EnvironmentName, products.Error);
+                        
+                        catalog = CreateCatalog(exchangeInfo.Data, products.Data);
+                        if (products.Success)
+                            _exchangeInfoCache[EnvironmentName] = catalog;
+                    }
+                    else
+                    {
+                        catalog = currentCatalog;
+                    }
+                }
+                finally
+                {
+                    locker.Release();
+                }
+            }
 
-            var exchangeInfo = await Cache.GetOrRetrieveAsync<SharedSymbolCatalog>("Binance.Spot.live.ExchangeInfo").ConfigureAwait(false);
-
-            var resultData = resultEx.Result.Data.Symbols.Select(x => ParseSymbol(x, exchangeInfo));
+            var resultData = exchangeInfo.Data.Symbols.Select(x => ParseSymbol(x, catalog));
             ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData.ToArray());
             if (request.BaseAssetType != null)
                 resultData = resultData.Where(x => x.BaseAssetType == request.BaseAssetType);
@@ -173,14 +131,28 @@ namespace Binance.Net.Clients.SpotApi
             if (request.QuoteAssetSubType != null)
                 resultData = resultData.Where(x => x.QuoteAssetSubType == request.QuoteAssetSubType);
 
-            return HttpResult.Ok(resultEx.Result, resultData.ToArray());
+            return HttpResult.Ok(exchangeInfo, resultData.ToArray());
 
         }
 
-        private SharedSpotSymbol ParseSymbol(BinanceSymbol symbol, SharedSymbolCatalog exchangeInfo)
+        private bool ExchangeInfoChanged(SharedSymbolCatalog catalog, BinanceExchangeInfo data)
         {
-            exchangeInfo.Assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo);
-            exchangeInfo.Assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo);
+            if (catalog.Symbols.Count != data.Symbols.Length)
+                return true;
+
+            foreach (var symbol in data.Symbols)
+            {
+                if (!catalog.Symbols.ContainsKey(symbol.Name))
+                    return true;
+            }
+
+            return false;
+        }
+
+        private SharedSpotSymbol ParseSymbol(BinanceSymbol symbol, SharedSymbolCatalog? exchangeInfo)
+        {
+            var baseAssetInfo = exchangeInfo?.Assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfoResult) == true ? baseAssetInfoResult : null;
+            var quoteAssetInfo = exchangeInfo?.Assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfoResult) == true ? quoteAssetInfoResult : null;
             return new SharedSpotSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.Name, symbol.Status == SymbolStatus.Trading && symbol.IsSpotTradingAllowed)
             {
                 MinTradeQuantity = symbol.LotSizeFilter?.MinQuantity,
@@ -194,6 +166,56 @@ namespace Binance.Net.Clients.SpotApi
                 QuoteAssetType = quoteAssetInfo?.Type ?? SharedAssetType.Unspecified,
                 QuoteAssetSubType = quoteAssetInfo?.SubType
             };
+        }
+
+        private SharedSymbolCatalog CreateCatalog(BinanceExchangeInfo exchangeInfo, BinanceProduct[]? products)
+        {
+            SharedAssetInfo MapAsset(string name)
+            {
+                var product = products?.FirstOrDefault(p => p.BaseAsset == name);
+                if (product?.Tags.Contains("bStocks", StringComparer.InvariantCultureIgnoreCase) == true)
+                    return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Stock);
+
+                if (product?.Tags.Contains("tCommodities", StringComparer.InvariantCultureIgnoreCase) == true)
+                    return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Commodity);
+
+                // Stablecoins / Fiat
+                if (LibraryHelpers.IsStableCoin(name))
+                    return new SharedAssetInfo(name, SharedAssetType.Crypto, SharedAssetSubType.StableCoin);
+
+                if (_exchangeSupportedFiatCurrencies.Contains(name))
+                    return new SharedAssetInfo(name, SharedAssetType.Fiat, null);
+
+                if (products == null)
+                    return new SharedAssetInfo(name, SharedAssetType.Unspecified, null);
+
+                return new SharedAssetInfo(name, SharedAssetType.Crypto, null);
+            }
+
+            var assets = new Dictionary<string, SharedAssetInfo>();
+            var symbols = new Dictionary<string, SharedSymbolInfo>();
+            foreach (var symbol in exchangeInfo.Symbols)
+            {
+                if (!assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo))
+                {
+                    baseAssetInfo = MapAsset(symbol.BaseAsset);
+                    assets.Add(symbol.BaseAsset, baseAssetInfo);
+                }
+                if (!assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo))
+                {
+                    quoteAssetInfo = MapAsset(symbol.QuoteAsset);
+                    assets.Add(symbol.QuoteAsset, quoteAssetInfo);
+                }
+
+                symbols.Add(symbol.Name, new SharedSymbolInfo(symbol.Name, baseAssetInfo, quoteAssetInfo));
+            }
+
+            var catalog = new SharedSymbolCatalog
+            {
+                Assets = assets,
+                Symbols = symbols
+            };
+            return catalog;
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsForBaseAssetAsync(string baseAsset)
