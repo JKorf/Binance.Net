@@ -1,9 +1,10 @@
 using Binance.Net.Enums;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Objects.Models.Spot;
+using CryptoExchange.Net.Caching;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.SharedApis.Models;
+using System.Diagnostics;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -16,6 +17,76 @@ namespace Binance.Net.Clients.SpotApi
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticExchangeParameters(Exchange);
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BinanceExchange.Metadata, this);
+
+#warning move to public central location
+        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["USD", "EUR"];
+        private static BinanceExchangeInfo? _spotExchangeInfo;
+        private static BinanceProduct[]? _products;
+        private static ExchangeCache Cache { get; } = new ExchangeCache(
+            new CacheItemDefinition<SharedSymbolCatalog>
+            {
+                Key = "Binance.Spot.ExchangeInfo",
+                Ttl = TimeSpan.FromMinutes(5),
+                ValueFactory = () => GetExchangeInfoAsync()
+            }
+        );
+
+        private static async Task<SharedSymbolCatalog> GetExchangeInfoAsync()
+        {
+            SharedAssetInfo MapAsset(string name)
+            {
+                var product = _products.FirstOrDefault(p => p.BaseAsset == name);
+                if (product?.Tags.Contains("bStocks", StringComparer.InvariantCultureIgnoreCase) == true)
+                    return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Stock);
+
+                if (product?.Tags.Contains("tCommodities", StringComparer.InvariantCultureIgnoreCase) == true)
+                    return new SharedAssetInfo(name, SharedAssetType.Rwa, SharedAssetSubType.Commodity);
+
+                // Stablecoins / Fiat
+                if (LibraryHelpers.IsStableCoin(name))
+                    return new SharedAssetInfo(name, SharedAssetType.Crypto, SharedAssetSubType.StableCoin);
+
+                if (_exchangeSupportedFiatCurrencies.Contains(name))
+                    return new SharedAssetInfo(name, SharedAssetType.Fiat, null);
+
+                return new SharedAssetInfo(name, SharedAssetType.Crypto, null);
+            }
+
+            using var client = new BinanceRestClient();
+            var tasks = new List<Task>();
+            if (_spotExchangeInfo == null)
+                tasks.Add(client.SpotApi.ExchangeData.GetExchangeInfoAsync(false, Enums.SymbolStatus.Trading));
+            if (_products == null)
+                tasks.Add(client.SpotApi.ExchangeData.GetProductsAsync());
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            if (_spotExchangeInfo == null || _products == null)
+                throw new Exception($"Failed to retrieve exchange info");
+
+            var assets = new Dictionary<string, SharedAssetInfo>();
+            var symbols = new Dictionary<string, SharedSymbolInfo>();
+            foreach (var symbol in _spotExchangeInfo.Symbols)
+            {
+                if (!assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo))
+                {
+                    baseAssetInfo = MapAsset(symbol.BaseAsset);
+                    assets.Add(symbol.BaseAsset, baseAssetInfo);
+                }
+                if (!assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo))
+                {
+                    quoteAssetInfo = MapAsset(symbol.QuoteAsset);
+                    assets.Add(symbol.QuoteAsset, quoteAssetInfo);
+                }
+
+                symbols.Add(symbol.Name, new SharedSymbolInfo(symbol.Name, baseAssetInfo, quoteAssetInfo));
+            }
+
+            return new SharedSymbolCatalog
+            {
+                Assets = assets,
+                Symbols = symbols
+            };
+        }
 
         #region Klines Client
 
@@ -69,6 +140,8 @@ namespace Binance.Net.Clients.SpotApi
         #endregion
 
         #region Spot Symbol client
+        SharedSymbolCatalog? ISpotSymbolRestClient.SymbolCatalog => Cache.Get<SharedSymbolCatalog?>("Binance.Spot.live.ExchangeInfo");
+
         GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; }
             = new GetSpotSymbolsOptions(_exchangeName, false);
 
@@ -84,10 +157,10 @@ namespace Binance.Net.Clients.SpotApi
             if (!resultEx.Result.Success)
                 return HttpResult.Fail<SharedSpotSymbol[]>(resultEx.Result);
 
-            BinanceExchange._products = resultPr.Result.Data;
-            BinanceExchange._spotExchangeInfo = resultEx.Result.Data;
+            _products = resultPr.Result.Data;
+            _spotExchangeInfo = resultEx.Result.Data;
 
-            var exchangeInfo = await BinanceExchange.Cache.GetAsync<SharedExchangeInfo>("Binance.Spot.live.ExchangeInfo").ConfigureAwait(false);
+            var exchangeInfo = await Cache.GetOrRetrieveAsync<SharedSymbolCatalog>("Binance.Spot.live.ExchangeInfo").ConfigureAwait(false);
 
             var resultData = resultEx.Result.Data.Symbols.Select(x => ParseSymbol(x, exchangeInfo));
             ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData.ToArray());
@@ -104,7 +177,7 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
-        private SharedSpotSymbol ParseSymbol(BinanceSymbol symbol, SharedExchangeInfo exchangeInfo)
+        private SharedSpotSymbol ParseSymbol(BinanceSymbol symbol, SharedSymbolCatalog exchangeInfo)
         {
             exchangeInfo.Assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo);
             exchangeInfo.Assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo);

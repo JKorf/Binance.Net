@@ -4,6 +4,7 @@ using CryptoExchange.Net.SharedApis;
 using Binance.Net.Interfaces;
 using Binance.Net.Objects.Models.Futures;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.Caching;
 
 namespace Binance.Net.Clients.CoinFuturesApi
 {
@@ -17,6 +18,81 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BinanceExchange.Metadata, this);
+
+        private static ExchangeCache Cache { get; } = new ExchangeCache(
+            new CacheItemDefinition<SharedSymbolCatalog>
+            {
+                Key = "Binance.CoinFutures.ExchangeInfo",
+                Ttl = TimeSpan.FromMinutes(5),
+                ValueFactory = () => GetExchangeInfoAsync(),
+            }
+        );
+
+        private static BinanceFuturesCoinExchangeInfo? _coinFuturesExchangeInfo;
+        private static async Task<SharedSymbolCatalog> GetExchangeInfoAsync()
+        {
+            SharedAssetInfo MapAsset(BinanceFuturesCoinSymbol symbol)
+            {
+                if (symbol.ContractType == ContractType.PerpetualTradFi)
+                {
+                    if (symbol.UnderlyingType == UnderlyingType.Commodity)
+                        return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Rwa, SharedAssetSubType.Commodity);
+
+                    if (symbol.UnderlyingType == UnderlyingType.Equity
+                    || symbol.UnderlyingType == UnderlyingType.KrEquity
+                    || symbol.UnderlyingType == UnderlyingType.PreMarket)
+                    {
+                        return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Rwa, SharedAssetSubType.Stock);
+                    }
+
+                    return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Rwa, null);
+                }
+
+                if (symbol.UnderlyingType == UnderlyingType.Coin || symbol.UnderlyingType == UnderlyingType.Index)
+                {
+                    if (LibraryHelpers.IsStableCoin(symbol.BaseAsset))
+                        return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Crypto, SharedAssetSubType.StableCoin);
+
+                    return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Crypto, null);
+                }
+
+                return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Unspecified, null);
+            }
+
+            using var client = new BinanceRestClient();
+            var tasks = new List<Task>();
+            if (_coinFuturesExchangeInfo == null)
+                tasks.Add(client.CoinFuturesApi.ExchangeData.GetExchangeInfoAsync());
+            await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            if (_coinFuturesExchangeInfo == null)
+                throw new Exception($"Failed to retrieve exchange info");
+
+            var assets = new Dictionary<string, SharedAssetInfo>();
+            var symbols = new Dictionary<string, SharedSymbolInfo>();
+            foreach (var symbol in _coinFuturesExchangeInfo.Symbols)
+            {
+                if (!assets.TryGetValue(symbol.BaseAsset, out var baseAssetInfo))
+                {
+                    baseAssetInfo = MapAsset(symbol);
+                    assets.Add(symbol.BaseAsset, baseAssetInfo);
+                }
+
+                if (!assets.TryGetValue(symbol.QuoteAsset, out var quoteAssetInfo))
+                {
+                    quoteAssetInfo = new SharedAssetInfo(symbol.QuoteAsset, SharedAssetType.Fiat, null);
+                    assets.Add(symbol.QuoteAsset, quoteAssetInfo);
+                }
+
+                symbols.Add(symbol.Name, new SharedSymbolInfo(symbol.Name, baseAssetInfo, quoteAssetInfo));
+            }
+
+            return new SharedSymbolCatalog
+            {
+                Assets = assets,
+                Symbols = symbols
+            };
+        }
 
         #region Klines client
 
@@ -82,6 +158,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         #endregion
 
         #region Futures Symbol client
+        SharedSymbolCatalog? IFuturesSymbolRestClient.SymbolCatalog => Cache.Get<SharedSymbolCatalog?>("Binance.CoinFutures.live.ExchangeInfo");
 
         GetFuturesSymbolsOptions IFuturesSymbolRestClient.GetFuturesSymbolsOptions { get; } = new GetFuturesSymbolsOptions(_exchangeName, false);
         async Task<HttpResult<SharedFuturesSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
@@ -94,28 +171,51 @@ namespace Binance.Net.Clients.CoinFuturesApi
             if (!result.Success)
                 return HttpResult.Fail<SharedFuturesSymbol[]>(result);
 
+            _coinFuturesExchangeInfo = result.Data;
+            var exchangeInfo = await Cache.GetOrRetrieveAsync<SharedSymbolCatalog>("Binance.CoinFutures.live.ExchangeInfo").ConfigureAwait(false);
+
             var data = result.Data.Symbols.Where(x => x.ContractType != null);
+            var resultData = data.Select(x => ParseSymbol(x, exchangeInfo));
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData.ToArray());
+
             if (request.TradingMode != null)
-                data = data.Where(x => FilterContractType(request.TradingMode.Value, x.ContractType!.Value));
-            var resultData = data.Select(s =>
-            new SharedFuturesSymbol(
-                s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualInverse : TradingMode.DeliveryInverse,
-                s.BaseAsset,
-                s.QuoteAsset,
-                s.Name,
-                s.Status == SymbolStatus.Trading)
+                resultData = resultData.Where(x => x.TradingMode == request.TradingMode);
+            if (request.BaseAssetType != null)
+                resultData = resultData.Where(x => x.BaseAssetType == request.BaseAssetType);
+            if (request.QuoteAssetType != null)
+                resultData = resultData.Where(x => x.QuoteAssetType == request.QuoteAssetType);
+            if (request.BaseAssetSubType != null)
+                resultData = resultData.Where(x => x.BaseAssetSubType == request.BaseAssetSubType);
+            if (request.QuoteAssetSubType != null)
+                resultData = resultData.Where(x => x.QuoteAssetSubType == request.QuoteAssetSubType);
+
+            return HttpResult.Ok(result, resultData.ToArray());
+        }
+
+        private SharedFuturesSymbol ParseSymbol(BinanceFuturesCoinSymbol s, SharedSymbolCatalog exchangeInfo)
+        {
+            exchangeInfo.Assets.TryGetValue(s.BaseAsset, out var baseAssetInfo);
+            exchangeInfo.Assets.TryGetValue(s.QuoteAsset, out var quoteAssetInfo);
+
+            return new SharedFuturesSymbol(
+                    s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualInverse : TradingMode.DeliveryInverse,
+                    s.BaseAsset,
+                    s.QuoteAsset,
+                    s.Name,
+                    s.Status == SymbolStatus.Trading)
             {
                 MinTradeQuantity = s.LotSizeFilter?.MinQuantity,
                 MaxTradeQuantity = s.LotSizeFilter?.MaxQuantity,
                 QuantityStep = s.LotSizeFilter?.StepSize,
                 PriceStep = s.PriceFilter?.TickSize,
                 ContractSize = s.ContractSize,
-                DeliveryTime = s.DeliveryDate.Year == 2100 ? null : s.DeliveryDate
-            }).ToArray();
-
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData);
-            return HttpResult.Ok(result, resultData);
-
+                DeliveryTime = s.DeliveryDate.Year == 2100 ? null : s.DeliveryDate,
+                DisplayName = s.Name,
+                BaseAssetType = baseAssetInfo?.Type ?? SharedAssetType.Unspecified,
+                BaseAssetSubType = baseAssetInfo?.SubType,
+                QuoteAssetType = quoteAssetInfo?.Type ?? SharedAssetType.Unspecified,
+                QuoteAssetSubType = quoteAssetInfo?.SubType,
+            };
         }
 
         private bool FilterContractType(TradingMode mode, ContractType type)
