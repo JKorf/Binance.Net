@@ -107,7 +107,7 @@ namespace Binance.Net.Clients.SpotApi
             {
                 var product = products?.FirstOrDefault(p => p.BaseAsset == name);
                 if (product?.Tags.Contains("bStocks", StringComparer.InvariantCultureIgnoreCase) == true)
-                    return new SharedAssetInfo(name, SharedAssetType.TradFi, SharedAssetSubType.Stock);
+                    return new SharedAssetInfo(name, SharedAssetType.TradFi, SharedAssetSubType.Equity);
 
                 if (product?.Tags.Contains("tCommodities", StringComparer.InvariantCultureIgnoreCase) == true)
                     return new SharedAssetInfo(name, SharedAssetType.TradFi, SharedAssetSubType.Commodity);

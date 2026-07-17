@@ -155,7 +155,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                     || symbol.UnderlyingType == UnderlyingType.KrEquity
                     || symbol.UnderlyingType == UnderlyingType.PreMarket)
                     {
-                        return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.TradFi, SharedAssetSubType.Stock);
+                        return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.TradFi, SharedAssetSubType.Equity);
                     }
 
                     return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.TradFi, null);
