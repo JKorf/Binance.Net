@@ -1,9 +1,4 @@
-﻿using Binance.Net.Clients;
-using Binance.Net.Converters;
-using Binance.Net.Enums;
-using Binance.Net.Objects.Models.Futures;
-using Binance.Net.Objects.Models.Spot;
-using CryptoExchange.Net.Caching;
+﻿using Binance.Net.Converters;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Filters;
