@@ -19,7 +19,7 @@ namespace Binance.Net.Clients.SpotApi
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticExchangeParameters(Exchange);
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BinanceExchange.Metadata, this);
 
-        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["AED", "ARS", "BRL", "COP", "EUR", "JPY", "KZT", "MXN", "UAH", "ZAR"];
+        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["AED", "ARS", "BRL", "COP", "EUR", "JPY", "KZT", "MXN", "UAH", "ZAR", "TRY", "IDR"];
 
         #region Klines Client
 
