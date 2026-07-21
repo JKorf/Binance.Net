@@ -174,6 +174,8 @@ var ticker = await binanceShared.GetSpotTickerAsync(new GetTickerRequest(symbol)
 
 Available shared client interfaces include: `ISpotTickerRestClient`, `ISpotOrderRestClient`, `IFuturesOrderRestClient`, `IBalanceRestClient`, `ITickerSocketClient`, `IOrderBookSocketClient`, and many more. See [the SharedApis docs](https://cryptoexchange.jkorf.dev/CryptoExchange.Net/idocs_shared.html).
 
+Shared symbol calls populate `DisplayName`, `BaseAssetType` / `BaseAssetSubType`, and `QuoteAssetType` / `QuoteAssetSubType`; their shared clients also expose `SpotSymbolCatalog` or `FuturesSymbolCatalog` after symbols have been loaded. The classification distinguishes crypto, stablecoins, fiat, and TradFi equities/commodities; 
+
 ## Dependency Injection
 
 ```csharp

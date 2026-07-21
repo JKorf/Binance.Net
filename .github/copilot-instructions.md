@@ -48,6 +48,8 @@ Store the returned `UpdateSubscription` and unsubscribe on shutdown via `socketC
 
 For code that needs to work across multiple exchanges, use `CryptoExchange.Net.SharedApis` interfaces (`ISpotTickerRestClient`, `ISpotOrderRestClient`, etc.) accessed via `.SharedClient` properties. Same pattern works for 25+ other exchanges in the CryptoExchange.Net family.
 
+Shared symbol results include `DisplayName` and base/quote asset type/subtype metadata, with populated `SpotSymbolCatalog` / `FuturesSymbolCatalog` caches available from the symbol clients.
+
 ## Avoid
 
 - Legacy `BinanceClient` class (use `BinanceRestClient`)

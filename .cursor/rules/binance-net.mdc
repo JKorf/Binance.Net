@@ -82,6 +82,8 @@ var ticker = await shared.GetSpotTickerAsync(
 
 Same code works against `OKXRestClient().UnifiedApi.SharedClient`, `BybitRestClient().V5Api.SharedClient`, and 25+ other exchanges.
 
+Shared symbol results include display names and asset type/subtype metadata, and the symbol clients expose populated `SpotSymbolCatalog` / `FuturesSymbolCatalog` caches.
+
 ## Hard rules
 
 - ❌ Never write raw `HttpClient` to Binance endpoints

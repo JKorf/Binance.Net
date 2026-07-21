@@ -4,8 +4,8 @@
 
 Binance.Net is a strongly typed .NET client library for the Binance REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, and socket patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 12.12.0.
-CryptoExchange.Net dependency: 11.1.0.
+Current package version in this repository: 13.2.0.
+CryptoExchange.Net dependency: 12.2.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -465,6 +465,8 @@ await socketClient.UnsubscribeAsync(sub.Data);
 ```
 
 Do not call `tickerSocket.UnsubscribeAsync(...)` on `ITickerSocketClient`; that shared interface does not expose the method.
+
+Shared symbol clients expose `SpotSymbolCatalog` or `FuturesSymbolCatalog` after `GetSpotSymbolsAsync` / `GetFuturesSymbolsAsync` has loaded the cache. Returned `SharedSpotSymbol` and `SharedFuturesSymbol` models include `DisplayName`, `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType`.
 
 ## Symbol And Filter Handling
 

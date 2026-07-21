@@ -241,6 +241,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 13.2.0 - 21 Jul 2026
+    * Updated CryptoExchange.Net to v12.2.0 
+    * Added SpotSymbolCatalog to Shared ISpotSymbolRestClient interface
+    * Added FuturesSymbolCatalog to Shared IFuturesSymbolRestClient interface
+    * Added BaseAssetType, BaseAssetSubType, QuoteAssetType and QuoteAssetSubType to GetSymbolsRequest model
+    * Added DisplayName to SharedSpotSymbol and SharedFuturesSymbol models
+    * Added BaseAssetType, BaseAssetSubType, QuoteAssetType and QuoteAssetSubType to SharedSpotSymbol and SharedFuturesSymbol models
+    * Added DebuggerDisplay attributes to Shared models
+    * Added HkEquity value to UnderlyingType Enum
+    * Removed Fee, FeeAsset from Shared websocket order updates
+    * Added Fee, FeeAsset to Shared websocket order LastTrade model
+
 * Version 13.1.1 - 13 Jul 2026
     * Combined request rate limit for coin and usdt futures
     * Updated Usdt futures GetFundingInfoAsync and GetBasisAsync endpoint weight from 0 to 1

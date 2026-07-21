@@ -2,9 +2,11 @@
 
 > Strongly typed .NET client library for the Binance REST and WebSocket APIs. Supports Spot, Margin, USD-M Futures, COIN-M Futures, and Options trading. Part of the CryptoExchange.Net ecosystem providing a unified abstraction across 28+ cryptocurrency exchanges.
 
-Binance.Net is the most widely adopted C# client for Binance, with full coverage of public and private endpoints, automatic WebSocket reconnection, comprehensive error handling via the `HttpResult<T>` / `WebSocketResult<T>` pattern, native AOT support, and built-in support for sub-accounts, brokerage, margin, and rebate operations. Current version: 12.x. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Binance.Net is the most widely adopted C# client for Binance, with full coverage of public and private endpoints, automatic WebSocket reconnection, comprehensive error handling via the `HttpResult<T>` / `WebSocketResult<T>` pattern, native AOT support, and built-in support for sub-accounts, brokerage, margin, and rebate operations. Current version: 13.2.0. Targets netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 
 REST methods return `HttpResult<T>` / `HttpResult`, WebSocket subscriptions and socket API requests return `WebSocketResult<T>` / `WebSocketResult`, and shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. For multi-exchange code use each API surface's `.SharedClient` and call `.SharedClient.Discover()` before routing optional shared features.
+
+Shared symbol results include display names and asset type/subtype metadata (crypto, stablecoin, fiat, or TradFi equity/commodity). Shared symbol clients expose their populated symbol catalogs
 
 ## Documentation
 

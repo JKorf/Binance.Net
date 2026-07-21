@@ -184,10 +184,14 @@ Use SharedApis for exchange-agnostic code across Binance, Bybit, OKX, Kraken, an
 | Shared futures order REST | `IFuturesOrderRestClient.PlaceFuturesOrderAsync(...)` |
 | Shared ticker socket | `ITickerSocketClient.SubscribeToTickerUpdatesAsync(...)` |
 | Shared order book socket | `IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(...)` |
+| Load typed spot symbols and catalog | `ISpotSymbolRestClient.GetSpotSymbolsAsync(...)`, then `.SpotSymbolCatalog` |
+| Load typed futures symbols and catalog | `IFuturesSymbolRestClient.GetFuturesSymbolsAsync(...)`, then `.FuturesSymbolCatalog` |
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
 Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers such as symbol support checks return `ExchangeCallResult<T>`.
+
+Shared spot and futures symbols include `DisplayName`, `BaseAssetType` / `BaseAssetSubType`, and `QuoteAssetType` / `QuoteAssetSubType`. Classifications cover crypto, stablecoins, fiat, and TradFi equities/commodities;
 
 ## Result Handling
 
