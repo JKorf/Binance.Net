@@ -508,6 +508,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginAmount[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginAsset[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginDelistSchedule[]))]
+    [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginRestrictedAssets))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginDustAsset[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginDustTransfer[]))]
     [JsonSerializable(typeof(Objects.Models.Spot.Margin.BinanceMarginLevel[]))]

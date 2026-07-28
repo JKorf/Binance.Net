@@ -582,6 +582,19 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         Task<HttpResult<BinanceMarginDelistSchedule[]>> GetMarginDelistScheduleAsync(int? receiveWindow = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Gets the assets which are currently restricted for margin trading. Assets in the open long restricted list can only be sold, not bought. Assets in the max collateral exceeded list have reached the platform wide collateral cap and can no longer be transfered in
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://developers.binance.com/docs/margin_trading/market-data/Get-Margin-Restricted-Assets" /><br />
+        /// Endpoint:<br />
+        /// GET /sapi/v1/margin/restricted-asset
+        /// </para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns>Margin restricted assets</returns>
+        Task<HttpResult<BinanceMarginRestrictedAssets>> GetMarginRestrictedAssetsAsync(CancellationToken ct = default);
+
+        /// <summary>
         /// Gets isolated margin tier data
         /// <para>
         /// Docs:<br />

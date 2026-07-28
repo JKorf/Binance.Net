@@ -1,0 +1,11 @@
+GET
+/sapi/v1/margin/restricted-asset
+false
+{
+  "openLongRestrictedAsset": [
+    "ADA"
+  ],
+  "maxCollateralExceededAsset": [
+    "ACH"
+  ]
+}

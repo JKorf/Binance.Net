@@ -627,6 +627,17 @@ namespace Binance.Net.Clients.SpotApi
 
         #endregion
 
+        #region Get Margin Restricted Assets
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BinanceMarginRestrictedAssets>> GetMarginRestrictedAssetsAsync(CancellationToken ct = default)
+        {
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "sapi/v1/margin/restricted-asset", BinanceExchange.RateLimiter.SpotRestIp, 1);
+            return await _baseClient.SendAsync<BinanceMarginRestrictedAssets>(request, null, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Query Isolated Margin Tier Data
 
         /// <inheritdoc />

@@ -133,6 +133,7 @@ namespace Binance.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetFutureHourlyInterestRateAsync(new[] { "ETHUSDT" }, false), "GetFutureHourlyInterestRate");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetIsolatedMarginTierDataAsync("ETHUSDT"), "GetIsolatedMarginTierData");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetMarginDelistScheduleAsync(), "GetMarginDelistSchedule");
+            await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetMarginRestrictedAssetsAsync(), "GetMarginRestrictedAssets");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetConvertListAllPairsAsync(), "GetConvertListAllPairs");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetConvertQuantityPrecisionPerAssetAsync(), "GetConvertQuantityPrecisionPerAsset");
             await tester.ValidateAsync(client => client.SpotApi.ExchangeData.GetDelistScheduleAsync(), "GetDelistSchedule");
