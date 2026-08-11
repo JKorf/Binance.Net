@@ -46,8 +46,6 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public IBinanceRestClientSpotApiAgent Agent { get; }
         /// <inheritdoc />
-        public IBinanceRestClientSpotApiAffiliate Affiliate { get; }
-        /// <inheritdoc />
         public string ExchangeName => "Binance";
         #endregion
 
@@ -59,7 +57,6 @@ namespace Binance.Net.Clients.SpotApi
             ExchangeData = new BinanceRestClientSpotApiExchangeData(_logger, this);
             Trading = new BinanceRestClientSpotApiTrading(_logger, this);
             Agent = new BinanceRestClientSpotApiAgent(this);
-            Affiliate = new BinanceRestClientSpotApiAffiliate(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;

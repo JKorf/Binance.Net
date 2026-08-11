@@ -47,6 +47,8 @@ namespace Binance.Net.Clients.GeneralApi
         public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
         /// <inheritdoc />
         public IBinanceRestClientGeneralApiNft Nft { get; }
+        /// <inheritdoc />
+        public IBinanceRestClientSpotApiAffiliate Affiliate { get; }
         #endregion
 
         #region constructor/destructor
@@ -67,6 +69,7 @@ namespace Binance.Net.Clients.GeneralApi
             CopyTrading = new BinanceRestClientGeneralApiCopyTrading(this);
             GiftCard = new BinanceRestClientGeneralApiGiftCard(this);
             Nft = new BinanceRestClientGeneralApiNFT(this);
+            Affiliate = new BinanceRestClientSpotApiAffiliate(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;

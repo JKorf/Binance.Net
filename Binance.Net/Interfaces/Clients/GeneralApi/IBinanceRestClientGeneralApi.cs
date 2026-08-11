@@ -67,6 +67,12 @@ namespace Binance.Net.Interfaces.Clients.GeneralApi
         public IBinanceRestClientGeneralApiGiftCard GiftCard { get; }
 
         /// <summary>
+        ///Endpoints related to affiliate performance.
+        /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiAffiliate"/>
+        public IBinanceRestClientSpotApiAffiliate Affiliate { get; }
+
+        /// <summary>
         /// Endpoints related to Binance Nft
         /// </summary>
         /// <see cref="IBinanceRestClientGeneralApiNft"/>

@@ -1,17 +1,17 @@
-﻿using Binance.Net.Interfaces.Clients.SpotApi;
-using Binance.Net.Objects;
-using Binance.Net.Objects.Models.Spot.Affiliate;
+﻿using Binance.Net.Clients.SpotApi;
+using Binance.Net.Interfaces.Clients.GeneralApi;
+using Binance.Net.Objects.Models.General.Affiliate;
 
-namespace Binance.Net.Clients.SpotApi
+namespace Binance.Net.Clients.GeneralApi
 {
     /// <inheritdoc />
     internal class BinanceRestClientSpotApiAffiliate : IBinanceRestClientSpotApiAffiliate
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 
-        private readonly BinanceRestClientSpotApi _baseClient;
+        private readonly BinanceRestClientGeneralApi _baseClient;
 
-        internal BinanceRestClientSpotApiAffiliate(BinanceRestClientSpotApi baseClient)
+        internal BinanceRestClientSpotApiAffiliate(BinanceRestClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

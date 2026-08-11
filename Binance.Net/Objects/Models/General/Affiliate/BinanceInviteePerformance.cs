@@ -1,4 +1,4 @@
-﻿namespace Binance.Net.Objects.Models.Spot.Affiliate
+﻿namespace Binance.Net.Objects.Models.General.Affiliate
 {
     [SerializationModel]
     public record BinanceInviteePerformance
@@ -23,12 +23,12 @@
         /// Total trading volume (formatted as decimal string)
         /// </summary>
         [JsonPropertyName("tradeVol")]
-        public string TradeVolume { get; set; }
+        public decimal TradeVolume { get; set; }
         /// <summary>
         /// Total commission earned from this invitee (formatted as decimal string)
         /// </summary>
         [JsonPropertyName("commission")]
-        public string Commission { get; set; }
+        public decimal Commission { get; set; }
         /// <summary>
         /// KYC completion timestamp (ms since epoch)
         /// </summary>

@@ -1,6 +1,6 @@
-using Binance.Net.Objects.Models.Spot.Affiliate;
+using Binance.Net.Objects.Models.General.Affiliate;
 
-namespace Binance.Net.Interfaces.Clients.SpotApi
+namespace Binance.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// Binance Affiliate Performance.
