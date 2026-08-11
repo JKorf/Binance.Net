@@ -35,5 +35,11 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         /// </summary>
         /// <see cref="IBinanceRestClientSpotApiAgent"/>
         public IBinanceRestClientSpotApiAgent Agent { get; }
+
+        /// <summary>
+        ///Endpoints related to affiliate performance.
+        /// </summary>
+        /// <see cref="IBinanceRestClientSpotApiAffiliate"/>
+        public IBinanceRestClientSpotApiAffiliate Affiliate { get; }
     }
 }

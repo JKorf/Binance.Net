@@ -5,12 +5,10 @@ using Binance.Net.Objects.Internal;
 using Binance.Net.Objects.Models.Spot;
 using Binance.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
-using System.Net.Http.Headers;
 
 namespace Binance.Net.Clients.SpotApi
 {
@@ -48,6 +46,8 @@ namespace Binance.Net.Clients.SpotApi
         /// <inheritdoc />
         public IBinanceRestClientSpotApiAgent Agent { get; }
         /// <inheritdoc />
+        public IBinanceRestClientSpotApiAffiliate Affiliate { get; }
+        /// <inheritdoc />
         public string ExchangeName => "Binance";
         #endregion
 
@@ -59,6 +59,7 @@ namespace Binance.Net.Clients.SpotApi
             ExchangeData = new BinanceRestClientSpotApiExchangeData(_logger, this);
             Trading = new BinanceRestClientSpotApiTrading(_logger, this);
             Agent = new BinanceRestClientSpotApiAgent(this);
+            Affiliate = new BinanceRestClientSpotApiAffiliate(this);
 
             RequestBodyEmptyContent = "";
             RequestBodyFormat = RequestBodyFormat.FormData;
