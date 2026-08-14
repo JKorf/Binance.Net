@@ -1,5 +1,8 @@
 ﻿namespace Binance.Net.Objects.Models.General.Affiliate
 {
+    /// <summary>
+    /// Binance Invitee Performance
+    /// </summary>
     [SerializationModel]
     public record BinanceInviteePerformance
     {
@@ -13,12 +16,12 @@
         /// The referral code used by this invitee
         /// </summary>
         [JsonPropertyName("referralCode")]
-        public string ReferralCode { get; set; }
+        public string ReferralCode { get; set; } = string.Empty;
         /// <summary>
         /// Custom note associated with this invitee
         /// </summary>
         [JsonPropertyName("note")]
-        public string Note { get; set; }
+        public string Note { get; set; } = string.Empty;
         /// <summary>
         /// Total trading volume (formatted as decimal string)
         /// </summary>
@@ -55,11 +58,11 @@
         /// Invitee's spot trading rebate rate (as percentage)
         /// </summary>
         [JsonPropertyName("inviteeSpotRate")]
-        public string InviteeSpotRate { get; set; }
+        public string InviteeSpotRate { get; set; } = string.Empty;
         /// <summary>
         /// Invitee's futures trading rebate rate (as percentage)
         /// </summary>
         [JsonPropertyName("inviteeFuturesRate")]
-        public string InviteeFuturesRate { get; set; }
+        public string InviteeFuturesRate { get; set; } = string.Empty;
     }
 }

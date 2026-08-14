@@ -1,5 +1,8 @@
 ﻿namespace Binance.Net.Objects.Models.General.Affiliate
 {
+    /// <summary>
+    /// Binance Affiliate Code Performance
+    /// </summary>
     [SerializationModel]
     public record BinanceCodePerformance
     {
@@ -13,7 +16,7 @@
         /// Custom note associated with this invitee
         /// </summary>
         [JsonPropertyName("note")]
-        public string Note { get; set; }
+        public string Note { get; set; } = string.Empty;
         /// <summary>
         /// 
         /// </summary>
