@@ -283,28 +283,31 @@ namespace Binance.Net.Clients.SpotApi
             parameters.AddOptionalParameter("recvWindow", receiveWindow?.ToString(CultureInfo.InvariantCulture) ?? _baseClient.ClientOptions.ReceiveWindow.TotalMilliseconds.ToString(CultureInfo.InvariantCulture));
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "api/v3/order/cancelReplace", BinanceExchange.RateLimiter.SpotRestIp, 4, true, tryParseOnNonSuccess: true);
-            var result = await _baseClient.SendAsync<BinanceResult<BinanceReplaceOrderResult>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BinanceReplaceOrderResult>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BinanceReplaceOrderResult>(result);
 
-            if (result.Data?.Data == null)
-            {
-                if (result.Data == null)
-                    return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(ErrorInfo.Unknown));
+            if (result.Data == null)
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(ErrorInfo.Unknown));
 
-                // A general API error
-                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Code, _baseClient.GetErrorInfo(result.Data.Code, result.Data.Message)));
-            }
+            // A general API error: the payload is wrapped alongside a code, and there is no result to report
+            if (result.Data.Data == null && result.Data.Code != null)
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Code.Value, _baseClient.GetErrorInfo(result.Data.Code.Value, result.Data.Message)));
 
-            if (result.Data.Data.NewOrderResult == OrderOperationResult.NotAttempted)
+            // A successful replacement is returned UNWRAPPED, a failed or partially failed one nested under
+            // "data" with a code alongside it. Reading only the wrapped shape made every success look like an
+            // error carrying no information, while the replacement order it created went unreported.
+            var replaceResult = result.Data.Data ?? result.Data;
+
+            if (replaceResult.NewOrderResult == OrderOperationResult.NotAttempted)
                 // Not attempted because cancel failed
-                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Data.CancelResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.CancelResponse.Code.Value, result.Data.Data.CancelResponse.Message)), result.Data.Data);
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(replaceResult.CancelResponse!.Code!.Value, _baseClient.GetErrorInfo(replaceResult.CancelResponse.Code.Value, replaceResult.CancelResponse.Message)), replaceResult);
 
-            if (result.Data.Data.NewOrderResult == OrderOperationResult.Failure)
+            if (replaceResult.NewOrderResult == OrderOperationResult.Failure)
                 // New order attempted; if cancel failed this still takes priority since cancelReplaceMode was AllowFailure
-                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(result.Data.Data.NewOrderResponse!.Code!.Value, _baseClient.GetErrorInfo(result.Data.Data.NewOrderResponse.Code.Value, result.Data.Data.NewOrderResponse.Message)), result.Data.Data);
+                return HttpResult.Fail<BinanceReplaceOrderResult>(result, new ServerError(replaceResult.NewOrderResponse!.Code!.Value, _baseClient.GetErrorInfo(replaceResult.NewOrderResponse.Code.Value, replaceResult.NewOrderResponse.Message)), replaceResult);
 
-            return HttpResult.Ok(result, result.Data.Data);
+            return HttpResult.Ok(result, replaceResult);
         }
         #endregion
 

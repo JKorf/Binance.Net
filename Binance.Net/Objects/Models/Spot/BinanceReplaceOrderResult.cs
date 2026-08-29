@@ -79,6 +79,13 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("code")]
         public int? Code { get; set; }
+        /// <summary>
+        /// ["<c>data</c>"] The replace result, populated only when the request failed or partially failed: the
+        /// endpoint returns its payload at the top level on success, and nested here alongside the code and
+        /// message otherwise.
+        /// </summary>
+        [JsonPropertyName("data")]
+        public BinanceReplaceOrderResult? Data { get; set; }
     }
 }
 
