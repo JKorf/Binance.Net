@@ -12,8 +12,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceRestClientUsdFuturesSharedApi
     {
-        #region Balance Client
+        #region Get Balances
+
         public GetBalancesOptions GetBalancesOptions { get; } = new GetBalancesOptions(_exchangeName, AccountTypeFilter.Futures);
+
+        async Task<ICallResult<SharedBalance[]>> IGetBalances.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
+            => await GetBalancesAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedBalance[]>> GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
@@ -35,5 +39,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         #endregion
+
     }
 }

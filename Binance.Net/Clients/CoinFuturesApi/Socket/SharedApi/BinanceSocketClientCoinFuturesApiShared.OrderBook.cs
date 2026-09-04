@@ -9,7 +9,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceSocketClientCoinFuturesSharedApi
     {
-        #region Order Book client
+        #region Subscribe To Order Book Updates
+
         public SubscribeOrderBookOptions SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(_exchangeName, false, new[] { 5, 10, 20 })
         {
             SupportsMultipleSymbols = true,
@@ -28,6 +29,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             
             return result;
         }
+
         #endregion
     }
 }

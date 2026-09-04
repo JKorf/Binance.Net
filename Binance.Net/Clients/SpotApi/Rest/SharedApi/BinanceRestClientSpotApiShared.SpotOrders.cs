@@ -11,7 +11,7 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotSharedApi
     {
-        #region Spot Order Client
+        #region Place Spot Order
 
         public SharedFeeDeductionType SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         public SharedFeeAssetType SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
@@ -53,7 +53,14 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Spot Order
+
         public GetSpotOrderOptions GetSpotOrderOptions { get; } = new GetSpotOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedSpotOrder>> IGetSpotOrder.GetSpotOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetSpotOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedSpotOrder>> GetSpotOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetSpotOrderOptions.ValidateRequest(request, this);
@@ -89,8 +96,15 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Open Spot Orders
+
         public GetOpenSpotOrdersOptions GetOpenSpotOrdersOptions { get; }
             = new GetOpenSpotOrdersOptions(_exchangeName, true);
+        async Task<ICallResult<SharedSpotOrder[]>> IGetOpenSpotOrders.GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
+            => await GetOpenSpotOrdersAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedSpotOrder[]>> GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
             var validationError = GetOpenSpotOrdersOptions.ValidateRequest(request, this);
@@ -124,7 +138,14 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Closed Spot Orders
+
         public GetSpotClosedOrdersOptions GetClosedSpotOrdersOptions { get; } = new GetSpotClosedOrdersOptions(_exchangeName, true, true, true, 1000);
+        async Task<ICallResult<SharedSpotOrder[]>> IGetClosedSpotOrders.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetClosedSpotOrdersAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedSpotOrder[]>> GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = GetClosedSpotOrdersOptions.ValidateRequest(request, this);
@@ -188,8 +209,15 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Spot Order Trades
+
         public GetSpotOrderTradesOptions GetSpotOrderTradesOptions { get; }
             = new GetSpotOrderTradesOptions(_exchangeName, true);
+        async Task<ICallResult<SharedUserTrade[]>> IGetSpotOrderTrades.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
+            => await GetSpotOrderTradesAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedUserTrade[]>> GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
             var validationError = GetSpotOrderTradesOptions.ValidateRequest(request, this);
@@ -220,12 +248,19 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Spot User Trade History
+
         Task<HttpResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotUserTradesAsync(GetUserTradesRequest request, PageRequest? nextPageToken, CancellationToken ct)
             => GetSpotUserTradeHistoryAsync(request, nextPageToken, ct);
         GetSpotUserTradeHistoryOptions ISpotOrderRestClient.GetSpotUserTradesOptions => GetSpotUserTradeHistoryOptions;
 
 
         public GetSpotUserTradeHistoryOptions GetSpotUserTradeHistoryOptions { get; } = new GetSpotUserTradeHistoryOptions(_exchangeName, true, true, true, 1000);
+        async Task<ICallResult<SharedUserTrade[]>> IGetSpotUserTradeHistory.GetSpotUserTradeHistoryAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetSpotUserTradeHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedUserTrade[]>> GetSpotUserTradeHistoryAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = GetSpotUserTradeHistoryOptions.ValidateRequest(request, this);
@@ -285,8 +320,15 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Cancel Spot Order
+
         public CancelSpotOrderOptions CancelSpotOrderOptions { get; }
             = new CancelSpotOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelSpotOrder.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelSpotOrderOptions.ValidateRequest(request, this);
@@ -303,6 +345,8 @@ namespace Binance.Net.Clients.SpotApi
             return HttpResult.Ok(order, new SharedId(order.Data!.Id.ToString()));
 
         }
+
+        #endregion
 
         private Enums.TimeInForce? GetTimeInForce(SharedTimeInForce? tif, SharedOrderType type)
         {
@@ -349,12 +393,13 @@ namespace Binance.Net.Clients.SpotApi
             return null;
         }
 
-        #endregion
-
-        #region Spot Client Id Order Client
+        #region Get Spot Order By Client Order Id
 
         public GetSpotOrderByClientOrderIdOptions GetSpotOrderByClientOrderIdOptions { get; }
             = new GetSpotOrderByClientOrderIdOptions(_exchangeName, true);
+        async Task<ICallResult<SharedSpotOrder>> IGetSpotOrderByClientOrderId.GetSpotOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetSpotOrderByClientOrderIdAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedSpotOrder>> GetSpotOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetSpotOrderByClientOrderIdOptions.ValidateRequest(request, this);
@@ -387,8 +432,15 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Cancel Spot Order By Client Order Id
+
         public CancelSpotOrderByClientOrderIdOptions CancelSpotOrderByClientOrderIdOptions { get; }
             = new CancelSpotOrderByClientOrderIdOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelSpotOrderByClientOrderId.CancelSpotOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotOrderByClientOrderIdAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelSpotOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelSpotOrderByClientOrderIdOptions.ValidateRequest(request, this);
@@ -402,6 +454,7 @@ namespace Binance.Net.Clients.SpotApi
             return HttpResult.Ok(order, new SharedId(order.Data!.Id.ToString()));
 
         }
+
         #endregion
     }
 }

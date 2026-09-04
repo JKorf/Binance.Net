@@ -7,7 +7,7 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceSocketClientSpotSharedApi
     {
-        #region Spot Order client
+        #region Subscribe To Spot Order Updates
 
         async Task<WebSocketResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
             => await SubscribeToSpotOrderUpdatesAsync(request, x => handler(x.ToType<SharedSpotOrder[]>(x.Data)), ct).ConfigureAwait(false);
@@ -61,6 +61,8 @@ namespace Binance.Net.Clients.SpotApi
             return result;
         }
 
+        #endregion
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == Enums.OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired)
@@ -88,9 +90,8 @@ namespace Binance.Net.Clients.SpotApi
 
             return SharedOrderType.Other;
         }
-        #endregion
 
-        #region Spot Order Client
+        #region Place Spot Order
 
         public SharedFeeDeductionType SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         public SharedFeeAssetType SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
@@ -135,8 +136,18 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Cancel Spot Order
+
+        CancelSpotOrderOptions ICancelSpotOrder.CancelSpotOrderOptions
+            => CancelSpotOrderOptions;
+
         public CancelSpotOrderSocketOptions CancelSpotOrderOptions { get; }
             = new CancelSpotOrderSocketOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelSpotOrder.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<QueryResult<SharedId>> CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelSpotOrderOptions.ValidateRequest(request, this);
@@ -153,6 +164,8 @@ namespace Binance.Net.Clients.SpotApi
             return QueryResult.Ok(order, new SharedId(order.Data!.Result.Id.ToString()));
         }
 
+        #endregion
+
         private Enums.TimeInForce? GetTimeInForce(SharedTimeInForce? tif, SharedOrderType type)
         {
             if (tif == SharedTimeInForce.FillOrKill) return TimeInForce.FillOrKill;
@@ -163,6 +176,5 @@ namespace Binance.Net.Clients.SpotApi
             return null;
         }
 
-        #endregion
     }
 }

@@ -11,8 +11,12 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotSharedApi
     {
-        #region Trigger Order Client
+        #region Place Spot Trigger Order
+
         public PlaceSpotTriggerOrderOptions PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> IPlaceSpotTriggerOrder.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
             var validationError = PlaceSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -38,8 +42,15 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Spot Trigger Order
+
         public GetSpotTriggerOrderOptions GetSpotTriggerOrderOptions { get; }
             = new GetSpotTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedSpotTriggerOrder>> IGetSpotTriggerOrder.GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedSpotTriggerOrder>> GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -81,6 +92,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
         private SharedTriggerOrderStatus ParseTriggerOrderStatus(BinanceOrder data)
         {
             if (data.Status == OrderStatus.Filled)
@@ -104,8 +117,13 @@ namespace Binance.Net.Clients.SpotApi
             return SharedTriggerOrderStatus.Unknown;
         }
 
+        #region Cancel Spot Trigger Order
+
         public CancelSpotTriggerOrderOptions CancelSpotTriggerOrderOptions { get; }
             = new CancelSpotTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelSpotTriggerOrder.CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -122,6 +140,8 @@ namespace Binance.Net.Clients.SpotApi
             return HttpResult.Ok(order, new SharedId(order.Data!.Id.ToString()));
 
         }
+
+        #endregion
 
         private SpotOrderType GetTriggerOrderParameters(SharedTriggerPriceDirection orderType, decimal? orderPrice, SharedOrderSide side)
         {
@@ -178,6 +198,5 @@ namespace Binance.Net.Clients.SpotApi
                     SharedTriggerOrderDirection.Exit);
             }
         }
-        #endregion
     }
 }

@@ -12,7 +12,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceRestClientCoinFuturesSharedApi
     {
-        #region Klines client
+        #region Get Klines
 
         public GetKlinesOptions GetKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, false, true, true, 1500, false,
                 SharedKlineInterval.OneMinute,
@@ -26,6 +26,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 SharedKlineInterval.OneWeek,
                 SharedKlineInterval.OneMonth
             );
+
+        async Task<ICallResult<SharedKline[]>> IGetKlines.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedKline[]>> GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
@@ -82,5 +85,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         #endregion
+
     }
 }

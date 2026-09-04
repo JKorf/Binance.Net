@@ -12,7 +12,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceRestClientCoinFuturesSharedApi
     {
-        #region Trigger Order Client
+        #region Place Futures Trigger Order
+
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, false)
         {
             RequiredRequestParameters = new List<ParameterDescription>
@@ -20,6 +21,9 @@ namespace Binance.Net.Clients.CoinFuturesApi
                 new ParameterDescription(nameof(PlaceFuturesTriggerOrderRequest.PositionMode), typeof(SharedPositionMode), "PositionMode the account is in", SharedPositionMode.OneWay)
             }
         };
+        async Task<ICallResult<SharedId>> IPlaceFuturesTriggerOrder.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
         {
             var validationError = PlaceFuturesTriggerOrderOptions.ValidateRequest(request, this);
@@ -48,7 +52,14 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Futures Trigger Order
+
         public GetFuturesTriggerOrderOptions GetFuturesTriggerOrderOptions { get; } = new GetFuturesTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedFuturesTriggerOrder>> IGetFuturesTriggerOrder.GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedFuturesTriggerOrder>> GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetFuturesTriggerOrderOptions.ValidateRequest(request, this);
@@ -92,6 +103,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         }
 
+        #endregion
+
         private WorkingType? GetWorkingType(PlaceFuturesTriggerOrderRequest request)
         {
             if (request.TriggerPriceType == null)
@@ -129,7 +142,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return SharedTriggerOrderStatus.Unknown;
         }
 
+        #region Cancel Futures Trigger Order
+
         public CancelFuturesTriggerOrderOptions CancelFuturesTriggerOrderOptions { get; } = new CancelFuturesTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelFuturesTriggerOrder.CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelFuturesTriggerOrderOptions.ValidateRequest(request, this);
@@ -146,6 +164,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return HttpResult.Ok(order, new SharedId(order.Data.Id.ToString()));
 
         }
+
+        #endregion
 
         private (FuturesOrderType, OrderSide) GetTriggerOrderParameters(SharedTriggerPriceDirection orderType, decimal? orderPrice, SharedTriggerOrderDirection direction)
         {
@@ -202,6 +222,5 @@ namespace Binance.Net.Clients.CoinFuturesApi
                     SharedTriggerOrderDirection.Exit);
             }
         }
-        #endregion
     }
 }

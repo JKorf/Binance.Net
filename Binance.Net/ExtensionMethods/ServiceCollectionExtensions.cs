@@ -1,4 +1,4 @@
-﻿using Binance.Net;
+using Binance.Net;
 using Binance.Net.Clients;
 using Binance.Net.Interfaces;
 using Binance.Net.Interfaces.Clients;
@@ -117,6 +117,15 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<ILoggerFactory>(),
                 x.GetRequiredService<IOptions<BinanceRestOptions>>(),
                 x.GetRequiredService<IOptions<BinanceSocketOptions>>()));
+
+            services.AddTransient<IBinanceSharedApiClient, BinanceSharedApiClient>();
+
+            services.RegisterSharedApi(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBinanceSocketClient>().SpotApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBinanceSocketClient>().UsdFuturesApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBinanceRestClient>().CoinFuturesApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBinanceSocketClient>().CoinFuturesApi.SharedApi);
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBinanceRestClient>().SpotApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBinanceSocketClient>().SpotApi.SharedClient);

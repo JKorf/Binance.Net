@@ -12,9 +12,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceRestClientCoinFuturesSharedApi
     {
-        #region Index Klines client
+        #region Get Index Price Klines
 
         public GetIndexPriceKlinesOptions GetIndexPriceKlinesOptions { get; } = new GetIndexPriceKlinesOptions(_exchangeName, true, true, true, 1000, false);
+
+        async Task<ICallResult<SharedFuturesKline[]>> IGetIndexPriceKlines.GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetIndexPriceKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedFuturesKline[]>> GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
@@ -61,5 +64,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         #endregion
+
     }
 }

@@ -11,7 +11,7 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotSharedApi
     {
-        #region Transfer client
+        #region Transfer
 
         public TransferOptions TransferOptions { get; } = new TransferOptions(_exchangeName, [
             SharedAccountType.Funding,
@@ -24,6 +24,9 @@ namespace Binance.Net.Clients.SpotApi
             SharedAccountType.IsolatedMargin,
             SharedAccountType.Option
             ]);
+        async Task<ICallResult<SharedId>> ITransfer.TransferAsync(TransferRequest request, CancellationToken ct)
+            => await TransferAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> TransferAsync(TransferRequest request, CancellationToken ct)
         {
             var validationError = TransferOptions.ValidateRequest(request, this);
@@ -48,6 +51,8 @@ namespace Binance.Net.Clients.SpotApi
             return HttpResult.Ok(transfer, new SharedId(transfer.Data!.TransactionId.ToString()));
 
         }
+
+        #endregion
 
         private UniversalTransferType? GetTransferType(TransferRequest request)
         {
@@ -107,6 +112,5 @@ namespace Binance.Net.Clients.SpotApi
             return null;
         }
 
-        #endregion
     }
 }

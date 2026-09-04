@@ -11,10 +11,13 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotSharedApi
     {
-        #region Deposit client
+        #region Get Deposit Addresses
 
         public GetDepositAddressesOptions GetDepositAddressesOptions { get; }
             = new GetDepositAddressesOptions(_exchangeName, true);
+        async Task<ICallResult<SharedDepositAddress[]>> IGetDepositAddresses.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
+            => await GetDepositAddressesAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedDepositAddress[]>> GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
         {
             var validationError = GetDepositAddressesOptions.ValidateRequest(request, this);
@@ -34,6 +37,10 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Deposit History
+
         Task<HttpResult<SharedDeposit[]>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, PageRequest? nextPageToken, CancellationToken ct)
             => GetDepositHistoryAsync(request, nextPageToken, ct);
         GetDepositHistoryOptions IDepositRestClient.GetDepositsOptions => GetDepositHistoryOptions;
@@ -45,6 +52,9 @@ namespace Binance.Net.Clients.SpotApi
                 new ParameterDescription("TravelRuleEndpoint", typeof(bool), "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
             }
         };
+        async Task<ICallResult<SharedDeposit[]>> IGetDepositHistory.GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetDepositHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedDeposit[]>> GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = GetDepositHistoryOptions.ValidateRequest(request, this);
@@ -136,6 +146,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
         private SharedTransferStatus ParseTransferStatus(DepositStatus status)
         {
             if (status == DepositStatus.Success)
@@ -148,6 +160,5 @@ namespace Binance.Net.Clients.SpotApi
             return SharedTransferStatus.Unknown;
         }
 
-        #endregion
     }
 }

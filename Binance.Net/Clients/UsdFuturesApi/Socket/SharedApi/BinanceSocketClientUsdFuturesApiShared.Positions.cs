@@ -9,7 +9,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceSocketClientUsdFuturesSharedApi
     {
-        #region Position client
+        #region Subscribe To Position Updates
+
         public SubscribePositionOptions SubscribePositionOptions { get; } 
             = new SubscribePositionOptions(_exchangeName, true);
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<DataEvent<SharedPosition[]>> handler, CancellationToken ct)
@@ -37,5 +38,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         #endregion
+
     }
 }

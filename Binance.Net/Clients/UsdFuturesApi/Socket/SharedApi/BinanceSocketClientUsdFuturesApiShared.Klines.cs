@@ -9,7 +9,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceSocketClientUsdFuturesSharedApi
     {
-        #region Kline client
+        #region Subscribe To Kline Updates
+
         public SubscribeKlineOptions SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchangeName, false)
         {
             SupportsMultipleSymbols = true,
@@ -35,6 +36,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
             return result;
         }
+
         #endregion
     }
 }

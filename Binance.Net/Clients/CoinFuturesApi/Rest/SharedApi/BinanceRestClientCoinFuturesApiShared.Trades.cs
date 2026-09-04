@@ -12,9 +12,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceRestClientCoinFuturesSharedApi
     {
-        #region Recent Trade client
+        #region Get Recent Trades
 
         public GetRecentTradesOptions GetRecentTradesOptions { get; } = new GetRecentTradesOptions(_exchangeName, 1000, false);
+        async Task<ICallResult<SharedTrade[]>> IGetRecentTrades.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
+            => await GetRecentTradesAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedTrade[]>> GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
             var validationError = GetRecentTradesOptions.ValidateRequest(request, this);
@@ -39,11 +42,15 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         #endregion
 
-        #region Trade History client
+        #region Get Trade History
+
         public GetTradeHistoryOptions GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(_exchangeName, true, true, true, 1000, false)
         {
             MaxAge = TimeSpan.FromDays(365)
         };
+
+        async Task<ICallResult<SharedTrade[]>> IGetTradeHistory.GetTradeHistoryAsync(GetTradeHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetTradeHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedTrade[]>> GetTradeHistoryAsync(GetTradeHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
@@ -89,6 +96,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
                         }).ToArray(), nextPageRequest);
 
         }
+
         #endregion
     }
 }

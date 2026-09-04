@@ -9,7 +9,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceSocketClientUsdFuturesSharedApi
     {
-        #region Balance client
+        #region Subscribe To Balance Updates
+
         public SubscribeBalanceOptions SubscribeBalanceOptions { get; } 
             = new SubscribeBalanceOptions(_exchangeName, true);
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
@@ -31,5 +32,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         #endregion
+
     }
 }

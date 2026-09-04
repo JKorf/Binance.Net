@@ -12,8 +12,12 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceRestClientCoinFuturesSharedApi
     {
-        #region Order Book client
+        #region Get Order Book
+
         public GetOrderBookOptions GetOrderBookOptions { get; } = new GetOrderBookOptions(_exchangeName, new[] { 5, 10, 20, 50, 100, 500, 1000 }, false);
+        async Task<ICallResult<SharedOrderBook>> IGetOrderBook.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
+            => await GetOrderBookAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedOrderBook>> GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
         {
             var validationError = GetOrderBookOptions.ValidateRequest(request, this);
@@ -32,5 +36,6 @@ namespace Binance.Net.Clients.CoinFuturesApi
         }
 
         #endregion
+
     }
 }

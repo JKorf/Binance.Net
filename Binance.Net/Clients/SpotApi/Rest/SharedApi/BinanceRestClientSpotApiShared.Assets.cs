@@ -11,13 +11,17 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotSharedApi
     {
-        #region Asset client
+        #region Get All Assets
+
         Task<HttpResult<SharedAsset[]>> IAssetsRestClient.GetAssetsAsync(GetAssetsRequest request, CancellationToken ct)
             => GetAllAssetsAsync(request, ct);
         GetAllAssetsOptions IAssetsRestClient.GetAssetsOptions => GetAllAssetsOptions;
 
         public GetAllAssetsOptions GetAllAssetsOptions { get; }
             = new GetAllAssetsOptions(_exchangeName, true);
+
+        async Task<ICallResult<SharedAsset[]>> IGetAllAssets.GetAllAssetsAsync(GetAssetsRequest request, CancellationToken ct)
+            => await GetAllAssetsAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedAsset[]>> GetAllAssetsAsync(GetAssetsRequest request, CancellationToken ct)
         {
@@ -47,7 +51,14 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
+        #region Get Asset
+
         public GetAssetOptions GetAssetOptions { get; } = new GetAssetOptions(_exchangeName, true);
+        async Task<ICallResult<SharedAsset>> IGetAsset.GetAssetAsync(GetAssetRequest request, CancellationToken ct)
+            => await GetAssetAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedAsset>> GetAssetAsync(GetAssetRequest request, CancellationToken ct)
         {
             var validationError = GetAssetOptions.ValidateRequest(request, this);
@@ -81,5 +92,6 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
     }
 }

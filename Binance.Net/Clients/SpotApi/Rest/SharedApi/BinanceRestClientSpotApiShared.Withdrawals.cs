@@ -11,7 +11,7 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceRestClientSpotSharedApi
     {
-        #region Withdrawal client
+        #region Get Withdrawal History
 
         Task<HttpResult<SharedWithdrawal[]>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, PageRequest? nextPageToken, CancellationToken ct)
             => GetWithdrawalHistoryAsync(request, nextPageToken, ct);
@@ -24,6 +24,9 @@ namespace Binance.Net.Clients.SpotApi
                 new ParameterDescription("TravelRuleEndpoint", typeof(bool), "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
             }
         };
+        async Task<ICallResult<SharedWithdrawal[]>> IGetWithdrawalHistory.GetWithdrawalHistoryAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetWithdrawalHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedWithdrawal[]>> GetWithdrawalHistoryAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = GetWithdrawalHistoryOptions.ValidateRequest(request, this);
@@ -122,6 +125,8 @@ namespace Binance.Net.Clients.SpotApi
 
         }
 
+        #endregion
+
         private SharedTransferStatus GetWithdrawalStatus(WithdrawalStatus x)
         {
             if (x == WithdrawalStatus.Canceled || x == WithdrawalStatus.Rejected || x == WithdrawalStatus.Failure)
@@ -136,9 +141,7 @@ namespace Binance.Net.Clients.SpotApi
             return SharedTransferStatus.Unknown;
         }
 
-        #endregion
-
-        #region Withdraw client
+        #region Withdraw
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
@@ -147,6 +150,9 @@ namespace Binance.Net.Clients.SpotApi
                 new ParameterDescription("TravelRuleQuestionnaire", typeof(BinanceWithdrawQuestionnaire), "Travel rule questionnaire", new BinanceWithdrawQuestionnaireEu())
             }
         };
+        async Task<ICallResult<SharedId>> IWithdraw.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
+            => await WithdrawAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> WithdrawAsync(WithdrawRequest request, CancellationToken ct)
         {
             var validationError = WithdrawOptions.ValidateRequest(request, this);
@@ -187,5 +193,6 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
     }
 }

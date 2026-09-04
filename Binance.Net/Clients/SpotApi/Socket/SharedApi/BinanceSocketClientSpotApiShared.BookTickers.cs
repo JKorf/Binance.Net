@@ -7,7 +7,7 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceSocketClientSpotSharedApi
     {
-        #region Book Ticker client
+        #region Subscribe To Book Ticker Updates
 
         public SubscribeBookTickerOptions SubscribeBookTickerOptions { get; }
             = new SubscribeBookTickerOptions(_exchangeName, false)
@@ -36,5 +36,6 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
     }
 }

@@ -12,8 +12,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceRestClientUsdFuturesSharedApi
     {
-        #region Fee Client
+        #region Get Fees
+
         public GetFeeOptions GetFeeOptions { get; } = new GetFeeOptions(_exchangeName, true);
+
+        async Task<ICallResult<SharedFee>> IGetFees.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
+            => await GetFeesAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedFee>> GetFeesAsync(GetFeeRequest request, CancellationToken ct)
         {
@@ -32,6 +36,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return HttpResult.Ok(result, new SharedFee(result.Data.MakerCommissionRate * 100, result.Data.TakerCommissionRate * 100));
 
         }
+
         #endregion
     }
 }

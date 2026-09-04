@@ -9,7 +9,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 {
     internal partial class BinanceSocketClientCoinFuturesSharedApi
     {
-        #region Futures Order client
+        #region Subscribe To Futures Order Updates
+
         async Task<WebSocketResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<DataEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
             => await SubscribeToFuturesOrderUpdatesAsync(request, x => handler(x.ToType<SharedFuturesOrder[]>(x.Data)), ct).ConfigureAwait(false);
 
@@ -68,6 +69,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return result;
         }
 
+        #endregion
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == Enums.OrderStatus.Canceled || status == OrderStatus.Rejected || status == OrderStatus.Expired)
@@ -95,9 +98,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
             return SharedOrderType.Other;
         }
-        #endregion
 
-        #region Futures Order Client
+        #region Place Futures Order
 
         public SharedFeeDeductionType FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         public SharedFeeAssetType FuturesFeeAssetType => SharedFeeAssetType.BaseAsset;
@@ -111,7 +113,13 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         public string GenerateClientOrderId() => ExchangeHelpers.RandomString(20);
 
+        PlaceFuturesOrderOptions IPlaceFuturesOrder.PlaceFuturesOrderOptions
+            => PlaceFuturesOrderOptions;
+
         public PlaceFuturesOrderSocketOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderSocketOptions(_exchangeName, false);
+        async Task<ICallResult<SharedId>> IPlaceFuturesOrder.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<QueryResult<SharedId>> PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
             var validationError = PlaceFuturesOrderOptions.ValidateRequest(request, this);
@@ -137,7 +145,17 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         }
 
+        #endregion
+
+        #region Cancel Futures Order
+
+        CancelFuturesOrderOptions ICancelFuturesOrder.CancelFuturesOrderOptions
+            => CancelFuturesOrderOptions;
+
         public CancelFuturesOrderSocketOptions CancelFuturesOrderOptions { get; } = new CancelFuturesOrderSocketOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelFuturesOrder.CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<QueryResult<SharedId>> CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelFuturesOrderOptions.ValidateRequest(request, this);
@@ -155,6 +173,8 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         }
 
+        #endregion
+
         private TimeInForce? GetTimeInForce(SharedOrderType type, SharedTimeInForce? tif)
         {
             if (tif == SharedTimeInForce.ImmediateOrCancel) return TimeInForce.ImmediateOrCancel;
@@ -165,6 +185,5 @@ namespace Binance.Net.Clients.CoinFuturesApi
             return null;
         }
 
-        #endregion
     }
 }

@@ -7,7 +7,8 @@ namespace Binance.Net.Clients.SpotApi
 {
     internal partial class BinanceSocketClientSpotSharedApi
     {
-        #region Kline client
+        #region Subscribe To Kline Updates
+
         public SubscribeKlineOptions SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchangeName, false)
         {
             SupportsMultipleSymbols = true,
@@ -33,6 +34,7 @@ namespace Binance.Net.Clients.SpotApi
 
             return result;
         }
+
         #endregion
     }
 }

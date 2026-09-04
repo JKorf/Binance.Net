@@ -12,7 +12,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceRestClientUsdFuturesSharedApi
     {
-        #region Futures Order Client
+        #region Place Futures Order
 
         public SharedFeeDeductionType FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         public SharedFeeAssetType FuturesFeeAssetType => SharedFeeAssetType.QuoteAsset;
@@ -28,6 +28,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public string GenerateClientOrderId() => ExchangeHelpers.RandomString(20);
 
         public PlaceFuturesOrderOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(_exchangeName, false);
+        async Task<ICallResult<SharedId>> IPlaceFuturesOrder.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
             var validationError = PlaceFuturesOrderOptions.ValidateRequest(request, this);
@@ -53,7 +56,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Futures Order
+
         public GetFuturesOrderOptions GetFuturesOrderOptions { get; } = new GetFuturesOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedFuturesOrder>> IGetFuturesOrder.GetFuturesOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedFuturesOrder>> GetFuturesOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetFuturesOrderOptions.ValidateRequest(request, this);
@@ -90,7 +100,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Open Futures Orders
+
         public GetOpenFuturesOrdersOptions GetOpenFuturesOrdersOptions { get; } = new GetOpenFuturesOrdersOptions(_exchangeName, true);
+        async Task<ICallResult<SharedFuturesOrder[]>> IGetOpenFuturesOrders.GetOpenFuturesOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
+            => await GetOpenFuturesOrdersAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedFuturesOrder[]>> GetOpenFuturesOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
             var validationError = GetOpenFuturesOrdersOptions.ValidateRequest(request, this);
@@ -125,7 +142,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Closed Futures Orders
+
         public GetFuturesClosedOrdersOptions GetClosedFuturesOrdersOptions { get; } = new GetFuturesClosedOrdersOptions(_exchangeName, true, true, true, 1000);
+        async Task<ICallResult<SharedFuturesOrder[]>> IGetClosedFuturesOrders.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetClosedFuturesOrdersAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedFuturesOrder[]>> GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = GetClosedFuturesOrdersOptions.ValidateRequest(request, this);
@@ -191,7 +215,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Futures Order Trades
+
         public GetFuturesOrderTradesOptions GetFuturesOrderTradesOptions { get; } = new GetFuturesOrderTradesOptions(_exchangeName, true);
+        async Task<ICallResult<SharedUserTrade[]>> IGetFuturesOrderTrades.GetFuturesOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
+            => await GetFuturesOrderTradesAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedUserTrade[]>> GetFuturesOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
             var validationError = GetFuturesOrderTradesOptions.ValidateRequest(request, this);
@@ -221,11 +252,18 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Futures User Trade History
+
         Task<HttpResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, PageRequest? nextPageToken, CancellationToken ct)
             => GetFuturesUserTradeHistoryAsync(request, nextPageToken, ct);
         GetFuturesUserTradeHistoryOptions IFuturesOrderRestClient.GetFuturesUserTradesOptions => GetFuturesUserTradeHistoryOptions;
 
         public GetFuturesUserTradeHistoryOptions GetFuturesUserTradeHistoryOptions { get; } = new GetFuturesUserTradeHistoryOptions(_exchangeName, true, true, true, 1000);
+        async Task<ICallResult<SharedUserTrade[]>> IGetFuturesUserTradeHistory.GetFuturesUserTradeHistoryAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetFuturesUserTradeHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedUserTrade[]>> GetFuturesUserTradeHistoryAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = GetFuturesUserTradeHistoryOptions.ValidateRequest(request, this);
@@ -282,7 +320,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Cancel Futures Order
+
         public CancelFuturesOrderOptions CancelFuturesOrderOptions { get; } = new CancelFuturesOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelFuturesOrder.CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelFuturesOrderOptions.ValidateRequest(request, this);
@@ -300,7 +345,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Get Positions
+
         public GetPositionsOptions GetPositionsOptions { get; } = new GetPositionsOptions(_exchangeName, true);
+        async Task<ICallResult<SharedPosition[]>> IGetPositions.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
+            => await GetPositionsAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedPosition[]>> GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
         {
             var validationError = GetPositionsOptions.ValidateRequest(request, this);
@@ -333,6 +385,10 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Close Position
+
         public ClosePositionOptions ClosePositionOptions { get; } = new ClosePositionOptions(_exchangeName, true)
         {
             RequiredRequestParameters = new List<ParameterDescription>
@@ -341,6 +397,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 new ParameterDescription(nameof(ClosePositionRequest.Quantity), typeof(decimal), "Quantity of the position is required", 0.1m)
             }
         };
+        async Task<ICallResult<SharedId>> IClosePosition.ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
+            => await ClosePositionAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
         {
             var validationError = ClosePositionOptions.ValidateRequest(request, this);
@@ -366,6 +425,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return HttpResult.Ok(result, new SharedId(result.Data.Id.ToString()));
 
         }
+
+        #endregion
 
         private TimeInForce? GetTimeInForce(SharedOrderType type, SharedTimeInForce? tif)
         {
@@ -411,11 +472,12 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return null;
         }
 
-        #endregion
-
-        #region Futures Client Id Order Client
+        #region Get Futures Order By Client Order Id
 
         public GetFuturesOrderByClientOrderIdOptions GetFuturesOrderByClientOrderIdOptions { get; } = new GetFuturesOrderByClientOrderIdOptions(_exchangeName, true);
+        async Task<ICallResult<SharedFuturesOrder>> IGetFuturesOrderByClientOrderId.GetFuturesOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetFuturesOrderByClientOrderIdAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedFuturesOrder>> GetFuturesOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetFuturesOrderByClientOrderIdOptions.ValidateRequest(request, this);
@@ -449,7 +511,14 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         }
 
+        #endregion
+
+        #region Cancel Futures Order By Client Order Id
+
         public CancelFuturesOrderByClientOrderIdOptions CancelFuturesOrderByClientOrderIdOptions { get; } = new CancelFuturesOrderByClientOrderIdOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelFuturesOrderByClientOrderId.CancelFuturesOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesOrderByClientOrderIdAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelFuturesOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelFuturesOrderByClientOrderIdOptions.ValidateRequest(request, this);
@@ -463,6 +532,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             return HttpResult.Ok(order, new SharedId(order.Data.Id.ToString()));
 
         }
+
         #endregion
     }
 }

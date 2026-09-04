@@ -9,7 +9,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 {
     internal partial class BinanceSocketClientUsdFuturesSharedApi
     {
-        #region Trade client
+        #region Subscribe To Trade Updates
 
         public SubscribeTradeOptions SubscribeTradeOptions { get; }
             = new SubscribeTradeOptions(_exchangeName, false)
@@ -40,5 +40,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
         }
 
         #endregion
+
     }
 }
