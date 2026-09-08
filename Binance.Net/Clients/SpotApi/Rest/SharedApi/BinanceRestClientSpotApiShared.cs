@@ -36,8 +36,8 @@ namespace Binance.Net.Clients.SpotApi
             SetCapabilities(
                 GetKlinesOptions,
                 GetSpotSymbolsOptions,
-                GetAllSpotTickersOptions,
-                GetSpotTickerOptions,
+                GetAllTickersOptions,
+                GetTickerOptions,
                 GetBookTickerOptions,
                 GetRecentTradesOptions,
                 PlaceSpotOrderOptions,

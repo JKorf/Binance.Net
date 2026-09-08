@@ -391,14 +391,11 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         public ClosePositionOptions ClosePositionOptions { get; } = new ClosePositionOptions(_exchangeName, true)
         {
-            RequiredRequestParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription(nameof(ClosePositionRequest.PositionSide), typeof(SharedPositionSide), "The position side to close", SharedPositionSide.Long),
-                new ParameterDescription(nameof(ClosePositionRequest.Quantity), typeof(decimal), "Quantity of the position is required", 0.1m)
-            }
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<ClosePositionRequest>.Required(x => x.PositionSide),
+                RequestParameterRuleOverride<ClosePositionRequest>.Required(x => x.Quantity)
+            ]
         };
-        async Task<ICallResult<SharedId>> IClosePosition.ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
-            => await ClosePositionAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedId>> ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
         {

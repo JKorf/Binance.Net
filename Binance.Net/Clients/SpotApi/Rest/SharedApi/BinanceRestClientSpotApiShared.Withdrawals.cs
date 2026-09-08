@@ -19,10 +19,9 @@ namespace Binance.Net.Clients.SpotApi
 
         public GetWithdrawalHistoryOptions GetWithdrawalHistoryOptions { get; } = new GetWithdrawalHistoryOptions(_exchangeName, false, true, true, 1000)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("TravelRuleEndpoint", typeof(bool), "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("TravelRuleEndpoint", "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
+            ]
         };
         async Task<ICallResult<SharedWithdrawal[]>> IGetWithdrawalHistory.GetWithdrawalHistoryAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
             => await GetWithdrawalHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
@@ -145,10 +144,9 @@ namespace Binance.Net.Clients.SpotApi
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("TravelRuleQuestionnaire", typeof(BinanceWithdrawQuestionnaire), "Travel rule questionnaire", new BinanceWithdrawQuestionnaireEu())
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("TravelRuleQuestionnaire", "Travel rule questionnaire", new BinanceWithdrawQuestionnaireEu())
+            ]
         };
         async Task<ICallResult<SharedId>> IWithdraw.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
             => await WithdrawAsync(request, ct).ConfigureAwait(false);

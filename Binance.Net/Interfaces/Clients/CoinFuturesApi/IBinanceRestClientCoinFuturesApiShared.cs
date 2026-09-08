@@ -34,8 +34,8 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
     /// exchange client libraries.
     /// </summary>
     public interface IBinanceRestClientCoinFuturesSharedApi :
-        IGetFuturesTickerRest,
-        IGetAllFuturesTickersRest,
+        IGetTickerRest,
+        IGetAllTickersRest,
         IGetFuturesSymbolsRest,
         IGetKlinesRest,
         IGetRecentTradesRest,
@@ -59,7 +59,6 @@ namespace Binance.Net.Interfaces.Clients.CoinFuturesApi
         IGetFuturesUserTradeHistoryRest,
         ICancelFuturesOrderRest,
         IGetPositionsRest,
-        IClosePositionRest,
         IGetFuturesOrderByClientOrderIdRest,
         ICancelFuturesOrderByClientOrderIdRest,
         IPlaceFuturesTriggerOrderRest,

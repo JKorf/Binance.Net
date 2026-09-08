@@ -10,7 +10,7 @@ using System.Collections.Concurrent;
 
 namespace Binance.Net.Clients.UsdFuturesApi
 {
-    internal partial class BinanceRestClientUsdFuturesSharedApi : 
+    internal partial class BinanceRestClientUsdFuturesSharedApi :
         SharedApiBase,
         IBinanceRestClientUsdFuturesApiShared,
         IBinanceRestClientUsdFuturesSharedApi
@@ -35,8 +35,8 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 GetKlinesOptions,
                 GetMarkPriceKlinesOptions,
                 GetFuturesSymbolsOptions,
-                GetAllFuturesTickersOptions,
-                GetFuturesTickerOptions,
+                GetAllTickersOptions,
+                GetTickerOptions,
                 GetBookTickerOptions,
                 GetRecentTradesOptions,
                 PlaceFuturesOrderOptions,
@@ -47,7 +47,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 GetFuturesUserTradeHistoryOptions,
                 CancelFuturesOrderOptions,
                 GetPositionsOptions,
-                ClosePositionOptions,
                 GetFuturesOrderByClientOrderIdOptions,
                 CancelFuturesOrderByClientOrderIdOptions,
                 GetLeverageOptions,

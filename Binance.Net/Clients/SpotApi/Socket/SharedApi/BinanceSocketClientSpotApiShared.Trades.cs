@@ -14,10 +14,9 @@ namespace Binance.Net.Clients.SpotApi
         {
             SupportsMultipleSymbols = true,
             MaxSymbolCount = 200,
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("Aggregated", typeof(bool), "Whether to subscribe to aggregated trade updates instead of individual trade updates", true)
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("Aggregated", "Whether to subscribe to aggregated trade updates instead of individual trade updates", true)
+            ]
         };
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<DataEvent<SharedTrade[]>> handler, CancellationToken ct)
         {

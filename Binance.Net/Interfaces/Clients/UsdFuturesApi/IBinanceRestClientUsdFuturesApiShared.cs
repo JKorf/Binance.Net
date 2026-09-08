@@ -35,8 +35,8 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
     /// </summary>
     public interface IBinanceRestClientUsdFuturesSharedApi :
         IGetBalancesRest,
-        IGetFuturesTickerRest,
-        IGetAllFuturesTickersRest,
+        IGetTickerRest,
+        IGetAllTickersRest,
         IGetFuturesSymbolsRest,
         IPlaceFuturesOrderRest,
         IGetFuturesOrderRest,
@@ -46,7 +46,6 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         IGetFuturesUserTradeHistoryRest,
         ICancelFuturesOrderRest,
         IGetPositionsRest,
-        IClosePositionRest,
         IGetKlinesRest,
         IGetRecentTradesRest,
         IGetTradeHistoryRest,

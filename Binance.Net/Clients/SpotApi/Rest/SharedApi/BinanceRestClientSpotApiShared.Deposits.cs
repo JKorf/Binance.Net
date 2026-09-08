@@ -47,10 +47,9 @@ namespace Binance.Net.Clients.SpotApi
 
         public GetDepositHistoryOptions GetDepositHistoryOptions { get; } = new GetDepositHistoryOptions(_exchangeName, false, true, true, 1000)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("TravelRuleEndpoint", typeof(bool), "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("TravelRuleEndpoint", "Whether to use the TravelRule endpoint (true) or not (false, default)", true)
+            ]
         };
         async Task<ICallResult<SharedDeposit[]>> IGetDepositHistory.GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
             => await GetDepositHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);

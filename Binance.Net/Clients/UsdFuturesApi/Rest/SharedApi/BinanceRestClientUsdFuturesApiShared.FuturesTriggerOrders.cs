@@ -16,10 +16,9 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, false)
         {
-            RequiredRequestParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription(nameof(PlaceFuturesTriggerOrderRequest.PositionMode), typeof(SharedPositionMode), "PositionMode the account is in", SharedPositionMode.OneWay)
-            }
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<PlaceFuturesTriggerOrderRequest>.Required(x => x.PositionMode)
+            ]
         };
         async Task<ICallResult<SharedId>> IPlaceFuturesTriggerOrder.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
             => await PlaceFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
@@ -43,6 +42,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 newClientOrderId: request.ClientOrderId,
                 positionSide: request.PositionMode == SharedPositionMode.OneWay ? null : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
                 workingType: GetWorkingType(request),
+                reduceOnly: request.ReduceOnly,
                 ct: ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<SharedId>(result);
