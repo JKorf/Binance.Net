@@ -1,28 +1,29 @@
-﻿using Binance.Net.UnitTests.TestImplementations;
+﻿using Binance.Net.Clients;
+using Binance.Net.Clients.SpotApi;
+using Binance.Net.Interfaces.Clients;
+using Binance.Net.Objects.Models.Spot;
+using Binance.Net.Objects.Options;
+using Binance.Net.UnitTests.TestImplementations;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Requests;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using CryptoExchange.Net.Objects;
-using System.Threading.Tasks;
-using Binance.Net.Objects.Models.Spot;
-using Binance.Net.Clients;
-using Binance.Net.Objects.Options;
-using NUnit.Framework.Legacy;
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Binance.Net.Interfaces.Clients;
-using System.Diagnostics;
-using Binance.Net.Clients.SpotApi;
-using CryptoExchange.Net.Interfaces;
+using System.Threading.Tasks;
 
 namespace Binance.Net.UnitTests
 {
@@ -254,6 +255,54 @@ namespace Binance.Net.UnitTests
 
             Assert.That(missingOptions, Is.Empty);
             Assert.That(missingInterfaces, Is.Empty);
+        }
+
+        [Test]
+        public void TestSpotRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BinanceRestClient().SpotApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestSpotSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BinanceSocketClient().SpotApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestFuturesRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BinanceRestClient().UsdFuturesApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestFuturesSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BinanceSocketClient().UsdFuturesApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestCoinFuturesRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BinanceRestClient().CoinFuturesApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestCoinFuturesSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BinanceSocketClient().CoinFuturesApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
         }
     }
 }
