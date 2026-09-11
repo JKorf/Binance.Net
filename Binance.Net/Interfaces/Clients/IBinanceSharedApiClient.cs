@@ -1,13 +1,14 @@
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+using CryptoExchange.Net.SharedApis;
 
 namespace Binance.Net.Interfaces.Clients
 {
     /// <summary>
     /// Client for the shared REST and WebSocket API implementations of Binance
     /// </summary>
-    public interface IBinanceSharedApiClient
+    public interface IBinanceSharedApiClient : ISharedApiClientBase
     {
         /// <summary>
         /// Spot REST shared API implementations

@@ -2,11 +2,15 @@ using Binance.Net.Interfaces.Clients;
 using Binance.Net.Interfaces.Clients.CoinFuturesApi;
 using Binance.Net.Interfaces.Clients.SpotApi;
 using Binance.Net.Interfaces.Clients.UsdFuturesApi;
+using Binance.Net.Objects.Options;
+using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.Options;
+using System.Net.NetworkInformation;
 
 namespace Binance.Net.Clients
 {
     /// <inheritdoc />
-    public class BinanceSharedApiClient : IBinanceSharedApiClient
+    public class BinanceSharedApiClient : SharedApiClientBase, IBinanceSharedApiClient
     {
         /// <inheritdoc />
         public IBinanceRestClientSpotSharedApi SpotRest { get; }
@@ -26,7 +30,15 @@ namespace Binance.Net.Clients
         /// </summary>
         public BinanceSharedApiClient(
             IBinanceRestClient restClient,
-            IBinanceSocketClient socketClient)
+            IBinanceSocketClient socketClient,
+            IOptions<BinanceOptions> options)
+            : base(options.Value.SharedApi.PreferredTransport,
+                  restClient.SpotApi.SharedApi,
+                  restClient.UsdFuturesApi.SharedApi,
+                  restClient.CoinFuturesApi.SharedApi,
+                  socketClient.SpotApi.SharedApi,
+                  socketClient.UsdFuturesApi.SharedApi,
+                  socketClient.CoinFuturesApi.SharedApi)
         {
             SpotRest = restClient.SpotApi.SharedApi;
             UsdFuturesRest = restClient.UsdFuturesApi.SharedApi;

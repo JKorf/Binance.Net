@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Objects.Options;
+using CryptoExchange.Net.SharedApis;
 
 namespace Binance.Net.Objects.Options
 {
@@ -16,5 +17,9 @@ namespace Binance.Net.Objects.Options
         /// * Toggling this option might fail operations using a clientOrderId parameter for pre-existing orders which were placed before the toggle. Operations on orders placed after the toggle will work as expected. It's advised to toggle when there are no open orders
         /// </summary>
         public bool AllowAppendingClientOrderId { get; set; } = false;
+        /// <summary>
+        /// Options for Shared API usage
+        /// </summary>
+        public SharedApiOptions SharedApi { get; set; } = new();
     }
 }
