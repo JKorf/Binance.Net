@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var options = BinanceOptions.Create(configuration);
+            var options = BinanceOptions.CreateFromConfiguration(configuration);
 
             services.AddSingleton(Options.Options.Create(options.Rest));
             services.AddSingleton(Options.Options.Create(options.Socket));

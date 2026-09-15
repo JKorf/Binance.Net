@@ -1,6 +1,7 @@
 ﻿using CryptoExchange.Net.Objects.Options;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Binance.Net.Objects.Options
 {
@@ -36,7 +37,7 @@ namespace Binance.Net.Objects.Options
         /// <summary>
         /// Create BinanceOptions using the provided IConfiguration
         /// </summary>
-        public static BinanceOptions Create(IConfiguration configuration)
+        public static BinanceOptions CreateFromConfiguration(IConfiguration configuration)
         {
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
