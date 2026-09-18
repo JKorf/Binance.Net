@@ -24,7 +24,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public BinanceRestClientUsdFuturesSharedApi(BinanceRestClientUsdFuturesApi api)
             : base(
                   SharedTransport.Rest,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear },
                   () => api.Authenticated,
                   api.FormatSymbol)

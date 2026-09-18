@@ -127,6 +127,8 @@ For more examples and explanations, continue with the [Binance.Net documentation
 
 The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/docs/shared-api) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
 
+For new Shared API code, use the V2 `SharedApi` capabilities. The examples and interface table below describe the still-supported V1 `SharedClient` facade; see the [V1 to V2 migration guide](https://cryptoexchange.jkorf.dev/docs/shared-api/migration) to upgrade one operation at a time.
+
 This allows the same application code to work with different exchange libraries. Each Binance API surface exposes its supported shared functionality through a `SharedClient` property. Because support differs between exchanges and API surfaces, call `Discover()` to inspect the available trading modes, environments, endpoints, and subscriptions at runtime.
 
 ### Supported shared interfaces

@@ -26,7 +26,7 @@ namespace Binance.Net.Clients.SpotApi
         public BinanceRestClientSpotSharedApi(BinanceRestClientSpotApi api)
             : base(
                   SharedTransport.Rest,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.Spot },
                   () => api.Authenticated,
                   api.FormatSymbol)

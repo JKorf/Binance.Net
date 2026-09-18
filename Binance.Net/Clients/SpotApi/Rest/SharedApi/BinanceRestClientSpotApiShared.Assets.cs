@@ -20,7 +20,7 @@ namespace Binance.Net.Clients.SpotApi
         public GetAllAssetsOptions GetAllAssetsOptions { get; }
             = new GetAllAssetsOptions(_exchangeName, true);
 
-        async Task<ICallResult<SharedAsset[]>> IGetAllAssets.GetAllAssetsAsync(GetAssetsRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedAsset[]>> IGetAllAssets.GetAllAssetsAsync(GetAssetsRequest request, CancellationToken ct)
             => await GetAllAssetsAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedAsset[]>> GetAllAssetsAsync(GetAssetsRequest request, CancellationToken ct)
@@ -56,7 +56,7 @@ namespace Binance.Net.Clients.SpotApi
         #region Get Asset
 
         public GetAssetOptions GetAssetOptions { get; } = new GetAssetOptions(_exchangeName, true);
-        async Task<ICallResult<SharedAsset>> IGetAsset.GetAssetAsync(GetAssetRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedAsset>> IGetAsset.GetAssetAsync(GetAssetRequest request, CancellationToken ct)
             => await GetAssetAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedAsset>> GetAssetAsync(GetAssetRequest request, CancellationToken ct)

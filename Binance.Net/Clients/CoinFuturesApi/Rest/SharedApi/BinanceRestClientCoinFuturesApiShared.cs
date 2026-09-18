@@ -25,7 +25,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
         public BinanceRestClientCoinFuturesSharedApi(BinanceRestClientCoinFuturesApi api)
             : base(
                   SharedTransport.Rest,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse },
                   () => api.Authenticated,
                   api.FormatSymbol)

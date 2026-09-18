@@ -105,7 +105,7 @@ namespace Binance.Net.Clients.SpotApi
 
         public string GenerateClientOrderId() => ExchangeHelpers.RandomString(20);
 
-        async Task<ICallResult<SharedId>> IPlaceSpotOrder.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedId>> IPlaceSpotOrder.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
             => await PlaceSpotOrderAsync(request, ct).ConfigureAwait(false);
 
         PlaceSpotOrderOptions IPlaceSpotOrder.PlaceSpotOrderOptions
@@ -145,7 +145,7 @@ namespace Binance.Net.Clients.SpotApi
 
         public CancelSpotOrderSocketOptions CancelSpotOrderOptions { get; }
             = new CancelSpotOrderSocketOptions(_exchangeName, true);
-        async Task<ICallResult<SharedId>> ICancelSpotOrder.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedId>> ICancelSpotOrder.CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)
             => await CancelSpotOrderAsync(request, ct).ConfigureAwait(false);
 
         public async Task<QueryResult<SharedId>> CancelSpotOrderAsync(CancelOrderRequest request, CancellationToken ct)

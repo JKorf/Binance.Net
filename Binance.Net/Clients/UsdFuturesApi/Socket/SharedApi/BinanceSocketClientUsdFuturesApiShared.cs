@@ -22,7 +22,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public BinanceSocketClientUsdFuturesSharedApi(BinanceSocketClientUsdFuturesApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear },
                   () => api.Authenticated,
                   api.FormatSymbol)
