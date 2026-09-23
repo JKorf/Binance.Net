@@ -18,4 +18,23 @@ namespace Binance.Net.Interfaces.Clients.UsdFuturesApi
         IFuturesOrderManagementSocketClient
     {
     }
+
+    /// <summary>
+    /// Shared API interface. Shared APIs provide a common,
+    /// exchange-independent contract for accessing functionality across different
+    /// exchange client libraries.
+    /// </summary>
+    public interface IBinanceSocketClientUsdFuturesSharedApi :
+        ISubscribeTickerSocket,
+        ISubscribeAllTickersSocket,
+        ISubscribeTradesSocket,
+        ISubscribeBookTickerSocket,
+        ISubscribeOrderBookSocket,
+        ISubscribeKlinesSocket,
+        ISubscribeBalancesSocket,
+        ISubscribePositionsSocket,
+        ISubscribeFuturesOrdersSocket,
+        IPlaceFuturesOrderSocket,
+        ICancelFuturesOrderSocket
+    { }
 }

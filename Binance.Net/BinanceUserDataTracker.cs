@@ -17,11 +17,15 @@ namespace Binance.Net
             string? userIdentifier,
             SpotUserDataTrackerConfig? config = null) : base(
                 logger,
-                restClient.SpotApi.SharedClient,
-                restClient.SpotApi.SharedClient,
-                socketClient.SpotApi.SharedClient,
-                restClient.SpotApi.SharedClient,
-                socketClient.SpotApi.SharedClient,
+                restClient.SpotApi.SharedApi,
+                restClient.SpotApi.SharedApi,
+                socketClient.SpotApi.SharedApi,
+
+                restClient.SpotApi.SharedApi,
+                restClient.SpotApi.SharedApi,
+                socketClient.SpotApi.SharedApi,
+
+                restClient.SpotApi.SharedApi,
                 null,
                 userIdentifier, 
                 config ?? new SpotUserDataTrackerConfig())
@@ -46,13 +50,19 @@ namespace Binance.Net
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config = null) : 
             base(logger,
-                restClient.UsdFuturesApi.SharedClient,
-                restClient.UsdFuturesApi.SharedClient,
-                socketClient.UsdFuturesApi.SharedClient,
-                restClient.UsdFuturesApi.SharedClient,
-                socketClient.UsdFuturesApi.SharedClient,
+                restClient.UsdFuturesApi.SharedApi,
+                restClient.UsdFuturesApi.SharedApi,
+                socketClient.UsdFuturesApi.SharedApi,
+
+                restClient.UsdFuturesApi.SharedApi,
+                restClient.UsdFuturesApi.SharedApi,
+                socketClient.UsdFuturesApi.SharedApi,
+
+                restClient.UsdFuturesApi.SharedApi,
                 null,
-                socketClient.UsdFuturesApi.SharedClient,
+
+                restClient.UsdFuturesApi.SharedApi,
+                socketClient.UsdFuturesApi.SharedApi,
                 userIdentifier,
                 config ?? new FuturesUserDataTrackerConfig())
         {
@@ -75,13 +85,19 @@ namespace Binance.Net
             IBinanceSocketClient socketClient,
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config = null) : base(logger,
-                restClient.CoinFuturesApi.SharedClient,
-                restClient.CoinFuturesApi.SharedClient,
-                socketClient.CoinFuturesApi.SharedClient,
-                restClient.CoinFuturesApi.SharedClient,
-                socketClient.CoinFuturesApi.SharedClient,
+                restClient.UsdFuturesApi.SharedApi,
+                restClient.UsdFuturesApi.SharedApi,
+                socketClient.UsdFuturesApi.SharedApi,
+
+                restClient.UsdFuturesApi.SharedApi,
+                restClient.UsdFuturesApi.SharedApi,
+                socketClient.UsdFuturesApi.SharedApi,
+
+                restClient.UsdFuturesApi.SharedApi,
                 null,
-                socketClient.CoinFuturesApi.SharedClient,
+
+                restClient.UsdFuturesApi.SharedApi,
+                socketClient.UsdFuturesApi.SharedApi,
                 userIdentifier,
                 config ?? new FuturesUserDataTrackerConfig())
         {
