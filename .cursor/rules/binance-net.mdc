@@ -75,12 +75,12 @@ For exchange-agnostic code, use `CryptoExchange.Net.SharedApis`:
 ```csharp
 using CryptoExchange.Net.SharedApis;
 
-var shared = new BinanceRestClient().SpotApi.SharedClient;
-var ticker = await shared.GetSpotTickerAsync(
+var shared = new BinanceRestClient().SpotApi.SharedApi;
+var ticker = await shared.GetTickerAsync(
     new GetTickerRequest(new SharedSymbol(TradingMode.Spot, "BTC", "USDT")));
 ```
 
-Same code works against `OKXRestClient().UnifiedApi.SharedClient`, `BybitRestClient().V5Api.SharedClient`, and 25+ other exchanges.
+Same code works against `OKXRestClient().UnifiedApi.SharedApi`, `BybitRestClient().V5Api.SharedApi`, and 25+ other exchanges.
 
 Shared symbol results include display names and asset type/subtype metadata, and the symbol clients expose populated `SpotSymbolCatalog` / `FuturesSymbolCatalog` caches.
 
@@ -94,7 +94,7 @@ Shared symbol results include display names and asset type/subtype metadata, and
 - ❌ Never pass a custom `clientOrderId` to `PlaceOrderAsync` unless required
 - ✅ Always use `BinanceCredentials("key", "secret")`, not generic `ApiCredentials`
 - ✅ Always store WebSocket subscriptions and unsubscribe on shutdown
-- ✅ Always use `var binanceShared = client.SpotApi.SharedClient` for cross-exchange code
+- ✅ Always use `var binanceShared = client.SpotApi.SharedApi` for cross-exchange code
 
 ## Reference
 

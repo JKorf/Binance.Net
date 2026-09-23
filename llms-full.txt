@@ -31,7 +31,7 @@ Primary documentation:
 - Do not call `.Result` or `.Wait()` on async methods.
 - Do not invent endpoint names. If unsure, inspect `Binance.Net/Interfaces/Clients/**`.
 - Do not pass custom client order IDs unless the user explicitly needs correlation with an external system. Let the library auto-generate IDs in ordinary examples.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.SharedClient.Discover()` before routing optional shared features.
+- Use the exchange-level `IBinanceSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Installation
 
@@ -196,19 +196,19 @@ BinanceRestClient
     .ExchangeData
     .Account
     .Trading
-    .SharedClient
+    .SharedApi
   .UsdFuturesApi
     .ExchangeData
     .Account
     .Trading
     .Agent
-    .SharedClient
+    .SharedApi
   .CoinFuturesApi
     .ExchangeData
     .Account
     .Trading
     .Agent
-    .SharedClient
+    .SharedApi
   .GeneralApi
     .Brokerage
     .Futures
@@ -231,17 +231,17 @@ BinanceSocketClient
     .ExchangeData
     .Account
     .Trading
-    .SharedClient
+    .SharedApi
   .UsdFuturesApi
     .ExchangeData
     .Account
     .Trading
-    .SharedClient
+    .SharedApi
   .CoinFuturesApi
     .ExchangeData
     .Account
     .Trading
-    .SharedClient
+    .SharedApi
 ```
 
 Important: margin and portfolio margin endpoints are not separate top-level `SpotApi.Margin` or `SpotApi.PortfolioMargin` properties. They are under `SpotApi.Account` and `SpotApi.Trading` where applicable.
@@ -423,17 +423,13 @@ using Binance.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
 var restClient = new BinanceRestClient();
-ISpotTickerRestClient tickerClient = restClient.SpotApi.SharedClient;
+IGetTickerRest tickerClient = restClient.SpotApi.SharedApi;
 
-var sharedInfo = restClient.SpotApi.SharedClient.Discover();
-var supportedFeatures = sharedInfo.Features
-    .Where(x => x.Supported)
-    .Select(x => x.EndpointName);
-Console.WriteLine($"{sharedInfo.Exchange} {sharedInfo.TypeName}: {string.Join(", ", supportedFeatures)}");
+// Use the exchange-level `IBinanceSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
 
-var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
+var ticker = await tickerClient.GetTickerAsync(new GetTickerRequest(symbol));
 if (!ticker.Success)
 {
     Console.WriteLine(ticker.Error);
@@ -447,7 +443,7 @@ Shared WebSocket subscriptions return an `UpdateSubscription` in `.Data`. For sh
 
 ```csharp
 var socketClient = new BinanceSocketClient();
-ITickerSocketClient tickerSocket = socketClient.SpotApi.SharedClient;
+ISubscribeTickerSocket tickerSocket = socketClient.SpotApi.SharedApi;
 
 var sub = await tickerSocket.SubscribeToTickerUpdatesAsync(
     new SubscribeTickerRequest(new SharedSymbol(TradingMode.Spot, "BTC", "USDT")),
@@ -464,9 +460,9 @@ Console.ReadLine();
 await socketClient.UnsubscribeAsync(sub.Data);
 ```
 
-Do not call `tickerSocket.UnsubscribeAsync(...)` on `ITickerSocketClient`; that shared interface does not expose the method.
+Do not call `tickerSocket.UnsubscribeAsync(...)` on `ISubscribeTickerSocket`; that shared interface does not expose the method.
 
-Shared socket order placement and cancellation are exposed by `ISpotOrderManagementSocketClient` for Spot and `IFuturesOrderManagementSocketClient` for USD-M and COIN-M. Use `.SharedClient.Discover()` before relying on these optional cross-exchange capabilities.
+Use the exchange-level `IBinanceSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 Shared symbol clients expose `SpotSymbolCatalog` or `FuturesSymbolCatalog` after `GetSpotSymbolsAsync` / `GetFuturesSymbolsAsync` has loaded the cache. Returned `SharedSpotSymbol` and `SharedFuturesSymbol` models include `DisplayName`, `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType`.
 

@@ -13,13 +13,13 @@ Use this file to route common user intents to the correct Binance.Net client mem
 | Testnet environment | `BinanceEnvironment.Testnet` |
 | Binance.US environment | `BinanceEnvironment.Us` |
 | Dependency injection | `services.AddBinance(options => { ... })` |
-| Shared spot REST client | `client.SpotApi.SharedClient` |
-| Shared USD-M futures REST client | `client.UsdFuturesApi.SharedClient` |
-| Shared COIN-M futures REST client | `client.CoinFuturesApi.SharedClient` |
-| Shared spot socket client | `socketClient.SpotApi.SharedClient` |
-| Shared USD-M futures socket client | `socketClient.UsdFuturesApi.SharedClient` |
-| Shared COIN-M futures socket client | `socketClient.CoinFuturesApi.SharedClient` |
-| Discover shared capabilities | `client.SpotApi.SharedClient.Discover()` / `client.UsdFuturesApi.SharedClient.Discover()` / `client.CoinFuturesApi.SharedClient.Discover()` |
+| Shared spot REST client | `client.SpotApi.SharedApi` |
+| Shared USD-M futures REST client | `client.UsdFuturesApi.SharedApi` |
+| Shared COIN-M futures REST client | `client.CoinFuturesApi.SharedApi` |
+| Shared spot socket client | `socketClient.SpotApi.SharedApi` |
+| Shared USD-M futures socket client | `socketClient.UsdFuturesApi.SharedApi` |
+| Shared COIN-M futures socket client | `socketClient.CoinFuturesApi.SharedApi` |
+| Resolve a runtime-selected Shared API capability | `IBinanceSharedApiClient.GetCapability(...)` |
 
 ## Spot REST
 
@@ -172,22 +172,22 @@ Use SharedApis for exchange-agnostic code across Binance, Bybit, OKX, Kraken, an
 
 | User intent | Binance.Net member or interface |
 |---|---|
-| Shared spot REST client | `new BinanceRestClient().SpotApi.SharedClient` |
-| Shared USD-M futures REST client | `new BinanceRestClient().UsdFuturesApi.SharedClient` |
-| Shared COIN-M futures REST client | `new BinanceRestClient().CoinFuturesApi.SharedClient` |
-| Shared spot socket client | `new BinanceSocketClient().SpotApi.SharedClient` |
-| Shared USD-M futures socket client | `new BinanceSocketClient().UsdFuturesApi.SharedClient` |
-| Shared COIN-M futures socket client | `new BinanceSocketClient().CoinFuturesApi.SharedClient` |
-| Discover shared capabilities | `.SharedClient.Discover()` |
-| Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
-| Shared spot order REST | `ISpotOrderRestClient.PlaceSpotOrderAsync(...)` |
-| Shared futures order REST | `IFuturesOrderRestClient.PlaceFuturesOrderAsync(...)` |
-| Shared ticker socket | `ITickerSocketClient.SubscribeToTickerUpdatesAsync(...)` |
-| Shared order book socket | `IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(...)` |
-| Shared spot order socket API | `ISpotOrderManagementSocketClient.PlaceSpotOrderAsync(...)` / `CancelSpotOrderAsync(...)` |
-| Shared futures order socket API (USD-M and COIN-M) | `IFuturesOrderManagementSocketClient.PlaceFuturesOrderAsync(...)` / `CancelFuturesOrderAsync(...)` |
-| Load typed spot symbols and catalog | `ISpotSymbolRestClient.GetSpotSymbolsAsync(...)`, then `.SpotSymbolCatalog` |
-| Load typed futures symbols and catalog | `IFuturesSymbolRestClient.GetFuturesSymbolsAsync(...)`, then `.FuturesSymbolCatalog` |
+| Shared spot REST client | `new BinanceRestClient().SpotApi.SharedApi` |
+| Shared USD-M futures REST client | `new BinanceRestClient().UsdFuturesApi.SharedApi` |
+| Shared COIN-M futures REST client | `new BinanceRestClient().CoinFuturesApi.SharedApi` |
+| Shared spot socket client | `new BinanceSocketClient().SpotApi.SharedApi` |
+| Shared USD-M futures socket client | `new BinanceSocketClient().UsdFuturesApi.SharedApi` |
+| Shared COIN-M futures socket client | `new BinanceSocketClient().CoinFuturesApi.SharedApi` |
+| Resolve a runtime-selected Shared API capability | `IBinanceSharedApiClient.GetCapability(...)` |
+| Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
+| Shared spot order REST | `IPlaceSpotOrderRest.PlaceSpotOrderAsync(...)` |
+| Shared futures order REST | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync(...)` |
+| Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(...)` |
+| Shared order book socket | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync(...)` |
+| Shared spot order socket API | `IPlaceSpotOrderSocket.PlaceSpotOrderAsync(...)` / `ICancelSpotOrderSocket.CancelSpotOrderAsync(...)` |
+| Shared futures order socket API (USD-M and COIN-M) | `IPlaceFuturesOrderSocket.PlaceFuturesOrderAsync(...)` / `ICancelFuturesOrderSocket.CancelFuturesOrderAsync(...)` |
+| Load typed spot symbols and catalog | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(...)`, then `.SpotSymbolCatalog` |
+| Load typed futures symbols and catalog | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync(...)`, then `.FuturesSymbolCatalog` |
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
@@ -217,6 +217,6 @@ Shared spot and futures symbols include `DisplayName`, `BaseAssetType` / `BaseAs
 | `SpotApi.SubAccount` | `GeneralApi.SubAccount` |
 | `GeneralApi.Loans` | `GeneralApi.CryptoLoans` |
 | `.Data` without `.Success` check | Check `.Success` first |
-| `ITickerSocketClient.UnsubscribeAsync(...)` | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
+| Unsubscribe from a shared subscription | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
 | Custom `clientOrderId` by default | Let Binance.Net auto-generate it |
 | `positionSide` in every futures order | Include only when hedge mode is intended |
