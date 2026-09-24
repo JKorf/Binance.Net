@@ -4,7 +4,7 @@
 
 Binance.Net is a strongly typed .NET client library for the Binance REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, and socket patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 13.5.1.
+Current package version in this repository: 13.6.0.
 CryptoExchange.Net dependency: 12.5.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
