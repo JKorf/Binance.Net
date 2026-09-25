@@ -48,6 +48,11 @@ namespace Binance.Net.Enums
         /// </summary>
         [Map("CN_EQUITY")]
         CnEquity,
+        /// <summary>
+        /// ["<c>FX</c>"] FX market
+        /// </summary>
+        [Map("FX")]
+        FxMarket,
     }
 }
 
