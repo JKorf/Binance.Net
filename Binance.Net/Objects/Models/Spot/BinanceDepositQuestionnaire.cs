@@ -47,6 +47,11 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonIgnore]
         public static BinanceDepositQuestionnaireAustralia Australia => new BinanceDepositQuestionnaireAustralia();
+        /// <summary>
+        /// Create a questionnaire for a deposit for Brazil
+        /// </summary>
+        [JsonIgnore]
+        public static BinanceDepositQuestionnaireBrazil Brazil => new BinanceDepositQuestionnaireBrazil();
 
 #pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
 #pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
@@ -566,6 +571,110 @@ namespace Binance.Net.Objects.Models.Spot
         /// </summary>
         [JsonPropertyName("declaration")]
         public bool Declaration { get; set; }
+    }
+
+    /// <summary>
+    /// Brazil deposit questionnaire
+    /// </summary>
+    public record BinanceDepositQuestionnaireBrazil : BinanceDepositQuestionnaire
+    {
+        /// <summary>
+        /// ["<c>depositOriginator</c>"] 1:Myself, 2:Not Myself
+        /// </summary>
+        [JsonPropertyName("depositOriginator")]
+        public int DepositOriginator { get; set; }
+        /// <summary>
+        /// ["<c>receiveFrom</c>"] 1:Private Wallet, 2:Another VASP
+        /// </summary>
+        [JsonPropertyName("receiveFrom")]
+        public int ReceiveFrom { get; set; }
+        /// <summary>
+        /// ["<c>vasp</c>"] VASP identifier of the originator. Required when ReceiveFrom is 2
+        /// </summary>
+        [JsonPropertyName("vasp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Vasp { get; set; }
+        /// <summary>
+        /// ["<c>declaration</c>"] Declaration confirmation
+        /// </summary>
+        [JsonPropertyName("declaration")]
+        public bool Declaration { get; set; }
+        /// <summary>
+        /// ["<c>orgType</c>"] 0:Individual, 1:Corporate/Entity
+        /// </summary>
+        [JsonPropertyName("orgType")]
+        public int OrgType { get; set; }
+        /// <summary>
+        /// ["<c>orgFirstName</c>"] Originator's first name. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("orgFirstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrgFirstName { get; set; }
+        /// <summary>
+        /// ["<c>orgLastName</c>"] Originator's last name. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("orgLastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? OrgLastName { get; set; }
+        /// <summary>
+        /// ["<c>country</c>"] Originator's country code, ISO 2 digit, lower case. Required when OrgType is 0
+        /// </summary>
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Country { get; set; }
+        /// <summary>
+        /// ["<c>corpName</c>"] Corporation/entity name. Required when OrgType is 1
+        /// </summary>
+        [JsonPropertyName("corpName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CorpName { get; set; }
+        /// <summary>
+        /// ["<c>corpCountry</c>"] Corporation country code, ISO 2 digit, lower case. Required when OrgType is 1
+        /// </summary>
+        [JsonPropertyName("corpCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CorpCountry { get; set; }
+        /// <summary>
+        /// ["<c>cpf</c>"] CPF (Brazilian individual taxpayer number). Required when depositOriginator is 2 and the originator country is br (domestic)
+        /// </summary>
+        [JsonPropertyName("cpf")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Cpf { get; set; }
+        /// <summary>
+        /// ["<c>cnpj</c>"] CNPJ (Brazilian corporate taxpayer number). Required when depositOriginator is 2 and the originator country is br (domestic)
+        /// </summary>
+        [JsonPropertyName("cnpj")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Cnpj { get; set; }
+        /// <summary>
+        /// ["<c>individualTaxId</c>"] Individual taxpayer identification number.  Required when DepositOriginator is 2 and the originator country is not br (international)
+        /// </summary>
+        [JsonPropertyName("individualTaxId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? IndividualTaxId { get; set; }
+        /// <summary>
+        /// ["<c>corporateTaxId</c>"] Corporate taxpayer identification number. Required when DepositOriginator is 2 and the originator country is not br (international)
+        /// </summary>
+        [JsonPropertyName("corporateTaxId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CorporateTaxId { get; set; }
+        /// <summary>
+        /// ["<c>txnPurpose</c>"] Purpose of transaction code (e.g. 12995). Required for international transfers
+        /// </summary>
+        [JsonPropertyName("txnPurpose")]
+        public string TxnPurpose { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>counterpartyType</c>"] Counterparty type. Required for international transfers
+        /// </summary>
+        [JsonPropertyName("counterpartyType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? CounterpartyType { get; set; }
+        /// <summary>
+        /// ["<c>relationship</c>"] Relationship. Required for international transfers from a Corporate/Entity originator
+        /// </summary>
+        [JsonPropertyName("relationship")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? Relationship { get; set; }
     }
 }
 

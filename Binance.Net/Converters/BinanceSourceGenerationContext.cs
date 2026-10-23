@@ -38,6 +38,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireEu))]
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireSouthAfrica))]
     [JsonSerializable(typeof(BinanceWithdrawQuestionnaireAustralia))]
+    [JsonSerializable(typeof(BinanceWithdrawQuestionnaireBrazil))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireJapan))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireKazakhstan))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireBahrain))]
@@ -46,6 +47,7 @@ namespace Binance.Net.Converters
     [JsonSerializable(typeof(BinanceDepositQuestionnaireEu))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireSouthAfrica))]
     [JsonSerializable(typeof(BinanceDepositQuestionnaireAustralia))]
+    [JsonSerializable(typeof(BinanceDepositQuestionnaireBrazil))]
 
     [JsonSerializable(typeof(BinanceTravelRuleDeposit[]))]
     [JsonSerializable(typeof(BinanceTravelRuleWithdrawal[]))]
