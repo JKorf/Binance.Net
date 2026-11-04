@@ -30,10 +30,10 @@ namespace Binance.Net.Objects.Models.Futures
         [JsonPropertyName("isLocked")]
         public bool IsLocked { get; set; }
         /// <summary>
-        /// ["<c>plannedRecoveryTime</c>"] Planned time when indicator is unlocked
+        /// ["<c>plannedRecoverTime</c>"] Planned time when indicator is unlocked
         /// </summary>
         [JsonConverter(typeof(DateTimeConverter))]
-        [JsonPropertyName("plannedRecoveryTime")]
+        [JsonPropertyName("plannedRecoverTime")]
         public DateTime? PlannedRecoveryTime { get; set; }
         /// <summary>
         /// ["<c>indicator</c>"] The indicator name
