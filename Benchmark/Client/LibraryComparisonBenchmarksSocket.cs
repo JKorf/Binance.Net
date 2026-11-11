@@ -1,4 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using Binance.Api;
 using Binance.Net.Clients;
@@ -14,18 +14,16 @@ namespace Binance.Net.Benchmark.Client
 {
     [MemoryDiagnoser]
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
-    [SimpleJob(RuntimeMoniker.Net48)]
-    [SimpleJob(RuntimeMoniker.Net10_0)]
+    [SimpleJob(RuntimeMoniker.Net48, invocationCount: 1)]
+    [SimpleJob(RuntimeMoniker.Net11_0, invocationCount: 1)]
     public class LibraryComparisonBenchmarksSocket
     {
-        private static readonly int _socketUpdateReceiveTarget = 10_0000;
-
         private BinanceSocketClient _binanceNetClient;
-        private ccxt.pro.binance _ccxtClient;
+        private BenchmarkCcxtClient _ccxtClient;
         private BinanceSocketApiClient _binanceApiClient;
 
-        [GlobalSetup]
-        public async Task Setup()
+        [GlobalSetup(Targets = [nameof(BinanceNet_Trades), nameof(BinanceNetShared_Trades), nameof(BinanceApi_Trades)])]
+        public void Setup()
         {
             var env = BinanceEnvironment.CreateCustom(
                 "Benchmark",
@@ -47,14 +45,20 @@ namespace Binance.Net.Benchmark.Client
                 Environment = env,
             }), null);
 
-            _ccxtClient = CreateWs();
-            await _ccxtClient.LoadMarkets();
+
 
             _binanceApiClient = new BinanceSocketApiClient(new BinanceSocketApiClientOptions
             {
                 AutoReconnect = false,
             });
             BinanceAddress.Default.SpotSocketApiStreamAddress = "ws://localhost:" + Program.ServerPort;
+        }
+
+        [IterationSetup(Target = nameof(CCXT_Trades))]
+        public void SetupCcxt()
+        {
+            _ccxtClient = CreateWs();
+            _ccxtClient.LoadMarkets().GetAwaiter().GetResult();
         }
 
         [Benchmark(Baseline = true), IterationCount(25)]
@@ -65,12 +69,22 @@ namespace Binance.Net.Benchmark.Client
             var result = await _binanceNetClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
             {
                 received++;
-                if (received == _socketUpdateReceiveTarget)
+
+                if (received == TradeStream.Count)
                     waitEvent.Set();
             }, CancellationToken.None);
 
-            await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
+            if (!result.Success)
+                throw new InvalidOperationException(result.Error.ToString());
+            try
+            {
+                if (!await waitEvent.WaitAsync(TimeSpan.FromSeconds(30)))
+                    throw new TimeoutException($"Received {received} of {TradeStream.Count} trades.");
+            }
+            finally
+            {
+                await result.Data.CloseAsync();
+            }
         }
 
         [Benchmark, IterationCount(25)]
@@ -82,35 +96,58 @@ namespace Binance.Net.Benchmark.Client
             var result = await _binanceNetClient.SpotApi.SharedClient.SubscribeToTradeUpdatesAsync(request, x =>
             {
                 received++;
-                if (received == _socketUpdateReceiveTarget)
+                if (received == TradeStream.Count)
                     waitEvent.Set();
             }, CancellationToken.None);
 
-            await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
+            if (!result.Success)
+                throw new InvalidOperationException(result.Error.ToString());
+            try
+            {
+                if (!await waitEvent.WaitAsync(TimeSpan.FromSeconds(30)))
+                    throw new TimeoutException($"Received {received} of {TradeStream.Count} trades.");
+            }
+            finally
+            {
+                await result.Data.CloseAsync();
+            }
         }
 
         [Benchmark, IterationCount(25)]
         public async Task CCXT_Trades()
         {
-            var waitEvent = new AsyncResetEvent(false, false);
-            var received = 0;
-            _ = Task.Run(async () =>
+            using var timeout = new CancellationTokenSource();
+            var deadline = Task.Delay(TimeSpan.FromSeconds(30), timeout.Token);
+            try
             {
-                while (true)
-                {
-                    var trades = await _ccxtClient.WatchTrades("ETH/USDT");
-                    received += trades.Count;
+                var subscription = _ccxtClient.WatchTrades("ETH/USDT");
+                if (await Task.WhenAny(subscription, deadline) == deadline)
+                    throw new TimeoutException("CCXT did not deliver the first ETH/USDT trade batch.");
+                await subscription;
 
-                    if (received >= _socketUpdateReceiveTarget)
-                        break;
-                }
+                if (await Task.WhenAny(_ccxtClient.StreamCompleted, deadline) == deadline)
+                    throw new TimeoutException($"CCXT processed {_ccxtClient.Received} of {TradeStream.Count} trades.");
+            }
+            finally
+            {
+                timeout.Cancel();
+                await _ccxtClient.Close();
+            }
+        }
 
-                waitEvent.Set();
-            });
+        private sealed class BenchmarkCcxtClient : ccxt.pro.binance
+        {
+            private readonly TaskCompletionSource<bool> _completed = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            public Task StreamCompleted => _completed.Task;
+            public int Received { get; private set; }
 
-            await waitEvent.WaitAsync();
-            await _ccxtClient.Close();
+            public override void handleTrade(ccxt.Exchange.WebSocketClient client, object message)
+            {
+                base.handleTrade(client, message);
+                // WatchTrades delivers batches and can miss the last notification between awaits.
+                if (++Received == TradeStream.Count)
+                    _completed.TrySetResult(true);
+            }
         }
 
         [Benchmark, IterationCount(25)]
@@ -121,12 +158,21 @@ namespace Binance.Net.Benchmark.Client
             var result = await _binanceApiClient.Spot.SubscribeToTradesAsync(["ETHUSDT"], x =>
             {
                 received++;
-                if (received == _socketUpdateReceiveTarget)
+                if (received == TradeStream.Count)
                     waitEvent.Set();
             }, CancellationToken.None);
 
-            await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
+            if (!result.Success)
+                throw new InvalidOperationException(result.Error.ToString());
+            try
+            {
+                if (!await waitEvent.WaitAsync(TimeSpan.FromSeconds(30)))
+                    throw new TimeoutException($"Received {received} of {TradeStream.Count} trades.");
+            }
+            finally
+            {
+                await result.Data.CloseAsync();
+            }
         }
 
         [GlobalCleanup]
@@ -134,14 +180,17 @@ namespace Binance.Net.Benchmark.Client
         {
             _binanceNetClient?.Dispose();
         }
-        public static ccxt.pro.binance CreateWs()
+        private static BenchmarkCcxtClient CreateWs()
         {
-            var client = new ccxt.pro.binance();
+            var client = new BenchmarkCcxtClient();
             client.enableRateLimit = false;
             client.newUpdates = true;
+            client.options["tradesLimit"] = TradeStream.Count;
 
             var urls = (Dictionary<string, object>)client.urls;
             var apiUrls = (Dictionary<string, object>)urls["api"];
+            apiUrls["public"] = "http://localhost:" + Program.ServerPort + "/api/v3";
+            client.options["fetchMarkets"] = new Dictionary<string, object> { ["types"] = new List<object> { "spot" } };
             apiUrls["ws"] = new Dictionary<string, object>
             {
                 ["spot"] = "ws://localhost:" + Program.ServerPort + "/stream",

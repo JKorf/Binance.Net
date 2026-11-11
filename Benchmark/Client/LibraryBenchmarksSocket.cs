@@ -1,4 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
@@ -15,7 +15,9 @@ namespace Binance.Net.Benchmark.Client
 {
 
     [MemoryDiagnoser]
+#if !VERSION_COMPARISON
     [Config(typeof(Config))]
+#endif
     public class LibraryBenchmarksSocket
     {
         private class Config : ManualConfig
@@ -26,9 +28,9 @@ namespace Binance.Net.Benchmark.Client
 
                 AddJob(
                     baseJob
-                        .WithId("NET10_0")
+                        .WithId("NET11_0")
                         .WithIterationCount(20)
-                        .WithRuntime(CoreRuntime.Core10_0));
+                        .WithRuntime(CoreRuntime.Core11_0));
                 AddJob(
                     baseJob
                         .WithId("NET481")
@@ -40,94 +42,53 @@ namespace Binance.Net.Benchmark.Client
         public BinanceSocketClient SocketClient;
         public ILogger Logger;
 
-        private const int _socketUpdateReceiveTarget = 1000000;
-
-
         [GlobalSetup()]
         public void Setup()
         {
+#if VERSION_COMPARISON
+            Program.VerifyLibraries();
+#endif
             CreateClient();
         }
 
-        [IterationSetup(Target = nameof(Socket100Topics))]
-        public void IterationSetupMultiTopic()
-        {
-            Task.Run(async () =>
-            {
-                for (var i = 0; i < 10; i++)
-                {
-                    var subTopics = new string[10];
-                    for (var j = 0; j < 10; j++)
-                        subTopics[j] = "DUMMY" + i;
-
-                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(subTopics, x => { }, CancellationToken.None);
-                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToAggregatedTradeUpdatesAsync(subTopics, x => { }, CancellationToken.None);
-                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToBookTickerUpdatesAsync(subTopics, x => { }, CancellationToken.None);
-                    _ = await SocketClient.SpotApi.ExchangeData.SubscribeToOrderBookUpdatesAsync(subTopics, null, x => { }, CancellationToken.None);
-                }
-            }).Wait();
-        }
-
-        [IterationCleanup(Target = nameof(Socket100Topics))]
-        public void IterationCleanUpMultiTopic()
-        {
-            SocketClient.SpotApi.UnsubscribeAllAsync().Wait();
-        }
-
-        //[Benchmark()]
-        public async Task SocketHighPerf()
-        {
-            var waitEvent = new AsyncResetEvent(false, false);
-            var received = 0;
-            var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesPerfAsync(["ETHUSDT"], x =>
-            {
-                received++;
-
-                if (received == _socketUpdateReceiveTarget)
-                    waitEvent.Set();
-            }, CancellationToken.None);
-
-            await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
-        }
+        [Benchmark(Baseline = true)]
+        public Task Socket1Topic() => ReceiveTradesAsync(["ETHUSDT"]);
 
         [Benchmark()]
-        public async Task Socket1Topic()
+        public Task Socket100Topics()
         {
-            var waitEvent = new AsyncResetEvent(false, false);
-            var received = 0;
-            var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(["ETHUSDT"], x =>
-            {
-                received++;
-                if (received == _socketUpdateReceiveTarget)
-                    waitEvent.Set();
-
-            }, CancellationToken.None);
-
-            await waitEvent.WaitAsync();
-            await result.Data.CloseAsync();
-        }
-
-        [Benchmark()]
-        public async Task Socket100Topics()
-        {
-            var waitEvent = new AsyncResetEvent(false, false);
-            var received = 0;
             var topics = new string[100];
             for (var i = 0; i < 100; i++)
-                topics[i] = "DUMMY";
+                topics[i] = "DUMMY" + i;
 
             topics[50] = "ETHUSDT";
 
+            return ReceiveTradesAsync(topics);
+        }
+
+        private async Task ReceiveTradesAsync(string[] topics)
+        {
+            var waitEvent = new AsyncResetEvent(false, false);
+            var received = 0;
             var result = await SocketClient.SpotApi.ExchangeData.SubscribeToTradeUpdatesAsync(topics, x =>
             {
                 received++;
-                if (received == _socketUpdateReceiveTarget)
+                if (received == TradeStream.Count)
                     waitEvent.Set();
 
             }, CancellationToken.None);
 
-            await waitEvent.WaitAsync();
+            if (!result.Success)
+                throw new InvalidOperationException($"Subscription failed: {result.Error}");
+            try
+            {
+                if (!await waitEvent.WaitAsync(TimeSpan.FromSeconds(30)))
+                    throw new TimeoutException($"Received {received} of {TradeStream.Count} trade updates.");
+            }
+            finally
+            {
+                await result.Data.CloseAsync();
+            }
         }
 
         [GlobalCleanup]

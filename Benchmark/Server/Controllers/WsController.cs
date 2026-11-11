@@ -15,57 +15,34 @@ namespace Binance.Net.Benchmark.Controllers
         [HttpGet("ws/{*streamPath}")]
         public async Task Get(string? streamPath = null)
         {
-            var webSocket = await Request.HttpContext.WebSockets.AcceptWebSocketAsync();
+            using var socket = await HttpContext.WebSockets.AcceptWebSocketAsync();
+            var ct = HttpContext.RequestAborted;
+            var buffer = new byte[8192];
+            var combined = string.IsNullOrEmpty(streamPath);
+            if (string.Equals(streamPath, "ethusdt@trade", StringComparison.OrdinalIgnoreCase))
+                await PushTradeUpdates(socket, ct, combined);
 
-            var cts = new CancellationTokenSource();
-
-            var useCombinedStreamPayload = string.IsNullOrEmpty(streamPath);
-
-            _ = Task.Run(async () =>
+            while (socket.State == WebSocketState.Open)
             {
-                while (!cts.IsCancellationRequested)
+                using var request = new MemoryStream();
+                WebSocketReceiveResult frame;
+                do
                 {
-                    // Listen for subscribe requests
-                    var buffer = new byte[8096];
-                    var result = await webSocket.ReceiveAsync(buffer, CancellationToken.None);
-                    if (result.MessageType == WebSocketMessageType.Close)
+                    frame = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), ct);
+                    if (frame.MessageType == WebSocketMessageType.Close)
                     {
-                        cts.Cancel();
-
-                        if (webSocket.State == WebSocketState.CloseReceived)
-                        {
-                            //Console.WriteLine("Closed received, sending close response");
-                            await webSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Closing", default).ConfigureAwait(false);
-                        }
-                        else
-                        {
-                            //Console.WriteLine("Closed received as answer on close request");
-                        }
+                        await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Closing", ct);
+                        return;
                     }
+                    request.Write(buffer, 0, frame.Count);
+                } while (!frame.EndOfMessage);
 
-                    else
-                    {
-                        var msg = JsonSerializer.Deserialize<SubscribeMessage>(Encoding.UTF8.GetString(buffer, 0, result.Count))!;
-
-                        var response = "{\"result\":null,\"id\":" + msg.Id + "}";
-                        await SendAsync(webSocket, response);
-
-                        if (msg.Params.Any(x => string.Equals(x, "ethusdt@trade", StringComparison.OrdinalIgnoreCase)))
-                        {
-                            _ = PushTradeUpdates(webSocket, cts.Token, useCombinedStreamPayload);
-                        }
-                    }
-                }
-            });
-
-            
-            try
-            {
-                await Task.Delay(-1, cts.Token);
+                request.Position = 0;
+                var msg = JsonSerializer.Deserialize<SubscribeMessage>(request)!;
+                await SendAsync(socket, JsonSerializer.Serialize(new { result = (object?)null, id = msg.Id }));
+                if (msg.Method == "SUBSCRIBE" && msg.Params.Contains("ethusdt@trade", StringComparer.OrdinalIgnoreCase))
+                    await PushTradeUpdates(socket, ct, combined);
             }
-            catch (Exception) { }            
-
-            //Console.WriteLine("Finished");
         }
 
         private async Task SendAsync(WebSocket webSocket, string message)
@@ -87,12 +64,12 @@ namespace Binance.Net.Benchmark.Controllers
         private async Task PushTradeUpdates(WebSocket webSocket, CancellationToken ct, bool combinedStreamPayload)
         {
             var time = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds;
-            for (var i = 0; i < 1_000_000; i++)
+            for (var i = 0; i < TradeStream.Count; i++)
             {
                 if (ct.IsCancellationRequested)
                     break;
 
-                var trade = "{\"e\":\"trade\",\"E\":"+time+",\"s\":\"ETHUSDT\",\"t\":" + (5000000000L + i) + ",\"p\":\"3187.96000000\",\"q\":\"0.00170000\",\"T\":"+time+",\"m\":false,\"M\":true}";
+                var trade = "{\"e\":\"trade\",\"E\":"+time+",\"s\":\"ETHUSDT\",\"t\":" + (TradeStream.FirstId + i) + ",\"p\":\"3187.96000000\",\"q\":\"0.00170000\",\"T\":"+time+",\"m\":false,\"M\":true}";
                 var combinedTrade = "{\"stream\":\"ethusdt@trade\",\"data\":" + trade + "}";
 
                 if (combinedStreamPayload)
@@ -105,11 +82,7 @@ namespace Binance.Net.Benchmark.Controllers
                 }
             }
 
-            try
-            {
-                await Task.Delay(5000, ct);
-            }
-            catch (Exception) { }
+
         }
 
     }
@@ -119,7 +92,10 @@ namespace Binance.Net.Benchmark.Controllers
         [JsonPropertyName("id")]
         public long Id { get; set; }
 
+        [JsonPropertyName("method")]
+        public string? Method { get; set; }
+
         [JsonPropertyName("params")]
-        public string[] Params { get; set; }
+        public string[] Params { get; set; } = [];
     }
 }

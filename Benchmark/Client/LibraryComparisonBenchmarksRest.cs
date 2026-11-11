@@ -1,4 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using Binance.Api;
 using Binance.Net.Clients;
@@ -11,9 +11,10 @@ using System.Text;
 namespace Binance.Net.Benchmark.Client
 {
     [MemoryDiagnoser]
+    [GroupBenchmarksBy(BenchmarkDotNet.Configs.BenchmarkLogicalGroupRule.ByCategory)]
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
     [SimpleJob(RuntimeMoniker.Net48)]
-    [SimpleJob(RuntimeMoniker.Net10_0)]
+    [SimpleJob(RuntimeMoniker.Net11_0)]
     public class LibraryComparisonBenchmarksRest
     {
         private BinanceRestClient _binanceNetClient;
@@ -54,43 +55,59 @@ namespace Binance.Net.Benchmark.Client
             BinanceAddress.Default.SpotRestApiAddress = "http://localhost:" + Program.ServerPort;
         }
 
-        [Benchmark(Baseline = true), IterationCount(25)]
+        [Benchmark(Baseline = true, OperationsPerInvoke = 1000), BenchmarkCategory("ServerTime"), IterationCount(25)]
         public async Task BinanceNet_ServerTime()
         {
             for (var i = 0; i < 1000; i++)
-                _ = await _binanceNetClient.SpotApi.ExchangeData.GetServerTimeAsync();
+            {
+                var result = await _binanceNetClient.SpotApi.ExchangeData.GetServerTimeAsync();
+                if (!result.Success)
+                    throw new InvalidOperationException(result.Error.ToString());
+            }
         }
 
-        [Benchmark, IterationCount(25)]
+        [Benchmark(OperationsPerInvoke = 1000), BenchmarkCategory("ServerTime"), IterationCount(25)]
         public async Task CCXT_ServerTime()
         {
             for (var i = 0; i < 1000; i++)
                 _ = await _ccxtClient.publicGetTime();
         }
 
-        [Benchmark, IterationCount(25)]
+        [Benchmark(OperationsPerInvoke = 1000), BenchmarkCategory("ServerTime"), IterationCount(25)]
         public async Task BinanceApi_ServerTime()
         {
             for (var i = 0; i < 1000; i++)
-                _ = await _binanceApiClient.Spot.GetTimeAsync();
+            {
+                var result = await _binanceApiClient.Spot.GetTimeAsync();
+                if (!result.Success)
+                    throw new InvalidOperationException(result.Error.ToString());
+            }
         }
 
-        [Benchmark, IterationCount(25)]
+        [Benchmark(Baseline = true, OperationsPerInvoke = 1000), BenchmarkCategory("Ticker"), IterationCount(25)]
         public async Task BinanceNet_Ticker()
         {
             for (var i = 0; i < 1000; i++)
-                _ = await _binanceNetClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+            {
+                var result = await _binanceNetClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+                if (!result.Success)
+                    throw new InvalidOperationException(result.Error.ToString());
+            }
         }
 
-        [Benchmark, IterationCount(25)]
+        [Benchmark(OperationsPerInvoke = 1000), BenchmarkCategory("Ticker"), IterationCount(25)]
         public async Task BinanceNetShared_Ticker()
         {
             var request = new GetTickerRequest(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"));
             for (var i = 0; i < 1000; i++)
-                _ = await _binanceNetClient.SpotApi.SharedClient.GetSpotTickerAsync(request);
+            {
+                var result = await _binanceNetClient.SpotApi.SharedClient.GetSpotTickerAsync(request);
+                if (!result.Success)
+                    throw new InvalidOperationException(result.Error.ToString());
+            }
         }
 
-        [Benchmark, IterationCount(25)]
+        [Benchmark(OperationsPerInvoke = 1000), BenchmarkCategory("Ticker"), IterationCount(25)]
         public async Task CCXT_Ticker()
         {
             var parameters = new Dictionary<string, object>
@@ -101,11 +118,15 @@ namespace Binance.Net.Benchmark.Client
                 _ = await _ccxtClient.publicGetTicker24hr(parameters);
         }
 
-        [Benchmark, IterationCount(25)]
+        [Benchmark(OperationsPerInvoke = 1000), BenchmarkCategory("Ticker"), IterationCount(25)]
         public async Task BinanceApi_Ticker()
         {
             for (var i = 0; i < 1000; i++)
-                _ = await _binanceApiClient.Spot.GetTickerAsync("ETHUSDT");
+            {
+                var result = await _binanceApiClient.Spot.GetTickerAsync("ETHUSDT");
+                if (!result.Success)
+                    throw new InvalidOperationException(result.Error.ToString());
+            }
         }
 
         [GlobalCleanup]
