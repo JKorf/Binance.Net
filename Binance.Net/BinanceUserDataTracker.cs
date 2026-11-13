@@ -1,4 +1,5 @@
 ﻿using Binance.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Trackers.UserData;
 using CryptoExchange.Net.Trackers.UserData.Objects;
 
@@ -85,21 +86,22 @@ namespace Binance.Net
             IBinanceSocketClient socketClient,
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config = null) : base(logger,
-                restClient.UsdFuturesApi.SharedApi,
-                restClient.UsdFuturesApi.SharedApi,
-                socketClient.UsdFuturesApi.SharedApi,
+                restClient.CoinFuturesApi.SharedApi,
+                restClient.CoinFuturesApi.SharedApi,
+                socketClient.CoinFuturesApi.SharedApi,
 
-                restClient.UsdFuturesApi.SharedApi,
-                restClient.UsdFuturesApi.SharedApi,
-                socketClient.UsdFuturesApi.SharedApi,
+                restClient.CoinFuturesApi.SharedApi,
+                restClient.CoinFuturesApi.SharedApi,
+                socketClient.CoinFuturesApi.SharedApi,
 
-                restClient.UsdFuturesApi.SharedApi,
+                restClient.CoinFuturesApi.SharedApi,
                 null,
 
-                restClient.UsdFuturesApi.SharedApi,
-                socketClient.UsdFuturesApi.SharedApi,
+                restClient.CoinFuturesApi.SharedApi,
+                socketClient.CoinFuturesApi.SharedApi,
                 userIdentifier,
-                config ?? new FuturesUserDataTrackerConfig())
+                config ?? new FuturesUserDataTrackerConfig(),
+                SharedAccountType.PerpetualInverseFutures)
         {
 
         }
