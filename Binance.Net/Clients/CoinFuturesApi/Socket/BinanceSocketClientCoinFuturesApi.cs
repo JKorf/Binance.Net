@@ -182,7 +182,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
             var scope = new TokenScope(
                     BinanceExchange.Metadata.Id,
                     EnvironmentName,
-                    "Futures",
+                    "CoinFutures",
                     ApiCredentials!.Credential!.Key);
 
             return await TokenManager.AcquireAndReplaceAsync(subscription, scope).ConfigureAwait(false);
@@ -190,7 +190,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         private async Task<CallResult<string>> StartListenKeyAsync(TokenScope tokenScope, CancellationToken ct)
         {
-            var result = await TokenClient.SpotApi.Account.StartRiskDataUserStreamAsync(ct).ConfigureAwait(false);
+            var result = await TokenClient.CoinFuturesApi.Account.StartUserStreamAsync(ct).ConfigureAwait(false);
             if (!result.Success)
                 return CallResult.Fail<string>(result.Error);
 
@@ -199,7 +199,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         private async Task<CallResult> KeepAliveListenKeyAsync(TokenInfo token, CancellationToken ct)
         {
-            var result = await TokenClient.SpotApi.Account.KeepAliveRiskDataUserStreamAsync(token.Token, ct).ConfigureAwait(false);
+            var result = await TokenClient.CoinFuturesApi.Account.KeepAliveUserStreamAsync(token.Token, ct).ConfigureAwait(false);
             if (!result.Success)
                 return CallResult.Fail<string>(result.Error);
 
@@ -208,7 +208,7 @@ namespace Binance.Net.Clients.CoinFuturesApi
 
         private async Task<CallResult> StopListenKeyAsync(TokenInfo token, CancellationToken ct)
         {
-            var result = await TokenClient.SpotApi.Account.StopRiskDataUserStreamAsync(token.Token, ct).ConfigureAwait(false);
+            var result = await TokenClient.CoinFuturesApi.Account.StopUserStreamAsync(token.Token, ct).ConfigureAwait(false);
             if (!result.Success)
                 return CallResult.Fail<string>(result.Error);
 
