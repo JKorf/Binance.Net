@@ -53,7 +53,7 @@ else
     await socketClient.UnsubscribeAllAsync();
 }
 
-static async Task HandleRequest<T>(string action, Func<Task<WebCallResult<T>>> request, Func<T, string> outputData)
+static async Task HandleRequest<T>(string action, Func<Task<HttpResult<T>>> request, Func<T, string> outputData)
 {
     Console.WriteLine("Press enter to continue");
     Console.ReadLine();

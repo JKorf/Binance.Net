@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4.2.2
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4.3.1
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: 11.0.100
     - name: Set GitHub package source
       run: dotnet nuget add source --username JKorf --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/JKorf/index.json"
     - name: Restore dependencies

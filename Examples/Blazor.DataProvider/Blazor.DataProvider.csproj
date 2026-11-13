@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Binance.Net" Version="9.5.0" />
+    <ProjectReference Include="..\..\Binance.Net\Binance.Net.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,9 +10,9 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.16.0-preview.2" />
-    <PackageReference Include="Binance.Api" Version="6.5.7" />
-    <PackageReference Include="Binance.Net" Version="12.11.1" />
-    <PackageReference Include="ccxt" Version="4.5.52" />
+    <PackageReference Include="Binance.Api" Version="6.8.8" />
+    <PackageReference Include="Binance.Net" Version="13.8.0" />
+    <PackageReference Include="ccxt" Version="4.5.92" />
   </ItemGroup>
 	
   <ItemGroup>

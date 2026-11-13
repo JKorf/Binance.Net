@@ -20,14 +20,14 @@ namespace Blazor.DataProvider
             _socketClient = socketClient;
         }
 
-        public Task<WebCallResult<IEnumerable<IBinanceTick>>> Get24HPrices()
+        public Task<HttpResult<IBinanceTick[]>> Get24HPrices()
         {
             return _client.SpotApi.ExchangeData.GetTickersAsync();
         }
 
-        public Task<CallResult<UpdateSubscription>> SubscribeTickerUpdates(Action<DataEvent<IEnumerable<IBinanceTick>>> tickHandler)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeTickerUpdates(Action<DataEvent<IBinanceMiniTick[]>> tickHandler)
         {
-            return _socketClient.SpotApi.ExchangeData.SubscribeToAllTickerUpdatesAsync(tickHandler);
+            return _socketClient.SpotApi.ExchangeData.SubscribeToAllMiniTickerUpdatesAsync(tickHandler);
         }
 
         public async Task Unsubscribe(UpdateSubscription subscription)

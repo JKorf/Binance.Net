@@ -22,21 +22,21 @@
     protected override async Task OnInitializedAsync()
     {
         var callResult = await _dataProvider.Get24HPrices();
-        if (callResult)
+        if (callResult.Success)
             _ticks = callResult.Data;
 
         var subResult = await _dataProvider.SubscribeTickerUpdates(HandleTickUpdates);
-        if (subResult)
+        if (subResult.Success)
             _subscription = subResult.Data;
     }
 
-    private void HandleTickUpdates(DataEvent<IEnumerable<IBinanceTick>> update)
+    private void HandleTickUpdates(DataEvent<IBinanceMiniTick[]> update)
     {
         foreach (var tick in update.Data)
         {
             var symbol = _ticks.SingleOrDefault(t => t.Symbol == tick.Symbol);
             if (symbol != null)
-                symbol.PriceChangePercent = tick.PriceChangePercent;
+                symbol.PriceChangePercent = Math.Round(tick.LastPrice / tick.OpenPrice * 100 - 100, 3);
         }
 
         InvokeAsync(StateHasChanged);
