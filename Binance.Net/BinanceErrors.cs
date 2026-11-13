@@ -14,6 +14,12 @@ namespace Binance.Net
 
                 new ErrorInfo(ErrorType.InvalidTimestamp, false, "Request timestamp invalid, check time sync", "-1021"),
 
+                new ErrorInfo(ErrorType.SystemError, true, "Unknown error while processing the request", "-1000"),
+                new ErrorInfo(ErrorType.SystemError, true, "Internal error, unable to process the request", "-1001"),
+                new ErrorInfo(ErrorType.SystemError, false, "Unexpected response from the message bus, execution status unknown", "-1006"),
+
+                new ErrorInfo(ErrorType.Timeout, false, "Timeout waiting for response from the backend server, execution status unknown", "-1007"),
+
                 new ErrorInfo(ErrorType.MissingParameter, false, "Empty parameter", "-1105"),
 
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid characters in parameter", "-1100"),
@@ -135,6 +141,12 @@ namespace Binance.Net
 
                 new ErrorInfo(ErrorType.InvalidTimestamp, false, "Request timestamp invalid, check time sync", "-1021"),
 
+                new ErrorInfo(ErrorType.SystemError, true, "Unknown error while processing the request", "-1000"),
+                new ErrorInfo(ErrorType.SystemError, true, "Internal error, unable to process the request", "-1001"),
+                new ErrorInfo(ErrorType.SystemError, false, "Unexpected response from the message bus, execution status unknown", "-1006"),
+
+                new ErrorInfo(ErrorType.Timeout, false, "Timeout waiting for response from the backend server, execution status unknown", "-1007"),
+
 
                 new ErrorInfo(ErrorType.RateLimitRequest, false, "Request rate limit reached", "-1003"),
 
@@ -186,6 +198,7 @@ namespace Binance.Net
                 new ErrorInfo(ErrorType.InsufficientBalance, false, "Insufficient isolated margin balance", "-4051"),
 
                 new ErrorInfo(ErrorType.UnknownOrder, false, "Order does not exist", "-2013"),
+                new ErrorInfo(ErrorType.UnknownOrder, false, "Unknown order sent", "-2011"),
 
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Order type not supported with reduce only", "-2026"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Max leverage ratio exceeded", "-2027"),
