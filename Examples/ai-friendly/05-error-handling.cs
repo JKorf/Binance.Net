@@ -125,7 +125,7 @@ if (!order.Success)
 {
     // Distinguish error categories for the caller
     string category = order.Error!.IsTransient
-        ? "Transient — should retry"
+        ? "Transient — reconcile the order state before resubmitting"
         : "Permanent — surface to user";
 
     Console.WriteLine($"{category}: {order.Error.Code} {order.Error.Message}");

@@ -18,6 +18,20 @@ var client = new BinanceRestClient(options =>
 
 const string symbol = "ETHUSDT";
 
+// This opening/closing recipe uses one-way mode. Do not change the account's
+// position mode automatically just to run an example.
+var mode = await client.UsdFuturesApi.Account.GetPositionModeAsync();
+if (!mode.Success)
+{
+    Console.WriteLine($"Failed to get position mode: {mode.Error}");
+    return;
+}
+if (mode.Data.IsHedgeMode)
+{
+    Console.WriteLine("This example requires one-way mode; adapt both order legs for hedge mode.");
+    return;
+}
+
 // ---- 1. SET LEVERAGE ----
 // Leverage is per-symbol, persists across orders. Max varies by symbol and account tier.
 var leverage = await client.UsdFuturesApi.Account.ChangeInitialLeverageAsync(symbol, 5);
@@ -30,7 +44,7 @@ Console.WriteLine($"Leverage set to {leverage.Data.Leverage}x for {symbol}");
 
 // ---- 2. PLACE MARKET ORDER (open long position) ----
 // Market order — fills immediately at best available price.
-// In Hedge mode add positionSide: PositionSide.Long.
+// Hedge-mode opening and closing orders require a different parameter combination.
 var openOrder = await client.UsdFuturesApi.Trading.PlaceOrderAsync(
     symbol: symbol,
     side: OrderSide.Buy,
@@ -53,7 +67,7 @@ if (!positions.Success)
     return;
 }
 
-var position = positions.Data.FirstOrDefault(p => p.Quantity != 0);
+var position = positions.Data.FirstOrDefault(p => p.Quantity > 0);
 if (position == null)
 {
     Console.WriteLine("No open position found (may not have filled yet).");
@@ -75,7 +89,11 @@ var closeOrder = await client.UsdFuturesApi.Trading.PlaceOrderAsync(
 
 if (closeOrder.Success)
 {
-    Console.WriteLine($"Closed position via order {closeOrder.Data.Id}");
+    Console.WriteLine($"Submitted close order {closeOrder.Data.Id}");
+}
+else
+{
+    Console.WriteLine($"Failed to close position: {closeOrder.Error}");
 }
 
 // Common variations:
@@ -83,5 +101,5 @@ if (closeOrder.Success)
 //   Stop-market:        type: FuturesOrderType.StopMarket, add stopPrice
 //   Take-profit:        type: FuturesOrderType.TakeProfitMarket, add stopPrice
 //   COIN-M futures:     use client.CoinFuturesApi.* (same API surface)
-//   Hedge mode:         add positionSide: PositionSide.Long / PositionSide.Short to orders
+//   Hedge mode:         adapt both order legs and close parameters; this sample exits if enabled
 //   Margin type:        client.UsdFuturesApi.Account.ChangeMarginTypeAsync(symbol, FuturesMarginType.Isolated)

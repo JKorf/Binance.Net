@@ -1,25 +1,26 @@
-# Binance.Net AI API Quick Map
+# Binance.Net API surfaces
 
-Use this file to route common user intents to the correct Binance.Net client member. If a method name or parameter is not listed here, inspect `Binance.Net/Interfaces/Clients/**` before generating code.
+Use this reference to route an intent to the relevant member. Table entries abbreviate overloads; confirm parameters in the installed package before use. See [usage](usage.md) for setup and results.
 
-## Client Roots
+## Client roots
 
-| Intent | Use |
-|---|---|
-| REST calls | `new BinanceRestClient()` |
-| WebSocket streams and socket API requests | `new BinanceSocketClient()` |
-| API key authentication | `options.ApiCredentials = new BinanceCredentials("key", "secret")` |
-| Live environment | `BinanceEnvironment.Live` |
-| Testnet environment | `BinanceEnvironment.Testnet` |
-| Binance.US environment | `BinanceEnvironment.Us` |
-| Dependency injection | `services.AddBinance(options => { ... })` |
-| Shared spot REST client | `client.SpotApi.SharedApi` |
-| Shared USD-M futures REST client | `client.UsdFuturesApi.SharedApi` |
-| Shared COIN-M futures REST client | `client.CoinFuturesApi.SharedApi` |
-| Shared spot socket client | `socketClient.SpotApi.SharedApi` |
-| Shared USD-M futures socket client | `socketClient.UsdFuturesApi.SharedApi` |
-| Shared COIN-M futures socket client | `socketClient.CoinFuturesApi.SharedApi` |
-| Resolve a runtime-selected Shared API capability | `IBinanceSharedApiClient.GetCapability(...)` |
+| Surface | Purpose |
+| --- | --- |
+| `BinanceRestClient.SpotApi.ExchangeData` | Spot exchange info, tickers, klines, trades, and order books |
+| `BinanceRestClient.SpotApi.Account` | Spot and margin accounts, wallets, transfers, and portfolio margin |
+| `BinanceRestClient.SpotApi.Trading` | Spot and margin orders, order lists, and convert |
+| `BinanceRestClient.UsdFuturesApi` | USD-M `ExchangeData`, `Account`, and `Trading` |
+| `BinanceRestClient.CoinFuturesApi` | COIN-M `ExchangeData`, `Account`, and `Trading` |
+| `BinanceRestClient.GeneralApi` | Subaccounts, brokerage, earn, staking, loans, and other general REST products |
+| `BinanceSocketClient.SpotApi` | Spot `ExchangeData`, `Account`, and `Trading` |
+| `BinanceSocketClient.UsdFuturesApi` | USD-M `ExchangeData`, `Account`, and `Trading` |
+| `BinanceSocketClient.CoinFuturesApi` | COIN-M `ExchangeData`, `Account`, and `Trading` |
+
+The tables use `client` for a `BinanceRestClient` and `socketClient` for a `BinanceSocketClient`. There is no separate `SpotApi.Margin` or options client root in this library.
+
+## Environments
+
+Select `BinanceEnvironment.Live`, `Testnet`, `Demo`, or `Us` through client options. Match credentials and supported products to the selected environment; a test or regional environment does not imply coverage of every live endpoint.
 
 ## Spot REST
 
@@ -73,7 +74,7 @@ Margin endpoints are under `SpotApi.Account` and `SpotApi.Trading`, not under a 
 | Place margin order | `client.SpotApi.Trading.PlaceMarginOrderAsync(...)` |
 | Cancel margin order | `client.SpotApi.Trading.CancelMarginOrderAsync(...)` |
 | Get margin order | `client.SpotApi.Trading.GetMarginOrderAsync(...)` |
-| Place margin OCO order | `client.SpotApi.Trading.PlaceMarginOcoOrderAsync(...)` |
+| Place margin OCO order | `client.SpotApi.Trading.PlaceMarginOCOOrderAsync(...)` |
 
 ## USD-M Futures REST
 
@@ -166,57 +167,58 @@ Margin endpoints are under `SpotApi.Account` and `SpotApi.Trading`, not under a 
 | Subscribe COIN-M user data | `socketClient.CoinFuturesApi.Account.SubscribeToUserDataUpdatesAsync(...)` |
 | Socket API place COIN-M order | `socketClient.CoinFuturesApi.Trading.PlaceOrderAsync(...)` |
 
-## SharedApis
+## Private streams
 
-Use SharedApis for exchange-agnostic code across Binance, Bybit, OKX, Kraken, and other CryptoExchange.Net libraries.
+Spot user data uses `socketClient.SpotApi.Account.SubscribeToUserDataUpdatesAsync(...)` with socket credentials and callback arguments; it connects through the spot WebSocket API. Do not apply an old spot listen-key recipe to this overload.
 
-| User intent | Binance.Net member or interface |
-|---|---|
-| Shared spot REST client | `new BinanceRestClient().SpotApi.SharedApi` |
-| Shared USD-M futures REST client | `new BinanceRestClient().UsdFuturesApi.SharedApi` |
-| Shared COIN-M futures REST client | `new BinanceRestClient().CoinFuturesApi.SharedApi` |
-| Shared spot socket client | `new BinanceSocketClient().SpotApi.SharedApi` |
-| Shared USD-M futures socket client | `new BinanceSocketClient().UsdFuturesApi.SharedApi` |
-| Shared COIN-M futures socket client | `new BinanceSocketClient().CoinFuturesApi.SharedApi` |
-| Resolve a runtime-selected Shared API capability | `IBinanceSharedApiClient.GetCapability(...)` |
-| Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
-| Shared spot order REST | `IPlaceSpotOrderRest.PlaceSpotOrderAsync(...)` |
-| Shared futures order REST | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync(...)` |
-| Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(...)` |
-| Shared order book socket | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync(...)` |
-| Shared spot order socket API | `IPlaceSpotOrderSocket.PlaceSpotOrderAsync(...)` / `ICancelSpotOrderSocket.CancelSpotOrderAsync(...)` |
-| Shared futures order socket API (USD-M and COIN-M) | `IPlaceFuturesOrderSocket.PlaceFuturesOrderAsync(...)` / `ICancelFuturesOrderSocket.CancelFuturesOrderAsync(...)` |
-| Load typed spot symbols and catalog | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(...)`, then `.SpotSymbolCatalog` |
-| Load typed futures symbols and catalog | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync(...)`, then `.FuturesSymbolCatalog` |
+USD-M and COIN-M account subscriptions have overloads that obtain and renew a listen key automatically when credentials are configured, and overloads accepting an externally managed key. Manage externally supplied keys through the corresponding REST account API's start/keep-alive/stop methods. Margin subscriptions use margin-specific methods and listen tokens; inspect the selected overload. Unsubscribe through the concrete socket client in all cases.
 
-For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
+Native socket account/trading requests return `QueryResult<BinanceResponse<T>>` where declared. Check outer success before unwrapping `Data`; this is distinct from subscription results.
 
-Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers such as symbol support checks return `ExchangeCallResult<T>`.
+## Shared API V2
 
-Shared spot and futures symbols include `DisplayName`, `BaseAssetType` / `BaseAssetSubType`, and `QuoteAssetType` / `QuoteAssetSubType`. Classifications cover crypto, stablecoins, fiat, and TradFi equities/commodities;
+For portable code, use `.SharedApi` on the selected native REST or socket root. Keep native request/model types separate from Shared API types.
 
-## Result Handling
+| Intent | Capability or member |
+| --- | --- |
+| Get a ticker | `IGetTickerRest.GetTickerAsync` |
+| Get/filter spot symbols | `IGetSpotSymbolsRest.GetSpotSymbolsAsync` |
+| Get/filter futures symbols | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync` |
+| Place a spot order | `IPlaceSpotOrderRest.PlaceSpotOrderAsync` |
+| Place a futures order | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync` |
+| Subscribe to tickers | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync` |
+| Subscribe to trades | `ISubscribeTradesSocket.SubscribeToTradeUpdatesAsync` |
+| Subscribe to order books | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync` |
 
-| Situation | Pattern |
-|---|---|
-| REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Socket subscription success check | `WebSocketResult<UpdateSubscription> sub = await ...; if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
-| Read REST data | Read `result.Data` only after `result.Success` |
-| Shared helper data | Read `ExchangeCallResult<T>.Data` only after `result.Success` |
-| Retry decision | Retry only when `result.Error?.IsTransient == true` |
-| Cancellation | Pass `ct: cancellationToken` |
+`IBinanceSharedApiClient` groups the six supported surfaces:
 
-## Common Routing Pitfalls
+| Property | Interface |
+| --- | --- |
+| `SpotRest` | `IBinanceRestClientSpotSharedApi` |
+| `UsdFuturesRest` | `IBinanceRestClientUsdFuturesSharedApi` |
+| `CoinFuturesRest` | `IBinanceRestClientCoinFuturesSharedApi` |
+| `SpotSocket` | `IBinanceSocketClientSpotSharedApi` |
+| `UsdFuturesSocket` | `IBinanceSocketClientUsdFuturesSharedApi` |
+| `CoinFuturesSocket` | `IBinanceSocketClientCoinFuturesSharedApi` |
 
-| Do not use | Use instead |
-|---|---|
-| `BinanceClient` | `BinanceRestClient` |
-| `ApiCredentials` | `BinanceCredentials` |
-| `SpotApi.Margin` | `SpotApi.Account` / `SpotApi.Trading` margin methods |
-| `SpotApi.PortfolioMargin` | `SpotApi.Account.GetPortfolioMargin*` methods |
-| `SpotApi.SubAccount` | `GeneralApi.SubAccount` |
-| `GeneralApi.Loans` | `GeneralApi.CryptoLoans` |
-| `.Data` without `.Success` check | Check `.Success` first |
-| Unsubscribe from a shared subscription | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
-| Custom `clientOrderId` by default | Let Binance.Net auto-generate it |
-| `positionSide` in every futures order | Include only when hedge mode is intended |
+Use a surface property when the operation is known. For dynamic selection, call `GetCapability` on an aggregate instance with a typed descriptor such as `SharedCapabilities.Tickers.GetTicker.Rest`, and specify the intended trading mode when selecting between spot and futures. Check for a null match, then use its `Capability` and `Options`. Use `GetCapabilities` for all matches and `Discover` for summary metadata.
+
+`AddBinance` registers the aggregate and its supported capabilities. Where several surfaces or exchanges implement an injected capability, select the intended implementation explicitly instead of relying on the last DI registration.
+
+### Symbols and quantities
+
+Call `GetSpotSymbolsAsync` or `GetFuturesSymbolsAsync` successfully before reading the corresponding `SpotSymbolCatalog` or `FuturesSymbolCatalog`. `GetSymbolsRequest` supports asset-type filters. Symbol responses populate display names, base/quote asset types, and subtypes, including crypto, stablecoins, fiat, and TradFi classifications. Keep USD-M and COIN-M futures catalogs associated with their respective surfaces.
+
+Shared book ticker, position, and user-trade quantities use `SharedOrderQuantity`. Read `QuantityInBaseAsset`, `QuantityInQuoteAsset`, or `QuantityInContracts` as appropriate. Binance shared order books report `QuantityType` as `SharedQuantityType.BaseAsset`.
+
+Shared subscriptions are closed through the concrete `BinanceSocketClient.UnsubscribeAsync(subscription.Data)`.
+
+## Source navigation in a checkout
+
+These links are available in a source checkout, not in the standalone NuGet skill:
+
+- [Client interfaces](../../../../Binance.Net/Interfaces/Clients/): exact method signatures and endpoint documentation.
+- [Client implementations](../../../../Binance.Net/Clients/): transport and Shared API mappings.
+- [Compiled examples](../../../../Examples/ai-friendly/): complete programs.
+
+For packaged usage patterns, see [usage](usage.md).

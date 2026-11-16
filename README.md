@@ -33,21 +33,10 @@ The [Binance.Net documentation](https://cryptoexchange.jkorf.dev/docs/exchange-c
 
 ## For AI Coding Assistants
 
-This library provides first-class support for AI coding assistants. The relevant skill files are in this repository:
-
-- **Agents**: `AGENTS.md` (auto-detected at repo root)
-- **Cursor**: `.cursor/rules/binance-net.mdc`
-- **GitHub Copilot**: `.github/copilot-instructions.md`
-- **Other tools** (Windsurf, Codex, Continue, Aider, etc.): `llms.txt` at repo root
-- **API quick map**: `docs/ai-api-map.md`
-- **Compilable examples**: `Examples/ai-friendly/`
-
-See [cryptoexchange-skills-hub](https://github.com/JKorf/cryptoexchange-skills-hub) for installable skills.
-
-**Quick prompt to verify your assistant is using these:**
-> "Show me a minimal example of placing a limit buy order on Binance Spot using Binance.Net, including authentication setup."
-
-The expected output should use `BinanceRestClient`, `BinanceCredentials`, and the `HttpResult` pattern.
+- [Binance.Net skill](.claude/skills/binance-net/SKILL.md) contains consumer guidance and links to API routing and usage references. It is also included in the NuGet package.
+- [AGENTS.md](AGENTS.md) covers development of this repository.
+- [llms.txt](llms.txt) indexes the AI documentation and source references.
+- [Examples/ai-friendly](Examples/ai-friendly) contains complete programs compiled by the test suite.
 
 ## Benchmark
 Performance is a core focus. For a benchmark comparing Binance.Net performance to CCXT and Binance.Api, see [docs/binance-net-benchmark.md](docs/binance-net-benchmark.md).
