@@ -17,7 +17,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
         public SharedFeeDeductionType FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         public SharedFeeAssetType FuturesFeeAssetType => SharedFeeAssetType.QuoteAsset;
 
-        public SharedOrderType[] FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
+        public SharedOrderType[] FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market, SharedOrderType.LimitMaker };
         public SharedTimeInForce[] FuturesSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
         public SharedQuantitySupport FuturesSupportedOrderQuantity { get; } = new SharedQuantitySupport(
                 SharedQuantityType.BaseAsset,
@@ -48,7 +48,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
             var result = await _api.Trading.PlaceOrderAsync(
                 request.Symbol!.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
-                request.OrderType == SharedOrderType.Limit ? Enums.FuturesOrderType.Limit : Enums.FuturesOrderType.Market,
+                request.OrderType == SharedOrderType.Market ? Enums.FuturesOrderType.Market : Enums.FuturesOrderType.Limit,
                 quantity: request.Quantity?.QuantityInBaseAsset ?? request.Quantity?.QuantityInContracts,
                 price: request.Price,
                 positionSide: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
@@ -435,6 +435,7 @@ namespace Binance.Net.Clients.UsdFuturesApi
 
         private TimeInForce? GetTimeInForce(SharedOrderType type, SharedTimeInForce? tif)
         {
+            if (type == SharedOrderType.LimitMaker) return TimeInForce.GoodTillCrossing;
             if (tif == SharedTimeInForce.ImmediateOrCancel) return TimeInForce.ImmediateOrCancel;
             if (tif == SharedTimeInForce.FillOrKill) return TimeInForce.FillOrKill;
             if (tif == SharedTimeInForce.GoodTillCanceled) return TimeInForce.GoodTillCanceled;
