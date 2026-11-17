@@ -1,0 +1,147 @@
+name: Prepare release
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package key from release-config.json; optional for a single-package repository'
+        required: false
+        type: string
+      version:
+        description: 'Next stable major.minor.patch version'
+        required: true
+        type: string
+      notes:
+        description: 'Markdown notes with actual newlines and indentation (CLI supports notes=@file)'
+        required: true
+        type: string
+      override_reason:
+        description: 'Reason for a major release or unusual version jump; requires approval'
+        required: false
+        type: string
+      integration_tests:
+        description: 'Also run public integration tests'
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prepare-release
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      requires_approval: ${{ steps.plan.outputs.requires_approval }}
+      sdk: ${{ steps.plan.outputs.sdk }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate release and show approval preview
+        id: plan
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/validate@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        with:
+          package: ${{ inputs.package }}
+          version: ${{ inputs.version }}
+          notes: ${{ inputs.notes }}
+          override-reason: ${{ inputs.override_reason }}
+
+      - name: Verify required version reviewers are configured
+        if: steps.plan.outputs.requires_approval == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $json = gh api "repos/$env:GITHUB_REPOSITORY/environments/version-approval"
+          if ($LASTEXITCODE -ne 0) { throw 'Create the version-approval environment with required reviewers before preparing exceptional versions.' }
+          $environment = $json | ConvertFrom-Json
+          $rules = @($environment.protection_rules | Where-Object { $_.type -eq 'required_reviewers' })
+          if ($rules.Count -ne 1 -or @($rules[0].reviewers).Count -eq 0) { throw 'version-approval must have at least one required reviewer. Configure it under Settings > Environments.' }
+
+  version_approval:
+    needs: validate
+    if: needs.validate.outputs.requires_approval == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: version-approval
+    steps:
+      - name: Record version approval
+        run: echo 'Version approval gate passed. See the validate job summary for package, version, reason, and release notes.'
+
+  prepare:
+    needs: [validate, version_approval]
+    if: ${{ always() && !cancelled() && needs.validate.result == 'success' && (needs.version_approval.result == 'success' || needs.version_approval.result == 'skipped') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Prepare selected package and test reports
+        id: prepared
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/prepare@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        with:
+          package: ${{ inputs.package }}
+          version: ${{ inputs.version }}
+          notes: ${{ inputs.notes }}
+          override-reason: ${{ inputs.override_reason }}
+          integration-tests: ${{ inputs.integration_tests }}
+
+      - name: Create release automation token
+        if: vars.RELEASE_APP_ID != ''
+        id: release-app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Commit release changes and open PR
+        env:
+          GH_TOKEN: ${{ steps.release-app.outputs.token || github.token }}
+          RELEASE_APP_CONFIGURED: ${{ vars.RELEASE_APP_ID != '' }}
+          PLAN_PATH: ${{ steps.prepared.outputs.plan_path }}
+          BODY_PATH: ${{ steps.prepared.outputs.body_path }}
+        run: |
+          $plan = Get-Content -LiteralPath $env:PLAN_PATH -Raw | ConvertFrom-Json
+          gh auth setup-git
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot configure GitHub credentials for the release branch.' }
+          git switch --create $plan.branch
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot create release branch.' }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- $plan.project $plan.readme
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot stage release changes.' }
+          git commit -m "Prepare $($plan.package_id) release $($plan.version)"
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot commit release changes.' }
+          git push origin "HEAD:refs/heads/$($plan.branch)"
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot push release branch.' }
+          $url = gh pr create --base $plan.base_branch --head $plan.branch --title "Release $($plan.package_id) $($plan.version)" --body-file $env:BODY_PATH
+          if ($LASTEXITCODE -ne 0) { throw 'Branch was pushed, but PR creation failed. Open a PR from that branch manually.' }
+          "Release PR: $url" >> $env:GITHUB_STEP_SUMMARY
+          if ($env:RELEASE_APP_CONFIGURED -ne 'true') { 'GitHub App is not configured. PR checks may require manual workflow approval with GITHUB_TOKEN.' >> $env:GITHUB_STEP_SUMMARY }

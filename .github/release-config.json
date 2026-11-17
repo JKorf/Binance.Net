@@ -1,0 +1,18 @@
+{
+  "baseBranch": "master",
+  "sdk": "11.0.100",
+  "packages": [
+    {
+      "key": "binance",
+      "project": "Binance.Net/Binance.Net.csproj",
+      "testProjects": [
+        "Binance.Net.UnitTests/Binance.Net.UnitTests.csproj"
+      ],
+      "packageId": "Binance.Net",
+      "readme": "README.md",
+      "tagPrefix": "Binance.Net.",
+      "releaseIntegrationTests": false,
+      "publishToGitHubPackages": true
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+name: Publish release
+run-name: '${{ github.event_name == ''workflow_dispatch'' && format(''Recover release from run #{0}'', inputs.original_run_id) || format(''Publish release PR #{0}'', github.event.pull_request.number) }}'
+
+on:
+  workflow_dispatch:
+    inputs:
+      original_run_id:
+        description: Original failed publish workflow run ID
+        required: true
+        type: string
+      artifact_id:
+        description: Original release-pr artifact ID (not the test results artifact)
+        required: true
+        type: string
+  pull_request:
+    types: [closed]
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.repository }}-${{ github.event.pull_request.head.ref || inputs.original_run_id }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'release/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      sdk: ${{ steps.built.outputs.sdk }}
+      commit: ${{ steps.built.outputs.commit }}
+      pull_request: ${{ steps.built.outputs.pull_request }}
+      artifact_id: ${{ steps.built.outputs.artifact_id }}
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify publication approval configuration
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUGET_USER: ${{ vars.NUGET_USER }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_USER)) { throw 'Set repository variable NUGET_USER to your NuGet.org profile username.' }
+          $json = gh api "repos/$env:GITHUB_REPOSITORY/environments/release"
+          if ($LASTEXITCODE -ne 0) { throw 'Create the release environment with required reviewers before publishing.' }
+          $environment = $json | ConvertFrom-Json
+          $rules = @($environment.protection_rules | Where-Object { $_.type -eq 'required_reviewers' })
+          if ($rules.Count -ne 1 -or @($rules[0].reviewers).Count -eq 0) { throw 'The release environment must have at least one required reviewer.' }
+
+      - name: Build and retain final approved-artifact candidates
+        id: built
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/build@93e3e075a0b3a42dd909630615f7361a8c16c32b
+
+  recover:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      sdk: ${{ steps.recovered.outputs.sdk }}
+      commit: ${{ steps.recovered.outputs.commit }}
+      pull_request: ${{ steps.recovered.outputs.pull_request }}
+      artifact_id: ${{ steps.recovered.outputs.artifact_id }}
+      original_run_id: ${{ steps.recovered.outputs.original_run_id }}
+    steps:
+      - name: Recover original package artifacts
+        id: recovered
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/recover@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        with:
+          original-run-id: ${{ inputs.original_run_id }}
+          artifact-id: ${{ inputs.artifact_id }}
+
+  publish:
+    needs: [build, recover]
+    if: ${{ !cancelled() && (needs.build.result == 'success' || needs.recover.result == 'success') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: release
+    permissions:
+      contents: write
+      actions: read
+      packages: write
+      id-token: write
+    outputs:
+      release_url: ${{ steps.published.outputs.release_url }}
+      nuget_url: ${{ steps.published.outputs.nuget_url }}
+    steps:
+      - uses: actions/setup-dotnet@v4.3.1
+        with:
+          dotnet-version: ${{ needs.build.outputs.sdk || needs.recover.outputs.sdk }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ needs.recover.outputs.original_run_id || github.run_id }}
+          artifact-ids: ${{ needs.build.outputs.artifact_id || needs.recover.outputs.artifact_id }}
+          path: ${{ runner.temp }}/approved-release
+          merge-multiple: true
+
+      - name: Verify approved artifacts before obtaining credentials
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/publish@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        with:
+          artifact-directory: ${{ runner.temp }}/approved-release
+          commit: ${{ needs.build.outputs.commit || needs.recover.outputs.commit }}
+          pull-request: ${{ needs.build.outputs.pull_request || needs.recover.outputs.pull_request }}
+          validate-only: 'true'
+
+      - name: Create GitHub tag and release token
+        if: vars.RELEASE_APP_ID != ''
+        id: release-app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-workflows: write
+
+      - name: Obtain short-lived NuGet publishing credential
+        id: nuget
+        uses: NuGet/login@v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Publish approved packages and GitHub release
+        id: published
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/publish@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        with:
+          artifact-directory: ${{ runner.temp }}/approved-release
+          commit: ${{ needs.build.outputs.commit || needs.recover.outputs.commit }}
+          pull-request: ${{ needs.build.outputs.pull_request || needs.recover.outputs.pull_request }}
+          github-token: ${{ steps.release-app.outputs.token || github.token }}
+          github-packages-token: ${{ github.token }}
+          nuget-api-key: ${{ steps.nuget.outputs.NUGET_API_KEY }}
