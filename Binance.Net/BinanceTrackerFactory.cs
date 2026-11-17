@@ -41,22 +41,22 @@ namespace Binance.Net
             var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
 
-            IKlineRestClient sharedRestClient;
-            IKlineSocketClient sharedSocketClient;
+            IGetKlinesRest sharedRestClient;
+            ISubscribeKlinesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.SpotApi.SharedClient;
-                sharedSocketClient = socketClient.SpotApi.SharedClient;
+                sharedRestClient = restClient.SpotApi.SharedApi;
+                sharedSocketClient = socketClient.SpotApi.SharedApi;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                sharedRestClient = restClient.UsdFuturesApi.SharedClient;
-                sharedSocketClient = socketClient.UsdFuturesApi.SharedClient;
+                sharedRestClient = restClient.UsdFuturesApi.SharedApi;
+                sharedSocketClient = socketClient.UsdFuturesApi.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.CoinFuturesApi.SharedClient;
-                sharedSocketClient = socketClient.CoinFuturesApi.SharedClient;
+                sharedRestClient = restClient.CoinFuturesApi.SharedApi;
+                sharedSocketClient = socketClient.CoinFuturesApi.SharedApi;
             }
 
             return new KlineTracker(
@@ -80,22 +80,22 @@ namespace Binance.Net
             var restClient = _serviceProvider?.GetRequiredService<IBinanceRestClient>() ?? new BinanceRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBinanceSocketClient>() ?? new BinanceSocketClient();
 
-            ITradeHistoryRestClient sharedRestClient;
-            ITradeSocketClient sharedSocketClient;
+            IGetTradeHistoryRest sharedRestClient;
+            ISubscribeTradesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.SpotApi.SharedClient;
-                sharedSocketClient = socketClient.SpotApi.SharedClient;
+                sharedRestClient = restClient.SpotApi.SharedApi;
+                sharedSocketClient = socketClient.SpotApi.SharedApi;
             }
             else if (symbol.TradingMode.IsLinear())
             {
-                sharedRestClient = restClient.UsdFuturesApi.SharedClient;
-                sharedSocketClient = socketClient.UsdFuturesApi.SharedClient;
+                sharedRestClient = restClient.UsdFuturesApi.SharedApi;
+                sharedSocketClient = socketClient.UsdFuturesApi.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.CoinFuturesApi.SharedClient;
-                sharedSocketClient = socketClient.CoinFuturesApi.SharedClient;
+                sharedRestClient = restClient.CoinFuturesApi.SharedApi;
+                sharedSocketClient = socketClient.CoinFuturesApi.SharedApi;
             }
 
             return new TradeTracker(
