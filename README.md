@@ -272,6 +272,14 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 13.9.0 - 17 Nov 2026
+    * Updated CryptoExchange.Net to v13.3.0
+    * Added some error mappings
+    * Added LimitMaker support for Shared API futures implementations
+    * Fixed CoinFutures user stream using the margin listen key
+    * Fixed CoinFutures user data tracker using the UsdFutures clients
+    * Fixed BinanceFuturesTradingStatus PlannedRecoveryTime deserialization
+
 * Version 13.8.0 - 23 Oct 2026
     * Updated CryptoExchange.Net to v13.2.2
     * Added Brazil withdrawal/deposit travel rule questionnaires
