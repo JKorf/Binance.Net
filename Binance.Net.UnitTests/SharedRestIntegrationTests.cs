@@ -29,7 +29,7 @@ namespace Binance.Net.UnitTests
             return true;
         }
 
-        private IBinanceRestClientSpotApiShared GetSpotRestClient()
+        private IBinanceRestClientSpotSharedApi GetSpotRestClient()
         {
             var collection = new ServiceCollection();
             collection.AddBinance(x => x.Rest.OutputOriginalData = true);
@@ -39,10 +39,10 @@ namespace Binance.Net.UnitTests
                 x.AddProvider(new TraceLoggerProvider());
             });
             var sp = collection.BuildServiceProvider();
-            return sp.GetRequiredService<IBinanceRestClient>().SpotApi.SharedClient;
+            return sp.GetRequiredService<IBinanceRestClient>().SpotApi.SharedApi;
         }
 
-        private IBinanceRestClientUsdFuturesApiShared GetFuturesRestClient()
+        private IBinanceRestClientUsdFuturesSharedApi GetFuturesRestClient()
         {
             var collection = new ServiceCollection();
             collection.AddBinance(x => x.Rest.OutputOriginalData = true);
@@ -52,7 +52,7 @@ namespace Binance.Net.UnitTests
                 x.AddProvider(new TraceLoggerProvider());
             });
             var sp = collection.BuildServiceProvider();
-            return sp.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.SharedClient;
+            return sp.GetRequiredService<IBinanceRestClient>().UsdFuturesApi.SharedApi;
         }
 
         [Test]
@@ -151,8 +151,8 @@ namespace Binance.Net.UnitTests
                 return;
 
             var client = GetFuturesRestClient();
-            var result1 = await client.GetFuturesTickerAsync(new GetTickerRequest(_futuresSymbol));
-            var result2 = await client.GetFuturesTickersAsync(new GetTickersRequest());
+            var result1 = await client.GetTickerAsync(new GetTickerRequest(_futuresSymbol));
+            var result2 = await client.GetAllTickersAsync(new GetTickersRequest());
             CheckResults([
                 ("FuturesTicker", result1),
                 ("FuturesTickers", result2)
@@ -166,8 +166,8 @@ namespace Binance.Net.UnitTests
                 return;
 
             var client = GetSpotRestClient();
-            var result1 = await client.GetSpotTickerAsync(new GetTickerRequest(_spotSymbol));
-            var result2 = await client.GetSpotTickersAsync(new GetTickersRequest());
+            var result1 = await client.GetTickerAsync(new GetTickerRequest(_spotSymbol));
+            var result2 = await client.GetAllTickersAsync(new GetTickersRequest());
             CheckResults([
                 ("SpotTicker", result1),
                 ("SpotTickers", result2)
