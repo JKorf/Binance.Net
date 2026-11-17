@@ -53,7 +53,7 @@ jobs:
 
       - name: Validate release and show approval preview
         id: plan
-        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/validate@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/validate@c69d8a688f09e7c0a858386fc90b6d5a56e14a56
         with:
           package: ${{ inputs.package }}
           version: ${{ inputs.version }}
@@ -101,7 +101,7 @@ jobs:
 
       - name: Prepare selected package and test reports
         id: prepared
-        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/prepare@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/prepare@c69d8a688f09e7c0a858386fc90b6d5a56e14a56
         with:
           package: ${{ inputs.package }}
           version: ${{ inputs.version }}

@@ -62,7 +62,7 @@ jobs:
 
       - name: Build and retain final approved-artifact candidates
         id: built
-        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/build@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/build@c69d8a688f09e7c0a858386fc90b6d5a56e14a56
 
   recover:
     if: github.event_name == 'workflow_dispatch'
@@ -80,7 +80,7 @@ jobs:
     steps:
       - name: Recover original package artifacts
         id: recovered
-        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/recover@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/recover@c69d8a688f09e7c0a858386fc90b6d5a56e14a56
         with:
           original-run-id: ${{ inputs.original_run_id }}
           artifact-id: ${{ inputs.artifact_id }}
@@ -114,7 +114,7 @@ jobs:
           merge-multiple: true
 
       - name: Verify approved artifacts before obtaining credentials
-        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/publish@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/publish@c69d8a688f09e7c0a858386fc90b6d5a56e14a56
         with:
           artifact-directory: ${{ runner.temp }}/approved-release
           commit: ${{ needs.build.outputs.commit || needs.recover.outputs.commit }}
@@ -141,7 +141,7 @@ jobs:
 
       - name: Publish approved packages and GitHub release
         id: published
-        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/publish@93e3e075a0b3a42dd909630615f7361a8c16c32b
+        uses: JKorf/CryptoExchange.Net.ReleaseWorkflow/actions/publish@c69d8a688f09e7c0a858386fc90b6d5a56e14a56
         with:
           artifact-directory: ${{ runner.temp }}/approved-release
           commit: ${{ needs.build.outputs.commit || needs.recover.outputs.commit }}
