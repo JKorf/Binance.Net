@@ -76,9 +76,6 @@ namespace Binance.Net.Clients.UsdFuturesApi
                 return new SharedAssetInfo(symbol.BaseAsset, SharedAssetType.Unspecified, null);
             }
 
-            if (s.BaseAsset.Contains("BRL"))
-            {
-            }
             var baseAssetInfo = MapAsset(s);
             var isPerp = s.ContractType == ContractType.Perpetual || s.ContractType == ContractType.PerpetualTradFi || s.ContractType == ContractType.PerpetualDelivering;
             return new SharedFuturesSymbol(isPerp ? TradingMode.PerpetualLinear : TradingMode.DeliveryLinear,
