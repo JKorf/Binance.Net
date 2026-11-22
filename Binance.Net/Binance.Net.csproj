@@ -46,7 +46,7 @@
     </PackageReference>
   </ItemGroup>
   <PropertyGroup>
-    <DocumentationFile>Binance.Net.xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Icon\icon.png" Pack="true" PackagePath="\" />
