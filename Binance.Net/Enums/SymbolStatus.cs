@@ -77,7 +77,22 @@ namespace Binance.Net.Enums
         /// ["<c>CANCEL_ONLY</c>"] Only cancel orders is allowed
         /// </summary>
         [Map("CANCEL_ONLY")]
-        CancelOnly
+        CancelOnly,
+        /// <summary>
+        /// ["<c>DELIVERED</c>"] Delivered
+        /// </summary>
+        [Map("DELIVERED")]
+        Delivered,
+        /// <summary>
+        /// ["<c>TRADING_HALT</c>"] [FUTURES] Trading Halted
+        /// </summary>
+        [Map("TRADING_HALT")]
+        TradingHalt,
+        /// <summary>
+        /// ["<c>TRADING_CANCEL_ONLY</c>"] [FUTURES] Only cancel orders allowed
+        /// </summary>
+        [Map("TRADING_CANCEL_ONLY")]
+        TradingCancelOnly
     }
 }
 
