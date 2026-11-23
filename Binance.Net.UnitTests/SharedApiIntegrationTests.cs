@@ -35,16 +35,15 @@ namespace Binance.Net.UnitTests
             return provider.GetRequiredService<IBinanceSharedApiClient>();
         }
 
-        protected override SharedApiTestConfig GetConfig(ISharedRest client)
+        protected override SharedApiTestConfig GetConfig(ISharedRest client, CapabilityOptions options)
         {
-            if (client is IBinanceRestClientUsdFuturesSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
-            if (client is IBinanceRestClientCoinFuturesSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualInverse, "ETH", "USD"), "ETH");
-            if (client is IBinanceRestClientSpotSharedApi)
+            if (options.SupportedTradingModes.Contains(TradingMode.Spot))
                 return new SharedApiTestConfig(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), "ETH");
 
-            throw new NotImplementedException();
+            else if (options.SupportedTradingModes.Contains(TradingMode.PerpetualInverse))
+                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualInverse, "ETH", "USD"), "ETH");
+
+            return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
         }
     }
 
@@ -75,16 +74,15 @@ namespace Binance.Net.UnitTests
             return provider.GetRequiredService<IBinanceSharedApiClient>();
         }
 
-        protected override SharedApiTestConfig GetConfig(ISharedSocket client)
+        protected override SharedApiTestConfig GetConfig(ISharedSocket client, CapabilityOptions options)
         {
-            if (client is IBinanceSocketClientUsdFuturesSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
-            if (client is IBinanceSocketClientCoinFuturesSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualInverse, "ETH", "USD"), "ETH");
-            if (client is IBinanceSocketClientSpotSharedApi)
+            if (options.SupportedTradingModes.Contains(TradingMode.Spot))
                 return new SharedApiTestConfig(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), "ETH");
 
-            throw new NotImplementedException();
+            else if (options.SupportedTradingModes.Contains(TradingMode.PerpetualInverse))
+                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualInverse, "ETH", "USD"), "ETH");
+
+            return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
         }
     }
 }
