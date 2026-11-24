@@ -36,6 +36,7 @@ namespace Binance.Net.Clients.SpotApi
                SubscribeSpotOrderOptions,
                SubscribeKlineOptions,
                SubscribeOrderBookOptions,
+               SubscribeIncrementalOrderBookOptions,
                PlaceSpotOrderOptions,
                CancelSpotOrderOptions
                );
