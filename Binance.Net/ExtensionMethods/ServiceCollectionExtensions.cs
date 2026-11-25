@@ -6,6 +6,8 @@ using Binance.Net.Objects.Options;
 using Binance.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.OrderBook.V2;
+using CryptoExchange.Net.OrderBook.V2.Interfaces;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -74,6 +76,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.Add(new ServiceDescriptor(typeof(IBinanceSocketClient), x => { return new BinanceSocketClient(x.GetRequiredService<IOptions<BinanceSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
             services.AddTransient<IBinanceOrderBookFactory, BinanceOrderBookFactory>();
+            services.AddTransient<IClientOrderBookFactory, BinanceClientOrderBookFactory>();
             services.AddTransient<IBinanceTrackerFactory, BinanceTrackerFactory>();
             services.AddTransient<ITrackerFactory, BinanceTrackerFactory>();
             services.AddSingleton<IBinanceUserClientProvider, BinanceUserClientProvider>(x =>
