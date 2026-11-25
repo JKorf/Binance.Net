@@ -36,7 +36,7 @@ namespace Binance.Net.Enums
         /// <summary>
         /// ["<c>HALT</c>"] Halted
         /// </summary>
-        [Map("HALT")]
+        [Map("HALT", "TRADING_HALT")]
         Halt,
         /// <summary>
         /// ["<c>AUCTION_MATCH</c>"] 
@@ -76,8 +76,13 @@ namespace Binance.Net.Enums
         /// <summary>
         /// ["<c>CANCEL_ONLY</c>"] Only cancel orders is allowed
         /// </summary>
-        [Map("CANCEL_ONLY")]
-        CancelOnly
+        [Map("CANCEL_ONLY", "TRADING_CANCEL_ONLY")]
+        CancelOnly,
+        /// <summary>
+        /// ["<c>DELIVERED</c>"] Delivered
+        /// </summary>
+        [Map("DELIVERED")]
+        Delivered
     }
 }
 
