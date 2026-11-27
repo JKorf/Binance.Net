@@ -56,13 +56,6 @@ namespace Binance.Net.SymbolOrderBooks
                                              _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                              _serviceProvider.GetRequiredService<IBinanceRestClient>(),
                                              _serviceProvider.GetRequiredService<IBinanceSocketClient>());
-        /// <inheritdoc />
-        public CryptoExchange.Net.OrderBook.V2.Interfaces.IClientOrderBook CreateSpot2(SharedSymbol symbol, Action<BinanceOrderBookOptions>? options = null)
-            => new BinanceSpotSymbolOrderBook2(symbol,
-                                             options,
-                                             _serviceProvider.GetRequiredService<ILoggerFactory>(),
-                                             _serviceProvider.GetRequiredService<IBinanceSharedApiClient>());
-
 
         /// <inheritdoc />
         public ISymbolOrderBook CreateUsdtFutures(string symbol, Action<BinanceOrderBookOptions>? options = null)

@@ -37,8 +37,6 @@ namespace Binance.Net.Interfaces
         /// <returns></returns>
         ISymbolOrderBook CreateSpot(string symbol, Action<BinanceOrderBookOptions>? options = null);
 
-        CryptoExchange.Net.OrderBook.V2.Interfaces.IClientOrderBook CreateSpot2(SharedSymbol symbol, Action<BinanceOrderBookOptions>? options = null);
-
         /// <summary>
         /// Create a Usdt Futures SymbolOrderBook
         /// </summary>

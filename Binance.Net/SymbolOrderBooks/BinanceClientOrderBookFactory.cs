@@ -1,15 +1,32 @@
-﻿using CryptoExchange.Net.OrderBook.V2;
+﻿using Binance.Net.Interfaces.Clients;
+using CryptoExchange.Net.OrderBook.V2;
+using CryptoExchange.Net.OrderBook.V2.Interfaces;
 using CryptoExchange.Net.SharedApis;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Binance.Net.SymbolOrderBooks
 {
-    public class BinanceClientOrderBookFactory : ClientOrderBookFactory
+    /// <summary>
+    /// Client order book factory
+    /// </summary>
+    public class BinanceClientOrderBookFactory : ClientOrderBookFactory, IClientOrderBookFactory
     {
-        public BinanceClientOrderBookFactory(ILoggerFactory logger, ISharedApiClientBase api) : base(logger, api)
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BinanceClientOrderBookFactory(ILoggerFactory logger, IBinanceSharedApiClient api) : base(logger, api)
         {
+        }
+
+        /// <inheritdoc />
+        public IClientOrderBook Create(SharedSymbol symbol, ExchangeParameters? exchangeParameters = null)
+        {
+            var config = new BookConfig()
+            {
+                SkipSequenceCheckFirstUpdateAfterSnapshotSet = true,
+                MinFirstBufferedUpdateWait = TimeSpan.FromMilliseconds(100),
+                MaxFirstBufferedUpdateWait = TimeSpan.FromMilliseconds(250),
+            };
+            return Create(symbol, config, exchangeParameters);
         }
     }
 }
