@@ -29,5 +29,32 @@ namespace Binance.Net.Clients.SpotApi
         }
 
         #endregion
+
+        #region Subscribe To Incremental Order Book Updates
+
+        public SubscribeIncrementalOrderBookOptions SubscribeIncrementalOrderBookOptions { get; }
+            = new SubscribeIncrementalOrderBookOptions(_exchangeName, false, [5000], SharedOrderBookSubscriptionType.OnlyIncremental)
+        {
+            SupportsMultipleSymbols = true,
+            MaxSymbolCount = 200
+        };
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToIncrementalOrderBookUpdatesAsync
+            (SubscribeOrderBookRequest request, Action<DataEvent<SharedIncrementalOrderBook>> handler, CancellationToken ct)
+        {
+            var validationError = SubscribeIncrementalOrderBookOptions.ValidateRequest(request, this);
+            if (validationError != null)
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, validationError);
+
+            var symbols = request.SymbolNames(FormatSymbol);
+            var result = await _api.ExchangeData.SubscribeToOrderBookUpdatesAsync(symbols, 100, update => handler(
+                update.ToType(
+                    new SharedIncrementalOrderBook(SharedQuantityType.BaseAsset, update.Data.FirstUpdateId, update.Data.LastUpdateId, update.Data.Asks, update.Data.Bids))), ct).ConfigureAwait(false);
+
+            return result;
+        }
+
+        #endregion
+
+
     }
 }

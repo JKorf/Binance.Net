@@ -32,6 +32,7 @@ namespace Binance.Net.Interfaces.Clients.SpotApi
         ISubscribeBalancesSocket,
         ISubscribeKlinesSocket,
         ISubscribeOrderBookSocket,
+        ISubscribeIncrementalOrderBookSocket,
         IPlaceSpotOrderSocket,
         ICancelSpotOrderSocket
     { }
